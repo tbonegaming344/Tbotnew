@@ -5720,7 +5720,7 @@ module.exports = {
 	
 	  const embed = new EmbedBuilder()
 	  .setTitle("Tbot Database")
-	  .setDescription(`Please selet option from select menus below to access the database
+	  .setDescription(`Please select option from select menus below to access the database
 Note: the decks are in alphabetical order not by hero and there are ${commands.length} commands in the database with ${allpdecks.length} plant decks and ${allzdecks.length} zombie decks`)
 		.setColor("Random")
 		.addFields({

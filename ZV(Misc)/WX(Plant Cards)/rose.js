@@ -22,7 +22,7 @@ module.exports = {
     );
     const select = new StringSelectMenuBuilder()
     .setCustomId("select")
-    .setPlaceholder("select an option below to view Nightcap's decklists")
+    .setPlaceholder("select an option below to view Rose's decklists")
     .addOptions(
       new StringSelectMenuOptionBuilder()
       .setLabel("Budget Deck")

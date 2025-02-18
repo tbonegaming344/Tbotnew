@@ -10,6 +10,7 @@ intents: [
 	GatewayIntentBits.GuildMessages,
 	GatewayIntentBits.GuildMessageReactions, 
 	GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.MessageContent
 ] 
 })
 let db = mysql.createPool({
@@ -19,7 +20,7 @@ let db = mysql.createPool({
     database: database
   }).promise();
   module.exports = db;
-  let prefix = "<@1043528908148052089>"
+  let prefix = "?";
 client.commands = new Collection();
 client.aliases = new Collection();
 const fs = require('fs');

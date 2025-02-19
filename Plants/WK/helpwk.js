@@ -214,7 +214,7 @@ module.exports = {
     )
     const sk3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("highlander3")
+      .setCustomId("highlander2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -450,9 +450,6 @@ Note: WallKnight has ${controldecks.length} control decks in Tbot`,
     }
     else if(i.customId == "hl2" || i.customId == "highlander2"){
       await i.update({embeds: [highlander], components: [hl2]})
-    }
-    else if(i.customId == "hl3" || i.customId == "highlander3"){
-      await i.update({embeds: [highlander], components: [hl3]})
     }
     else if(i.customId == "sk" || i.customId == "shitknight"){
       await i.update({embeds: [shitknight], components: [sk]})

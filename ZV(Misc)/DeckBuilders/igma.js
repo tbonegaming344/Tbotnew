@@ -50,10 +50,6 @@ module.exports = {
     let ladderdecks = [
       "igmaburn",
     ]
-    let toBuildTempo = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      toBuildTempo += `\n<@1043528908148052089> **${tempodecks[i]}**`;
-    }
     let decks = [
       "igmablobchum",
       "igmaburn",

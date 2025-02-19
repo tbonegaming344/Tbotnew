@@ -32,6 +32,11 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
     let decks = ["mechacontrol"];
+    let toBuildString = "";
+    for (let i = 0; i < decks.length; i++) {
+      let deck = decks[i];
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+    }
     let [result] = await db.query(`select mechacontrol
 from rbdecks rb`);
     let user = await client.users.fetch("727772762776797248");

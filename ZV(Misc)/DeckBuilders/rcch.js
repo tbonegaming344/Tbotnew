@@ -44,11 +44,13 @@ module.exports = {
     let decks = [
       "healmidrose",
     ]
-    let [result] = await db.query(`select hmr,
-pepegasmash, 
-from  rodecks ro 
-inner join smdecks sm 
-on (ro.deckinfo= sm.deckinfo);`);
+    let toBuildString = "";
+    for (let i = 0; i < decks.length; i++) {
+      let deck = decks[i];
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+    }
+    let [result] = await db.query(`select hmr
+from  rodecks ro;`);
     let user = await client.users.fetch("371765420576866304");
     let rcch = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)

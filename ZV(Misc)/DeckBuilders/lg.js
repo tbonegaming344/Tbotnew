@@ -89,8 +89,8 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     collector.on("collect", async (i) => {
         if(i.customId == "npa" || i.customId == "noplayingallowed") {
           await i.update({
-            embeds: [npa],
-            components: [noplayingallowed],
+            embeds: [noplayingallowed],
+            components: [npa],
           });
           if(i.customId == "helplg" || i.customId == "help") {
             await i.update({

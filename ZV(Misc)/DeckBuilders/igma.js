@@ -46,7 +46,7 @@ module.exports = {
           .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
           .setValue("midrange")
       )
-    const row = new ActionRowBuilder().addComponent(select);
+    const row = new ActionRowBuilder().addComponents(select);
     let ladderdecks = [
       "igmaburn",
     ]

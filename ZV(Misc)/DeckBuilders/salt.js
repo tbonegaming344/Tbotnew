@@ -138,23 +138,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("pepegasmash")
+      .setCustomId("sea")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
-    );
-    const psmash = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gstache")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sea4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
     );
     const sea4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("psmash")
+      .setCustomId("gstache")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -190,7 +180,6 @@ module.exports = {
       "cyburn",
       "gargburn",
       "gravestache",
-      "pepegasmash",
       "seacret",
       "spacestars",
       "stacheticia",
@@ -350,7 +339,7 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("pepegasmash3")
+      .setCustomId("radio")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );
@@ -367,7 +356,7 @@ module.exports = {
     );
     const radio = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("psmash3")
+      .setCustomId("gargburn")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -433,7 +422,6 @@ module.exports = {
       "cyburn",
       "figlottery",
       "gargburn",
-      "pepegasmash",
       "radiotherapy",
       "seacret",
       "shamcontrol",
@@ -789,23 +777,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("pepegasmash4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const psmash4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gravestache3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("radio3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const radio3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("psmash4")
+      .setCustomId("gravestache3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -894,7 +872,6 @@ module.exports = {
       "gargburn",
       "gravestache",
       "noplayingallowed",
-      "pepegasmash",
       "radiotherapy",
       "schoolyard",
       "seacret",
@@ -925,6 +902,8 @@ inner join rbdecks rb
 on (cz.deckinfo = rb.deckinfo)
 inner join ncdecks nc
 on (cz.deckinfo = nc.deckinfo)
+inner join ntdecks nt
+on (cz.deckinfo = nt.deckinfo)
 inner join ebdecks eb 
 on (cz.deckinfo = eb.deckinfo)
 inner join wkdecks wk 

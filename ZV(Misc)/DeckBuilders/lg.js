@@ -51,13 +51,16 @@ module.exports = {
 noplayingallowed from ebdecks`);
     let user = await client.users.fetch("321772369125572608");
     let lgtqyz = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `To view the Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
+    .setTitle(`${user.displayName} Decks`)
+    .setDescription(
+      `My commands for decks made by ${user.displayName} are ${toBuildString}`
+    )
+    .setFooter({
+      text: `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
+    })
+    .setThumbnail(user.displayAvatarURL())
+    .setColor("Random");
     let noplayingallowed= new EmbedBuilder()
     .setTitle(`${result[5].noplayingallowed}`)
     .setDescription(`${result[3].noplayingallowed}`)

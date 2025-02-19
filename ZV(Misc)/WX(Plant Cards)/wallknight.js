@@ -198,7 +198,7 @@ module.exports = {
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    const hl3= new ActionRowBuilder().addComponents(
+    const hl2= new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("chemotherapy2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")

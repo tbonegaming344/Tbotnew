@@ -1,5 +1,6 @@
 const { token, user, host, password, database} = require('./config.json');
 const mysql = require(`mysql2`);
+const { PermissionsBitField } = require('discord.js');
 const { Client, Partials, ChannelType, EmbedBuilder, Collection, Events, GatewayIntentBits} = require('discord.js');
 const client = new Client({ 
 	partials: [
@@ -75,6 +76,12 @@ client.on(Events.MessageCreate, async message => {
             client.commands.get(commandName) ||
             client.commands.find((a) => a.aliases && a.aliases.includes(commandName))
         if (!command) return channel.send(`${message} is not a command sent by ${message.author.username}.`)
+            // Check if the message is from a guild (not a DM)
+        if (message.guild) {
+        if (!(message.guild.members.me.permissionsIn(message.channel).has(PermissionsBitField.Flags.SendMessages))) {
+            return channel.send(`I do not have permission to send messages in this channel. ${message.guild.name}, ${message.channel.name}, <#${message.channel.id}>`);
+        }
+    }
         try{
             await command.run(client, message, args);
         } catch (e) {
@@ -85,15 +92,17 @@ client.on(Events.MessageCreate, async message => {
             console.error(e);
              message.channel.send({ embeds: [errEmbed] });
         }
-    }
-	//DM Commands
+        //DM Commands
     if (message.channel.type === ChannelType.DM) {
         return;
     }
+    }
+	
 })
 client.on(Events.Debug, (stdout) => {
-    if (stdout.startsWith(`Hit a 429`)) {
-        require(`child_process`).exec(`kill 1`);
+    if (stdout.startsWith("Hit a 429")) {
+        console.log("Rate limit reached. Retrying after some time...");
+        // Implement a delay or retry mechanism, like setTimeout or exponential backoff
     }
 })
 client.login(token);

@@ -178,7 +178,6 @@ module.exports = {
     );
     let decks = [
       "boltbolt",
-      "boss",
       "budgetrb",
       "bustbolt",
       "coggerazzi",

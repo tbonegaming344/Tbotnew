@@ -1,7 +1,7 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags } = require('discord.js');
 module.exports = {
 	name: `wallnutbowling`,
-	aliases: [`wnb`, `bowling`, `walnutbowling`,`bowl`, `wallnut-bowling`, ``],
+	aliases: [`wnb`, `bowling`, `walnutbowling`,`bowl`, `wallnut-bowling`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
 		const row = new ActionRowBuilder()

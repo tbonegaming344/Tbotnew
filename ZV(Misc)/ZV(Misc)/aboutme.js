@@ -2,7 +2,7 @@ const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} =
 require('discord.js');
 module.exports = {
 	name: `aboutme`,
-	aliases: [`about`, `tbotinfo`, `botinfo`, `infotbot`, `info`, `tbot`, `uptime`],
+	aliases: [`about`, `tbotinfo`, `botinfo`, `infotbot`, `info`, `tbot`, `uptime`, ``],
 	category: `Miscellaneous`,
 	run: async(client, message, args) => {
 		let Ccommands = Array.from(client.commands.values());
@@ -58,17 +58,19 @@ If you are looking for a spefic hero or category you can pick out the hero or co
 								 {
 									name: "Decks",
 									value: `Tbot has plenty of decks stored in its database for viewing and playing with.
-To see decks with a specific hero do <@1043528908148052089> helpherointials`
+To see decks with a specific hero do <@1043528908148052089> helpherointials
+To see every deck please use the <@1043528908148052089> helpdb command.
+If you would like to suggest your owh deck to tbot use the <@1043528908148052089> adddeck.`
 								 },
 								 {
 									 name: "Developer",
-									 value: `Bot developed by <@625172218120372225>. \n Feel free to message <@625172218120372225> with questions`
+									 value: `Bot developed by <@625172218120372225>. 
+									 Feel free to message <@625172218120372225> with questions or to suggest any new commands or features that aren't decks.
+									 You can report bugs or issues by dming Tbone or by using the bugreport command!`
 								 },
 								 {
 									 name: "Developers socials",
 									 value: `Join <@625172218120372225> discord linked below to get updated on when new commands and features are added to the bot.
-You can sumbit your decks to Tbot by using the <@1043528908148052089> adddeck command. 
-To suggest any new commands or features that aren't decks please contact <@625172218120372225>.
 You can also subscribe to his Youtube channel below where tbone uploads gaming and other videos.`
 								 },
 								 {
@@ -81,7 +83,7 @@ You can also subscribe to his Youtube channel below where tbone uploads gaming a
 								 },
 								{
 									name: "Donate",
-									value: `If you want to support the bot and its development you can donate to the bot by clicking the donate button below. 
+									value: `If you want to support the bot and its development you can donate to the bot by clicking the donate button below(not required just a way for people to support truly up to you). 
 Your support is greatly appriecated either way whether you dontate or not!`
 								})
 			.setThumbnail(client.user.displayAvatarURL())

@@ -960,23 +960,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("mopr2")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const mopr2 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("healmidrose2")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
 		.setCustomId("pts2")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	)
 	const pts2 = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("mopribus2")
+		.setCustomId("healmidrose2")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -1041,7 +1031,6 @@ module.exports = {
 		"cyburn",
 		"figlottery",
 		"healmidrose",
-		"mopribus",
 		"pawntrickstab",
 		"radiotherapy",
 		"reflourished",
@@ -1284,13 +1273,23 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("msp2")
+		.setCustomId("mopr2")
+		.setEmoji("<:arrowright:1271446796207525898>")
+		.setStyle(ButtonStyle.Primary)
+	)
+	const mopr2 = new ActionRowBuilder().addComponents(
+		new ButtonBuilder()
+		.setCustomId("lifecouldbedream2")
+		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+		.setStyle(ButtonStyle.Primary),
+		new ButtonBuilder()
+		.setCustomId("pts2")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	)
 	const msp2 = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("lifecouldbedream2")
+		.setCustomId("mopribus2")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -1400,6 +1399,7 @@ module.exports = {
 		"highlander",
 		"lasersnap",
 		"lifecouldbedream",
+		"mopribus",
 		"mspotk",
 		"nuttin",
 		"plantmop",
@@ -2912,23 +2912,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("sbg2")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const sbg2 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("rampticia")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
 		.setCustomId("syard")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	)
 	const syard = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("sbgear2")
+		.setCustomId("rampticia")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -3222,7 +3212,6 @@ module.exports = {
 		"racism",
 		"raiserpackage",
 		"rampticia",
-		"sbg2",
 		"schoolyard",
 		"seacret",
 		"slavery",
@@ -3464,23 +3453,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("sbg22")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const sbg22 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("pablosyeeyzs2")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
 		.setCustomId("sea2")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	)
 	const sea2 = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("sbgear22")
+		.setCustomId("pablosyeeyzs2")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -3536,7 +3515,6 @@ module.exports = {
 		"lockthebathroom",
 		"kaleidoscope",
 		"pablosyeeyzs",
-		"sbg2",
 		"seacret", 
 		"spacestars",
 		"telimps",
@@ -5438,23 +5416,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("sbg23")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	  )
-	  const sbg23 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("petmop3")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
 		.setCustomId("stars4")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	  )
 	  const stars4 = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("sbgear23")
+		.setCustomId("petmop3")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -5545,7 +5513,6 @@ module.exports = {
 		"lunchtime",
 		"pablosyeeyzs",
 		"petmop",
-		"sbg2",
 		"spacestars",
 		"sunlord",
 		"trickstache",
@@ -8887,25 +8854,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`})
 					)
 					.setColor("Random")
 					.setImage(`${result[4].gargburn}`);
-					let sbgear2= new EmbedBuilder()
-					.setTitle(`${result[5].sbg2}`)
-					.setDescription(`${result[3].sbg2}`)
-					.setFooter({text: `${result[2].sbg2}`})
-								.addFields({
-									name: "Deck Type",
-									value: `${result[6].sbg2}`,
-									inline: true
-								},{
-									name: "Archetype",
-									value: `${result[0].sbg2}`,
-									inline: true
-								},{
-									name: "Deck Cost", 
-									value: `${result[1].sbg2}`,
-									inline: true
-								})
-						.setColor("Random")
-						.setImage(`${result[4].sbg2}`)
 					let trickmech = new EmbedBuilder()
 					.setTitle(`${result[5].trickmech}`)
 					.setDescription(`${result[3].trickmech}`)
@@ -10518,15 +10466,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`})
 		}
 		if(i.customId == "rfl3" || i.customId == "reflourished3"){
 			await i.update({embeds: [reflourished], components: [rfl3]})
-		}
-		if(i.customId == "sbg2" || i.customId == "sbgear2"){
-			await i.update({embeds: [sbgear2], components: [sbg2]})
-		}
-		if(i.customId == "sbg22" || i.customId == "sbgear22"){
-			await i.update({embeds: [sbgear2], components: [sbg22]})
-		}
-		if(i.customId == "sbg23" || i.customId == "sbgear23"){
-			await i.update({embeds: [sbgear2], components: [sbg23]})
 		}
 	})
     }

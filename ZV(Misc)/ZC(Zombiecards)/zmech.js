@@ -86,23 +86,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("sbg2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const sbg2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("gargburn")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("tm")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
-    )
+    );
     const tm = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("sbgear2")
+        .setCustomId("gargburn")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -138,7 +128,6 @@ module.exports = {
       "dozzamech",
       "frymech",
       "gargburn",
-      "sbg2",
       "trickmech",
       "uncrackamech",
       "zmoss",
@@ -158,7 +147,7 @@ module.exports = {
           .setDescription('Decks that are cheap for new players')
 					.setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Decks")
+          .setLabel("Competitive Deck")
           .setValue("comp")
           .setDescription('Some of the Best Decks in the game')
 					.setEmoji("<:compemote:1325461143136764060>"), 
@@ -201,45 +190,6 @@ module.exports = {
     let budgetdecks = [
       "budgetzm"
     ]
-    const comprow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sbgear22")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const gb2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcomp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sbg22")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sbg22 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargburn2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("comphelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let compdecks = [
-      "gargburn", 
-      "sbg2"
-    ]
-    let toBuildCompString = "";
-    for (let i = 0; i < compdecks.length; i++) {
-      let deck = compdecks[i];
-      toBuildCompString += `\n<@1043528908148052089> **${deck}**`;
-    }
     const ladderrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("trickmech2")
@@ -342,7 +292,6 @@ module.exports = {
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-
     let memedecks = [
       "dozzamech",
       "uncrackamech", 
@@ -480,7 +429,7 @@ module.exports = {
     ]
     const midrangerow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("sbgear23")
+      .setCustomId("gargburn4")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -504,16 +453,6 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("sbg23")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sbg23 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargburn4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("helpmidrange")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
@@ -521,7 +460,6 @@ module.exports = {
     let midrangedecks = [
       "binaryflagwar",
       "gargburn", 
-      "sbg2"
     ]
     let toBuildMidrangeString = "";
     for (let i = 0; i < midrangedecks.length; i++) {
@@ -564,17 +502,6 @@ module.exports = {
       .setFooter({
         text: `To view the Zmech decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Zmech has ${decks.length} total decks in Tbot`,
-      })
-      .setColor("Random");
-      let compEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8"
-      )
-      .setTitle("Zmech Competitive Decks")
-      .setDescription(`My competitive decks for Zmech(ZM) are ${toBuildCompString}`)
-      .setFooter({
-        text: `To view the Zmech competitive decks please use the commands listed above or click on the buttons below to navigate through all competitive decks!
-Note: Zmech has ${compdecks.length} competitive decks in Tbot`,
       })
       .setColor("Random");
       let helpzm = new EmbedBuilder()
@@ -794,25 +721,6 @@ Note: Zmech has ${midrangedecks.length} midrange decks in Tbot`,
       )
       .setColor("Random")
       .setImage(`${result[4].gargburn}`);
-      let sbgear2= new EmbedBuilder()
-      .setTitle(`${result[5].sbg2}`)
-      .setDescription(`${result[3].sbg2}`)
-      .setFooter({text: `${result[2].sbg2}`})
-                  .addFields({
-                      name: "Deck Type",
-                      value: `${result[6].sbg2}`,
-                      inline: true
-                  },{
-                      name: "Archetype",
-                      value: `${result[0].sbg2}`,
-                      inline: true
-                  },{
-                      name: "Deck Cost", 
-                      value: `${result[1].sbg2}`,
-                      inline: true
-                  })
-          .setColor("Random")
-          .setImage(`${result[4].sbg2}`)
       let trickmech = new EmbedBuilder()
       .setTitle(`${result[5].trickmech}`)
       .setDescription(`${result[3].trickmech}`)
@@ -872,7 +780,7 @@ Note: Zmech has ${midrangedecks.length} midrange decks in Tbot`,
           await i.update({embeds: [alldecksEmbed], components: [alldecksrow]});
         }
         if(value == "comp"){
-          await i.update({embeds: [compEmbed], components: [comprow]});
+          await i.reply({embeds: [gargburn], flags: MessageFlags.Ephemeral})
         }
         if(value == "ladder"){
           await i.update({embeds: [ladderEmbed], components: [ladderrow]});
@@ -1003,15 +911,6 @@ Note: Zmech has ${midrangedecks.length} midrange decks in Tbot`,
       }
       if(i.customId == "br2" || i.customId == "brady2") {
         await i.update({ embeds: [brady], components: [br2] });
-      }
-      if(i.customId == "sbg2" || i.customId == "sbgear2") {
-        await i.update({ embeds: [sbgear2], components: [sbg2] });
-      }
-      if(i.customId == "sbg22" || i.customId == "sbgear22") {
-        await i.update({ embeds: [sbgear2], components: [sbg22] });
-      }
-      if(i.customId == "sbg23" || i.customId == "sbgear23") {
-        await i.update({ embeds: [sbgear2], components: [sbg23] });
       }
     });
   },

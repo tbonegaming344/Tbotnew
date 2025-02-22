@@ -27,11 +27,6 @@ module.exports = {
     .setPlaceholder("Select an option below to view Badorni's Decks")
     .addOptions(
       new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Deck")
-      .setDescription('Some of the Best Plant Decks in the game')
-      .setEmoji("<:compemote:1325461143136764060>")
-      .setValue("comp"),
-      new StringSelectMenuOptionBuilder()
       .setLabel("Meme Decks")
       .setDescription('Plant Decks that are built off a weird/fun combo')
       .setValue("meme"),
@@ -209,7 +204,17 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("pmop")
+      .setCustomId("mopr2")
+     .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    let mopr2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("moprbius2")
+  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+      .setCustomId("psy3")
      .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
@@ -239,6 +244,7 @@ module.exports = {
       "freezeheal",
       "frozentelimps",
       "healburn",
+      "moprbius",
       "plantmop",
       "psychosolstice",
     ] 
@@ -294,11 +300,11 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("mopr2")
+      .setCustomId("mopr3")
      .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    let mopr2 = new ActionRowBuilder().addComponents(
+    let mopr3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("healburn3")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -310,7 +316,7 @@ module.exports = {
     )
     let psy3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("mopribus2")
+        .setCustomId("mopribus3")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -322,10 +328,6 @@ module.exports = {
       "healburn",
       "moprbius",
       "psychosolstice",
-    ]
-   
-    let compdecks = [
-      "moprbius",
     ]
     const alldecksrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -383,11 +385,11 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("mopr3")
+        .setCustomId("mopr4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     )
-    let mopr3 = new ActionRowBuilder().addComponents(
+    let mopr4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("healburn4")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -399,7 +401,7 @@ module.exports = {
     )
     let pmop4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("mopribus3")
+        .setCustomId("mopribus4")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -688,9 +690,6 @@ Note: ${user.displayName} has ${condecks.length} control decks in Tbot`,
     collector.on("collect", async (i) => {
       if(i.customId == "select"){
         const value = i.values[0];
-        if(value == "comp"){
-          await i.reply({embeds: [mop], flags: MessageFlags.Ephemeral})
-        }
         if(value == "combo"){
           await i.update({embeds: [combobad], components: [combo]});
         }
@@ -818,6 +817,9 @@ Note: ${user.displayName} has ${condecks.length} control decks in Tbot`,
         }
         if(i.customId == "helpall" || i.customId == "allhelp"){
           await i.update({embeds: [allbad], components: [alldecksrow]})
+        }
+        if(i.customId == "mopr4" || i.customId == "moprbius4"){
+          await i.update({embeds: [mop], components: [mopr4]})
         }
     });
   },

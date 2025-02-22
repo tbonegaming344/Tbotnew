@@ -35,7 +35,7 @@ module.exports = {
       .setEmoji("💰")
       .setDescription("A Deck that is cheap for new players"),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Decks")
+      .setLabel("Competitive Deck")
       .setValue("comp")
       .setEmoji("<:compemote:1325461143136764060>")
       .setDescription("Some of the best decks in the game"),
@@ -74,48 +74,12 @@ module.exports = {
     let budgetdecks = [
       "budgtemopzilla"
     ]
-    const comprow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mopribus")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ap")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const ap = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcomp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("mop")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const mop = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("apotk")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("comphelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
     let compdecks = [
-      "apotk", 
-      "moprbius"
+      "apotk"
     ]
-    let toBuildCompString = "";
-    for (let i = 0; i < compdecks.length; i++) {
-      let deck = compdecks[i];
-      toBuildCompString += `\n<@1043528908148052089> **${deck}**`;
-    }
     const memerow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("lasersnap")
+      .setCustomId("mopribus")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -139,13 +103,24 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+      .setCustomId("mop")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const mop = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("lasersnap")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
       .setCustomId("memehelp")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     let memedecks = [
       "aggroramppeas", 
-      "lasersnap"
+      "lasersnap", 
+      "moprbius"
     ]
     let toBuildMemeString = ""; 
     for (let i = 0; i < memedecks.length; i++) {
@@ -170,11 +145,11 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("ap2")
+      .setCustomId("ap")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    const ap2 = new ActionRowBuilder().addComponents(
+    const ap = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("helpcombo")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -186,7 +161,7 @@ module.exports = {
     )
     const lsnap2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("apotk2")
+      .setCustomId("apotk")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -231,11 +206,11 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("ap3")
+      .setCustomId("ap2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    const ap3 = new ActionRowBuilder().addComponents(
+    const ap2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("helpmid")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -247,7 +222,7 @@ module.exports = {
     )
     const lsnap3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("apotk3")
+      .setCustomId("apotk2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -299,11 +274,11 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("ap4")
+      .setCustomId("ap3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    const ap4= new ActionRowBuilder().addComponents(
+    const ap3= new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("aggroramppeas2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -315,7 +290,7 @@ module.exports = {
     )
     const bmz = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("apotk4")
+      .setCustomId("apotk3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -577,7 +552,7 @@ Note: Chompzilla has ${midrangedecks.length} Midrange decks in Tbot`,
           await i.reply({embeds: [budgetcz], flags: MessageFlags.Ephemeral})
         }
         if(value == "comp"){
-          await i.update({embeds: [compEmbed], components: [comprow]})
+          await i.reply({embeds: [apotk], flags: MessageFlags.Ephemeral})
         }
         if(value == "meme"){
           await i.update({embeds: [memeEmbed], components: [memerow]})
@@ -636,9 +611,6 @@ Note: Chompzilla has ${midrangedecks.length} Midrange decks in Tbot`,
       }
       if(i.customId == "ap3" || i.customId == "apotk3"){
         await i.update({embeds: [apotk], components: [ap3]})
-      }
-      if(i.customId == "ap4" || i.customId == "apotk4"){
-        await i.update({embeds: [apotk], components: [ap4]})
       }
       if(i.customId == "agrp" || i.customId == "aggroramppeas"){
         await i.update({embeds: [aggroramppeas], components: [agrp]})

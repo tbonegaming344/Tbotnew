@@ -172,7 +172,7 @@ module.exports = {
       .setEmoji("<:compemote:1325461143136764060>")
       .setValue("comp"), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Deck")
+      .setLabel("Ladder Decks")
       .setDescription("Decks that are generally only good for ranked games")
       .setEmoji("<:ladder:1271503994857979964>") 
       .setValue("ladder"),
@@ -214,9 +214,56 @@ module.exports = {
     let compdecks = [
       "icebox",
     ]
+    const ladderrow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("schoolyard2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("ag2")
+    .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const ag2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpladder")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("go2")
+    .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const go2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("agraves2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("sy2")
+    .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const sy2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("gomorrah2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("ladderhelp")
+    .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
     let ladderdecks = [
+      "agraves",
       "gomorrah",
-    ]
+      "schoolyard"
+    ];
+    let toBuildLadderString = "";
+    for (let i = 0; i < ladderdecks.length; i++) {
+      let deck = ladderdecks[i];
+      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
+    }
     const memerow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("sunlord2")
@@ -491,6 +538,18 @@ module.exports = {
         text: `To view the Neptuna decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has ${decks.length} total decks in Tbot`,
       });
+      let ladderEmbed = new EmbedBuilder()
+      .setThumbnail(
+        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
+      )
+      .setTitle("Neptuna Ladder Decks")
+      .setDescription(`My ladder decks for Neptuna(NT) are ${toBuildLadderString}`)
+      .setColor("Random")
+      .setFooter({
+        text: `To view the Neptuna ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
+Note: Neptuna has a total of ${ladderdecks.length} ladder decks in Tbot`,
+      });
+
       let memeEmbed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
@@ -786,7 +845,7 @@ Note: Neptuna has ${decks.length} total decks in Tbot`)
           await i.reply({embeds: [icebox], flags: MessageFlags.Ephemeral});
         }
         if(value == "ladder"){
-          await i.reply({embeds: [gomorrah], flags: MessageFlags.Ephemeral})
+          await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
         }
         if(value == "meme"){
           await i.update({ embeds: [memeEmbed], components: [memerow] });

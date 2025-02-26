@@ -5,7 +5,7 @@ module.exports = {
 	category: `Zombie Cards`, 
 	run: async(client, message, args) => {
 		let embed = new EmbedBuilder()
-			.setThimbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/Newspaper_ZombieH.png/revision/latest?cb=20170422001224")
+			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/Newspaper_ZombieH.png/revision/latest?cb=20170422001224")
 			.setTitle("Newspaper Zombie | <:Crazy:1062502046474973224>")
 			.setDescription("**\\-  Professional Zombie  -**")
 			.addFields({name: "Stats", 

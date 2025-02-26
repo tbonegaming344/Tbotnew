@@ -23,8 +23,9 @@ module.exports = {
 							)
 		.setColor("Random")
 		.setFooter({text: "Thank you for voting for tbot today <:Worryheart:821732059348336690>"})
+		message.channel.send({embeds: [ vote ] } )
 	}
 		
-		message.channel.send({embeds: [ vote ] } )
+		
 	}
 }

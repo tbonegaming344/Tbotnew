@@ -5,7 +5,7 @@ module.exports = {
 	category: `Zombie Cards`, 
 	run: async(client, message, args) => {
 		let embed = new EmbedBuilder()
-			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/Newspaper_ZombieH.png/revision/latest?cb=20170422001224")
+			.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1344290261970194522/NewspaperZombie.webp?ex=67c05f5e&is=67bf0dde&hm=08af1b6accff49116e1fdb0014f921207a65d6e1564215e61e5bbdffec870911&=&format=webp&width=542&height=614")
 			.setTitle("Newspaper Zombie | <:Crazy:1062502046474973224>")
 			.setDescription("**\\-  Professional Zombie  -**")
 			.addFields({name: "Stats", 

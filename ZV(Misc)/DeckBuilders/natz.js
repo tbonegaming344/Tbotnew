@@ -29,9 +29,18 @@ const {
         .setEmoji("<:compemote:1325461143136764060>")
         .setValue("comp"), 
         new StringSelectMenuOptionBuilder()
+      .setLabel("Ladder Deck")
+      .setDescription('Decks that mostly only good for ranked games')
+      .setEmoji("<:ladder:1271503994857979964>")
+      .setValue("ladder"),
+        new StringSelectMenuOptionBuilder()
         .setLabel("Meme Deck")
         .setDescription("Decks that are built off a weird/fun combo")
         .setValue("meme"), 
+        new StringSelectMenuOptionBuilder()
+        .setLabel("Combo Deck")
+        .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
+        .setValue("combo"),
         new StringSelectMenuOptionBuilder()
         .setLabel('Control Deck')
         .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
@@ -40,6 +49,10 @@ const {
         .setLabel('Midrange Deck')
         .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
         .setValue('midrange'), 
+        new StringSelectMenuOptionBuilder()
+        .setLabel("Tempo Deck")
+        .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.')
+        .setValue("tempo"),
         new StringSelectMenuOptionBuilder()
         .setLabel("All Natz Decks")
         .setDescription("An option to view all decks")
@@ -53,13 +66,23 @@ const {
           .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
           .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
-          .setCustomId("lt")
+          .setCustomId("carr")
          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+      const carr = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("helpnatz")
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId("lt")
+          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
       const lt = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
-          .setCustomId("helpnatz")
+          .setCustomId("carroot")
           .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
           .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
@@ -77,7 +100,7 @@ const {
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      let decks = ["ladytuna", "toyotacontrolla"];
+      let decks = ["carroot", "ladytuna", "toyotacontrolla"];
       let toBuildString = "";
       for (let i = 0; i < decks.length; i++) {
         let deck = decks[i];
@@ -102,7 +125,25 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
         .setColor("Random");
-
+        let carroot = new EmbedBuilder()
+        .setTitle(`${result[5].carroot}`)
+        .setDescription(`${result[3].carroot}`)
+        .setFooter({ text: `${result[2].carroot}` })
+        .addFields({
+            name: "Deck Type",
+            value: `${result[6].carroot}`,
+            inline: true
+        }, {
+            name: "Archetype",
+            value: `${result[0].carroot}`,
+            inline: true
+        }, {
+            name: "Deck Cost",
+            value: `${result[1].carroot}`,
+            inline: true
+        })
+        .setColor("Random")
+        .setImage(`${result[4].carroot}`);
         let toyotacontrolla = new EmbedBuilder()
         .setTitle(`${result[5].toyotacontrolla}`)
         .setDescription(`${result[3].toyotacontrolla}`)
@@ -156,6 +197,9 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
             if(i.customId == "lt" || i.customId == "ladytuna"){
               await i.update({embeds: [ladytuna], components: [lt]})
             }
+            if(i.customId == "carr" || i.customId == "carroot"){
+              await i.update({embeds: [carroot], components: [carr]})
+            }
             if(i.customId == "select"){
               const value = i.values[0]
               if(value == "all"){
@@ -167,7 +211,9 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
               if(value == "meme" || value == "midrange"){
                 await i.reply({embeds: [ladytuna], flags: MessageFlags.Ephemeral})
               }
-              
+              if(value == "ladder" || value == "combo" || value == "tempo"){
+                await i.reply({embeds: [carroot], flags: MessageFlags.Ephemeral})
+              }
             }
         }); 
     }

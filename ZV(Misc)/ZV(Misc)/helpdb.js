@@ -199,23 +199,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("an")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const an = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("oneone")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("ab")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const ab = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("anti")
+        .setCustomId("oneone")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -369,13 +359,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("chemo")
+        .setCustomId("carr")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+	const carr = new ActionRowBuilder().addComponents(
+	  new ButtonBuilder()
+	    .setCustomId("cancerknight")
+		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+		.setStyle(ButtonStyle.Primary),
+	  new ButtonBuilder()
+	    .setCustomId("chemo")
+		.setEmoji("<:arrowright:1271446796207525898>")
+		.setStyle(ButtonStyle.Primary)
+	);
     const chemo = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("cancerknight")
+        .setCustomId("carroot")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -726,7 +726,6 @@ module.exports = {
     const allpdecks = [
       "100%winrate",
       "101",
-      "anti",
       "abeans",
       "aggroramppeas",
       "apotk",
@@ -743,6 +742,7 @@ module.exports = {
       "budgetsp",
       "budgetwk",
       "cancerknight",
+	  "carroot",
       "chemotherapy",
       "cyburn",
       "ejection",
@@ -1106,10 +1106,20 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("eject2")
+        .setCustomId("carr2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+	const carr2 = new ActionRowBuilder().addComponents(
+	new ButtonBuilder()
+		.setCustomId("brainclones2")
+		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+		.setStyle(ButtonStyle.Primary),
+	new ButtonBuilder()
+		.setCustomId("eject2")
+		.setEmoji("<:arrowright:1271446796207525898>")
+		.setStyle(ButtonStyle.Primary)
+	);
     const eject2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("brainclones2")
@@ -1174,6 +1184,7 @@ module.exports = {
       "101",
       "bartin",
       "brainclones",
+	  "carroot",
       "ejection",
       "frymidrose",
       "going3nuts",
@@ -1534,13 +1545,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("cburn3")
+        .setCustomId("carr3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+	const carr3 = new ActionRowBuilder().addComponents(
+	new ButtonBuilder()
+		.setCustomId("budgetcc3")
+		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+		.setStyle(ButtonStyle.Primary),
+	new ButtonBuilder()
+		.setCustomId("cburn3")
+		.setEmoji("<:arrowright:1271446796207525898>")
+		.setStyle(ButtonStyle.Primary)
+	);
     const cburn3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("budgetcc3")
+        .setCustomId("carroot3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1742,6 +1763,7 @@ module.exports = {
       "101",
       "apotk",
       "budgetcc",
+	  "carroot",
       "cyburn",
       "freezeheal",
       "gangstaparadise",
@@ -2113,23 +2135,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("an3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const an3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("winrate1003")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bclones3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bclones3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("anti3")
+        .setCustomId("winrate1003")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2223,13 +2235,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("fmr3")
+        .setCustomId("carr4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+	const carr4 = new ActionRowBuilder().addComponents(
+	new ButtonBuilder()
+		.setCustomId("budgetwk3")
+		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+		.setStyle(ButtonStyle.Primary),
+	new ButtonBuilder()
+		.setCustomId("fmr3")
+		.setEmoji("<:arrowright:1271446796207525898>")
+		.setStyle(ButtonStyle.Primary)
+	);
     const fmr3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("budgetwk3")
+        .setCustomId("carroot4")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2259,7 +2281,6 @@ module.exports = {
     );
     const tempopdecks = [
       "100%winrate",
-      "anti",
       "brainclones",
       "budgetct",
       "budgetcz",
@@ -2269,6 +2290,7 @@ module.exports = {
       "budgetsf",
       "budgetsp",
       "budgetwk",
+	  "carroot",
       "frymidrose",
       "lifecouldbedream",
       "translattail",
@@ -5990,29 +6012,25 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
 		on (bc.deckinfo = wk.deckinfo)
 		inner join zmdecks zm
 		on (bc.deckinfo = zm.deckinfo)`);
-    let anti = new EmbedBuilder()
-      .setTitle(`${result[5].anti}`)
-      .setDescription(`${result[3].anti}`)
-      .setFooter({ text: `${result[2].anti}` })
-      .addFields(
-        {
+		let carroot = new EmbedBuilder()
+      .setTitle(`${result[5].carroot}`)
+      .setDescription(`${result[3].carroot}`)
+      .setFooter({ text: `${result[2].carroot}` })
+      .addFields({
           name: "Deck Type",
-          value: `${result[6].anti}`,
-          inline: true,
-        },
-        {
+          value: `${result[6].carroot}`,
+          inline: true
+      }, {
           name: "Archetype",
-          value: `${result[0].anti}`,
-          inline: true,
-        },
-        {
+          value: `${result[0].carroot}`,
+          inline: true
+      }, {
           name: "Deck Cost",
-          value: `${result[1].anti}`,
-          inline: true,
-        }
-      )
+          value: `${result[1].carroot}`,
+          inline: true
+      })
       .setColor("Random")
-      .setImage(result[4].anti);
+      .setImage(`${result[4].carroot}`);
     let shamcontrolbc = new EmbedBuilder()
       .setTitle(`${result[5].shamcontrol}`)
       .setDescription(`${result[3].shamcontrol}`)
@@ -9511,15 +9529,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "one3" || i.customId == "oneone3") {
         await i.update({ embeds: [oneone], components: [one3] });
       }
-      if (i.customId == "an" || i.customId == "anti") {
-        await i.update({ embeds: [anti], components: [an] });
-      }
-      if (i.customId == "an2" || i.customId == "anti2") {
-        await i.update({ embeds: [anti], components: [an2] });
-      }
-      if (i.customId == "an3" || i.customId == "anti3") {
-        await i.update({ embeds: [anti], components: [an3] });
-      }
       if (i.customId == "ab" || i.customId == "abeans") {
         await i.update({ embeds: [abeans], components: [ab] });
       }
@@ -10981,6 +10990,18 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "sav4" || i.customId == "savage4") {
         await i.update({ embeds: [savage22], components: [sav4] });
       }
+	  if(i.customId == "carr" || i.customId == "carroot") {
+		await i.update({ embeds: [carroot], components: [carr] });
+	  }
+	  if(i.customId == "carr2" || i.customId == "carroot2") {
+		await i.update({ embeds: [carroot], components: [carr2] });
+	  }
+	  if(i.customId == "carr3" || i.customId == "carroot3") {
+		await i.update({ embeds: [carroot], components: [carr3] });
+	  }
+	  if(i.customId == "carr4" || i.customId == "carroot4") {
+		await i.update({ embeds: [carroot], components: [carr4] });
+	  }
     });
   },
 };

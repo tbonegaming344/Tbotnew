@@ -34,6 +34,10 @@ module.exports = {
       .setEmoji("<:ladder:1271503994857979964>")
       .setValue("ladder"),
       new StringSelectMenuOptionBuilder()
+      .setLabel("Combo Deck")
+      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
+      .setValue("combo"),
+      new StringSelectMenuOptionBuilder()
       .setLabel("Control Deck")
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
       .setValue("control"),
@@ -77,7 +81,7 @@ It gets +2<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>, __Amp
             "As leader of the Plant-etary Guard, she's ready to root out Zombies wherever they crop up.",
         }
       );
-    let decks = ["anti", "shamcontrolbc"];
+    let decks = ["carroot", "shamcontrolbc"];
     let [result] = await db.query("SELECT * FROM bcdecks");
     let embed = new EmbedBuilder()
     .setThumbnail(
@@ -89,29 +93,25 @@ It gets +2<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>, __Amp
 Note: Beta Carrotina has ${decks.length} total decks in Tbot`
     )
     .setColor("Random")
-    let anti = new EmbedBuilder()
-      .setTitle(`${result[5].anti}`)
-      .setDescription(`${result[3].anti}`)
-      .setFooter({ text: `${result[2].anti}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].anti}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].anti}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].anti}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(result[4].anti);
+    let carroot = new EmbedBuilder()
+    .setTitle(`${result[5].carroot}`)
+    .setDescription(`${result[3].carroot}`)
+    .setFooter({ text: `${result[2].carroot}` })
+    .addFields({
+        name: "Deck Type",
+        value: `${result[6].carroot}`,
+        inline: true
+    }, {
+        name: "Archetype",
+        value: `${result[0].carroot}`,
+        inline: true
+    }, {
+        name: "Deck Cost",
+        value: `${result[1].carroot}`,
+        inline: true
+    })
+    .setColor("Random")
+    .setImage(`${result[4].carroot}`);
     let shamcontrol = new EmbedBuilder()
       .setTitle(`${result[5].shamcontrol}`)
       .setDescription(`${result[3].shamcontrol}`)
@@ -146,8 +146,8 @@ Note: Beta Carrotina has ${decks.length} total decks in Tbot`
       }
       if(i.customId == "select"){
         const value = i.values[0];
-        if(value == "ladder" || value == "tempo"){
-          await i.reply({embeds: [anti], flags: MessageFlags.Ephemeral})
+        if(value == "ladder" || value == "combo" || value == "tempo"){
+          await i.reply({embeds: [carroot], flags: MessageFlags.Ephemeral})
         }
         if(value == "control" || value == "competitive"){
           await i.reply({embeds: [shamcontrol], flags: MessageFlags.Ephemeral})

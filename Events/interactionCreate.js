@@ -1119,7 +1119,7 @@ ${games}`,
             where bc.deckinfo = "image link:"`);
           const deck = [
             //BC Tbot DB
-            `${result[0].anti}`,
+            `${result[0].carroot}`,
             `${result[0].shamcontrol}`,
       
             //CT TBOT DB
@@ -1299,7 +1299,7 @@ ${games}`,
           );
           const deck = [
             //BC Tbot DB
-            `${result[0].anti}`,
+            `${result[0].carroot}`,
             `${result[0].shamcontrol}`,
          
           ];
@@ -1897,7 +1897,7 @@ ${games}`,
                     where bc.deckinfo = "image link:"`);
           const deck = [
               //BC Tbot DB
-              `${result[0].anti}`,
+              `${result[0].carroot}`,
               `${result[0].shamcontrol}`,
         
               //CT TBOT DB

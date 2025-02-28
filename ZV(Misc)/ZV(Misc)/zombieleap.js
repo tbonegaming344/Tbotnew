@@ -163,7 +163,7 @@ module.exports = {
         "Trapper Zombie",
         "Unthawed Viking",
       ]
-      const fivecost = [
+     const fivecost = [
         "Mondo Bronto", 
         "Smashing Gargantuar", 
         "Supernova Gargantuar",
@@ -232,19 +232,58 @@ module.exports = {
       const eightdrop = eightcost[Math.floor(Math.random() * eightcost.length)];
       const ninedrop = ninecost[Math.floor(Math.random() * ninecost.length)];
       const tendrop = tencost[Math.floor(Math.random() * tencost.length)];
-      const leap = [
-        `You Have leaped ${zerodrop} into ${onedrop}`,
-        `You Have leaped ${onedrop} into ${twodrop}`,
-        `You Have leaped ${twodrop} into ${threedrop}`,
-        `You Have leaped ${threedrop} into ${fourdrop}`,
-        `You Have leaped ${fourdrop} into ${fivedrop}`,
-        `You Have leaped ${fivedrop} into ${sixdrop}`,
-        `You Have leaped ${sixdrop} into ${sevendrop}`,
-        `You Have leaped ${sevendrop} into ${eightdrop}`,
-        `You Have leaped ${eightdrop} into ${ninedrop}`,
-        `You Have leaped ${ninedrop} into ${tendrop}`,
-      ];
-      message.channel.send(leap[Math.floor(Math.random() * leap.length)]);
+      const repeatedZeroDrop = `You Have leaped ${zerodrop} into ${onedrop}`;
+      const repeatZeroDropCount = 68;
+      const leap= []
+      for (let i = 0; i < repeatZeroDropCount; i++) {
+        leap.push(repeatedZeroDrop);
+      }
+     const repeatedOneDrop = `You Have leaped ${onedrop} into ${twodrop}`;
+    const repeatOneDropCount = 1326;
+    for (let i = 0; i < repeatOneDropCount; i++) {
+      leap.push(repeatedOneDrop);
     }
+    const repeatedTwoDrop = `You Have leaped ${twodrop} into ${threedrop}`;
+    const repeatTwoDropCount = 1404;
+    for (let i = 0; i < repeatTwoDropCount; i++) {
+      leap.push(repeatedTwoDrop);
+    }
+    const repeatedThreeDrop = `You Have leaped ${threedrop} into ${fourdrop}`;
+    const repeatThreeDropCount = 1224;
+    for (let i = 0; i < repeatThreeDropCount; i++) {
+      leap.push(repeatedThreeDrop);
+    }
+    const repeatedFourDrop = `You Have leaped ${fourdrop} into ${fivedrop}`;
+    const repeatFourDropCount = 816;
+    for (let i = 0; i < repeatFourDropCount; i++) {
+      leap.push(repeatedFourDrop);
+    }
+    const repeatedFiveDrop = `You Have leaped ${fivedrop} into ${sixdrop}`;
+    const repeatFiveDropCount = 288;
+    for (let i = 0; i < repeatFiveDropCount; i++) {
+      leap.push(repeatedFiveDrop);
+    }
+    const repeatedSixDrop = `You Have leaped ${sixdrop} into ${sevendrop}`;
+    const repeatSixDropCount = 72;
+    for (let i = 0; i < repeatSixDropCount; i++) {
+      leap.push(repeatedSixDrop);
+    }
+    const repeatedSevenDrop = `You Have leaped ${sevendrop} into ${eightdrop}`;
+    const repeatSevenDropCount = 12;
+    for (let i = 0; i < repeatSevenDropCount; i++) {
+      leap.push(repeatedSevenDrop);
+    }
+    const repeatedEightDrop = `You Have leaped ${eightdrop} into ${ninedrop}`;
+    const repeatEightDropCount = 2;
+    for (let i = 0; i < repeatEightDropCount; i++) {
+      leap.push(repeatedEightDrop);
+    }
+    const repeatedNineDrop = `You Have leaped ${ninedrop} into ${tendrop}`;
+    const repeatNineDropCount = 1;
+    for (let i = 0; i < repeatNineDropCount; i++) {
+      leap.push(repeatedNineDrop);
+    }
+      message.channel.send(`${leap[Math.floor(Math.random() * leap.length)]}`);
+  }
   },
 };

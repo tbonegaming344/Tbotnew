@@ -219,23 +219,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("apo")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const apo = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("aggroramppeas")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bart")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bart = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("apotk")
+        .setCustomId("aggroramppeas")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -463,9 +453,20 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+   
     const hburn = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("going3nuts")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("healcon")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const healcon = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("healburn")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -475,7 +476,7 @@ module.exports = {
     );
     const hmr = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("healburn")
+        .setCustomId("healcontrol")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -728,7 +729,6 @@ module.exports = {
       "101",
       "abeans",
       "aggroramppeas",
-      "apotk",
       "bartin",
       "brainclones",
       "budgetct",
@@ -742,7 +742,7 @@ module.exports = {
       "budgetsp",
       "budgetwk",
       "cancerknight",
-	  "carroot",
+	    "carroot",
       "chemotherapy",
       "cyburn",
       "ejection",
@@ -753,6 +753,7 @@ module.exports = {
       "gangstaparadise",
       "going3nuts",
       "healburn",
+      "healcontrol",
       "healmidrose",
       "healthotk",
       "highlander",
@@ -978,13 +979,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("healcon2")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const healcon2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("figlottery2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("hmr2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const hmr2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("figlottery2")
+        .setCustomId("healcontrol2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1054,10 +1065,10 @@ module.exports = {
     );
     const comppdecks = [
       "abeans",
-      "apotk",
       "chemotherapy",
       "cyburn",
       "figlottery",
+      "healcontrol",
       "healmidrose",
       "pawntrickstab",
       "radiotherapy",
@@ -1525,23 +1536,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("apo3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const apo3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("oneone3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bcc3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bcc3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("apotk3")
+        .setCustomId("oneone3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1761,9 +1762,8 @@ module.exports = {
     );
     const combopdecks = [
       "101",
-      "apotk",
       "budgetcc",
-	  "carroot",
+	    "carroot",
       "cyburn",
       "freezeheal",
       "gangstaparadise",
@@ -1835,13 +1835,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("pts3")
+        .setCustomId("healcon3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const pts3 = new ActionRowBuilder().addComponents(
+    const healcon3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("funnyflare3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("pts3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    )
+    const pts3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("healcontrol3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1894,6 +1904,7 @@ module.exports = {
       "chemotherapy",
       "ejection",
       "funnyflare",
+      "healcontrol",
       "pawntrickstab",
       "radiotherapy",
       "shamcontrolbc",
@@ -1910,23 +1921,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("apo4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const apo4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helppmidrange")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("cburn4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const cburn4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("apotk4")
+        .setCustomId("helppmidrange")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2095,8 +2096,6 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
     const midrangepdecks = [
-      "apotk",
-      "budgetnc",
       "cyburn",
       "figlottery",
       "gangstaparadise",
@@ -6272,7 +6271,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].aggroramppeas}`);
-    let apotk = new EmbedBuilder()
+    let healcontrol = new EmbedBuilder()
       .setTitle(`${result[5].apotk}`)
       .setDescription(`${result[3].apotk}`)
       .setFooter({ text: `${result[2].apotk}` })
@@ -9547,17 +9546,14 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "agrp3" || i.customId == "aggroramppeas3") {
         await i.update({ embeds: [aggroramppeas], components: [agrp3] });
       }
-      if (i.customId == "apo" || i.customId == "apotk") {
-        await i.update({ embeds: [apotk], components: [apo] });
+      if(i.customId == "healcon" || i.customId == "healcontrol"){
+        await i.update({embeds: [healcontrol], components: [healcon]})
       }
-      if (i.customId == "apo2" || i.customId == "apotk2") {
-        await i.update({ embeds: [apotk], components: [apo2] });
+      if(i.customId == "healcon2" || i.customId == "healcontrol2"){
+        await i.update({embeds: [healcontrol], components: [healcon2]})
       }
-      if (i.customId == "apo3" || i.customId == "apotk3") {
-        await i.update({ embeds: [apotk], components: [apo3] });
-      }
-      if (i.customId == "apo4" || i.customId == "apotk4") {
-        await i.update({ embeds: [apotk], components: [apo4] });
+      if(i.customId == "healcon3" || i.customId == "healcontrol3"){
+        await i.update({embeds: [healcontrol], components: [healcon3]})
       }
       if (i.customId == "bart" || i.customId == "bartin") {
         await i.update({ embeds: [bartin], components: [bart] });

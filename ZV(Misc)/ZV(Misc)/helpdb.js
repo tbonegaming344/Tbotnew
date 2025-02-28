@@ -10972,13 +10972,13 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "sav" || i.customId == "savage") {
         await i.update({ embeds: [savage22], components: [sav] });
       }
-      if (i.customId == "sav2" || i.customId == "savage22") {
+      if (i.customId == "sav2" || i.customId == "savage2") {
         await i.update({ embeds: [savage22], components: [sav2] });
       }
-      if (i.customId == "sav3" || i.customId == "savage33") {
+      if (i.customId == "sav3" || i.customId == "savage3") {
         await i.update({ embeds: [savage22], components: [sav3] });
       }
-      if (i.customId == "sav4" || i.customId == "savage44") {
+      if (i.customId == "sav4" || i.customId == "savage4") {
         await i.update({ embeds: [savage22], components: [sav4] });
       }
     });

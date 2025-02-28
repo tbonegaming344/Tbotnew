@@ -5287,7 +5287,7 @@ module.exports = {
     );
     const bas4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("helpzmid")
+        .setCustomId("savage4")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()

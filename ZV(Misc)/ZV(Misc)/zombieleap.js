@@ -207,7 +207,7 @@ module.exports = {
         "Gargantuar-Throwing Gargantuar",
         "Nurse Gargantuar",
         "Zombot Dinotronic Mechasaur",
-        "Knight  of the Living Dead",
+        "Knight of the Living Dead",
         "Rodeo Gargantuar",
         "Wannabe Hero", 
       ]

@@ -31,13 +31,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("sav")
+       .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const sav= new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpall")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("bas")
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bas = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("helpall")
+        .setCustomId("savage")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -106,6 +116,7 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
     let decks = [
+      "22savage",
       "bastet",
       "budgetim",
       "kaleidoscope",
@@ -129,7 +140,7 @@ module.exports = {
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Decks")
+      .setLabel("Competitive Deck")
       .setValue("comp")
       .setDescription("Some of the best Decks in the game")
       .setEmoji("<:compemote:1325461143136764060>"),
@@ -212,13 +223,23 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+      .setCustomId("sav2")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const sav2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("memehelp")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
       .setCustomId("bas2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const bas2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("memehelp")
+      .setCustomId("savage2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -247,6 +268,7 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     const memedecks = [
+      "22savage",
       "bastet",
       "rampticia", 
       "stacheticia",
@@ -262,13 +284,23 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+      .setCustomId("sav3")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const sav3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("combohelp")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
       .setCustomId("bas3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const bas3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("combohelp")
+      .setCustomId("savage3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -327,6 +359,7 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     const combodecks = [
+      "22savage",
       "bastet",
       "budgetim", 
       "mechascope", 
@@ -384,13 +417,23 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+      .setCustomId("sav4")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const sav4 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("midrangehelp")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
       .setCustomId("bas4")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const bas4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("midrangehelp")
+      .setCustomId("savage4")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -419,6 +462,7 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     const midrangedecks = [
+      "22savage",
       "bastet",
       "budgetim", 
       "youngcatmartin"
@@ -562,6 +606,29 @@ Note: Immorticia has ${midrangedecks.length} midrange decks in Tbot`,
       })
       .setColor("Random");
     let [result] = await db.query(`SELECT * FROM imdecks`);
+    let savage22 = new EmbedBuilder()
+      .setTitle(`${result[5].savage22}`)
+      .setDescription(`${result[3].savage22}`)
+      .setFooter({ text: `${result[2].savage22}` })
+      .addFields(
+        {
+          name: "Deck Type",
+          value: `${result[6].savage22}`,
+          inline: true,
+        },
+        {
+          name: "Archetype",
+          value: `${result[0].savage22}`,
+          inline: true,
+        },
+        {
+          name: "Deck Cost",
+          value: `${result[1].savage22}`,
+          inline: true,
+        }
+      )
+      .setColor("Random")
+      .setImage(`${result[4].savage22}`);
     let bastet = new EmbedBuilder()
     .setTitle(`${result[5].bastet}`)
     .setDescription(`${result[3].bastet}`)
@@ -855,6 +922,18 @@ Note: Immorticia has ${midrangedecks.length} midrange decks in Tbot`,
       }
       if(i.customId == "ms4" || i.customId == "mechascope4") {
         await i.update({embeds: [mechascope], components: [ms4]})
+      }
+      if(i.customId == "sav" || i.customId == "savage") {
+        await i.update({embeds: [savage22], components: [sav]})
+      }
+      if(i.customId == "sav2" || i.customId == "savage2") {
+        await i.update({embeds: [savage22], components: [sav2]})
+      }
+      if(i.customId == "sav3" || i.customId == "savage3") {
+        await i.update({embeds: [savage22], components: [sav3]})
+      }
+      if(i.customId == "sav4" || i.customId == "savage4") {
+        await i.update({embeds: [savage22], components: [sav4]})
       }
     });
   },

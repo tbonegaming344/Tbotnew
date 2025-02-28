@@ -92,6 +92,7 @@ module.exports = {
               dHero == "hg" ||
               dHero == "huge" ||
               dHero == "huge giganticus" ||
+              dHero == "hugegiganticus" ||
               dHero == "giganticus" ||
               dHero == "huge-giganticus"
             ) {
@@ -330,6 +331,7 @@ module.exports = {
               dHero == "hg" ||
               dHero == "huge" ||
               dHero == "huge giganticus" ||
+              dHero == "hugegiganticus" ||
               dHero == "giganticus" ||
               dHero == "huge-giganticus"
             ) {
@@ -1219,6 +1221,7 @@ ${games}`,
             `${result[0].spacestars}`,
             `${result[0].splimps}`,
             //IM TBOT DB
+            `${result[0].savage22}`,
             `${result[0].bastet}`,
             `${result[0].otktrickster}`,
             `${result[0].rampticia}`,
@@ -1701,7 +1704,7 @@ ${games}`,
           );
           const deck = [
             //IM TBOT DB
-            
+            `${result[0].savage22}`,
             `${result[0].bastet}`,
             `${result[0].otktrickster}`,
             `${result[0].rampticia}`,
@@ -2027,6 +2030,7 @@ ${games}`,
               `${result[0].spacestars}`,
               `${result[0].splimps}`,
               //IM TBOT DB
+              `${result[0].savage22}`,
               `${result[0].bastet}`,
               `${result[0].otktrickster}`,
               `${result[0].rampticia}`,

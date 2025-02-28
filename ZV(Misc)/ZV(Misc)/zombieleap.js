@@ -135,7 +135,7 @@ module.exports = {
         "Overstuffed Zombie",
         "Primordial Cheese Shover",
         "Sneezing Zombie", 
-        "Sufer Zombie", 
+        "Surfer Zombie", 
         "Drum Major",
         "Mad Chemist",
         "Mountain Climber",

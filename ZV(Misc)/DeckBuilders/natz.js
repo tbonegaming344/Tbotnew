@@ -107,7 +107,8 @@ const {
         toBuildString += `\n<@1043528908148052089> **${deck}**`;
       }
       let user = await client.users.fetch("608656205589512195");
-        let [result] = await db.query(`select ladytuna, toyotacontrolla from ntdecks nt inner join ncdecks nc on nt.deckinfo = nc.deckinfo`);
+        let [result] = await db.query(`select carroot, ladytuna, toyotacontrolla from ntdecks nt inner join ncdecks nc on nt.deckinfo = nc.deckinfo 
+          inner join bcdecks bc on nt.deckinfo = bc.deckinfo`);
         let natz = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
         .setDescription(

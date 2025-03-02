@@ -1196,6 +1196,7 @@ ${games}`,
             //EB TBOT DB
             
             `${result[0].gargstar22}`,
+            `${result[0].huntgargs}`,
             `${result[0].igmaburn}`,
             
             `${result[0].noplayingallowed}`,
@@ -1598,6 +1599,7 @@ ${games}`,
             //EB TBOT DB
             
             `${result[0].gargstar22}`,
+            `${result[0].huntgargs}`,
             `${result[0].igmaburn}`,
             
             `${result[0].noplayingallowed}`,
@@ -2005,6 +2007,7 @@ ${games}`,
               //EB TBOT DB
               
               `${result[0].gargstar22}`,
+              `${result[0].huntgargs}`,
               `${result[0].igmaburn}`,
               
               `${result[0].noplayingallowed}`,

@@ -2735,13 +2735,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("hgargs")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const hgargs = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("homophobia")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("ibox")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const ibox = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("homophobia")
+        .setCustomId("huntgargs")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3244,6 +3254,7 @@ module.exports = {
       "himpter",
       "homophobia",
       "horts",
+      "huntgargs",
       "icebox",
       "igmablobchum",
       "igmaburn",
@@ -4062,13 +4073,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("hgargs2")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const hgargs2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("homophobia2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("igbc2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const igbc2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("homophobia2")
+        .setCustomId("huntgargs2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4290,6 +4311,7 @@ module.exports = {
       "gargolithtech",
       "himpter",
       "homophobia",
+      "huntgargs",
       "igmablobchum",
       "kingleap",
       "ladytuna",
@@ -5138,6 +5160,16 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("hgargs3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const hgargs3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("frozentelimps4")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("kscope3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
@@ -5269,6 +5301,7 @@ module.exports = {
       "bonusducks",
       "bustbolt",
       "frozentelimps",
+      "huntgargs",
       "kaleidoscope",
       "mechacontrol",
       "mechascope",
@@ -7588,6 +7621,25 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].gargstar22}`);
+      const huntgargs = new EmbedBuilder()
+      .setTitle(`${result[5].huntgargs}`)
+      .setDescription(`${result[3].huntgargs}`)
+      .setFooter({ text: `${result[2].huntgargs}` })
+      .addFields({
+        name: "Deck Type",
+        value: `${result[6].huntgargs}`,
+        inline: true
+      },{ 
+        name: "Archetype", 
+        value: `${result[0].huntgargs}`,
+        inline: true
+      },{ 
+        name: "Deck Cost", 
+        value: `${result[1].huntgargs}`,
+        inline: true
+      })
+      .setColor("Random")
+      .setImage(`${result[4].huntgargs}`);
     let igmaburn = new EmbedBuilder()
       .setTitle(`${result[5].igmaburn}`)
       .setDescription(`${result[3].igmaburn}`)
@@ -10998,6 +11050,15 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
 	  if(i.customId == "carr4" || i.customId == "carroot4") {
 		await i.update({ embeds: [carroot], components: [carr4] });
 	  }
+    if(i.customId == "hgargs" || i.customId == "huntgargs"){
+      await i.update({ embeds: [huntgargs], components: [hgargs] });
+    }
+    if(i.customId == "hgargs2" || i.customId == "huntgargs2"){
+      await i.update({ embeds: [huntgargs], components: [hgargs2] });
+    }
+    if(i.customId == "hgargs3" || i.customId == "huntgargs3"){
+      await i.update({ embeds: [huntgargs], components: [hgargs3] });
+    }
     });
   },
 };

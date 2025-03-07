@@ -1157,7 +1157,7 @@ ${games}`,
             `${result[0].frymidrose}`,
             `${result[0].hmr}`,
             //SF TBOT DB
-            `${result[0].oneone}`,
+        
             `${result[0].ejection}`,
             `${result[0].funnyflare}`,
             `${result[0].healburn}`,
@@ -1477,7 +1477,7 @@ ${games}`,
           );
           const deck = [
             //SF TBOT DB
-            `${result[0].oneone}`,
+        
             `${result[0].ejection}`,
             `${result[0].funnyflare}`,
             `${result[0].healburn}`,
@@ -1928,7 +1928,7 @@ ${games}`,
               `${result[0].frymidrose}`,
               `${result[0].hmr}`,
               //SF TBOT DB
-              `${result[0].oneone}`,
+          
               `${result[0].ejection}`,
               `${result[0].funnyflare}`,
               `${result[0].healburn}`,

@@ -44,7 +44,7 @@ module.exports = {
       .setDescription('Some of the Best Decks in the game')
       .setEmoji("<:compemote:1325461143136764060>"), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Decks")
+      .setLabel("Ladder Deck")
       .setValue("ladder")
       .setDescription('Decks that mostly only good for ranked games')
 			.setEmoji("<:ladder:1271503994857979964>"),
@@ -77,18 +77,28 @@ module.exports = {
     const electricBoogalooDecks = {
       budgetDecks: ["budgetburn"],
       competitiveDecks: ["seacret"],
-      ladderDecks: ["gargstar22", "igmaburn"],
+      ladderDecks: ["gargstar22"],
       memeDecks: ["huntgargs", "noplayingallowed"],
-      aggroDecks: ["budgetburn", "igmaburn", "seacret"],
+      aggroDecks: ["budgetburn", "seacret"],
       comboDecks: ["seacret"],
       controlDecks: ["huntgargs", "noplayingallowed"],
       midrangeDecks: ["gargstar22"],
-      allDecks: ["budgetburn", "gargstar22", "huntgargs", "igmaburn", "noplayingallowed", "seacret"],
+      allDecks: ["budgetburn", "gargstar22", "huntgargs", "noplayingallowed", "seacret"],
     }
     const row = new ActionRowBuilder().addComponents(select)
     const alldecksrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("seacret2")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+      .setCustomId("budeb")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const budeb = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("helpall")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -98,7 +108,7 @@ module.exports = {
     )
     const gstar22 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("helpall")
+      .setCustomId("budgeteb")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -112,23 +122,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("iburn3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const iburn3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("huntgargs")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("npa")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const npa= new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("igmaburn3")
+      .setCustomId("huntgargs")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -150,47 +150,6 @@ module.exports = {
     for (let i=0; i < electricBoogalooDecks.allDecks.length; i++){
       let deck = electricBoogalooDecks.allDecks[i]
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let budgetdecks = [
-      "budgetburn"
-    ]
-    let compdecks = [
-      "seacret"
-    ]
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("igmaburn2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gstar222")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const gstar222 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("iburn2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const iburn2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargstar222")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    let toBuildLadderString = "";
-    for (let i=0; i < electricBoogalooDecks.ladderDecks.length; i++){
-      let deck = electricBoogalooDecks.ladderDecks[i]
-      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
     }
     const memerow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
@@ -243,23 +202,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("iburn")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const iburn = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("budgetburn")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("sea")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
     )
     const sea= new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("igmaburn")
+      .setCustomId("budgetburn")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -272,9 +221,6 @@ module.exports = {
     let deck = electricBoogalooDecks.aggroDecks[i]
     toBuildAggroString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let combodecks = [
-      "seacret", 
-    ]
     const controlrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("noplayingallowed3")
@@ -329,17 +275,6 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks
       .setFooter({
         text: `To view the Electric Boogaloo decks please use the commands listed above or navigate through all of the decks using the buttons below!
 Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks in Tbot`,
-      })
-      .setColor("Random");
-      let ladderEmbed = new EmbedBuilder()
-      .setThumbnail("https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png")
-      .setTitle("Electric Boogaloo Ladder Decks")
-      .setDescription(
-        `My Ladder Decks for Electric Boogaloo(EB) are ${toBuildLadderString}`
-      )
-      .setFooter({
-        text: `To view the Ladder Electric Boogaloo decks please use the commands listed above or navigate through all of the Ladder decks using the buttons below!
-Note: Electric Boogaloo has ${electricBoogalooDecks.ladderDecks.length} Ladder decks in Tbot`,
       })
       .setColor("Random");
       const memeEmbed = new EmbedBuilder()
@@ -433,25 +368,6 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control
       })
       .setColor("Random")
       .setImage(`${result[4].huntgargs}`);
-    let igmaburn = new EmbedBuilder()
-    .setTitle(`${result[5].igmaburn}`)	
-    .setDescription(`${result[3].igmaburn}`)
-.setFooter({text: `${result[2].igmaburn}`})
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].igmaburn}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].igmaburn}`,
-      inline: true
-    },{
-      name: "Deck Cost", 
-      value: `${result[1].igmaburn}`,
-      inline: true
-    })
-  .setColor("Random")			
-  .setImage(`${result[4].igmaburn}`)
     //No Playing Allowed
     let noplayingallowed = new EmbedBuilder()
     .setTitle(`${result[5].noplayingallowed}`)
@@ -507,11 +423,8 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control
         if(value == "comp" || value == "combo"){
           await i.reply({embeds: [seacret], flags: MessageFlags.Ephemeral})
         }
-        if( value == "midrange"){
+        if(value == "ladder" || value == "midrange"){
           await i.reply({embeds: [gargstar22], flags: MessageFlags.Ephemeral})
-        }
-        if(value == "ladder"){
-          await i.update({embeds: [ladderEmbed], components: [ladderrow]})
         }
         if(value == "meme"){
           await i.update({embeds: [memeEmbed], components: [memerow]})
@@ -547,16 +460,6 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control
     if(i.customId == "bburn" || i.customId == "budgetburn") {
       await i.update({embeds: [budgetburn], components: [bburn]})
     }
-    //Igma Burn 
-    if(i.customId == "iburn" || i.customId == "igmaburn"){
-      await i.update({embeds: [igmaburn], components: [iburn]})
-    }
-    if(i.customId == "iburn2" || i.customId == "igmaburn2"){
-      await i.update({embeds: [igmaburn], components: [iburn2]})
-    }
-    if(i.customId == "iburn3" || i.customId == "igmaburn3"){
-      await i.update({embeds: [igmaburn], components: [iburn3]})
-    }
     //Seacret
     if(i.customId == "sea" || i.customId == "seacret"){
       await i.update({embeds: [seacret], components: [sea]})
@@ -588,6 +491,9 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control
     }
     if(i.customId == "hgargs3" || i.customId == "huntgargs3"){
       await i.update({embeds: [huntgargs], components: [hgargs3]})
+    }
+    if(i.customId == "budeb" || i.customId == "budgeteb"){
+      await i.update({embeds: [budgetburn], components: [budeb]})
     }
     });
   }

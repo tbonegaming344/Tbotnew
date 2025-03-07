@@ -76,33 +76,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("kl")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const kl = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("igmablobchum")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("marx")
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const marx = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("kingleap")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("msb")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const msb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("marxbolt")
+        .setCustomId("igmablobchum")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -112,17 +92,7 @@ module.exports = {
     );
     const mc = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("mimescibolt")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ps")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const ps = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("mechacontrol")
+        .setCustomId("marxbolt")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -132,7 +102,7 @@ module.exports = {
     );
     const sb = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pharaohster")
+        .setCustomId("mechacontrol")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -166,11 +136,8 @@ module.exports = {
       "bustbolt",
       "coggerazzi",
       "igmablobchum",
-      "kingleap",
       "marxbolt",
-      "mimescibolt",
       "mechacontrol",
-      "pharaohster",
       "sunbandits",
       "terrifytricksterazzi",
       "uncrackabolt",
@@ -274,7 +241,7 @@ module.exports = {
     }
     let ladderrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("pharaohster2")
+      .setCustomId("mechacontrol2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -308,26 +275,6 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("msb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const msb2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mechacontrol2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ps2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const ps2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mimescibolt2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("helpladder")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
@@ -336,8 +283,6 @@ module.exports = {
       "boltbolt",
       "marxbolt",
       "mechacontrol", 
-      "mimescibolt", 
-      "pharaohster",
     ]
     let toBuildLadderString = "";
     for (let i = 0; i < ladderdecks.length; i++) {
@@ -490,43 +435,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("kl3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const kl3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("igmablobchum3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("msb3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const msb3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("kingleap3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ps3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const ps3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mimescibolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder() 
       .setCustomId("sb3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );
     const sb3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("pharaohster3")
+      .setCustomId("igmablobchum3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -549,9 +464,6 @@ module.exports = {
       "bustbolt",
       "coggerazzi",
       "igmablobchum",
-      "kingleap", 
-      "mimescibolt", 
-      "pharaohster",
       "sunbandits",
       "terrifytricksterazzi",
     ]
@@ -586,23 +498,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("ps4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const ps4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mechacontrol3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("sb4")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );
     const sb4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("pharaohster4")
+      .setCustomId("mechacontrol3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -623,10 +525,8 @@ module.exports = {
 
     let controldecks = [
       "bustbolt",
-      "josebolt",
       "mechacontrol",
-      "pharaohster",
-      "sunbandits",
+      "sunbandits",      
       "uncrackabolt",
     ]
     let toBuildControlString = "";
@@ -744,7 +644,7 @@ module.exports = {
       .setDescription(`My commands for Rustbolt(RB) are ${toBuildString}`)
       .setFooter({
         text: `To view the RustBolt decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Rustbolt has ${decks.length} toal decks in Tbot`,
+Note: Rustbolt has ${decks.length} total decks in Tbot`,
       })
       .setColor("Random");
       let helprb = new EmbedBuilder()
@@ -753,7 +653,7 @@ Note: Rustbolt has ${decks.length} toal decks in Tbot`,
       )
       .setTitle("Rustbolt Decks")
       .setDescription(`To view the RustBolt decks please select an option from the select menu below!
-Note: Rustbolt has ${decks.length} toal decks in Tbot`)
+Note: Rustbolt has ${decks.length} total decks in Tbot`)
       .setColor("Random");
       let compEmbed = new EmbedBuilder()
       .setThumbnail(
@@ -763,7 +663,7 @@ Note: Rustbolt has ${decks.length} toal decks in Tbot`)
       .setDescription(`My competitive decks for Rustbolt(RB) are ${toBuildCompString}`)
       .setFooter({
         text: `To view the RustBolt competitive decks please use the commands listed above or click on the buttons below to navigate through all competitive decks!
-Note: Rustbolt has ${compdecks.length} toal competitive decks in Tbot`,
+Note: Rustbolt has ${compdecks.length} total competitive decks in Tbot`,
       })
       .setColor("Random");
       let ladderEmbed = new EmbedBuilder()
@@ -774,7 +674,7 @@ Note: Rustbolt has ${compdecks.length} toal competitive decks in Tbot`,
       .setDescription(`My ladder decks for Rustbolt(RB) are ${toBuildLadderString}`)
       .setFooter({
         text: `To view the RustBolt ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Rustbolt has ${ladderdecks.length} toal ladder decks in Tbot`,
+Note: Rustbolt has ${ladderdecks.length} total ladder decks in Tbot`,
       })
       .setColor("Random");
       let memeEmbed = new EmbedBuilder()
@@ -785,7 +685,7 @@ Note: Rustbolt has ${ladderdecks.length} toal ladder decks in Tbot`,
       .setDescription(`My meme decks for Rustbolt(RB) are ${toBuildMemeString}`)
       .setFooter({
         text: `To view the RustBolt meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-Note: Rustbolt has ${memedecks.length} toal meme decks in Tbot`,
+Note: Rustbolt has ${memedecks.length} total meme decks in Tbot`,
       })
       .setColor("Random");
       let aggroEmbed = new EmbedBuilder()
@@ -796,7 +696,7 @@ Note: Rustbolt has ${memedecks.length} toal meme decks in Tbot`,
       .setDescription(`My aggro decks for Rustbolt(RB) are ${toBuildAggroString}`)
       .setFooter({
         text: `To view the RustBolt aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
-Note: Rustbolt has ${aggrodecks.length} toal aggro decks in Tbot`,
+Note: Rustbolt has ${aggrodecks.length} total aggro decks in Tbot`,
       })
       .setColor("Random");
       let comboEmbed = new EmbedBuilder()
@@ -807,7 +707,7 @@ Note: Rustbolt has ${aggrodecks.length} toal aggro decks in Tbot`,
       .setDescription(`My combo decks for Rustbolt(RB) are ${toBuildComboString}`)
       .setFooter({
         text: `To view the RustBolt combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-Note: Rustbolt has ${combodecks.length} toal combo decks in Tbot`,
+Note: Rustbolt has ${combodecks.length} total combo decks in Tbot`,
       })
       .setColor("Random");
       let controlEmbed = new EmbedBuilder()
@@ -818,7 +718,7 @@ Note: Rustbolt has ${combodecks.length} toal combo decks in Tbot`,
       .setDescription(`My control decks for Rustbolt(RB) are ${toBuildControlString}`)
       .setFooter({
         text: `To view the RustBolt control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-Note: Rustbolt has ${controldecks.length} toal control decks in Tbot`,
+Note: Rustbolt has ${controldecks.length} total control decks in Tbot`,
       })
       .setColor("Random");
       let midrangeEmbed = new EmbedBuilder()
@@ -829,7 +729,7 @@ Note: Rustbolt has ${controldecks.length} toal control decks in Tbot`,
       .setDescription(`My midrange decks for Rustbolt(RB) are ${toBuildMidrangeString}`)
       .setFooter({
         text: `To view the RustBolt midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: Rustbolt has ${midrangedecks.length} toal midrange decks in Tbot`,
+Note: Rustbolt has ${midrangedecks.length} total midrange decks in Tbot`,
       })
       .setColor("Random");
       let tempoEmbed = new EmbedBuilder()
@@ -840,7 +740,7 @@ Note: Rustbolt has ${midrangedecks.length} toal midrange decks in Tbot`,
       .setDescription(`My tempo decks for Rustbolt(RB) are ${toBuildTempoString}`)
       .setFooter({
         text: `To view the RustBolt tempo decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
+Note: Rustbolt has ${tempodecks.length} total tempo decks in Tbot`,
       })
       .setColor("Random");
     let [result] = await db.query(`select * from rbdecks`);
@@ -920,25 +820,6 @@ Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
         })
       .setColor("Random")
       .setImage(`${result[4].igmablobchum}`)
-    let kingleap = new EmbedBuilder()
-    .setTitle(`${result[5].kingleap}`)
-    .setDescription(`${result[3].kingleap}`)
-    .setFooter({text:`${result[2].kingleap}`})
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].kingleap}`,
-          inline: true
-        },{
-          name: "Archetype",
-          value: `${result[0].kingleap}`,
-          inline: true
-        },{
-          name: "Deck Cost", 
-          value: `${result[1].kingleap}`,
-          inline: true
-        })
-      .setColor("Random")
-      .setImage(`	${result[4].kingleap}`)
     let marxbolt = new EmbedBuilder()
     .setTitle(`${result[5].marxbolt}`)
 		.setDescription(`${result[3].marxbolt}`)
@@ -958,25 +839,6 @@ Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
 		})
 		.setColor("Random")
 		.setImage(`${result[4].marxbolt}`)
-    let mimescibolt = new EmbedBuilder()
-    .setTitle(`${result[5].mimescibolt}`)
-		.setDescription(`${result[3].mimescibolt}`)
-		.setFooter({text:`${result[2].mimescibolt}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].mimescibolt}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].mimescibolt}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].mimescibolt}`,
-			inline: true
-		})
-		.setColor("Random")
-		.setImage(`${result[4].mimescibolt}`)
     let mechacontrol = new EmbedBuilder()
     .setTitle(`${result[5].mechacontrol}`)
 		.setDescription(`${result[3].mechacontrol}`)
@@ -996,25 +858,6 @@ Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
 			inline: true
 		})
 		.setImage(`${result[4].mechacontrol}`)
-    let pharaohster = new EmbedBuilder()
-    .setTitle(`${result[5].pharaohster}`)
-    .setDescription(`${result[3].pharaohster}`)
-    .setFooter({text: `${result[2].pharaohster}`})
-          .addFields({
-            name: "Deck Type",
-            value: `${result[6].pharaohster}`,
-            inline: true
-          },{
-            name: "Archetype",
-            value: `${result[0].pharaohster}`,
-            inline: true
-          },{
-            name: "Deck Cost", 
-            value: `${result[1].pharaohster}`,
-            inline: true
-          })
-      .setColor("Random")
-      .setImage(`${result[4].pharaohster}`)
     let coggerazzi = new EmbedBuilder()
     .setTitle(`${result[5].poggerrazzi}`)
     .setDescription(`${result[3].poggerrazzi}`)
@@ -1196,15 +1039,6 @@ Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
       if (i.customId == "igb4" || i.customId == "igmablobchum4") {
         await i.update({ embeds: [igmablobchum], components: [igb4] });
       }
-      if (i.customId == "kl" || i.customId == "kingleap") {
-        await i.update({ embeds: [kingleap], components: [kl] });
-      }
-      if (i.customId == "kl2" || i.customId == "kingleap2") {
-        await i.update({ embeds: [kingleap], components: [kl2] });
-      }
-      if (i.customId == "kl3" || i.customId == "kingleap3") {
-        await i.update({ embeds: [kingleap], components: [kl3] });
-      }
       if (i.customId == "bust" || i.customId == "bustbolt") {
         await i.update({ embeds: [bustbolt], components: [bust] });
       }
@@ -1227,15 +1061,6 @@ Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
       if (i.customId == "marx3" || i.customId == "marxbolt3") {
         await i.update({ embeds: [marxbolt], components: [marx3] });
       }
-      if (i.customId == "msb" || i.customId == "mimescibolt") {
-        await i.update({ embeds: [mimescibolt], components: [msb] });
-      }
-      if (i.customId == "msb2" || i.customId == "mimescibolt2") {
-        await i.update({ embeds: [mimescibolt], components: [msb2] });
-      }
-      if (i.customId == "msb3" || i.customId == "mimescibolt3") {
-        await i.update({ embeds: [mimescibolt], components: [msb3] });
-      }
       if (i.customId == "mc" || i.customId == "mechacontrol") {
         await i.update({ embeds: [mechacontrol], components: [mc] });
       }
@@ -1244,18 +1069,6 @@ Note: Rustbolt has ${tempodecks.length} toal tempo decks in Tbot`,
       }
       if (i.customId == "mc3" || i.customId == "mechacontrol3") {
         await i.update({ embeds: [mechacontrol], components: [mc3] });
-      }
-      if (i.customId == "ps" || i.customId == "pharaohster") {
-        await i.update({ embeds: [pharaohster], components: [ps] });
-      }
-      if (i.customId == "ps2" || i.customId == "pharaohster2") {
-        await i.update({ embeds: [pharaohster], components: [ps2] });
-      }
-      if (i.customId == "ps3" || i.customId == "pharaohster3") {
-        await i.update({ embeds: [pharaohster], components: [ps3] });
-      }
-      if (i.customId == "ps4" || i.customId == "pharaohster4") {
-        await i.update({ embeds: [pharaohster], components: [ps4] });
       }
       if (i.customId == "cog" || i.customId == "coggerazzi") {
         await i.update({ embeds: [coggerazzi], components: [cog] });

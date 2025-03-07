@@ -56,10 +56,6 @@ module.exports = {
           .setLabel("Midrange Decks")
           .setValue("midrange")
           .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
-          .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.'), 
           new StringSelectMenuOptionBuilder()
           .setLabel("All Decks")
           .setValue("all")
@@ -72,43 +68,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("one")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const one = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpladder")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("agr")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary),
     );
     const agraves = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("oneone")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("an")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const an = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("agraves")
+        .setCustomId("helpladder")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
         .setCustomId("ej")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary),
-    )
+    );
     const ej = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("anti")
+        .setCustomId("agraves")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -122,23 +98,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("sd")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const sd= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hibird")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("ycm")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary),
     );
     const youngcatmartin= new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("speeddemon")
+        .setCustomId("hibird")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -147,12 +113,9 @@ module.exports = {
         .setStyle(ButtonStyle.Primary),
     );
     let ladderdecks = [
-      "101",
       "agraves",
-      "anti",
       "ejection",
       "hibird",
-      "speeddemon",
       "ycm",
     ]
     let toBuildLadder = "";
@@ -166,33 +129,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("one2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const one2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpcombo")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("hb2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary),
     );
     const hb2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("oneone")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("sd2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const sd2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hibird2")
+        .setCustomId("helpcombo")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -202,7 +145,7 @@ module.exports = {
     );
     const sb = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("speeddemon2")
+        .setCustomId("hibird2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -231,9 +174,7 @@ module.exports = {
         .setStyle(ButtonStyle.Primary),
     );
     let combodecks = [
-      "101",
       "hibird",
-      "speeddemon",
       "sunbandits",
       "ycm",
       "ykm",
@@ -377,33 +318,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("one3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const one3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpall")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("agr2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary),
     );
     const agr2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("oneone3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("an2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const an2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("agraves2")
+        .setCustomId("helpall")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -413,7 +334,7 @@ module.exports = {
     );
     const ej3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("anti2")
+        .setCustomId("agraves2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -427,23 +348,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("sd3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const sd3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hibird4")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("sb4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary),
     );
     const sb4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("speeddemon3")
+        .setCustomId("hibird4")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -472,12 +383,9 @@ module.exports = {
         .setStyle(ButtonStyle.Primary),
     )
     let decks = [
-      "101",
       "agraves",
-      "anti",
       "ejection",
       "hibird",
-      "speeddemon",
       "sunbandits",
       "ycm",
       "ykm",
@@ -487,28 +395,19 @@ module.exports = {
       let deck = decks[i];
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select oneone, agraves, anti,
-ejection, hibird,  sunbandits, speeddemon, ycm, ykm 
-from sfdecks sf inner join ntdecks nt 
-on (sf.deckinfo = nt.deckinfo)
-inner join bcdecks bc
-on (sf.deckinfo = bc.deckinfo)
-inner join wkdecks wk 
-on (sf.deckinfo = wk.deckinfo)
+    let [result] = await db.query(`select agraves,
+ejection, hibird, sunbandits, ycm, ykm 
+from ntdecks nt
+inner join sfdecks sf
+on (nt.deckinfo = sf.deckinfo)
 inner join pbdecks pb 
-on (sf.deckinfo = pb.deckinfo)
-inner join czdecks cz 
-on (sf.deckinfo = cz.deckinfo)
-inner join ncdecks nc 
-on (sf.deckinfo = nc.deckinfo)
+on (nt.deckinfo = pb.deckinfo)
 inner join rbdecks rb 
-on (sf.deckinfo = rb.deckinfo)
-inner join gkdecks gk 
-on (sf.deckinfo = gk.deckinfo)
+on (nt.deckinfo = rb.deckinfo)
 inner join imdecks im 
-on (sf.deckinfo = im.deckinfo)
+on (nt.deckinfo = im.deckinfo)
 inner join hgdecks hg
-on (sf.deckinfo = hg.deckinfo)`);
+on (nt.deckinfo = hg.deckinfo)`);
     let user = await client.users.fetch("265754905828917259");
     let tryhard = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
@@ -584,26 +483,6 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("Random");
-      let oneone = new EmbedBuilder()
-      .setTitle(`${result[5].oneone}`)
-      .setDescription(`${result[3].oneone}`)
-      .setFooter({ text: `${result[2].oneone}` })
-      .setColor("Random")
-      .setImage(`${result[4].oneone}`)
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].oneone}`,
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `${result[0].oneone}`,
-        inline: true
-      },{ 
-        name: "Deck Cost", 
-        value: `${result[1].oneone}`,
-        inline: true
-      });
     let agr = new EmbedBuilder()
     .setTitle(`${result[5].agraves}`)
     .setDescription(`${result[3].agraves}`)
@@ -623,27 +502,6 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
         })
       .setColor("Random")
       .setImage(`${result[4].agraves}`)
-    let anti = new EmbedBuilder()
-    .setTitle(`${result[5].anti}`)
-		  .setDescription(`${result[3].anti}`)
-		  .setFooter({text: `${result[2].anti}`})
-				  .addFields({
-					name: "Deck Type", 
-					value: `${result[6].anti}`,
-					inline: true
-				  },
-				  {
-					name: "Archetype",
-					value: `${result[0].anti}`,
-					inline: true
-				  },
-				  {
-					name: "Deck Cost", 
-					value: `${result[1].anti}`,
-					inline: true
-				})
-			  .setColor("Random")
-			  .setImage(result[4].anti)
     let eject = new EmbedBuilder()
     .setTitle(`${result[5].ejection}`)
     .setDescription(`${result[3].ejection}`)
@@ -683,26 +541,6 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
         })
       .setColor("Random")
       .setImage(`${result[4].hibird}`)
-      let speeddemon = new EmbedBuilder()
-	.setTitle(`${result[5].speeddemon}`)
-	.setDescription(`${result[3].speeddemon}`)
-	.setFooter({text:`${result[2].speeddemon}`})
-			.addFields({
-				name: "Deck Type",
-				value: `${result[6].speeddemon}`,
-				inline: true
-			},
-			{
-				name: "Archetype",
-				value: `${result[0].speeddemon}`,
-				inline: true
-			},{
-				name: "Deck Cost", 
-				value: `${result[1].speeddemon}`,
-				inline: true
-			})
-		.setColor("Random")		
-	.setImage(`${result[4].speeddemon}`)
     let sband = new EmbedBuilder()
     .setTitle(`${result[5].sunbandits}`)
     .setDescription(`${result[3].sunbandits}`)
@@ -790,18 +628,12 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
         if(value == "aggro"){
           await i.reply({embeds: [agr], flags: MessageFlags.Ephemeral})
         }
-        if(value =="tempo"){
-          await i.reply({embeds: [anti], flags: MessageFlags.Ephemeral})
-        }
       }
       if (i.customId =="ladderhelp" || i.customId == "helpladder") {
         await i.update({
           embeds: [ladderhard],
           components: [ladderow],
         });
-      }
-      if(i.customId == "an" || i.customId == "anti"){
-        await i.update({embeds: [anti], components: [an]});
       }
       if (i.customId == "agr" || i.customId == "agraves") {
         await i.update({
@@ -893,12 +725,6 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
           components: [sb3],
         });
       }
-      if(i.customId == "sd" || i.customId == "speeddemon"){
-        await i.update({embeds: [speeddemon], components: [sd]})
-      }
-      if(i.customId == "sd2" || i.customId == "speeddemon2"){
-        await i.update({embeds: [speeddemon], components: [sd2]})
-      }
       if (i.customId == "ykm3" || i.customId == "youngkenmartin3") {
         await i.update({
           embeds: [ykm],
@@ -923,29 +749,17 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
           components: [sb2],
         });
       }
-      if(i.customId == "one" || i.customId == "oneone"){
-        await i.update({embeds: [oneone], components: [one]})
-      }
-      if(i.customId == "one2" || i.customId == "oneone2"){
-        await i.update({embeds: [oneone], components: [one2]})
-      }
       if(i.customId == "helpall" || i.customId == "allhelp"){
         await i.update({embeds: [allhard], components: [alldecksrow]})
       }
       if(i.customId == "agr2" || i.customId == "agraves2"){
         await i.update({embeds: [agr], components: [agr2]})
       }
-      if(i.customId == "an2" || i.customId == "anti2"){
-        await i.update({embeds: [anti], components: [an2]})
-      }
       if(i.customId == "ej3" || i.customId == "ejection3"){
         await i.update({embeds: [eject], components: [ej3]})
       }
       if(i.customId == "hb4" || i.customId == "hibird4"){
         await i.update({embeds: [hbird], components: [hb4]})
-      }
-      if(i.customId == "sd3" || i.customId == "speeddemon3"){
-        await i.update({embeds: [speeddemon], components: [sd3]})
       }
       if(i.customId == "sb4" || i.customId == "sunbandits4"){
         await i.update({embeds: [sband], components: [sb4]})
@@ -955,9 +769,6 @@ Note: ${user.displayName} has ${decks.length} total decks in tbot`,
       }
       if(i.customId == "ykm4" || i.customId == "youngkenmartin4"){
         await i.update({embeds: [ykm], components: [youngkenmartin4]})
-      }
-      if(i.customId == "one3" || i.customId == "oneone3"){
-        await i.update({embeds: [oneone], components: [one3]})
       }
     });
   },

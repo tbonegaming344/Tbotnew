@@ -31,7 +31,7 @@ module.exports = {
           .setValue("aggro")
           .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
+          .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
         new StringSelectMenuOptionBuilder()
@@ -82,44 +82,9 @@ module.exports = {
     for (let i = 0; i < ladderdecks.length; i++) {
       toBuildLadder += `\n<@1043528908148052089> **${ladderdecks[i]}**`;
     }
-    let combo = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-       .setCustomId("kl2")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let kl2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("combohelp")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>") 
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mr2")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let mr2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("kingleap2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpcombo")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
     let combodecks =[
-      "kingleap",
       "midred"
     ]
-    let toBuildCombo = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      toBuildCombo += `\n<@1043528908148052089> **${combodecks[i]}**`;
-    }
     let midrange = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("midred3")
@@ -160,7 +125,7 @@ module.exports = {
     }
     let meme = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("kingleap")
+        .setCustomId("hland2")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -184,24 +149,13 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("kl")
+        .setCustomId("helpmeme")
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let kl = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hland2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpmeme")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
     let memedecks = [
       "dozzamech",
       "highlander",
-      "kingleap"
     ]
     let toBuildMeme = "";
     for (let i = 0; i < memedecks.length; i++) {
@@ -271,23 +225,13 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("kl3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const kl3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hlander3")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("mr4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     )
     const mr4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("kingleap3")
+        .setCustomId("hlander3")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -298,7 +242,6 @@ module.exports = {
     let decks = [
       "dozzamech",
       "highlander",
-      "kingleap",
       "midred",
     ];
     let toBuildString = "";
@@ -306,12 +249,10 @@ module.exports = {
       toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
     }
     let [result] = await db.query(`select dozzamech, highlander, 
-kingleap, midred, trickmech
+midred, trickmech
 from zmdecks zm 
 inner join wkdecks wk 
 on (zm.deckinfo = wk.deckinfo) 
-inner join rbdecks rb 
-on (zm.deckinfo = rb.deckinfo)
 inner join czdecks cz 
 on (zm.deckinfo = cz.deckinfo)`);
 let user = await client.users.fetch("1143937777763889324");
@@ -345,17 +286,6 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
     })
     .setThumbnail(user.displayAvatarURL())
     .setColor("Random");
-     let combodozza = new EmbedBuilder()
-      .setTitle(`${user.displayName} Combo Decks`)
-      .setDescription(
-        `My Combo decks made by ${user.displayName} are ${toBuildCombo}`
-      )
-      .setFooter({
-        text: `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${combodecks.length} Combo decks in Tbot`
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");  
       let middozza = new EmbedBuilder()
       .setTitle(`${user.displayName} Midrange Decks`)
       .setDescription(
@@ -427,25 +357,6 @@ Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`
 			inline: true
 		})
 		.setImage(`${result[4].highlander}`)
-    let kleap = new EmbedBuilder()
-    .setTitle(`${result[5].kingleap}`)
-    .setDescription(`${result[3].kingleap}`)
-    .setFooter({text:`${result[2].kingleap}`})
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].kingleap}`,
-          inline: true
-        },{
-          name: "Archetype",
-          value: `${result[0].kingleap}`,
-          inline: true
-        },{
-          name: "Deck Cost", 
-          value: `${result[1].kingleap}`,
-          inline: true
-        })
-      .setColor("Random")
-      .setImage(`	${result[4].kingleap}`)
     let mred = new EmbedBuilder()
     .setTitle(`${result[5].midred}`)
     .setDescription(`${result[3].midred}`)
@@ -499,7 +410,7 @@ Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`
         await i.update({embeds: [ladderdozza], components: [ladderrow]});
       }
       if(value == "combo"){
-        await i.update({embeds: [combodozza], components: [combo]});
+        await i.reply({embeds: [mred], flags: MessageFlags.Ephemeral})
       }
       if(value == "midrange"){
         await i.update({embeds: [middozza], components: [midrange]});
@@ -514,9 +425,6 @@ Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`
         await i.update({embeds: [alldozza], components: [alldecksrow]})
       }
     }
-    if(i.customId === "kl" ||i.customId === "kingleap" ) {
-      await i.update({embeds: [kleap], components: [kl]});
-    }
     if(i.customId === "mr" || i.customId === "midred") {
       await i.update({embeds: [mred], components: [mr]});
     }
@@ -525,15 +433,6 @@ Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`
     }
     if(i.customId == "mr2" || i.customId == "midred2") {
       await i.update({embeds: [mred], components: [mr2]});
-    }
-    if(i.customId == "kl2" || i.customId == "kingleap2") {
-      await i.update({embeds: [kleap], components: [kl2]});
-    }
-    if(i.customId == "kl3" || i.customId == "kingleap3") {
-      await i.update({embeds: [kleap], components: [kl3]});
-    }
-    if(i.customId == "helpcombo" || i.customId == "combohelp") {
-      await i.update({embeds: [combodozza], components: [combo]});
     }
     // Midrange Decks
     if(i.customId == "mr3" || i.customId == "midred3") {

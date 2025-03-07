@@ -1148,10 +1148,7 @@ ${games}`,
             `${result[0].sovietonion}`,
             
             //NC TBOT DB
-            
             `${result[0].cyburn}`,
-            `${result[0].gangstaparadise}`,
-            `${result[0].speeddemon}`,
             `${result[0].toyotacontrolla}`, 
             `${result[0].translattail}`,
             // RO TBOT DB
@@ -1165,12 +1162,11 @@ ${games}`,
             `${result[0].funnyflare}`,
             `${result[0].healburn}`,
             `${result[0].healmidflare}`,
-            `${result[0].physcopineclones}`,
+           
             `${result[0].physcosolstice}`,
             `${result[0].ramp2seedling}`,
             //SP TBOT DB
-            //Bartin
-            `${result[0].bartin}`,
+      
             `${result[0].radiotherapy}`,
            `${result[0].nuttin}`,
             //WK TBOT DB
@@ -1197,7 +1193,7 @@ ${games}`,
             
             `${result[0].gargstar22}`,
             `${result[0].huntgargs}`,
-            `${result[0].igmaburn}`,
+          
             
             `${result[0].noplayingallowed}`,
         
@@ -1212,7 +1208,7 @@ ${games}`,
             `${result[0].frozentelimps}`,
             `${result[0].gravestache}`,
             `${result[0].gravepiratestache}`,
-            `${result[0].kitchenhg}`,
+           
             `${result[0].sweap}`,
             `${result[0].otkswabbie}`, 
             `${result[0].telimps}`,
@@ -1253,9 +1249,8 @@ ${games}`,
           
             `${result[0].bustbolt}`,
             `${result[0].igmablobchum}`,
-            `${result[0].kingleap}`,
+            
             `${result[0].marxbolt}`,
-            `${result[0].mimescibolt}`,
             `${result[0].pharaohster}`,
             `${result[0].poggerrazzi}`,
             `${result[0].sunbandits}`,
@@ -1274,7 +1269,7 @@ ${games}`,
            `${result[0].brady}`,
             `${result[0].dozzamech}`,
             `${result[0].feastmech}`,
-            `${result[0].frymech}`,
+           
             `${result[0].gargburn}`,
             `${result[0].trickmech}`,
             `${result[0].zmoss}`,
@@ -1439,8 +1434,6 @@ ${games}`,
             //NC TBOT DB
             
             `${result[0].cyburn}`,
-            `${result[0].gangstaparadise}`,
-            `${result[0].speeddemon}`,
             `${result[0].toyotacontrolla}`, 
             `${result[0].translattail}`,
           ];
@@ -1489,7 +1482,7 @@ ${games}`,
             `${result[0].funnyflare}`,
             `${result[0].healburn}`,
             `${result[0].healmidflare}`,
-            `${result[0].physcopineclones}`,
+           
             `${result[0].physcosolstice}`,
             `${result[0].ramp2seedling}`,
           
@@ -1512,8 +1505,7 @@ ${games}`,
                     where deckinfo = 'image link:'`);
           const deck = [
             //SP TBOT DB
-            //Bartin
-            `${result[0].bartin}`,
+      
             `${result[0].radiotherapy}`,
            `${result[0].nuttin}`,
            
@@ -1600,7 +1592,7 @@ ${games}`,
             
             `${result[0].gargstar22}`,
             `${result[0].huntgargs}`,
-            `${result[0].igmaburn}`,
+          
             
             `${result[0].noplayingallowed}`,
         
@@ -1633,7 +1625,7 @@ ${games}`,
             `${result[0].frozentelimps}`,
             `${result[0].gravestache}`,
             `${result[0].gravepiratestache}`,
-            `${result[0].kitchenhg}`,
+           
             `${result[0].sweap}`,
             `${result[0].otkswabbie}`, 
             `${result[0].telimps}`,
@@ -1800,9 +1792,8 @@ ${games}`,
           
             `${result[0].bustbolt}`,
             `${result[0].igmablobchum}`,
-            `${result[0].kingleap}`,
+            
             `${result[0].marxbolt}`,
-            `${result[0].mimescibolt}`,
             `${result[0].pharaohster}`,
             `${result[0].poggerrazzi}`,
             `${result[0].sunbandits}`,
@@ -1860,7 +1851,7 @@ ${games}`,
            `${result[0].brady}`,
             `${result[0].dozzamech}`,
             `${result[0].feastmech}`,
-            `${result[0].frymech}`,
+           
             `${result[0].gargburn}`,
             `${result[0].trickmech}`,
             `${result[0].zmoss}`,
@@ -1929,8 +1920,6 @@ ${games}`,
               //NC TBOT DB
               
               `${result[0].cyburn}`,
-              `${result[0].gangstaparadise}`,
-              `${result[0].speeddemon}`,
               `${result[0].toyotacontrolla}`, 
               `${result[0].translattail}`,
               // RO TBOT DB
@@ -1944,12 +1933,10 @@ ${games}`,
               `${result[0].funnyflare}`,
               `${result[0].healburn}`,
               `${result[0].healmidflare}`,
-              `${result[0].physcopineclones}`,
+             
               `${result[0].physcosolstice}`,
               `${result[0].ramp2seedling}`,
               //SP TBOT DB
-              //Bartin
-              `${result[0].bartin}`,
               `${result[0].radiotherapy}`,
              `${result[0].nuttin}`,
               //WK TBOT DB
@@ -2008,7 +1995,7 @@ ${games}`,
               
               `${result[0].gargstar22}`,
               `${result[0].huntgargs}`,
-              `${result[0].igmaburn}`,
+            
               
               `${result[0].noplayingallowed}`,
           
@@ -2023,7 +2010,7 @@ ${games}`,
               `${result[0].frozentelimps}`,
               `${result[0].gravestache}`,
               `${result[0].gravepiratestache}`,
-              `${result[0].kitchenhg}`,
+             
               `${result[0].sweap}`,
               `${result[0].otkswabbie}`, 
               `${result[0].telimps}`,
@@ -2064,9 +2051,8 @@ ${games}`,
             
               `${result[0].bustbolt}`,
               `${result[0].igmablobchum}`,
-              `${result[0].kingleap}`,
+              
               `${result[0].marxbolt}`,
-              `${result[0].mimescibolt}`,
               `${result[0].pharaohster}`,
               `${result[0].poggerrazzi}`,
               `${result[0].sunbandits}`,
@@ -2084,7 +2070,7 @@ ${games}`,
              `${result[0].brady}`,
               `${result[0].dozzamech}`,
               `${result[0].feastmech}`,
-              `${result[0].frymech}`,
+             
               `${result[0].gargburn}`,
               `${result[0].trickmech}`,
               `${result[0].zmoss}`,

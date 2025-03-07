@@ -66,23 +66,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("frym")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const frym = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("dozzamech")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("gb")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const gb = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("frymech")
+        .setCustomId("dozzamech")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -126,7 +116,6 @@ module.exports = {
       "brady",
       "budgetzm",
       "dozzamech",
-      "frymech",
       "gargburn",
       "trickmech",
       "uncrackamech",
@@ -216,23 +205,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("frym2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const frym2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("brady2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("tm2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const tm2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("frymech2")
+      .setCustomId("brady2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -244,7 +223,6 @@ module.exports = {
     let ladderdecks = [
       "binaryflagwar",
       "brady",
-      "frymech", 
       "trickmech"
     ]
     let toBuildLadderString = "";
@@ -328,23 +306,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("frym3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const frym3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("dozzamech3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("tm3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const tm3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("frymech3")
+      .setCustomId("dozzamech3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -355,7 +323,6 @@ module.exports = {
     let aggrodecks = [
       "budgetzm", 
       "dozzamech", 
-      "frymech", 
       "trickmech",
     ]
     let toBuildAggroString = "";
@@ -675,29 +642,6 @@ Note: Zmech has ${midrangedecks.length} midrange decks in Tbot`,
         value: `${result[1].feastmech}`,
         inline: true
       });
-    let frymech = new EmbedBuilder()
-      .setTitle(`${result[5].frymech}`)
-      .setDescription(`${result[3].frymech}`)
-      .setFooter({ text: `${result[2].frymech}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].frymech}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].frymech}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].frymech}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].frymech}`);
     let gargburn = new EmbedBuilder()
       .setTitle(`${result[5].gargburn}`)
       .setDescription(`${result[3].gargburn}`)
@@ -864,15 +808,6 @@ Note: Zmech has ${midrangedecks.length} midrange decks in Tbot`,
       }
       if (i.customId == "um3" || i.customId == "uncrackamech3") {
         await i.update({ embeds: [uncrackamech], components: [um3] });
-      }
-      if (i.customId == "frym" || i.customId == "frymech") {
-        await i.update({ embeds: [frymech], components: [frym] });
-      }
-      if (i.customId == "frym2" || i.customId == "frymech2") {
-        await i.update({ embeds: [frymech], components: [frym2] });
-      }
-      if (i.customId == "frym3" || i.customId == "frymech3") {
-        await i.update({ embeds: [frymech], components: [frym3] });
       }
       if (i.customId == "gb" || i.customId == "gargburn") {
         await i.update({ embeds: [gargburn], components: [gb] });

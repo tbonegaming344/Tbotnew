@@ -2,7 +2,7 @@ const {EmbedBuilder} = require("discord.js");
 let db = require("../../index.js");
 module.exports = {
 	name: `budgetburstsp`,
-	aliases: [`spbudget`, `bsp`, `budgetsp`, `budgetbartin`, `budgetsd`],
+	aliases: [`spbudget`, `bsp`, `budgetsp`,`budgetsd`],
 	category: `Spudow(SP)`,
 		run: async(client, message, args) => {
 			let [result] = await db.query(`SELECT budgetburstsp from spdecks`);

@@ -406,23 +406,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("bartin")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bart = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("aggrohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("schoolyard2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );
     const syard2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("bart")
+      .setCustomId("aggrohelp")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -452,7 +442,6 @@ module.exports = {
     );
 
     let aggrodecks = [
-      "bartin",
       "schoolyard",
       "seacret",
       "watertron"
@@ -565,23 +554,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("bart2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bart2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("gstache2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
-    )
+    );
     const gstache2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("bartin2")
+      .setCustomId("ladderhelp")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -600,7 +579,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     let ladderdecks = [
-      "bartin",
       "gravestache",
       "schoolyard",
     ]
@@ -654,23 +632,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("bart3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const bart3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("allhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("budgetykm3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const bykm3 = new ActionRowBuilder().addComponents( 
       new ButtonBuilder()
-      .setCustomId("bartin3")
+      .setCustomId("allhelp")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -839,7 +807,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     let decks = [
-      "bartin",
       "budgetykm",
       "bustbolt",
       "chemotherapy",
@@ -864,7 +831,7 @@ module.exports = {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
     let [result] =
-      await db.query(`select apotk, bartin,
+      await db.query(`select apotk,
 budgetykm, bustbolt, chemotherapy,
 cyburn, gargburn, gravestache, healmidflare, noplayingallowed, 
 schoolyard, seacret, shamcontrol, spacestars, stacheticia, radiotherapy, uncrackabolt, watertron
@@ -1014,27 +981,6 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
       .setColor("Random")		
       .setImage(`${result[4].apotk}`)
-    // Bartin
-    let bartin = new EmbedBuilder()
-    .setTitle(`${result[5].bartin}`)
-    .setDescription(`${result[3].bartin}`)
-    .setFooter({ text: `${result[2].bartin}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].bartin}`,
-      inline: true,
-    },
-    {
-      name: "Archetype",
-      value: `${result[0].bartin}`,
-      inline: true,
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].bartin}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].bartin}`);
     let bustbolt = new EmbedBuilder()
     .setTitle(`${result[5].bustbolt}`)
 		.setDescription(`${result[3].bustbolt}`)
@@ -1538,15 +1484,6 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         }
         if(i.customId == "wt3" || i.customId == "watertron3"){
           await i.update({embeds: [watertron], components: [wt3]})
-        }
-        if(i.customId == "bart" || i.customId == "bartin"){
-          await i.update({embeds: [bartin], components: [bart]})
-        }
-        if(i.customId == "bart2" || i.customId == "bartin2"){
-          await i.update({embeds: [bartin], components: [bart2]})
-        }
-        if(i.customId == "bart3" || i.customId == "bartin3"){
-          await i.update({embeds: [bartin], components: [bart3]})
         }
         if(i.customId == "syard" || i.customId == "schoolyard"){
           await i.update({embeds: [schoolyard], components: [syard]})

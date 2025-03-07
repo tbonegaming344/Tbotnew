@@ -161,7 +161,6 @@ module.exports = {
       "frozentelimps",
 	  "gravepiratestache",
       "gravestache",
-      "kitchenhg",
 	  "otkswabbie",
       "sweap",
       "telimps",
@@ -337,23 +336,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("khg2")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const khg2 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("frozentelimps2")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
 		.setCustomId("otks2")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	)
 	const otks2 = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("kitchenhg2")
+		.setCustomId("frozentelimps2")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -374,7 +363,6 @@ module.exports = {
 	const memedecks = [
 		"conjureleap", 
 		"frozentelimps", 
-		"kitchenhg",
 		"otkswabbie",
 		"ykm"
 	]
@@ -451,23 +439,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		.setCustomId("khg3")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const khg3 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("gravestache3")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
-		.setCustomId("otks3")
+		.setCustomId("otksw3")
 		.setEmoji("<:arrowright:1271446796207525898>")
 		.setStyle(ButtonStyle.Primary)
 	)
 	const otks3 = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		.setCustomId("kitchenhg3")
+		.setCustomId("gravestache3")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
@@ -502,7 +480,6 @@ module.exports = {
 		"frozentelimps", 
 		"gravepiratestache",
 		"gravestache", 
-		"kitchenhg", 
 		"otkswabbie",
 		"telimps", 
 		"ykm"
@@ -908,29 +885,6 @@ Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 	.setFooter({ text: `${result[2].gravestache}` })
 	.setColor("Random")
 	.setImage(`${result[4].gravestache}`);
-  let kitchenhg = new EmbedBuilder()
-	.setTitle(`${result[5].kitchenhg}`)
-	.setDescription(`${result[3].kitchenhg}`)
-	.setFooter({ text: `${result[2].kitchenhg}` })
-	.addFields(
-	  {
-		name: "Deck Type",
-		value: `${result[6].kitchenhg}`,
-		inline: true,
-	  },
-	  {
-		name: "Archetype",
-		value: `${result[0].kitchenhg}`,
-		inline: true,
-	  },
-	  {
-		name: "Deck Cost",
-		value: `${result[1].kitchenhg}`,
-		inline: true,
-	  }
-	)
-	.setColor("Random")
-	.setImage(`${result[4].kitchenhg}`);
 	let otkswabbie = new EmbedBuilder()
 	.setTitle(`${result[5].otkswabbie}`)
 	.setDescription(`${result[3].otkswabbie}`)
@@ -1152,15 +1106,6 @@ Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
       }
 	  if (i.customId == "cboy4" || i.customId == "cryoboy4") {
         await i.update({ embeds: [cryoboy], components: [cboy4] });
-      }
-      if (i.customId == "khg" || i.customId == "kitchenhg") {
-        await i.update({ embeds: [kitchenhg], components: [khg] });
-      }
-	  if (i.customId == "khg2" || i.customId == "kitchenhg2") {
-        await i.update({ embeds: [kitchenhg], components: [khg2] });
-      }
-	  if (i.customId == "khg3" || i.customId == "kitchenhg3") {
-        await i.update({ embeds: [kitchenhg], components: [khg3] });
       }
 	  if(i.customId == "otks" || i.customId == "otkswabbie"){
 		await i.update({ embeds: [otkswabbie], components: [otks] });

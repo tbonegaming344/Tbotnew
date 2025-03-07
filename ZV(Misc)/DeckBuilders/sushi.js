@@ -71,23 +71,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("bart")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const bart =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("propack")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
     );
     const propack =  new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("bartin")
+      .setCustomId("helpladder")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -97,7 +87,7 @@ module.exports = {
     )
     const tisb3 =  new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("bartin")
+      .setCustomId("professorpackage")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -116,7 +106,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary),
     );
     let ladderdecks = [
-      "bartin",
       "professorpackage",
       "telimpssb",
       "trickmech",
@@ -176,45 +165,9 @@ module.exports = {
       let deck = combodecks[i];
       toBuildCombo += `\n<@1043528908148052089> **${deck}**`;
     }
-    const aggrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("trickmech3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bart3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const bart3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpaggro")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tmech3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const tmech3 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bartin3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("aggrohelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
     let aggrodecks = [
-      "bartin",
       "trickmech"
     ]
-    let toBuildAggro= "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      let deck = aggrodecks[i];
-      toBuildAggro += `\n<@1043528908148052089> **${deck}**`;
-    }
     const competitiverow =  new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("telimps2")
@@ -341,23 +294,13 @@ const sb2 =  new ActionRowBuilder().addComponents(
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("bart2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const bart2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("hmrose3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
     )
     const hmrose3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("bartin2")
+      .setCustomId("helpall")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -416,7 +359,6 @@ const sb2 =  new ActionRowBuilder().addComponents(
       .setStyle(ButtonStyle.Primary),
     );
     let decks = [
-      "bartin",
       "healmidrose",
       "professorpackage", 
       "sunbandits",
@@ -430,21 +372,18 @@ const sb2 =  new ActionRowBuilder().addComponents(
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
     let [result] =
-      await db.query(`select
-bartin, hmr, professorpackage, sunbandits, telimps, telimpssb,trickmech
-from spdecks sp 
-inner join hgdecks hg
-on (sp.deckinfo = hg.deckinfo)
-inner join rodecks ro 
-on (sp.deckinfo = ro.deckinfo)
+      await db.query(`select hmr, professorpackage, sunbandits, telimps, telimpssb,trickmech
+from rodecks ro
 inner join pbdecks pb 
-on (sp.deckinfo = pb.deckinfo)
-inner join sbdecks sb
-on (sp.deckinfo = sb.deckinfo)
+on (ro.deckinfo = pb.deckinfo)
 inner join rbdecks rb 
-on (sp.deckinfo = rb.deckinfo)
+on (ro.deckinfo = rb.deckinfo)
+inner join hgdecks hg
+on (ro.deckinfo = hg.deckinfo)
+inner join sbdecks sb
+on (ro.deckinfo = sb.deckinfo)
 inner join zmdecks zm
-on (sp.deckinfo = zm.deckinfo)`);
+on (ro.deckinfo = zm.deckinfo)`);
     let user = await client.users.fetch("198942472565555200");
     let sushi = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
@@ -520,36 +459,6 @@ Note: ${user.displayName} has ${tempodecks.length} Tempo decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("Random");
-      let aggrosushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Aggro Decks`)
-      .setDescription(
-        `My Aggro decks made by ${user.displayName} are ${toBuildAggro}`
-      )
-      .setFooter({
-        text: `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let bartin = new EmbedBuilder()
-      .setTitle(`${result[5].bartin}`)
-      .setDescription(`${result[3].bartin}`)
-      .setFooter({ text: `${result[2].bartin}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].bartin}`,
-        inline: true,
-      },{
-        name: "Archetype",
-        value: `${result[0].bartin}`,
-        inline: true
-      },{ 
-        name: "Deck Cost", 
-        value: `${result[1].bartin}`,
-        inline: true
-      })
-      .setColor("Random")
-      .setImage(`${result[4].bartin}`);
     let hmr = new EmbedBuilder()
     .setTitle(`${result[5].hmr}`)
     .setDescription(`${result[3].hmr}`)
@@ -715,16 +624,6 @@ Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`,
       }
       if(i.customId === "helptempo" || i.customId === "tempohelp"){
         await i.update({embeds: [temposushi], components: [temporow]})
-      }
-      //bartin 
-      if(i.customId == "bart" || i.customId == "bartin"){
-        await i.update({embeds: [bartin], components: [bart]})
-      }
-      if(i.customId == "bart2" || i.customId == "bartin2"){
-        await i.update({embeds: [bartin], components: [bart2]})
-      }
-      if(i.customId == "bart3" || i.customId == "bartin3"){
-        await i.update({embeds: [bartin], components: [bart3]})
       }
       //Sun Bandits
       if(i.customId == "sb" || i.customId == "sunbandits"){

@@ -35,7 +35,7 @@ module.exports = {
       .setDescription('Some of the Best Decks in the game')
       .setEmoji("<:compemote:1325461143136764060>"), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Decks")
+      .setLabel("Ladder Deck")
       .setValue("ladder")
       .setDescription('Decks that mostly only good for ranked games')
 			.setEmoji("<:ladder:1271503994857979964>"), 
@@ -73,56 +73,9 @@ module.exports = {
     const compdecks = [
       "figlottery",
     ]; 
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("pyschopineclones")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("one")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const one = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("eject")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const eject = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("oneone")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("pclones")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const pclones = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("ejection")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
     const ladderdecks = [
-      "101",
       "ejection", 
-      "pyschopineclones"
     ];
-    let toBuildLadderString = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
-    }; 
     const memerow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("ramp2seedling")
@@ -190,23 +143,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("one2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const one2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcombo")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
       .setCustomId("hburn2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const hburn2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("oneone2")
+      .setCustomId("helpcombo")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -220,23 +163,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("pclones2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const pclones2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("psychosolstice2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
       .setCustomId("r2s2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const r2s2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("pyschopineclones2")
+      .setCustomId("psychosolstice2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -245,10 +178,8 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     const combodecks = [
-      "oneone",
       "healburn", 
       "psychosolstice", 
-      "pyschopineclones",
       "ramp2seedling"
     ]
     let toBuildComboString = "";
@@ -262,11 +193,11 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("eject2")
+      .setCustomId("eject")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    const eject2 = new ActionRowBuilder().addComponents(
+    const eject = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("helpcontrol")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -278,7 +209,7 @@ module.exports = {
     )
     const ff2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("ejection2")
+      .setCustomId("ejection")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -331,23 +262,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("pclones3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const pclones3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("psychosolstice3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
       .setCustomId("r2s3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const r2s3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("pyschopineclones3")
+      .setCustomId("psychosolstice3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -359,7 +280,6 @@ module.exports = {
       "figlottery",
       "healburn", 
       "psychosolstice", 
-      "pyschopineclones",
       "ramp2seedling", 
     ];
     let toBuildMidrangeString = "";
@@ -376,31 +296,21 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("one3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const one3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
       .setCustomId("bsf")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const bsf = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("oneone3")
+      .setCustomId("helpall")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("eject3")
+      .setCustomId("eject2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
-    const eject3= new ActionRowBuilder().addComponents(
+    const eject2= new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("budgetsf")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -412,7 +322,7 @@ module.exports = {
     )
     const flottery2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("ejection3")
+      .setCustomId("ejection2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -446,23 +356,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
-      .setCustomId("pclones4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const pclones4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("psychosolstice4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
       .setCustomId("r2s4")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const r2s4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("pyschopineclones4")
+      .setCustomId("psychosolstice4")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary), 
       new ButtonBuilder()
@@ -471,14 +371,12 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     let decks = [ 
-      "oneone",
       "budgetswarmsf",
       "ejection",
+      "figlottery",
       "funnyflare",
       "healburn",
-      "healmidflare",
       "psychosolstice",
-      "pyschopineclones",
       "ramp2seedling",
     ];
     let toBuildString = "";
@@ -516,20 +414,9 @@ module.exports = {
         "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist"
       )
       .setTitle("Solar Flare Decks")
-      .setDescription(`To view the Solar Flare decks please click on the buttons below!
+      .setDescription(`To view the Solar Flare decks please select an option from the select menu below!
 Note: Solar Flare has ${decks.length} total decks in Tbot`)
       .setColor("Random")
-      let ladderEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist"
-      )
-      .setTitle("Solar Flare Ladder Decks")
-      .setDescription(`My ladder decks for Solar Flare(SF) are ${toBuildLadderString}`)
-      .setColor("Random")
-      .setFooter({
-        text: `To view the ladder Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Solar Flare has ${ladderdecks.length} ladder decks in Tbot`,
-      });
       let memeEmbed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist"
@@ -586,26 +473,6 @@ Note: Solar Flare has ${controldecks.length} control decks in Tbot`,
 Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
       });
     let [result] = await db.query(`SELECT * from sfdecks`);
-    let oneone= new EmbedBuilder()
-    .setTitle(`${result[5].oneone}`)
-    .setDescription(`${result[3].oneone}`)
-    .setFooter({ text: `${result[2].oneone}` })
-    .setColor("Random")
-    .setImage(`${result[4].oneone}`)
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].oneone}`,
-      inline: true,
-    },
-    {
-      name: "Archetype",
-      value: `${result[0].oneone}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].oneone}`,
-      inline: true
-    });
     let budgetsf = new EmbedBuilder()
       .setTitle(`${result[5].budgetswarmsf}`)
       .setDescription(`${result[3].budgetswarmsf}`)
@@ -700,7 +567,7 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
 
       .setColor("Random");
 
-    let healmidflare = new EmbedBuilder()
+    let figlottery = new EmbedBuilder()
       .setTitle(`${result[5].healmidflare}`)
       .setDescription(`${result[3].healmidflare}`)
       .setFooter({ text: `${result[2].healmidflare}` })
@@ -747,46 +614,6 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
         }
       )
       .setImage(`${result[4].psychosolstice}`);
-      let pyschopineclone= new EmbedBuilder()
-      .setTitle(`${result[5].psychopineclones}`)
-      .setDescription(`${result[3].psychopineclones}`)
-      .setFooter({text: `${result[2].psychopineclones}`})
-            .addFields({
-              name: "Deck Type",
-              value: `${result[6].psychopineclones}`,
-              inline: true
-            },
-            {
-              name: "Archetype",
-              value: `${result[0].psychopineclones}`,
-              inline: true
-            },{
-              name: "Deck Cost", 
-              value: `${result[1].psychopineclones}`,
-              inline: true
-            })
-        .setColor("Random")
-        .setImage(`${result[4].psychopineclones}`)
-        let figlottery = new EmbedBuilder()
-        .setTitle(`${result[5].healmidflare}`)
-        .setDescription(`${result[3].healmidflare}`)
-        .setFooter({ text: `${result[2].healmidflare}` })
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].healmidflare}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].healmidflare}`,
-          inline: true,
-        },{ 
-          name: "Deck Cost", 
-          value: `${result[1].healmidflare}`,
-          inline: true
-        })
-        .setColor("Random")
-        .setImage(`${result[4].healmidflare}`);
     let ramp2seedling= new EmbedBuilder()
       .setTitle(`${result[5].ramp2seedling}`)
       .setDescription(`${result[3].ramp2seedling}`)
@@ -809,7 +636,7 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
         }
       )
       .setColor("Random")
-      .setImage(`${result[4].ramp2seedling}`)
+      .setImage(`${result[4].ramp2seedling}`);
     const m = await message.channel.send({ embeds: [sf], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({ filter: iFilter });
@@ -823,7 +650,7 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
           await i.reply({embeds: [figlottery], flags: MessageFlags.Ephemeral})
         }
         if(value == "ladder"){
-          await i.update({embeds: [ladderEmbed], components: [ladderrow]})
+          await i.reply({embeds: [ejection], flags: MessageFlags.Ephemeral})
         }
         if(value == "budget" || value == "tempo"){
           await i.reply({embeds: [budgetsf], flags: MessageFlags.Ephemeral})
@@ -843,9 +670,6 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
         if(value == "midrange"){
           await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
         } 
-      }
-      if( i.customId == "helpladder" || i.customId == "ladderhelp"){
-        await i.update({embeds: [ladderEmbed], components: [ladderrow]})
       }
       if( i.customId == "allhelp" || i.customId == "helpall"){
         await i.update({embeds: [allEmbed], components: [alldecksrow]})
@@ -886,9 +710,6 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
       if(i.customId == "eject2" || i.customId == "ejection2"){
         await i.update({embeds: [ejection], components: [eject2]})
       }
-      if(i.customId == "eject3" || i.customId == "ejection3"){
-        await i.update({embeds: [ejection], components: [eject3]})
-      }
       if(i.customId == "r2s" || i.customId == "ramp2seedling"){
         await i.update({embeds: [ramp2seedling], components: [r2s]})
       }
@@ -921,27 +742,6 @@ Note: Solar Flare has ${midrangedecks.length} midrange decks in Tbot`,
       }
       if(i.customId == "hburn4" || i.customId == "healburn4"){
         await i.update({embeds: [healburn], components: [hburn4]})
-      }
-      if(i.customId == "one" || i.customId == "oneone"){
-        await i.update({embeds: [oneone], components: [one]})
-      }
-      if(i.customId == "one2" || i.customId == "oneone2"){
-        await i.update({embeds: [oneone], components: [one2]})
-      }
-      if(i.customId == "one3" || i.customId == "oneone3"){
-        await i.update({embeds: [oneone], components: [one3]})
-      }
-      if(i.customId == "pclones" || i.customId == "pyschopineclones"){
-        await i.update({embeds: [pyschopineclone], components: [pclones]})
-      }
-      if(i.customId == "pclones2" || i.customId == "pyschopineclones2"){
-        await i.update({embeds: [pyschopineclone], components: [pclones2]})
-      }
-      if(i.customId == "pclones3" || i.customId == "pyschopineclones3"){
-        await i.update({embeds: [pyschopineclone], components: [pclones3]})
-      }
-      if(i.customId == "pclones4" || i.customId == "pyschopineclones4"){
-        await i.update({embeds: [pyschopineclone], components: [pclones4]})
       }
       if(i.customId == "bsf" || i.customId == "budgetsf"){
         await i.update({embeds: [budgetsf], components: [bsf]})

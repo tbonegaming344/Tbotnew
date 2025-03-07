@@ -175,7 +175,7 @@ module.exports = {
     const selectrow = new ActionRowBuilder().addComponents(select);
     const allprow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("yuletide")
+        .setCustomId("watertron")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -189,23 +189,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("one")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const one = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("winrate100")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("ab")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const ab = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("oneone")
+        .setCustomId("winrate100")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -219,33 +209,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bart")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bart = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("aggroramppeas")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bclones")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bclones = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("bartin")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bct")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bct = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("brainclones")
+        .setCustomId("aggroramppeas")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -353,16 +323,16 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-	const carr = new ActionRowBuilder().addComponents(
-	  new ButtonBuilder()
+	  const carr = new ActionRowBuilder().addComponents(
+	   new ButtonBuilder()
 	    .setCustomId("cancerknight")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-	  new ButtonBuilder()
+		  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+		  .setStyle(ButtonStyle.Primary),
+	    new ButtonBuilder()
 	    .setCustomId("chemo")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	);
+		  .setEmoji("<:arrowright:1271446796207525898>")
+		  .setStyle(ButtonStyle.Primary)
+	  );
     const chemo = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("carroot")
@@ -429,23 +399,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("gp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const gp = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("funnyflare")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("g3n")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const g3n = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("gangstaparadise")
+        .setCustomId("funnyflare")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -453,7 +413,6 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-   
     const hburn = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("going3nuts")
@@ -580,23 +539,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("pclones")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const pclones = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("psychosolstice")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("nut")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const nut = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pyschopineclones")
+        .setCustomId("psychosolstice")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -660,23 +609,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("sdemon")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const sdemon = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("shitknight")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("srings")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const srings = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("speeddemon")
+        .setCustomId("shitknight")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -726,11 +665,8 @@ module.exports = {
     );
     const allpdecks = [
       "100%winrate",
-      "101",
       "abeans",
       "aggroramppeas",
-      "bartin",
-      "brainclones",
       "budgetct",
       "budgetcc",
       "budgetcz",
@@ -750,7 +686,6 @@ module.exports = {
       "freezeheal",
       "frymidrose",
       "funnyflare",
-      "gangstaparadise",
       "going3nuts",
       "healburn",
       "healcontrol",
@@ -765,7 +700,6 @@ module.exports = {
       "pawntrickstab",
       "plantmop",
       "psychosolstice",
-      "pyschopineclones",
       "nuttin",
       "radiotherapy",
       "ramp2seedling",
@@ -773,7 +707,6 @@ module.exports = {
       "savagemayflower",
       "shamcontrolbc",
       "shitknight",
-      "speeddemon",
       "starrings",
       "startron",
       "toyotacontrolla",
@@ -939,23 +872,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("apo2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const apo2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("abeans2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("chemo2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const chemo2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("apotk2")
+        .setCustomId("abeans2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1083,37 +1006,7 @@ module.exports = {
     }
     const ladderprow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("speedemon2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("one2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const one2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helppladder")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bart2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bart2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("oneone2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bclones2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bclones2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("bartin2")
+        .setCustomId("midred2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1123,7 +1016,7 @@ module.exports = {
     );
 	const carr2 = new ActionRowBuilder().addComponents(
 	new ButtonBuilder()
-		.setCustomId("brainclones2")
+		.setCustomId("helppladder")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		.setStyle(ButtonStyle.Primary),
 	new ButtonBuilder()
@@ -1133,7 +1026,7 @@ module.exports = {
 	);
     const eject2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("brainclones2")
+        .setCustomId("carroot2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1167,41 +1060,16 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("pyschopineclones2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const pclones2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("sdemon2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const sdemon2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("pyschopineclones2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("ladderphelp")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const ladderpdecks = [
-      "101",
-      "bartin",
-      "brainclones",
-	  "carroot",
+	    "carroot",
       "ejection",
       "frymidrose",
       "going3nuts",
       "midred",
-      "pyschopineclones",
-      "speeddemon",
     ];
     let toBuildLadderPString = "";
     for (let i = 0; i < ladderpdecks.length; i++) {
@@ -1263,23 +1131,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("gp2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const gp2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("funnyflare2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("hburn2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const hburn2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("gangstaparadise2")
+        .setCustomId("funnyflare2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1333,7 +1191,7 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("pts2")
+        .setCustomId("msp2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
@@ -1443,7 +1301,6 @@ module.exports = {
       "cancerknight",
       "freezeheal",
       "funnyflare",
-      "gangstaparadise",
       "healburn",
       "healthotk",
       "highlander",
@@ -1491,23 +1348,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bart3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bart3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("aggroramppeas3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("wtron3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const wtron3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("bartin3")
+        .setCustomId("aggroramppeas3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1515,7 +1362,7 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const aggropdecks = ["abeans", "aggroramppeas", "bartin", "watertron"];
+    const aggropdecks = ["abeans", "aggroramppeas", "watertron"];
     let toBuildAggroPString = "";
     for (let i = 0; i < aggropdecks.length; i++) {
       toBuildAggroPString += `\n<@1043528908148052089> **${aggropdecks[i]}**`;
@@ -1526,23 +1373,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("one3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const one3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helppcombo")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bcc3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bcc3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("oneone3")
+        .setCustomId("helppcombo")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1576,23 +1413,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("gp3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const gp3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("freezeheal3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("g3n3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const g3n3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("gangstaparadise3")
+        .setCustomId("freezeheal3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1686,23 +1513,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("pclones3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const pclones3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("psychosolstice3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("r2s3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const r2s3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pyschopineclones3")
+        .setCustomId("psychosolstice3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1716,23 +1533,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("sdemon3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const sdemon3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("savagemayflower3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("srings3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const srings3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("speeddemon3")
+        .setCustomId("savagemayflower3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1761,12 +1568,10 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
     const combopdecks = [
-      "101",
       "budgetcc",
 	    "carroot",
       "cyburn",
       "freezeheal",
-      "gangstaparadise",
       "going3nuts",
       "healburn",
       "healthotk",
@@ -1777,10 +1582,8 @@ module.exports = {
       "nuttin",
       "plantmop",
       "psychosolstice",
-      "pyschopineclones",
       "ramp2seedling",
       "savagemayflower",
-      "speeddemon",
       "starrings",
       "startron",
       "translattail",
@@ -1941,23 +1744,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("gp4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const gp4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("figlottery3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("g3n4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const g3n4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("gangstaparadise4")
+        .setCustomId("figlottery3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2041,23 +1834,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("pclones4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const pclones4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("psychosolstice4")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("r2s4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const r2s4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pyschopineclones4")
+        .setCustomId("psychosolstice4")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2098,7 +1881,6 @@ module.exports = {
     const midrangepdecks = [
       "cyburn",
       "figlottery",
-      "gangstaparadise",
       "going3nuts",
       "healburn",
       "healmidrose",
@@ -2108,7 +1890,6 @@ module.exports = {
       "midred",
       "mopribus",
       "psychosolstice",
-      "pyschopineclones",
       "ramp2seedling",
       "reflourished",
       "starrings",
@@ -2134,23 +1915,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bclones3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bclones3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("winrate1003")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bct3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bct3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("brainclones3")
+        .setCustomId("winrate1003")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2280,7 +2051,6 @@ module.exports = {
     );
     const tempopdecks = [
       "100%winrate",
-      "brainclones",
       "budgetct",
       "budgetcz",
       "budgetgk",
@@ -2289,7 +2059,7 @@ module.exports = {
       "budgetsf",
       "budgetsp",
       "budgetwk",
-	  "carroot",
+	    "carroot",
       "frymidrose",
       "lifecouldbedream",
       "translattail",
@@ -2625,23 +2395,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("frym")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const frym = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("frozentelimps")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("gburn")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const gburn = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("frymech")
+        .setCustomId("frozentelimps")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2765,43 +2525,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("iburn")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const iburn = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("igmablobchum")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("kscope")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const kscope = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("igmaburn")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("kleap")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const kleap = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("kaleidoscope")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("kithg")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const kithg = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("kingleap")
+        .setCustomId("igmablobchum")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2811,7 +2541,7 @@ module.exports = {
     );
     const lt = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("kitchenhg")
+        .setCustomId("kaleidoscope")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2819,7 +2549,6 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-
     const ltbr = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("ladytuna")
@@ -2836,23 +2565,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("mbolt")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const mbolt = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("lunchtime")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("mcon")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const mcon = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("marxbolt")
+        .setCustomId("lunchtime")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2866,7 +2585,7 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("msbolt")
+        .setCustomId("npa")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
@@ -2882,7 +2601,7 @@ module.exports = {
     );
     const npa = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("mimescibolt")
+        .setCustomId("mechascope")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2926,23 +2645,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("phster")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const phster = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("petmop")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("propackage")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const propackage = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pharaohster")
+        .setCustomId("petmop")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3056,23 +2765,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("swe")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const swe = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("sunlord")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("timps")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const timps = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("sweap")
+        .setCustomId("sunlord")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3243,7 +2942,6 @@ module.exports = {
       "dozzamech",
       "floss",
       "frozentelimps",
-      "frymech",
       "gargburn",
       "gargolithtech",
       "gargstar22",
@@ -3257,23 +2955,18 @@ module.exports = {
       "huntgargs",
       "icebox",
       "igmablobchum",
-      "igmaburn",
       "kaleidoscope",
-      "kingleap",
-      "kitchenhg",
       "ladytuna",
       "lockthebathroom",
       "lunchtime",
       "marxbolt",
       "mechacontrol",
       "mechascope",
-      "mimescibolt",
       "noplayingallowed",
       "otkswabbie",
       "pablosyeeyzs",
       "pbfeast",
       "petmop",
-      "pharaohster",
       "professorpackage",
       "racism",
       "raiserpackage",
@@ -3286,7 +2979,6 @@ module.exports = {
       "stacheticia",
       "sunbandits",
       "sunlord",
-      "sweap",
       "telimps",
       "telimpssb",
       "terrifytricksterazzi",
@@ -3308,7 +3000,7 @@ module.exports = {
     }
     const budgetzrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("playerremoval2")
+        .setCustomId("budgetzm2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3677,23 +3369,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("frym2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const frym2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cryoboy2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("gstar222")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const gstar222 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("frymech2")
+        .setCustomId("cryoboy2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3747,23 +3429,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("iburn2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const iburn2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("horts2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("mbolt2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const mbolt2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("igmaburn2")
+        .setCustomId("horts2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3787,33 +3459,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("msbolt2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const msbolt2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("mechascope2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("pster2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const phster2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("mimescibolt2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("propackage2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const propackage2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pharaohster2")
+        .setCustomId("mechascope2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3847,23 +3499,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("swe2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const swe2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("splimps2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("timpssb2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const timpssb2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("sweap2")
+        .setCustomId("splimps2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3910,24 +3552,18 @@ module.exports = {
       "boltbolt",
       "brady",
       "cryoboy",
-      "frymech",
       "gargstar22",
       "gomorrah",
       "gravepiratestache",
       "gravestache",
       "hibird",
       "horts",
-      "igmaburn",
       "marxbolt",
       "mechacontrol",
-      "mechascope",
-      "mimescibolt",
-      "pharaohster",
       "professorpackage",
       "raiserpackage",
       "schoolyard",
       "splimps",
-      "sweap",
       "telimpssb",
       "trickmech",
       "valkster",
@@ -4093,23 +3729,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("kleap2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const kleap2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("igmablobchum2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("lt2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const lt2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("kingleap2")
+        .setCustomId("igmablobchum2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4313,7 +3939,6 @@ module.exports = {
       "homophobia",
       "huntgargs",
       "igmablobchum",
-      "kingleap",
       "ladytuna",
       "lunchtime",
       "noplayingallowed",
@@ -4424,23 +4049,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("frym3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const frym3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("dozzamech3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("gps3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const gps3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("frymech3")
+        .setCustomId("dozzamech3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4454,23 +4069,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("iburn3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const iburn3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("homophobia3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("mbolt3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const mbolt3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("igmaburn3")
+        .setCustomId("homophobia3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4537,10 +4142,8 @@ module.exports = {
       "budgetrb",
       "budgetzm",
       "dozzamech",
-      "frymech",
       "gravepiratestache",
       "homophobia",
-      "igmaburn",
       "marxbolt",
       "schoolyard",
       "seacret",
@@ -4788,53 +4391,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("kleap3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const kleap3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("igmablobchum3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("kithg3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const kithg3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("igmablobchum3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("mscope3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const mscope3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("kitchenhg3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mo3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const mo3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("mechascope3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("msbolt3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const msbolt3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("mop3")
+        .setCustomId("igmablobchum3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4844,7 +4407,7 @@ module.exports = {
     );
     const otksw3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("mimescibolt3")
+        .setCustomId("mechascope3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4858,23 +4421,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("phster3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const phster3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("pablosyeeyzs3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("rticia3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const rticia3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pharaohster3")
+        .setCustomId("pablosyeeyzs3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -5065,13 +4618,9 @@ module.exports = {
       "himpter",
       "horts",
       "igmablobchum",
-      "kingleap",
-      "kitchenhg",
       "mechascope",
-      "mimescibolt",
       "otkswabbie",
       "pablosyeeyzs",
-      "pharaohster",
       "rampticia",
       "spacestars",
       "stacheticia",
@@ -5220,23 +4769,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("phster4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const phster4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("pbfeast3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("sbandits4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const sbandits4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pharaohster4")
+        .setCustomId("pbfeast3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -5307,7 +4846,6 @@ module.exports = {
       "mechascope",
       "noplayingallowed",
       "pbfeast",
-      "pharaohster",
       "sunbandits",
       "telimps",
       "telimpssb",
@@ -5761,23 +5299,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("swe3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const swe3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("raiserpackage3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("terrifyster4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const terrifyster4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("sweap3")
+        .setCustomId("raiserpackage3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -5797,7 +5325,6 @@ module.exports = {
       "professorpackage",
       "racism",
       "raiserpackage",
-      "sweap",
       "terrifytricksterazzi",
     ];
     let toBuildTempoZString = "";
@@ -6419,29 +5946,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setFooter({ text: `${result[2].mopribus}` })
       .setImage(`${result[4].mopribus}`);
-    let int3 = new EmbedBuilder()
-      .setTitle(`${result[5].it3}`)
-      .setDescription(`${result[3].it3}`)
-      .setFooter({ text: `${result[2].it3}` })
-      .setColor("Random")
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].it3}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].it3}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].it3}`,
-          inline: true,
-        }
-      )
-      .setImage(`${result[4].it3}`);
     let budgetgk = new EmbedBuilder()
       .setTitle(`${result[5].budgetgk}`)
       .setDescription(`${result[3].budgetgk}`)
@@ -6626,29 +6130,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].sovietonion}`);
-    let brainclones = new EmbedBuilder()
-      .setTitle(`${result[5].brainclones}`)
-      .setDescription(`${result[3].brainclones}`)
-      .setColor("Random")
-      .setFooter({ text: `${result[2].brainclones}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].brainclones}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].brainclones}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].brainclones}`,
-          inline: true,
-        }
-      )
-      .setImage(`${result[4].brainclones}`);
     //budgetnc
     let budgetnc = new EmbedBuilder()
       .setTitle(`${result[5].budgetnc}`)
@@ -6697,53 +6178,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       .setColor("Random")
       .setImage(`${result[4].cyburn}`);
 
-    let gangsterparadise = new EmbedBuilder()
-      .setTitle(`${result[5].gangstaparadise}`)
-      .setDescription(`${result[3].gangstaparadise}`)
-      .setColor("Random")
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].gangstaparadise}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].gangstaparadise}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].gangstaparadise}`,
-          inline: true,
-        }
-      )
-      .setImage(`${result[4].gangstaparadise}`)
-      .setFooter({ text: `${result[2].gangstaparadise}` });
 
-    let speeddemon = new EmbedBuilder()
-      .setTitle(`${result[5].speeddemon}`)
-      .setDescription(`${result[3].speeddemon}`)
-      .setFooter({ text: `${result[2].speeddemon}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].speeddemon}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].speeddemon}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].speeddemon}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].speeddemon}`);
     let toyotacontrolla = new EmbedBuilder()
       .setTitle(`${result[5].toyotacontrolla}`)
       .setDescription(`${result[3].toyotacontrolla}`)
@@ -6882,29 +6317,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].hmr}`);
-    let oneone = new EmbedBuilder()
-      .setTitle(`${result[5].oneone}`)
-      .setDescription(`${result[3].oneone}`)
-      .setFooter({ text: `${result[2].oneone}` })
-      .setColor("Random")
-      .setImage(`${result[4].oneone}`)
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].oneone}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].oneone}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].oneone}`,
-          inline: true,
-        }
-      );
     let budgetsf = new EmbedBuilder()
       .setTitle(`${result[5].budgetswarmsf}`)
       .setDescription(`${result[3].budgetswarmsf}`)
@@ -7046,29 +6458,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
         }
       )
       .setImage(`${result[4].psychosolstice}`);
-    let pyschopineclones = new EmbedBuilder()
-      .setTitle(`${result[5].psychopineclones}`)
-      .setDescription(`${result[3].psychopineclones}`)
-      .setFooter({ text: `${result[2].psychopineclones}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].psychopineclones}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].psychopineclones}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].psychopineclones}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].psychopineclones}`);
     let ramp2seedling = new EmbedBuilder()
       .setTitle(`${result[5].ramp2seedling}`)
       .setDescription(`${result[3].ramp2seedling}`)
@@ -7092,29 +6481,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].ramp2seedling}`);
-    let bartin = new EmbedBuilder()
-      .setTitle(`${result[5].bartin}`)
-      .setDescription(`${result[3].bartin}`)
-      .setFooter({ text: `${result[2].bartin}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].bartin}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].bartin}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].bartin}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].bartin}`);
     let budgetsp = new EmbedBuilder()
       .setTitle(`${result[5].budgetburstsp}`)
       .setDescription(`${result[3].budgetburstsp}`)
@@ -7640,29 +7006,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       })
       .setColor("Random")
       .setImage(`${result[4].huntgargs}`);
-    let igmaburn = new EmbedBuilder()
-      .setTitle(`${result[5].igmaburn}`)
-      .setDescription(`${result[3].igmaburn}`)
-      .setFooter({ text: `${result[2].igmaburn}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].igmaburn}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].igmaburn}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].igmaburn}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].igmaburn}`);
     //No Playing Allowed
     let noplayingallowed = new EmbedBuilder()
       .setTitle(`${result[5].noplayingallowed}`)
@@ -7918,29 +7261,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       .setFooter({ text: `${result[2].gravestache}` })
       .setColor("Random")
       .setImage(`${result[4].gravestache}`);
-    let kitchenhg = new EmbedBuilder()
-      .setTitle(`${result[5].kitchenhg}`)
-      .setDescription(`${result[3].kitchenhg}`)
-      .setFooter({ text: `${result[2].kitchenhg}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].kitchenhg}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].kitchenhg}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].kitchenhg}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].kitchenhg}`);
     let otkswabbie = new EmbedBuilder()
       .setTitle(`${result[5].otkswabbie}`)
       .setDescription(`${result[3].otkswabbie}`)
@@ -7964,29 +7284,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].otkswabbie}`);
-    let sweap = new EmbedBuilder()
-      .setTitle(`${result[5].sweap}`)
-      .setDescription(`${result[3].sweap}`)
-      .setFooter({ text: `${result[2].sweap}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].sweap}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].sweap}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].sweap}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].sweap}`);
     let telimps = new EmbedBuilder()
       .setTitle(`${result[5].telimps}`)
       .setDescription(`${result[3].telimps}`)
@@ -8818,29 +8115,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].igmablobchum}`);
-    let kingleap = new EmbedBuilder()
-      .setTitle(`${result[5].kingleap}`)
-      .setDescription(`${result[3].kingleap}`)
-      .setFooter({ text: `${result[2].kingleap}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].kingleap}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].kingleap}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].kingleap}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`	${result[4].kingleap}`);
     let marxbolt = new EmbedBuilder()
       .setTitle(`${result[5].marxbolt}`)
       .setDescription(`${result[3].marxbolt}`)
@@ -8864,29 +8138,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].marxbolt}`);
-    let mimescibolt = new EmbedBuilder()
-      .setTitle(`${result[5].mimescibolt}`)
-      .setDescription(`${result[3].mimescibolt}`)
-      .setFooter({ text: `${result[2].mimescibolt}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].mimescibolt}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].mimescibolt}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].mimescibolt}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].mimescibolt}`);
     let mechacontrol = new EmbedBuilder()
       .setTitle(`${result[5].mechacontrol}`)
       .setDescription(`${result[3].mechacontrol}`)
@@ -8910,29 +8161,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
         }
       )
       .setImage(`${result[4].mechacontrol}`);
-    let pharaohster = new EmbedBuilder()
-      .setTitle(`${result[5].pharaohster}`)
-      .setDescription(`${result[3].pharaohster}`)
-      .setFooter({ text: `${result[2].pharaohster}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].pharaohster}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].pharaohster}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].pharaohster}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].pharaohster}`);
     let coggerazzi = new EmbedBuilder()
       .setTitle(`${result[5].poggerrazzi}`)
       .setDescription(`${result[3].poggerrazzi}`)
@@ -9279,29 +8507,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
           inline: true,
         }
       );
-    let frymech = new EmbedBuilder()
-      .setTitle(`${result[5].frymech}`)
-      .setDescription(`${result[3].frymech}`)
-      .setFooter({ text: `${result[2].frymech}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].frymech}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].frymech}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].frymech}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].frymech}`);
     let gargburn = new EmbedBuilder()
       .setTitle(`${result[5].gargburn}`)
       .setDescription(`${result[3].gargburn}`)
@@ -9571,15 +8776,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "wr1003" || i.customId == "winrate1003") {
         await i.update({ embeds: [winrate100], components: [wr1003] });
       }
-      if (i.customId == "one" || i.customId == "oneone") {
-        await i.update({ embeds: [oneone], components: [one] });
-      }
-      if (i.customId == "one2" || i.customId == "oneone2") {
-        await i.update({ embeds: [oneone], components: [one2] });
-      }
-      if (i.customId == "one3" || i.customId == "oneone3") {
-        await i.update({ embeds: [oneone], components: [one3] });
-      }
       if (i.customId == "ab" || i.customId == "abeans") {
         await i.update({ embeds: [abeans], components: [ab] });
       }
@@ -9607,24 +8803,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if(i.customId == "healcon3" || i.customId == "healcontrol3"){
         await i.update({embeds: [healcontrol], components: [healcon3]})
       }
-      if (i.customId == "bart" || i.customId == "bartin") {
-        await i.update({ embeds: [bartin], components: [bart] });
-      }
-      if (i.customId == "bart2" || i.customId == "bartin2") {
-        await i.update({ embeds: [bartin], components: [bart2] });
-      }
-      if (i.customId == "bart3" || i.customId == "bartin3") {
-        await i.update({ embeds: [bartin], components: [bart3] });
-      }
-      if (i.customId == "bclones" || i.customId == "brainclones") {
-        await i.update({ embeds: [brainclones], components: [bclones] });
-      }
-      if (i.customId == "bclones2" || i.customId == "brainclones2") {
-        await i.update({ embeds: [brainclones], components: [bclones2] });
-      }
-      if (i.customId == "bclones3" || i.customId == "brainclones3") {
-        await i.update({ embeds: [brainclones], components: [bclones3] });
-      }
+  
       if (i.customId == "bct" || i.customId == "budgetct") {
         await i.update({ embeds: [budgetct], components: [bct] });
       }
@@ -9793,18 +8972,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "fflare3" || i.customId == "funnyflare3") {
         await i.update({ embeds: [funnyflare], components: [fflare3] });
       }
-      if (i.customId == "gp" || i.customId == "gangstaparadise") {
-        await i.update({ embeds: [gangsterparadise], components: [gp] });
-      }
-      if (i.customId == "gp2" || i.customId == "gangstaparadise2") {
-        await i.update({ embeds: [gangsterparadise], components: [gp2] });
-      }
-      if (i.customId == "gp3" || i.customId == "gangstaparadise3") {
-        await i.update({ embeds: [gangsterparadise], components: [gp3] });
-      }
-      if (i.customId == "gp4" || i.customId == "gangstaparadise4") {
-        await i.update({ embeds: [gangsterparadise], components: [gp4] });
-      }
       if (i.customId == "g3n" || i.customId == "going3nuts") {
         await i.update({ embeds: [going3nuts], components: [g3n] });
       }
@@ -9919,18 +9086,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "psol4" || i.customId == "psychosolstice4") {
         await i.update({ embeds: [psychosolstice], components: [psol4] });
       }
-      if (i.customId == "pclones" || i.customId == "pyschopineclones") {
-        await i.update({ embeds: [pyschopineclones], components: [pclones] });
-      }
-      if (i.customId == "pclones2" || i.customId == "pyschopineclones2") {
-        await i.update({ embeds: [pyschopineclones], components: [pclones2] });
-      }
-      if (i.customId == "pclones3" || i.customId == "pyschopineclones3") {
-        await i.update({ embeds: [pyschopineclones], components: [pclones3] });
-      }
-      if (i.customId == "pclones4" || i.customId == "pyschopineclones4") {
-        await i.update({ embeds: [pyschopineclones], components: [pclones4] });
-      }
       if (i.customId == "radio" || i.customId == "radiotherapy") {
         await i.update({ embeds: [radiotherapy], components: [radio] });
       }
@@ -9978,15 +9133,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       }
       if (i.customId == "sknight3" || i.customId == "shitknight3") {
         await i.update({ embeds: [shitknight], components: [sknight3] });
-      }
-      if (i.customId == "sdemon" || i.customId == "speeddemon") {
-        await i.update({ embeds: [speeddemon], components: [sdemon] });
-      }
-      if (i.customId == "sdemon2" || i.customId == "speeddemon2") {
-        await i.update({ embeds: [speeddemon], components: [sdemon2] });
-      }
-      if (i.customId == "sdemon3" || i.customId == "speeddemon3") {
-        await i.update({ embeds: [speeddemon], components: [sdemon3] });
       }
       if (i.customId == "srings" || i.customId == "starrings") {
         await i.update({ embeds: [starrings], components: [srings] });
@@ -10357,15 +9503,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "ftimps4" || i.customId == "frozentelimps4") {
         await i.update({ embeds: [frozentelimps], components: [ftimps4] });
       }
-      if (i.customId == "frym" || i.customId == "frymech") {
-        await i.update({ embeds: [frymech], components: [frym] });
-      }
-      if (i.customId == "frym2" || i.customId == "frymech2") {
-        await i.update({ embeds: [frymech], components: [frym2] });
-      }
-      if (i.customId == "frym3" || i.customId == "frymech3") {
-        await i.update({ embeds: [frymech], components: [frym3] });
-      }
       if (i.customId == "gburn" || i.customId == "gargburn") {
         await i.update({ embeds: [gargburn], components: [gburn] });
       }
@@ -10492,33 +9629,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "igbc4" || i.customId == "igmablobchum4") {
         await i.update({ embeds: [igmablobchum], components: [igbc4] });
       }
-      if (i.customId == "iburn" || i.customId == "igmaburn") {
-        await i.update({ embeds: [igmaburn], components: [iburn] });
-      }
-      if (i.customId == "iburn2" || i.customId == "igmaburn2") {
-        await i.update({ embeds: [igmaburn], components: [iburn2] });
-      }
-      if (i.customId == "iburn3" || i.customId == "igmaburn3") {
-        await i.update({ embeds: [igmaburn], components: [iburn3] });
-      }
-      if (i.customId == "kleap" || i.customId == "kingleap") {
-        await i.update({ embeds: [kingleap], components: [kleap] });
-      }
-      if (i.customId == "kleap2" || i.customId == "kingleap2") {
-        await i.update({ embeds: [kingleap], components: [kleap2] });
-      }
-      if (i.customId == "kleap3" || i.customId == "kingleap3") {
-        await i.update({ embeds: [kingleap], components: [kleap3] });
-      }
-      if (i.customId == "kithg" || i.customId == "kitchenhg") {
-        await i.update({ embeds: [kitchenhg], components: [kithg] });
-      }
-      if (i.customId == "kithg2" || i.customId == "kitchenhg2") {
-        await i.update({ embeds: [kitchenhg], components: [kithg2] });
-      }
-      if (i.customId == "kithg3" || i.customId == "kitchenhg3") {
-        await i.update({ embeds: [kitchenhg], components: [kithg3] });
-      }
       if (i.customId == "ltbr" || i.customId == "lockthebathroom") {
         await i.update({ embeds: [lockthebathroom], components: [ltbr] });
       }
@@ -10575,15 +9685,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       }
       if (i.customId == "ltime3" || i.customId == "lunchtime3") {
         await i.update({ embeds: [lunchtime], components: [ltime3] });
-      }
-      if (i.customId == "msbolt" || i.customId == "mimescibolt") {
-        await i.update({ embeds: [mimescibolt], components: [msbolt] });
-      }
-      if (i.customId == "msbolt2" || i.customId == "mimescibolt2") {
-        await i.update({ embeds: [mimescibolt], components: [msbolt2] });
-      }
-      if (i.customId == "msbolt3" || i.customId == "mimescibolt3") {
-        await i.update({ embeds: [mimescibolt], components: [msbolt3] });
       }
       if (i.customId == "npa" || i.customId == "noplayingallowed") {
         await i.update({ embeds: [noplayingallowed], components: [npa] });
@@ -10642,18 +9743,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       if (i.customId == "pmop3" || i.customId == "petmop3") {
         await i.update({ embeds: [petmop], components: [pmop3] });
       }
-      if (i.customId == "phster" || i.customId == "pharaohster") {
-        await i.update({ embeds: [pharaohster], components: [phster] });
-      }
-      if (i.customId == "phster2" || i.customId == "pharaohster2") {
-        await i.update({ embeds: [pharaohster], components: [phster2] });
-      }
-      if (i.customId == "phster3" || i.customId == "pharaohster3") {
-        await i.update({ embeds: [pharaohster], components: [phster3] });
-      }
-      if (i.customId == "phster4" || i.customId == "pharaohster4") {
-        await i.update({ embeds: [pharaohster], components: [phster4] });
-      }
+  
       if (i.customId == "propackage" || i.customId == "professorpackage") {
         await i.update({
           embeds: [professorpackage],
@@ -10788,15 +9878,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       }
       if (i.customId == "slord4" || i.customId == "sunlord4") {
         await i.update({ embeds: [sunlord], components: [slord4] });
-      }
-      if (i.customId == "swe" || i.customId == "sweap") {
-        await i.update({ embeds: [sweap], components: [swe] });
-      }
-      if (i.customId == "swe2" || i.customId == "sweap2") {
-        await i.update({ embeds: [sweap], components: [swe2] });
-      }
-      if (i.customId == "swe3" || i.customId == "sweap3") {
-        await i.update({ embeds: [sweap], components: [swe3] });
       }
       if (i.customId == "timps" || i.customId == "telimps") {
         await i.update({ embeds: [telimps], components: [timps] });

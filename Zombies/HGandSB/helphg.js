@@ -99,23 +99,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("khg")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const khg = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("gravestache")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("otks")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
 	  const otks = new ActionRowBuilder().addComponents(
 		new ButtonBuilder()
-		  .setCustomId("otkblob")
+		  .setCustomId("gravestache")
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		  .setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()

@@ -101,23 +101,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		  .setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		  .setCustomId("khg")
-		  .setEmoji("<:arrowright:1271446796207525898>")
-		  .setStyle(ButtonStyle.Primary)
-	  );
-	  const khg = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		  .setCustomId("gravestache")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		  .setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
 		  .setCustomId("otks")
 		  .setEmoji("<:arrowright:1271446796207525898>")
 		  .setStyle(ButtonStyle.Primary)
 	  );
 		const otks = new ActionRowBuilder().addComponents(
 		  new ButtonBuilder()
-			.setCustomId("otkblob")
+			.setCustomId("gravestache")
 		  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 			.setStyle(ButtonStyle.Primary),
 		  new ButtonBuilder()
@@ -718,19 +708,6 @@ Note: there are ${controldecks.length} control decks for Huge Gigantacus in Tbot
 	  .setFooter({
 		text: `To view the midrange Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: there are ${midrangedecks.length} midrange decks for Huge Gigantacus in Tbot`
-	  })
-	  let tempoEmbed = new EmbedBuilder()
-	  .setThumbnail(
-		"https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
-	  )
-	  .setTitle("Huge Gigantacus Tempo Decks")
-	  .setDescription(
-		`My tempo decks for Huge-Gigantacus(HG) are ${toBuildTempoString}`
-	  )
-	  .setColor("Random")
-	  .setFooter({
-		text: `To view the tempo Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 	  })
     let [result] = await db.query(`SELECT * FROM hgdecks`);
 	let blobfishwrappers = new EmbedBuilder()

@@ -119,23 +119,13 @@ module.exports = {
 		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
 		  .setStyle(ButtonStyle.Primary),
 		new ButtonBuilder()
-		  .setCustomId("sw")
+		  .setCustomId("ti")
 		  .setEmoji("<:arrowright:1271446796207525898>")
 		  .setStyle(ButtonStyle.Primary)
 	  );
-    const sw = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("otkswabbie")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ti")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
     const ti = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("sweap")
+        .setCustomId("otkswabbie")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -162,7 +152,6 @@ module.exports = {
 	  "gravepiratestache",
       "gravestache",
 	  "otkswabbie",
-      "sweap",
       "telimps",
       "ykm",
     ];
@@ -575,44 +564,9 @@ module.exports = {
     for (let i = 0; i < midrangedecks.length; i++) {
       toBuildMidrangeString += `\n<@1043528908148052089> **${midrangedecks[i]}**`;
     }
-	const temporow = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("sweap3")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
-		.setCustomId("cl3")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const cl3 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("helptempo")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
-		.setCustomId("sw3")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
-	const sw3 = new ActionRowBuilder().addComponents(
-		new ButtonBuilder()
-		.setCustomId("conjureleap3")
-		.setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-		.setStyle(ButtonStyle.Primary),
-		new ButtonBuilder()
-		.setCustomId("tempohelp")
-		.setEmoji("<:arrowright:1271446796207525898>")
-		.setStyle(ButtonStyle.Primary)
-	)
 	const tempodecks = [
 		"conjureleap", 
-		"sweap"
 	]
-	let toBuildTempoString = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      toBuildTempoString += `\n<@1043528908148052089> **${tempodecks[i]}**`;
-    }
     let allEmbed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
@@ -713,19 +667,6 @@ Note: there are ${controldecks.length} control decks for Huge Gigantacus in Tbot
 	  .setFooter({
 		text: `To view the midrange Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: there are ${midrangedecks.length} midrange decks for Huge Gigantacus in Tbot`
-	  })
-	  let tempoEmbed = new EmbedBuilder()
-	  .setThumbnail(
-		"https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
-	  )
-	  .setTitle("Huge Gigantacus Tempo Decks")
-	  .setDescription(
-		`My tempo decks for Huge-Gigantacus(HG) are ${toBuildTempoString}`
-	  )
-	  .setColor("Random")
-	  .setFooter({
-		text: `To view the tempo Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 	  })
     let [result] = await db.query(`SELECT * FROM hgdecks`);
 	let blobfishwrappers = new EmbedBuilder()
@@ -904,29 +845,6 @@ Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 				})
 		.setColor("Random")
 .setImage(`${result[4].otkswabbie}`)
-  let sweap = new EmbedBuilder()
-	.setTitle(`${result[5].sweap}`)
-	.setDescription(`${result[3].sweap}`)
-	.setFooter({ text: `${result[2].sweap}` })
-	.addFields(
-	  {
-		name: "Deck Type",
-		value: `${result[6].sweap}`,
-		inline: true,
-	  },
-	  {
-		name: "Archetype",
-		value: `${result[0].sweap}`,
-		inline: true,
-	  },
-	  {
-		name: "Deck Cost",
-		value: `${result[1].sweap}`,
-		inline: true,
-	  }
-	)
-	.setColor("Random")
-	.setImage(`${result[4].sweap}`);
   let telimps = new EmbedBuilder()
 	.setTitle(`${result[5].telimps}`)
 	.setDescription(`${result[3].telimps}`)
@@ -1007,7 +925,7 @@ Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 				await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
 			}
 			if(value == "tempo"){
-				await i.update({embeds: [tempoEmbed], components: [temporow]})
+				await i.reply({embeds: [conjureleap], flags: MessageFlags.Ephemeral})
 			}
 			if(value == "all"){
 				await i.update({embeds: [allEmbed], components: [alldecksrow]})
@@ -1039,9 +957,6 @@ Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 	  }
 	  if (i.customId == "helpmidrange" || i.customId == "midrangehelp") {
 		await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-	  }
-	  if (i.customId == "helptempo" || i.customId == "tempohelp") {
-		await i.update({ embeds: [tempoEmbed], components: [temporow] });
 	  }
 	  if(i.customId == "bfwrap"|| i.customId == "blobfishwrappers"){
 		await i.update({embeds: [blobfishwrappers], components: [bfwrap]})
@@ -1116,15 +1031,6 @@ Note: there are ${tempodecks.length} tempo decks for Huge Gigantacus in Tbot`
 	  if(i.customId == "otks3" || i.customId == "otkswabbie3"){
 		await i.update({ embeds: [otkswabbie], components: [otks3] });
 	  }
-      if (i.customId == "sw" || i.customId == "sweap") {
-        await i.update({ embeds: [sweap], components: [sw] });
-      }
-	  if (i.customId == "sw2" || i.customId == "sweap2") {
-        await i.update({ embeds: [sweap], components: [sw2] });
-      }
-	  if (i.customId == "sw3" || i.customId == "sweap3") {
-        await i.update({ embeds: [sweap], components: [sw3] });
-      }
       if (i.customId == "ti" || i.customId == "telimps") {
         await i.update({ embeds: [telimps], components: [ti] });
       }

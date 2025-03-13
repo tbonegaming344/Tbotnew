@@ -35,7 +35,7 @@ module.exports = {
       .setDescription('Some of the Best Decks in the game')
       .setEmoji("<:compemote:1325461143136764060>"), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Decks")
+      .setLabel("Ladder Deck")
       .setValue("ladder")
       .setDescription('Decks that mostly only good for ranked games')
 			.setEmoji("<:ladder:1271503994857979964>"),
@@ -72,45 +72,9 @@ module.exports = {
     const tempodecks = [
       "budgetct",
     ]
-    const ladderow  = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gourdtron")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("g3n4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const g3n4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gourd")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const gourd = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("going3nuts4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
     const ladderdecks = [
       "going3nuts",
-      "gourdtron",
     ]
-    let toBuildLadderString = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
-    }
     const memedecks = [
       "startron"
     ]
@@ -120,23 +84,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("cycle2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const cycle2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcombo")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("g3n")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     const g3n = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("cycletron2")
+      .setCustomId("helpcombo")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -155,7 +109,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     const combodecks = [
-      "cycletron",
       "going3nuts", 
       "startron"
     ]
@@ -311,17 +264,6 @@ Note: Citron has ${decks.length} total decks in Tbot`)
         text: `To view the Citron decks please use the commands listed above or click on the buttons below to navigate through all Citron decks!
 Note: Citron has ${decks.length} total decks in Tbot`
       });
-      let ladderEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
-      )
-      .setTitle("Citron Ladder Decks")
-      .setDescription(`My ladder decks for Citron(CT) are ${toBuildLadderString}`)
-      .setColor("Random")
-      .setFooter({
-        text: `To view the ladder Citron decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Citron has ${ladderdecks.length} ladder decks in Tbot`
-      });
       let comboEmbed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
@@ -387,26 +329,6 @@ Note: Citron has ${midrangedecks.length} midrange decks in Tbot`
 			inline: true
 		})
 		.setImage(`${result[4].going3nuts}`)
-    let gourdtron = new EmbedBuilder()
-    .setTitle(`${result[5].gourdtron}`)
-    .setDescription(`${result[3].gourdtron}`)
-    .setFooter({text: `${result[2].gourdtron}`})
-    .addFields({
-        name: "Deck Type",
-        value: `${result[6].gourdtron}`,
-        inline: true
-},
-{
-        name: "Archetype",
-        value: `${result[0].gourdtron}`,
-        inline: true
-    },{
-        name: "Deck Cost", 
-        value: `${result[1].gourdtron}`,
-        inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].gourdtron}`);
     let startron = new EmbedBuilder()
     .setTitle(`${result[5].startron}`)
     .setDescription(`${result[3].startron}`)
@@ -465,7 +387,7 @@ Note: Citron has ${midrangedecks.length} midrange decks in Tbot`
           await i.reply({embeds: [watertron], flags: MessageFlags.Ephemeral})
         }
         if(value == "ladder"){
-          await i.update({embeds: [ladderEmbed], components: [ladderow]})
+          await i.reply({embeds: [going3nuts], flags: MessageFlags.Ephemeral})
         }
         if(value == "meme"){
           await i.reply({embeds: [startron], flags: MessageFlags.Ephemeral})
@@ -483,9 +405,6 @@ Note: Citron has ${midrangedecks.length} midrange decks in Tbot`
       }
       if( i.customId == "helpall" || i.customId =="allhelp"){
         await i.update({embeds: [allEmbed], components: [alldecksrow]})
-      }
-      if(i.customId == "helpladder" || i.customId == "ladderhelp"){
-        await i.update({embeds: [ladderEmbed], components: [ladderow]})
       }
       if(i.customId == "helpmeme" || i.customId == "memehelp"){
         await i.update({embeds: [memeEmbed], components: [memerow]})
@@ -523,9 +442,6 @@ Note: Citron has ${midrangedecks.length} midrange decks in Tbot`
       }
       if(i.customId == "g3n3" || i.customId == "going3nuts3"){
         await i.update({embeds: [going3nuts], components: [g3n3]})
-      }
-      if(i.customId == "g3n4" || i.customId == "going3nuts4"){
-        await i.update({embeds: [going3nuts], components: [g3n4]})
       }
       if(i.customId == "wt" || i.customId == "watertron"){
         await i.update({embeds: [watertron], components: [wt]})

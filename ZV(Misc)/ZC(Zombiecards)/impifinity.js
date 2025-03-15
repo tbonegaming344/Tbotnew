@@ -22,7 +22,7 @@ module.exports = {
     );
     const alldecksrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("wrathmartin")
+        .setCustomId("splimps")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -228,26 +228,7 @@ Note: Impfinity has ${decks.length} total decks in Tbot`)
         inline: true
       })
     .setColor("Random")
-    .setImage(`${result[4].splimps}`)
-  let wrathmartin = new EmbedBuilder()
-  .setTitle(`${result[5].wrathmartin}`)
-  .setDescription(`${result[3].wrathmartin}`)
-  .setFooter({ text: `${result[2].wrathmartin}` })
-  .addFields({
-    name: "Deck Type",
-    value: `${result[6].wrathmartin}`,
-    inline: true
-  },{ 
-    name: "Archetype", 
-    value: `${result[0].wrathmartin}`,
-    inline: true
-  },{ 
-    name: "Deck Cost", 
-    value: `${result[1].wrathmartin}`,
-    inline: true 
-  })
-  .setColor("Random")
-  .setImage(`${result[4].wrathmartin}`);
+    .setImage(`${result[4].splimps}`);
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],
@@ -287,12 +268,6 @@ Note: Impfinity has ${decks.length} total decks in Tbot`)
       }
       if (i.customId == "spl" || i.customId == "splimps") {
         await i.update({ embeds: [splimps], components: [spl] });
-      }
-      if (i.customId == "spl2" || i.customId == "splimps2") {
-        await i.update({ embeds: [splimps], components: [spl2] });
-      }
-      if(i.customId == "spl3" || i.customId == "splimps3") {
-        await i.update({ embeds: [splimps], components: [spl3] });
       }
       if(i.customId == "helpladder" || i.customId == "ladderhelp") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });

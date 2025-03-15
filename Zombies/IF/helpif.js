@@ -27,7 +27,7 @@ module.exports = {
   run: async (client, message, args) => {
     const alldecksrow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("wrathmartin")
+        .setCustomId("splimps")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()

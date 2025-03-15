@@ -172,39 +172,36 @@ module.exports = {
       const alldecksrow = createButtons("radiotherapy", "bsp");
       const bsp = createButtons("helpall", "nut");
       const nut = createButtons("budgetsp", "radio");
-      const radio = createButtons("nutting", "allhelp");
+      const radio = createButtons("nuttin", "allhelp");
       const budgetsp = createDeckEmbed(result, "budgetburstsp")
       const radiotherapy = createDeckEmbed(result, "radiotherapy");
       const nuttin = createDeckEmbed(result, "nutting");
+      const embeds = { budgetsp, nuttin, radiotherapy, allEmbed };
+      const components = { alldecksrow, bsp, nut, radio };
     const m = await message.channel.send({ embeds: [sp], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
-    async function handleSelectMenu(i, budgetsp, nuttin, radiotherapy,  allEmbed, alldecksrow) {
+    async function handleSelectMenu(i, embeds, components) {
       const value = i.values[0];
       if (value === "budget" || value === "tempo") {
-        await i.reply({ embeds: [budgetsp], flags: MessageFlags.Ephemeral });
-      } 
-      else if (value == "meme" || value == "combo"){
-        await i.reply({ embeds: [nuttin] , flags: MessageFlags.Ephemeral });
-      }
-       else if (value === "competitive" || value === "control") {
-        await i.reply({ embeds: [radiotherapy], flags: MessageFlags.Ephemeral });
-      } 
-      else if (value === "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
+        await i.reply({ embeds: [embeds.budgetsp], flags: MessageFlags.Ephemeral });
+      } else if (value == "meme" || value == "combo") {
+        await i.reply({ embeds: [embeds.nuttin], flags: MessageFlags.Ephemeral });
+      } else if (value === "competitive" || value === "control") {
+        await i.reply({ embeds: [embeds.radiotherapy], flags: MessageFlags.Ephemeral });
+      } else if (value === "all") {
+        await i.update({ embeds: [embeds.allEmbed], components: [components.alldecksrow] });
       }
     }
 
-    async function handleButtonInteraction(i, bsp, nut, radio, alldecksrow) {
+    async function handleButtonInteraction(i, embeds, components) {
       if (i.customId === "allhelp" || i.customId === "helpall") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
+        await i.update({ embeds: [embeds.allEmbed], components: [components.alldecksrow] });
       } else if (i.customId === "bsp" || i.customId === "budgetsp") {
-        await i.update({ embeds: [budgetsp], components: [bsp] });
-      } 
-      else if (i.customId === "nut" || i.customId === "healthotk") {
-        await i.update({ embeds: [nuttin], components: [nut] });
-      } 
-      else if (i.customId === "radio" || i.customId === "radiotherapy") {
-        await i.update({ embeds: [radiotherapy], components: [radio] });
+        await i.update({ embeds: [embeds.budgetsp], components: [components.bsp] });
+      } else if (i.customId === "nut" || i.customId === "nuttin") {
+        await i.update({ embeds: [embeds.nuttin], components: [components.nut] });
+      } else if (i.customId === "radio" || i.customId === "radiotherapy") {
+        await i.update({ embeds: [embeds.radiotherapy], components: [components.radio] });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
@@ -213,9 +210,9 @@ module.exports = {
         await i.update({ embeds: [embed], components: [row] });
       }
       else if (i.customId === "select") {
-        await handleSelectMenu(i, budgetsp, nuttin, radiotherapy,  allEmbed, alldecksrow);
+        await handleSelectMenu(i, embeds, components);
       } else {
-        await handleButtonInteraction(i, bsp, nut, radio, alldecksrow);
+        await handleButtonInteraction(i, embeds, components);
       }
     });
   },

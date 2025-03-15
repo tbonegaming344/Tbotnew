@@ -191,7 +191,7 @@ Note: Impfinity has ${decks.length} total decks in Tbot`)
       inline: true  
     })
     .setColor("Random")
-    .setImage(`${result[4].spacestars}`);
+    .setImage(`${result[4].spacestars}`)
     let splimps = new EmbedBuilder()
     .setTitle(`${result[5].splimps}`)
     .setDescription(`${result[3].splimps}`)

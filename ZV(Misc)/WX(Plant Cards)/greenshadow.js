@@ -8,6 +8,17 @@ const {
   StringSelectMenuOptionBuilder
 } = require("discord.js");
 let db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer){
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("Random");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `greenshadow`,
   aliases: [`gs`, `green`, `shadow`, `penelopea`],
@@ -35,11 +46,15 @@ module.exports = {
       .setDescription('Some of the Best  Decks in the game')
       .setEmoji("<:compemote:1325461143136764060>"),
       new StringSelectMenuOptionBuilder()
+      .setLabel("Ladder Deck")
+      .setValue("ladder")
+      .setDescription("Decks that mostly only good for ranked games"), 
+      new StringSelectMenuOptionBuilder()
       .setLabel("Meme Decks")
       .setValue("meme")
       .setDescription('Decks that are built off a weird/fun combo'),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Aggro Deck")
+      .setLabel("Aggro Decks")
       .setValue("aggro")
       .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'),
       new StringSelectMenuOptionBuilder()
@@ -61,218 +76,58 @@ module.exports = {
       .setEmoji("<a:GreenShadow:1100168011270328390>")
     )
     const row = new ActionRowBuilder().addComponents(select)
-    const budgetdecks = [
-      "budgetmopshadow"
-    ]
-    const compdecks = [
-      "abeans",
-    ]; 
-    const memerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("starrings")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("wr100")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const wr100 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpmeme")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("smf")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const smf = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("winrate100")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("srings")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const srings = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("savagemayflower")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("memehelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const memedecks = [
-      "100%winrate",
-      "savagemayflower", 
-      "starrings"
-    ]; 
-    let toBuildMemeString = "";
-    for (let i = 0; i < memedecks.length; i++) {
-      let deck = memedecks[i];
-      toBuildMemeString += `\n<@1043528908148052089> **${deck}**`;
+    const greenShadowDecks = {
+      budgetDecks: ["budgetmopshadow"],
+      competitiveDecks: ["abeans"],
+      ladderDecks: ["pbeans"],
+      memeDecks: ["100%winrate", "savagemayflower", "starrings"],
+      aggroDecks: ["abeans", "pbeans"], 
+      comboDecks: ["savagemayflower", "starrings"],
+      midrangeDecks: ["starrings"],
+      tempoDecks: ["100%winrate", "budgetmopshadow"], 
+      allDecks:  [ "100%winrate", "abeans","budgetmopshadow", "pbeans", "savagemayflower", "starrings",]
     }
-    const aggrodecks = [
-      "abeans"
-    ]; 
-    const comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("starrings2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("smf2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const smf2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcombo")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("srings2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const srings2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("savagemayflower2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("combohelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const combodecks = [
-      "savagemayflower", 
-      "starrings", 
-    ]; 
-    let toBuildComboString = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      let deck = combodecks[i];
-      toBuildComboString += `\n<@1043528908148052089> **${deck}**`;
-    };
-    const midrangedecks = [ 
-      "starrings", 
-    ]; 
-    const temporow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("budgetmopshadow")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("wr1002")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const wr1002 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helptempo")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("bms")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const bms = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("winrate1002")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("tempohelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const tempodecks = [
-      "100%winrate",
-      "budgetmopshadow", 
-    ];
-    let toBuildTempoString = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      let deck = tempodecks[i];
-      toBuildTempoString += `\n<@1043528908148052089> **${deck}**`;
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("yuletide4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("wr1003")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const wr1003 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("ab")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const ab= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("winrate1003")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("bms2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const bms2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("abeans")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("smf3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const smf3= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("budgetmopshadow2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("srings4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const srings4= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("savagemayflower3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary), 
-      new ButtonBuilder()
-      .setCustomId("allhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const decks = [
-      "100%winrate",
-      "abeans",
-      "budgetmopshadow",
-      "savagemayflower",
-      "starrings",
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
-      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+
+    function BuildDeckString(decks) {
+      return decks.map(deck => `\n<@1043528908148052089> **${deck}**`).join('');
     }
+    const memerow = CreateButtons("starrings", "wr100")
+    const wr100 = CreateButtons("helpmeme", "smf")
+    const smf = CreateButtons("winrate100", "srings")
+    const srings = CreateButtons("savagemayflower", "memehelp")
+    const comborow = CreateButtons("starrings2", "smf2")
+    const smf2 = CreateButtons("helpcombo", "srings2")
+    const srings2 = CreateButtons("savagemayflower2", "combohelp")
+    const temporow = CreateButtons("budgetmopshadow", "wr1002")
+    const wr1002 = CreateButtons("helptempo", "bms")
+    const bms = CreateButtons("winrate1002", "tempohelp")
+    const aggrorow = CreateButtons("pbeans", "ab2")
+    const ab2 = CreateButtons("aggrohelp", "pb")
+    const pb = CreateButtons("abeans2", "helpaggro")
+    const alldecksrow = CreateButtons("starrings4", "wr1003")
+    const wr1003 = CreateButtons("helpall", "ab")
+    const ab = CreateButtons("winrate1003", "bms2")
+    const bms2 = CreateButtons("ab", "pb2")
+    const pb2 = CreateButtons("bms2", "smf3")
+    const smf3 = CreateButtons("pbeans2", "srings4")
+    const srings4 = CreateButtons("smf3", "allhelp");
+    const toBuildString = BuildDeckString(greenShadowDecks.allDecks)
+    const toBuildAggroString = BuildDeckString(greenShadowDecks.aggroDecks)
+    const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
+    const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks); 
+    const toBuildTempoString = BuildDeckString(greenShadowDecks.tempoDecks);
     let gs = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/pvzcc/images/2/26/GreenShadowBYL.png/revision/latest?cb=20200704033327"
@@ -299,259 +154,180 @@ module.exports = {
             "Little known fact: When she takes off the cape and mask, she goes by the name Penelopea.",
         }
       );
-      let embed = new EmbedBuilder()
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
+      let embed = new CreateHelpEmbed(
+        "Green Shadow Decks", 
+        `To view the Green Shadow decks please select an option using the select menu below
+Note: Green Shadow has ${greenShadowDecks.allDecks.length} decks in Tbot`, 
+   "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
       )
-      .setTitle("Green Shadow Decks")
-      .setDescription(`To view the Green Shadow decks please click on the buttons below!
-Note: Green Shadow has ${decks.length} total decks in Tbot`)
-      .setColor("Random")
-      let allEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
-      )
-      .setTitle("Green Shadow Decks")
-      .setDescription(`My decks for Green Shadow(GS) are ${toBuildString}`)
-      .setColor("Random")
-      .setFooter({
-        text: `To view the Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Green Shadow has ${decks.length} decks in Tbot`,
-      });
-      let memeEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
-      )
-      .setTitle("Green Shadow Meme Decks")
-      .setDescription(`My meme decks for Green Shadow(GS) are ${toBuildMemeString}`)
-      .setColor("Random")
-      .setFooter({
-        text: `To view the meme Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-Note: Green Shadow has ${memedecks.length} meme decks in Tbot`,
-      });
-      let comboEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
-      )
-      .setTitle("Green Shadow Combo Decks")
-      .setDescription(`My combo decks for Green Shadow(GS) are ${toBuildComboString}`)
-      .setColor("Random")
-      .setFooter({
-        text: `To view the combo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-Note: Green Shadow has ${combodecks.length} combo decks in Tbot`,
-      });
-      let tempoEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
-      )
-      .setTitle("Green Shadow Tempo Decks")
-      .setDescription(`My tempo decks for Green Shadow(GS) are ${toBuildTempoString}`)
-      .setColor("Random")
-      .setFooter({
-        text: `To view the tempo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-Note: Green Shadow has ${tempodecks.length} tempo decks in Tbot`,
-      });
-    let [result] = await db.query(`SELECT * from gsdecks`);
-    let winrate100 = new EmbedBuilder()
-      .setTitle(`${result[5].wr100}`)
-      .setDescription(`${result[3].wr100}`)
-      .setFooter({ text: `${result[2].wr100}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].wr100}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].wr100}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].wr100}`,
-          inline: true,
+        let allEmbed = new CreateHelpEmbed(
+        "Green Shadow Decks",
+        `My decks for Green Shadow(GS) are ${toBuildString}`,
+        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
+        `To view the Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all decks!
+Note: Green Shadow has ${greenShadowDecks.allDecks.length} decks in Tbot`,
+        )
+        let memeEmbed = new CreateHelpEmbed(
+        "Green Shadow Meme Decks",
+        `My meme decks for Green Shadow(GS) are ${toBuildMemeString}`,
+        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
+        `To view the meme Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
+Note: Green Shadow has ${greenShadowDecks.memeDecks.length} meme decks in Tbot`
+        )
+        let aggroEmbed = new CreateHelpEmbed(
+          "Green Shadow Aggro Decks",
+        `My aggro decks for Green Shadow(GS) are ${toBuildAggroString}`,
+        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
+        `To view the aggro Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
+Note: Green Shadow has ${greenShadowDecks.aggroDecks.length} aggro decks in Tbot`
+        )
+        let comboEmbed = new CreateHelpEmbed(
+        "Green Shadow Combo Decks",
+        `My combo decks for Green Shadow(GS) are ${toBuildComboString}`,
+        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
+        `To view the combo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
+Note: Green Shadow has ${greenShadowDecks.comboDecks.length} combo decks in Tbot`
+        )
+        let tempoEmbed = new CreateHelpEmbed(
+          "Green Shadow Tempo Decks", 
+          `My tempo decks for Green Shadow(GS) are ${toBuildTempoString}`, 
+          "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png", 
+          `To view the tempo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
+Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot`
+        )
+      let [result] = await db.query(`SELECT * from gsdecks`);
+      function CreateDeckEmbed(result, deckName) {
+        const embed = new EmbedBuilder()
+          .setTitle(`${result[5][deckName]}`)
+          .setDescription(`${result[3][deckName]}`)
+          .setFooter({ text: `${result[2][deckName]}` })
+          .addFields(
+            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+          )
+          .setColor("Random");
+        const imageUrl = result[4][deckName];
+        if (imageUrl) {
+          embed.setImage(imageUrl);
         }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].wr100}`);
-    let abeans = new EmbedBuilder()
-      .setTitle(`${result[5].abeans}`)
-      .setDescription(`${result[3].abeans}`)
-      .setFooter({ text: `${result[2].abeans}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].abeans}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].abeans}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].abeans}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].abeans}`);
-    let budgetgs = new EmbedBuilder()
-      .setTitle(`${result[5].budgetgs}`)
-      .setDescription(`${result[3].budgetgs}`)
-      .setFooter({ text: `${result[2].budgetgs}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].budgetgs}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].budgetgs}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].budgetgs}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].budgetgs}`);
-    let savagemayflower = new EmbedBuilder()
-      .setTitle(`${result[5].savagemayflower}`)
-      .setDescription(`${result[3].savagemayflower}`)
-      .setColor("Random")
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].savagemayflower}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].savagemayflower}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].savagemayflower}`,
-          inline: true,
-        }
-      )
-      .setFooter({ text: `${result[2].savagemayflower}` })
-      .setImage(`${result[4].savagemayflower}`);
-    let starrings = new EmbedBuilder()
-      .setTitle(`${result[5].sovietonion}`)
-      .setDescription(`${result[3].sovietonion}`)
-      .setFooter({ text: `${result[2].sovietonion}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].sovietonion}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].sovietonion}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].sovietonion}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].sovietonion}`);
-
+        return embed;
+      }
+      let winrate100 = new CreateDeckEmbed(result, "wr100")
+      let abeans = new CreateDeckEmbed(result, "abeans")
+      let budgetgs = new CreateDeckEmbed(result, "budgetgs")
+      let savagemayflower = new CreateDeckEmbed(result, "savagemayflower")
+      let starrings = new CreateDeckEmbed(result, "sovietonion")
+      const pbeans = new CreateDeckEmbed(result, "pbeans")
     const Filter = (i) => i.user.id === message.author.id;
+    async function HandleSelectMenu(i) {
+      const value = i.values[0]; 
+        if(value == "budget"){
+          await i.reply({embeds: [budgetgs], flags: MessageFlags.Ephemeral})
+        }
+        else if(value == "comp"){
+          await i.reply({embeds: [abeans], flags: MessageFlags.Ephemeral})
+        }
+        else if(value == "ladder"){
+          await i.reply({embeds: [pbeans], flags: MessageFlags.Ephemeral})
+        }
+        else if(value == "aggro"){
+          await i.update({embeds: [aggroEmbed], components: [aggrorow]})
+        }
+        else if(value == "meme"){
+          await i.update({embeds: [memeEmbed], components: [memerow]})
+        }
+        else if(value == "combo"){
+          await i.update({embeds: [comboEmbed], components: [comborow]})
+        }
+        else if(value == "midrange"){
+          await i.reply({embeds: [starrings], flags: MessageFlags.Ephemeral})
+        }
+        else if(value == "tempo"){
+          await i.update({embeds: [tempoEmbed], components: [temporow]})
+        }
+        else if(value == "all"){
+          await i.update({embeds: [allEmbed], components: [alldecksrow]})
+        }
+    }
+    async function HandleButtonInteraction(i) {
+      if( i.customId == "helpall" || i.customId == "allhelp"){
+        await i.update({embeds: [allEmbed], components: [alldecksrow]})
+      }
+      else if(i.customId == "memehelp" || i.customId == "helpmeme"){
+        await i.update({embeds: [memeEmbed], components: [memerow]})
+      }
+      else if( i.customId == "combohelp" || i.customId == "helpcombo"){
+        await i.update({embeds: [comboEmbed], components: [comborow]})
+      }
+      else if(i.customId == "helpmid" || i.customId == "midhelp"){
+        await i.update({embeds: [midrnageEmbed], components: [midrangerow]})
+      }
+      else if( i.customId == "helptempo" || i.customId == "tempohelp"){
+        await i.update({embeds: [tempoEmbed], components: [temporow]})
+      }
+      else if(i.customId == "ab" || i.customId == "abeans"){
+        await i.update({embeds: [abeans], components: [ab]})
+      }
+      else if(i.customId == "srings" || i.customId == "starrings"){
+        await i.update({embeds: [starrings], components: [srings]})
+      }
+      else if(i.customId == "srings2" || i.customId == "starrings2"){
+        await i.update({embeds: [starrings], components: [srings2]})
+      }
+      else if(i.customId == "srings3" || i.customId == "starrings3"){
+        await i.update({embeds: [starrings], components: [srings3]})
+      }
+      else if(i.customId == "srings4" || i.customId == "starrings4"){
+        await i.update({embeds: [starrings], components: [srings4]})
+      }
+      else if(i.customId == "wr100" || i.customId == "winrate100"){
+        await i.update({embeds: [winrate100], components: [wr100]})
+      }
+      else if(i.customId == "wr1002" || i.customId == "winrate1002"){
+        await i.update({embeds: [winrate100], components: [wr1002]})
+      }
+      else if(i.customId == "wr1003" || i.customId == "winrate1003"){
+        await i.update({embeds: [winrate100], components: [wr1003]})
+      }
+      else if(i.customId == "smf" || i.customId == "savagemayflower"){
+        await i.update({embeds: [savagemayflower], components: [smf]})
+      }
+      else if(i.customId == "smf2" || i.customId == "savagemayflower2"){
+        await i.update({embeds: [savagemayflower], components: [smf2]})
+      }
+      else if(i.customId == "smf3" || i.customId == "savagemayflower3"){
+        await i.update({embeds: [savagemayflower], components: [smf3]})
+      }
+      else if(i.customId == "bms" || i.customId == "budgetmopshadow"){
+        await i.update({embeds: [budgetgs], components: [bms]})
+      }
+      else if(i.customId == "bms2" || i.customId == "budgetmopshadow2"){
+        await i.update({embeds: [budgetgs], components: [bms2]})
+      }
+      else if(i.customId == "helpaggro" || i.customId == "aggrohelp"){
+        await i.update({embeds: [aggroEmbed], components: [aggrorow]})
+      }
+      else if(i.customId == "ab2" || i.customId == "abeans2"){
+        await i.update({embeds: [abeans], components: [ab2]})
+      }
+      else if(i.customId == "pb" || i.customId == "pbeans"){
+        await i.update({embeds: [pbeans], components: [pb]})
+      }
+      else if(i.customId == "pb2" || i.customId == "pbeans2"){
+        await i.update({embeds: [pbeans], components: [pb2]})
+      }
+    }
     const m = await message.channel.send({ embeds: [gs], components: [cmd] });
     const collect = m.createMessageComponentCollector({ filter: Filter });
     collect.on("collect", async (i) => {
       if (i.customId == "cmd") {
         await i.update({ embeds: [embed], components: [row] });
       }
-      if(i.customId == "select"){
-        const value = i.values[0]; 
-        if(value == "budget"){
-          await i.reply({embeds: [budgetgs], flags: MessageFlags.Ephemeral})
-        }
-        if(value == "comp" || value == "aggro"){
-          await i.reply({embeds: [abeans], flags: MessageFlags.Ephemeral})
-        }
-        if(value == "meme"){
-          await i.update({embeds: [memeEmbed], components: [memerow]})
-        }
-        if(value == "combo"){
-          await i.update({embeds: [comboEmbed], components: [comborow]})
-        }
-        if(value == "midrange"){
-          await i.reply({embeds: [starrings], flags: MessageFlags.Ephemeral})
-        }
-        if(value == "tempo"){
-          await i.update({embeds: [tempoEmbed], components: [temporow]})
-        }
-        if(value == "all"){
-          await i.update({embeds: [allEmbed], components: [alldecksrow]})
-        }
-      }
-      if( i.customId == "helpall" || i.customId == "allhelp"){
-        await i.update({embeds: [allEmbed], components: [alldecksrow]})
-      }
-      if(i.customId == "memehelp" || i.customId == "helpmeme"){
-        await i.update({embeds: [memeEmbed], components: [memerow]})
-      }
-      if( i.customId == "combohelp" || i.customId == "helpcombo"){
-        await i.update({embeds: [comboEmbed], components: [comborow]})
-      }
-      if(i.customId == "helpmid" || i.customId == "midhelp"){
-        await i.update({embeds: [midrnageEmbed], components: [midrangerow]})
-      }
-      if( i.customId == "helptempo" || i.customId == "tempohelp"){
-        await i.update({embeds: [tempoEmbed], components: [temporow]})
-      }
-      if(i.customId == "ab" || i.customId == "abeans"){
-        await i.update({embeds: [abeans], components: [ab]})
-      }
-      if(i.customId == "srings" || i.customId == "starrings"){
-        await i.update({embeds: [starrings], components: [srings]})
-      }
-      if(i.customId == "srings2" || i.customId == "starrings2"){
-        await i.update({embeds: [starrings], components: [srings2]})
-      }
-      if(i.customId == "srings3" || i.customId == "starrings3"){
-        await i.update({embeds: [starrings], components: [srings3]})
-      }
-      if(i.customId == "srings4" || i.customId == "starrings4"){
-        await i.update({embeds: [starrings], components: [srings4]})
-      }
-      if(i.customId == "wr100" || i.customId == "winrate100"){
-        await i.update({embeds: [winrate100], components: [wr100]})
-      }
-      if(i.customId == "wr1002" || i.customId == "winrate1002"){
-        await i.update({embeds: [winrate100], components: [wr1002]})
-      }
-      if(i.customId == "wr1003" || i.customId == "winrate1003"){
-        await i.update({embeds: [winrate100], components: [wr1003]})
-      }
-      if(i.customId == "smf" || i.customId == "savagemayflower"){
-        await i.update({embeds: [savagemayflower], components: [smf]})
-      }
-      if(i.customId == "smf2" || i.customId == "savagemayflower2"){
-        await i.update({embeds: [savagemayflower], components: [smf2]})
-      }
-      if(i.customId == "smf3" || i.customId == "savagemayflower3"){
-        await i.update({embeds: [savagemayflower], components: [smf3]})
-      }
-      if(i.customId == "bms" || i.customId == "budgetmopshadow"){
-        await i.update({embeds: [budgetgs], components: [bms]})
-      }
-      if(i.customId == "bms2" || i.customId == "budgetmopshadow2"){
-        await i.update({embeds: [budgetgs], components: [bms2]})
+      else if (i.customId === "select") {
+        await HandleSelectMenu(i);
+      } else {
+        await HandleButtonInteraction(i);
       }
     });
   },

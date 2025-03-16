@@ -519,13 +519,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("plmop")
+        .setCustomId("pb")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const plmop = new ActionRowBuilder().addComponents(
+    const pb = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("pawntrickstab")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("plmop")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    )
+    const plmop = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("pbeans")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -698,6 +708,7 @@ module.exports = {
       "mopribus",
       "mspotk",
       "pawntrickstab",
+      "pbeans",
       "plantmop",
       "psychosolstice",
       "nuttin",
@@ -1006,7 +1017,7 @@ module.exports = {
     }
     const ladderprow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("midred2")
+        .setCustomId("pbeans2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1060,16 +1071,27 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("ladderphelp")
+        .setCustomId("pb2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+    const pb2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("midred2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("ladderphelp")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+  );
     const ladderpdecks = [
 	    "carroot",
       "ejection",
       "frymidrose",
       "going3nuts",
       "midred",
+      "pbeans"
     ];
     let toBuildLadderPString = "";
     for (let i = 0; i < ladderpdecks.length; i++) {
@@ -1348,13 +1370,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("pb3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const pb3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("aggroramppeas3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("wtron3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const wtron3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("aggroramppeas3")
+        .setCustomId("pbeans3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1362,7 +1394,7 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const aggropdecks = ["abeans", "aggroramppeas", "watertron"];
+    const aggropdecks = ["abeans", "aggroramppeas", "pbeans", "watertron"];
     let toBuildAggroPString = "";
     for (let i = 0; i < aggropdecks.length; i++) {
       toBuildAggroPString += `\n<@1043528908148052089> **${aggropdecks[i]}**`;
@@ -6084,6 +6116,27 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].budgetgs}`);
+        let pbeans = new EmbedBuilder()
+              .setTitle(`${result[5].pbeans}`)
+              .setDescription(`${result[3].pbeans}`)
+              .setColor("Random")
+              .addFields({
+              name: "Deck Type",
+              value: `${result[6].pbeans}`,
+              inline: true
+              },
+              {
+              name: "Archetype",
+              value: `${result[0].pbeans}`,
+              inline: true
+              },
+              {
+              name: "Deck Cost", 
+              value:`${result[1].pbeans}`,
+              inline: true
+              })
+              .setFooter({text: `${result[2].pbeans}`})
+              .setImage(`${result[4].pbeans}`)
     let savagemayflower = new EmbedBuilder()
       .setTitle(`${result[5].savagemayflower}`)
       .setDescription(`${result[3].savagemayflower}`)
@@ -10140,6 +10193,16 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
     if(i.customId == "hgargs3" || i.customId == "huntgargs3"){
       await i.update({ embeds: [huntgargs], components: [hgargs3] });
     }
+    if(i.customId == "pb" || i.customId == "pbeans"){
+      await i.update({ embeds: [pbeans], components: [pb] });
+    }
+    if(i.customId == "pb2" || i.customId == "pbeans2"){
+      await i.update({ embeds: [pbeans], components: [pb2] });
+    }
+    if(i.customId == "pb3" || i.customId == "pbeans3"){
+      await i.update({ embeds: [pbeans], components: [pb3] });
+    }
+
     });
   },
 };

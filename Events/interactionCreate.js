@@ -11,7 +11,7 @@ const {
 } = require("discord.js");
 const { ascii, hangmanGuesses } = require("../Utilities/hangman");
 let db = require("../index.js");
-var FuzzySearch = require("fuzzy-search");
+const FuzzySearch = require("fuzzy-search");
 const discord = new ActionRowBuilder().addComponents(
   new ButtonBuilder()
     .setLabel("Discord server")
@@ -682,229 +682,6 @@ module.exports = {
 
         return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
       }
-      //Elo Score
-      if (interaction.customId === "elo-score-modal") {
-        await interaction.deferUpdate();
-        let m = interaction.fields.getTextInputValue("elo-input");
-        try {
-          const playerone = await client.users.fetch(m);
-        } catch (err) {
-          console.log(err);
-          return interaction.followUp({
-            content: "Please input user Ids only",
-           flags: MessageFlags.Ephemeral,
-          });
-        }
-        let db = new (require("quick.db").QuickDB)();
-        await interaction.followUp({
-          content: `<@${m}> has ${
-            (await db.get(`points_${m}`)) ? await db.get(`points_${m}`) : 1000
-          } points.`,
-         flags: MessageFlags.Ephemeral,
-        });
-      }
-      //Elo Report
-      if (interaction.customId === "elo-report-modal") {
-        await interaction.deferUpdate();
-        const player1 = interaction.fields.getTextInputValue("player1");
-        const player2 = interaction.fields.getTextInputValue("player2");
-        const player1Elo = interaction.fields.getTextInputValue("player1Score");
-        const player2Elo = interaction.fields.getTextInputValue("player2Score");
-        const games = interaction.fields.getTextInputValue("games");
-        try {
-          const playerone = await client.users.fetch(player1);
-          const playertwo = await client.users.fetch(player2);
-        } catch (err) {
-          console.log(err);
-          return interaction.followUp({
-            content: "Please input user Ids only",
-           flags: MessageFlags.Ephemeral,
-          });
-        }
-        console.log(player1, player2); //for debug ig
-        if (player1 == player2) {
-          await interaction.followUp({
-            content: "You can't report two same users",
-           flags: MessageFlags.Ephemeral,
-          });
-        } else if (isNaN(player1Elo) || isNaN(player2Elo)) {
-          return interaction.followUp({
-            content: "please input a number for the scores",
-           flags: MessageFlags.Ephemeral,
-          });
-        } else if (
-          player1 == "297073686916366336" ||
-          player2 == "297073686916366336" ||
-          player1 == "235148962103951360" ||
-          player2 == "235148962103951360" ||
-          player1 == "591922988832653313" ||
-          player2 == "591922988832653313" ||
-          player1 == "837345172105723985" ||
-          player2 == "837345172105723985" ||
-          player1 == "634059474012995594" ||
-          player2 == "634059474012995594" ||
-          player1 == "559426966151757824" ||
-          player2 == "559426966151757824" ||
-          player1 == "282286160494067712" ||
-          player2 == "282286160494067712" ||
-          player1 == "252128902418268161" ||
-          player2 == "252128902418268161" ||
-          player1 == "375805687529209857" ||
-          player2 == "375805687529209857" ||
-          player1 == "172002275412279296" ||
-          player2 == "172002275412279296" ||
-          player1 == "882491278581977179" ||
-          player2 == "882491278581977179" ||
-          player1 == "1043528908148052089" ||
-          player2 == "1043528908148052089"
-        ) {
-          await interaction.followUp({
-            content: "You can't play a bot!",
-           flags: MessageFlags.Ephemeral,
-          });
-        } else {
-          let win1 = player1Elo;
-          let win2 = player2Elo;
-          let db = new (require("quick.db").QuickDB)();
-
-          if (win1 > win2) {
-            let points1 = (await db.get(`points_${player1}`)) ?? 0;
-            let points2 = (await db.get(`points_${player2}`)) ?? 0;
-            let equ = Math.round(
-              30 * (1 - 1 / (1 + 2 ** ((points2 - points1) / 30)))
-            );
-            await interaction
-              .followUp({
-                content: `It's ${win1}-${win2}. Do you agree <@${player2}>?`,
-              })
-              .then((msg) => {
-                msg.react("👍");
-                let filter = (r, u) => u == player2;
-                let collector = msg.createReactionCollector({
-                  filter,
-                  max: 3,
-                  time: 60000,
-                });
-                collector.on("collect", async (col) => {
-                  console.log(col);
-                  console.log("mogus");
-                  interaction.channel.send("Got it!");
-                  const channel =
-                    client.channels.cache.get("840248485663473694");
-                  await channel.send({
-                    content: `<@${player1}> ${win1}-${win2} <@${player2}>
-${games}`,
-                  });
-                  if (await db.get(`points_${player1}`))
-                    await db.add(`points_${player1}`, equ);
-                  else await db.set(`points_${player1}`, 1000 + equ);
-                  if (await db.get(`points_${player2}`))
-                    await db.sub(`points_${player2}`, equ);
-                  else await db.set(`points_${player2}`, 1000 - equ);
-                  collector.stop();
-                });
-                collector.on("end", async () => {
-                  await interaction.followUp({
-                    content: "Done!",
-                   flags: MessageFlags.Ephemeral,
-                  });
-                });
-              });
-          }
-          if (win2 > win1) {
-            let points1 = (await db.get(`points_${player2}`)) ?? 0;
-            let points2 = (await db.get(`points_${player1}`)) ?? 0;
-            let equ = Math.round(
-              30 * (1 - 1 / (1 + 2 ** ((points2 - points1) / 30)))
-            );
-            await interaction
-              .followUp({
-                content: `It's ${win2}-${win1}. Do you agree <@${player1}>?`,
-              })
-              .then((msg) => {
-                msg.react("👍");
-                let filter = (r, u) => u == player1;
-                let collec = msg.createReactionCollector({
-                  filter,
-                  max: 3,
-                  time: 60000,
-                });
-                collec.on("collect", async (col) => {
-                  console.log("mogus");
-                  console.log(col);
-                  interaction.channel.send("Got it!");
-                  const channel =
-                    client.channels.cache.get("840248485663473694");
-                  await channel.send({
-                    content: `<@${player1}> ${win1}-${win2} <@${player2}>
-${games}`,
-                  });
-                  if (await db.get(`points_${player2}`))
-                    await db.add(`points_${player2}`, equ);
-                  else await db.set(`points_${player2}`, 1000 + equ);
-                  if (await db.get(`points_${player1}`))
-                    await db.sub(`points_${player1}`, equ);
-                  else await db.set(`points_${player1}`, 1000 - equ); //wasnt lyin
-                });
-                collec.on("end", async (m) => {
-                  console.log(m);
-                  await interaction.followUp({
-                    content: "Done!",
-                   flags: MessageFlags.Ephemeral,
-                  });
-                });
-              });
-          }
-        }
-      }
-      // Elo Remove 
-      if (interaction.customId === "elo-remove-modal") {
-        await interaction.deferUpdate();
-        let m = interaction.fields.getTextInputValue("elo-remove-input");
-        let amount = interaction.fields.getTextInputValue("elo-remove-score");
-        if (isNaN(amount)) {
-          return interaction.followUp({
-            content: "Please input a number for the amount to remove",
-           flags: MessageFlags.Ephemeral,
-          });
-        }
-        try {
-          const playerone = await client.users.fetch(m);
-        } catch (err) {
-          console.log(err);
-          return interaction.followUp({
-            content: "Please input user Ids only",
-           flags: MessageFlags.Ephemeral,
-          });
-        }
-        let db = new (require("quick.db")).QuickDB();
-        await db.sub(`points_${m}`, amount);
-        await interaction.followUp({content: `Removed ${amount} points from <@${m}>`,flags: MessageFlags.Ephemeral});
-      }
-      // Elo Add
-      if (interaction.customId === "elo-add-modal") {
-        await interaction.deferUpdate();
-        let m = interaction.fields.getTextInputValue("elo-add-input");
-        let amount = interaction.fields.getTextInputValue("elo-add-score");
-        if (isNaN(amount)) {
-          return interaction.followUp({
-            content: "Please input a number for the amount to add",
-           flags: MessageFlags.Ephemeral,
-          });
-        }
-        try {
-          const playerone = await client.users.fetch(m);
-        } catch (err) {
-          console.log(err);
-          return interaction.followUp({
-            content: "Please input user Ids only",
-           flags: MessageFlags.Ephemeral,
-          });
-        }
-        let db = new (require("quick.db")).QuickDB();
-        await db.add(`points_${m}`, amount);
-        await interaction.followUp({content: `Added ${amount} points to <@${m}>`,flags: MessageFlags.Ephemeral});
-      }
       //Hangman
       if (interaction.customId.startsWith("hangman-")) {
         await interaction.deferUpdate();
@@ -1143,7 +920,7 @@ ${games}`,
             `${result[0].pawntrickstab}`,
             `${result[0].wr100}`,
             `${result[0].abeans}`,
-           
+            `${result[0].pbeans}`,
             `${result[0].savagemayflower}`,
             `${result[0].sovietonion}`,
             
@@ -1405,7 +1182,7 @@ ${games}`,
             //GS TBOT DB
            `${result[0].wr100}`,
             `${result[0].abeans}`,
-           
+            `${result[0].pbeans}`,
             `${result[0].savagemayflower}`,
             `${result[0].sovietonion}`,
             
@@ -1909,7 +1686,7 @@ ${games}`,
               `${result[0].pawntrickstab}`,
               `${result[0].wr100}`,
               `${result[0].abeans}`,
-             
+              `${result[0].pbeans}`,
               `${result[0].savagemayflower}`,
               `${result[0].sovietonion}`,
               
@@ -5024,112 +4801,7 @@ ${games}`,
           .addComponents(row, row2);
         await interaction.showModal(modal);
       }
-      //elo score
-      if (interaction.customId === "elo-score") {
-        const modalInput = new TextInputBuilder()
-          .setCustomId("elo-input")
-          .setLabel("input user ID")
-          .setStyle(TextInputStyle.Short);
-
-        const row = new ActionRowBuilder({
-          components: [modalInput],
-        });
-        const modal = new ModalBuilder()
-          .setTitle("Elo Score")
-          .setCustomId("elo-score-modal")
-          .addComponents(row);
-        await interaction.showModal(modal);
-      }
-      //elo report
-      if (interaction.customId === "elo-report") {
-        const Player1 = new TextInputBuilder()
-          .setCustomId("player1")
-          .setLabel("Player 1 Discord ID")
-          .setStyle(TextInputStyle.Short);
-        const player1Score = new TextInputBuilder()
-          .setCustomId("player1Score")
-          .setLabel("Player 1 Score")
-          .setStyle(TextInputStyle.Short);
-        const Player2 = new TextInputBuilder()
-          .setCustomId("player2")
-          .setLabel("Player 2 Discord ID")
-          .setStyle(TextInputStyle.Short);
-        const player2Score = new TextInputBuilder()
-          .setCustomId("player2Score")
-          .setLabel("Player 2 Score")
-          .setStyle(TextInputStyle.Short);
-        const games = new TextInputBuilder()
-          .setCustomId("games")
-          .setLabel("Matchups Played with winning deck bolded")
-          .setStyle(TextInputStyle.Paragraph);
-        const row1 = new ActionRowBuilder({
-          components: [Player1],
-        });
-        const row2 = new ActionRowBuilder({
-          components: [player1Score],
-        });
-        const row3 = new ActionRowBuilder({
-          components: [Player2],
-        });
-        const row4 = new ActionRowBuilder({
-          components: [player2Score],
-        });
-        const row5 = new ActionRowBuilder({
-          components: [games],
-        });
-        const report = new ModalBuilder()
-          .setTitle("Elo Report")
-          .setCustomId("elo-report-modal")
-          .addComponents(row1, row2, row3, row4, row5);
-        await interaction.showModal(report);
-      }
-      // ELo Remove
-      if (interaction.customId === "elo-remove") {
-        const modalInput = new TextInputBuilder()
-          .setCustomId("elo-remove-input")
-          .setLabel("input user ID")
-          .setStyle(TextInputStyle.Short);
-          const scoreinput = new TextInputBuilder()
-          .setCustomId("elo-remove-score")
-          .setLabel("input score to remove")
-          .setStyle(TextInputStyle.Short);
-
-        const row = new ActionRowBuilder({
-          components: [modalInput],
-        });
-        const row2 = new ActionRowBuilder({
-          components: [scoreinput],
-        });
-        const modal = new ModalBuilder()
-          .setTitle("Elo Remove")
-          .setCustomId("elo-remove-modal")
-          .addComponents(row, row2);
-        await interaction.showModal(modal);
-      }
-      // ELo Add
-      if (interaction.customId === "elo-add") {
-        const modalInput = new TextInputBuilder()
-          .setCustomId("elo-add-input")
-          .setLabel("input user ID")
-          .setStyle(TextInputStyle.Short);
-        const scoreinput = new TextInputBuilder()
-          .setCustomId("elo-add-score")
-          .setLabel("input score to add")
-          .setStyle(TextInputStyle.Short);
-
-        const row = new ActionRowBuilder({
-          components: [modalInput],
-        });
-        const row2 = new ActionRowBuilder({
-          components: [scoreinput],
-        });
-        const modal = new ModalBuilder()
-          .setTitle("Elo Add")
-          .setCustomId("elo-add-modal")
-          .addComponents(row, row2);
-        await interaction.showModal(modal);
-      }
-      //Random Decks
+      //Random Deck
       if (interaction.customId === "random-deck") {
         const modalInput = new TextInputBuilder()
           .setCustomId("random-decks-input")

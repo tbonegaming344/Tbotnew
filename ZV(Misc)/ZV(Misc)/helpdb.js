@@ -539,13 +539,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("pop")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const pop = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("plantmop")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("psol")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const psol = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("plantmop")
+        .setCustomId("popsicle")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -710,6 +720,7 @@ module.exports = {
       "pawntrickstab",
       "pbeans",
       "plantmop",
+      "popsicle",
       "psychosolstice",
       "nuttin",
       "radiotherapy",
@@ -1243,13 +1254,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("pop2")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const pop2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("plantmop2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("psol2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const psol2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("plantmop2")
+        .setCustomId("popsicle2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1332,6 +1353,7 @@ module.exports = {
       "mspotk",
       "nuttin",
       "plantmop",
+      "popsicle",
       "psychosolstice",
       "ramp2seedling",
       "savagemayflower",
@@ -1690,13 +1712,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("pop3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const pop3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("pawntrickstab3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("radio3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const radio3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pawntrickstab3")
+        .setCustomId("popsicle3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1741,6 +1773,7 @@ module.exports = {
       "funnyflare",
       "healcontrol",
       "pawntrickstab",
+      "popsicle",
       "radiotherapy",
       "shamcontrolbc",
       "shitknight",
@@ -6602,6 +6635,25 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
         }
       )
       .setImage(`${result[4].radiotherapy}`);
+       const popsicle = new EmbedBuilder()
+              .setTitle(`${result[5].popsicle}`)
+              .setDescription(`${result[3].popsicle}`)
+              .setFooter({text: `${result[2].popsicle}`})
+                  .setColor("Random")
+                  .setImage(`${result[4].popsicle}`)
+                      .addFields({
+                          name: "Deck Type",
+                          value: `${result[6].popsicle}`,
+                          inline: true
+                      },{
+                          name: "Archetype",
+                          value: `${result[0].popsicle}`,
+                          inline: true
+                      },{
+                          name: "Deck Cost", 
+                          value: `${result[1].popsicle}`,
+                          inline: true
+                      })
     let budgetwk = new EmbedBuilder()
       .setTitle(`${result[5].budgetwkmidheal}`)
       .setDescription(`${result[3].budgetwkmidheal}`)
@@ -8631,7 +8683,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setImage(`${result[4].zmoss}`);
     collector.on("collect", async (i) => {
-      if (i.customId == "starter") {
+    if(i.customId == "starter") {
         const value = i.values[0];
         if (value == "budgetpdecks") {
           await i.update({
@@ -8639,1330 +8691,1330 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
             components: [budgetprow],
           });
         }
-        if (value == "comppdecks") {
+        else if (value == "comppdecks") {
           await i.update({ embeds: [comppdecksEmbed], components: [compprow] });
         }
-        if (value == "ladderpdecks") {
+        else if (value == "ladderpdecks") {
           await i.update({
             embeds: [ladderpdecksEmbed],
             components: [ladderprow],
           });
         }
-        if (value == "memepdecks") {
+        else if (value == "memepdecks") {
           await i.update({ embeds: [memepdecksEmbed], components: [memeprow] });
         }
-        if (value == "aggropdecks") {
+        else if (value == "aggropdecks") {
           await i.update({
             embeds: [aggropdecksEmbed],
             components: [aggroprow],
           });
         }
-        if (value == "combopdecks") {
+        else if (value == "combopdecks") {
           await i.update({
             embeds: [combopdecksEmbed],
             components: [comboprow],
           });
         }
-        if (value == "controlpdecks") {
+       else if (value == "controlpdecks") {
           await i.update({
             embeds: [controlpdecksEmbed],
             components: [controlprow],
           });
         }
-        if (value == "midrangepdecks") {
+        else if (value == "midrangepdecks") {
           await i.update({
             embeds: [midrangepdecksEmbed],
             components: [midrangeprow],
           });
         }
-        if (value == "tempopdecks") {
+        else if (value == "tempopdecks") {
           await i.update({
             embeds: [tempopdecksEmbed],
             components: [tempoprow],
           });
         }
-        if (value == "budgetzdecks") {
+        else if (value == "budgetzdecks") {
           await i.update({
             embeds: [budgetzdecksEmbed],
             components: [budgetzrow],
           });
         }
-        if (value == "compzdecks") {
+       else if (value == "compzdecks") {
           await i.update({ embeds: [compzdecksEmbed], components: [compzrow] });
         }
-        if (value == "ladderzdecks") {
+       else if (value == "ladderzdecks") {
           await i.update({
             embeds: [ladderzdecksEmbed],
             components: [ladderzrow],
           });
         }
-        if (value == "memezdecks") {
+        else if (value == "memezdecks") {
           await i.update({ embeds: [memezdecksEmbed], components: [memezrow] });
         }
-        if (value == "aggrozdecks") {
+        else if (value == "aggrozdecks") {
           await i.update({
             embeds: [aggrozdecksEmbed],
             components: [aggrozrow],
           });
         }
-        if (value == "combozdecks") {
+        else if (value == "combozdecks") {
           await i.update({
             embeds: [combozdecksEmbed],
             components: [combozrow],
           });
         }
-        if (value == "controlzdecks") {
+       else if (value == "controlzdecks") {
           await i.update({
             embeds: [controlzdecksEmbed],
             components: [controlzrow],
           });
         }
-        if (value == "midrangezdecks") {
+        else if (value == "midrangezdecks") {
           await i.update({
             embeds: [midrangezdecksEmbed],
             components: [midrangezrow],
           });
         }
-        if (value == "tempozdecks") {
+        else if (value == "tempozdecks") {
           await i.update({
             embeds: [tempozdecksEmbed],
             components: [tempozrow],
           });
         }
-        if (value == "allpdecks") {
+        else if (value == "allpdecks") {
           await i.update({ embeds: [allpdecksEmbed], components: [allprow] });
         }
-        if (value == "allzdecks") {
+       else if (value == "allzdecks") {
           await i.update({ embeds: [allzdecksEmbed], components: [allzrow] });
         }
       }
-      if (i.customId == "helppbudget" || i.customId == "budgetphelp") {
+       if(i.customId == "helppbudget" || i.customId == "budgetphelp") {
         await i.update({
           embeds: [budgetpdecksEmbed],
           components: [budgetprow],
         });
       }
-      if (i.customId == "helppcomp" || i.customId == "compphelp") {
+      else if(i.customId == "helppcomp" || i.customId == "compphelp") {
         await i.update({ embeds: [comppdecksEmbed], components: [compprow] });
       }
-      if (i.customId == "helppladder" || i.customId == "ladderphelp") {
+      else if(i.customId == "helppladder" || i.customId == "ladderphelp") {
         await i.update({
           embeds: [ladderpdecksEmbed],
           components: [ladderprow],
         });
       }
-      if (i.customId == "helppmeme" || i.customId == "memephelp") {
+      else if(i.customId == "helppmeme" || i.customId == "memephelp") {
         await i.update({ embeds: [memepdecksEmbed], components: [memeprow] });
       }
-      if (i.customId == "helppaggro" || i.customId == "aggrophelp") {
+      else if(i.customId == "helppaggro" || i.customId == "aggrophelp") {
         await i.update({ embeds: [aggropdecksEmbed], components: [aggroprow] });
       }
-      if (i.customId == "helppcombo" || i.customId == "combophelp") {
+      else if(i.customId == "helppcombo" || i.customId == "combophelp") {
         await i.update({ embeds: [combopdecksEmbed], components: [comboprow] });
       }
-      if (i.customId == "helppcontrol" || i.customId == "controlphelp") {
+      else if(i.customId == "helppcontrol" || i.customId == "controlphelp") {
         await i.update({
           embeds: [controlpdecksEmbed],
           components: [controlprow],
         });
       }
-      if (i.customId == "helppmidrange" || i.customId == "midrangephelp") {
+      else if(i.customId == "helppmidrange" || i.customId == "midrangephelp") {
         await i.update({
           embeds: [midrangepdecksEmbed],
           components: [midrangeprow],
         });
       }
-      if (i.customId == "helpptempo" || i.customId == "tempophelp") {
+      else if(i.customId == "helpptempo" || i.customId == "tempophelp") {
         await i.update({ embeds: [tempopdecksEmbed], components: [tempoprow] });
       }
-      if (i.customId == "helpzbudget" || i.customId == "helpbudgetz") {
+      else if(i.customId == "helpzbudget" || i.customId == "helpbudgetz") {
         await i.update({
           embeds: [budgetzdecksEmbed],
           components: [budgetzrow],
         });
       }
-      if (i.customId == "helpzcomp" || i.customId == "compzhelp") {
+      else if(i.customId == "helpzcomp" || i.customId == "compzhelp") {
         await i.update({ embeds: [compzdecksEmbed], components: [compzrow] });
       }
-      if (i.customId == "helpzladder" || i.customId == "ladderzhelp") {
+      else if(i.customId == "helpzladder" || i.customId == "ladderzhelp") {
         await i.update({
           embeds: [ladderzdecksEmbed],
           components: [ladderzrow],
         });
       }
-      if (i.customId == "helpzmeme" || i.customId == "memezhelp") {
+      else if(i.customId == "helpzmeme" || i.customId == "memezhelp") {
         await i.update({ embeds: [memezdecksEmbed], components: [memezrow] });
       }
-      if (i.customId == "helpzaggro" || i.customId == "aggrozhelp") {
+      else if(i.customId == "helpzaggro" || i.customId == "aggrozhelp") {
         await i.update({ embeds: [aggrozdecksEmbed], components: [aggrozrow] });
       }
-      if (i.customId == "helpzcombo" || i.customId == "combozhelp") {
+      else if(i.customId == "helpzcombo" || i.customId == "combozhelp") {
         await i.update({ embeds: [combozdecksEmbed], components: [combozrow] });
       }
-      if (i.customId == "helpzcontrol" || i.customId == "controlzhelp") {
+      else if(i.customId == "helpzcontrol" || i.customId == "controlzhelp") {
         await i.update({
           embeds: [controlzdecksEmbed],
           components: [controlzrow],
         });
       }
-      if (i.customId == "helpzmid" || i.customId == "midzhelp") {
+      else if(i.customId == "helpzmid" || i.customId == "midzhelp") {
         await i.update({
           embeds: [midrangezdecksEmbed],
           components: [midrangezrow],
         });
       }
-      if (i.customId == "helpztempo" || i.customId == "tempozhelp") {
+      else if(i.customId == "helpztempo" || i.customId == "tempozhelp") {
         await i.update({ embeds: [tempozdecksEmbed], components: [tempozrow] });
       }
-      if (i.customId == "helpallp" || i.customId == "allphelp") {
+      else if(i.customId == "helpallp" || i.customId == "allphelp") {
         await i.update({ embeds: [allpdecksEmbed], components: [allprow] });
       }
-      if (i.customId == "helpzall" || i.customId == "allzhelp") {
+      else if(i.customId == "helpzall" || i.customId == "allzhelp") {
         await i.update({ embeds: [allzdecksEmbed], components: [allzrow] });
       }
-      if (i.customId == "wr100" || i.customId == "winrate100") {
+      else if(i.customId == "wr100" || i.customId == "winrate100") {
         await i.update({ embeds: [winrate100], components: [wr100] });
       }
-      if (i.customId == "wr1002" || i.customId == "winrate1002") {
+      else if(i.customId == "wr1002" || i.customId == "winrate1002") {
         await i.update({ embeds: [winrate100], components: [wr1002] });
       }
-      if (i.customId == "wr1003" || i.customId == "winrate1003") {
+      else if(i.customId == "wr1003" || i.customId == "winrate1003") {
         await i.update({ embeds: [winrate100], components: [wr1003] });
       }
-      if (i.customId == "ab" || i.customId == "abeans") {
+      else if(i.customId == "ab" || i.customId == "abeans") {
         await i.update({ embeds: [abeans], components: [ab] });
       }
-      if (i.customId == "ab2" || i.customId == "abeans2") {
+      else if(i.customId == "ab2" || i.customId == "abeans2") {
         await i.update({ embeds: [abeans], components: [ab2] });
       }
-      if (i.customId == "ab3" || i.customId == "abeans3") {
+      else if(i.customId == "ab3" || i.customId == "abeans3") {
         await i.update({ embeds: [abeans], components: [ab3] });
       }
-      if (i.customId == "agrp" || i.customId == "aggroramppeas") {
+      else if(i.customId == "agrp" || i.customId == "aggroramppeas") {
         await i.update({ embeds: [aggroramppeas], components: [agrp] });
       }
-      if (i.customId == "agrp2" || i.customId == "aggroramppeas2") {
+      else if(i.customId == "agrp2" || i.customId == "aggroramppeas2") {
         await i.update({ embeds: [aggroramppeas], components: [agrp2] });
       }
-      if (i.customId == "agrp3" || i.customId == "aggroramppeas3") {
+      else if(i.customId == "agrp3" || i.customId == "aggroramppeas3") {
         await i.update({ embeds: [aggroramppeas], components: [agrp3] });
       }
-      if(i.customId == "healcon" || i.customId == "healcontrol"){
+      else if(i.customId == "healcon" || i.customId == "healcontrol"){
         await i.update({embeds: [healcontrol], components: [healcon]})
       }
-      if(i.customId == "healcon2" || i.customId == "healcontrol2"){
+      else if(i.customId == "healcon2" || i.customId == "healcontrol2"){
         await i.update({embeds: [healcontrol], components: [healcon2]})
       }
-      if(i.customId == "healcon3" || i.customId == "healcontrol3"){
+      else if(i.customId == "healcon3" || i.customId == "healcontrol3"){
         await i.update({embeds: [healcontrol], components: [healcon3]})
       }
   
-      if (i.customId == "bct" || i.customId == "budgetct") {
+      else if(i.customId == "bct" || i.customId == "budgetct") {
         await i.update({ embeds: [budgetct], components: [bct] });
       }
-      if (i.customId == "bct2" || i.customId == "budgetct2") {
+      else if(i.customId == "bct2" || i.customId == "budgetct2") {
         await i.update({ embeds: [budgetct], components: [bct2] });
       }
-      if (i.customId == "bct3" || i.customId == "budgetct3") {
+      else if(i.customId == "bct3" || i.customId == "budgetct3") {
         await i.update({ embeds: [budgetct], components: [bct3] });
       }
-      if (i.customId == "bcc" || i.customId == "budgetcc") {
+      else if(i.customId == "bcc" || i.customId == "budgetcc") {
         await i.update({ embeds: [budgetcc], components: [bcc] });
       }
-      if (i.customId == "bcc2" || i.customId == "budgetcc2") {
+      else if(i.customId == "bcc2" || i.customId == "budgetcc2") {
         await i.update({ embeds: [budgetcc], components: [bcc2] });
       }
-      if (i.customId == "bcc3" || i.customId == "budgetcc3") {
+      else if(i.customId == "bcc3" || i.customId == "budgetcc3") {
         await i.update({ embeds: [budgetcc], components: [bcc3] });
       }
-      if (i.customId == "bcz" || i.customId == "budgetcz") {
+      else if(i.customId == "bcz" || i.customId == "budgetcz") {
         await i.update({ embeds: [budgetcz], components: [bcz] });
       }
-      if (i.customId == "bcz2" || i.customId == "budgetcz2") {
+      else if(i.customId == "bcz2" || i.customId == "budgetcz2") {
         await i.update({ embeds: [budgetcz], components: [bcz2] });
       }
-      if (i.customId == "bcz3" || i.customId == "budgetcz3") {
+      else if(i.customId == "bcz3" || i.customId == "budgetcz3") {
         await i.update({ embeds: [budgetcz], components: [bcz3] });
       }
-      if (i.customId == "bgk" || i.customId == "budgetgk") {
+      else if(i.customId == "bgk" || i.customId == "budgetgk") {
         await i.update({ embeds: [budgetgk], components: [bgk] });
       }
-      if (i.customId == "bgk2" || i.customId == "budgetgk2") {
+      else if(i.customId == "bgk2" || i.customId == "budgetgk2") {
         await i.update({ embeds: [budgetgk], components: [bgk2] });
       }
-      if (i.customId == "bgk3" || i.customId == "budgetgk3") {
+      else if(i.customId == "bgk3" || i.customId == "budgetgk3") {
         await i.update({ embeds: [budgetgk], components: [bgk3] });
       }
-      if (i.customId == "bgs" || i.customId == "budgetgs") {
+      else if(i.customId == "bgs" || i.customId == "budgetgs") {
         await i.update({ embeds: [budgetgs], components: [bgs] });
       }
-      if (i.customId == "bgs2" || i.customId == "budgetgs2") {
+      else if(i.customId == "bgs2" || i.customId == "budgetgs2") {
         await i.update({ embeds: [budgetgs], components: [bgs2] });
       }
-      if (i.customId == "bgs3" || i.customId == "budgetgs3") {
+      else if(i.customId == "bgs3" || i.customId == "budgetgs3") {
         await i.update({ embeds: [budgetgs], components: [bgs3] });
       }
-      if (i.customId == "bnc" || i.customId == "budgetnc") {
+      else if(i.customId == "bnc" || i.customId == "budgetnc") {
         await i.update({ embeds: [budgetnc], components: [bnc] });
       }
-      if (i.customId == "bnc2" || i.customId == "budgetnc2") {
+      else if(i.customId == "bnc2" || i.customId == "budgetnc2") {
         await i.update({ embeds: [budgetnc], components: [bnc2] });
       }
-      if (i.customId == "bnc3" || i.customId == "budgetnc3") {
+      else if(i.customId == "bnc3" || i.customId == "budgetnc3") {
         await i.update({ embeds: [budgetnc], components: [bnc3] });
       }
-      if (i.customId == "bro" || i.customId == "budgetro") {
+      else if(i.customId == "bro" || i.customId == "budgetro") {
         await i.update({ embeds: [budgetro], components: [bro] });
       }
-      if (i.customId == "bro2" || i.customId == "budgetro2") {
+      else if(i.customId == "bro2" || i.customId == "budgetro2") {
         await i.update({ embeds: [budgetro], components: [bro2] });
       }
-      if (i.customId == "bro3" || i.customId == "budgetro3") {
+      else if(i.customId == "bro3" || i.customId == "budgetro3") {
         await i.update({ embeds: [budgetro], components: [bro3] });
       }
-      if (i.customId == "bsf" || i.customId == "budgetsf") {
+      else if(i.customId == "bsf" || i.customId == "budgetsf") {
         await i.update({ embeds: [budgetsf], components: [bsf] });
       }
-      if (i.customId == "bsf2" || i.customId == "budgetsf2") {
+      else if(i.customId == "bsf2" || i.customId == "budgetsf2") {
         await i.update({ embeds: [budgetsf], components: [bsf2] });
       }
-      if (i.customId == "bsf3" || i.customId == "budgetsf3") {
+      else if(i.customId == "bsf3" || i.customId == "budgetsf3") {
         await i.update({ embeds: [budgetsf], components: [bsf3] });
       }
-      if (i.customId == "bsp" || i.customId == "budgetsp") {
+      else if(i.customId == "bsp" || i.customId == "budgetsp") {
         await i.update({ embeds: [budgetsp], components: [bsp] });
       }
-      if (i.customId == "bsp2" || i.customId == "budgetsp2") {
+      else if(i.customId == "bsp2" || i.customId == "budgetsp2") {
         await i.update({ embeds: [budgetsp], components: [bsp2] });
       }
-      if (i.customId == "bsp3" || i.customId == "budgetsp3") {
+      else if(i.customId == "bsp3" || i.customId == "budgetsp3") {
         await i.update({ embeds: [budgetsp], components: [bsp3] });
       }
-      if (i.customId == "bwk" || i.customId == "budgetwk") {
+      else if(i.customId == "bwk" || i.customId == "budgetwk") {
         await i.update({ embeds: [budgetwk], components: [bwk] });
       }
-      if (i.customId == "bwk2" || i.customId == "budgetwk2") {
+      else if(i.customId == "bwk2" || i.customId == "budgetwk2") {
         await i.update({ embeds: [budgetwk], components: [bwk2] });
       }
-      if (i.customId == "bwk3" || i.customId == "budgetwk3") {
+      else if(i.customId == "bwk3" || i.customId == "budgetwk3") {
         await i.update({ embeds: [budgetwk], components: [bwk3] });
       }
-      if (i.customId == "cank" || i.customId == "cancerknight") {
+      else if(i.customId == "cank" || i.customId == "cancerknight") {
         await i.update({ embeds: [cancerknight], components: [cank] });
       }
-      if (i.customId == "cank2" || i.customId == "cancerknight2") {
+      else if(i.customId == "cank2" || i.customId == "cancerknight2") {
         await i.update({ embeds: [cancerknight], components: [cank2] });
       }
-      if (i.customId == "cank3" || i.customId == "cancerknight3") {
+      else if(i.customId == "cank3" || i.customId == "cancerknight3") {
         await i.update({ embeds: [cancerknight], components: [cank3] });
       }
-      if (i.customId == "chemo" || i.customId == "chemotherapy") {
+      else if(i.customId == "chemo" || i.customId == "chemotherapy") {
         await i.update({ embeds: [chemotherapy], components: [chemo] });
       }
-      if (i.customId == "chemo2" || i.customId == "chemotherapy2") {
+      else if(i.customId == "chemo2" || i.customId == "chemotherapy2") {
         await i.update({ embeds: [chemotherapy], components: [chemo2] });
       }
-      if (i.customId == "chemo3" || i.customId == "chemotherapy3") {
+      else if(i.customId == "chemo3" || i.customId == "chemotherapy3") {
         await i.update({ embeds: [chemotherapy], components: [chemo3] });
       }
-      if (i.customId == "cburn" || i.customId == "cyburn") {
+      else if(i.customId == "cburn" || i.customId == "cyburn") {
         await i.update({ embeds: [cyburn], components: [cburn] });
       }
-      if (i.customId == "cburn2" || i.customId == "cyburn2") {
+      else if(i.customId == "cburn2" || i.customId == "cyburn2") {
         await i.update({ embeds: [cyburn], components: [cburn2] });
       }
-      if (i.customId == "cburn3" || i.customId == "cyburn3") {
+      else if(i.customId == "cburn3" || i.customId == "cyburn3") {
         await i.update({ embeds: [cyburn], components: [cburn3] });
       }
-      if (i.customId == "cburn4" || i.customId == "cyburn4") {
+      else if(i.customId == "cburn4" || i.customId == "cyburn4") {
         await i.update({ embeds: [cyburn], components: [cburn4] });
       }
-      if (i.customId == "eject" || i.customId == "ejection") {
+      else if(i.customId == "eject" || i.customId == "ejection") {
         await i.update({ embeds: [ejection], components: [eject] });
       }
-      if (i.customId == "eject2" || i.customId == "ejection2") {
+      else if(i.customId == "eject2" || i.customId == "ejection2") {
         await i.update({ embeds: [ejection], components: [eject2] });
       }
-      if (i.customId == "eject3" || i.customId == "ejection3") {
+      else if(i.customId == "eject3" || i.customId == "ejection3") {
         await i.update({ embeds: [ejection], components: [eject3] });
       }
-      if (i.customId == "elus" || i.customId == "elusives") {
+      else if(i.customId == "elus" || i.customId == "elusives") {
         await i.update({ embeds: [elusives], components: [elus] });
       }
-      if (i.customId == "elus2" || i.customId == "elusives2") {
+      else if(i.customId == "elus2" || i.customId == "elusives2") {
         await i.update({ embeds: [elusives], components: [elus2] });
       }
-      if (i.customId == "elus3" || i.customId == "elusives3") {
+      else if(i.customId == "elus3" || i.customId == "elusives3") {
         await i.update({ embeds: [elusives], components: [elus3] });
       }
-      if (i.customId == "elus4" || i.customId == "elusives4") {
+      else if(i.customId == "elus4" || i.customId == "elusives4") {
         await i.update({ embeds: [elusives], components: [elus4] });
       }
-      if (i.customId == "fheal" || i.customId == "freezeheal") {
+      else if(i.customId == "fheal" || i.customId == "freezeheal") {
         await i.update({ embeds: [freezeheal], components: [fheal] });
       }
-      if (i.customId == "fheal2" || i.customId == "freezeheal2") {
+      else if(i.customId == "fheal2" || i.customId == "freezeheal2") {
         await i.update({ embeds: [freezeheal], components: [fheal2] });
       }
-      if (i.customId == "fheal3" || i.customId == "freezeheal3") {
+      else if(i.customId == "fheal3" || i.customId == "freezeheal3") {
         await i.update({ embeds: [freezeheal], components: [fheal3] });
       }
-      if (i.customId == "fmr" || i.customId == "frymidrose") {
+      else if(i.customId == "fmr" || i.customId == "frymidrose") {
         await i.update({ embeds: [frymidrose], components: [fmr] });
       }
-      if (i.customId == "fmr2" || i.customId == "frymidrose2") {
+      else if(i.customId == "fmr2" || i.customId == "frymidrose2") {
         await i.update({ embeds: [frymidrose], components: [fmr2] });
       }
-      if (i.customId == "fmr3" || i.customId == "frymidrose3") {
+      else if(i.customId == "fmr3" || i.customId == "frymidrose3") {
         await i.update({ embeds: [frymidrose], components: [fmr3] });
       }
-      if (i.customId == "fflare" || i.customId == "funnyflare") {
+      else if(i.customId == "fflare" || i.customId == "funnyflare") {
         await i.update({ embeds: [funnyflare], components: [fflare] });
       }
-      if (i.customId == "fflare2" || i.customId == "funnyflare2") {
+      else if(i.customId == "fflare2" || i.customId == "funnyflare2") {
         await i.update({ embeds: [funnyflare], components: [fflare2] });
       }
-      if (i.customId == "fflare3" || i.customId == "funnyflare3") {
+      else if(i.customId == "fflare3" || i.customId == "funnyflare3") {
         await i.update({ embeds: [funnyflare], components: [fflare3] });
       }
-      if (i.customId == "g3n" || i.customId == "going3nuts") {
+      else if(i.customId == "g3n" || i.customId == "going3nuts") {
         await i.update({ embeds: [going3nuts], components: [g3n] });
       }
-      if (i.customId == "g3n2" || i.customId == "going3nuts2") {
+      else if(i.customId == "g3n2" || i.customId == "going3nuts2") {
         await i.update({ embeds: [going3nuts], components: [g3n2] });
       }
-      if (i.customId == "g3n3" || i.customId == "going3nuts3") {
+      else if(i.customId == "g3n3" || i.customId == "going3nuts3") {
         await i.update({ embeds: [going3nuts], components: [g3n3] });
       }
-      if (i.customId == "g3n4" || i.customId == "going3nuts4") {
+      else if(i.customId == "g3n4" || i.customId == "going3nuts4") {
         await i.update({ embeds: [going3nuts], components: [g3n4] });
       }
-      if (i.customId == "hburn" || i.customId == "healburn") {
+      else if(i.customId == "hburn" || i.customId == "healburn") {
         await i.update({ embeds: [healburn], components: [hburn] });
       }
-      if (i.customId == "hburn2" || i.customId == "healburn2") {
+      else if(i.customId == "hburn2" || i.customId == "healburn2") {
         await i.update({ embeds: [healburn], components: [hburn2] });
       }
-      if (i.customId == "hburn3" || i.customId == "healburn3") {
+      else if(i.customId == "hburn3" || i.customId == "healburn3") {
         await i.update({ embeds: [healburn], components: [hburn3] });
       }
-      if (i.customId == "hburn4" || i.customId == "healburn4") {
+      else if(i.customId == "hburn4" || i.customId == "healburn4") {
         await i.update({ embeds: [healburn], components: [hburn4] });
       }
-      if (i.customId == "flottery" || i.customId == "figlottery") {
+      else if(i.customId == "flottery" || i.customId == "figlottery") {
         await i.update({ embeds: [figlottery], components: [flottery] });
       }
-      if (i.customId == "flottery2" || i.customId == "figlottery2") {
+      else if(i.customId == "flottery2" || i.customId == "figlottery2") {
         await i.update({ embeds: [figlottery], components: [flottery2] });
       }
-      if (i.customId == "flottery3" || i.customId == "figlottery3") {
+      else if(i.customId == "flottery3" || i.customId == "figlottery3") {
         await i.update({ embeds: [figlottery], components: [flottery3] });
       }
-      if (i.customId == "hmr" || i.customId == "healmidrose") {
+      else if(i.customId == "hmr" || i.customId == "healmidrose") {
         await i.update({ embeds: [healmidrose], components: [hmr] });
       }
-      if (i.customId == "hmr2" || i.customId == "healmidrose2") {
+      else if(i.customId == "hmr2" || i.customId == "healmidrose2") {
         await i.update({ embeds: [healmidrose], components: [hmr2] });
       }
-      if (i.customId == "hmr3" || i.customId == "healmidrose3") {
+      else if(i.customId == "hmr3" || i.customId == "healmidrose3") {
         await i.update({ embeds: [healmidrose], components: [hmr3] });
       }
-      if (i.customId == "hland" || i.customId == "highlander") {
+      else if(i.customId == "hland" || i.customId == "highlander") {
         await i.update({ embeds: [highlander], components: [hland] });
       }
-      if (i.customId == "hland2" || i.customId == "highlander2") {
+      else if(i.customId == "hland2" || i.customId == "highlander2") {
         await i.update({ embeds: [highlander], components: [hland2] });
       }
-      if (i.customId == "hland3" || i.customId == "highlander3") {
+      else if(i.customId == "hland3" || i.customId == "highlander3") {
         await i.update({ embeds: [highlander], components: [hland3] });
       }
-      if (i.customId == "lcbd" || i.customId == "lifecouldbedream") {
+      else if(i.customId == "lcbd" || i.customId == "lifecouldbedream") {
         await i.update({ embeds: [lifecouldbedream], components: [lcbd] });
       }
-      if (i.customId == "lcbd2" || i.customId == "lifecouldbedream2") {
+      else if(i.customId == "lcbd2" || i.customId == "lifecouldbedream2") {
         await i.update({ embeds: [lifecouldbedream], components: [lcbd2] });
       }
-      if (i.customId == "lcbd3" || i.customId == "lifecouldbedream3") {
+      else if(i.customId == "lcbd3" || i.customId == "lifecouldbedream3") {
         await i.update({ embeds: [lifecouldbedream], components: [lcbd3] });
       }
-      if (i.customId == "mred" || i.customId == "midred") {
+      else if(i.customId == "mred" || i.customId == "midred") {
         await i.update({ embeds: [midred], components: [mred] });
       }
-      if (i.customId == "mred2" || i.customId == "midred2") {
+      else if(i.customId == "mred2" || i.customId == "midred2") {
         await i.update({ embeds: [midred], components: [mred2] });
       }
-      if (i.customId == "mred3" || i.customId == "midred3") {
+      else if(i.customId == "mred3" || i.customId == "midred3") {
         await i.update({ embeds: [midred], components: [mred3] });
       }
-      if (i.customId == "mred4" || i.customId == "midred4") {
+      else if(i.customId == "mred4" || i.customId == "midred4") {
         await i.update({ embeds: [midred], components: [mred4] });
       }
-      if (i.customId == "mopr" || i.customId == "mopribus") {
+      else if(i.customId == "mopr" || i.customId == "mopribus") {
         await i.update({ embeds: [mopribus], components: [mopr] });
       }
-      if (i.customId == "mopr2" || i.customId == "mopribus2") {
+      else if(i.customId == "mopr2" || i.customId == "mopribus2") {
         await i.update({ embeds: [mopribus], components: [mopr2] });
       }
-      if (i.customId == "mopr3" || i.customId == "mopribus3") {
+      else if(i.customId == "mopr3" || i.customId == "mopribus3") {
         await i.update({ embeds: [mopribus], components: [mopr3] });
       }
-      if (i.customId == "mopr4" || i.customId == "mopribus4") {
+      else if(i.customId == "mopr4" || i.customId == "mopribus4") {
         await i.update({ embeds: [mopribus], components: [mopr4] });
       }
-      if (i.customId == "msp" || i.customId == "mspotk") {
+      else if(i.customId == "msp" || i.customId == "mspotk") {
         await i.update({ embeds: [mspotk], components: [msp] });
       }
-      if (i.customId == "msp2" || i.customId == "mspotk2") {
+      else if(i.customId == "msp2" || i.customId == "mspotk2") {
         await i.update({ embeds: [mspotk], components: [msp2] });
       }
-      if (i.customId == "msp3" || i.customId == "mspotk3") {
+      else if(i.customId == "msp3" || i.customId == "mspotk3") {
         await i.update({ embeds: [mspotk], components: [msp3] });
       }
-      if (i.customId == "plmop" || i.customId == "plantmop") {
+      else if(i.customId == "plmop" || i.customId == "plantmop") {
         await i.update({ embeds: [plantmop], components: [plmop] });
       }
-      if (i.customId == "plmop2" || i.customId == "plantmop2") {
+      else if(i.customId == "plmop2" || i.customId == "plantmop2") {
         await i.update({ embeds: [plantmop], components: [plmop2] });
       }
-      if (i.customId == "plmop3" || i.customId == "plantmop3") {
+      else if(i.customId == "plmop3" || i.customId == "plantmop3") {
         await i.update({ embeds: [plantmop], components: [plmop3] });
       }
-      if (i.customId == "psol" || i.customId == "psychosolstice") {
+      else if(i.customId == "psol" || i.customId == "psychosolstice") {
         await i.update({ embeds: [psychosolstice], components: [psol] });
       }
-      if (i.customId == "psol2" || i.customId == "psychosolstice2") {
+      else if(i.customId == "psol2" || i.customId == "psychosolstice2") {
         await i.update({ embeds: [psychosolstice], components: [psol2] });
       }
-      if (i.customId == "psol3" || i.customId == "psychosolstice3") {
+      else if(i.customId == "psol3" || i.customId == "psychosolstice3") {
         await i.update({ embeds: [psychosolstice], components: [psol3] });
       }
-      if (i.customId == "psol4" || i.customId == "psychosolstice4") {
+      else if(i.customId == "psol4" || i.customId == "psychosolstice4") {
         await i.update({ embeds: [psychosolstice], components: [psol4] });
       }
-      if (i.customId == "radio" || i.customId == "radiotherapy") {
+      else if(i.customId == "radio" || i.customId == "radiotherapy") {
         await i.update({ embeds: [radiotherapy], components: [radio] });
       }
-      if (i.customId == "radio2" || i.customId == "radiotherapy2") {
+      else if(i.customId == "radio2" || i.customId == "radiotherapy2") {
         await i.update({ embeds: [radiotherapy], components: [radio2] });
       }
-      if (i.customId == "radio3" || i.customId == "radiotherapy3") {
+      else if(i.customId == "radio3" || i.customId == "radiotherapy3") {
         await i.update({ embeds: [radiotherapy], components: [radio3] });
       }
-      if (i.customId == "r2s" || i.customId == "ramp2seedling") {
+      else if(i.customId == "r2s" || i.customId == "ramp2seedling") {
         await i.update({ embeds: [ramp2seedling], components: [r2s] });
       }
-      if (i.customId == "r2s2" || i.customId == "ramp2seedling2") {
+      else if(i.customId == "r2s2" || i.customId == "ramp2seedling2") {
         await i.update({ embeds: [ramp2seedling], components: [r2s2] });
       }
-      if (i.customId == "r2s3" || i.customId == "ramp2seedling3") {
+      else if(i.customId == "r2s3" || i.customId == "ramp2seedling3") {
         await i.update({ embeds: [ramp2seedling], components: [r2s3] });
       }
-      if (i.customId == "r2s4" || i.customId == "ramp2seedling4") {
+      else if(i.customId == "r2s4" || i.customId == "ramp2seedling4") {
         await i.update({ embeds: [ramp2seedling], components: [r2s4] });
       }
-      if (i.customId == "smf" || i.customId == "savagemayflower") {
+      else if(i.customId == "smf" || i.customId == "savagemayflower") {
         await i.update({ embeds: [savagemayflower], components: [smf] });
       }
-      if (i.customId == "smf2" || i.customId == "savagemayflower2") {
+      else if(i.customId == "smf2" || i.customId == "savagemayflower2") {
         await i.update({ embeds: [savagemayflower], components: [smf2] });
       }
-      if (i.customId == "smf3" || i.customId == "savagemayflower3") {
+      else if(i.customId == "smf3" || i.customId == "savagemayflower3") {
         await i.update({ embeds: [savagemayflower], components: [smf3] });
       }
-      if (i.customId == "shambc" || i.customId == "shamcontrolbc") {
+      else if(i.customId == "shambc" || i.customId == "shamcontrolbc") {
         await i.update({ embeds: [shamcontrolbc], components: [shambc] });
       }
-      if (i.customId == "shambc2" || i.customId == "shamcontrolbc2") {
+      else if(i.customId == "shambc2" || i.customId == "shamcontrolbc2") {
         await i.update({ embeds: [shamcontrolbc], components: [shambc2] });
       }
-      if (i.customId == "shambc3" || i.customId == "shamcontrolbc3") {
+      else if(i.customId == "shambc3" || i.customId == "shamcontrolbc3") {
         await i.update({ embeds: [shamcontrolbc], components: [shambc3] });
       }
-      if (i.customId == "sknight" || i.customId == "shitknight") {
+      else if(i.customId == "sknight" || i.customId == "shitknight") {
         await i.update({ embeds: [shitknight], components: [sknight] });
       }
-      if (i.customId == "sknight2" || i.customId == "shitknight2") {
+      else if(i.customId == "sknight2" || i.customId == "shitknight2") {
         await i.update({ embeds: [shitknight], components: [sknight2] });
       }
-      if (i.customId == "sknight3" || i.customId == "shitknight3") {
+      else if(i.customId == "sknight3" || i.customId == "shitknight3") {
         await i.update({ embeds: [shitknight], components: [sknight3] });
       }
-      if (i.customId == "srings" || i.customId == "starrings") {
+      else if(i.customId == "srings" || i.customId == "starrings") {
         await i.update({ embeds: [starrings], components: [srings] });
       }
-      if (i.customId == "srings2" || i.customId == "starrings2") {
+      else if(i.customId == "srings2" || i.customId == "starrings2") {
         await i.update({ embeds: [starrings], components: [srings2] });
       }
-      if (i.customId == "srings3" || i.customId == "starrings3") {
+      else if(i.customId == "srings3" || i.customId == "starrings3") {
         await i.update({ embeds: [starrings], components: [srings3] });
       }
-      if (i.customId == "srings4" || i.customId == "starrings4") {
+      else if(i.customId == "srings4" || i.customId == "starrings4") {
         await i.update({ embeds: [starrings], components: [srings4] });
       }
-      if (i.customId == "stron" || i.customId == "startron") {
+      else if(i.customId == "stron" || i.customId == "startron") {
         await i.update({ embeds: [startron], components: [stron] });
       }
-      if (i.customId == "stron2" || i.customId == "startron2") {
+      else if(i.customId == "stron2" || i.customId == "startron2") {
         await i.update({ embeds: [startron], components: [stron2] });
       }
-      if (i.customId == "stron3" || i.customId == "startron3") {
+      else if(i.customId == "stron3" || i.customId == "startron3") {
         await i.update({ embeds: [startron], components: [stron3] });
       }
-      if (i.customId == "stron4" || i.customId == "startron4") {
+      else if(i.customId == "stron4" || i.customId == "startron4") {
         await i.update({ embeds: [startron], components: [stron4] });
       }
-      if (i.customId == "tc" || i.customId == "toyotacontrolla") {
+      else if(i.customId == "tc" || i.customId == "toyotacontrolla") {
         await i.update({ embeds: [toyotacontrolla], components: [tc] });
       }
-      if (i.customId == "tc2" || i.customId == "toyotacontrolla2") {
+      else if(i.customId == "tc2" || i.customId == "toyotacontrolla2") {
         await i.update({ embeds: [toyotacontrolla], components: [tc2] });
       }
-      if (i.customId == "tc3" || i.customId == "toyotacontrolla3") {
+      else if(i.customId == "tc3" || i.customId == "toyotacontrolla3") {
         await i.update({ embeds: [toyotacontrolla], components: [tc3] });
       }
-      if (i.customId == "tlattail" || i.customId == "translattail") {
+      else if(i.customId == "tlattail" || i.customId == "translattail") {
         await i.update({ embeds: [translattail], components: [tlattail] });
       }
-      if (i.customId == "tlattail2" || i.customId == "translattail2") {
+      else if(i.customId == "tlattail2" || i.customId == "translattail2") {
         await i.update({ embeds: [translattail], components: [tlattail2] });
       }
-      if (i.customId == "tlattail3" || i.customId == "translattail3") {
+      else if(i.customId == "tlattail3" || i.customId == "translattail3") {
         await i.update({ embeds: [translattail], components: [tlattail3] });
       }
-      if (i.customId == "tlattail4" || i.customId == "translattail4") {
+      else if(i.customId == "tlattail4" || i.customId == "translattail4") {
         await i.update({ embeds: [translattail], components: [tlattail4] });
       }
-      if (i.customId == "wtron" || i.customId == "watertron") {
+      else if(i.customId == "wtron" || i.customId == "watertron") {
         await i.update({ embeds: [watertron], components: [wtron] });
       }
-      if (i.customId == "wtron2" || i.customId == "watertron2") {
+      else if(i.customId == "wtron2" || i.customId == "watertron2") {
         await i.update({ embeds: [watertron], components: [wtron2] });
       }
-      if (i.customId == "wtron3" || i.customId == "watertron3") {
+      else if(i.customId == "wtron3" || i.customId == "watertron3") {
         await i.update({ embeds: [watertron], components: [wtron3] });
       }
-      if (i.customId == "agr" || i.customId == "agraves") {
+      else if(i.customId == "agr" || i.customId == "agraves") {
         await i.update({ embeds: [agraves], components: [agr] });
       }
-      if (i.customId == "agr2" || i.customId == "agraves2") {
+      else if(i.customId == "agr2" || i.customId == "agraves2") {
         await i.update({ embeds: [agraves], components: [agr2] });
       }
-      if (i.customId == "agr3" || i.customId == "agraves3") {
+      else if(i.customId == "agr3" || i.customId == "agraves3") {
         await i.update({ embeds: [agraves], components: [agr3] });
       }
-      if (i.customId == "agor" || i.customId == "antiagor") {
+      else if(i.customId == "agor" || i.customId == "antiagor") {
         await i.update({ embeds: [antiagor], components: [agor] });
       }
-      if (i.customId == "agor2" || i.customId == "antiagor2") {
+      else if(i.customId == "agor2" || i.customId == "antiagor2") {
         await i.update({ embeds: [antiagor], components: [agor2] });
       }
-      if (i.customId == "agor3" || i.customId == "antiagor3") {
+      else if(i.customId == "agor3" || i.customId == "antiagor3") {
         await i.update({ embeds: [antiagor], components: [agor3] });
       }
-      if (i.customId == "agoragor" || i.customId == "antiagoragor") {
+      else if(i.customId == "agoragor" || i.customId == "antiagoragor") {
         await i.update({ embeds: [antiagoragor], components: [agoragor] });
       }
-      if (i.customId == "agoragor2" || i.customId == "antiagoragor2") {
+      else if(i.customId == "agoragor2" || i.customId == "antiagoragor2") {
         await i.update({ embeds: [antiagoragor], components: [agoragor2] });
       }
-      if (i.customId == "agoragor3" || i.customId == "antiagoragor3") {
+      else if(i.customId == "agoragor3" || i.customId == "antiagoragor3") {
         await i.update({ embeds: [antiagoragor], components: [agoragor3] });
       }
-      if (i.customId == "agoragor4" || i.customId == "antiagoragor4") {
+      else if(i.customId == "agoragor4" || i.customId == "antiagoragor4") {
         await i.update({ embeds: [antiagoragor], components: [agoragor4] });
       }
-      if (i.customId == "bfmg" || i.customId == "bfmidgargs") {
+      else if(i.customId == "bfmg" || i.customId == "bfmidgargs") {
         await i.update({ embeds: [bfmidgargs], components: [bfmg] });
       }
-      if (i.customId == "bfmg2" || i.customId == "bfmidgargs2") {
+      else if(i.customId == "bfmg2" || i.customId == "bfmidgargs2") {
         await i.update({ embeds: [bfmidgargs], components: [bfmg2] });
       }
-      if (i.customId == "bfmg3" || i.customId == "bfmidgargs3") {
+      else if(i.customId == "bfmg3" || i.customId == "bfmidgargs3") {
         await i.update({ embeds: [bfmidgargs], components: [bfmg3] });
       }
-      if (i.customId == "bfpc" || i.customId == "bfplankcontrol") {
+      else if(i.customId == "bfpc" || i.customId == "bfplankcontrol") {
         await i.update({ embeds: [bfplankcontrol], components: [bfpc] });
       }
-      if (i.customId == "bfpc2" || i.customId == "bfplankcontrol2") {
+      else if(i.customId == "bfpc2" || i.customId == "bfplankcontrol2") {
         await i.update({ embeds: [bfplankcontrol], components: [bfpc2] });
       }
-      if (i.customId == "bfpc3" || i.customId == "bfplankcontrol3") {
+      else if(i.customId == "bfpc3" || i.customId == "bfplankcontrol3") {
         await i.update({ embeds: [bfplankcontrol], components: [bfpc3] });
       }
-      if (i.customId == "bas" || i.customId == "bastet") {
+      else if(i.customId == "bas" || i.customId == "bastet") {
         await i.update({ embeds: [bastet], components: [bas] });
       }
-      if (i.customId == "bas2" || i.customId == "bastet2") {
+      else if(i.customId == "bas2" || i.customId == "bastet2") {
         await i.update({ embeds: [bastet], components: [bas2] });
       }
-      if (i.customId == "bas3" || i.customId == "bastet3") {
+      else if(i.customId == "bas3" || i.customId == "bastet3") {
         await i.update({ embeds: [bastet], components: [bas3] });
       }
-      if (i.customId == "bas4" || i.customId == "bastet4") {
+      else if(i.customId == "bas4" || i.customId == "bastet4") {
         await i.update({ embeds: [bastet], components: [bas4] });
       }
-      if (i.customId == "bfw" || i.customId == "binaryflagwar") {
+      else if(i.customId == "bfw" || i.customId == "binaryflagwar") {
         await i.update({ embeds: [binaryflagwar], components: [bfw] });
       }
-      if (i.customId == "bfw2" || i.customId == "binaryflagwar2") {
+      else if(i.customId == "bfw2" || i.customId == "binaryflagwar2") {
         await i.update({ embeds: [binaryflagwar], components: [bfw2] });
       }
-      if (i.customId == "bfw3" || i.customId == "binaryflagwar3") {
+      else if(i.customId == "bfw3" || i.customId == "binaryflagwar3") {
         await i.update({ embeds: [binaryflagwar], components: [bfw3] });
       }
-      if (i.customId == "bfw4" || i.customId == "binaryflagwar4") {
+      else if(i.customId == "bfw4" || i.customId == "binaryflagwar4") {
         await i.update({ embeds: [binaryflagwar], components: [bfw4] });
       }
-      if (i.customId == "bfwrap" || i.customId == "blobfishwrappers") {
+      else if(i.customId == "bfwrap" || i.customId == "blobfishwrappers") {
         await i.update({ embeds: [blobfishwrappers], components: [bfwrap] });
       }
-      if (i.customId == "bfwrap2" || i.customId == "blobfishwrappers2") {
+      else if(i.customId == "bfwrap2" || i.customId == "blobfishwrappers2") {
         await i.update({ embeds: [blobfishwrappers], components: [bfwrap2] });
       }
-      if (i.customId == "bfwrap3" || i.customId == "blobfishwrappers3") {
+      else if(i.customId == "bfwrap3" || i.customId == "blobfishwrappers3") {
         await i.update({ embeds: [blobfishwrappers], components: [bfwrap3] });
       }
-      if (i.customId == "bfwrap4" || i.customId == "blobfishwrappers4") {
+      else if(i.customId == "bfwrap4" || i.customId == "blobfishwrappers4") {
         await i.update({ embeds: [blobfishwrappers], components: [bfwrap4] });
       }
-      if (i.customId == "bsmash" || i.customId == "bobertsmash") {
+      else if(i.customId == "bsmash" || i.customId == "bobertsmash") {
         await i.update({ embeds: [bobertsmash], components: [bsmash] });
       }
-      if (i.customId == "bsmash2" || i.customId == "bobertsmash2") {
+      else if(i.customId == "bsmash2" || i.customId == "bobertsmash2") {
         await i.update({ embeds: [bobertsmash], components: [bsmash2] });
       }
-      if (i.customId == "bsmash3" || i.customId == "bobertsmash3") {
+      else if(i.customId == "bsmash3" || i.customId == "bobertsmash3") {
         await i.update({ embeds: [bobertsmash], components: [bsmash3] });
       }
-      if (i.customId == "bbolt" || i.customId == "boltbolt") {
+      else if(i.customId == "bbolt" || i.customId == "boltbolt") {
         await i.update({ embeds: [boltbolt], components: [bbolt] });
       }
-      if (i.customId == "bbolt2" || i.customId == "boltbolt2") {
+      else if(i.customId == "bbolt2" || i.customId == "boltbolt2") {
         await i.update({ embeds: [boltbolt], components: [bbolt2] });
       }
-      if (i.customId == "bbolt3" || i.customId == "boltbolt3") {
+      else if(i.customId == "bbolt3" || i.customId == "boltbolt3") {
         await i.update({ embeds: [boltbolt], components: [bbolt3] });
       }
-      if (i.customId == "bbolt4" || i.customId == "boltbolt4") {
+      else if(i.customId == "bbolt4" || i.customId == "boltbolt4") {
         await i.update({ embeds: [boltbolt], components: [bbolt4] });
       }
-      if (i.customId == "bducks" || i.customId == "bonusducks") {
+      else if(i.customId == "bducks" || i.customId == "bonusducks") {
         await i.update({ embeds: [bonusducks], components: [bducks] });
       }
-      if (i.customId == "bducks2" || i.customId == "bonusducks2") {
+      else if(i.customId == "bducks2" || i.customId == "bonusducks2") {
         await i.update({ embeds: [bonusducks], components: [bducks2] });
       }
-      if (i.customId == "bducks3" || i.customId == "bonusducks3") {
+      else if(i.customId == "bducks3" || i.customId == "bonusducks3") {
         await i.update({ embeds: [bonusducks], components: [bducks3] });
       }
-      if (i.customId == "bducks4" || i.customId == "bonusducks4") {
+      else if(i.customId == "bducks4" || i.customId == "bonusducks4") {
         await i.update({ embeds: [bonusducks], components: [bducks4] });
       }
-      if (i.customId == "brad" || i.customId == "brady") {
+      else if(i.customId == "brad" || i.customId == "brady") {
         await i.update({ embeds: [brady], components: [brad] });
       }
-      if (i.customId == "brad2" || i.customId == "brady2") {
+      else if(i.customId == "brad2" || i.customId == "brady2") {
         await i.update({ embeds: [brady], components: [brad2] });
       }
-      if (i.customId == "brad3" || i.customId == "brady3") {
+      else if(i.customId == "brad3" || i.customId == "brady3") {
         await i.update({ embeds: [brady], components: [brad3] });
       }
-      if (i.customId == "bbf" || i.customId == "budgetbf") {
+      else if(i.customId == "bbf" || i.customId == "budgetbf") {
         await i.update({ embeds: [budgetbf], components: [bbf] });
       }
-      if (i.customId == "bbf2" || i.customId == "budgetbf2") {
+      else if(i.customId == "bbf2" || i.customId == "budgetbf2") {
         await i.update({ embeds: [budgetbf], components: [bbf2] });
       }
-      if (i.customId == "bbf3" || i.customId == "budgetbf3") {
+      else if(i.customId == "bbf3" || i.customId == "budgetbf3") {
         await i.update({ embeds: [budgetbf], components: [bbf3] });
       }
-      if (i.customId == "beb" || i.customId == "budgeteb") {
+      else if(i.customId == "beb" || i.customId == "budgeteb") {
         await i.update({ embeds: [budgeteb], components: [beb] });
       }
-      if (i.customId == "beb2" || i.customId == "budgeteb2") {
+      else if(i.customId == "beb2" || i.customId == "budgeteb2") {
         await i.update({ embeds: [budgeteb], components: [beb2] });
       }
-      if (i.customId == "beb3" || i.customId == "budgeteb3") {
+      else if(i.customId == "beb3" || i.customId == "budgeteb3") {
         await i.update({ embeds: [budgeteb], components: [beb3] });
       }
-      if (i.customId == "bif" || i.customId == "budgetif") {
+      else if(i.customId == "bif" || i.customId == "budgetif") {
         await i.update({ embeds: [budgetif], components: [bif] });
       }
-      if (i.customId == "bif2" || i.customId == "budgetif2") {
+      else if(i.customId == "bif2" || i.customId == "budgetif2") {
         await i.update({ embeds: [budgetif], components: [bif2] });
       }
-      if (i.customId == "bif3" || i.customId == "budgetif3") {
+      else if(i.customId == "bif3" || i.customId == "budgetif3") {
         await i.update({ embeds: [budgetif], components: [bif3] });
       }
-      if (i.customId == "bim" || i.customId == "budgetim") {
+      else if(i.customId == "bim" || i.customId == "budgetim") {
         await i.update({ embeds: [budgetim], components: [bim] });
       }
-      if (i.customId == "bim2" || i.customId == "budgetim2") {
+      else if(i.customId == "bim2" || i.customId == "budgetim2") {
         await i.update({ embeds: [budgetim], components: [bim2] });
       }
-      if (i.customId == "bim3" || i.customId == "budgetim3") {
+      else if(i.customId == "bim3" || i.customId == "budgetim3") {
         await i.update({ embeds: [budgetim], components: [bim3] });
       }
-      if (i.customId == "bnt" || i.customId == "budgetnt") {
+      else if(i.customId == "bnt" || i.customId == "budgetnt") {
         await i.update({ embeds: [budgetnt], components: [bnt] });
       }
-      if (i.customId == "bnt2" || i.customId == "budgetnt2") {
+      else if(i.customId == "bnt2" || i.customId == "budgetnt2") {
         await i.update({ embeds: [budgetnt], components: [bnt2] });
       }
-      if (i.customId == "bnt3" || i.customId == "budgetnt3") {
+      else if(i.customId == "bnt3" || i.customId == "budgetnt3") {
         await i.update({ embeds: [budgetnt], components: [bnt3] });
       }
-      if (i.customId == "bpb" || i.customId == "budgetpb") {
+      else if(i.customId == "bpb" || i.customId == "budgetpb") {
         await i.update({ embeds: [budgetpb], components: [bpb] });
       }
-      if (i.customId == "bpb2" || i.customId == "budgetpb2") {
+      else if(i.customId == "bpb2" || i.customId == "budgetpb2") {
         await i.update({ embeds: [budgetpb], components: [bpb2] });
       }
-      if (i.customId == "bpb3" || i.customId == "budgetpb3") {
+      else if(i.customId == "bpb3" || i.customId == "budgetpb3") {
         await i.update({ embeds: [budgetpb], components: [bpb3] });
       }
-      if (i.customId == "brb" || i.customId == "budgetrb") {
+      else if(i.customId == "brb" || i.customId == "budgetrb") {
         await i.update({ embeds: [budgetrb], components: [brb] });
       }
-      if (i.customId == "brb2" || i.customId == "budgetrb2") {
+      else if(i.customId == "brb2" || i.customId == "budgetrb2") {
         await i.update({ embeds: [budgetrb], components: [brb2] });
       }
-      if (i.customId == "brb3" || i.customId == "budgetrb3") {
+      else if(i.customId == "brb3" || i.customId == "budgetrb3") {
         await i.update({ embeds: [budgetrb], components: [brb3] });
       }
-      if (i.customId == "bsb" || i.customId == "budgetsb") {
+      else if(i.customId == "bsb" || i.customId == "budgetsb") {
         await i.update({ embeds: [budgetsb], components: [bsb] });
       }
-      if (i.customId == "bsb2" || i.customId == "budgetsb2") {
+      else if(i.customId == "bsb2" || i.customId == "budgetsb2") {
         await i.update({ embeds: [budgetsb], components: [bsb2] });
       }
-      if (i.customId == "bsb3" || i.customId == "budgetsb3") {
+      else if(i.customId == "bsb3" || i.customId == "budgetsb3") {
         await i.update({ embeds: [budgetsb], components: [bsb3] });
       }
-      if (i.customId == "bsm" || i.customId == "budgetsm") {
+      else if(i.customId == "bsm" || i.customId == "budgetsm") {
         await i.update({ embeds: [budgetsm], components: [bsm] });
       }
-      if (i.customId == "bsm2" || i.customId == "budgetsm2") {
+      else if(i.customId == "bsm2" || i.customId == "budgetsm2") {
         await i.update({ embeds: [budgetsm], components: [bsm2] });
       }
-      if (i.customId == "bsm3" || i.customId == "budgetsm3") {
+      else if(i.customId == "bsm3" || i.customId == "budgetsm3") {
         await i.update({ embeds: [budgetsm], components: [bsm3] });
       }
-      if (i.customId == "bykm" || i.customId == "budgetykm") {
+      else if(i.customId == "bykm" || i.customId == "budgetykm") {
         await i.update({ embeds: [budgetykm], components: [bykm] });
       }
-      if (i.customId == "bykm2" || i.customId == "budgetykm2") {
+      else if(i.customId == "bykm2" || i.customId == "budgetykm2") {
         await i.update({ embeds: [budgetykm], components: [bykm2] });
       }
-      if (i.customId == "bykm3" || i.customId == "budgetykm3") {
+      else if(i.customId == "bykm3" || i.customId == "budgetykm3") {
         await i.update({ embeds: [budgetykm], components: [bykm3] });
       }
-      if (i.customId == "bykm4" || i.customId == "budgetykm4") {
+      else if(i.customId == "bykm4" || i.customId == "budgetykm4") {
         await i.update({ embeds: [budgetykm], components: [bykm4] });
       }
-      if (i.customId == "bzm" || i.customId == "budgetzm") {
+      else if(i.customId == "bzm" || i.customId == "budgetzm") {
         await i.update({ embeds: [budgetzm], components: [bzm] });
       }
-      if (i.customId == "bzm2" || i.customId == "budgetzm2") {
+      else if(i.customId == "bzm2" || i.customId == "budgetzm2") {
         await i.update({ embeds: [budgetzm], components: [bzm2] });
       }
-      if (i.customId == "bzm3" || i.customId == "budgetzm3") {
+      else if(i.customId == "bzm3" || i.customId == "budgetzm3") {
         await i.update({ embeds: [budgetzm], components: [bzm3] });
       }
-      if (i.customId == "bust" || i.customId == "bustbolt") {
+      else if(i.customId == "bust" || i.customId == "bustbolt") {
         await i.update({ embeds: [bustbolt], components: [bust] });
       }
-      if (i.customId == "bust2" || i.customId == "bustbolt2") {
+      else if(i.customId == "bust2" || i.customId == "bustbolt2") {
         await i.update({ embeds: [bustbolt], components: [bust2] });
       }
-      if (i.customId == "bust3" || i.customId == "bustbolt3") {
+      else if(i.customId == "bust3" || i.customId == "bustbolt3") {
         await i.update({ embeds: [bustbolt], components: [bust3] });
       }
-      if (i.customId == "bust4" || i.customId == "bustbolt4") {
+      else if(i.customId == "bust4" || i.customId == "bustbolt4") {
         await i.update({ embeds: [bustbolt], components: [bust4] });
       }
-      if (i.customId == "cog" || i.customId == "coggerazzi") {
+      else if(i.customId == "cog" || i.customId == "coggerazzi") {
         await i.update({ embeds: [coggerazzi], components: [cog] });
       }
-      if (i.customId == "cog2" || i.customId == "coggerazzi2") {
+      else if(i.customId == "cog2" || i.customId == "coggerazzi2") {
         await i.update({ embeds: [coggerazzi], components: [cog2] });
       }
-      if (i.customId == "cog3" || i.customId == "coggerazzi3") {
+      else if(i.customId == "cog3" || i.customId == "coggerazzi3") {
         await i.update({ embeds: [coggerazzi], components: [cog3] });
       }
-      if (i.customId == "cog4" || i.customId == "coggerazzi4") {
+      else if(i.customId == "cog4" || i.customId == "coggerazzi4") {
         await i.update({ embeds: [coggerazzi], components: [cog4] });
       }
-      if (i.customId == "cbait" || i.customId == "congabait") {
+      else if(i.customId == "cbait" || i.customId == "congabait") {
         await i.update({ embeds: [congabait], components: [cbait] });
       }
-      if (i.customId == "cbait2" || i.customId == "congabait2") {
+      else if(i.customId == "cbait2" || i.customId == "congabait2") {
         await i.update({ embeds: [congabait], components: [cbait2] });
       }
-      if (i.customId == "cbait3" || i.customId == "congabait3") {
+      else if(i.customId == "cbait3" || i.customId == "congabait3") {
         await i.update({ embeds: [congabait], components: [cbait3] });
       }
-      if (i.customId == "cbait4" || i.customId == "congabait4") {
+      else if(i.customId == "cbait4" || i.customId == "congabait4") {
         await i.update({ embeds: [congabait], components: [cbait4] });
       }
-      if (i.customId == "cleap" || i.customId == "conjureleap") {
+      else if(i.customId == "cleap" || i.customId == "conjureleap") {
         await i.update({ embeds: [conjureleap], components: [cleap] });
       }
-      if (i.customId == "cleap2" || i.customId == "conjureleap2") {
+      else if(i.customId == "cleap2" || i.customId == "conjureleap2") {
         await i.update({ embeds: [conjureleap], components: [cleap2] });
       }
-      if (i.customId == "cleap3" || i.customId == "conjureleap3") {
+      else if(i.customId == "cleap3" || i.customId == "conjureleap3") {
         await i.update({ embeds: [conjureleap], components: [cleap3] });
       }
-      if (i.customId == "cboy" || i.customId == "cryoboy") {
+      else if(i.customId == "cboy" || i.customId == "cryoboy") {
         await i.update({ embeds: [cryoboy], components: [cboy] });
       }
-      if (i.customId == "cboy2" || i.customId == "cryoboy2") {
+      else if(i.customId == "cboy2" || i.customId == "cryoboy2") {
         await i.update({ embeds: [cryoboy], components: [cboy2] });
       }
-      if (i.customId == "cboy3" || i.customId == "cryoboy3") {
+      else if(i.customId == "cboy3" || i.customId == "cryoboy3") {
         await i.update({ embeds: [cryoboy], components: [cboy3] });
       }
-      if (i.customId == "cboy4" || i.customId == "cryoboy4") {
+      else if(i.customId == "cboy4" || i.customId == "cryoboy4") {
         await i.update({ embeds: [cryoboy], components: [cboy4] });
       }
-      if (i.customId == "dmech" || i.customId == "dozzamech") {
+      else if(i.customId == "dmech" || i.customId == "dozzamech") {
         await i.update({ embeds: [dozzamech], components: [dmech] });
       }
-      if (i.customId == "dmech2" || i.customId == "dozzamech2") {
+      else if(i.customId == "dmech2" || i.customId == "dozzamech2") {
         await i.update({ embeds: [dozzamech], components: [dmech2] });
       }
-      if (i.customId == "dmech3" || i.customId == "dozzamech3") {
+      else if(i.customId == "dmech3" || i.customId == "dozzamech3") {
         await i.update({ embeds: [dozzamech], components: [dmech3] });
       }
-      if (i.customId == "flo" || i.customId == "floss") {
+      else if(i.customId == "flo" || i.customId == "floss") {
         await i.update({ embeds: [floss], components: [flo] });
       }
-      if (i.customId == "flo2" || i.customId == "floss2") {
+      else if(i.customId == "flo2" || i.customId == "floss2") {
         await i.update({ embeds: [floss], components: [flo2] });
       }
-      if (i.customId == "flo3" || i.customId == "floss3") {
+      else if(i.customId == "flo3" || i.customId == "floss3") {
         await i.update({ embeds: [floss], components: [flo3] });
       }
-      if (i.customId == "ftimps" || i.customId == "frozentelimps") {
+      else if(i.customId == "ftimps" || i.customId == "frozentelimps") {
         await i.update({ embeds: [frozentelimps], components: [ftimps] });
       }
-      if (i.customId == "ftimps2" || i.customId == "frozentelimps2") {
+      else if(i.customId == "ftimps2" || i.customId == "frozentelimps2") {
         await i.update({ embeds: [frozentelimps], components: [ftimps2] });
       }
-      if (i.customId == "ftimps3" || i.customId == "frozentelimps3") {
+      else if(i.customId == "ftimps3" || i.customId == "frozentelimps3") {
         await i.update({ embeds: [frozentelimps], components: [ftimps3] });
       }
-      if (i.customId == "ftimps4" || i.customId == "frozentelimps4") {
+      else if(i.customId == "ftimps4" || i.customId == "frozentelimps4") {
         await i.update({ embeds: [frozentelimps], components: [ftimps4] });
       }
-      if (i.customId == "gburn" || i.customId == "gargburn") {
+      else if(i.customId == "gburn" || i.customId == "gargburn") {
         await i.update({ embeds: [gargburn], components: [gburn] });
       }
-      if (i.customId == "gburn2" || i.customId == "gargburn2") {
+      else if(i.customId == "gburn2" || i.customId == "gargburn2") {
         await i.update({ embeds: [gargburn], components: [gburn2] });
       }
-      if (i.customId == "gburn3" || i.customId == "gargburn3") {
+      else if(i.customId == "gburn3" || i.customId == "gargburn3") {
         await i.update({ embeds: [gargburn], components: [gburn3] });
       }
-      if (i.customId == "gburn4" || i.customId == "gargburn4") {
+      else if(i.customId == "gburn4" || i.customId == "gargburn4") {
         await i.update({ embeds: [gargburn], components: [gburn4] });
       }
-      if (i.customId == "gtech" || i.customId == "gargolithtech") {
+      else if(i.customId == "gtech" || i.customId == "gargolithtech") {
         await i.update({ embeds: [gargolithtech], components: [gtech] });
       }
-      if (i.customId == "gtech2" || i.customId == "gargolithtech2") {
+      else if(i.customId == "gtech2" || i.customId == "gargolithtech2") {
         await i.update({ embeds: [gargolithtech], components: [gtech2] });
       }
-      if (i.customId == "gtech3" || i.customId == "gargolithtech3") {
+      else if(i.customId == "gtech3" || i.customId == "gargolithtech3") {
         await i.update({ embeds: [gargolithtech], components: [gtech3] });
       }
-      if (i.customId == "gstar22" || i.customId == "gargstar22") {
+      else if(i.customId == "gstar22" || i.customId == "gargstar22") {
         await i.update({ embeds: [gargstar22], components: [gstar22] });
       }
-      if (i.customId == "gstar222" || i.customId == "gargstar222") {
+      else if(i.customId == "gstar222" || i.customId == "gargstar222") {
         await i.update({ embeds: [gargstar22], components: [gstar222] });
       }
-      if (i.customId == "gstar223" || i.customId == "gargstar223") {
+      else if(i.customId == "gstar223" || i.customId == "gargstar223") {
         await i.update({ embeds: [gargstar22], components: [gstar223] });
       }
-      if (i.customId == "gom" || i.customId == "gomorrah") {
+      else if(i.customId == "gom" || i.customId == "gomorrah") {
         await i.update({ embeds: [gomorrah], components: [gom] });
       }
-      if (i.customId == "gom2" || i.customId == "gomorrah2") {
+      else if(i.customId == "gom2" || i.customId == "gomorrah2") {
         await i.update({ embeds: [gomorrah], components: [gom2] });
       }
-      if (i.customId == "gom3" || i.customId == "gomorrah3") {
+      else if(i.customId == "gom3" || i.customId == "gomorrah3") {
         await i.update({ embeds: [gomorrah], components: [gom3] });
       }
-      if (i.customId == "gps" || i.customId == "gravepiratestache") {
+      else if(i.customId == "gps" || i.customId == "gravepiratestache") {
         await i.update({ embeds: [gravepiratestache], components: [gps] });
       }
-      if (i.customId == "gps2" || i.customId == "gravepiratestache2") {
+      else if(i.customId == "gps2" || i.customId == "gravepiratestache2") {
         await i.update({ embeds: [gravepiratestache], components: [gps2] });
       }
-      if (i.customId == "gps3" || i.customId == "gravepiratestache3") {
+      else if(i.customId == "gps3" || i.customId == "gravepiratestache3") {
         await i.update({ embeds: [gravepiratestache], components: [gps3] });
       }
-      if (i.customId == "gps4" || i.customId == "gravepiratestache4") {
+      else if(i.customId == "gps4" || i.customId == "gravepiratestache4") {
         await i.update({ embeds: [gravepiratestache], components: [gps4] });
       }
-      if (i.customId == "gstache" || i.customId == "gravestache") {
+      else if(i.customId == "gstache" || i.customId == "gravestache") {
         await i.update({ embeds: [gravestache], components: [gstache] });
       }
-      if (i.customId == "gstache2" || i.customId == "gravestache2") {
+      else if(i.customId == "gstache2" || i.customId == "gravestache2") {
         await i.update({ embeds: [gravestache], components: [gstache2] });
       }
-      if (i.customId == "gstache3" || i.customId == "gravestache3") {
+      else if(i.customId == "gstache3" || i.customId == "gravestache3") {
         await i.update({ embeds: [gravestache], components: [gstache3] });
       }
-      if (i.customId == "hbird" || i.customId == "hibird") {
+      else if(i.customId == "hbird" || i.customId == "hibird") {
         await i.update({ embeds: [hibird], components: [hbird] });
       }
-      if (i.customId == "hbird2" || i.customId == "hibird2") {
+      else if(i.customId == "hbird2" || i.customId == "hibird2") {
         await i.update({ embeds: [hibird], components: [hbird2] });
       }
-      if (i.customId == "hbird3" || i.customId == "hibird3") {
+      else if(i.customId == "hbird3" || i.customId == "hibird3") {
         await i.update({ embeds: [hibird], components: [hbird3] });
       }
-      if (i.customId == "hbird4" || i.customId == "hibird4") {
+      else if(i.customId == "hbird4" || i.customId == "hibird4") {
         await i.update({ embeds: [hibird], components: [hbird4] });
       }
-      if (i.customId == "hter" || i.customId == "himpter") {
+      else if(i.customId == "hter" || i.customId == "himpter") {
         await i.update({ embeds: [himps], components: [hter] });
       }
-      if (i.customId == "hter2" || i.customId == "himpter2") {
+      else if(i.customId == "hter2" || i.customId == "himpter2") {
         await i.update({ embeds: [himps], components: [hter2] });
       }
-      if (i.customId == "hter3" || i.customId == "himpter3") {
+      else if(i.customId == "hter3" || i.customId == "himpter3") {
         await i.update({ embeds: [himps], components: [hter3] });
       }
-      if (i.customId == "hter4" || i.customId == "himpter4") {
+      else if(i.customId == "hter4" || i.customId == "himpter4") {
         await i.update({ embeds: [himps], components: [hter4] });
       }
-      if (i.customId == "hor" || i.customId == "horts") {
+      else if(i.customId == "hor" || i.customId == "horts") {
         await i.update({ embeds: [horts], components: [hor] });
       }
-      if (i.customId == "hor2" || i.customId == "horts2") {
+      else if(i.customId == "hor2" || i.customId == "horts2") {
         await i.update({ embeds: [horts], components: [hor2] });
       }
-      if (i.customId == "hor3" || i.customId == "horts3") {
+      else if(i.customId == "hor3" || i.customId == "horts3") {
         await i.update({ embeds: [horts], components: [hor3] });
       }
-      if (i.customId == "hor4" || i.customId == "horts4") {
+      else if(i.customId == "hor4" || i.customId == "horts4") {
         await i.update({ embeds: [horts], components: [hor4] });
       }
-      if (i.customId == "homo" || i.customId == "homophobia") {
+      else if(i.customId == "homo" || i.customId == "homophobia") {
         await i.update({ embeds: [homophobia], components: [homo] });
       }
-      if (i.customId == "homo2" || i.customId == "homophobia2") {
+      else if(i.customId == "homo2" || i.customId == "homophobia2") {
         await i.update({ embeds: [homophobia], components: [homo2] });
       }
-      if (i.customId == "homo3" || i.customId == "homophobia3") {
+      else if(i.customId == "homo3" || i.customId == "homophobia3") {
         await i.update({ embeds: [homophobia], components: [homo3] });
       }
-      if (i.customId == "ibox" || i.customId == "icebox") {
+      else if(i.customId == "ibox" || i.customId == "icebox") {
         await i.update({ embeds: [icebox], components: [ibox] });
       }
-      if (i.customId == "ibox2" || i.customId == "icebox2") {
+      else if(i.customId == "ibox2" || i.customId == "icebox2") {
         await i.update({ embeds: [icebox], components: [ibox2] });
       }
-      if (i.customId == "ibox3" || i.customId == "icebox3") {
+      else if(i.customId == "ibox3" || i.customId == "icebox3") {
         await i.update({ embeds: [icebox], components: [ibox3] });
       }
-      if (i.customId == "igbc" || i.customId == "igmablobchum") {
+      else if(i.customId == "igbc" || i.customId == "igmablobchum") {
         await i.update({ embeds: [igmablobchum], components: [igbc] });
       }
-      if (i.customId == "igbc2" || i.customId == "igmablobchum2") {
+      else if(i.customId == "igbc2" || i.customId == "igmablobchum2") {
         await i.update({ embeds: [igmablobchum], components: [igbc2] });
       }
-      if (i.customId == "igbc3" || i.customId == "igmablobchum3") {
+      else if(i.customId == "igbc3" || i.customId == "igmablobchum3") {
         await i.update({ embeds: [igmablobchum], components: [igbc3] });
       }
-      if (i.customId == "igbc4" || i.customId == "igmablobchum4") {
+      else if(i.customId == "igbc4" || i.customId == "igmablobchum4") {
         await i.update({ embeds: [igmablobchum], components: [igbc4] });
       }
-      if (i.customId == "ltbr" || i.customId == "lockthebathroom") {
+      else if(i.customId == "ltbr" || i.customId == "lockthebathroom") {
         await i.update({ embeds: [lockthebathroom], components: [ltbr] });
       }
-      if (i.customId == "ltbr2" || i.customId == "lockthebathroom2") {
+      else if(i.customId == "ltbr2" || i.customId == "lockthebathroom2") {
         await i.update({ embeds: [lockthebathroom], components: [ltbr2] });
       }
-      if (i.customId == "ltbr3" || i.customId == "lockthebathroom3") {
+      else if(i.customId == "ltbr3" || i.customId == "lockthebathroom3") {
         await i.update({ embeds: [lockthebathroom], components: [ltbr3] });
       }
-      if (i.customId == "tmech" || i.customId == "trickmech") {
+      else if(i.customId == "tmech" || i.customId == "trickmech") {
         await i.update({ embeds: [trickmech], components: [tmech] });
       }
-      if (i.customId == "tmech2" || i.customId == "trickmech2") {
+      else if(i.customId == "tmech2" || i.customId == "trickmech2") {
         await i.update({ embeds: [trickmech], components: [tmech2] });
       }
-      if (i.customId == "tmech3" || i.customId == "trickmech3") {
+      else if(i.customId == "tmech3" || i.customId == "trickmech3") {
         await i.update({ embeds: [trickmech], components: [tmech3] });
       }
-      if (i.customId == "mbolt" || i.customId == "marxbolt") {
+      else if(i.customId == "mbolt" || i.customId == "marxbolt") {
         await i.update({ embeds: [marxbolt], components: [mbolt] });
       }
-      if (i.customId == "mbolt2" || i.customId == "marxbolt2") {
+      else if(i.customId == "mbolt2" || i.customId == "marxbolt2") {
         await i.update({ embeds: [marxbolt], components: [mbolt2] });
       }
-      if (i.customId == "mbolt3" || i.customId == "marxbolt3") {
+      else if(i.customId == "mbolt3" || i.customId == "marxbolt3") {
         await i.update({ embeds: [marxbolt], components: [mbolt3] });
       }
-      if (i.customId == "mcon" || i.customId == "mechacontrol") {
+      else if(i.customId == "mcon" || i.customId == "mechacontrol") {
         await i.update({ embeds: [mechacontrol], components: [mcon] });
       }
-      if (i.customId == "mcon2" || i.customId == "mechacontrol2") {
+      else if(i.customId == "mcon2" || i.customId == "mechacontrol2") {
         await i.update({ embeds: [mechacontrol], components: [mcon2] });
       }
-      if (i.customId == "mcon3" || i.customId == "mechacontrol3") {
+      else if(i.customId == "mcon3" || i.customId == "mechacontrol3") {
         await i.update({ embeds: [mechacontrol], components: [mcon3] });
       }
-      if (i.customId == "mscope" || i.customId == "mechascope") {
+      else if(i.customId == "mscope" || i.customId == "mechascope") {
         await i.update({ embeds: [mechascope], components: [mscope] });
       }
-      if (i.customId == "mscope2" || i.customId == "mechascope2") {
+      else if(i.customId == "mscope2" || i.customId == "mechascope2") {
         await i.update({ embeds: [mechascope], components: [mscope2] });
       }
-      if (i.customId == "mscope3" || i.customId == "mechascope3") {
+      else if(i.customId == "mscope3" || i.customId == "mechascope3") {
         await i.update({ embeds: [mechascope], components: [mscope3] });
       }
-      if (i.customId == "mscope4" || i.customId == "mechascope4") {
+      else if(i.customId == "mscope4" || i.customId == "mechascope4") {
         await i.update({ embeds: [mechascope], components: [mscope4] });
       }
-      if (i.customId == "ltime" || i.customId == "lunchtime") {
+      else if(i.customId == "ltime" || i.customId == "lunchtime") {
         await i.update({ embeds: [lunchtime], components: [ltime] });
       }
-      if (i.customId == "ltime2" || i.customId == "lunchtime2") {
+      else if(i.customId == "ltime2" || i.customId == "lunchtime2") {
         await i.update({ embeds: [lunchtime], components: [ltime2] });
       }
-      if (i.customId == "ltime3" || i.customId == "lunchtime3") {
+      else if(i.customId == "ltime3" || i.customId == "lunchtime3") {
         await i.update({ embeds: [lunchtime], components: [ltime3] });
       }
-      if (i.customId == "npa" || i.customId == "noplayingallowed") {
+      else if(i.customId == "npa" || i.customId == "noplayingallowed") {
         await i.update({ embeds: [noplayingallowed], components: [npa] });
       }
-      if (i.customId == "npa2" || i.customId == "noplayingallowed2") {
+      else if(i.customId == "npa2" || i.customId == "noplayingallowed2") {
         await i.update({ embeds: [noplayingallowed], components: [npa2] });
       }
-      if (i.customId == "npa3" || i.customId == "noplayingallowed3") {
+      else if(i.customId == "npa3" || i.customId == "noplayingallowed3") {
         await i.update({ embeds: [noplayingallowed], components: [npa3] });
       }
-      if (i.customId == "otksw" || i.customId == "otkswabbie") {
+      else if(i.customId == "otksw" || i.customId == "otkswabbie") {
         await i.update({ embeds: [otkswabbie], components: [otksw] });
       }
-      if (i.customId == "otksw2" || i.customId == "otkswabbie2") {
+      else if(i.customId == "otksw2" || i.customId == "otkswabbie2") {
         await i.update({ embeds: [otkswabbie], components: [otksw2] });
       }
-      if (i.customId == "otksw3" || i.customId == "otkswabbie3") {
+      else if(i.customId == "otksw3" || i.customId == "otkswabbie3") {
         await i.update({ embeds: [otkswabbie], components: [otksw3] });
       }
-      if (i.customId == "kscope" || i.customId == "kaleidoscope") {
+      else if(i.customId == "kscope" || i.customId == "kaleidoscope") {
         await i.update({ embeds: [kaleidoscope], components: [kscope] });
       }
-      if (i.customId == "kscope2" || i.customId == "kaleidoscope2") {
+      else if(i.customId == "kscope2" || i.customId == "kaleidoscope2") {
         await i.update({ embeds: [kaleidoscope], components: [kscope2] });
       }
-      if (i.customId == "kscope3" || i.customId == "kaleidoscope3") {
+      else if(i.customId == "kscope3" || i.customId == "kaleidoscope3") {
         await i.update({ embeds: [kaleidoscope], components: [kscope3] });
       }
-      if (i.customId == "pyeeyz" || i.customId == "pablosyeeyzs") {
+      else if(i.customId == "pyeeyz" || i.customId == "pablosyeeyzs") {
         await i.update({ embeds: [pablosyeezys], components: [pyeeyz] });
       }
-      if (i.customId == "pyeeyz2" || i.customId == "pablosyeeyzs2") {
+      else if(i.customId == "pyeeyz2" || i.customId == "pablosyeeyzs2") {
         await i.update({ embeds: [pablosyeezys], components: [pyeeyz2] });
       }
-      if (i.customId == "pyeeyz3" || i.customId == "pablosyeeyzs3") {
+      else if(i.customId == "pyeeyz3" || i.customId == "pablosyeeyzs3") {
         await i.update({ embeds: [pablosyeezys], components: [pyeeyz3] });
       }
-      if (i.customId == "pyeeyz4" || i.customId == "pablosyeeyzs4") {
+      else if(i.customId == "pyeeyz4" || i.customId == "pablosyeeyzs4") {
         await i.update({ embeds: [pablosyeezys], components: [pyeeyz4] });
       }
-      if (i.customId == "pfeast" || i.customId == "pbfeast") {
+      else if(i.customId == "pfeast" || i.customId == "pbfeast") {
         await i.update({ embeds: [pbfeast], components: [pfeast] });
       }
-      if (i.customId == "pfeast2" || i.customId == "pbfeast2") {
+      else if(i.customId == "pfeast2" || i.customId == "pbfeast2") {
         await i.update({ embeds: [pbfeast], components: [pfeast2] });
       }
-      if (i.customId == "pfeast3" || i.customId == "pbfeast3") {
+      else if(i.customId == "pfeast3" || i.customId == "pbfeast3") {
         await i.update({ embeds: [pbfeast], components: [pfeast3] });
       }
-      if (i.customId == "pmop" || i.customId == "petmop") {
+      else if(i.customId == "pmop" || i.customId == "petmop") {
         await i.update({ embeds: [petmop], components: [pmop] });
       }
-      if (i.customId == "pmop2" || i.customId == "petmop2") {
+      else if(i.customId == "pmop2" || i.customId == "petmop2") {
         await i.update({ embeds: [petmop], components: [pmop2] });
       }
-      if (i.customId == "pmop3" || i.customId == "petmop3") {
+      else if(i.customId == "pmop3" || i.customId == "petmop3") {
         await i.update({ embeds: [petmop], components: [pmop3] });
       }
   
-      if (i.customId == "propackage" || i.customId == "professorpackage") {
+      else if(i.customId == "propackage" || i.customId == "professorpackage") {
         await i.update({
           embeds: [professorpackage],
           components: [propackage],
         });
       }
-      if (i.customId == "propackage2" || i.customId == "professorpackage2") {
+      else if(i.customId == "propackage2" || i.customId == "professorpackage2") {
         await i.update({
           embeds: [professorpackage],
           components: [propackage2],
         });
       }
-      if (i.customId == "propackage3" || i.customId == "professorpackage3") {
+      else if(i.customId == "propackage3" || i.customId == "professorpackage3") {
         await i.update({
           embeds: [professorpackage],
           components: [propackage3],
         });
       }
-      if (i.customId == "rac" || i.customId == "racism") {
+      else if(i.customId == "rac" || i.customId == "racism") {
         await i.update({ embeds: [racism], components: [rac] });
       }
-      if (i.customId == "rac2" || i.customId == "racism2") {
+      else if(i.customId == "rac2" || i.customId == "racism2") {
         await i.update({ embeds: [racism], components: [rac2] });
       }
-      if (i.customId == "rac3" || i.customId == "racism3") {
+      else if(i.customId == "rac3" || i.customId == "racism3") {
         await i.update({ embeds: [racism], components: [rac3] });
       }
-      if (i.customId == "rpackage" || i.customId == "raiserpackage") {
+      else if(i.customId == "rpackage" || i.customId == "raiserpackage") {
         await i.update({ embeds: [raiserpackage], components: [rpackage] });
       }
-      if (i.customId == "rpackage2" || i.customId == "raiserpackage2") {
+      else if(i.customId == "rpackage2" || i.customId == "raiserpackage2") {
         await i.update({ embeds: [raiserpackage], components: [rpackage2] });
       }
-      if (i.customId == "rpackage3" || i.customId == "raiserpackage3") {
+      else if(i.customId == "rpackage3" || i.customId == "raiserpackage3") {
         await i.update({ embeds: [raiserpackage], components: [rpackage3] });
       }
-      if (i.customId == "rticia" || i.customId == "rampticia") {
+      else if(i.customId == "rticia" || i.customId == "rampticia") {
         await i.update({ embeds: [rampticia], components: [rticia] });
       }
-      if (i.customId == "rticia2" || i.customId == "rampticia2") {
+      else if(i.customId == "rticia2" || i.customId == "rampticia2") {
         await i.update({ embeds: [rampticia], components: [rticia2] });
       }
-      if (i.customId == "rticia3" || i.customId == "rampticia3") {
+      else if(i.customId == "rticia3" || i.customId == "rampticia3") {
         await i.update({ embeds: [rampticia], components: [rticia3] });
       }
-      if (i.customId == "syard" || i.customId == "schoolyard") {
+      else if(i.customId == "syard" || i.customId == "schoolyard") {
         await i.update({ embeds: [schoolyard], components: [syard] });
       }
-      if (i.customId == "syard2" || i.customId == "schoolyard2") {
+      else if(i.customId == "syard2" || i.customId == "schoolyard2") {
         await i.update({ embeds: [schoolyard], components: [syard2] });
       }
-      if (i.customId == "syard3" || i.customId == "schoolyard3") {
+      else if(i.customId == "syard3" || i.customId == "schoolyard3") {
         await i.update({ embeds: [schoolyard], components: [syard3] });
       }
-      if (i.customId == "sea" || i.customId == "seacret") {
+      else if(i.customId == "sea" || i.customId == "seacret") {
         await i.update({ embeds: [seacret], components: [sea] });
       }
-      if (i.customId == "sea2" || i.customId == "seacret2") {
+      else if(i.customId == "sea2" || i.customId == "seacret2") {
         await i.update({ embeds: [seacret], components: [sea2] });
       }
-      if (i.customId == "sea3" || i.customId == "seacret3") {
+      else if(i.customId == "sea3" || i.customId == "seacret3") {
         await i.update({ embeds: [seacret], components: [sea3] });
       }
-      if (i.customId == "svery" || i.customId == "slavery") {
+      else if(i.customId == "svery" || i.customId == "slavery") {
         await i.update({ embeds: [slavery], components: [svery] });
       }
-      if (i.customId == "svery2" || i.customId == "slavery2") {
+      else if(i.customId == "svery2" || i.customId == "slavery2") {
         await i.update({ embeds: [slavery], components: [svery2] });
       }
-      if (i.customId == "svery3" || i.customId == "slavery3") {
+      else if(i.customId == "svery3" || i.customId == "slavery3") {
         await i.update({ embeds: [slavery], components: [svery3] });
       }
-      if (i.customId == "stars" || i.customId == "spacestars") {
+      else if(i.customId == "stars" || i.customId == "spacestars") {
         await i.update({ embeds: [spacestars], components: [stars] });
       }
-      if (i.customId == "stars2" || i.customId == "spacestars2") {
+      else if(i.customId == "stars2" || i.customId == "spacestars2") {
         await i.update({ embeds: [spacestars], components: [stars2] });
       }
-      if (i.customId == "stars3" || i.customId == "spacestars3") {
+      else if(i.customId == "stars3" || i.customId == "spacestars3") {
         await i.update({ embeds: [spacestars], components: [stars3] });
       }
-      if (i.customId == "stars4" || i.customId == "spacestars4") {
+      else if(i.customId == "stars4" || i.customId == "spacestars4") {
         await i.update({ embeds: [spacestars], components: [stars4] });
       }
-      if (i.customId == "spl" || i.customId == "splimps") {
+      else if(i.customId == "spl" || i.customId == "splimps") {
         await i.update({ embeds: [splimps], components: [spl] });
       }
-      if (i.customId == "spl2" || i.customId == "splimps2") {
+      else if(i.customId == "spl2" || i.customId == "splimps2") {
         await i.update({ embeds: [splimps], components: [spl2] });
       }
-      if (i.customId == "spl3" || i.customId == "splimps3") {
+      else if(i.customId == "spl3" || i.customId == "splimps3") {
         await i.update({ embeds: [splimps], components: [spl3] });
       }
-      if (i.customId == "sticia" || i.customId == "stacheticia") {
+      else if(i.customId == "sticia" || i.customId == "stacheticia") {
         await i.update({ embeds: [stacheticia], components: [sticia] });
       }
-      if (i.customId == "sticia2" || i.customId == "stacheticia2") {
+      else if(i.customId == "sticia2" || i.customId == "stacheticia2") {
         await i.update({ embeds: [stacheticia], components: [sticia2] });
       }
-      if (i.customId == "sticia3" || i.customId == "stacheticia3") {
+      else if(i.customId == "sticia3" || i.customId == "stacheticia3") {
         await i.update({ embeds: [stacheticia], components: [sticia3] });
       }
-      if (i.customId == "saggro" || i.customId == "sushiaggro") {
+      else if(i.customId == "saggro" || i.customId == "sushiaggro") {
         await i.update({ embeds: [sushiaggro], components: [saggro] });
       }
-      if (i.customId == "saggro2" || i.customId == "sushiaggro2") {
+      else if(i.customId == "saggro2" || i.customId == "sushiaggro2") {
         await i.update({ embeds: [sushiaggro], components: [saggro2] });
       }
-      if (i.customId == "saggro3" || i.customId == "sushiaggro3") {
+      else if(i.customId == "saggro3" || i.customId == "sushiaggro3") {
         await i.update({ embeds: [sushiaggro], components: [saggro3] });
       }
-      if (i.customId == "sbandits" || i.customId == "sunbandits") {
+      else if(i.customId == "sbandits" || i.customId == "sunbandits") {
         await i.update({ embeds: [sunbandits], components: [sbandits] });
       }
-      if (i.customId == "sbandits2" || i.customId == "sunbandits2") {
+      else if(i.customId == "sbandits2" || i.customId == "sunbandits2") {
         await i.update({ embeds: [sunbandits], components: [sbandits2] });
       }
-      if (i.customId == "sbandits3" || i.customId == "sunbandits3") {
+      else if(i.customId == "sbandits3" || i.customId == "sunbandits3") {
         await i.update({ embeds: [sunbandits], components: [sbandits3] });
       }
-      if (i.customId == "sbandits4" || i.customId == "sunbandits4") {
+      else if(i.customId == "sbandits4" || i.customId == "sunbandits4") {
         await i.update({ embeds: [sunbandits], components: [sbandits4] });
       }
-      if (i.customId == "slord" || i.customId == "sunlord") {
+      else if(i.customId == "slord" || i.customId == "sunlord") {
         await i.update({ embeds: [sunlord], components: [slord] });
       }
-      if (i.customId == "slord2" || i.customId == "sunlord2") {
+      else if(i.customId == "slord2" || i.customId == "sunlord2") {
         await i.update({ embeds: [sunlord], components: [slord2] });
       }
-      if (i.customId == "slord3" || i.customId == "sunlord3") {
+      else if(i.customId == "slord3" || i.customId == "sunlord3") {
         await i.update({ embeds: [sunlord], components: [slord3] });
       }
-      if (i.customId == "slord4" || i.customId == "sunlord4") {
+      else if(i.customId == "slord4" || i.customId == "sunlord4") {
         await i.update({ embeds: [sunlord], components: [slord4] });
       }
-      if (i.customId == "timps" || i.customId == "telimps") {
+      else if(i.customId == "timps" || i.customId == "telimps") {
         await i.update({ embeds: [telimps], components: [timps] });
       }
-      if (i.customId == "timps2" || i.customId == "telimps2") {
+      else if(i.customId == "timps2" || i.customId == "telimps2") {
         await i.update({ embeds: [telimps], components: [timps2] });
       }
-      if (i.customId == "timps3" || i.customId == "telimps3") {
+      else if(i.customId == "timps3" || i.customId == "telimps3") {
         await i.update({ embeds: [telimps], components: [timps3] });
       }
-      if (i.customId == "timps4" || i.customId == "telimps4") {
+      else if(i.customId == "timps4" || i.customId == "telimps4") {
         await i.update({ embeds: [telimps], components: [timps4] });
       }
-      if (i.customId == "timpssb" || i.customId == "telimpssb") {
+      else if(i.customId == "timpssb" || i.customId == "telimpssb") {
         await i.update({ embeds: [telimpssb], components: [timpssb] });
       }
-      if (i.customId == "timpssb2" || i.customId == "telimpssb2") {
+      else if(i.customId == "timpssb2" || i.customId == "telimpssb2") {
         await i.update({ embeds: [telimpssb], components: [timpssb2] });
       }
-      if (i.customId == "timpssb3" || i.customId == "telimpssb3") {
+      else if(i.customId == "timpssb3" || i.customId == "telimpssb3") {
         await i.update({ embeds: [telimpssb], components: [timpssb3] });
       }
-      if (i.customId == "timpssb4" || i.customId == "telimpssb4") {
+      else if(i.customId == "timpssb4" || i.customId == "telimpssb4") {
         await i.update({ embeds: [telimpssb], components: [timpssb4] });
       }
-      if (i.customId == "terrifyster" || i.customId == "terrifytricksterazzi") {
+      else if(i.customId == "terrifyster" || i.customId == "terrifytricksterazzi") {
         await i.update({
           embeds: [terrifytricksterazzi],
           components: [terrifyster],
         });
       }
-      if (
+      else if (
         i.customId == "terrifyster2" ||
         i.customId == "terrifytricksterazzi2"
       ) {
@@ -9971,7 +10023,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
           components: [terrifyster2],
         });
       }
-      if (
+      else if (
         i.customId == "terrifyster3" ||
         i.customId == "terrifytricksterazzi3"
       ) {
@@ -9980,7 +10032,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
           components: [terrifyster3],
         });
       }
-      if (
+      else if (
         i.customId == "terrifyster4" ||
         i.customId == "terrifytricksterazzi4"
       ) {
@@ -9989,220 +10041,228 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
           components: [terrifyster4],
         });
       }
-      if (i.customId == "tstache" || i.customId == "trickstache") {
+      else if(i.customId == "tstache" || i.customId == "trickstache") {
         await i.update({ embeds: [trickstache], components: [tstache] });
       }
-      if (i.customId == "tstache2" || i.customId == "trickstache2") {
+      else if(i.customId == "tstache2" || i.customId == "trickstache2") {
         await i.update({ embeds: [trickstache], components: [tstache2] });
       }
-      if (i.customId == "tstache3" || i.customId == "trickstache3") {
+      else if(i.customId == "tstache3" || i.customId == "trickstache3") {
         await i.update({ embeds: [trickstache], components: [tstache3] });
       }
-      if (i.customId == "tstache4" || i.customId == "trickstache4") {
+      else if(i.customId == "tstache4" || i.customId == "trickstache4") {
         await i.update({ embeds: [trickstache], components: [tstache4] });
       }
-      if (i.customId == "ubolt" || i.customId == "uncrackabolt") {
+      else if(i.customId == "ubolt" || i.customId == "uncrackabolt") {
         await i.update({ embeds: [uncrackabolt], components: [ubolt] });
       }
-      if (i.customId == "ubolt2" || i.customId == "uncrackabolt2") {
+      else if(i.customId == "ubolt2" || i.customId == "uncrackabolt2") {
         await i.update({ embeds: [uncrackabolt], components: [ubolt2] });
       }
-      if (i.customId == "ubolt3" || i.customId == "uncrackabolt3") {
+      else if(i.customId == "ubolt3" || i.customId == "uncrackabolt3") {
         await i.update({ embeds: [uncrackabolt], components: [ubolt3] });
       }
-      if (i.customId == "umech" || i.customId == "uncrackamech") {
+      else if(i.customId == "umech" || i.customId == "uncrackamech") {
         await i.update({ embeds: [uncrackamech], components: [umech] });
       }
-      if (i.customId == "umech2" || i.customId == "uncrackamech2") {
+      else if(i.customId == "umech2" || i.customId == "uncrackamech2") {
         await i.update({ embeds: [uncrackamech], components: [umech2] });
       }
-      if (i.customId == "umech3" || i.customId == "uncrackamech3") {
+      else if(i.customId == "umech3" || i.customId == "uncrackamech3") {
         await i.update({ embeds: [uncrackamech], components: [umech3] });
       }
-      if (i.customId == "umech4" || i.customId == "uncrackamech4") {
+      else if(i.customId == "umech4" || i.customId == "uncrackamech4") {
         await i.update({ embeds: [uncrackamech], components: [umech4] });
       }
-      if (i.customId == "vster" || i.customId == "valkster") {
+      else if(i.customId == "vster" || i.customId == "valkster") {
         await i.update({ embeds: [valkster], components: [vster] });
       }
-      if (i.customId == "vster2" || i.customId == "valkster2") {
+      else if(i.customId == "vster2" || i.customId == "valkster2") {
         await i.update({ embeds: [valkster], components: [vster2] });
       }
-      if (i.customId == "vster3" || i.customId == "valkster3") {
+      else if(i.customId == "vster3" || i.customId == "valkster3") {
         await i.update({ embeds: [valkster], components: [vster3] });
       }
-      if (i.customId == "vster4" || i.customId == "valkster4") {
+      else if(i.customId == "vster4" || i.customId == "valkster4") {
         await i.update({ embeds: [valkster], components: [vster4] });
       }
-      if (i.customId == "wsports" || i.customId == "watersports") {
+      else if(i.customId == "wsports" || i.customId == "watersports") {
         await i.update({ embeds: [watersports], components: [wsports] });
       }
-      if (i.customId == "wsports2" || i.customId == "watersports2") {
+      else if(i.customId == "wsports2" || i.customId == "watersports2") {
         await i.update({ embeds: [watersports], components: [wsports2] });
       }
-      if (i.customId == "wsports3" || i.customId == "watersports3") {
+      else if(i.customId == "wsports3" || i.customId == "watersports3") {
         await i.update({ embeds: [watersports], components: [wsports3] });
       }
-      if (i.customId == "wsports4" || i.customId == "watersports4") {
+      else if(i.customId == "wsports4" || i.customId == "watersports4") {
         await i.update({ embeds: [watersports], components: [wsports4] });
       }
-      if (i.customId == "wph" || i.customId == "whalepharaoh") {
+      else if(i.customId == "wph" || i.customId == "whalepharaoh") {
         await i.update({ embeds: [whalepharaoh], components: [wph] });
       }
-      if (i.customId == "wph2" || i.customId == "whalepharaoh2") {
+      else if(i.customId == "wph2" || i.customId == "whalepharaoh2") {
         await i.update({ embeds: [whalepharaoh], components: [wph2] });
       }
-      if (i.customId == "wph3" || i.customId == "whalepharaoh3") {
+      else if(i.customId == "wph3" || i.customId == "whalepharaoh3") {
         await i.update({ embeds: [whalepharaoh], components: [wph3] });
       }
-      if (i.customId == "wph4" || i.customId == "whalepharaoh4") {
+      else if(i.customId == "wph4" || i.customId == "whalepharaoh4") {
         await i.update({ embeds: [whalepharaoh], components: [wph4] });
       }
-      if (i.customId == "ycmartin" || i.customId == "youngcatmartin") {
+      else if(i.customId == "ycmartin" || i.customId == "youngcatmartin") {
         await i.update({ embeds: [youngcatmartin], components: [ycmartin] });
       }
-      if (i.customId == "ycmartin2" || i.customId == "youngcatmartin2") {
+      else if(i.customId == "ycmartin2" || i.customId == "youngcatmartin2") {
         await i.update({ embeds: [youngcatmartin], components: [ycmartin2] });
       }
-      if (i.customId == "ycmartin3" || i.customId == "youngcatmartin3") {
+      else if(i.customId == "ycmartin3" || i.customId == "youngcatmartin3") {
         await i.update({ embeds: [youngcatmartin], components: [ycmartin3] });
       }
-      if (i.customId == "ycmartin4" || i.customId == "youngcatmartin4") {
+      else if(i.customId == "ycmartin4" || i.customId == "youngcatmartin4") {
         await i.update({ embeds: [youngcatmartin], components: [ycmartin4] });
       }
-      if (i.customId == "yemartin" || i.customId == "youngeggmartin") {
+      else if(i.customId == "yemartin" || i.customId == "youngeggmartin") {
         await i.update({ embeds: [youngeggmartin], components: [yemartin] });
       }
-      if (i.customId == "yemartin2" || i.customId == "youngeggmartin2") {
+      else if(i.customId == "yemartin2" || i.customId == "youngeggmartin2") {
         await i.update({ embeds: [youngeggmartin], components: [yemartin2] });
       }
-      if (i.customId == "yemartin3" || i.customId == "youngeggmartin3") {
+      else if(i.customId == "yemartin3" || i.customId == "youngeggmartin3") {
         await i.update({ embeds: [youngeggmartin], components: [yemartin3] });
       }
-      if (i.customId == "ykmartin" || i.customId == "youngkenmartin") {
+      else if(i.customId == "ykmartin" || i.customId == "youngkenmartin") {
         await i.update({ embeds: [youngkenmartin], components: [ykmartin] });
       }
-      if (i.customId == "ykmartin2" || i.customId == "youngkenmartin2") {
+      else if(i.customId == "ykmartin2" || i.customId == "youngkenmartin2") {
         await i.update({ embeds: [youngkenmartin], components: [ykmartin2] });
       }
-      if (i.customId == "ykmartin3" || i.customId == "youngkenmartin3") {
+      else if(i.customId == "ykmartin3" || i.customId == "youngkenmartin3") {
         await i.update({ embeds: [youngkenmartin], components: [ykmartin3] });
       }
-      if (i.customId == "ykmartin4" || i.customId == "youngkenmartin4") {
+      else if(i.customId == "ykmartin4" || i.customId == "youngkenmartin4") {
         await i.update({ embeds: [youngkenmartin], components: [ykmartin4] });
       }
-      if (i.customId == "zm" || i.customId == "zmoss") {
+      else if(i.customId == "zm" || i.customId == "zmoss") {
         await i.update({ embeds: [zmoss], components: [zm] });
       }
-      if (i.customId == "zm2" || i.customId == "zmoss2") {
+      else if(i.customId == "zm2" || i.customId == "zmoss2") {
         await i.update({ embeds: [zmoss], components: [zm2] });
       }
-      if (i.customId == "zm3" || i.customId == "zmoss3") {
+      else if(i.customId == "zm3" || i.customId == "zmoss3") {
         await i.update({ embeds: [zmoss], components: [zm3] });
       }
-      if (i.customId == "lt" || i.customId == "ladytuna") {
+      else if(i.customId == "lt" || i.customId == "ladytuna") {
         await i.update({ embeds: [ladytuna], components: [lt] });
       }
-      if (i.customId == "lt2" || i.customId == "ladytuna2") {
+      else if(i.customId == "lt2" || i.customId == "ladytuna2") {
         await i.update({ embeds: [ladytuna], components: [lt2] });
       }
-      if (i.customId == "lt3" || i.customId == "ladytuna3") {
+      else if(i.customId == "lt3" || i.customId == "ladytuna3") {
         await i.update({ embeds: [ladytuna], components: [lt3] });
       }
-      if (i.customId == "lsnap" || i.customId == "lasersnap") {
+      else if(i.customId == "lsnap" || i.customId == "lasersnap") {
         await i.update({ embeds: [lasersnap], components: [lsnap] });
       }
-      if (i.customId == "lsnap2" || i.customId == "lasersnap2") {
+      else if(i.customId == "lsnap2" || i.customId == "lasersnap2") {
         await i.update({ embeds: [lasersnap], components: [lsnap2] });
       }
-      if (i.customId == "lsnap3" || i.customId == "lasersnap3") {
+      else if(i.customId == "lsnap3" || i.customId == "lasersnap3") {
         await i.update({ embeds: [lasersnap], components: [lsnap3] });
       }
-      if (i.customId == "lsnap4" || i.customId == "lasersnap4") {
+      else if(i.customId == "lsnap4" || i.customId == "lasersnap4") {
         await i.update({ embeds: [lasersnap], components: [lsnap4] });
       }
-      if (i.customId == "hotk" || i.customId == "healthotk") {
+      else if(i.customId == "hotk" || i.customId == "healthotk") {
         await i.update({ embeds: [healthotk], components: [hotk] });
       }
-      if (i.customId == "hotk2" || i.customId == "healthotk2") {
+      else if(i.customId == "hotk2" || i.customId == "healthotk2") {
         await i.update({ embeds: [healthotk], components: [hotk2] });
       }
-      if (i.customId == "hotk3" || i.customId == "healthotk3") {
+      else if(i.customId == "hotk3" || i.customId == "healthotk3") {
         await i.update({ embeds: [healthotk], components: [hotk3] });
       }
-      if (i.customId == "hotk4" || i.customId == "healthotk4") {
+      else if(i.customId == "hotk4" || i.customId == "healthotk4") {
         await i.update({ embeds: [healthotk], components: [hotk4] });
       }
-      if (i.customId == "pts" || i.customId == "pawntrickstab") {
+      else if(i.customId == "pts" || i.customId == "pawntrickstab") {
         await i.update({ embeds: [pawntrickstab], components: [pts] });
       }
-      if (i.customId == "pts2" || i.customId == "pawntrickstab2") {
+      else if(i.customId == "pts2" || i.customId == "pawntrickstab2") {
         await i.update({ embeds: [pawntrickstab], components: [pts2] });
       }
-      if (i.customId == "pts3" || i.customId == "pawntrickstab3") {
+      else if(i.customId == "pts3" || i.customId == "pawntrickstab3") {
         await i.update({ embeds: [pawntrickstab], components: [pts3] });
       }
-      if (i.customId == "nut" || i.customId == "nuttin") {
+      else if(i.customId == "nut" || i.customId == "nuttin") {
         await i.update({ embeds: [nuttin], components: [nut] });
       }
-      if (i.customId == "nut2" || i.customId == "nuttin2") {
+      else if(i.customId == "nut2" || i.customId == "nuttin2") {
         await i.update({ embeds: [nuttin], components: [nut2] });
       }
-      if (i.customId == "nut3" || i.customId == "nuttin3") {
+      else if(i.customId == "nut3" || i.customId == "nuttin3") {
         await i.update({ embeds: [nuttin], components: [nut3] });
       }
-      if (i.customId == "rfl" || i.customId == "reflourished") {
+      else if(i.customId == "rfl" || i.customId == "reflourished") {
         await i.update({ embeds: [reflourished], components: [rfl] });
       }
-      if (i.customId == "rfl2" || i.customId == "reflourished2") {
+      else if(i.customId == "rfl2" || i.customId == "reflourished2") {
         await i.update({ embeds: [reflourished], components: [rfl2] });
       }
-      if (i.customId == "rfl3" || i.customId == "reflourished3") {
+      else if(i.customId == "rfl3" || i.customId == "reflourished3") {
         await i.update({ embeds: [reflourished], components: [rfl3] });
       }
-      if (i.customId == "sav" || i.customId == "savage") {
+      else if(i.customId == "sav" || i.customId == "savage") {
         await i.update({ embeds: [savage22], components: [sav] });
       }
-      if (i.customId == "sav2" || i.customId == "savage2") {
+      else if(i.customId == "sav2" || i.customId == "savage2") {
         await i.update({ embeds: [savage22], components: [sav2] });
       }
-      if (i.customId == "sav3" || i.customId == "savage3") {
+      else if(i.customId == "sav3" || i.customId == "savage3") {
         await i.update({ embeds: [savage22], components: [sav3] });
       }
-      if (i.customId == "sav4" || i.customId == "savage4") {
+      else if(i.customId == "sav4" || i.customId == "savage4") {
         await i.update({ embeds: [savage22], components: [sav4] });
       }
-	  if(i.customId == "carr" || i.customId == "carroot") {
+	  else if(i.customId == "carr" || i.customId == "carroot") {
 		await i.update({ embeds: [carroot], components: [carr] });
 	  }
-	  if(i.customId == "carr2" || i.customId == "carroot2") {
+	  else if(i.customId == "carr2" || i.customId == "carroot2") {
 		await i.update({ embeds: [carroot], components: [carr2] });
 	  }
-	  if(i.customId == "carr3" || i.customId == "carroot3") {
+	  else if(i.customId == "carr3" || i.customId == "carroot3") {
 		await i.update({ embeds: [carroot], components: [carr3] });
 	  }
-	  if(i.customId == "carr4" || i.customId == "carroot4") {
+	  else if(i.customId == "carr4" || i.customId == "carroot4") {
 		await i.update({ embeds: [carroot], components: [carr4] });
 	  }
-    if(i.customId == "hgargs" || i.customId == "huntgargs"){
+    else if(i.customId == "hgargs" || i.customId == "huntgargs"){
       await i.update({ embeds: [huntgargs], components: [hgargs] });
     }
-    if(i.customId == "hgargs2" || i.customId == "huntgargs2"){
+    else if(i.customId == "hgargs2" || i.customId == "huntgargs2"){
       await i.update({ embeds: [huntgargs], components: [hgargs2] });
     }
-    if(i.customId == "hgargs3" || i.customId == "huntgargs3"){
+    else if(i.customId == "hgargs3" || i.customId == "huntgargs3"){
       await i.update({ embeds: [huntgargs], components: [hgargs3] });
     }
-    if(i.customId == "pb" || i.customId == "pbeans"){
+    else if(i.customId == "pb" || i.customId == "pbeans"){
       await i.update({ embeds: [pbeans], components: [pb] });
     }
-    if(i.customId == "pb2" || i.customId == "pbeans2"){
+    else if(i.customId == "pb2" || i.customId == "pbeans2"){
       await i.update({ embeds: [pbeans], components: [pb2] });
     }
     if(i.customId == "pb3" || i.customId == "pbeans3"){
       await i.update({ embeds: [pbeans], components: [pb3] });
     }
-
+    else if(i.customId == "pop" || i.customId == "popsicle"){
+      await i.update({ embeds: [popsicle], components: [pop] });
+    }
+    else if(i.customId == "pop2" || i.customId == "popsicle2"){
+      await i.update({ embeds: [popsicle], components: [pop2] });
+    }
+    else if(i.customId == "pop3" || i.customId == "popsicle3"){
+      await i.update({ embeds: [popsicle], components: [pop3] });
+    }
     });
   },
 };

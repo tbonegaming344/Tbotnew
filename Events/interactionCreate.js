@@ -943,7 +943,7 @@ module.exports = {
             `${result[0].physcosolstice}`,
             `${result[0].ramp2seedling}`,
             //SP TBOT DB
-      
+            `${result[0].popsicle}`,
             `${result[0].radiotherapy}`,
            `${result[0].nuttin}`,
             //WK TBOT DB
@@ -1280,7 +1280,7 @@ module.exports = {
                     where deckinfo = 'image link:'`);
           const deck = [
             //SP TBOT DB
-      
+            `${result[0].popsicle}`,
             `${result[0].radiotherapy}`,
            `${result[0].nuttin}`,
            
@@ -1710,6 +1710,7 @@ module.exports = {
               `${result[0].physcosolstice}`,
               `${result[0].ramp2seedling}`,
               //SP TBOT DB
+              `${result[0].popsicle}`,
               `${result[0].radiotherapy}`,
              `${result[0].nuttin}`,
               //WK TBOT DB

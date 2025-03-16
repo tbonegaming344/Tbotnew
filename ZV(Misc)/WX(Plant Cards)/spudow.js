@@ -92,7 +92,6 @@ module.exports = {
     function buildDeckString(decks) {
       return decks.map(deck => `\n<@1043528908148052089> **${deck}**`).join('');
     }
-    const toBuildString = buildDeckString(spudowDecks.allDecks);
     let sp = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/4/49/HD_Tater_Toss.png/revision/latest?cb=20190624184934&path-prefix=protagonist"
@@ -119,19 +118,37 @@ module.exports = {
             "Always tries to keep his head in tough situations. Always loses it.",
         }
       );
-      let embed = createHelpEmbed(
+      const toBuildString = buildDeckString(spudowDecks.allDecks);
+      const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
+      const toBuildControlString = buildDeckString(spudowDecks.controlDecks);
+      const embed = createHelpEmbed(
         "Spudow Decks",
-        `To view the Spudow decks please select an option from the select menu below!
-        Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
-      )
-  let allEmbed = createHelpEmbed(
+        `To view the Spudow decks please select an option using the select menu below!
+  Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
+        "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719"
+      );
+  
+      const allEmbed = createHelpEmbed(
         "All Spudow Decks",
         `My decks for Spudow are ${toBuildString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
         `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
-        Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`
-  )
+  Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`
+      );
+      const controlEmbed = createHelpEmbed(
+        "Spudow Control Decks",
+        `My control decks for Spudow are ${toBuildControlString}`,
+        "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
+        `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
+  Note: Spudow has ${spudowDecks.controlDecks.length} decks in Tbot`
+      );
+      const memeEmbed = createHelpEmbed(
+        "Spudow Meme Decks",
+        `My meme decks for Spudow are ${toBuildMemeString}`,
+        "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
+        `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
+  Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
+      );
       let [result] = await db.query(`SELECT * from spdecks`);
       /**
    * This function creates an embed for a deck
@@ -169,24 +186,40 @@ module.exports = {
           
         return embed;
       }
+      const controlrow = createButtons("radiotherapy2", "pop");
+      const pop = createButtons("helpcontrol", "radio2");
+      const radio2 = createButtons("popsicle", "controlhelp");
+      const memerow = createButtons("popsicle3", "nut2");
+      const nut2 = createButtons("helpmeme", "pop3");
+      const pop3 = createButtons("nuttin2", "memehelp");
       const alldecksrow = createButtons("radiotherapy", "bsp");
       const bsp = createButtons("helpall", "nut");
-      const nut = createButtons("budgetsp", "radio");
-      const radio = createButtons("nuttin", "allhelp");
-      const budgetsp = createDeckEmbed(result, "budgetburstsp")
+      const nut = createButtons("budgetsp", "pop2");
+      const pop2 = createButtons("nuttin", "radio");
+      const radio = createButtons("popsicle2", "allhelp");
+      const budgetsp = createDeckEmbed(result, "budgetburstsp");
       const radiotherapy = createDeckEmbed(result, "radiotherapy");
       const nuttin = createDeckEmbed(result, "nutting");
+      const popsicle = createDeckEmbed(result, "popsicle");
     const m = await message.channel.send({ embeds: [sp], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value === "budget" || value === "tempo") {
         await i.reply({ embeds: [budgetsp], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme" || value == "combo") {
+      } 
+      else if (value === "meme") {
+        await i.update({ embeds: [memeEmbed], components: [memerow] });
+      }
+      else if ( value == "combo") {
         await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
-      } else if (value === "competitive" || value === "control") {
+      } else if (value === "competitive") {
         await i.reply({ embeds: [radiotherapy], flags: MessageFlags.Ephemeral });
-      } else if (value === "all") {
+      } 
+      else if(value == "control"){
+        await i.update({embeds: [controlEmbed], components: [controlrow]});
+      }
+      else if (value === "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
@@ -200,6 +233,27 @@ module.exports = {
         await i.update({ embeds: [nuttin], components: [nut] });
       } else if (i.customId === "radio" || i.customId === "radiotherapy") {
         await i.update({ embeds: [radiotherapy], components: [radio] });
+      }
+      else if(i.customId == "pop" || i.customId == "popsicle"){
+        await i.update({embeds: [popsicle], components: [pop]});
+      }
+      else if(i.customId == "pop2" || i.customId == "popsicle2"){
+        await i.update({embeds: [popsicle], components: [pop2]});
+      }
+      else if(i.customId == "pop3" || i.customId == "popsicle3"){
+        await i.update({embeds: [popsicle], components: [pop3]});
+      }
+      else if(i.customId == "radio2" || i.customId == "radiotherapy2"){
+        await i.update({embeds: [radiotherapy], components: [radio2]});
+      }
+      else if(i.customId == "nut2" || i.customId == "nuttin2"){
+        await i.update({embeds: [nuttin], components: [nut2]});
+      }
+      else if(i.customId == "memehelp" || i.customId == "helpmeme"){
+        await i.update({embeds: [memeEmbed], components: [memerow]});
+      }
+      else if(i.customId == "controlhelp" || i.customId == "helpcontrol"){
+        await i.update({embeds: [controlEmbed], components: [controlrow]});
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

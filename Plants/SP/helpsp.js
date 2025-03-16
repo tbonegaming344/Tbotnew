@@ -104,8 +104,8 @@ module.exports = {
     const toBuildString = buildDeckString(spudowDecks.allDecks);
     let embed = createHelpEmbed(
       "Spudow Decks",
-      `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
-      Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
+      `To view the Spudow decks please select an option using the select menu below!
+Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719"
     );
 

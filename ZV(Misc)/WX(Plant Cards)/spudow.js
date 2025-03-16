@@ -121,7 +121,7 @@ module.exports = {
       );
       let embed = createHelpEmbed(
         "Spudow Decks",
-        `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
+        `To view the Spudow decks please select an option from the select menu below!
         Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
       )
@@ -176,32 +176,30 @@ module.exports = {
       const budgetsp = createDeckEmbed(result, "budgetburstsp")
       const radiotherapy = createDeckEmbed(result, "radiotherapy");
       const nuttin = createDeckEmbed(result, "nutting");
-      const embeds = { budgetsp, nuttin, radiotherapy, allEmbed };
-      const components = { alldecksrow, bsp, nut, radio };
     const m = await message.channel.send({ embeds: [sp], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
-    async function handleSelectMenu(i, embeds, components) {
+    async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value === "budget" || value === "tempo") {
-        await i.reply({ embeds: [embeds.budgetsp], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [budgetsp], flags: MessageFlags.Ephemeral });
       } else if (value == "meme" || value == "combo") {
-        await i.reply({ embeds: [embeds.nuttin], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
       } else if (value === "competitive" || value === "control") {
-        await i.reply({ embeds: [embeds.radiotherapy], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [radiotherapy], flags: MessageFlags.Ephemeral });
       } else if (value === "all") {
-        await i.update({ embeds: [embeds.allEmbed], components: [components.alldecksrow] });
+        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
 
-    async function handleButtonInteraction(i, embeds, components) {
+    async function handleButtonInteraction(i) {
       if (i.customId === "allhelp" || i.customId === "helpall") {
-        await i.update({ embeds: [embeds.allEmbed], components: [components.alldecksrow] });
+        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       } else if (i.customId === "bsp" || i.customId === "budgetsp") {
-        await i.update({ embeds: [embeds.budgetsp], components: [components.bsp] });
+        await i.update({ embeds: [budgetsp], components: [bsp] });
       } else if (i.customId === "nut" || i.customId === "nuttin") {
-        await i.update({ embeds: [embeds.nuttin], components: [components.nut] });
+        await i.update({ embeds: [nuttin], components: [nut] });
       } else if (i.customId === "radio" || i.customId === "radiotherapy") {
-        await i.update({ embeds: [embeds.radiotherapy], components: [components.radio] });
+        await i.update({ embeds: [radiotherapy], components: [radio] });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
@@ -210,9 +208,9 @@ module.exports = {
         await i.update({ embeds: [embed], components: [row] });
       }
       else if (i.customId === "select") {
-        await handleSelectMenu(i, embeds, components);
+        await handleSelectMenu(i);
       } else {
-        await handleButtonInteraction(i, embeds, components);
+        await handleButtonInteraction(i);
       }
     });
   },

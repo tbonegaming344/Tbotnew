@@ -73,16 +73,10 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "shit") {
+      if (i.customId == "shit" || i.customId == "shitknight") {
         await i.update({ embeds: [sknight], components: [shit] });
       }
-      if (i.customId == "sknight") {
-        await i.update({ embeds: [sknight], components: [shit] });
-      }
-      if (i.customId == "helpsnap") {
-        await i.update({ embeds: [snap], components: [row] });
-      }
-      if (i.customId == "help") {
+      if (i.customId == "help" || i.customId == "helpsnap") {
         await i.update({ embeds: [snap], components: [row] });
       }
     });

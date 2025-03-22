@@ -6,19 +6,16 @@ const {
   ButtonStyle,
 } = require("discord.js");
 module.exports = {
-  name: `wrecko`,
+  name: `wreko`,
   aliases: [
-    `helpwrecko`,
-    `wreckohelp`,
-    `decksmadebywrecko`,
-    `wreckodecklists`,
-    `decklistsmadebywrecko`,
-    `wreckodecks`,
-    `snortingwreckodecks`,
-    `snortingwrecko`,
-    `snorting`,
-    `deckwrecko`,
-    `deckwrecko`,
+    `helpwreko`,
+    `wrekohelp`,
+    `decksmadebywreko`,
+    `wrekodecklists`,
+    `decklistsmadebywreko`,
+    `wrekodecks`,
+    `deckwreko`,
+    `deckwreko`,
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
@@ -48,7 +45,7 @@ module.exports = {
       .join("");
     let [result] = await db.query(`select popsicle from spdecks`);
     let user = await client.users.fetch("1060179032852930560");
-    const wrecko = new EmbedBuilder()
+    const wreko = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
         `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -83,7 +80,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         }
       );
     const m = await message.channel.send({
-      embeds: [wrecko],
+      embeds: [wreko],
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -92,8 +89,8 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       if (i.customId == "pop" || i.customId == "popsicle") {
         await i.update({ embeds: [popsicle], components: [pop] });
       }
-      if (i.customId == "help" || i.customId == "helpwrecko") {
-        await i.update({ embeds: [wrecko], components: [row] });
+      if (i.customId == "help" || i.customId == "helpwreko") {
+        await i.update({ embeds: [wreko], components: [row] });
       }
     });
   },

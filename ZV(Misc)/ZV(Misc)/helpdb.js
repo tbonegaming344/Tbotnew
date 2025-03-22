@@ -1472,13 +1472,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("g3n3")
+        .setCustomId("fflare3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const fflare3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("freezeheal3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("healcon3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const g3n3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("freezeheal3")
+        .setCustomId("funnyflare3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1631,6 +1641,7 @@ module.exports = {
 	    "carroot",
       "cyburn",
       "freezeheal",
+      "funnyflare",
       "going3nuts",
       "healburn",
       "healthotk",
@@ -1687,23 +1698,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("fflare3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const fflare3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("ejection3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("healcon3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const healcon3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("funnyflare3")
+        .setCustomId("ejection3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1775,7 +1776,6 @@ module.exports = {
       "cancerknight",
       "chemotherapy",
       "ejection",
-      "funnyflare",
       "healcontrol",
       "pawntrickstab",
       "popsicle",
@@ -1818,9 +1818,19 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+    const fflare4 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("flottery3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("g3n4")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
     const g3n4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("figlottery3")
+        .setCustomId("funnyflare4")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1951,6 +1961,7 @@ module.exports = {
     const midrangepdecks = [
       "cyburn",
       "figlottery",
+      "funnyflare",
       "going3nuts",
       "healburn",
       "healmidrose",
@@ -9071,6 +9082,9 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
         await i.update({ embeds: [funnyflare], components: [fflare2] });
       }
       else if(i.customId == "fflare3" || i.customId == "funnyflare3") {
+        await i.update({ embeds: [funnyflare], components: [fflare3] });
+      }
+      else if(i.customId == "fflare4" || i.customId == "funnyflare4") {
         await i.update({ embeds: [funnyflare], components: [fflare3] });
       }
       else if(i.customId == "g3n" || i.customId == "going3nuts") {

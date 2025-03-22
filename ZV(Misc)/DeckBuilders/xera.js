@@ -71,6 +71,7 @@ module.exports = {
       ladderDecks: ["brady", "gomorrah", "gravepiratestache"],
       memeDecks: [
         "22savage",
+        "funnyflare",
         "himpter",
         "laserrings",
         "startron",
@@ -80,6 +81,7 @@ module.exports = {
       aggroDecks: ["gravepiratestache"],
       comboDecks: [
         "22savage",
+        "funnyflare",
         "gravepiratestache",
         "himpter",
         "laserrings",
@@ -90,6 +92,7 @@ module.exports = {
       controlDecks: ["toyotacontrolla", "uncrackamech"],
       midrangeDecks: [
         "22savage",
+        "funnyflare",
         "gomorrah",
         "himpter",
         "laserrings",
@@ -100,6 +103,7 @@ module.exports = {
       allDecks: [
         "22savage",
         "brady",
+        "funnyflare",
         "gomorrah",
         "gravepiratestache",
         "himpter",
@@ -170,13 +174,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("ff")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const ff = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("savage")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("hi")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const hi = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("savage")
+        .setCustomId("funnyflare")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -243,13 +257,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("ff2")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const ff2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("savage2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("gps")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const gps = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("savage2")
+        .setCustomId("funnyflare2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -359,13 +383,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("ff3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const ff3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("savage3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("go2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const go2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("savage3")
+        .setCustomId("funnyflare3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -442,13 +476,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("ff4")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const ff4 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("brady2")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("go3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const go3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("brady2")
+        .setCustomId("funnyflare4")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -530,9 +574,10 @@ module.exports = {
       .map((deck) => `\n<@1043528908148052089> **${deck}**`)
       .join("");
     let [result] =
-      await db.query(`SELECT savage22, gomorrah, gps, himps, lasersnap, startron, toyotacontrolla, feastmech, brady, watersports 
+      await db.query(`SELECT savage22, funnyflare, gomorrah, gps, himps, lasersnap, startron, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
+            inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
             inner join ctdecks ct on (im.deckinfo = ct.deckinfo)
             inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
@@ -660,6 +705,26 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
       )
       .setColor("Random")
       .setImage(`${result[4].brady}`);
+      let	funnyflare = new EmbedBuilder()
+			.setTitle(`${result[5].funnyflare}`)	
+			.setDescription(`${result[3].funnyflare}`)
+			.setFooter({text:`${result[2].funnyflare}`})
+			.addFields({
+				name: "Deck Type",
+				value: `${result[6].funnyflare}`,
+				inline: true
+			},
+			{
+				name: "Archetype",
+				value: `${result[0].funnyflare}`,
+				inline: true
+			},{
+				name: "Deck Cost", 
+				value: `${result[1].funnyflare}`,
+				inline: true
+			})
+		.setColor("Random")
+		.setImage(`${result[4].funnyflare}`)
     let gomorrah = new EmbedBuilder()
       .setTitle(`${result[5].gomorrah}`)
       .setDescription(`${result[3].gomorrah}`)
@@ -1000,6 +1065,18 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
       }
       if (i.customId == "sav4" || i.customId == "savage4") {
         await i.update({ embeds: [savage22], components: [sav4] });
+      }
+      if(i.customId == "ff" || i.customId == "funnyflare"){
+        await i.update({embeds: [funnyflare], components: [ff]})
+      }
+      if(i.customId == "ff2" || i.customId == "funnyflare2"){
+        await i.update({embeds: [funnyflare], components: [ff2]})
+      }
+      if(i.customId == "ff3" || i.customId == "funnyflare3"){
+        await i.update({embeds: [funnyflare], components: [ff3]})
+      }
+      if(i.customId == "ff4" || i.customId == "funnyflare4"){
+        await i.update({embeds: [funnyflare], components: [ff4]})
       }
     });
   },

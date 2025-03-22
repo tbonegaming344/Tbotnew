@@ -60,23 +60,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("agrp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const agrp = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpmeme")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("ck")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
     );
     const ck = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("agrpeas")
+      .setCustomId("helpmeme")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -115,7 +105,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary),
     );
    let memedecks = [
-    "aggroramppeas",
     "cancerknight",
     "coggerazzi",
     "pbfeast",
@@ -125,45 +114,6 @@ module.exports = {
     for (let i = 0; i < memedecks.length; i++) {
       let deck = memedecks[i];
       toBuildMeme += `\n <@1043528908148052089> **${deck}**`;
-    }
-    const agrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("seacret2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("agrp2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const agrp2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpaggro")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sea2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const sea2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("aggroramppeas2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("aggrohelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-   let aggrodecks = [
-    "aggroramppeas",
-    "seacret",
-   ]
-    let toBuildAggro = "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      let deck = aggrodecks[i];
-      toBuildAggro += `\n <@1043528908148052089> **${deck}**`;
     }
    const controlrow = new ActionRowBuilder().addComponents(
     new ButtonBuilder()
@@ -217,7 +167,7 @@ module.exports = {
     }
     const comborow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("seacret4")
+      .setCustomId("seacret2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -241,11 +191,11 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("sea4")
+      .setCustomId("sea2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
     );
-    const sea4 = new ActionRowBuilder().addComponents(
+    const sea2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("rampticia2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -311,23 +261,13 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("agrp3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const agrp3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("ck3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
-    )
+    );
     const ck3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("aggroramppeas3")
+      .setCustomId("helpall")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -386,7 +326,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary),
     )
     let decks = [
-      "aggroramppeas",
       "cancerknight",
       "coggerazzi",
       "kaleidoscope",
@@ -399,19 +338,17 @@ module.exports = {
       let deck = decks[i];
       toBuildString += `\n <@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select aggroramppeas, cancerknight, otktrickster, seacret,
+    let [result] = await db.query(`select cancerknight, otktrickster, seacret,
 pbfeast, poggerrazzi, rampticia
-from czdecks cz 
-inner join wkdecks wk 
-on (cz.deckinfo = wk.deckinfo) 
+from wkdecks wk 
 inner join ebdecks eb
-on (cz.deckinfo = eb.deckinfo)
+on (wk.deckinfo = eb.deckinfo)
 inner join pbdecks pb 
-on (cz.deckinfo = pb.deckinfo)
+on (wk.deckinfo = pb.deckinfo)
 inner join rbdecks rb 
-on (cz.deckinfo = rb.deckinfo)
+on (wk.deckinfo = rb.deckinfo)
 inner join imdecks im 
-on (cz.deckinfo = im.deckinfo)`);
+on (wk.deckinfo = im.deckinfo)`);
     // fetch user mono
     let user = await client.users.fetch("444700385744257034");
     let mono = new EmbedBuilder()
@@ -441,17 +378,6 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       .setFooter({
         text: `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${memedecks.length} meme decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let aggromono = new EmbedBuilder()
-      .setTitle(`${user.displayName} Aggro Decks`)
-      .setDescription(
-        `My commands for aggro decks made by ${user.displayName} are ${toBuildAggro}`
-      )
-      .setFooter({
-        text: `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${aggrodecks.length} aggro decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("Random");
@@ -489,27 +415,6 @@ Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tb
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("Random");
-    let arpeas = new EmbedBuilder()
-    .setTitle(`${result[5].aggroramppeas}`)
-    .setDescription(`${result[3].aggroramppeas}`)
-    .setFooter({ text: `${result[2].aggroramppeas}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].aggroramppeas}`,
-      inline: true,
-    },
-    {
-      name: "Archetype",
-      value: `${result[0].aggroramppeas}`,
-      inline: true,
-    },
-    { 
-      name: "Deck Cost", 
-      value: `${result[1].aggroramppeas}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].aggroramppeas}`);
     let cknight = new EmbedBuilder()
   	.setTitle(`${result[5].cancerknight}`)
 		.setDescription(`${result[3].cancerknight}`)
@@ -648,7 +553,7 @@ Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tb
           await i.update({embeds: [combomono], components: [comborow]});
         }
         if(value == "aggro"){
-          await i.update({embeds: [aggromono], components: [agrorow]});
+          await i.reply({embeds: [seacret], flags: MessageFlags.Ephemeral})
         }
         if(value == "all"){
           await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
@@ -712,12 +617,6 @@ Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tb
       if(i.customId == "helpaggro" || i.customId == "aggrohelp"){
         await i.update({embeds: [aggromono], components: [agrorow]});
       }
-      if(i.customId == "agrp2" || i.customId == "aggroramppeas2"){
-        await i.update({embeds: [arpeas], components: [agrp2]});
-      }
-      if(i.customId == "agrp3" || i.customId == "aggroramppeas3"){
-        await i.update({embeds: [arpeas], components: [agrp3]});
-      }
       if(i.customId == "sea2" || i.customId == "seacret2"){
         await i.update({embeds: [seacret], components: [sea2]});
       }
@@ -735,9 +634,6 @@ Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tb
       }
       if(i.customId == "sea3" || i.customId == "seacret3"){
         await i.update({embeds: [seacret], components: [sea3]});
-      }
-      if(i.customId == "sea4" || i.customId == "seacret4"){
-        await i.update({embeds: [seacret], components: [sea4]});
       }
       if(i.customId == "kscope" || i.customId == "kaleidoscope"){
         await i.update({embeds: [kaleidoscope], components: [kscope]})

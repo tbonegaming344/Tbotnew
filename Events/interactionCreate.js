@@ -909,13 +909,13 @@ module.exports = {
             `${result[0].mspotk}`,
             `${result[0].plantmop}`,
             `${result[0].yrm}`,
-            `${result[0].aggroramppeas}`, 
             `${result[0].apotk}`, 
             `${result[0].lasersnap}`,
             `${result[0].midred}`,
             //Mopribus
             `${result[0].mopribus}`,
             //GK TBOT DB
+            `${result[0].dinogloves}`,
             `${result[0].healthotk}`, 
             `${result[0].pawntrickstab}`,
             `${result[0].wr100}`,
@@ -1131,8 +1131,6 @@ module.exports = {
           let [result] = await db.query(`SELECT * from czdecks
                     where deckinfo = 'image link:'`);
           const deck = [
-           
-            `${result[0].aggroramppeas}`, 
             `${result[0].apotk}`, 
             `${result[0].lasersnap}`,
             `${result[0].midred}`,
@@ -1159,6 +1157,7 @@ module.exports = {
           );
           const gk = [
             //GK TBOT DB
+            `${result[0].dinogloves}`,
             `${result[0].healthotk}`, 
             `${result[0].pawntrickstab}`,
           ];
@@ -1675,13 +1674,13 @@ module.exports = {
               `${result[0].mspotk}`,
               `${result[0].plantmop}`,
               `${result[0].yrm}`,
-              `${result[0].aggroramppeas}`, 
               `${result[0].apotk}`, 
               `${result[0].lasersnap}`,
               `${result[0].midred}`,
               //Mopribus
               `${result[0].mopribus}`,
               //GK TBOT DB
+              `${result[0].dinogloves}`,
               `${result[0].healthotk}`, 
               `${result[0].pawntrickstab}`,
               `${result[0].wr100}`,

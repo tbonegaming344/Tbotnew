@@ -199,23 +199,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("agrp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const agrp = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("abeans")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bct")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bct = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("aggroramppeas")
+        .setCustomId("abeans")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -349,13 +339,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("eject")
+        .setCustomId("dgloves")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const eject = new ActionRowBuilder().addComponents(
+    const dgloves = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("cyburn")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("eject")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    )
+    const eject = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("dinogloves")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -686,7 +686,6 @@ module.exports = {
     const allpdecks = [
       "100%winrate",
       "abeans",
-      "aggroramppeas",
       "budgetct",
       "budgetcc",
       "budgetcz",
@@ -701,6 +700,7 @@ module.exports = {
 	    "carroot",
       "chemotherapy",
       "cyburn",
+      "dinogloves",
       "ejection",
       "figlottery",
       "freezeheal",
@@ -1124,23 +1124,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("agrp2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const agrp2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("winrate1002")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("cank2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const cank2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("aggroramppeas2")
+        .setCustomId("winrate1002")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("dgloves2")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const dgloves2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("cancerknight2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1150,7 +1150,7 @@ module.exports = {
     );
     const fheal2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("cancerknight2")
+        .setCustomId("dinogloves2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1340,8 +1340,8 @@ module.exports = {
     );
     const memepdecks = [
       "100%winrate",
-      "aggroramppeas",
       "cancerknight",
+      "dinogloves", 
       "freezeheal",
       "funnyflare",
       "healburn",
@@ -1382,11 +1382,11 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("agrp3")
+        .setCustomId("dgloves3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const agrp3 = new ActionRowBuilder().addComponents(
+    const dgloves3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("abeans3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -1398,7 +1398,7 @@ module.exports = {
     );
     const pb3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("aggroramppeas3")
+        .setCustomId("dinogloves3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -1416,7 +1416,12 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const aggropdecks = ["abeans", "aggroramppeas", "pbeans", "watertron"];
+    const aggropdecks = [
+      "abeans", 
+      "dinogloves", 
+      "pbeans", 
+      "watertron"
+    ];
     let toBuildAggroPString = "";
     for (let i = 0; i < aggropdecks.length; i++) {
       toBuildAggroPString += `\n<@1043528908148052089> **${aggropdecks[i]}**`;
@@ -5873,29 +5878,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
         }
       )
       .setImage(`${result[4].reflourished}`);
-    let aggroramppeas = new EmbedBuilder()
-      .setTitle(`${result[5].aggroramppeas}`)
-      .setDescription(`${result[3].aggroramppeas}`)
-      .setFooter({ text: `${result[2].aggroramppeas}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].aggroramppeas}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].aggroramppeas}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].aggroramppeas}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].aggroramppeas}`);
     let healcontrol = new EmbedBuilder()
       .setTitle(`${result[5].apotk}`)
       .setDescription(`${result[3].apotk}`)
@@ -6034,6 +6016,29 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].budgetgk}`);
+      const dinogloves= new EmbedBuilder()
+      .setTitle(`${result[5].dinogloves}`)
+      .setDescription(`${result[3].dinogloves}`)
+      .setFooter({ text: `${result[2].dinogloves}` })
+      .addFields(
+        {
+          name: "Deck Type",
+          value: `${result[6].dinogloves}`,
+          inline: true,
+        },
+        {
+          name: "Archetype",
+          value: `${result[0].dinogloves}`,
+          inline: true,
+        },
+        {
+          name: "Deck Cost",
+          value: `${result[1].dinogloves}`,
+          inline: true,
+        }
+      )
+      .setColor("Random")
+      .setImage(`${result[4].dinogloves}`);
     let healthotk = new EmbedBuilder()
       .setTitle(`${result[5].healthotk}`)
       .setDescription(`${result[3].healthotk}`)
@@ -8890,15 +8895,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       else if(i.customId == "ab3" || i.customId == "abeans3") {
         await i.update({ embeds: [abeans], components: [ab3] });
       }
-      else if(i.customId == "agrp" || i.customId == "aggroramppeas") {
-        await i.update({ embeds: [aggroramppeas], components: [agrp] });
-      }
-      else if(i.customId == "agrp2" || i.customId == "aggroramppeas2") {
-        await i.update({ embeds: [aggroramppeas], components: [agrp2] });
-      }
-      else if(i.customId == "agrp3" || i.customId == "aggroramppeas3") {
-        await i.update({ embeds: [aggroramppeas], components: [agrp3] });
-      }
       else if(i.customId == "healcon" || i.customId == "healcontrol"){
         await i.update({embeds: [healcontrol], components: [healcon]})
       }
@@ -10262,6 +10258,15 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
     }
     else if(i.customId == "pop3" || i.customId == "popsicle3"){
       await i.update({ embeds: [popsicle], components: [pop3] });
+    }
+    else if(i.customId == "dgloves" || i.customId == "dinogloves"){
+      await i.update({embeds: [dinogloves], components: [dgloves]})
+    }
+    else if(i.customId == "dgloves2" || i.customId == "dinogloves2"){
+      await i.update({embeds: [dinogloves], components: [dgloves2]})
+    }
+    else if(i.customId == "dgloves3" || i.customId == "dinogloves3"){
+      await i.update({embeds: [dinogloves], components: [dgloves3]})
     }
     });
   },

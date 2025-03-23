@@ -256,13 +256,23 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+      .setCustomId("ab")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    );
+    const ab = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("helpcomp")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
       .setCustomId("bust3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );
     const bust3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("helpcomp")
+      .setCustomId("abeans")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -382,6 +392,7 @@ module.exports = {
     )
 
     let competitivedecks = [
+      "abeans",
       "bustbolt",
       "chemotherapy",
       "cyburn",
@@ -406,13 +417,23 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("schoolyard2")
+      .setCustomId("ab2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );
-    const syard2 = new ActionRowBuilder().addComponents(
+    const ab2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("aggrohelp")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+      .setCustomId("syard2")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const syard2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("abeans2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -422,7 +443,7 @@ module.exports = {
     );
     const sea2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("syard2")
+      .setCustomId("schoolyard2")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -632,7 +653,17 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("budgetykm3")
+      .setCustomId("ab3")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    )
+    const ab3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("allhelp")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+      .setCustomId("bykm3")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
@@ -648,7 +679,7 @@ module.exports = {
     )
     const bust4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-      .setCustomId("bykm3")
+      .setCustomId("budgetykm3")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -807,6 +838,7 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     let decks = [
+      "abeans",
       "budgetykm",
       "bustbolt",
       "chemotherapy",
@@ -831,37 +863,39 @@ module.exports = {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
     let [result] =
-      await db.query(`select apotk,
+      await db.query(`select abeans, apotk,
 budgetykm, bustbolt, chemotherapy,
 cyburn, gargburn, gravestache, healmidflare, noplayingallowed, 
 schoolyard, seacret, shamcontrol, spacestars, stacheticia, radiotherapy, uncrackabolt, watertron
-from czdecks cz 
+from gsdecks gs 
+inner join czdecks cz
+on (gs.deckinfo = cz.deckinfo)
 inner join spdecks sp
-on (cz.deckinfo = sp.deckinfo)
+on (gs.deckinfo = sp.deckinfo)
 inner join imdecks im 
-on (cz.deckinfo = im.deckinfo)
+on (gs.deckinfo = im.deckinfo)
 inner join hgdecks hg
-on (cz.deckinfo = hg.deckinfo)
+on (gs.deckinfo = hg.deckinfo)
 inner join rbdecks rb 
-on (cz.deckinfo = rb.deckinfo)
+on (gs.deckinfo = rb.deckinfo)
 inner join ncdecks nc
-on (cz.deckinfo = nc.deckinfo)
+on (gs.deckinfo = nc.deckinfo)
 inner join ntdecks nt
-on (cz.deckinfo = nt.deckinfo)
+on (gs.deckinfo = nt.deckinfo)
 inner join ebdecks eb 
-on (cz.deckinfo = eb.deckinfo)
+on (gs.deckinfo = eb.deckinfo)
 inner join wkdecks wk 
-on (cz.deckinfo = wk.deckinfo)
+on (gs.deckinfo = wk.deckinfo)
 inner join zmdecks zm 
-on (cz.deckinfo = zm.deckinfo)
+on (gs.deckinfo = zm.deckinfo)
 inner join bcdecks bc 
-on (cz.deckinfo = bc.deckinfo)
+on (gs.deckinfo = bc.deckinfo)
 inner join ifdecks fi
-on (cz.deckinfo = fi.deckinfo)
+on (gs.deckinfo = fi.deckinfo)
 inner join ctdecks ct 
-on (cz.deckinfo = ct.deckinfo)
+on (gs.deckinfo = ct.deckinfo)
 inner join sfdecks sf
-on (cz.deckinfo = sf.deckinfo)`);
+on (gs.deckinfo = sf.deckinfo)`);
     let user = await client.users.fetch("599750713509281792");
     let salt = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
@@ -959,6 +993,27 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("Random");
+      let abeans = new EmbedBuilder()
+	.setTitle(`${result[5].abeans}`)
+	.setDescription(`${result[3].abeans}`)
+	.setFooter({text: `${result[2].abeans}`})
+			.addFields({
+			name: "Deck Type",
+			value: `${result[6].abeans}`,
+			inline: true
+			},
+			{
+			name: "Archetype",
+			value: `${result[0].abeans}`,
+			inline: true
+			},
+			{
+				name: "Deck Cost", 
+				value: `${result[1].abeans}`,
+				inline: true
+			})
+		.setColor("Random")
+		.setImage(`${result[4].abeans}`)
     let healcontrol= new EmbedBuilder()
     .setTitle(`${result[5].apotk}`)
     .setDescription(`${result[3].apotk}`)
@@ -1304,222 +1359,231 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         if(value == "budget"){
           await i.reply({embeds: [budgetykm], flags: MessageFlags.Ephemeral})
         }
-        if(value == "control"){
+        else if(value == "control"){
           await i.update({embeds: [controlsalt], components: [controlrow]});
         }
-        if(value == "combo"){
+        else if(value == "combo"){
           await i.update({embeds: [combosalt], components: [comborow]});
         }
-        if(value == "comp"){
+        else if(value == "comp"){
           await i.update({embeds: [compsalt], components: [competitiverow]});
         }
-        if(value == "aggro"){
+        else if(value == "aggro"){
           await i.update({embeds: [aggrosalt], components: [aggrorow]});
         }
-        if(value == "ladder"){
+        else if(value == "ladder"){
           await i.update({embeds: [laddersalt], components: [ladderrow]});
         }
-        if(value == "midrange"){
+        else if(value == "midrange"){
           await i.update({embeds: [midsalt], components: [midrangerow]});
         }
-        if(value == "meme"){
+        else if(value == "meme"){
           await i.update({embeds: [memesalt], components: [memerow]});
         }
-        if(value == "all"){
+        else if(value == "all"){
           await i.update({embeds: [alldecksEmbed], components: [alldecksrow]});
         }
       }
-      if(i.customId == "combohelp" || i.customId == "helpcombo"){
+      else if(i.customId == "combohelp" || i.customId == "helpcombo"){
         await i.update({embeds: [combosalt], components: [comborow]})
       }
-      if(i.customId == "controlhelp" || i.customId == "helpcontrol"){
+      else if(i.customId == "controlhelp" || i.customId == "helpcontrol"){
         await i.update({embeds: [controlsalt], components: [controlrow]})
       }
-      if(i.customId == "memehelp" || i.customId == "helpmeme"){
+      else if(i.customId == "memehelp" || i.customId == "helpmeme"){
         await i.update({embeds: [memesalt], components: [memerow]})
       }
-      if(i.customId == "midhelp" || i.customId == "helpmid"){
+      else if(i.customId == "midhelp" || i.customId == "helpmid"){
         await i.update({embeds: [midsalt], components: [midrangerow]})
       }
-      if(i.customId == "aggrohelp" || i.customId == "helpaggro"){
+      else if(i.customId == "aggrohelp" || i.customId == "helpaggro"){
         await i.update({embeds: [aggrosalt], components: [aggrorow]})
       }
-      if(i.customId == "ladderhelp" || i.customId == "helpladder"){
+      else if(i.customId == "ladderhelp" || i.customId == "helpladder"){
         await i.update({embeds: [laddersalt], components: [ladderrow]})
       }
-      if(i.customId == "comphelp" || i.customId == "helpcomp"){
+      else if(i.customId == "comphelp" || i.customId == "helpcomp"){
         await i.update({embeds: [compsalt], components: [competitiverow]})
       }
-      if(i.customId == "allhelp" || i.customId == "helpall"){
+      else if(i.customId == "allhelp" || i.customId == "helpall"){
         await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
       }
-        if(i.customId == "healcon" || i.customId == "healcontrol"){
+        else if(i.customId == "healcon" || i.customId == "healcontrol"){
           await i.update({embeds: [healcontrol], components: [healcon]})
         }
-        if(i.customId == "healcon2" || i.customId == "healcontrol2"){
+        else if(i.customId == "healcon2" || i.customId == "healcontrol2"){
           await i.update({embeds: [healcontrol], components: [healcon2]})
         }
-        if(i.customId == "healcon3" || i.customId == "healcontrol3"){
+        else if(i.customId == "healcon3" || i.customId == "healcontrol3"){
           await i.update({embeds: [healcontrol], components: [healcon3]})
         }
-        if(i.customId == "bykm" || i.customId == "budgetykm"){
+        else if(i.customId == "bykm" || i.customId == "budgetykm"){
           await i.update({embeds: [budgetykm], components: [bykm]})
         }
-        if(i.customId == "bykm2" || i.customId == "budgetykm2"){
+        else if(i.customId == "bykm2" || i.customId == "budgetykm2"){
           await i.update({embeds: [budgetykm], components: [bykm2]})
         }
-        if(i.customId == "bykm3" || i.customId == "budgetykm3"){
+        else if(i.customId == "bykm3" || i.customId == "budgetykm3"){
           await i.update({embeds: [budgetykm], components: [bykm3]})
         }
-        if(i.customId == "bust" || i.customId == "bustbolt"){
+        else if(i.customId == "bust" || i.customId == "bustbolt"){
           await i.update({embeds: [bustbolt], components: [bust]})
         }
-        if(i.customId == "bust2" || i.customId == "bustbolt2"){
+        else if(i.customId == "bust2" || i.customId == "bustbolt2"){
           await i.update({embeds: [bustbolt], components: [bust2]})
         }
-        if(i.customId == "bust3" || i.customId == "bustbolt3"){
+        else if(i.customId == "bust3" || i.customId == "bustbolt3"){
           await i.update({embeds: [bustbolt], components: [bust3]})
         }
-        if(i.customId == "bust4" || i.customId == "bustbolt4"){
+        else if(i.customId == "bust4" || i.customId == "bustbolt4"){
           await i.update({embeds: [bustbolt], components: [bust4]})
         }
-        if(i.customId == "cburn" || i.customId == "cyburn"){
+        else if(i.customId == "cburn" || i.customId == "cyburn"){
           await i.update({embeds: [cyburn], components: [cburn]})
         }
-        if(i.customId == "cburn2" || i.customId == "cyburn2"){
+        else if(i.customId == "cburn2" || i.customId == "cyburn2"){
           await i.update({embeds: [cyburn], components: [cburn2]})
         }
-        if(i.customId == "cburn3" || i.customId == "cyburn3"){
+        else if(i.customId == "cburn3" || i.customId == "cyburn3"){
           await i.update({embeds: [cyburn], components: [cburn3]})
         }
-        if(i.customId == "cburn4" || i.customId == "cyburn4"){
+        else if(i.customId == "cburn4" || i.customId == "cyburn4"){
           await i.update({embeds: [cyburn], components: [cburn4]})
         }
-        if(i.customId == "gb" || i.csutomId == "gargburn"){
+        else if(i.customId == "gb" || i.csutomId == "gargburn"){
           await i.update({embeds: [gargburn], components: [gb]})
         }
-        if(i.customId == "gb2" || i.customId == "gargburn2"){
+        else if(i.customId == "gb2" || i.customId == "gargburn2"){
           await i.update({embeds: [gargburn], components: [gb2]})
         }
-        if(i.customId == "gb3" || i.customId == "gargburn3"){
+        else if(i.customId == "gb3" || i.customId == "gargburn3"){
           await i.update({embeds: [gargburn], components: [gb3]})
         }
-        if(i.customId == "gb4" || i.customId == "gargburn4"){
+        else if(i.customId == "gb4" || i.customId == "gargburn4"){
           await i.update({embeds: [gargburn], components: [gb4]})
         }
-        if(i.customId == "gstache" || i.customId == "gravestache"){
+        else if(i.customId == "gstache" || i.customId == "gravestache"){
           await i.update({embeds: [gravestache], components: [gstache]})
         }
-        if(i.customId == "gstache2" || i.customId == "gravestache2"){
+        else if(i.customId == "gstache2" || i.customId == "gravestache2"){
           await i.update({embeds: [gravestache], components: [gstache2]})
         }
-        if(i.customId == "gstache3" || i.customId == "gravestache3"){
+        else if(i.customId == "gstache3" || i.customId == "gravestache3"){
           await i.update({embeds: [gravestache], components: [gstache3]})
         }
-        if(i.customId == "stars" || i.customId == "spacestars"){
+        else if(i.customId == "stars" || i.customId == "spacestars"){
           await i.update({embeds: [spacestars], components: [stars]})
         }
-        if(i.customId == "stars2" || i.customId == "spacestars2"){
+        else if(i.customId == "stars2" || i.customId == "spacestars2"){
           await i.update({embeds: [spacestars], components: [stars2]})
         }
-        if(i.customId == "stars3" || i.customId == "spacestars3"){
+        else if(i.customId == "stars3" || i.customId == "spacestars3"){
           await i.update({embeds: [spacestars], components: [stars3]})
         }
-        if(i.customId == "stars4" || i.customId == "spacestars4"){
+        else if(i.customId == "stars4" || i.customId == "spacestars4"){
           await i.update({embeds: [spacestars], components: [stars4]})
         }
-        if(i.customId == "sticia" || i.customId == "stacheticia"){
+        else if(i.customId == "sticia" || i.customId == "stacheticia"){
           await i.update({embeds: [stacheticia], components: [sticia]})
         }
-        if(i.customId == "sticia2" || i.customId == "stacheticia2"){
+        else if(i.customId == "sticia2" || i.customId == "stacheticia2"){
           await i.update({embeds: [stacheticia], components: [sticia2]})
         }
-        if(i.customId == "sticia3" || i.customId == "stacheticia3"){
+        else if(i.customId == "sticia3" || i.customId == "stacheticia3"){
           await i.update({embeds: [stacheticia], components: [sticia3]})
         }
-        if(i.customId == "chemo" || i.customId == "chemotherapy"){
+        else if(i.customId == "chemo" || i.customId == "chemotherapy"){
           await i.update({embeds: [chemotherapy], components: [chemo]})
         }
-        if(i.customId == "chemo2" || i.customId == "chemotherapy2"){
+        else if(i.customId == "chemo2" || i.customId == "chemotherapy2"){
           await i.update({embeds: [chemotherapy], components: [chemo2]})
         }
-        if(i.customId == "chemo3" || i.customId == "chemotherapy3"){
+        else if(i.customId == "chemo3" || i.customId == "chemotherapy3"){
           await i.update({embeds: [chemotherapy], components: [chemo3]})
         }
-        if(i.customId == "sea" || i.customId == "seacret"){
+        else if(i.customId == "sea" || i.customId == "seacret"){
           await i.update({embeds: [seacret], components: [sea]})
         }
-        if(i.customId == "sea2" || i.customId == "seacret2"){
+        else if(i.customId == "sea2" || i.customId == "seacret2"){
           await i.update({embeds: [seacret], components: [sea2]})
         }
-        if(i.customId == "sea3" || i.customId == "seacret3"){
+        else if(i.customId == "sea3" || i.customId == "seacret3"){
           await i.update({embeds: [seacret], components: [sea3]})
         }
-        if(i.customId == "sea4" || i.customId == "seacret4"){
+        else if(i.customId == "sea4" || i.customId == "seacret4"){
           await i.update({embeds: [seacret], components: [sea4]})
         }
-        if(i.customId == "sham" || i.customId == "shamcontrol"){
+        else if(i.customId == "sham" || i.customId == "shamcontrol"){
           await i.update({embeds: [shamcontrol], components: [sham]})
         }
-        if(i.customId == "sham2" || i.customId == "shamcontrol2"){
+        else if(i.customId == "sham2" || i.customId == "shamcontrol2"){
           await i.update({embeds: [shamcontrol], components: [sham2]})
         }
-        if(i.customId == "sham3" || i.customId == "shamcontrol3"){
+        else if(i.customId == "sham3" || i.customId == "shamcontrol3"){
           await i.update({embeds: [shamcontrol], components: [sham3]})
         }
-        if(i.customId == "uncrack" || i.customId == "uncrackabolt"){
+        else if(i.customId == "uncrack" || i.customId == "uncrackabolt"){
           await i.update({embeds: [uncrackabolt], components: [uncrack]})
         }
-        if(i.customId == "uncrack2" || i.customId == "uncrackabolt2"){
+        else if(i.customId == "uncrack2" || i.customId == "uncrackabolt2"){
           await i.update({embeds: [uncrackabolt], components: [uncrack2]})
         }
-        if(i.customId == "uncrack3" || i.customId == "uncrackabolt3"){
+        else if(i.customId == "uncrack3" || i.customId == "uncrackabolt3"){
           await i.update({embeds: [uncrackabolt], components: [uncrack3]})
         }
-        if(i.customId == "wt" || i.customId == "watertron"){
+        else if(i.customId == "wt" || i.customId == "watertron"){
           await i.update({embeds: [watertron], components: [wt]})
         }
-        if(i.customId == "wt2" || i.customId == "watertron2"){
+        else if(i.customId == "wt2" || i.customId == "watertron2"){
           await i.update({embeds: [watertron], components: [wt2]})
         }
-        if(i.customId == "wt3" || i.customId == "watertron3"){
+        else if(i.customId == "wt3" || i.customId == "watertron3"){
           await i.update({embeds: [watertron], components: [wt3]})
         }
-        if(i.customId == "syard" || i.customId == "schoolyard"){
+        else if(i.customId == "syard" || i.customId == "schoolyard"){
           await i.update({embeds: [schoolyard], components: [syard]})
         }
-        if(i.customId == "syard2" || i.customId == "schoolyard2"){
+        else if(i.customId == "syard2" || i.customId == "schoolyard2"){
           await i.update({embeds: [schoolyard], components: [syard2]})
         }
-        if(i.customId == "syard3" || i.customId == "schoolyard3"){
+        else if(i.customId == "syard3" || i.customId == "schoolyard3"){
           await i.update({embeds: [schoolyard], components: [syard3]})
         }
-        if(i.customId == "flottery" || i.customId == "figlottery"){
+        else if(i.customId == "flottery" || i.customId == "figlottery"){
           await i.update({embeds: [figlottery], components: [flottery]})
         }
-        if(i.customId == "flottery2" || i.customId == "figlottery2"){
+        else if(i.customId == "flottery2" || i.customId == "figlottery2"){
           await i.update({embeds: [figlottery], components: [flottery2]})
         }
-        if(i.customId == "flottery3" || i.customId == "figlottery3"){
+        else if(i.customId == "flottery3" || i.customId == "figlottery3"){
           await i.update({embeds: [figlottery], components: [flottery3]})
         }
-        if(i.customId == "radio" || i.customId == "radiotherapy"){
+        else if(i.customId == "radio" || i.customId == "radiotherapy"){
           await i.update({embeds: [radiotherapy], components: [radio]})
         }
-        if(i.customId == "radio2" || i.customId == "radiotherapy2"){
+        else if(i.customId == "radio2" || i.customId == "radiotherapy2"){
           await i.update({embeds: [radiotherapy], components: [radio2]})
         }
-        if(i.customId == "radio3" || i.customId == "radiotherapy3"){
+        else if(i.customId == "radio3" || i.customId == "radiotherapy3"){
           await i.update({embeds: [radiotherapy], components: [radio3]})
         }
-        if(i.customId == "npa" || i.customId == "noplaingallowed"){
+        else if(i.customId == "npa" || i.customId == "noplaingallowed"){
           await i.update({embeds: [noplaingallowed], components: [npa]})
         }
-        if(i.customId == "npa2" || i.customId == "noplaingallowed2"){
+        else if(i.customId == "npa2" || i.customId == "noplaingallowed2"){
           await i.update({embeds: [noplaingallowed], components: [npa2]})
         }
-        if(i.customId == "npa3" || i.customId == "noplaingallowed3"){
+        else if(i.customId == "npa3" || i.customId == "noplaingallowed3"){
           await i.update({embeds: [noplaingallowed], components: [npa3]})
+        }
+        else if(i.customId == "ab" || i.customId == "abeans"){
+          await i.update({embeds: [abeans], components: [ab]})
+        }
+        else if(i.customId == "ab2" || i.customId == "abeans2"){
+          await i.update({embeds: [abeans], components: [ab2]})
+        }
+        else if(i.customId == "ab3" || i.customId == "abeans3"){
+          await i.update({embeds: [abeans], components: [ab3]})
         }
     });
   }

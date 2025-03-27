@@ -13,7 +13,7 @@ function CreateHelpEmbed(title, description, thumbnail, footer){
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-    .setColor("Black");
+    .setColor("#000000");
   if (footer) {
     embed.setFooter({ text: `${footer}` });
   }

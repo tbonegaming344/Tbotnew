@@ -8,6 +8,17 @@ const {
   StringSelectMenuOptionBuilder
 } = require("discord.js");
 let db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer){
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("Black");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `impfinity`,
   aliases: [`if`],

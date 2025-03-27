@@ -2,7 +2,7 @@ const db = require("../../index.js");
 const { EmbedBuilder } = require("discord.js");
 module.exports = {
     name: `nohokaistars`,
-    aliases: [`lbamid`, `nohokai`, `gargolithmid`, `midlba`, `midgargolith`, `nhkstars`, `nhs`, `nhks`],
+    aliases: [`lbamid`, `nohokai`, `gargolithmid`, `midlba`, `midgargolith`, `nhkstars`, `nhs`],
     category: `Impfinity(IF)`,
     run: async(client, message, args) => {
         const [result] = await db.query(`SELECT nohokaistars FROM ifdecks`);

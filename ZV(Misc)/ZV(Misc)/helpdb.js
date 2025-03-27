@@ -7,7 +7,6 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 let db = require("../../index.js");
-const nohokaistars = require("../../Zombies/IF/nohokaistars.js");
 module.exports = {
   name: `helpdb`,
   aliases: [
@@ -7465,7 +7464,7 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].budgetif}`);
-      const nohonkaistars = new EmbedBuilder()
+      const nohokaistars = new EmbedBuilder()
         .setTitle(`${result[5].nohokaistars}`)
         .setDescription(`${result[3].nohokaistars}`)
         .setFooter({ text: `${result[2].nohokaistars}` })

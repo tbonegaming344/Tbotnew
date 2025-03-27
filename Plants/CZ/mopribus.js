@@ -24,7 +24,7 @@ module.exports = {
     let mop = new EmbedBuilder()
       .setTitle(`${result[5].mopribus}`)
       .setDescription(`${result[3].mopribus}`)
-      .setColor("Random")
+      .setColor("Yellow")
       .addFields({
         name: "Deck Type",
         value: `${result[6].mopribus}`,

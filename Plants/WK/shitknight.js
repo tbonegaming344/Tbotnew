@@ -24,7 +24,7 @@ module.exports = {
 				value:  `${result[1].shitknight}`,
 				inline: true
 		})
-		.setColor("Random")			
+		.setColor("Yellow")			
 		.setImage(`${result[4].shitknight}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

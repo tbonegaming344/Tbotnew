@@ -167,7 +167,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
           { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
           { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
         )
-        .setColor("Green");
+        .setColor("#964B00");
       const imageUrl = result[4][deckName];
       if (imageUrl) {
         embed.setImage(imageUrl);
@@ -185,19 +185,19 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       if(value == "budget" || value == "tempo"){
         await i.reply({embeds: [budgetgk], flags: MessageFlags.Ephemeral})
       }
-      if(value == "aggro"){
+      else if(value == "aggro"){
         await i.reply({embeds: [dinogloves], flags: MessageFlags.Ephemeral})
       }
-      if(value == "combo" || value == "midrange"){
+      else if(value == "combo" || value == "midrange"){
         await i.reply({embeds: [healthotk], flags: MessageFlags.Ephemeral})
       }
-      if(value == "meme"){
+      else if(value == "meme"){
         await i.update({embeds: [memeEmbed], components: [memerow]})
       }
-      if(value == "comp" || value == "control"){
+      else if(value == "comp" || value == "control"){
         await i.reply({embeds: [pawntrickstab], flags: MessageFlags.Ephemeral})
       }
-      if(value == "all"){
+      else if(value == "all"){
         await i.update({embeds: [allEmbed], components: [alldecksrow]})
       }
     }
@@ -205,25 +205,25 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       if(i.customId == "helpmeme" || i.customId == "memehelp"){
         await i.update({embeds: [memeEmbed], components: [memerow]})
       }
-      if(i.customId == "allhelp" || i.customId == "helpall"){
+      else if(i.customId == "allhelp" || i.customId == "helpall"){
         await i.update({embeds: [allEmbed], components: [alldecksrow]})
       }
-      if(i.customId == "bgk" || i.customId == "budgetgk"){
+      else if(i.customId == "bgk" || i.customId == "budgetgk"){
         await i.update({embeds: [budgetgk], components: [bgk]})
       }
-      if(i.customId == "dgloves" || i.customId == "dinogloves"){
+      else if(i.customId == "dgloves" || i.customId == "dinogloves"){
         await i.update({embeds: [dinogloves], components: [dgloves]})
       }
-      if(i.customId == "dgloves2" || i.customId == "dinogloves2"){
+      else if(i.customId == "dgloves2" || i.customId == "dinogloves2"){
         await i.update({embeds: [dinogloves], components: [dgloves2]})
       }
-      if(i.customId == "hotk" || i.customId == "healthotk"){
+      else if(i.customId == "hotk" || i.customId == "healthotk"){
         await i.update({embeds: [healthotk], components: [hotk]})
       }
-      if(i.customId == "hotk2" || i.customId == "healthotk2"){
+      else if(i.customId == "hotk2" || i.customId == "healthotk2"){
         await i.update({embeds: [healthotk], components: [hotk2]})
       }
-      if(i.customId == "pts" || i.customId == "pawntrickstab"){
+      else if(i.customId == "pts" || i.customId == "pawntrickstab"){
           await i.update({embeds: [pawntrickstab], components: [pts]})
       }
     }

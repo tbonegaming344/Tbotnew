@@ -9,7 +9,7 @@ module.exports = {
 		let smf = new EmbedBuilder()
 		.setTitle(`${result[5].savagemayflower}`)
 		.setDescription(`${result[3].savagemayflower}`)
-		.setColor("Random")
+		.setColor("White")
 		.addFields({
 			name: "Deck Type",
 			value: `${result[6].savagemayflower}`,

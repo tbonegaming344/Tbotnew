@@ -3,18 +3,18 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags, 
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  MessageFlags,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 let db = require("../../index.js");
 
-function CreateHelpEmbed(title, description, thumbnail, footer){
+function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-    .setColor("Brown");
+    .setColor("Red");
   if (footer) {
     embed.setFooter({ text: `${footer}` });
   }
@@ -53,19 +53,25 @@ module.exports = {
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setDescription("Decks that are built off a weird/fun combo")
-          .setValue("meme"), 
+          .setValue("meme"),
         new StringSelectMenuOptionBuilder()
-          .setLabel('Combo Deck')
-          .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
-          .setValue('combo'), 
+          .setLabel("Combo Deck")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          )
+          .setValue("combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel('Control Decks')
-          .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
-          .setValue('control'),
+          .setLabel("Control Decks")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          )
+          .setValue("control"),
         new StringSelectMenuOptionBuilder()
-          .setLabel('Tempo Deck')
-          .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.')
-          .setValue('tempo'), 
+          .setLabel("Tempo Deck")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          )
+          .setValue("tempo"),
         new StringSelectMenuOptionBuilder()
           .setLabel("All Spudow Decks")
           .setValue("all")
@@ -75,13 +81,13 @@ module.exports = {
 
     const row = new ActionRowBuilder().addComponents(select);
     const spudowDecks = {
-      budgetDecks: ["budgetsp"], 
+      budgetDecks: ["budgetsp"],
       competitiveDecks: ["radiotherapy"],
       memeDecks: ["nutting", "popsicle"],
       comboDecks: ["nutting"],
       controlDecks: ["radiotherapy", "popsicle"],
       tempoDecks: ["budgetsp"],
-      allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy"]
+      allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy"],
     };
 
     function CreateButtons(leftButtonId, rightButtonId) {
@@ -98,7 +104,9 @@ module.exports = {
     }
 
     function buildDeckString(decks) {
-      return decks.map(deck => `\n<@1043528908148052089> **${deck}**`).join('');
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
 
     const toBuildString = buildDeckString(spudowDecks.allDecks);
@@ -144,7 +152,7 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
           { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
           { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
         )
-        .setColor("Random");
+         .setColor("#964B00");
       const imageUrl = result[4][deckName];
       if (imageUrl) {
         embed.setImage(imageUrl);
@@ -178,19 +186,18 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
       const value = i.values[0];
       if (value === "budget" || value === "tempo") {
         await i.reply({ embeds: [budgetsp], flags: MessageFlags.Ephemeral });
-      } 
-      else if (value === "meme") {
+      } else if (value === "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
-      }
-      else if ( value == "combo") {
+      } else if (value == "combo") {
         await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
       } else if (value === "competitive") {
-        await i.reply({ embeds: [radiotherapy], flags: MessageFlags.Ephemeral });
-      } 
-      else if(value == "control"){
-        await i.update({embeds: [controlEmbed], components: [controlrow]});
-      }
-      else if (value === "all") {
+        await i.reply({
+          embeds: [radiotherapy],
+          flags: MessageFlags.Ephemeral,
+        });
+      } else if (value == "control") {
+        await i.update({ embeds: [controlEmbed], components: [controlrow] });
+      } else if (value === "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
@@ -204,29 +211,21 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
         await i.update({ embeds: [nuttin], components: [nut] });
       } else if (i.customId === "radio" || i.customId === "radiotherapy") {
         await i.update({ embeds: [radiotherapy], components: [radio] });
+      } else if (i.customId == "pop" || i.customId == "popsicle") {
+        await i.update({ embeds: [popsicle], components: [pop] });
+      } else if (i.customId == "pop2" || i.customId == "popsicle2") {
+        await i.update({ embeds: [popsicle], components: [pop2] });
+      } else if (i.customId == "pop3" || i.customId == "popsicle3") {
+        await i.update({ embeds: [popsicle], components: [pop3] });
+      } else if (i.customId == "radio2" || i.customId == "radiotherapy2") {
+        await i.update({ embeds: [radiotherapy], components: [radio2] });
+      } else if (i.customId == "nut2" || i.customId == "nuttin2") {
+        await i.update({ embeds: [nuttin], components: [nut2] });
+      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
+        await i.update({ embeds: [memeEmbed], components: [memerow] });
+      } else if (i.customId == "controlhelp" || i.customId == "helpcontrol") {
+        await i.update({ embeds: [controlEmbed], components: [controlrow] });
       }
-      else if(i.customId == "pop" || i.customId == "popsicle"){
-        await i.update({embeds: [popsicle], components: [pop]});
-      }
-      else if(i.customId == "pop2" || i.customId == "popsicle2"){
-        await i.update({embeds: [popsicle], components: [pop2]});
-      }
-      else if(i.customId == "pop3" || i.customId == "popsicle3"){
-        await i.update({embeds: [popsicle], components: [pop3]});
-      }
-      else if(i.customId == "radio2" || i.customId == "radiotherapy2"){
-        await i.update({embeds: [radiotherapy], components: [radio2]});
-      }
-      else if(i.customId == "nut2" || i.customId == "nuttin2"){
-        await i.update({embeds: [nuttin], components: [nut2]});
-      }
-      else if(i.customId == "memehelp" || i.customId == "helpmeme"){
-        await i.update({embeds: [memeEmbed], components: [memerow]});
-      }
-      else if(i.customId == "controlhelp" || i.customId == "helpcontrol"){
-        await i.update({embeds: [controlEmbed], components: [controlrow]});
-      }
-
     }
 
     const collector = m.createMessageComponentCollector({ filter: iFilter });

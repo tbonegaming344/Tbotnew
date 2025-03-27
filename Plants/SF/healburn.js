@@ -26,7 +26,7 @@ module.exports = {
 		})
 .setImage(`${result[4].healburn}`)
 		
-		.setColor("Random")
+		.setColor("Yellow")
 		message.channel.send({embeds: [hb]})
 	}
 }

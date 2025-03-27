@@ -23,7 +23,7 @@ module.exports = {
                 value: `${result[1].carroot}`,
                 inline: true
             })
-            .setColor("Random")
+            .setColor("White")
             .setImage(`${result[4].carroot}`);
         message.channel.send({ embeds: [carroot] });
     }

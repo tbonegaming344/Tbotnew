@@ -20,7 +20,7 @@ module.exports = {
     let gn3 = new EmbedBuilder()
       .setTitle(`${result[5].going3nuts}`)
       .setDescription(`${result[3].going3nuts}`)
-      .setColor("Random")
+      .setColor("White")
       .setFooter({ text: `${result[2].going3nuts}` })
       .addFields(
         {

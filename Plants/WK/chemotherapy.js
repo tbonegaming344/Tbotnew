@@ -23,7 +23,7 @@ module.exports = {
 			value: `${result[1].chemotherapy}`,
 			inline: true
 		})
-		.setColor("Random")
+		.setColor("Yellow")
 		.setImage(`${result[4].chemotherapy}`)
 		message.channel.send({embeds: [chemotherapy]})
 	}

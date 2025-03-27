@@ -23,7 +23,7 @@ module.exports = {
 				name: "Deck Cost", 
 				value: `${result[1].budgetcc}`,
 				inline: true})
-		.setColor("Random")
+		.setColor("Green")
 .setImage(`${result[4].budgetcc}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

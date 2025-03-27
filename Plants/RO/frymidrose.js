@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].frymidrose}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Yellow")
 .setImage(`${result[4].frymidrose}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

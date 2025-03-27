@@ -27,7 +27,7 @@ module.exports = {
               inline: true,
             }
           )
-          .setColor("Random")
+          .setColor("#964B00")
           .setImage(`${result[4].pawntrickstab}`);
         message.channel.send({ embeds: [pawntrickstab] });
     }

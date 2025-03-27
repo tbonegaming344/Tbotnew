@@ -25,7 +25,7 @@ module.exports = {
 				value: `${result[1].wr100}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("White")
 .setImage(`${result[4].wr100}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

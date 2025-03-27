@@ -24,6 +24,7 @@ module.exports ={
             inline: true
         })	
         .setImage(`${result[4].radiotherapy}`)
+        .setColor("#964B00")
         message.channel.send({embeds: [radio]})
     }
 }

@@ -24,7 +24,7 @@ module.exports = {
         name: "Deck Cost", 
         value: `${result[1].cyburn}`,
         inline: true})
-      .setColor("Random")
+      .setColor("White")
       .setImage(`${result[4].cyburn}`);
     message.channel.send({ embeds: [embed] });
   },

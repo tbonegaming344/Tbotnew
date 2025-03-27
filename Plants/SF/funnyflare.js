@@ -24,7 +24,7 @@ module.exports = {
 				value: `${result[1].funnyflare}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Yellow")
 		.setImage(`${result[4].funnyflare}`)
 	message.channel.send({embeds: [ fflare ] } ) 
 	}

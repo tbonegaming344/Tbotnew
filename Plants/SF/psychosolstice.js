@@ -18,7 +18,7 @@ module.exports = {
     let pys = new EmbedBuilder()
       .setTitle(`${result[5].psychosolstice}`)
       .setDescription(`${result[3].psychosolstice}`)
-      .setColor("Random")
+      .setColor("Yellow")
       .setFooter({ text: `${result[2].psychosolstice}` })
       .addFields({
         name: "Deck Type",

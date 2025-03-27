@@ -10,7 +10,7 @@ module.exports = {
 		.setTitle(`${result[5].freezeheal}`)
 		.setDescription(`${result[3].freezeheal}`)
 		.setFooter({text: `${result[2].freezeheal}`})
-		.setColor("Random")
+		.setColor("Yellow")
 		.addFields({
 			name: "Deck Type",
 			value: `${result[6].freezeheal}`,

@@ -9,7 +9,7 @@ module.exports = {
         let mspotk = new EmbedBuilder()
         .setTitle(`${result[5].mspotk}`)
         .setDescription(`${result[3].mspotk}`)
-      .setColor("Random")
+      .setColor("Green")
       .setFooter({ text: `${result[2].mspotk}` })
       .addFields({
         name: "Deck Type",

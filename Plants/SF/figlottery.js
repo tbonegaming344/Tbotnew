@@ -36,7 +36,7 @@ module.exports = {
         value: `${result[1].healmidflare}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Yellow")
       .setImage(`${result[4].healmidflare}`);
     message.channel.send({ embeds: [embed] });
   },

@@ -34,7 +34,7 @@ module.exports = {
         value: `${result[1].shamcontrol}`,
         inline: true,
       })
-      .setColor("Random")
+      .setColor("White")
       .setImage(`${result[4].shamcontrol}`);
     message.channel.send({ embeds: [embed] });
   },

@@ -13,7 +13,7 @@ function CreateHelpEmbed(title, description, thumbnail, footer){
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-    .setColor("Random");
+    .setColor("Green");
   if (footer) {
     embed.setFooter({ text: `${footer}` });
   }
@@ -121,8 +121,8 @@ module.exports = {
     const ab = CreateButtons("winrate1003", "bms2")
     const bms2 = CreateButtons("ab", "pb2")
     const pb2 = CreateButtons("bms2", "smf3")
-    const smf3 = CreateButtons("pbeans2", "srings4")
-    const srings4 = CreateButtons("smf3", "allhelp");
+    const smf3 = CreateButtons("pbeans2", "srings3")
+    const srings3 = CreateButtons("smf3", "allhelp");
     const toBuildString = BuildDeckString(greenShadowDecks.allDecks)
     const toBuildAggroString = BuildDeckString(greenShadowDecks.aggroDecks)
     const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
@@ -206,7 +206,7 @@ Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot
             { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
             { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
           )
-          .setColor("Random");
+          .setColor("White");
         const imageUrl = result[4][deckName];
         if (imageUrl) {
           embed.setImage(imageUrl);
@@ -277,9 +277,6 @@ Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot
       }
       else if(i.customId == "srings3" || i.customId == "starrings3"){
         await i.update({embeds: [starrings], components: [srings3]})
-      }
-      else if(i.customId == "srings4" || i.customId == "starrings4"){
-        await i.update({embeds: [starrings], components: [srings4]})
       }
       else if(i.customId == "wr100" || i.customId == "winrate100"){
         await i.update({embeds: [winrate100], components: [wr100]})

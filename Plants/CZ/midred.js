@@ -25,7 +25,7 @@ module.exports = {
 				value: `${result[1].midred}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Yellow")
 		.setImage(`${result[4].midred}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

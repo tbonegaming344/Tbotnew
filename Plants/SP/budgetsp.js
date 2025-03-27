@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].budgetburstsp}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("#964B00")
 .setImage(`${result[4].budgetburstsp}`)
 	message.channel.send({embeds: [ budgetsp] } ) 
 		}

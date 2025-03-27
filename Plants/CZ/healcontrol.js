@@ -26,7 +26,7 @@ module.exports = {
 				value:`${result[1].apotk}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("Yellow")		
 		.setImage(`${result[4].apotk}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

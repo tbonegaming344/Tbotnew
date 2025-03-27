@@ -9,7 +9,7 @@ module.exports = {
         .setTitle(`${result[5].popsicle}`)
         .setDescription(`${result[3].popsicle}`)
         .setFooter({text: `${result[2].popsicle}`})
-            .setColor("Random")
+            .setColor("#964B00")
             .setImage(`${result[4].popsicle}`)
                 .addFields({
                     name: "Deck Type",

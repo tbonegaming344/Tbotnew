@@ -9,7 +9,7 @@ module.exports = {
         let pbeans = new EmbedBuilder()
         .setTitle(`${result[5].pbeans}`)
         .setDescription(`${result[3].pbeans}`)
-        .setColor("Random")
+        .setColor("White")
         .addFields({
         name: "Deck Type",
         value: `${result[6].pbeans}`,

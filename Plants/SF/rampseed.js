@@ -24,7 +24,7 @@ module.exports = {
 				value: `${result[1].ramp2seedling}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Yellow")
 .setImage(`${result[4].ramp2seedling}`)
 	message.channel.send({embeds: [ embed ] } )
 	}

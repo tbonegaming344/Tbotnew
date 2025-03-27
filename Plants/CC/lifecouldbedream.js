@@ -20,7 +20,7 @@ module.exports = {
     let lcbd = new EmbedBuilder()
       .setTitle(`${result[5].lcbd}`)
       .setDescription(`${result[3].lcbd}`)
-      .setColor("Random")
+      .setColor("Green")
       .setFooter({ text: `${result[2].lcbd}` })
       .addFields({
         name: "Deck Type",

@@ -25,7 +25,7 @@ module.exports = {
 				value:`${result[1].toyotacontrolla}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("White")		
 		.setImage(`${result[4].toyotacontrolla}`)
 	message.channel.send({embeds: [ embed ] } )
 	}

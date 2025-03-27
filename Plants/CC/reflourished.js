@@ -9,7 +9,7 @@ module.exports = {
         let reflourished = new EmbedBuilder()
         .setTitle(`${result[5].reflourished}`)
         .setDescription(`${result[3].reflourished}`)
-      .setColor("Random")
+      .setColor("Green")
       .setFooter({ text: `${result[2].reflourished}` })
       .addFields({
         name: "Deck Type",

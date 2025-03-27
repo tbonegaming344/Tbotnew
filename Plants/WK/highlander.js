@@ -9,7 +9,7 @@ module.exports = {
 		let hl = new EmbedBuilder()
 		.setTitle(`${result[5].highlander}`)
 		.setDescription(`${result[3].highlander}`)
-		.setColor("Random")
+		.setColor("Yellow")
 		.setFooter({text: `${result[2].highlander}`})
 		.addFields({
 			name: "Deck Type",

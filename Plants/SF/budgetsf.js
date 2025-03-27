@@ -39,7 +39,7 @@ module.exports = {
           inline: true,
         }
       )
-      .setColor("Random")
+      .setColor("Yellow")
       .setImage(`${result[4].budgetswarmsf}`);
     message.channel.send({ embeds: [budgetswarm] });
   },

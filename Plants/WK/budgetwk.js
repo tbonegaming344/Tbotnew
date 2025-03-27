@@ -39,7 +39,7 @@ module.exports = {
           inline: true,
         }
       )
-      .setColor("Random")
+      .setColor("Yellow")
       .setImage(`${result[4].budgetwkmidheal}`);
     message.channel.send({ embeds: [budgetwk] });
   },

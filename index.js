@@ -27,7 +27,6 @@ client.aliases = new Collection();
 const fs = require('fs');
 
 fs.readdirSync('./Plants').forEach(folder => {
-    // let commands = filesConfig(`./src/commands/${folder}`, ".js");
     let commands = fs
         .readdirSync(`./Plants/${folder}`)
         .filter(file => file.endsWith('.js'));
@@ -38,7 +37,6 @@ fs.readdirSync('./Plants').forEach(folder => {
     });
 })
 fs.readdirSync('./Zombies').forEach(folder => {
-    // let commands = filesConfig(`./src/commands/${folder}`, ".js");
     let commands = fs
         .readdirSync(`./Zombies/${folder}`)
         .filter(file => file.endsWith('.js'));
@@ -49,7 +47,6 @@ fs.readdirSync('./Zombies').forEach(folder => {
     });
 })
 fs.readdirSync('./ZV(Misc)').forEach(folder => {
-    // let commands = filesConfig(`./src/commands/${folder}`, ".js");
     let commands = fs
         .readdirSync(`./ZV(Misc)/${folder}`)
         .filter(file => file.endsWith('.js'));
@@ -74,7 +71,7 @@ client.on(Events.MessageCreate, async message => {
         let commandName = args.join("").toLowerCase()
         const command =
             client.commands.get(commandName) ||
-            client.commands.find((a) => a.aliases && a.aliases.includes(commandName))
+            client.commands.find((a) => a.aliases?.includes(commandName));
         if (!command) return channel.send(`${message} is not a command sent by ${message.author.username}.`)
             // Check if the message is from a guild (not a DM)
         if (message.guild) {

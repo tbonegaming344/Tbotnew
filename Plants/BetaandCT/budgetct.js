@@ -25,7 +25,7 @@ module.exports = {
 					value: `${result[1].budgetct}`,
 					inline: true
 				})
-		.setColor("Random")
+		.setColor("White")
 	.setImage(`${result[4].budgetct}`)
 	message.channel.send({embeds: [ budgetct] } ) 
 	}

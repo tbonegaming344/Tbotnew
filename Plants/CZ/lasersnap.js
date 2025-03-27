@@ -10,7 +10,7 @@ module.exports = {
     .setTitle(`${result[5].lasersnap}`)
     .setDescription(`${result[3].lasersnap}`)
     .setFooter({text: `${result[2].lasersnap}`})
-        .setColor("Random")
+        .setColor("Yellow")
         .setImage(`${result[4].lasersnap}`)
             .addFields({
                 name: "Deck Type",

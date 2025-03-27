@@ -25,7 +25,7 @@ let embed = new EmbedBuilder()
 				value: `${result[1].abeans}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("White")
 		.setImage(`${result[4].abeans}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

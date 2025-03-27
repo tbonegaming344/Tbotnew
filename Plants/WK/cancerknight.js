@@ -9,7 +9,7 @@ module.exports = {
 		let cancer = new EmbedBuilder()
 		.setTitle(`${result[5].cancerknight}`)
 		.setDescription(`${result[3].cancerknight}`)
-		.setColor("Random")
+		.setColor("Yellow")
 		.addFields({
 			name: "Deck Type",
 			value: `${result[6].cancerknight}`,

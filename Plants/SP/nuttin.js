@@ -10,7 +10,7 @@ module.exports = {
     .setTitle(`${result[5].nutting}`)
     .setDescription(`${result[3].nutting}`)
     .setFooter({text: `${result[2].nutting}`})
-        .setColor("Random")
+        .setColor("#964B00")
         .setImage(`${result[4].nutting}`)
             .addFields({
                 name: "Deck Type",

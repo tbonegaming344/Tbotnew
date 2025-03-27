@@ -25,7 +25,7 @@ module.exports = {
             value: `${result[1].sovietonion}`,
             inline: true
         })
-        .setColor("Random")
+        .setColor("White")
         .setImage(`${result[4].sovietonion}`)
         message.channel.send({embeds: [tsunion]})
     }

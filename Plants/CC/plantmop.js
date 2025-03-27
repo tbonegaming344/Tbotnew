@@ -26,7 +26,7 @@ module.exports = {
 					value: `${result[1].plantmop}`,
 					inline: true
 				})
-		.setColor("Random")			
+		.setColor("Green")			
 		.setImage(`${result[4].plantmop}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

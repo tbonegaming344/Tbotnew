@@ -24,7 +24,7 @@ module.exports = {
 				value:`${result[1].translattail}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("White")		
 		.setImage(`${result[4].translattail}`)
 	message.channel.send({embeds: [ embed ] } )
 	}

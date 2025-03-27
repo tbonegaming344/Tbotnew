@@ -25,7 +25,7 @@ module.exports = {
         inline: true
       })
       .setImage(`${result[4].watertron}`)
-      .setColor("Random");
+      .setColor("White");
     message.channel.send({ embeds: [watertron] });
   },
 };

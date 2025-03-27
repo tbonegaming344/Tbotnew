@@ -13,7 +13,7 @@ function CreateHelpEmbed(title, description, thumbnail, footer){
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-    .setColor("Yellow");
+    .setColor("Red");
   if (footer) {
     embed.setFooter({ text: `${footer}` });
   }
@@ -206,102 +206,102 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
       if(value == "comp"){
         await i.reply({embeds: [figlottery], flags: MessageFlags.Ephemeral})
       }
-      if(value == "ladder" || value == "control"){
+     else if(value == "ladder" || value == "control"){
         await i.reply({embeds: [ejection], flags: MessageFlags.Ephemeral})
       }
-      if(value == "budget" || value == "tempo"){
+      else if(value == "budget" || value == "tempo"){
         await i.reply({embeds: [budgetsf], flags: MessageFlags.Ephemeral})
       }
-      if(value == "all"){
+      else if(value == "all"){
         await i.update({embeds: [allEmbed], components: [alldecksrow]})
       }
-      if(value == "meme"){
+      else if(value == "meme"){
         await i.update({embeds: [memeEmbed], components: [memerow]})
       }
-      if(value == "combo"){
+      else if(value == "combo"){
         await i.update({embeds: [comboEmbed], components: [comborow]})
       }
-      if(value == "midrange"){
+      else if(value == "midrange"){
         await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
       } 
     }
     async function handleButtonInteraction(i){
-      if( i.customId == "allhelp" || i.customId == "helpall"){
+     if(i.customId == "allhelp" || i.customId == "helpall"){
         await i.update({embeds: [allEmbed], components: [alldecksrow]})
       }
-      if(i.customId == "memehelp" || i.customId == "helpmeme"){
+     else if(i.customId == "memehelp" || i.customId == "helpmeme"){
         await i.update({embeds: [memeEmbed], components: [memerow]})
       }
-      if( i.customId == "helpcombo" || i.customId == "combohelp"){
+     else if(i.customId == "helpcombo" || i.customId == "combohelp"){
         await i.update({embeds: [comboEmbed], components: [comborow]})
       }
-      if( i.customId == "helpmid" || i.customId == "midhelp"){
+     else if(i.customId == "helpmid" || i.customId == "midhelp"){
         await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
       }
-      if(i.customId == "psol" || i.customId == "psychosolstice"){
+     else if(i.customId == "psol" || i.customId == "psychosolstice"){
         await i.update({embeds: [psychosolstice], components: [psol]})
       }
-      if(i.customId == "psol2" || i.customId == "psychosolstice2"){
+     else if(i.customId == "psol2" || i.customId == "psychosolstice2"){
         await i.update({embeds: [psychosolstice], components: [psol2]})
       }
-      if(i.customId == "psol3" || i.customId == "psychosolstice3"){
+     else if(i.customId == "psol3" || i.customId == "psychosolstice3"){
         await i.update({embeds: [psychosolstice], components: [psol3]})
       }
-      if(i.customId == "psol4" || i.customId == "psychosolstice4"){
+     else if(i.customId == "psol4" || i.customId == "psychosolstice4"){
         await i.update({embeds: [psychosolstice], components: [psol4]})
       }
-      if(i.customId == "flottery" || i.customId == "figlottery"){
+     else if(i.customId == "flottery" || i.customId == "figlottery"){
         await i.update({embeds: [figlottery], components: [flottery]})
       }
-      if(i.customId == "flottery2" || i.customId == "figlottery2"){
+     else if(i.customId == "flottery2" || i.customId == "figlottery2"){
         await i.update({embeds: [figlottery], components: [flottery2]})
       }
-      if(i.customId == "eject" || i.customId == "ejection"){
+     else if(i.customId == "eject" || i.customId == "ejection"){
         await i.update({embeds: [ejection], components: [eject]})
       }
-      if(i.customId == "r2s" || i.customId == "ramp2seedling"){
+     else if(i.customId == "r2s" || i.customId == "ramp2seedling"){
         await i.update({embeds: [ramp2seedling], components: [r2s]})
       }
-      if(i.customId == "r2s2" || i.customId == "ramp2seedling2"){
+     else if(i.customId == "r2s2" || i.customId == "ramp2seedling2"){
         await i.update({embeds: [ramp2seedling], components: [r2s2]})
       }
-      if(i.customId == "r2s3" || i.customId == "ramp2seedling3"){
+     else if(i.customId == "r2s3" || i.customId == "ramp2seedling3"){
         await i.update({embeds: [ramp2seedling], components: [r2s3]})
       }
-      if(i.customId == "r2s4" || i.customId == "ramp2seedling4"){
+     else if(i.customId == "r2s4" || i.customId == "ramp2seedling4"){
         await i.update({embeds: [ramp2seedling], components: [r2s4]})
       }
-      if(i.customId == "ff" || i.customId == "funnyflare"){
+     else if(i.customId == "ff" || i.customId == "funnyflare"){
         await i.update({embeds: [funnyflare], components: [ff]})
       }
-      if(i.customId == "ff2" || i.customId == "funnyflare2"){
+     else if(i.customId == "ff2" || i.customId == "funnyflare2"){
         await i.update({embeds: [funnyflare], components: [ff2]})
       }
-      if(i.customId == "ff3" || i.customId == "funnyflare3"){
+     else if(i.customId == "ff3" || i.customId == "funnyflare3"){
         await i.update({embeds: [funnyflare], components: [ff3]})
       }
-      if(i.customId == "ff4" || i.customId == "funnyflare4"){
+     else if(i.customId == "ff4" || i.customId == "funnyflare4"){
         await i.update({embeds: [funnyflare], components: [ff4]})
       }
-      if(i.customId == "hburn" || i.customId == "healburn"){
+     else if(i.customId == "hburn" || i.customId == "healburn"){
         await i.update({embeds: [healburn], components: [hburn]})
       }
-      if(i.customId == "hburn2" || i.customId == "healburn2"){
+     else if(i.customId == "hburn2" || i.customId == "healburn2"){
         await i.update({embeds: [healburn], components: [hburn2]})
       }
-      if(i.customId == "hburn3" || i.customId == "healburn3"){
+     else if(i.customId == "hburn3" || i.customId == "healburn3"){
         await i.update({embeds: [healburn], components: [hburn3]})
       }
-      if(i.customId == "hburn4" || i.customId == "healburn4"){
+     else if(i.customId == "hburn4" || i.customId == "healburn4"){
         await i.update({embeds: [healburn], components: [hburn4]})
       }
-      if(i.customId == "bsf" || i.customId == "budgetsf"){
+     else if(i.customId == "bsf" || i.customId == "budgetsf"){
         await i.update({embeds: [budgetsf], components: [bsf]})
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if(i.customId == "select"){
+     if(i.customId == "select"){
        await HandleSelectMenu(i)
       }
      else{

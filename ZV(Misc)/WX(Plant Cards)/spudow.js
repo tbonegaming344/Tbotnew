@@ -12,7 +12,7 @@ function createHelpEmbed(title, description, thumbnail, footer){
   .setTitle(title)
   .setDescription(description)
   .setThumbnail(thumbnail)
-  .setColor("Brown")
+  .setColor("Red")
   if(footer){
   embed.setFooter({text: `${footer}`})
   }
@@ -178,7 +178,7 @@ module.exports = {
             inline: true,
           }
         )
-        .setColor("Brown");
+         .setColor("#964B00");
         const imageUrl = result[4][deckName];
         if (imageUrl) {
           embed.setImage(imageUrl);

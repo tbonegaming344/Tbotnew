@@ -3292,7 +3292,7 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
     new ButtonBuilder()
-      .setCustomId("sea22")
+      .setCustomId("sea2")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     );

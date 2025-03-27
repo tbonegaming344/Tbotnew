@@ -9,12 +9,12 @@ const {
 } = require("discord.js");
 let db = require("../../index.js");
 
-function createHelpEmbed(title, description, thumbnail, footer){
+function CreateHelpEmbed(title, description, thumbnail, footer){
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-    .setColor("Random");
+    .setColor("Brown");
   if (footer) {
     embed.setFooter({ text: `${footer}` });
   }
@@ -84,7 +84,7 @@ module.exports = {
       allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy"]
     };
 
-    function createButtons(leftButtonId, rightButtonId) {
+    function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -104,28 +104,28 @@ module.exports = {
     const toBuildString = buildDeckString(spudowDecks.allDecks);
     const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
     const toBuildControlString = buildDeckString(spudowDecks.controlDecks);
-    const embed = createHelpEmbed(
+    const embed = CreateHelpEmbed(
       "Spudow Decks",
       `To view the Spudow decks please select an option using the select menu below!
 Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719"
     );
 
-    const allEmbed = createHelpEmbed(
+    const allEmbed = CreateHelpEmbed(
       "All Spudow Decks",
       `My decks for Spudow are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`
     );
-    const controlEmbed = createHelpEmbed(
+    const controlEmbed = CreateHelpEmbed(
       "Spudow Control Decks",
       `My control decks for Spudow are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.controlDecks.length} decks in Tbot`
     );
-    const memeEmbed = createHelpEmbed(
+    const memeEmbed = CreateHelpEmbed(
       "Spudow Meme Decks",
       `My meme decks for Spudow are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
@@ -134,7 +134,7 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
     );
     let [result] = await db.query(`SELECT * from spdecks`);
 
-    function createDeckEmbed(result, deckName) {
+    function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -151,21 +151,21 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const controlrow = createButtons("radiotherapy2", "pop");
-    const pop = createButtons("helpcontrol", "radio2");
-    const radio2 = createButtons("popsicle", "controlhelp");
-    const memerow = createButtons("popsicle3", "nut2");
-    const nut2 = createButtons("helpmeme", "pop3");
-    const pop3 = createButtons("nuttin2", "memehelp");
-    const alldecksrow = createButtons("radiotherapy", "bsp");
-    const bsp = createButtons("helpall", "nut");
-    const nut = createButtons("budgetsp", "pop2");
-    const pop2 = createButtons("nuttin", "radio");
-    const radio = createButtons("popsicle2", "allhelp");
-    const budgetsp = createDeckEmbed(result, "budgetburstsp");
-    const radiotherapy = createDeckEmbed(result, "radiotherapy");
-    const nuttin = createDeckEmbed(result, "nutting");
-    const popsicle = createDeckEmbed(result, "popsicle");
+    const controlrow = CreateButtons("radiotherapy2", "pop");
+    const pop = CreateButtons("helpcontrol", "radio2");
+    const radio2 = CreateButtons("popsicle", "controlhelp");
+    const memerow = CreateButtons("popsicle3", "nut2");
+    const nut2 = CreateButtons("helpmeme", "pop3");
+    const pop3 = CreateButtons("nuttin2", "memehelp");
+    const alldecksrow = CreateButtons("radiotherapy", "bsp");
+    const bsp = CreateButtons("helpall", "nut");
+    const nut = CreateButtons("budgetsp", "pop2");
+    const pop2 = CreateButtons("nuttin", "radio");
+    const radio = CreateButtons("popsicle2", "allhelp");
+    const budgetsp = CreateDeckEmbed(result, "budgetburstsp");
+    const radiotherapy = CreateDeckEmbed(result, "radiotherapy");
+    const nuttin = CreateDeckEmbed(result, "nutting");
+    const popsicle = CreateDeckEmbed(result, "popsicle");
 
     const m = await message.channel.send({
       embeds: [embed],

@@ -989,7 +989,7 @@ module.exports = {
             `${result[0].telimps}`,
             `${result[0].ykm}`,
             //IF TBOT DB
-           
+           `${result[0].nohokaistars}`,
             `${result[0].spacestars}`,
             `${result[0].splimps}`,
             //IM TBOT DB
@@ -1445,7 +1445,7 @@ module.exports = {
           );
           const deck = [
             //IF TBOT DB
-           
+           `${result[0].nohokaistars}`,
             `${result[0].spacestars}`,
             `${result[0].splimps}`,         
           ];
@@ -1785,7 +1785,7 @@ module.exports = {
               `${result[0].telimps}`,
               `${result[0].ykm}`,
               //IF TBOT DB
-             
+             `${result[0].nohokaistars}`,
               `${result[0].spacestars}`,
               `${result[0].splimps}`,
               //IM TBOT DB

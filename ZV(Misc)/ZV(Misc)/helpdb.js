@@ -7,6 +7,7 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 let db = require("../../index.js");
+const nohokaistars = require("../../Zombies/IF/nohokaistars.js");
 module.exports = {
   name: `helpdb`,
   aliases: [
@@ -2656,11 +2657,11 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("npa")
+        .setCustomId("nhks")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    const msbolt = new ActionRowBuilder().addComponents(
+    const nhks = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("mechascope")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
@@ -2672,7 +2673,7 @@ module.exports = {
     );
     const npa = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("mechascope")
+        .setCustomId("nohokaistars")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3032,6 +3033,7 @@ module.exports = {
       "marxbolt",
       "mechacontrol",
       "mechascope",
+      "nohokaistars",
       "noplayingallowed",
       "otkswabbie",
       "pablosyeeyzs",
@@ -3281,13 +3283,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("sea2")
+        .setCustomId("nhks2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+    const nhks2 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("pablosyeeyzs2")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
+      .setCustomId("sea22")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary)
+    );
     const sea2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("pablosyeeyzs2")
+        .setCustomId("nohokaistars2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3343,6 +3355,7 @@ module.exports = {
       "lockthebathroom",
       "kaleidoscope",
       "pablosyeeyzs",
+      "nohokaistars",
       "seacret",
       "spacestars",
       "telimps",
@@ -5121,13 +5134,23 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
+        .setCustomId("nhks3")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const nhks3 = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("petmop3")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
         .setCustomId("stars4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const stars4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("petmop3")
+        .setCustomId("nohokaistars3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -5219,6 +5242,7 @@ module.exports = {
       "lunchtime",
       "pablosyeeyzs",
       "petmop",
+      "nohokaistars",
       "spacestars",
       "sunlord",
       "trickstache",
@@ -7441,6 +7465,29 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].budgetif}`);
+      const nohonkaistars = new EmbedBuilder()
+        .setTitle(`${result[5].nohokaistars}`)
+        .setDescription(`${result[3].nohokaistars}`)
+        .setFooter({ text: `${result[2].nohokaistars}` })
+        .addFields(
+          {
+            name: "Deck Type",
+            value: `${result[6].nohokaistars}`,
+            inline: true,
+          },
+          {
+            name: "Archetype",
+            value: `${result[0].nohokaistars}`,
+            inline: true,
+          },
+          {
+            name: "Deck Cost",
+            value: `${result[1].nohokaistars}`,
+            inline: true,
+          }
+        )
+        .setColor("Random")
+        .setImage(`${result[4].nohokaistars}`);
     let spacestars = new EmbedBuilder()
       .setTitle(`${result[5].spacestars}`)
       .setDescription(`${result[3].spacestars}`)
@@ -10216,6 +10263,15 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
     }
     else if(i.customId == "dgloves3" || i.customId == "dinogloves3"){
       await i.update({embeds: [dinogloves], components: [dgloves3]})
+    }
+    else if(i.customId == "nhks" || i.customId == "nohokaistars"){
+      await i.update({embeds: [nohokaistars], components: [nhks]})
+    }
+    else if(i.customId == "nhks2" || i.customId == "nohokaistars2"){
+      await i.update({embeds: [nohokaistars], components: [nhks2]})
+    }
+    else if(i.customId == "nhks3" || i.customId == "nohokaistars3"){
+      await i.update({embeds: [nohokaistars], components: [nhks3]})
     }
     });
   },

@@ -40,7 +40,7 @@ module.exports = {
       .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
       .setValue('combo'), 
       new StringSelectMenuOptionBuilder()
-      .setLabel('Midrange Decks')
+      .setLabel('Midrange Deck')
       .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
       .setValue('midrange'),  
       new StringSelectMenuOptionBuilder()
@@ -232,13 +232,23 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("sea")
+      .setCustomId("nhks")
       .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary),
     );
-    const sea = new ActionRowBuilder().addComponents(
+    const nhks = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("kaleidoscope")
+      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+      .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+      .setCustomId("sea")
+      .setEmoji("<:arrowright:1271446796207525898>")
+      .setStyle(ButtonStyle.Primary),
+    )
+    const sea = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId("nohokaistars")
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
       .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -248,6 +258,7 @@ module.exports = {
     );
     let competitivedecks = [
       "kaleidoscope",
+      "nohokaistars",
       "seacret",
     ]
     let toBuildCompetitive = "";
@@ -338,11 +349,13 @@ module.exports = {
       let deck = decks[i];
       toBuildString += `\n <@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select cancerknight, otktrickster, seacret,
+    let [result] = await db.query(`select cancerknight, otktrickster, nohokaistars, seacret,
 pbfeast, poggerrazzi, rampticia
 from wkdecks wk 
 inner join ebdecks eb
 on (wk.deckinfo = eb.deckinfo)
+inner join ifdecks fi 
+on (wk.deckinfo = fi.deckinfo)
 inner join pbdecks pb 
 on (wk.deckinfo = pb.deckinfo)
 inner join rbdecks rb 
@@ -472,6 +485,29 @@ Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tb
     })
     .setColor("Random")
     .setImage(`${result[4].otktrickster}`);
+    const nohonkaistars = new EmbedBuilder()
+    .setTitle(`${result[5].nohokaistars}`)
+    .setDescription(`${result[3].nohokaistars}`)
+    .setFooter({ text: `${result[2].nohokaistars}` })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `${result[6].nohokaistars}`,
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `${result[0].nohokaistars}`,
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${result[1].nohokaistars}`,
+        inline: true,
+      }
+    )
+    .setColor("Random")
+    .setImage(`${result[4].nohokaistars}`);
     let seacret = new EmbedBuilder()
     .setTitle(`${result[5].seacret}`)
     .setDescription(`${result[3].seacret}`)
@@ -543,109 +579,110 @@ Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tb
         if(value == "comp"){
           await i.update({embeds: [competitivemono], components: [competitiverow]});
         }
-        if(value == "meme"){
+        else if(value == "meme"){
           await i.update({embeds: [mememono], components: [memerow]});
         }
-        if(value == "control"){
+        else if(value == "midrange"){
+          await i.reply({embeds: [nohonkaistars], flags: MessageFlags.Ephemeral})
+        }
+        else if(value == "tempo"){
+          await i.reply({embeds: [coggerazzi], flags: MessageFlags.Ephemeral})
+        }
+        else if(value == "control"){
           await i.update({embeds: [controlmono], components: [controlrow]});
         }
-        if(value == "combo"){
+        else if(value == "combo"){
           await i.update({embeds: [combomono], components: [comborow]});
         }
-        if(value == "aggro"){
+        else if(value == "aggro"){
           await i.reply({embeds: [seacret], flags: MessageFlags.Ephemeral})
         }
-        if(value == "all"){
+        else if(value == "all"){
           await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
         }
       }
-      if(i.customId == "sea" || i.customId == "seacret"){
+     else if(i.customId == "sea" || i.customId == "seacret"){
         await i.update({embeds: [seacret], components: [sea]});
       }
-      if(i.customId === "competitivehelp" || i.customId === "helpcompetitive"){
+     else if(i.customId === "competitivehelp" || i.customId === "helpcompetitive"){
         await i.update({embeds: [competitivemono], components: [competitiverow]});
       }
       //Meme Decks
-      
-      if(i.customId == "agrp" || i.customId === "agrpeas"){
-        await i.update({embeds: [arpeas], components: [agrp]});
-      }
-      if(i.customId == "ck" || i.customId == "cancerknight"){
+     else if(i.customId == "ck" || i.customId == "cancerknight"){
         await i.update({embeds: [cknight], components: [ck]});
       }
-      if(i.customId == "ck3" || i.customId == "cancerknight3"){
+     else if(i.customId == "ck3" || i.customId == "cancerknight3"){
         await i.update({embeds: [cknight], components: [ck3]});
       }
-      if(i.customId == "pbfeas" || i.customId == "pbfeast"){
+     else if(i.customId == "pbfeas" || i.customId == "pbfeast"){
         await i.update({embeds: [pbfeast], components: [pbfeas]});
       }
-      if(i.customId == "pbfeas3" || i.customId == "pbfeast3"){
+     else if(i.customId == "pbfeas3" || i.customId == "pbfeast3"){
         await i.update({embeds: [pbfeast], components: [pbfeas3]});
       }
-      if(i.customId == "rticia" || i.customId == "rampticia"){
+     else if(i.customId == "rticia" || i.customId == "rampticia"){
         await i.update({embeds: [rticia], components: [rampticia]});
       }
-      if(i.customId == "rticia3" || i.customId == "rampticia3"){
+     else if(i.customId == "rticia3" || i.customId == "rampticia3"){
         await i.update({embeds: [rticia], components: [rticia3]});
       }
-      if(i.customId == "memehelp"  || i.customId == "helpmeme"){
+     else if(i.customId == "memehelp"  || i.customId == "helpmeme"){
         await i.update({embeds: [mememono], components: [memerow]});
       }
       // Control Decks
      
-      if(i.customId == "ck2" || i.customId == "cancerknight2"){
+     else if(i.customId == "ck2" || i.customId == "cancerknight2"){
         await i.update({embeds: [cknight], components: [ck2]});
       }
-      if(i.customId == "pbfeas2"|| i.customId == "pbfeast2"){
+     else if(i.customId == "pbfeas2"|| i.customId == "pbfeast2"){
         await i.update({embeds: [pbfeast], components: [pbfeas2]});
       }
-      if(i.customId == "controlhelp" || i.customId =="helpcontrol"){
+     else if(i.customId == "controlhelp" || i.customId =="helpcontrol"){
         await i.update({embeds: [controlmono], components: [controlrow]});
       }
       // Combo Decks
-      if(i.customId == "rticia2" || i.customId == "rampticia2"){
+     else if(i.customId == "rticia2" || i.customId == "rampticia2"){
         await i.update({embeds: [rticia], components: [rticia2]});
       }
-      if(i.customId === "helpcombo" || i.customId === "combohelp"){
+     else if(i.customId === "helpcombo" || i.customId === "combohelp"){
         await i.update({embeds: [combomono], components: [comborow]});
       }
-      // Midrange Deck
-      if( i.customId == "helpmid" || i.customId == "midhelp"){
-        await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
-      }
       // Aggro Decks
-      if(i.customId == "helpaggro" || i.customId == "aggrohelp"){
+     else if(i.customId == "helpaggro" || i.customId == "aggrohelp"){
         await i.update({embeds: [aggromono], components: [agrorow]});
       }
-      if(i.customId == "sea2" || i.customId == "seacret2"){
+     else if(i.customId == "sea2" || i.customId == "seacret2"){
         await i.update({embeds: [seacret], components: [sea2]});
       }
-      if(i.customId == "cog" || i.customId == "coggerazzi"){
+     else if(i.customId == "cog" || i.customId == "coggerazzi"){
         await i.update({embeds: [coggerazzi], components: [cog]})
       }
-      if(i.customId == "cog2" || i.customId == "coggerazzi2"){
+     else if(i.customId == "cog2" || i.customId == "coggerazzi2"){
         await i.update({embeds: [coggerazzi], components: [cog2]})
       }
-      if(i.customId == "tempo"){
-        await i.reply({embeds: [coggerazzi], flags: MessageFlags.Ephemeral})
-      }
-      if(i.customId == "cog3" || i.customId == "coggerazzi3"){
+     else if(i.customId == "cog3" || i.customId == "coggerazzi3"){
         await i.update({embeds: [coggerazzi], components: [cog3]})
       }
-      if(i.customId == "sea3" || i.customId == "seacret3"){
+     else if(i.customId == "sea3" || i.customId == "seacret3"){
         await i.update({embeds: [seacret], components: [sea3]});
       }
-      if(i.customId == "kscope" || i.customId == "kaleidoscope"){
+     else if(i.customId == "kscope" || i.customId == "kaleidoscope"){
         await i.update({embeds: [kaleidoscope], components: [kscope]})
       }
-      if(i.customId == "kscope2" || i.customId == "kaleidoscope2"){
+     else if(i.customId == "kscope2" || i.customId == "kaleidoscope2"){
         await i.update({embeds: [kaleidoscope], components: [kscope2]})
       }
-      if(i.customId == "kscope3" || i.customId == "kaleidoscope3"){
+     else if(i.customId == "kscope3" || i.customId == "kaleidoscope3"){
         await i.update({embeds: [kaleidoscope], components: [kscope3]})
       }
-      if(i.customId == "allhelp" || i.customId == "helpall"){
+     else if(i.customId == "allhelp" || i.customId == "helpall"){
         await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
+      }
+     else if(i.customId == "nhks" || i.customId == "nohokaistars"){
+        await i.update({embeds: [nohonkaistars], components: [nhks]})
+      }
+     else if(i.customId == "nhks2" || i.customId == "nohokaistars2"){
+        await i.update({embeds: [nohonkaistars], components: [nhks2]})
       }
     });
   },

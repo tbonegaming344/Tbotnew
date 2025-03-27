@@ -1032,7 +1032,6 @@ module.exports = {
             `${result[0].terrifytrickazzi}`,
   
             //SM TBOT DB
-            `${result[0].bobertsmash}`,
             `${result[0].homophobia}`,
             `${result[0].horts}`,
             `${result[0].pablosyeezys}`,
@@ -1592,7 +1591,6 @@ module.exports = {
           );
           const deck = [
             //SM TBOT DB
-            `${result[0].bobertsmash}`,
             `${result[0].homophobia}`,
             `${result[0].horts}`,
             `${result[0].pablosyeezys}`,
@@ -1830,7 +1828,6 @@ module.exports = {
               `${result[0].terrifytrickazzi}`,
     
               //SM TBOT DB
-              `${result[0].bobertsmash}`,
               `${result[0].homophobia}`,
               `${result[0].horts}`,
               `${result[0].pablosyeezys}`,

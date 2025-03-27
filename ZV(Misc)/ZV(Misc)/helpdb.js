@@ -2246,23 +2246,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bsmash")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bsmash = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("blobfishwrappers")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bbolt")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bbolt = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("bobertsmash")
+        .setCustomId("blobfishwrappers")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3000,7 +2990,6 @@ module.exports = {
       "bastet",
       "binaryflagwar",
       "blobfishwrappers",
-      "bobertsmash",
       "boltbolt",
       "bonusducks",
       "brady",
@@ -3410,23 +3399,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bsmash2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bsmash2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("binaryflagwar2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bbolt2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bbolt2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("bobertsmash2")
+        .setCustomId("binaryflagwar2")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3629,7 +3608,6 @@ module.exports = {
       "bfmidgargs",
       "bfplankcontrol",
       "binaryflagwar",
-      "bobertsmash",
       "boltbolt",
       "brady",
       "cryoboy",
@@ -4060,23 +4038,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bsmash3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bsmash3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("agraves3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bbf3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bbf3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("bobertsmash3")
+        .setCustomId("agraves3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4216,7 +4184,6 @@ module.exports = {
     );
     const aggrozdecks = [
       "agraves",
-      "bobertsmash",
       "budgetbf",
       "budgeteb",
       "budgetif",
@@ -8374,29 +8341,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       .setFooter({ text: `${result[2].uncrackabolt}` })
       .setColor("Random")
       .setImage(`${result[4].uncrackabolt}`);
-    let bobertsmash = new EmbedBuilder()
-      .setTitle(`${result[5].bobertsmash}`)
-      .setDescription(`${result[3].bobertsmash}`)
-      .setFooter({ text: `${result[2].bobertsmash}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].bobertsmash}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].bobertsmash}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].bobertsmash}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].bobertsmash}`);
     let budgetsm = new EmbedBuilder()
       .setTitle(`${result[5].budgetsm}`)
       .setDescription(`${result[3].budgetsm}`)
@@ -9386,15 +9330,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       }
       else if(i.customId == "bfwrap4" || i.customId == "blobfishwrappers4") {
         await i.update({ embeds: [blobfishwrappers], components: [bfwrap4] });
-      }
-      else if(i.customId == "bsmash" || i.customId == "bobertsmash") {
-        await i.update({ embeds: [bobertsmash], components: [bsmash] });
-      }
-      else if(i.customId == "bsmash2" || i.customId == "bobertsmash2") {
-        await i.update({ embeds: [bobertsmash], components: [bsmash2] });
-      }
-      else if(i.customId == "bsmash3" || i.customId == "bobertsmash3") {
-        await i.update({ embeds: [bobertsmash], components: [bsmash3] });
       }
       else if(i.customId == "bbolt" || i.customId == "boltbolt") {
         await i.update({ embeds: [boltbolt], components: [bbolt] });

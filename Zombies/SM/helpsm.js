@@ -35,23 +35,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bob")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bob = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpall")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bsm")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bsm = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("bobertsmash")
+        .setCustomId("helpall")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -100,7 +90,6 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
     let decks = [
-      "bobertsmash",
       "budgetsm",
       "homophobia",
       "horts",
@@ -127,7 +116,7 @@ module.exports = {
       .setDescription('Some of the Best Decks in the game')
 			.setEmoji("<:compemote:1325461143136764060>"),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Decks")
+      .setLabel("Ladder Deck")
       .setValue("ladder")
       .setDescription('Decks that mostly only good for ranked games')
 			.setEmoji("<:ladder:1271503994857979964>"), 
@@ -136,7 +125,7 @@ module.exports = {
       .setValue("meme")
       .setDescription('Decks that are built off a weird/fun combo'), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Aggro Decks")
+      .setLabel("Aggro Deck")
       .setValue("aggro")
       .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
       new StringSelectMenuOptionBuilder()
@@ -168,46 +157,9 @@ module.exports = {
     let compdecks = [
       "pablosyeezys",
     ]
-
-    const ladderrow= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("horts2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bob2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bob2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("hor2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const hor2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bobertsmash2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
     let ladderdecks = [
-      "bobertsmash", 
       "horts"
     ]
-    let toBuildLadderString = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
-    }
     const memerow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("whalepharaoh2")
@@ -247,46 +199,10 @@ module.exports = {
       let deck = memedecks[i];
       toBuildMemeString += `\n<@1043528908148052089> **${deck}**`;
     }
-    const aggrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("homophobia3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bob3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bob3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpaggro")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ho3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const ho3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bobertsmash3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("aggrohelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
  
     let aggrodecks = [
-      "bobertsmash",
       "homophobia",
     ]
-    let toBuildAggroString = "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      let deck = aggrodecks[i];
-      toBuildAggroString += `\n<@1043528908148052089> **${deck}**`;
-    }
     const comborow = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
       .setCustomId("whalepharaoh3")
@@ -401,17 +317,6 @@ Note: Smash has ${decks.length} total decks in Tbot`)
 Note: Smash has ${decks.length} total decks in Tbot`,
       })
       .setColor("Random");
-      let ladderEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543"
-      )
-      .setTitle("Smash Ladder Decks")
-      .setDescription(`My ladder decks for Smash(SM) are ${toBuildLadderString}`)
-      .setFooter({
-        text: `To view the Smash ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Smash has ${ladderdecks.length} ladder decks in Tbot`,
-      })
-      .setColor("Random");
       let memeEmbed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543"
@@ -421,17 +326,6 @@ Note: Smash has ${ladderdecks.length} ladder decks in Tbot`,
       .setFooter({
         text: `To view the Smash meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: Smash has ${memedecks.length} meme decks in Tbot`,
-      })
-      .setColor("Random");
-      let aggroEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543"
-      )
-      .setTitle("Smash Aggro Decks")
-      .setDescription(`My aggro decks for Smash(SM) are ${toBuildAggroString}`)
-      .setFooter({
-        text: `To view the Smash aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
-Note: Smash has ${aggrodecks.length} aggro decks in Tbot`,
       })
       .setColor("Random");
       let comboEmbed = new EmbedBuilder()
@@ -457,25 +351,6 @@ Note: Smash has ${midrangedecks.length} midrange decks in Tbot`,
       })
       .setColor("Random");
     let [result] = await db.query(`SELECT * FROM smdecks`);
-    let bobertsmash = new EmbedBuilder()
-    .setTitle(`${result[5].bobertsmash}`)
-    .setDescription(`${result[3].bobertsmash}`)
-    .setFooter({text: `${result[2].bobertsmash}`})
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].bobertsmash}`,
-          inline: true
-        },{
-          name: "Archetype",
-          value: `${result[0].bobertsmash}`,
-          inline: true
-        },{
-          name: "Deck Cost", 
-          value: `${result[1].bobertsmash}`,
-          inline: true
-        })
-      .setColor("Random")
-      .setImage(`${result[4].bobertsmash}`)
     let budgetsm = new EmbedBuilder()
   	.setTitle(`${result[5].budgetsm}`)	
 			.setDescription(`${result[3].budgetsm}`)
@@ -583,104 +458,89 @@ Note: Smash has ${midrangedecks.length} midrange decks in Tbot`,
         if(value == "comp"){
           await i.reply({embeds: [pablosyeezys], flags: MessageFlags.Ephemeral})
         }
-        if(value == "ladder"){
-          await i.update({embeds: [ladderEmbed], components: [ladderrow]})
+        else if(value == "ladder"){
+          await i.reply({embeds: [horts], flags: MessageFlags.Ephemeral})
         }
-        if(value == "meme"){
+        else if(value == "meme"){
           await i.update({embeds: [memeEmbed], components: [memerow]})
         }
-        if(value == "aggro"){
-          await i.update({embeds: [aggroEmbed], components: [aggrorow]})
+        else if(value == "aggro"){
+          await i.reply({embeds: [homophobia], flags: MessageFlags.Ephemeral})
         }
-        if(value == "combo"){
+        else if(value == "combo"){
           await i.update({embeds: [comboEmbed], components: [comborow]})
         }
-        if(value == "control"){
+        else if(value == "control"){
           await i.reply({embeds: [whalepharaoh], flags: MessageFlags.Ephemeral})
         }
-        if(value == "midrange"){
+        else if(value == "midrange"){
           await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
         }
-        if(value == "budget"|| value == "tempo"){
+        else if(value == "budget"|| value == "tempo"){
           await i.reply({embeds: [budgetsm], flags: MessageFlags.Ephemeral})
         }
-        if(value == "all"){
+        else if(value == "all"){
           await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
         }
       }
-      if (i.customId == "bob"|| i.customId == "bobertsmash") {
-        await i.update({ embeds: [bobertsmash], components: [bob] });
-      }
-      if (i.customId == "bob2"|| i.customId == "bobertsmash2") {
-        await i.update({ embeds: [bobertsmash], components: [bob2] });
-      }
-      if (i.customId == "bob3"|| i.customId == "bobertsmash3") {
-        await i.update({ embeds: [bobertsmash], components: [bob3] });
-      }
-      if ( i.customId == "helpall" || i.customId == "allhelp") {
+      else if (i.customId == "helpall" || i.customId == "allhelp") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       }
-      if( i.customId == "ladderhelp" || i.customId == "helpladder"){
-        await i.update({embeds: [ladderEmbed], components: [ladderrow]})
-      }
-      if(i.customId == "memehelp" || i.customId == "helpmeme"){
+      else if (i.customId == "memehelp" || i.customId == "helpmeme"){
         await i.update({embeds: [memeEmbed], components: [memerow]})
       }
-      if ( i.customId == "aggrohelp" || i.customId == "helpaggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      }
-      if ( i.customId == "combohelp" || i.customId == "helpcombo") {
+      else if (i.customId == "combohelp" || i.customId == "helpcombo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       }
-      if ( i.customId == "midrangehelp" || i.customId == "helpmidrange") {
+      else if (i.customId == "midrangehelp" || i.customId == "helpmidrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       }
-      if ( i.customId == "tempohelp" || i.customId == "helptempo") {
+      else if (i.customId == "tempohelp" || i.customId == "helptempo") {
         await i.update({ embeds: [tempoEmbed], components: [temporow] });
       }
-      if (i.customId == "bsm" || i.customId == "budgetsm") {
+      else if (i.customId == "bsm" || i.customId == "budgetsm") {
         await i.update({ embeds: [budgetsm], components: [bsm] });
       }
-      if (i.customId == "ho" || i.customId == "homophobia") {
+      else if (i.customId == "ho" || i.customId == "homophobia") {
         await i.update({ embeds: [homophobia], components: [ho] });
       }
-      if (i.customId == "ho2" || i.customId == "homophobia2") {
+      else if (i.customId == "ho2" || i.customId == "homophobia2") {
         await i.update({ embeds: [homophobia], components: [ho2] });
       }
-      if (i.customId == "ho3" || i.customId == "homophobia3") {
+      else if (i.customId == "ho3" || i.customId == "homophobia3") {
         await i.update({ embeds: [homophobia], components: [ho3] });
       }
-      if (i.customId == "hor" || i.customId == "horts") {
+      else if (i.customId == "hor" || i.customId == "horts") {
         await i.update({ embeds: [horts], components: [hor] });
       }
-      if (i.customId == "hor2" || i.customId =="horts2") {
+      else if (i.customId == "hor2" || i.customId =="horts2") {
         await i.update({ embeds: [horts], components: [hor2] });
       }
-      if (i.customId == "hor3" || i.customId == "horts3") {
+      else if (i.customId == "hor3" || i.customId == "horts3") {
         await i.update({ embeds: [horts], components: [hor3] });
       }
-      if (i.customId == "hor4" || i.customId == "horts4") {
+      else if (i.customId == "hor4" || i.customId == "horts4") {
         await i.update({ embeds: [horts], components: [hor4] });
       }
-      if (i.customId == "py" || i.customId == "pablosyeezys") {
+      else if (i.customId == "py" || i.customId == "pablosyeezys") {
         await i.update({ embeds: [pablosyeezys], components: [py] });
       }
-      if (i.customId == "py2" || i.customId == "pablosyeezys2") {
+      else if (i.customId == "py2" || i.customId == "pablosyeezys2") {
         await i.update({ embeds: [pablosyeezys], components: [py2] });
       }
-      if (i.customId == "py3" || i.customId == "pablosyeezys3") {
+      else if (i.customId == "py3" || i.customId == "pablosyeezys3") {
         await i.update({ embeds: [pablosyeezys], components: [py3] });
       }
-      if(i.customId == "py4" || i.customId == "pablosyeezys4"){
+      else if (i.customId == "py4" || i.customId == "pablosyeezys4"){
         await i.update({embeds: [pablosyeezys], components: [py4]})
       }
-      if (i.customId == "wp" || i.customId == "whalepharaoh") {
+      else if (i.customId == "wp" || i.customId == "whalepharaoh") {
         await i.update({ embeds: [whalepharaoh], components: [wp] });
       }
-      if (i.customId == "wp2" || i.customId == "whalepharaoh2") {
+      else if (i.customId == "wp2" || i.customId == "whalepharaoh2") {
         await i.update({ embeds: [whalepharaoh], components: [wp2] });
       }
-      if (i.customId == "wp3" || i.customId == "whalepharaoh3") {
+      else if (i.customId == "wp3" || i.customId == "whalepharaoh3") {
         await i.update({ embeds: [whalepharaoh], components: [wp3] });
       }
     });

@@ -182,7 +182,7 @@ module.exports = {
       const budgetrose = new CreateDeckEmbed(result, "budgetro");
       const freezeheal = new CreateDeckEmbed(result, "freezeheal");
       const frymidrose = new CreateDeckEmbed(result, "frymidrose");
-      const healmidrose = new CreateDeckEmbed(result, "healmidrose");
+      const healmidrose = new CreateDeckEmbed(result, "hmr");
     const m = await message.channel.send({ embeds: [ro], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     async function HandleSelectMenu(i) {

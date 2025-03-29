@@ -145,7 +145,7 @@ module.exports = {
       )
         const helpif = new CreateHelpEmbed(
           "Impfinity(IF) Decks",
-          `To view the Impfinity decks please click on the buttons below!
+          `To view the Impfinity decks please select an option from the select menu below!
   Note: Impfinity has ${impfinityDecks.allDecks.length} total decks in Tbot`,
           "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520"
         );

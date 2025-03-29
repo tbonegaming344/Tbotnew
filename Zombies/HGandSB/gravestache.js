@@ -23,7 +23,7 @@ module.exports = {
         inline: true
       })
       .setFooter({ text: `${result[2].gravestache}` })
-      .setColor("Random")
+      .setColor("#000000")
       .setImage(`${result[4].gravestache}`);
     message.channel.send({ embeds: [gs] });
   },

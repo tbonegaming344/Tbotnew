@@ -9,7 +9,7 @@ module.exports = {
 		let racism = new EmbedBuilder()
 		.setTitle(`${result[5].racism}`)
 		.setDescription(`${result[3].racism}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.addFields({
 			name: "Deck Type", 
 			value: `${result[6].racism}`,

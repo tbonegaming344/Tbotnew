@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].dozzamech}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Purple")
 		.setImage(`${result[4].dozzamech}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

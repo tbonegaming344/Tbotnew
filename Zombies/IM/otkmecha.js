@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].otkmecha}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Blue")
 		.setImage(`${result[4].otkmecha}`)
 	message.channel.send({embeds: [ mechascope ] } ) 
 	}

@@ -9,7 +9,7 @@ module.exports= {
 		let cbait = new EmbedBuilder()
 		.setTitle(`${result[5].congabait}`)
 		.setDescription(`${result[3].congabait}`)
-		.setColor("Random")
+		.setColor("Purple")
 		.setFooter({text: `${result[2].congabait}`})
 		.addFields({
 			name: "Deck Type",

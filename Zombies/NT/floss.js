@@ -9,7 +9,7 @@ module.exports = {
         let floss = new EmbedBuilder()
         .setTitle(`${result[5].floss}`)
         .setDescription(`${result[3].floss}`)
-        .setColor('Random')
+        .setColor('#000000')
         .addFields({
             name: 'Deck Type',
             value: `${result[6].floss}`,

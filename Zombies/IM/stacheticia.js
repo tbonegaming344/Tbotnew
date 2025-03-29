@@ -9,7 +9,7 @@ module.exports = {
 		let st = new EmbedBuilder()
 		.setTitle(`${result[5].stacheticia}`)
 		.setDescription(`${result[3].stacheticia}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.addFields({
 			name: "Deck Type",
 			value: `${result[6].stacheticia}`,

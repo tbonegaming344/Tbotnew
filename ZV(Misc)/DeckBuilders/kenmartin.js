@@ -234,7 +234,7 @@ on (rb.deckinfo = hg.deckinfo)`);
     let ken = new EmbedBuilder()
       .setTitle("Ken Martin Decks")
       .setDescription(
-        `To view the Decks Made By Ken Martin please click on the buttons below!
+        `To view the Decks Made By Ken Martin please select an option from the select menu below!
 Note: Ken Martin has ${decks.length} total decks in Tbot`
       )
       .setThumbnail(

@@ -23,7 +23,7 @@ module.exports = {
 				value:`${result[1].trickstache}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Purple")
 		.setImage(`${result[4].trickstache}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

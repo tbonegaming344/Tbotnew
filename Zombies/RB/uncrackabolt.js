@@ -27,7 +27,7 @@ module.exports = {
     }
 )
 .setFooter({text: `${result[2].uncrackabolt}`})
-.setColor("Random")
+.setColor("Orange")
 .setImage(`${result[4].uncrackabolt}`)
 message.channel.send({embeds: [uncrackabolt]})
   }

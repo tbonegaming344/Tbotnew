@@ -9,7 +9,7 @@ module.exports = {
 		let bust = new EmbedBuilder()
 		.setTitle(`${result[5].bustbolt}`)
 		.setDescription(`${result[3].bustbolt}`)
-		.setColor("Random")
+		.setColor("Orange")
 			.setFooter({text: `${result[2].bustbolt}`})
 		.addFields({
 			name: "Deck Type",

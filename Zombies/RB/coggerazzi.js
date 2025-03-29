@@ -32,7 +32,7 @@ module.exports = {
         value: `${result[1].poggerrazzi}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Orange")
       .setImage(`${result[4].poggerrazzi}`);
     message.channel.send({ embeds: [embed] });
   },

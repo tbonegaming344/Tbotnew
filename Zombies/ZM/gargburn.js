@@ -23,7 +23,7 @@ module.exports = {
         value: `${result[1].gargburn}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Purple")
       .setImage(`${result[4].gargburn}`);
     message.channel.send({ embeds: [embed] });
   },

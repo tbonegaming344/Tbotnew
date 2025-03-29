@@ -8,6 +8,17 @@ const {
   StringSelectMenuOptionBuilder
 } = require("discord.js");
 let db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#FFC0CB");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `superbrainz`,
   aliases: [`sb`, `brainz`, `superbrains`],
@@ -20,7 +31,6 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
         .setEmoji("<:da6:1088143801459154944>")
     );
-    let decks = ["budgetsb", "teleimpssb"];
     const select = new StringSelectMenuBuilder()
     .setCustomId("select")
     .setPlaceholder("Select an option below to view Super Brainz decklists")
@@ -49,11 +59,14 @@ module.exports = {
       .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.')
     )
     const row = new ActionRowBuilder().addComponents(select)
-    const budgetdecks = ["budgetsb"]
-    const ladderdecks = ["telimpssb"]
-    const combodecks = ["telimpssb"]
-    let controldecks = ["telimpssb"]
-    const tempodecks = ["budgetsb"]
+    const superBrainzDecks = {
+      budgetDecks: ["budgetsb"], 
+      ladderDecks: ["telimpssb"], 
+      comboDecks: ["telimpssb"], 
+      controlDecks: ["telimpssb"], 
+      tempoDecks: ["budgetsb"], 
+      allDecks: ['budgetsb', "telimpssb"]
+    }
     let embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
@@ -77,62 +90,33 @@ module.exports = {
           value: `His most heroic quality is his lifestyle.`,
         }
       )
-      .setColor("Random");
-      let helpsb = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
-      )
-      .setTitle("Super Brainz Decks")
-      .setDescription(`To view the SuperBrainz decks please select an option from the select menu below!
-Note: There are ${decks.length} total decks for Super Brainz in Tbot`)
-      .setColor("Random");
-    let [result] = await db.query(`SELECT * FROM sbdecks`);
-    let budgetsb= new EmbedBuilder()
-      .setTitle(`${result[5].budgetsb}`)
-      .setDescription(`${result[3].budgetsb}`)
-      .setFooter({ text: `${result[2].budgetsb}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].budgetsb}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].budgetsb}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].budgetsb}`,
-          inline: true,
+      .setColor("#FFC0CB");
+      let helpsb = new CreateHelpEmbed(
+        "Super Brainz Decks", 
+        `To view the SuperBrainz decks please select an option from the select menu below!
+  Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz in Tbot`, 
+  "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
+       )
+      let [result] = await db.query(`SELECT * FROM sbdecks`);
+      function CreateDeckEmbed(result, deckName) {
+        const embed = new EmbedBuilder()
+          .setTitle(`${result[5][deckName]}`)
+          .setDescription(`${result[3][deckName]}`)
+          .setFooter({ text: `${result[2][deckName]}` })
+          .addFields(
+            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+          )
+           .setColor("#000000");
+        const imageUrl = result[4][deckName];
+        if (imageUrl) {
+          embed.setImage(imageUrl);
         }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].budgetsb}`);
-    let telimps = new EmbedBuilder()
-      .setTitle(`${result[5].telimpssb}`)
-      .setDescription(`${result[3].telimpssb}`)
-      .setFooter({ text: `	${result[2].telimpssb}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].telimpssb}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].telimpssb}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].telimpssb}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].telimpssb}`);
+        return embed;
+      }
+      let budgetsb= new CreateDeckEmbed(result, "budgetsb")
+      let telimps = new CreateDeckEmbed(result, "telimpssb")
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

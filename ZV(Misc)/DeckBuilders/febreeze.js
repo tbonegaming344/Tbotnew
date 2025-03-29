@@ -40,8 +40,8 @@ module.exports = {
     );
     let decks = ["horts"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
     let [result] = await db.query(`select horts from smdecks sm`);
     let user = await client.users.fetch("525852515128967179");

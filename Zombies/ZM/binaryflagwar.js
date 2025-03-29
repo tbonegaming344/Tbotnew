@@ -9,7 +9,7 @@ module.exports ={
 		let bfw = new EmbedBuilder()
 		.setTitle(`${result[5].binaryflagwar}`)
 		.setDescription(`${result[3].binaryflagwar}`)
-		.setColor("Random")
+		.setColor("Purple")
 		.setFooter({text: `${result[2].binaryflagwar}`})
 		.addFields({
 			name: "Deck Type",

@@ -9,7 +9,7 @@ module.exports = {
 		let gravepiratestache= new EmbedBuilder()
 		.setTitle(`${result[5].gps}`)
 		.setDescription(`${result[3].gps}`)
-	.setColor("Random")
+		.setColor("#000000")
 		.setImage(`${result[4].gps}`)
 		.addFields({
 			name: "Deck Type",

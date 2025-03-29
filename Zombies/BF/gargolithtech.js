@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].gargolithtech}`,
 				inline: true
 			})
-		.setColor("Random")					
+		.setColor("Blue")					
 		.setImage(`${result[4].gargolithtech}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

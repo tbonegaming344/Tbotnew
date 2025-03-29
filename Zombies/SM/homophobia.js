@@ -9,7 +9,7 @@ module.exports = {
 		let smb = new EmbedBuilder()
 		.setTitle(`${result[5].homophobia}`)
 		.setDescription(`${result[3].homophobia}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.setFooter({text: `${result[2].homophobia}`})
 		.setImage(`${result[4].homophobia}`)
 		.addFields({

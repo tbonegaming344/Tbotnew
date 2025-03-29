@@ -23,7 +23,7 @@ module.exports = {
                     value: `${result[1].bfplankcontrol}`,
                     inline: true
                 })
-        .setColor("Random")
+        .setColor("Blue")
         .setImage(`${result[4].bfplankcontrol}`)
     message.channel.send({embeds: [ embed ] } ) 
     }

@@ -9,7 +9,7 @@ module.exports= {
 		let ws = new EmbedBuilder()
 		.setTitle(`${result[5].watersports}`)
 		.setDescription(`${result[3].watersports}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.setFooter({text: `${result[2].watersports}`})
 		.addFields({
 			name: "Deck Type", 

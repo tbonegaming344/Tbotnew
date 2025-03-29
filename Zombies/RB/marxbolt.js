@@ -23,7 +23,7 @@ module.exports = {
 			value: `${result[1].marxbolt}`,
 			inline: true
 		})
-		.setColor("Random")
+		.setColor("Orange")
 		.setImage(`${result[4].marxbolt}`)
 		message.channel.send({embeds: [marxbolt]})
 	}

@@ -23,7 +23,7 @@ module.exports = {
         value: `${result[1].terrifytricksterazzi}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Orange")
       .setImage(`${result[4].terrifytricksterazzi}`);
     message.channel.send({ embeds: [terrifytricksterazzi] });
   },

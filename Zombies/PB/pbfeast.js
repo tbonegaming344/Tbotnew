@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].pbfeast}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("Purple")		
 		.setImage(`${result[4].pbfeast}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

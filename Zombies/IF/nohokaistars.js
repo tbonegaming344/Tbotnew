@@ -27,7 +27,7 @@ module.exports = {
             inline: true,
           }
         )
-        .setColor("Random")
+        .setColor("#000000")
         .setImage(`${result[4].nohokaistars}`);
         message.channel.send({ embeds: [nohonkaistars] });
     }

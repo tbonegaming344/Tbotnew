@@ -31,7 +31,7 @@ module.exports = {
         value: `${result[1].budgetburn}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Purple")
       .setImage(`${result[4].budgetburn}`);
     message.channel.send({ embeds: [budgeteb] });
   },

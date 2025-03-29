@@ -9,7 +9,7 @@ module.exports = {
 		let pmop = new EmbedBuilder()
 		.setTitle(`${result[5].petmop}`)
 		.setDescription(`${result[3].petmop}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.setFooter({text: `${result[2].petmop}`})
 			.addFields({
 				name: "Deck Type", 

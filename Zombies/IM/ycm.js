@@ -23,7 +23,7 @@ module.exports = {
         value: `${result[1].ycm}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Blue")
       .setImage(`${result[4].ycm}`);
     message.channel.send({ embeds: [embed] });
   },

@@ -23,7 +23,7 @@ module.exports = {
         value: `${result[1].trickmech}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Purple")
       .setImage(`${result[4].trickmech}`);
     message.channel.send({ embeds: [maelstrom] });
   },

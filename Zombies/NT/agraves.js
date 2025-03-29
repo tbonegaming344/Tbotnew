@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].agraves}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("#000000")
 		.setImage(`${result[4].agraves}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

@@ -21,7 +21,7 @@ module.exports = {
     let sc = new EmbedBuilder()
       .setTitle(`${result[5].seacret}`)
       .setDescription(`${result[3].seacret}`)
-      .setColor("Random")
+      .setColor("Purple")
       .setFooter({ text: `${result[2].seacret}` })
       .addFields(
         {

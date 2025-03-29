@@ -137,7 +137,7 @@ module.exports = {
         "Captain Combustible | <:Kabloom:1062502137826910268><:MegaGrow:1062501412992458802>"
       )
       .setDescription("**\\- Tree Hero  -**")
-      .setColor("Random")
+      .setColor("Red")
       .addFields(
         {
           name: "Superpowers",
@@ -155,7 +155,7 @@ module.exports = {
       );
     let embed = new CreateHelpEmbed(
       "Captain Combustible Decks",
-      `To view the Captain Combustible decks please click on the buttons below!
+      `To view the Captain Combustible decks please select an option from the select menu below!
   Note: Captain Combustible has ${captainCombustibleDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212"
     );

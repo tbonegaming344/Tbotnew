@@ -100,7 +100,7 @@ module.exports = {
         "Spudow | <:Kabloom:1062502137826910268><:Guardian:1062501130501885973>"
       )
       .setDescription("**\\- Root Hero  -**")
-      .setColor("Random")
+      .setColor("Red")
 
       .addFields(
         {

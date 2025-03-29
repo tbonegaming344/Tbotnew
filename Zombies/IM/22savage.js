@@ -27,7 +27,7 @@ module.exports = {
           inline: true,
         }
       )
-      .setColor("Random")
+      .setColor("Blue")
       .setImage(`${result[4].savage22}`);
     message.channel.send({ embeds: [savage22] });
   },

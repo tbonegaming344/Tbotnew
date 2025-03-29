@@ -10,7 +10,7 @@ module.exports = {
     .setTitle(`${result[5].ladytuna}`)
     .setDescription(`${result[3].ladytuna}`)
     .setFooter({text: `${result[2].ladytuna}`})
-        .setColor("Random")
+        .setColor("#000000")
         .setImage(`${result[4].ladytuna}`)
             .addFields({
                 name: "Deck Type",

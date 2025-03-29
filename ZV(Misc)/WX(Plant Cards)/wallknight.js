@@ -118,7 +118,7 @@ module.exports = {
         "Wall-Knight | <:Guardian:1062501130501885973><:Solar:1062502678384607262>"
       )
       .setDescription("**\\- Nut Hero  -**")
-      .setColor("Random")
+      .setColor("#964B00")
 
       .addFields(
         {

@@ -19,7 +19,7 @@ module.exports = {
     let uncrackamech= new EmbedBuilder()
       .setTitle(`${result[5].feastmech}`)
       .setDescription(`${result[3].feastmech}`)
-      .setColor("Random")
+      .setColor("Purple")
       .setImage(`${result[4].feastmech}`)
       .setFooter({ text: `${result[2].feastmech}` })
       .addFields({

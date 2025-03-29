@@ -23,7 +23,7 @@ module.exports = {
 					value: `${result[1].noplayingallowed}`,
 					inline: true
 				})
-		.setColor("Random")
+		.setColor("Purple")
 		.setImage(`${result[4].noplayingallowed}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

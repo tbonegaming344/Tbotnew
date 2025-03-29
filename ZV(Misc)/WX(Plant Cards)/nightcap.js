@@ -125,7 +125,7 @@ module.exports = {
         "Nightcap | <:Kabloom:1062502137826910268><:Smarty:1062502890448638022>"
       )
       .setDescription("**\\- Mushroom Hero  -**")
-      .setColor("Random")
+      .setColor("Red")
 
       .addFields(
         {

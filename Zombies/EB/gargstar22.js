@@ -22,7 +22,7 @@ module.exports = {
           value: `${result[1].gargstar22}`,
           inline: true
         })
-        .setColor("Random")
+        .setColor("Purple")
         .setImage(`${result[4].gargstar22}`);
         message.channel.send({embeds: [gstar22]})
     }

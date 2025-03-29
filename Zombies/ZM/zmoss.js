@@ -9,7 +9,7 @@ module.exports = {
         let zmoss = new EmbedBuilder()
         .setTitle(`${result[5].zmoss}`)
         .setDescription(`${result[3].zmoss}`)
-        .setColor("Random")
+        .setColor("Purple")
         .setFooter({text: `${result[2].zmoss}`})
         .addFields({
             name: "Deck Type",

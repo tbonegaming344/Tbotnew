@@ -150,7 +150,7 @@ module.exports = {
         "Chompzilla | <:MegaGrow:1062501412992458802><:Solar:1062502678384607262>"
       )
       .setDescription("**\\- Flytrap Hero  -**")
-      .setColor("Random")
+      .setColor("Green")
 
       .addFields(
         {

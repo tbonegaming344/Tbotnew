@@ -10,7 +10,7 @@ module.exports = {
             .setTitle(`${result[5].cyroboy}`)
             .setDescription(`${result[3].cyroboy}`)
             .setFooter({text: `${result[2].cyroboy}`})
-            .setColor("Random")
+            .setColor("#000000")
             .addFields({
                 name: 'Deck Type',
                 value: `${result[6].cyroboy}`,

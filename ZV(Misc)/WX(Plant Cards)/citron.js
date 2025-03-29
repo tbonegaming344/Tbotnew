@@ -135,7 +135,7 @@ module.exports = {
         "Citron | <:Guardian:1062501130501885973><:Smarty:1062502890448638022>"
       )
       .setDescription("**\\- Fruit Hero  -**")
-      .setColor("Random")
+      .setColor("#964B00")
 
       .addFields(
         {
@@ -155,7 +155,7 @@ module.exports = {
       );
     let embed = new CreateHelpEmbed(
       "Citron Decks",
-      `To view the Citron decks please click on the buttons below!
+      `To view the Citron decks please select an option from the select menu below!
   Note: Citron has ${citronDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
     );

@@ -10,7 +10,7 @@ module.exports = {
 	.setTitle(`${result[5].whalepharaoh}`)
 	.setDescription(`${result[3].whalepharaoh}`)
 	.setFooter({text: `${result[2].whalepharaoh}`})
-		.setColor("Random")
+		.setColor("Blue")
 		.setImage(`${result[4].whalepharaoh}`)
 			.addFields({
 				name: "Deck Type",

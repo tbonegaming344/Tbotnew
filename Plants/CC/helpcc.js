@@ -135,7 +135,7 @@ module.exports = {
     const rfl = new CreateButtons("plantmop3", "allhelp");
     let embed = new CreateHelpEmbed(
       "Captain Combustible Decks",
-      `To view the Captain Combustible decks please click on the buttons below!
+      `To view the Captain Combustible decks please select an option from the selectt menu below!
 Note: Captain Combustible has ${captainCombustibleDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212"
     );

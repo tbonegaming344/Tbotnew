@@ -23,7 +23,7 @@ module.exports = {
 				value:`${result[1].raiserpackage}`,
 				inline: true
 			})
-		.setColor("Random")			
+		.setColor("Blue")			
 		.setImage(`${result[4].raiserpackage}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

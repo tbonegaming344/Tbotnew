@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].hibird}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Purple")
 		.setImage(`${result[4].hibird}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

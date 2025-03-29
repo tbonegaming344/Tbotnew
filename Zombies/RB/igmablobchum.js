@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].igmablobchum}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Orange")
 		.setImage(`${result[4].igmablobchum}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

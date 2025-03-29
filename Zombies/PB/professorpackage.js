@@ -10,7 +10,7 @@ module.exports = {
       .setTitle(`${result[5].professorpackage}`)
       .setDescription(`${result[3].professorpackage}`)
       .setFooter({ text: `${result[2].professorpackage}` })
-      .setColor("Random")
+      .setColor("Purple")
       .setImage(`${result[4].professorpackage}`)
       .addFields({
         name: "Deck Type",

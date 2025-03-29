@@ -10,7 +10,7 @@ module.exports = {
 		.setImage(`${result[4].antiagoragor}`)
 		.setTitle(`${result[5].antiagoragor}`)
 		.setDescription(`${result[3].antiagoragor}`)
-			.setColor("Random")
+			.setColor("#000000")
 		.addFields({
 			name: "Deck Type",
 			value: `${result[6].antiagoragor}`,

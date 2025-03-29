@@ -124,7 +124,7 @@ module.exports = {
         "Rose | <:Smarty:1062502890448638022><:Solar:1062502678384607262>"
       )
       .setDescription("**\\- Flower Hero  -**")
-      .setColor("Random")
+      .setColor("White")
 
       .addFields(
         {

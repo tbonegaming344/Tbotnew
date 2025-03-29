@@ -7,7 +7,18 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#FFC0CB");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `rustbolt`,
   aliases: [`rb`, `rust`],
@@ -20,133 +31,6 @@ module.exports = {
         .setStyle(ButtonStyle.Danger)
         .setEmoji("<:RustboltH:1088094706346491904>")
     );
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("uncrackabolt")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bol")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bol = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpall")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("brb")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const brb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("boltbolt")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bust")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bust = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("budgetrb")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("cog")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const cog = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("bustbolt")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("igb")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const igb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("coggerazzi")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("marx")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const marx = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("igmablobchum")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mc")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const mc = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("marxbolt")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("sb")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const sb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("mechacontrol")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("tster")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const tster = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("sunbandits")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("uncrack")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const uncrack = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("terrifytricksterazzi")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("allhelp")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let decks = [
-      "boltbolt",
-      "budgetrb",
-      "bustbolt",
-      "coggerazzi",
-      "igmablobchum",
-      "marxbolt",
-      "mechacontrol",
-      "sunbandits",
-      "terrifytricksterazzi",
-      "uncrackabolt",
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
-      toBuildString += `\n<@1043528908148052089> **${deck}**`;
-    }
     const select = new StringSelectMenuBuilder()
     .setCustomId("select")
     .setPlaceholder("Select an option below to view Rustbolt decklists")
@@ -197,422 +81,89 @@ module.exports = {
       .setEmoji("<:RustboltH:1088094706346491904>")
     )
     const row = new ActionRowBuilder().addComponents(select);
-    let budgetdecks = [
-      "budgetrb",
-    ]
-    const comprow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("uncrackabolt2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bust2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bust2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("comphelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("uncrack2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const uncrack2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bustbolt2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpcomp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-      let compdecks = [
-      "bustbolt",
-      "uncrackabolt",
-    ]
-    let toBuildCompString = "";
-    for (let i = 0; i < compdecks.length; i++) {
-      let deck = compdecks[i];
-      toBuildCompString += `\n<@1043528908148052089> **${deck}**`;
+    const rustboltDecks = {
+      budgetDecks: ["budgetrb"], 
+      competitiveDecks: ["bustbolt", "uncrackabolt"],
+      ladderDecks: ["boltbolt", "marxbolt", "mechacontrol"],
+      memeDecks: ["coggerazzi", "igmablobchum", "sunbandits", "terrifytricksterazzi"],
+      aggroDecks: ["budgetrb", "marxbolt"],
+      comboDecks: ["boltbolt", "bustbolt", "coggerazzi", "igmablobchum", "sunbandits", "terrifytricksterazzi"],
+      controlDecks: ["bustbolt", "mechacontrol", "sunbandits", "uncrackabolt"],
+      midrangeDecks: ["boltbolt", "igmablobchum"],
+      tempoDecks: ["coggerazzi", "terrifytricksterazzi"],
+      allDecks: ["boltbolt", "budgetrb", "bustbolt", "coggerazzi", "igmablobchum", "marxbolt", "mechacontrol", "sunbandits", "terrifytricksterazzi", "uncrackabolt"],
     }
-    let ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mechacontrol2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bol2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bol2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("marx2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const marx2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("boltbolt2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("mc2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const mc2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("marxbolt2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let ladderdecks = [
-      "boltbolt",
-      "marxbolt",
-      "mechacontrol", 
-    ]
-    let toBuildLadderString = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    const memerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("terrifytricksterazzi2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cog2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const cog2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("memehelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("igb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const igb2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("coggerazzi2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sb2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("igmablobchum2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tster2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const tster2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sunbandits2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpmeme")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let memedecks = [
-      "coggerazzi",
-      "igmablobchum",
-      "sunbandits", 
-      "terrifytricksterazzi",
-    ]
-    let toBuildMemeString = "";
-    for (let i = 0; i < memedecks.length; i++) {
-      let deck = memedecks[i];
-      toBuildMemeString += `\n<@1043528908148052089> **${deck}**`;
+    const toBuildString = buildDeckString(rustboltDecks.allDecks);
+    const toBuildCompString = buildDeckString(rustboltDecks.competitiveDecks);
+    const toBuildLadderString = buildDeckString(rustboltDecks.ladderDecks);
+    const toBuildMemeString = buildDeckString(rustboltDecks.memeDecks);
+    const toBuildAggroString = buildDeckString(rustboltDecks.aggroDecks);
+    const toBuildComboString = buildDeckString(rustboltDecks.comboDecks);
+    const toBuildControlString = buildDeckString(rustboltDecks.controlDecks);
+    const toBuildMidrangeString = buildDeckString(rustboltDecks.midrangeDecks);
+    const toBuildTempoString = buildDeckString(rustboltDecks.tempoDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const aggrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("marxbolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("brb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const brb2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("aggrohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("marx3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const marx3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("budgetrb2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpaggro")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let aggrodecks = [
-      "budgetrb", 
-      "marxbolt"
-    ]
-    let toBuildAggroString = "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      let deck = aggrodecks[i];
-      toBuildAggroString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("terrifytricksterazzi3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bol3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bol3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("combohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bust3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bust3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("boltbolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cog3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const cog3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bustbolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("igb3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const igb3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("coggerazzi3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sb3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sb3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("igmablobchum3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tster3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const tster3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sunbandits3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpcombo")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let combodecks = [
-      "boltbolt", 
-      "bustbolt",
-      "coggerazzi",
-      "igmablobchum",
-      "sunbandits",
-      "terrifytricksterazzi",
-    ]
-    let toBuildComboString = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      let deck = combodecks[i];
-      toBuildComboString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const controlrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("uncrackabolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bust4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bust4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("controlhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("mc3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const mc3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bustbolt4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sb4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sb4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mechacontrol3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("uncrack3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const uncrack3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sunbandits4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpcontrol")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-
-    let controldecks = [
-      "bustbolt",
-      "mechacontrol",
-      "sunbandits",      
-      "uncrackabolt",
-    ]
-    let toBuildControlString = "";
-    for (let i = 0; i < controldecks.length; i++) {
-      let deck = controldecks[i];
-      toBuildControlString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const midrangerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("igmablobchum4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bol4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bol4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("midrangehelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("igb4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const igb4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("boltbolt4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpmidrange")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let midrangedecks = [
-      "boltbolt", 
-      "igmablobchum",
-    ]
-    let toBuildMidrangeString = "";
-    for (let i = 0; i < midrangedecks.length; i++) {
-      let deck = midrangedecks[i];
-      toBuildMidrangeString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const temporow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("terrifytricksterazzi4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cog4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const cog4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("tempohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tster4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const tster4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("coggerazzi4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helptempo")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let tempodecks = [
-      "coggerazzi",
-      "terrifytricksterazzi",
-    ]
-    let toBuildTempoString = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      let deck = tempodecks[i];
-      toBuildTempoString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let embed = new EmbedBuilder()
+    const alldecksrow = new CreateButtons("uncrackabolt", "bol");
+    const bol = new CreateButtons("helpall", "brb");
+    const brb = new CreateButtons("boltbolt", "bust");
+    const bust = new CreateButtons("budgetrb", "cog");
+    const cog = new CreateButtons("bustbolt", "igb");
+    const igb = new CreateButtons("coggerazzi", "marx");
+    const marx = new CreateButtons("igmablobchum", "mc");
+    const mc = new CreateButtons("marxbolt", "sb");
+    const sb = new CreateButtons("mechacontrol", "tster");
+    const tster = new CreateButtons("sunbandits", "uncrack");
+    const uncrack = new CreateButtons("terrifytricksterazzi", "allhelp");
+    const comprow = new CreateButtons("uncrackabolt2", "bust2");
+    const bust2 = new CreateButtons("comphelp", "uncrack2");
+    const uncrack2 = new CreateButtons("bustbolt2", "helpcomp");
+    const ladderrow = new CreateButtons("mechacontrol2", "bol2");
+    const bol2 = new CreateButtons("ladderhelp", "marx2");
+    const marx2 = new CreateButtons("boltbolt2", "mc2");
+    const mc2 = new CreateButtons("marxbolt2", "helpladder");
+    const memerow = new CreateButtons("terrifytricksterazzi2", "cog2");
+    const cog2 = new CreateButtons("memehelp", "igb2");
+    const igb2 = new CreateButtons("coggerazzi2", "sb2");
+    const sb2 = new CreateButtons("igmablobchum2", "tster2");
+    const tster2 = new CreateButtons("sunbandits2", "helpmeme");
+    const aggrorow = new CreateButtons("marxbolt3", "brb2");
+    const brb2 = new CreateButtons("aggrohelp", "marx3");
+    const marx3 = new CreateButtons("budgetrb2", "helpaggro");
+    const comborow = new CreateButtons("terrifytricksterazzi3", "bol3");
+    const bol3 = new CreateButtons("combohelp", "bust3");
+    const bust3 = new CreateButtons("boltbolt3", "cog3");
+    const cog3 = new CreateButtons("bustbolt3", "igb3");
+    const igb3 = new CreateButtons("coggerazzi3", "sb3");
+    const sb3 = new CreateButtons("igmablobchum3", "tster3");
+    const tster3 = new CreateButtons("sunbandits3", "helpcombo");
+    const controlrow = new CreateButtons("uncrackabolt3", "bust4");
+    const bust4 = new CreateButtons("controlhelp", "mc3");
+    const mc3 = new CreateButtons("bustbolt4", "sb4");
+    const sb4 = new CreateButtons("mechacontrol3", "uncrack3");
+    const uncrack3 = new CreateButtons("sunbandits4", "helpcontrol");
+    const midrangerow = new CreateButtons("igmablobchum4", "bol4");
+    const bol4 = new CreateButtons("midrangehelp", "igb4");
+    const igb4 = new CreateButtons("boltbolt4", "helpmidrange");
+    const temporow = new CreateButtons("terrifytricksterazzi4", "cog4");
+    const cog4 = new CreateButtons("tempohelp", "tster4");
+    const tster4 = new CreateButtons("coggerazzi4", "helptempo");
+    const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
       )
@@ -635,487 +186,287 @@ module.exports = {
           value: "He enjoys keeping his bolts tight and his screws loose.",
         }
       )
-      .setColor("Random");
-      let alldecksEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
+      .setColor("#FFC0CB");
+      const alldecksEmbed = new CreateHelpEmbed(
+        "Rustbolt Decks",
+        `My commands for Rustbolt(RB) are ${toBuildString}`,
+        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+        `To view the RustBolt decks please use the commands listed above or click on the buttons below to navigate through all decks!
+  Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`
       )
-      .setTitle("Rustbolt Decks")
-      .setDescription(`My commands for Rustbolt(RB) are ${toBuildString}`)
-      .setFooter({
-        text: `To view the RustBolt decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Rustbolt has ${decks.length} total decks in Tbot`,
-      })
-      .setColor("Random");
-      let helprb = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Decks")
-      .setDescription(`To view the RustBolt decks please select an option from the select menu below!
-Note: Rustbolt has ${decks.length} total decks in Tbot`)
-      .setColor("Random");
-      let compEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Competitive Decks")
-      .setDescription(`My competitive decks for Rustbolt(RB) are ${toBuildCompString}`)
-      .setFooter({
-        text: `To view the RustBolt competitive decks please use the commands listed above or click on the buttons below to navigate through all competitive decks!
-Note: Rustbolt has ${compdecks.length} total competitive decks in Tbot`,
-      })
-      .setColor("Random");
-      let ladderEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Ladder Decks")
-      .setDescription(`My ladder decks for Rustbolt(RB) are ${toBuildLadderString}`)
-      .setFooter({
-        text: `To view the RustBolt ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Rustbolt has ${ladderdecks.length} total ladder decks in Tbot`,
-      })
-      .setColor("Random");
-      let memeEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Meme Decks")
-      .setDescription(`My meme decks for Rustbolt(RB) are ${toBuildMemeString}`)
-      .setFooter({
-        text: `To view the RustBolt meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-Note: Rustbolt has ${memedecks.length} total meme decks in Tbot`,
-      })
-      .setColor("Random");
-      let aggroEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Aggro Decks")
-      .setDescription(`My aggro decks for Rustbolt(RB) are ${toBuildAggroString}`)
-      .setFooter({
-        text: `To view the RustBolt aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
-Note: Rustbolt has ${aggrodecks.length} total aggro decks in Tbot`,
-      })
-      .setColor("Random");
-      let comboEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Combo Decks")
-      .setDescription(`My combo decks for Rustbolt(RB) are ${toBuildComboString}`)
-      .setFooter({
-        text: `To view the RustBolt combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-Note: Rustbolt has ${combodecks.length} total combo decks in Tbot`,
-      })
-      .setColor("Random");
-      let controlEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Control Decks")
-      .setDescription(`My control decks for Rustbolt(RB) are ${toBuildControlString}`)
-      .setFooter({
-        text: `To view the RustBolt control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-Note: Rustbolt has ${controldecks.length} total control decks in Tbot`,
-      })
-      .setColor("Random");
-      let midrangeEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Midrange Decks")
-      .setDescription(`My midrange decks for Rustbolt(RB) are ${toBuildMidrangeString}`)
-      .setFooter({
-        text: `To view the RustBolt midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: Rustbolt has ${midrangedecks.length} total midrange decks in Tbot`,
-      })
-      .setColor("Random");
-      let tempoEmbed = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-      )
-      .setTitle("Rustbolt Tempo Decks")
-      .setDescription(`My tempo decks for Rustbolt(RB) are ${toBuildTempoString}`)
-      .setFooter({
-        text: `To view the RustBolt tempo decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-Note: Rustbolt has ${tempodecks.length} total tempo decks in Tbot`,
-      })
-      .setColor("Random");
-    let [result] = await db.query(`select * from rbdecks`);
-    let boltbolt = new EmbedBuilder()
-    .setTitle(`${result[5].boltbolt}`)
-    .setDescription(`${result[3].boltbolt}`)
-    .setFooter({ text: `${result[2].boltbolt}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].boltbolt}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].boltbolt}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].boltbolt}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].boltbolt}`);
-    let budgetrb = new EmbedBuilder()
-    .setTitle(`${result[5].budgetrb}`)	
-    .setDescription(`${result[3].budgetrb}`)
-.setFooter({text: `${result[2].budgetrb}`})
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].budgetrb}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].budgetrb}`,
-      inline: true
-    },{
-      name: "Deck Cost", 
-      value: `${result[1].budgetrb}`,
-      inline: true
-    })	
-    .setImage(`${result[4].budgetrb}`)
-  .setColor("Random")			
-    let bustbolt = new EmbedBuilder()
-    .setTitle(`${result[5].bustbolt}`)
-		.setDescription(`${result[3].bustbolt}`)
-		.setColor("Random")
-			.setFooter({text: `${result[2].bustbolt}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].bustbolt}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].bustbolt}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].bustbolt}`,
-			inline: true
-		})
-		.setImage(`${result[4].bustbolt}`)
-    let igmablobchum = new EmbedBuilder()
-    .setTitle(`${result[5].igmablobchum}`)
-    .setDescription(`${result[3].igmablobchum}`)
-    .setFooter({text: `${result[2].igmablobchum}`})
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].igmablobchum}`,
-          inline: true
-        },{
-          name: "Archetype",
-          value: `${result[0].igmablobchum}`,
-          inline: true
-        },{
-          name: "Deck Cost", 
-          value: `${result[1].igmablobchum}`,
-          inline: true
-        })
-      .setColor("Random")
-      .setImage(`${result[4].igmablobchum}`)
-    let marxbolt = new EmbedBuilder()
-    .setTitle(`${result[5].marxbolt}`)
-		.setDescription(`${result[3].marxbolt}`)
-		.setFooter({text: `${result[2].marxbolt}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].marxbolt}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].marxbolt}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].marxbolt}`,
-			inline: true
-		})
-		.setColor("Random")
-		.setImage(`${result[4].marxbolt}`)
-    let mechacontrol = new EmbedBuilder()
-    .setTitle(`${result[5].mechacontrol}`)
-		.setDescription(`${result[3].mechacontrol}`)
-		.setFooter({text: `${result[2].mechacontrol}`})
-		.setColor("Random")
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].mechacontrol}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].mechacontrol}`,
-			inline: true
-		},{
-			name: "Deck Cost",
-			value:`${result[1].mechacontrol}`,
-			inline: true
-		})
-		.setImage(`${result[4].mechacontrol}`)
-    let coggerazzi = new EmbedBuilder()
-    .setTitle(`${result[5].poggerrazzi}`)
-    .setDescription(`${result[3].poggerrazzi}`)
-    .setFooter({ text: `${result[2].poggerrazzi}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].poggerrazzi}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].poggerrazzi}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].poggerrazzi}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].poggerrazzi}`);
-    let sunbandits = new EmbedBuilder()
-    .setTitle(`${result[5].sunbandits}`)
-    .setDescription(`${result[3].sunbandits}`)
-    .setFooter({ text: `${result[2].sunbandits}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].sunbandits}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].sunbandits}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].sunbandits}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].sunbandits}`);
-    let terrifytricksterazzi = new EmbedBuilder()
-    .setTitle(`${result[5].terrifytricksterazzi}`)
-    .setDescription(`${result[3].terrifytricksterazzi}`)
-    .setFooter({ text: `${result[2].terrifytricksterazzi}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].terrifytricksterazzi}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].terrifytricksterazzi}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].terrifytricksterazzi}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].terrifytricksterazzi}`);
-    let uncrackabolt = new EmbedBuilder()
-    .setTitle(`${result[5].uncrackabolt}`)
-    .setDescription(`${result[3].uncrackabolt}`)
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `${result[6].uncrackabolt}`,
-        inline: true
-      },
-      {
-        name: "Archetype",
-        value: `${result[0].uncrackabolt}`,
-        inline: true
-      },
-    {
-        name: "Deck Cost",
-        value: `${result[1].uncrackabolt}`,
-        inline: true
-    }
-)
-.setFooter({text: `${result[2].uncrackabolt}`})
-.setColor("Random")
-.setImage(`${result[4].uncrackabolt}`)
+        const helprb = new CreateHelpEmbed(
+          "Rustbolt Decks",
+          `To view the RustBolt decks please select an option from the select menu below!
+  Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`, 
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+        )
+        const compEmbed = new CreateHelpEmbed(
+          "Rustbolt Competitive Decks",
+          `My commands for Rustbolt(RB) are ${toBuildCompString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt competitive decks please use the commands listed above or click on the buttons below to navigate through all competitive decks!
+  Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive decks in Tbot`
+        )
+        const ladderEmbed = new CreateHelpEmbed(
+          "Rustbolt Ladder Decks",
+          `My commands for Rustbolt(RB) are ${toBuildLadderString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
+  Note: Rustbolt has ${rustboltDecks.ladderDecks.length} total ladder decks in Tbot`
+        )
+        const memeEmbed = new CreateHelpEmbed(
+          "Rustbolt Meme Decks",
+          `My commands for Rustbolt(RB) are ${toBuildMemeString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
+  Note: Rustbolt has ${rustboltDecks.memeDecks.length} total meme decks in Tbot`
+        )
+        const aggroEmbed = new CreateHelpEmbed(
+          "Rustbolt Aggro Decks",
+          `My commands for Rustbolt(RB) are ${toBuildAggroString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
+  Note: Rustbolt has ${rustboltDecks.aggroDecks.length} total aggro decks in Tbot`
+        )
+        const comboEmbed = new CreateHelpEmbed(
+          "Rustbolt Combo Decks",
+          `My commands for Rustbolt(RB) are ${toBuildComboString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
+  Note: Rustbolt has ${rustboltDecks.comboDecks.length} total combo decks in Tbot`
+        )
+        const controlEmbed = new CreateHelpEmbed(
+          "Rustbolt Control Decks",
+          `My commands for Rustbolt(RB) are ${toBuildControlString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
+  Note: Rustbolt has ${rustboltDecks.controlDecks.length} total control decks in Tbot`
+        )
+        const midrangeEmbed = new CreateHelpEmbed(
+          "Rustbolt Midrange Decks",
+          `My commands for Rustbolt(RB) are ${toBuildMidrangeString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
+  Note: Rustbolt has ${rustboltDecks.midrangeDecks.length} total midrange decks in Tbot`
+        )
+        const tempoEmbed = new CreateHelpEmbed(
+          "Rustbolt Tempo Decks",
+          `My commands for Rustbolt(RB) are ${toBuildTempoString}`,
+          "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+          `To view the RustBolt tempo decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
+  Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
+        )
+      const [result] = await db.query(`select * from rbdecks`);
+      function CreateDeckEmbed(result, deckName) {
+        const embed = new EmbedBuilder()
+          .setTitle(`${result[5][deckName]}`)
+          .setDescription(`${result[3][deckName]}`)
+          .setFooter({ text: `${result[2][deckName]}` })
+          .addFields(
+            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+          )
+          .setColor("Orange");
+        const imageUrl = result[4][deckName];
+        if (imageUrl) {
+          embed.setImage(imageUrl);
+        }
+        return embed;
+      }
+      const boltbolt = new CreateDeckEmbed(result, "boltbolt");
+      const budgetrb = new CreateDeckEmbed(result, "budgetrb");
+      const bustbolt = new CreateDeckEmbed(result, "bustbolt");
+      const igmablobchum = new CreateDeckEmbed(result, "igmablobchum");
+      const marxbolt = new CreateDeckEmbed(result, "marxbolt");
+      const mechacontrol = new CreateDeckEmbed(result, "mechacontrol");
+      const coggerazzi = new CreateDeckEmbed(result, "poggerrazzi");
+      const sunbandits = new CreateDeckEmbed(result, "sunbandits");
+      const terrifytricksterazzi = new CreateDeckEmbed(result, "terrifytricksterazzi");
+      const uncrackabolt = new CreateDeckEmbed(result, "uncrackabolt");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],
     });
     const iFilter = (i) => i.user.id === message.author.id;
+    async function HandleSelectMenu(i){
+      const value = i.values[0];
+      if (value == "all") {
+        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
+      }
+      else if (value == "comp") {
+        await i.update({ embeds: [compEmbed], components: [comprow] });
+      }
+      else if (value == "ladder") {
+        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+      }
+      else if (value == "meme") {
+        await i.update({ embeds: [memeEmbed], components: [memerow] });
+      }
+      else if (value == "aggro") {
+        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
+      }
+      else if (value == "combo") {
+        await i.update({ embeds: [comboEmbed], components: [comborow] });
+      }
+      else if (value == "control") {
+        await i.update({ embeds: [controlEmbed], components: [controlrow] });
+      }
+      else if (value == "midrange") {
+        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+      }
+      else if (value == "tempo") {
+        await i.update({ embeds: [tempoEmbed], components: [temporow] });
+      }
+      else if (value == "budget") {
+        await i.reply({embeds: [budgetrb], flags: MessageFlags.Ephemeral})
+      }
+    }
+    async function HandleButtonInteraction(i){
+     if (i.customId == "helpall" || i.customId == "allhelp") {
+        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
+      }
+    else if (i.customId == "helpcomp" || i.customId == "comphelp") {
+        await i.update({ embeds: [compEmbed], components: [comprow] });
+      }
+    else if (i.customId == "helpladder" || i.customId == "ladderhelp") {
+        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+      }
+    else if (i.customId == "helpmeme" || i.customId == "memehelp") {
+        await i.update({ embeds: [memeEmbed], components: [memerow] });
+      }
+    else if (i.customId == "helpaggro" || i.customId == "aggrohelp") {
+        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
+      }
+    else if (i.customId == "helpcombo" || i.customId == "combohelp") {
+        await i.update({ embeds: [comboEmbed], components: [comborow] });
+      }
+    else if (i.customId == "helpcontrol" || i.customId == "controlhelp") {
+        await i.update({ embeds: [controlEmbed], components: [controlrow] });
+      }
+    else if (i.customId == "helpmidrange" || i.customId == "midrangehelp") {
+        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+      }
+    else if (i.customId == "helptempo" || i.customId == "tempohelp") {
+        await i.update({ embeds: [tempoEmbed], components: [temporow] });
+      }
+    else if (i.customId == "bol" || i.customId == "boltbolt") {
+        await i.update({ embeds: [boltbolt], components: [bol] });
+      }
+    else if (i.customId == "bol2" || i.customId == "boltbolt2") {
+        await i.update({ embeds: [boltbolt], components: [bol2] });
+      }
+    else if (i.customId == "bol3" || i.customId == "boltbolt3") {
+        await i.update({ embeds: [boltbolt], components: [bol3] });
+      }
+    else if (i.customId == "bol4" || i.customId == "boltbolt4") {
+        await i.update({ embeds: [boltbolt], components: [bol4] });
+      }
+    else if (i.customId == "brb" || i.customId == "budgetrb") {
+        await i.update({ embeds: [budgetrb], components: [brb] });
+      }
+    else if (i.customId == "brb2" || i.customId == "budgetrb2") {
+        await i.update({ embeds: [budgetrb], components: [brb2] });
+      }
+    else if (i.customId == "igb" || i.customId == "igmablobchum") {
+        await i.update({ embeds: [igmablobchum], components: [igb] });
+      }
+    else if (i.customId == "igb2" || i.customId == "igmablobchum2") {
+        await i.update({ embeds: [igmablobchum], components: [igb2] });
+      }
+    else if (i.customId == "igb3" || i.customId == "igmablobchum3") {
+        await i.update({ embeds: [igmablobchum], components: [igb3] });
+      }
+    else if (i.customId == "igb4" || i.customId == "igmablobchum4") {
+        await i.update({ embeds: [igmablobchum], components: [igb4] });
+      }
+    else if (i.customId == "bust" || i.customId == "bustbolt") {
+        await i.update({ embeds: [bustbolt], components: [bust] });
+      }
+    else if (i.customId == "bust2" || i.customId == "bustbolt2") {
+        await i.update({ embeds: [bustbolt], components: [bust2] });
+      }
+    else if (i.customId == "bust3" || i.customId == "bustbolt3") {
+        await i.update({ embeds: [bustbolt], components: [bust3] });
+      }
+    else if (i.customId == "bust4" || i.customId == "bustbolt4") {
+        await i.update({ embeds: [bustbolt], components: [bust4] });
+      }
+    else if (i.customId == "marx" || i.customId == "marxbolt") {
+        await i.update({ embeds: [marxbolt], components: [marx] });
+      }
+    else if (i.customId == "marx2" || i.customId == "marxbolt2") {
+        await i.update({ embeds: [marxbolt], components: [marx2] });
+      }
+    else if (i.customId == "marx3" || i.customId == "marxbolt3") {
+        await i.update({ embeds: [marxbolt], components: [marx3] });
+      }
+    else if (i.customId == "mc" || i.customId == "mechacontrol") {
+        await i.update({ embeds: [mechacontrol], components: [mc] });
+      }
+    else if (i.customId == "mc2" || i.customId == "mechacontrol2") {
+        await i.update({ embeds: [mechacontrol], components: [mc2] });
+      }
+    else if (i.customId == "mc3" || i.customId == "mechacontrol3") {
+        await i.update({ embeds: [mechacontrol], components: [mc3] });
+      }
+    else if (i.customId == "cog" || i.customId == "coggerazzi") {
+        await i.update({ embeds: [coggerazzi], components: [cog] });
+      }
+    else if (i.customId == "cog2" || i.customId == "coggerazzi2") {
+        await i.update({ embeds: [coggerazzi], components: [cog2] });
+      }
+    else if (i.customId == "cog3" || i.customId == "coggerazzi3") {
+        await i.update({ embeds: [coggerazzi], components: [cog3] });
+      }
+    else if (i.customId == "cog4" || i.customId == "coggerazzi4") {
+        await i.update({ embeds: [coggerazzi], components: [cog4] });
+      }
+    else if (i.customId == "sb" || i.customId == "sunbandits") {
+        await i.update({ embeds: [sunbandits], components: [sb] });
+      }
+    else if (i.customId == "sb2" || i.customId == "sunbandits2") {
+        await i.update({ embeds: [sunbandits], components: [sb2] });
+      }
+    else if (i.customId == "sb3" || i.customId == "sunbandits3") {
+        await i.update({ embeds: [sunbandits], components: [sb3] });
+      }
+    else if (i.customId == "sb4" || i.customId == "sunbandits4") {
+        await i.update({ embeds: [sunbandits], components: [sb4] });
+      }
+    else if (i.customId == "uncrack" || i.customId == "uncrackabolt") {
+        await i.update({ embeds: [uncrackabolt], components: [uncrack] });
+      }
+     else if(i.customId == "uncrack2" || i.customId == "uncrackabolt2"){
+        await i.update({ embeds: [uncrackabolt], components: [uncrack2] });
+      }
+     else if(i.customId == "uncrack3" || i.customId == "uncrackabolt3"){
+        await i.update({ embeds: [uncrackabolt], components: [uncrack3] });
+      }
+      else if(i.customId == "tster" || i.customId == "terrifytricksterazzi"){
+        await i.update({ embeds: [terrifytricksterazzi], components: [tster] });
+      }
+      else if(i.customId == "tster2" || i.customId == "terrifytricksterazzi2"){
+        await i.update({ embeds: [terrifytricksterazzi], components: [tster2] });
+      }
+      else if(i.customId == "tster3" || i.customId == "terrifytricksterazzi3"){
+        await i.update({ embeds: [terrifytricksterazzi], components: [tster3] });
+      }
+      else if(i.customId == "tster4" || i.customId == "terrifytricksterazzi4"){
+        await i.update({ embeds: [terrifytricksterazzi], components: [tster4] });
+      }
+    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "helprb") {
         await i.update({ embeds: [helprb], components: [row] });
       }
-      if(i.customId == "select"){
-        const value = i.values[0];
-        if (value == "all") {
-          await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-        }
-        if (value == "comp") {
-          await i.update({ embeds: [compEmbed], components: [comprow] });
-        }
-        if (value == "ladder") {
-          await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-        }
-        if (value == "meme") {
-          await i.update({ embeds: [memeEmbed], components: [memerow] });
-        }
-        if (value == "aggro") {
-          await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-        }
-        if (value == "combo") {
-          await i.update({ embeds: [comboEmbed], components: [comborow] });
-        }
-        if (value == "control") {
-          await i.update({ embeds: [controlEmbed], components: [controlrow] });
-        }
-        if (value == "midrange") {
-          await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-        }
-        if (value == "tempo") {
-          await i.update({ embeds: [tempoEmbed], components: [temporow] });
-        }
-        if (value == "budget") {
-          await i.reply({embeds: [budgetrb], flags: MessageFlags.Ephemeral})
-        }
-
-      }
-      if (i.customId == "helpall" || i.customId == "allhelp") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      }
-      if ( i.customId == "helpcomp" || i.customId == "comphelp") {
-        await i.update({ embeds: [compEmbed], components: [comprow] });
-      }
-      if (i.customId == "helpladder" || i.customId == "ladderhelp") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      }
-      if ( i.customId == "helpmeme" || i.customId == "memehelp") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      }
-      if ( i.customId == "helpaggro" || i.customId == "aggrohelp") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      }
-      if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      }
-      if ( i.customId == "helpcontrol" || i.customId == "controlhelp") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      }
-      if ( i.customId == "helpmidrange" || i.customId == "midrangehelp") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      }
-      if ( i.customId == "helptempo" || i.customId == "tempohelp") {
-        await i.update({ embeds: [tempoEmbed], components: [temporow] });
-      }
-      if (i.customId == "bol" || i.customId == "boltbolt") {
-        await i.update({ embeds: [boltbolt], components: [bol] });
-      }
-      if (i.customId == "bol2" || i.customId == "boltbolt2") {
-        await i.update({ embeds: [boltbolt], components: [bol2] });
-      }
-      if (i.customId == "bol3" || i.customId == "boltbolt3") {
-        await i.update({ embeds: [boltbolt], components: [bol3] });
-      }
-      if (i.customId == "bol4" || i.customId == "boltbolt4") {
-        await i.update({ embeds: [boltbolt], components: [bol4] });
-      }
-      if (i.customId == "brb" || i.customId == "budgetrb") {
-        await i.update({ embeds: [budgetrb], components: [brb] });
-      }
-      if (i.customId == "brb2" || i.customId == "budgetrb2") {
-        await i.update({ embeds: [budgetrb], components: [brb2] });
-      }
-      if (i.customId == "igb" || i.customId == "igmablobchum") {
-        await i.update({ embeds: [igmablobchum], components: [igb] });
-      }
-      if (i.customId == "igb2" || i.customId == "igmablobchum2") {
-        await i.update({ embeds: [igmablobchum], components: [igb2] });
-      }
-      if (i.customId == "igb3" || i.customId == "igmablobchum3") {
-        await i.update({ embeds: [igmablobchum], components: [igb3] });
-      }
-      if (i.customId == "igb4" || i.customId == "igmablobchum4") {
-        await i.update({ embeds: [igmablobchum], components: [igb4] });
-      }
-      if (i.customId == "bust" || i.customId == "bustbolt") {
-        await i.update({ embeds: [bustbolt], components: [bust] });
-      }
-      if (i.customId == "bust2" || i.customId == "bustbolt2") {
-        await i.update({ embeds: [bustbolt], components: [bust2] });
-      }
-      if (i.customId == "bust3" || i.customId == "bustbolt3") {
-        await i.update({ embeds: [bustbolt], components: [bust3] });
-      }
-      if (i.customId == "bust4" || i.customId == "bustbolt4") {
-        await i.update({ embeds: [bustbolt], components: [bust4] });
-      }
-
-      if (i.customId == "marx" || i.customId == "marxbolt") {
-        await i.update({ embeds: [marxbolt], components: [marx] });
-      }
-      if (i.customId == "marx2" || i.customId == "marxbolt2") {
-        await i.update({ embeds: [marxbolt], components: [marx2] });
-      }
-      if (i.customId == "marx3" || i.customId == "marxbolt3") {
-        await i.update({ embeds: [marxbolt], components: [marx3] });
-      }
-      if (i.customId == "mc" || i.customId == "mechacontrol") {
-        await i.update({ embeds: [mechacontrol], components: [mc] });
-      }
-      if (i.customId == "mc2" || i.customId == "mechacontrol2") {
-        await i.update({ embeds: [mechacontrol], components: [mc2] });
-      }
-      if (i.customId == "mc3" || i.customId == "mechacontrol3") {
-        await i.update({ embeds: [mechacontrol], components: [mc3] });
-      }
-      if (i.customId == "cog" || i.customId == "coggerazzi") {
-        await i.update({ embeds: [coggerazzi], components: [cog] });
-      }
-      if (i.customId == "cog2" || i.customId == "coggerazzi2") {
-        await i.update({ embeds: [coggerazzi], components: [cog2] });
-      }
-      if (i.customId == "cog3" || i.customId == "coggerazzi3") {
-        await i.update({ embeds: [coggerazzi], components: [cog3] });
-      }
-      if (i.customId == "cog4" || i.customId == "coggerazzi4") {
-        await i.update({ embeds: [coggerazzi], components: [cog4] });
-      }
-      if (i.customId == "sb" || i.customId == "sunbandits") {
-        await i.update({ embeds: [sunbandits], components: [sb] });
-      }
-      if (i.customId == "sb2" || i.customId == "sunbandits2") {
-        await i.update({ embeds: [sunbandits], components: [sb2] });
-      }
-      if (i.customId == "sb3" || i.customId == "sunbandits3") {
-        await i.update({ embeds: [sunbandits], components: [sb3] });
-      }
-      if (i.customId == "sb4" || i.customId == "sunbandits4") {
-        await i.update({ embeds: [sunbandits], components: [sb4] });
-      }
-      //Uncrackabolt
-      if (i.customId == "uncrack" || i.customId == "uncrackabolt") {
-        await i.update({ embeds: [uncrackabolt], components: [uncrack] });
-      }
-      if(i.customId == "uncrack2" || i.customId == "uncrackabolt2"){
-        await i.update({ embeds: [uncrackabolt], components: [uncrack2] });
-      }
-      if(i.customId == "uncrack3" || i.customId == "uncrackabolt3"){
-        await i.update({ embeds: [uncrackabolt], components: [uncrack3] });
-      }
-      if(i.customId == "tster" || i.customId == "terrifytricksterazzi"){
-        await i.update({ embeds: [terrifytricksterazzi], components: [tster] });
-      }
-      if(i.customId == "tster2" || i.customId == "terrifytricksterazzi2"){
-        await i.update({ embeds: [terrifytricksterazzi], components: [tster2] });
-      }
-      if(i.customId == "tster3" || i.customId == "terrifytricksterazzi3"){
-        await i.update({ embeds: [terrifytricksterazzi], components: [tster3] });
-      }
-      if(i.customId == "tster4" || i.customId == "terrifytricksterazzi4"){
-        await i.update({ embeds: [terrifytricksterazzi], components: [tster4] });
-      }
+      else if(i.customId == "select"){
+        await HandleSelectMenu(i);
+       }
+       else{
+         await HandleButtonInteraction(i);
+       }
     });
   },
 };

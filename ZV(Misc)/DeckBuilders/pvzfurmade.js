@@ -96,7 +96,7 @@ on (pb.deckinfo = sm.deckinfo)`);
     let fur = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
-        `To view the Decks Made By ${user.displayName} please click on the buttons below!
+        `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${combodecks.length} total decks in Tbot`
       )
       .setThumbnail(user.displayAvatarURL())

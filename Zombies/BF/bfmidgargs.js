@@ -9,7 +9,7 @@ module.exports= {
 		let bfmg = new EmbedBuilder()
 		.setTitle(`${result[5].bfmidgargs}`)
 		.setDescription(`${result[3].bfmidgargs}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.setFooter({text: `${result[2].bfmidgargs}`})
 		.addFields({
 			name: "Deck Type", 

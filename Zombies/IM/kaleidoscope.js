@@ -23,7 +23,7 @@ module.exports = {
         value: `${result[1].otktrickster}`,
         inline: true  
       })
-      .setColor("Random")
+      .setColor("Blue")
       .setImage(`${result[4].otktrickster}`);
     message.channel.send({ embeds: [embed] });
   },

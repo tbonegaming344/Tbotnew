@@ -18,7 +18,7 @@ module.exports = {
       .setTitle(`${result[5].mechacontrol}`)
       .setDescription(`${result[3].mechacontrol}`)
       .setFooter({ text: `${result[2].mechacontrol}` })
-      .setColor("Random")
+      .setColor("Orange")
       .addFields(
         {
           name: "Deck Type",

@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].lockin}`,
 				inline: true
 			})
-		.setColor("Random")			
+		.setColor("Blue")			
 		.setImage(`${result[4].lockin}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

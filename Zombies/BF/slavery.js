@@ -9,7 +9,7 @@ module.exports = {
 		let sp = new EmbedBuilder()
 		.setTitle(`${result[5].slavery}`)
 		.setDescription(`${result[3].slavery}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.setFooter({text: `${result[2].slavery}`})
 		.addFields({
 			name: "Deck Type", 

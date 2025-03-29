@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].valkster}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Purple")
 		.setImage(`${result[4].valkster}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

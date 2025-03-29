@@ -72,7 +72,7 @@ module.exports = {
         "Beta-Carrotina | <:Guardian:1062501130501885973><:Smarty:1062502890448638022>"
       )
       .setDescription("**\\- Root Hero  -**")
-      .setColor("Random")
+      .setColor("#964B00")
 
       .addFields(
         {

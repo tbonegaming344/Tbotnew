@@ -136,7 +136,7 @@ module.exports = {
         "Green Shadow | <:MegaGrow:1062501412992458802><:Smarty:1062502890448638022>"
       )
       .setDescription("**\\- Pea Hero  -**")
-      .setColor("Random")
+      .setColor("Green")
 
       .addFields(
         {

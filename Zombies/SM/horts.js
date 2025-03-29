@@ -23,7 +23,7 @@ module.exports = {
 				value: `${result[1].horts}`,
 				inline: true
 			})
-		.setColor("Random")
+		.setColor("Blue")
 		.setImage(`${result[4].horts}`)
 	message.channel.send({embeds: [ embed ] } ) 
 	}

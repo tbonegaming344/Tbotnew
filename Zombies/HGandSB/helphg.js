@@ -249,7 +249,7 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
           { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
           { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
         )
-        .setColor("Purple");
+        .setColor("#FFC0CB");
       const imageUrl = result[4][deckName];
       if (imageUrl) {
         embed.setImage(imageUrl);

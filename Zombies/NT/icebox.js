@@ -10,7 +10,7 @@ module.exports = {
         .setTitle(`${result[5].icebox}`)
         .setDescription(`${result[3].icebox}`)
         .setFooter({text: `${result[2].icebox}`})
-        .setColor("Random")
+        .setColor("#000000")
         .addFields({
             name: "Deck Type",
             value: `${result[6].icebox}`,

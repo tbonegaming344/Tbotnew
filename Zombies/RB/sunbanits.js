@@ -23,7 +23,7 @@ module.exports = {
         value: `${result[1].sunbandits}`,
         inline: true
       })
-      .setColor("Random")
+      .setColor("Orange")
       .setImage(`${result[4].sunbandits}`);
     message.channel.send({ embeds: [embed] });
   },

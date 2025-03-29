@@ -24,7 +24,7 @@ name: `budgetpb`,
 				inline: true
 			})	
 					.setImage(`${result[4].budgetpb}`)
-		.setColor("Random")			
+		.setColor("Purple")			
 	message.channel.send({embeds: [ budgetpb ] } ) 
 		}
 }

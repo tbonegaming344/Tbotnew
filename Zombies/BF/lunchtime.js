@@ -9,7 +9,7 @@ module.exports = {
 		let mp = new EmbedBuilder()
 		.setTitle(`${result[5].midpets}`)
 		.setDescription(`${result[3].midpets}`)
-		.setColor("Random")
+		.setColor("Blue")
 		.setImage(`${result[4].midpets}`)
 		.setFooter({text: `${result[2].midpets}`})
 		.addFields({

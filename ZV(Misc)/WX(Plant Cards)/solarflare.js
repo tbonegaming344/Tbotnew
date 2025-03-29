@@ -140,7 +140,7 @@ module.exports = {
         "Solar Flare | <:Kabloom:1062502137826910268><:Solar:1062502678384607262>"
       )
       .setDescription("**\\- Flower Hero  -**")
-      .setColor("Random")
+      .setColor("Red")
 
       .addFields(
         {

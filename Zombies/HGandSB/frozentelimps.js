@@ -9,7 +9,7 @@ module.exports = {
 		let fti = new EmbedBuilder()
 		.setTitle(`${result[5].frozentelimps}`)
 		.setDescription(`${result[3].frozentelimps}`)
-	.setColor("Random")
+	.setColor("#000000")
 		.setImage(`${result[4].frozentelimps}`)
 		.addFields({
 			name: "Deck Type",

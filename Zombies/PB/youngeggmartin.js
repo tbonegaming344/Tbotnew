@@ -9,7 +9,7 @@ module.exports = {
     let youngeggmartin = new EmbedBuilder()
       .setTitle(`${result[5].youngeggmartin}`)
       .setDescription(`${result[3].youngeggmartin}`)
-      .setColor("Random")
+      .setColor("Purple")
       .setFooter({ text: `${result[2].youngeggmartin}` })
       .addFields({
         name: "Deck Type",

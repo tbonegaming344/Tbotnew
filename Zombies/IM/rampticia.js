@@ -23,7 +23,7 @@ module.exports = {
 				value:`${result[1].rampticia}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("Blue")		
 		.setImage(`${result[4].rampticia}`)
 	message.channel.send({embeds: [ embed ] } ) 
 		}

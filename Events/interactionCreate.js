@@ -979,7 +979,6 @@ module.exports = {
             //SB TBOT DB
             `${result[0].telimpssb}`,
             //HG TBOT DB
-            `${result[0].blobfishwrappers}`,
             `${result[0].conjureleap}`,
             `${result[0].cyroboy}`,
             `${result[0].frozentelimps}`,
@@ -1392,7 +1391,6 @@ module.exports = {
           );
           const deck = [
             //HG TBOT DB
-            `${result[0].blobfishwrappers}`,
             `${result[0].conjureleap}`,
             `${result[0].cyroboy}`,
             `${result[0].frozentelimps}`,
@@ -1775,7 +1773,6 @@ module.exports = {
               //SB TBOT DB
               `${result[0].telimpssb}`,
               //HG TBOT DB
-              `${result[0].blobfishwrappers}`,
               `${result[0].conjureleap}`,
               `${result[0].cyroboy}`,
               `${result[0].frozentelimps}`,

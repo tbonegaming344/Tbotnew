@@ -2236,23 +2236,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bfwrap")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bfwrap = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("binaryflagwar")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bbolt")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bbolt = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("blobfishwrappers")
+        .setCustomId("binaryflagwar")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -2989,7 +2979,6 @@ module.exports = {
       "bfplankcontrol",
       "bastet",
       "binaryflagwar",
-      "blobfishwrappers",
       "boltbolt",
       "bonusducks",
       "brady",
@@ -3212,23 +3201,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bfwrap2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bfwrap2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpzcomp")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bust2")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bust2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("blobfishwrappers2")
+        .setCustomId("helpzcomp")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -3347,7 +3326,6 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
     const compzdecks = [
-      "blobfishwrappers",
       "bustbolt",
       "gargburn",
       "icebox",
@@ -4271,23 +4249,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bfwrap3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bfwrap3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("binaryflagwar3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bbolt3")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bbolt3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("blobfishwrappers3")
+        .setCustomId("binaryflagwar3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4660,7 +4628,6 @@ module.exports = {
       "antiagoragor",
       "bastet",
       "binaryflagwar",
-      "blobfishwrappers",
       "boltbolt",
       "bonusducks",
       "budgetpb",
@@ -4729,23 +4696,13 @@ module.exports = {
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("bfwrap4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bfwrap4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("bfplankcontrol3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("bducks4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
     const bducks4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("blobfishwrappers4")
+        .setCustomId("bfplankcontrol3")
         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -4896,7 +4853,6 @@ module.exports = {
     const controlzdecks = [
       "antiagoragor",
       "bfplankcontrol",
-      "blobfishwrappers",
       "bonusducks",
       "bustbolt",
       "frozentelimps",
@@ -7211,29 +7167,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       )
       .setColor("Random")
       .setImage(`${result[4].telimpssb}`);
-    let blobfishwrappers = new EmbedBuilder()
-      .setTitle(`${result[5].blobfishwrappers}`)
-      .setDescription(`${result[3].blobfishwrappers}`)
-      .setFooter({ text: `${result[2].blobfishwrappers}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].blobfishwrappers}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].blobfishwrappers}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].blobfishwrappers}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].blobfishwrappers}`);
     let budgetykm = new EmbedBuilder()
       .setTitle(`${result[5].budgetykm}`)
       .setDescription(`${result[3].budgetykm}`)
@@ -9364,18 +9297,6 @@ Note: there are ${tempozdecks.length} tempo zombie decks in the database`,
       }
       else if(i.customId == "bfw4" || i.customId == "binaryflagwar4") {
         await i.update({ embeds: [binaryflagwar], components: [bfw4] });
-      }
-      else if(i.customId == "bfwrap" || i.customId == "blobfishwrappers") {
-        await i.update({ embeds: [blobfishwrappers], components: [bfwrap] });
-      }
-      else if(i.customId == "bfwrap2" || i.customId == "blobfishwrappers2") {
-        await i.update({ embeds: [blobfishwrappers], components: [bfwrap2] });
-      }
-      else if(i.customId == "bfwrap3" || i.customId == "blobfishwrappers3") {
-        await i.update({ embeds: [blobfishwrappers], components: [bfwrap3] });
-      }
-      else if(i.customId == "bfwrap4" || i.customId == "blobfishwrappers4") {
-        await i.update({ embeds: [blobfishwrappers], components: [bfwrap4] });
       }
       else if(i.customId == "bbolt" || i.customId == "boltbolt") {
         await i.update({ embeds: [boltbolt], components: [bbolt] });

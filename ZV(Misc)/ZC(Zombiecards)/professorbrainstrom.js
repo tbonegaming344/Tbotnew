@@ -216,49 +216,48 @@ module.exports = {
       `My commands for Professor Brainstorm(PB) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom decks please use the commands listed above or click on the buttons below to navigate through all decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`
+Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`
     );
     const ladderEmbed = new CreateHelpEmbed(
       "Professor Brainstorm Ladder Decks",
       `My ladder commands for Professor Brainstorm(PB) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.ladderDecks.length} ladder decks in Tbot`
+Note: Professor Brainstorm has ${professorBrainstormDecks.ladderDecks.length} ladder decks in Tbot`
     );
     const memeEmbed = new CreateHelpEmbed(
       "Professor Brainstorm Meme Decks",
       `My meme commands for Professor Brainstorm(PB) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.memeDecks.length} meme decks in Tbot`
+Note: Professor Brainstorm has ${professorBrainstormDecks.memeDecks.length} meme decks in Tbot`
     );
     const comboEmbed = new CreateHelpEmbed(
       "Professor Brainstorm Combo Decks",
       `My combo commands for Professor Brainstorm(PB) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.comboDecks.length} combo decks in Tbot`
+Note: Professor Brainstorm has ${professorBrainstormDecks.comboDecks.length} combo decks in Tbot`
     );
     const controlEmbed = new CreateHelpEmbed(
       "Professor Brainstorm Control Decks",
       `My control commands for Professor Brainstorm(PB) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} control decks in Tbot`
+Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} control decks in Tbot`
     );
     const midrangeEmbed = new CreateHelpEmbed(
       "Professor Brainstorm Midrange Decks",
       `My midrange commands for Professor Brainstorm(PB) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.midrangeDecks.length} midrange decks in Tbot`
+Note: Professor Brainstorm has ${professorBrainstormDecks.midrangeDecks.length} midrange decks in Tbot`
     );
     const helppb = new CreateHelpEmbed(
       "Professor Brainstorm Decks",
-      `My commands for Professor Brainstorm(PB) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
-      `To view the Professor Brainstrom decks please use the commands listed above or click on the buttons below to navigate through all decks!
-  Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`
+      `To view the Professor Brainstrom decks please select an option from the select menu below!
+Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`,
+      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022"
     );
     const [result] = await db.query(`select * from pbdecks`);
     function CreateDeckEmbed(result, deckName) {

@@ -241,7 +241,7 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
     const brady = new CreateDeckEmbed(result, "brady");
     const budgetzm = new CreateDeckEmbed(result, "budgetzm");
     const dozzamech = new CreateDeckEmbed(result, "dozzamech");
-    const uncrackamech = new CreateDeckEmbed(result, "uncrackamech");
+    const uncrackamech = new CreateDeckEmbed(result, "feastmech");
     const gargburn = new CreateDeckEmbed(result, "gargburn");
     const trickmech = new CreateDeckEmbed(result, "trickmech");
     const zmoss = new CreateDeckEmbed(result, "zmoss");

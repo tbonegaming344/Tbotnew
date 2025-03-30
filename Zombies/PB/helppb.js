@@ -242,10 +242,9 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.midrangeDecks.length} 
     );
     const helppb = new CreateHelpEmbed(
       "Professor Brainstorm Decks",
-      `My commands for Professor Brainstorm(PB) are ${toBuildString}`,
+      `To view the Professor Brainstrom decks please select an option from the select menu below!
+Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
-      `To view the Professor Brainstrom decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`
     );
     const [result] = await db.query(`select * from pbdecks`);
     function CreateDeckEmbed(result, deckName) {

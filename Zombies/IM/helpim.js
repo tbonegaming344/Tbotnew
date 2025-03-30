@@ -179,7 +179,8 @@ Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`
     );
     const embed = new CreateHelpEmbed(
       "Immorticia Decks",
-      `To view the Immorticia decks please select an option from the select menu below!`,
+      `To view the Immorticia decks please select an option from the select menu below!
+Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
     );
     const ladderEmbed = new CreateHelpEmbed(
@@ -238,11 +239,11 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
     const savage22 = new CreateDeckEmbed(result, "savage22");
     const bastet = new CreateDeckEmbed(result, "bastet");
     const budgetim = new CreateDeckEmbed(result, "budgetim");
-    const mechascope = new CreateDeckEmbed(result, "mechascope");
-    const kaleidoscope = new CreateDeckEmbed(result, "kaleidoscope");
+    const mechascope = new CreateDeckEmbed(result, "otkmecha");
+    const kaleidoscope = new CreateDeckEmbed(result, "otktrickster");
     const rampticia = new CreateDeckEmbed(result, "rampticia");
     const stacheticia = new CreateDeckEmbed(result, "stacheticia");
-    const youngcatmartin = new CreateDeckEmbed(result, "youngcatmartin");
+    const youngcatmartin = new CreateDeckEmbed(result, "ycm");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

@@ -236,7 +236,8 @@ module.exports = {
     );
     let helpim = new CreateHelpEmbed(
       "Immorticia Decks",
-      `To view the Immorticia decks please select an option from the select menu below!`,
+      `To view the Immorticia decks please select an option from the select menu below!
+Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
     );
     let ladderEmbed = new CreateHelpEmbed(
@@ -244,35 +245,35 @@ module.exports = {
       `My ladder decks for Immorticia(IM) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the ladder Immorticia decks please use the commands listed above or click on the buttons below to navigate through all ladder Immorticia decks!
-  Note: Immorticia has ${immorticiaDecks.ladderDecks.length} ladder decks in Tbot`
+Note: Immorticia has ${immorticiaDecks.ladderDecks.length} ladder decks in Tbot`
     );
     let memeEmbed = new CreateHelpEmbed(
       "Immorticia Meme Decks",
       `My meme decks for Immorticia(IM) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the meme Immorticia decks please use the commands listed above or click on the buttons below to navigate through all meme Immorticia decks!
-  Note: Immorticia has ${immorticiaDecks.memeDecks.length} meme decks in Tbot`
+Note: Immorticia has ${immorticiaDecks.memeDecks.length} meme decks in Tbot`
     );
     let comboEmbed = new CreateHelpEmbed(
       "Immorticia Combo Decks",
       `My combo decks for Immorticia(IM) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the combo Immorticia decks please use the commands listed above or click on the buttons below to navigate through all combo Immorticia decks!
-  Note: Immorticia has ${immorticiaDecks.comboDecks.length} combo decks in Tbot`
+Note: Immorticia has ${immorticiaDecks.comboDecks.length} combo decks in Tbot`
     );
     let controlEmbed = new CreateHelpEmbed(
       "Immorticia Control Decks",
       `My control decks for Immorticia(IM) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the control Immorticia decks please use the commands listed above or click on the buttons below to navigate through all control Immorticia decks!
-  Note: Immorticia has ${immorticiaDecks.controlDecks.length} control decks in Tbot`
+Note: Immorticia has ${immorticiaDecks.controlDecks.length} control decks in Tbot`
     );
     let midrangeEmbed = new CreateHelpEmbed(
       "Immorticia Midrange Decks",
       `My midrange decks for Immorticia(IM) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the midrange Immorticia decks please use the commands listed above or click on the buttons below to navigate through all midrange Immorticia decks!
-  Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in Tbot`
+Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in Tbot`
     );
     let [result] = await db.query(`SELECT * FROM imdecks`);
     function CreateDeckEmbed(result, deckName) {
@@ -292,14 +293,14 @@ module.exports = {
       }
       return embed;
     }
-    let savage22 = new CreateDeckEmbed(result, "savage22");
-    let bastet = new CreateDeckEmbed(result, "bastet");
-    let budgetim = new CreateDeckEmbed(result, "budgetim");
-    let mechascope = new CreateDeckEmbed(result, "mechascope");
-    let kaleidoscope = new CreateDeckEmbed(result, "kaleidoscope");
-    let rampticia = new CreateDeckEmbed(result, "rampticia");
-    let stacheticia = new CreateDeckEmbed(result, "stacheticia");
-    let youngcatmartin = new CreateDeckEmbed(result, "youngcatmartin");
+    const savage22 = new CreateDeckEmbed(result, "savage22");
+    const bastet = new CreateDeckEmbed(result, "bastet");
+    const budgetim = new CreateDeckEmbed(result, "budgetim");
+    const mechascope = new CreateDeckEmbed(result, "otkmecha");
+    const kaleidoscope = new CreateDeckEmbed(result, "otktrickster");
+    const rampticia = new CreateDeckEmbed(result, "rampticia");
+    const stacheticia = new CreateDeckEmbed(result, "stacheticia");
+    const youngcatmartin = new CreateDeckEmbed(result, "ycm");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

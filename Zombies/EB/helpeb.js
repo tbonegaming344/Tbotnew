@@ -140,7 +140,7 @@ module.exports = {
     }
 
     const alldecksrow = new CreateButtons("seacret", "budeb");
-    const budeb = new new CreateButtons("helpall", "gstar22")();
+    const budeb = new CreateButtons("helpall", "gstar22");
     const gstar22 = new CreateButtons("budgeteb", "hgargs");
     const hgargs = new CreateButtons("gargstar22", "npa");
     const npa = new CreateButtons("huntgargs", "sea");

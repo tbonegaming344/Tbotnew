@@ -46,11 +46,11 @@ const {
         .setLabel("Meme Decks")
         .setValue("meme")
         .setDescription("Decks that are built off a weird/fun combo"), 
-        new StringSelectMenuBuilder()
+        new StringSelectMenuOptionBuilder()
         .setLabel("Aggro Deck")
         .setValue("aggro")
         .setDescription("Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."),
-        new StringSelectMenuBuilder()
+        new StringSelectMenuOptionBuilder()
         .setLabel("Combo Decks")
         .setValue("combo")
         .setDescription("Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."),
@@ -112,29 +112,29 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
             user.displayAvatarURL()
           )
           let memeEmbed = new CreateHelpEmbed(
-            `${user.username} Meme Decks`,
-            `My meme decks created by ${user.username} are:\n${toBuildMemeString}`,
+            `${user.displayName} Meme Decks`,
+            `My meme decks created by ${user.displayName} are ${toBuildMemeString}`,
             user.displayAvatarURL(), 
             `To view the meme decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: ${user.displayName} has ${pillowyDecks.memeDecks.length} total meme decks in Tbot`
           )
           let comboEmbed = new CreateHelpEmbed(
-            `${user.username} Combo Decks`,
-            `My combo decks created by ${user.username} are:\n${toBuildComboString}`,
+            `${user.displayName} Combo Decks`,
+            `My combo decks created by ${user.displayName} are ${toBuildComboString}`,
             user.displayAvatarURL(),
             `To view the combo decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: ${user.displayName} has ${pillowyDecks.comboDecks.length} total combo decks in Tbot`
           )
           let midrangeEmbed = new CreateHelpEmbed(
-            `${user.username} Midrange Decks`,
-            `My midrange decks created by ${user.username} are:\n${toBuildMidrangeString}`,
+            `${user.displayName} Midrange Decks`,
+            `My midrange decks created by ${user.displayName} are ${toBuildMidrangeString}`,
             user.displayAvatarURL(),
             `To view the midrange decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrange decks in Tbot`
           )
           let allDecksEmbed = new CreateHelpEmbed(
-            `${user.username} Decks`,
-            `My decks created by ${user.username} are:\n${toBuildString}`,
+            `${user.displayName} Decks`,
+            `My decks created by ${user.displayName} are ${toBuildString}`,
             user.displayAvatarURL(),
             `To view the decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all decks!
 Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`
@@ -158,7 +158,7 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
           }
             let abeans = new CreateDeckEmbed(result, "abeans")
             let healburn = new CreateDeckEmbed(result, "healburn")
-            let starrings = new CreateDeckEmbed(result, "starrings")
+            let starrings = new CreateDeckEmbed(result, "sovietonion")
           const m = await message.channel.send({ embeds: [pillowy], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
           async function handleSelectMenu(i){

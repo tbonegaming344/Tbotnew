@@ -57,7 +57,11 @@ const {
         new StringSelectMenuOptionBuilder()
         .setLabel("Midrange Decks")
         .setValue("midrange")
-        .setDescription("Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game")
+        .setDescription("Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"), 
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("All of the decks made by Pillowy")
       )
       const row = new ActionRowBuilder().addComponents(select);
       const pillowyDecks = {

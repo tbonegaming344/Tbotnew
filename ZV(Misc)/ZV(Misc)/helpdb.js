@@ -7,7 +7,6 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-const { resourceLimits } = require("worker_threads");
 /**
  *
  * @param {string} title the title of the embed

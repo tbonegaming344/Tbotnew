@@ -8,6 +8,17 @@ const {
     MessageFlags
   } = require("discord.js");
   let db = require("../../index.js");
+  function CreateHelpEmbed(title, description, thumbnail, footer) {
+    const embed = new EmbedBuilder()
+      .setTitle(title)
+      .setDescription(description)
+      .setThumbnail(thumbnail)
+      .setColor("Random");
+    if (footer) {
+      embed.setFooter({ text: `${footer}` });
+    }
+    return embed;
+  }
   module.exports = {
     name: `pillowy`,
     aliases: [
@@ -32,7 +43,7 @@ const {
         .setEmoji("<:compemote:1325461143136764060>")
         .setDescription("Some of the best decks in the game"),
         new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Deck")
+        .setLabel("Meme Decks")
         .setValue("meme")
         .setDescription("Decks that are built off a weird/fun combo"), 
         new StringSelectMenuBuilder()
@@ -40,79 +51,183 @@ const {
         .setValue("aggro")
         .setDescription("Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."),
         new StringSelectMenuBuilder()
-        .setLabel("Combo Deck")
+        .setLabel("Combo Decks")
         .setValue("combo")
         .setDescription("Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."),
         new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Deck")
+        .setLabel("Midrange Decks")
         .setValue("midrange")
         .setDescription("Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game")
       )
-          let decks = ["abeans", "starrings"];
-          let [result] = await db.query(`SELECT abeans, sovietonion FROM gsdecks`)
+      const row = new ActionRowBuilder().addComponents(select);
+      const pillowyDecks = {
+        competitiveDecks: ["abeans"], 
+        memeDecks: ["healburn", "starrings"], 
+        aggroDecks: ["abeans"], 
+        comboDecks: ["healburn", "starrings"],
+        midrangeDecks: ["healburn", "starrings"], 
+        allDecks: ["abeans", "healburn", "starrings"],
+      }
+      function buildDeckString(decks) {
+        return decks
+          .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+          .join("");
+      }
+      const toBuildString = buildDeckString(pillowyDecks.allDecks);
+      const toBuildMemeString = buildDeckString(pillowyDecks.memeDecks);
+      const toBuildComboString = buildDeckString(pillowyDecks.comboDecks);
+      const toBuildMidrangeString = buildDeckString(pillowyDecks.midrangeDecks);
+      function CreateButtons(leftButtonId, rightButtonId) {
+        return new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setCustomId(leftButtonId)
+            .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+            .setStyle(ButtonStyle.Primary),
+          new ButtonBuilder()
+            .setCustomId(rightButtonId)
+            .setEmoji("<:arrowright:1271446796207525898>")
+            .setStyle(ButtonStyle.Primary)
+        );
+      }
+      const memeRow = new CreateButtons("starrings", "hburn");
+      const hburn = new CreateButtons("helpmeme", "srings");
+      const srings = new CreateButtons("healburn", "memehelp");
+      const comboRow = new CreateButtons("starrings2", "hburn2");
+      const hburn2 = new CreateButtons("helpcombo", "srings2");
+      const srings2 = new CreateButtons("healburn2", "combohelp");
+      const midrangeRow = new CreateButtons("starrings3", "hburn3");
+      const hburn3 = new CreateButtons("helpmidrange", "srings3");
+      const srings3 = new CreateButtons("healburn3", "midrangehelp");
+      const allDecksRow = new CreateButtons("starrings4", "ab");
+      const ab = new CreateButtons("helpall", "hburn4");
+      const hburn4 = new CreateButtons("abeans", "srings4");
+      const srings4 = new CreateButtons("healburn4", "allhelp");
+          let [result] = await db.query(`SELECT abeans, healburn, sovietonion FROM gsdecks gs
+            inner join sfdecks sf on (gs.deckinfo = sf.deckinfo)`)
           let user = await client.users.fetch("1157720864679272549");
-          let pillowy = new EmbedBuilder()
-            .setTitle(`${user.displayName} Decks`)
-            .setDescription(
-              `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
-            )
-            .setThumbnail(user.displayAvatarURL())
-            .setColor("Random");
-            let abeans = new EmbedBuilder()
-	.setTitle(`${result[5].abeans}`)
-	.setDescription(`${result[3].abeans}`)
-	.setFooter({text: `${result[2].abeans}`})
-			.addFields({
-			name: "Deck Type",
-			value: `${result[6].abeans}`,
-			inline: true
-			},
-			{
-			name: "Archetype",
-			value: `${result[0].abeans}`,
-			inline: true
-			},
-			{
-				name: "Deck Cost", 
-				value: `${result[1].abeans}`,
-				inline: true
-			})
-		.setColor("Random")
-		.setImage(`${result[4].abeans}`)
-            let tsunion = new EmbedBuilder()
-        .setTitle(`${result[5].sovietonion}`)
-        .setDescription(`${result[3].sovietonion}`)
-        .setFooter({text: `${result[2].sovietonion}`})
-        .addFields({
-            name: "Deck Type",
-            value: `${result[6].sovietonion}`,
-            inline: true
-        },
-        {
-            name: "Archetype",
-            value: `${result[0].sovietonion}`,
-            inline: true
-        },
-        {
-            name: "Deck Cost", 
-            value: `${result[1].sovietonion}`,
-            inline: true
-        })
-        .setColor("Random")
-        .setImage(`${result[4].sovietonion}`)
+          let pillowy = new CreateHelpEmbed(
+            `${user.displayName} Decks`,
+            `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
+Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`,
+            user.displayAvatarURL()
+          )
+          let memeEmbed = new CreateHelpEmbed(
+            `${user.username} Meme Decks`,
+            `My meme decks created by ${user.username} are:\n${toBuildMemeString}`,
+            user.displayAvatarURL(), 
+            `To view the meme decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all meme decks!
+Note: ${user.displayName} has ${pillowyDecks.memeDecks.length} total meme decks in Tbot`
+          )
+          let comboEmbed = new CreateHelpEmbed(
+            `${user.username} Combo Decks`,
+            `My combo decks created by ${user.username} are:\n${toBuildComboString}`,
+            user.displayAvatarURL(),
+            `To view the combo decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all combo decks!
+Note: ${user.displayName} has ${pillowyDecks.comboDecks.length} total combo decks in Tbot`
+          )
+          let midrangeEmbed = new CreateHelpEmbed(
+            `${user.username} Midrange Decks`,
+            `My midrange decks created by ${user.username} are:\n${toBuildMidrangeString}`,
+            user.displayAvatarURL(),
+            `To view the midrange decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all midrange decks!
+Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrange decks in Tbot`
+          )
+          let allDecksEmbed = new CreateHelpEmbed(
+            `${user.username} Decks`,
+            `My decks created by ${user.username} are:\n${toBuildString}`,
+            user.displayAvatarURL(),
+            `To view the decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all decks!
+Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`
+          )
+          function CreateDeckEmbed(result, deckName) {
+            const embed = new EmbedBuilder()
+              .setTitle(`${result[5][deckName]}`)
+              .setDescription(`${result[3][deckName]}`)
+              .setFooter({ text: `${result[2][deckName]}` })
+              .addFields(
+                { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+                { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+                { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+              )
+              .setColor("Random");
+            const imageUrl = result[4][deckName];
+            if (imageUrl) {
+              embed.setImage(imageUrl);
+            }
+            return embed;
+          }
+            let abeans = new CreateDeckEmbed(result, "abeans")
+            let healburn = new CreateDeckEmbed(result, "healburn")
+            let starrings = new CreateDeckEmbed(result, "starrings")
           const m = await message.channel.send({ embeds: [pillowy], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
-          const collector = m.createMessageComponentCollector({ filter: iFilter });
-          collector.on("collect", async (i) => {
-            if(i.customId == "select"){
+          async function handleSelectMenu(i){
             const value = i.values[0];
             if(value == "competitive" || value == "aggro"){
               await i.reply({embeds: [abeans], flags: MessageFlags.Ephemeral})
             }
-            if(value == "meme" || value == "combo" || value == "midrange"){
-              await i.reply({embeds: [tsunion], flags: MessageFlags.Ephemeral})
+            else if(value == "meme" ){
+              await i.update({embeds: [memeEmbed], components: [memeRow]})
             }
+            else if(value == "combo"){
+              await i.update({embeds: [comboEmbed], components: [comboRow]})
+            }
+            else if(value == "midrange"){
+              await i.update({embeds: [midrangeEmbed], components: [midrangeRow]})
+            }
+            else if(value == "all"){
+              await i.update({embeds: [allDecksEmbed], components: [allDecksRow]})
+            }
+          }
+          async function handleButtonInteraction(i) {
+            if(i.customId == "helpmeme" || i.customId == "memehelp"){
+              await i.update({embeds: [memeEmbed], components: [memeRow]})
+            }
+            else if(i.customId == "helpcombo" || i.customId == "combohelp"){
+              await i.update({embeds: [comboEmbed], components: [comboRow]})
+            }
+            else if(i.customId == "helpmidrange" || i.customId == "midrangehelp"){
+              await i.update({embeds: [midrangeEmbed], components: [midrangeRow]})
+            }
+            else if(i.customId == "helpall" || i.customId == "allhelp"){
+              await i.update({embeds: [allDecksEmbed], components: [allDecksRow]})
+            }
+            else if(i.customId == "srings" || i.customId == "starrings"){
+              await i.update({embeds: [starrings], components: [srings]})
+            }
+            else if(i.customId == "hburn"|| i.customId == "healburn"){
+              await i.update({embeds: [healburn], components: [hburn]})
+            }
+            else if(i.customId == "srings2" || i.customId == "starrings2"){
+              await i.update({embeds: [starrings], components: [srings2]})
+            }
+            else if(i.customId == "hburn2"|| i.customId == "healburn2"){
+              await i.update({embeds: [healburn], components: [hburn2]})
+            }
+            else if(i.customId == "srings3" || i.customId == "starrings3"){
+              await i.update({embeds: [starrings], components: [srings3]})
+            }
+            else if(i.customId == "hburn3"|| i.customId == "healburn3"){
+              await i.update({embeds: [healburn], components: [hburn3]})
+            }
+            else if(i.customId == "srings4" || i.customId == "starrings4"){
+              await i.update({embeds: [starrings], components: [srings4]})
+            }
+            else if(i.customId == "hburn4"|| i.customId == "healburn4"){
+              await i.update({embeds: [healburn], components: [hburn4]})
+            }
+            else if(i.customId == "ab" || i.customId == "abeans"){
+              await i.update({embeds: [abeans], components: [ab]})
+            }
+
+          }
+          const collector = m.createMessageComponentCollector({ filter: iFilter });
+          collector.on("collect", async (i) => {
+            if(i.customId == "select"){
+            await handleSelectMenu(i);
+            }
+            else{
+              await handleButtonInteraction(i);
             }
           });
         },

@@ -13,7 +13,7 @@ function CreateHelpEmbed(title, description, thumbnail, footer){
   }
 module.exports = {
 	name: `wildisnub`,
-	aliases: [`wildhelp`, `helpwild`, `wild1`, `decksmadebywild`, `wilddecks`],
+	aliases: [`wildhelp`, `helpwild`, `wild1`, `decksmadebywild`, `wilddecks`, `wilddeck`],
 	category: `DeckBuilders`,
 	run: async(client, message, args) => {
 		const select = new StringSelectMenuBuilder()

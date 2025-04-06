@@ -2,7 +2,7 @@ const {EmbedBuilder} = require("discord.js");
 let db = require("../../index.js");
 module.exports = {
 	name: `funnyflare`,
-	aliases: [`solarflaretroll`, `trf`, `trollflare`, `funnyflare`, `trollarflare`, `trollerflare`],
+	aliases: [`solarflaretroll`, `trf`, `trollflare`, `funnyflare`, `trollarflare`, `trollerflare`, `funnierflare`],
 	category: `Solar Flare(SF)`,
 	run: async(client, message, args) => {
 		let [result] = await db.query(`SELECT funnyflare from sfdecks`);

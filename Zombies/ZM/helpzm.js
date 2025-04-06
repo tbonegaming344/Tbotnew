@@ -24,6 +24,7 @@ module.exports = {
   aliases: [
     `zmhelp`,
     `zmcommands`,
+    `zmdeck`,
     `commandszm`,
     `helpzmech`,
     `zmechcommands`,

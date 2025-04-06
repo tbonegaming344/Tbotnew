@@ -25,6 +25,7 @@ module.exports = {
     `rohelp`,
     `rocommands`,
     `commandsro`,
+    `rosedeck`,
     `helprose`,
     `rodecks`,
     `rosehelp`,

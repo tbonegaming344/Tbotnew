@@ -15,6 +15,7 @@ module.exports = {
     `deckadditionsforthebot`,
     `deckaddrequirements`,
     `adddecks`,
+    `decksuggestion`,
 	  `submit`,
 	  `submitdeck`,
 	  `submitdecks`,
@@ -149,7 +150,7 @@ Please note that the deck will be reviewed and judge by judges and the communtit
 Afterwards interact with the buttons below to suggest a deck or to suggest a deck update`,
       })
       .setColor("Random")
-    const m = await message.channel.send({
+    await message.channel.send({
       embeds: [deck],
       components: [row, suggestnew, suggestup, vids],
     });

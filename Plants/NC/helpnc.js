@@ -24,12 +24,14 @@ module.exports = {
   aliases: [
     `nccommands`,
     `commandsnc`,
+    `nightcapdecks`,
     `nchelp`,
-    `helpNight Cap`,
-    `Night Caphelp`,
+    `helpnightcap`,
+    `nightcaphelp`,
     `helpcap`,
     `helpnight`,
-    `Night Capdecks`,
+    `nightcapdecks`,
+    `helpnightcap`,
     `ncdecks`,
     `capdecks`,
     `ncdeck`

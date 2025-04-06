@@ -2,7 +2,7 @@ const {EmbedBuilder} = require("discord.js");
 let db = require('../../index.js')
 module.exports = {
 	name: `brady`,
-	aliases: [`smashmouth`, `mariogalaxy`, `3star`, `ballin`],
+	aliases: [`smashmouth`, `mariogalaxy`, `3star`, `ballin`, `bradyinrome`],
 	category: `Zmech(ZM)`,
 		run: async(client, message, args) => {
 			let [result] = await db.query(`SELECT brady FROM zmdecks`);

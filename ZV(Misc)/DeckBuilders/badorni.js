@@ -94,23 +94,13 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("healburn")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const hburn = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("ftimps")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("moprbius")
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     )
     const mopr = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("hburn2")
+        .setCustomId("ftimps")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -143,7 +133,6 @@ module.exports = {
       "antiagoragor",
       "freezeheal",
       "frozentelimps",
-      "healburn",
       "moprbius",
       "plantmop",
       "psychosolstice",
@@ -194,23 +183,13 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("hburn2")
-     .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let hburn2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("ftimps2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("mopr2")
      .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     let mopr2 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("moprbius2")
+        .setCustomId("ftimps2")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -220,7 +199,7 @@ module.exports = {
     )
     let pmop = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("healburn2")
+        .setCustomId("mopribus2")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -243,7 +222,6 @@ module.exports = {
       "antiagoragor",
       "freezeheal",
       "frozentelimps",
-      "healburn",
       "moprbius",
       "plantmop",
       "psychosolstice",
@@ -290,23 +268,13 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-      .setCustomId("hburn3")
-     .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let hburn3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midrange")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
       .setCustomId("mopr3")
      .setEmoji("<:arrowright:1271446796207525898>")
       .setStyle(ButtonStyle.Primary)
     )
     let mopr3 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("healburn3")
+        .setCustomId("midrange")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -325,7 +293,6 @@ module.exports = {
       .setStyle(ButtonStyle.Primary)
     )
     let middecks = [
-      "healburn",
       "moprbius",
       "psychosolstice",
     ]
@@ -375,23 +342,13 @@ module.exports = {
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
-        .setCustomId("hburn4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let hburn4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("fti4")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
         .setCustomId("mopr4")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     )
     let mopr4 = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
-        .setCustomId("healburn4")
+        .setCustomId("fti4")
   .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
       new ButtonBuilder()
@@ -424,7 +381,6 @@ module.exports = {
       "antiagoragor",
       "freezeheal",
       "frozentelimps",
-      "healburn",
       "moprbius",
       "plantmop",
       "psychosolstice",
@@ -452,7 +408,7 @@ module.exports = {
     }
     let [result] =
       await db.query(`select antiagor, antiagoragor,
-	freezeheal, frozentelimps, healburn, mopribus, plantmop,
+	freezeheal, frozentelimps, mopribus, plantmop,
 	psychosolstice from ntdecks nt
 	inner join ccdecks cc
 	on (nt.deckinfo = cc.deckinfo)
@@ -602,27 +558,6 @@ Note: ${user.displayName} has ${condecks.length} control decks in Tbot`,
 			inline: true
 		})
 		.setFooter({text: `${result[2].frozentelimps}`})
-    let healburn = new EmbedBuilder()
-    .setTitle(`${result[5].healburn}`)
-		.setDescription(`${result[3].healburn}`)
-		.setFooter({text: `${result[2].healburn}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].healburn}`,
-			inline: true
-		},
-		{
-			name: "Archetype",
-			value: `${result[0].healburn}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].healburn}`,
-			inline: true
-		})
-.setImage(`${result[4].healburn}`)
-		
-		.setColor("Random")
     let mop = new EmbedBuilder()
     .setTitle(`${result[5].mopribus}`)
     .setDescription(`${result[3].mopribus}`)
@@ -733,9 +668,6 @@ Note: ${user.displayName} has ${condecks.length} control decks in Tbot`,
         if(i.customId == "ftimps" || i.customId == "frozentelimps"){
           await i.update({embeds: [fti], components: [ftimps]})
         }
-        if(i.customId == "hburn" || i.customId == "healburn"){
-          await i.update({embeds: [healburn], components: [hburn]})
-        }
         if(i.customId == "mopr2" || i.customId == "moprbius2"){
           await i.update({embeds: [mop], components: [mopr2]})
         }
@@ -773,17 +705,9 @@ Note: ${user.displayName} has ${condecks.length} control decks in Tbot`,
         if(i.customId == "fti3" || i.customId == "ftimps3"){
           await i.update({embeds: [fti], components: [fti3]})
         }
-        //Heal Burn
-        if(i.customId == "hburn2" || i.customId == "healburn2"){
-          await i.update({embeds: [healburn], components: [hburn2]})
-        }
         //Midrange Decks
         if(i.customId == "mid" || i.customId == "midrange"){
           await i.update({embeds: [midbad], components: [midrange]})
-        }
-        //Heal Burn
-        if(i.customId == "hburn3" || i.customId == "healburn3"){
-          await i.update({embeds: [healburn], components: [hburn3]})
         }
         if(i.customId == "mopr3" || i.customId == "mopribus3"){
           await i.update({embeds: [mop], components: [mopr3]})
@@ -805,9 +729,6 @@ Note: ${user.displayName} has ${condecks.length} control decks in Tbot`,
         }
         if(i.customId == "freeze3" || i.customId == "freezeheal3"){
           await i.update({embeds: [freal], components: [freeze3]})
-        }
-        if(i.customId == "hburn4" || i.customId == "healburn4"){
-          await i.update({embeds: [healburn], components: [hburn4]})
         }
         if(i.customId == "pmop4" || i.customId == "plantmop4"){
           await i.update({embeds: [plantmop], components: [pmop4]})

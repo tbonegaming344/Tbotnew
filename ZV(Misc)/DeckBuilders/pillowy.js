@@ -13,7 +13,7 @@ const {
       .setTitle(title)
       .setDescription(description)
       .setThumbnail(thumbnail)
-      .setColor("Random");
+      .setColor("#FFB6C1");
     if (footer) {
       embed.setFooter({ text: `${footer}` });
     }
@@ -153,7 +153,7 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
                 { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
                 { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
               )
-              .setColor("Random");
+              .setColor("#FFB6C1");
             const imageUrl = result[4][deckName];
             if (imageUrl) {
               embed.setImage(imageUrl);

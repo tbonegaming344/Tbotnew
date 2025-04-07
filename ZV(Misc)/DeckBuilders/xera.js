@@ -119,9 +119,11 @@ module.exports = {
       allDecks: [
         "22savage",
         "brady",
+        "frozentelimps",
         "funnyflare",
         "gomorrah",
         "gravepiratestache",
+        "healburn",
         "himpter",
         "laserrings",
         "startron",
@@ -194,11 +196,13 @@ module.exports = {
     const ws3 = new CreateButtons("startron3", "midhelp");
     const alldecksrow = new CreateButtons("watersports4", "sav4");
     const sav4 = new CreateButtons("helpall", "br2");
-    const br2 = new CreateButtons("savage4", "ff4");
-    const ff4 = new CreateButtons("brady2", "go3");
+    const br2 = new CreateButtons("savage4", "ftimps4");
+    const ftimps4 = new CreateButtons("brady2", "ff4");
+    const ff4 = new CreateButtons("frozentelimps4", "go3");
     const go3 = new CreateButtons("funnyflare4", "gps3");
-    const gps3 = new CreateButtons("gomorrah3", "hi4");
-    const hi4 = new CreateButtons("gravepiratestache3", "lrings4");
+    const gps3 = new CreateButtons("gomorrah3", "hburn4");
+    const hburn4 = new CreateButtons("gravepiratestache3", "hi4");
+    const hi4 = new CreateButtons("healburn4", "lrings4");
     const lrings4 = new CreateButtons("himps4", "star4");
     const star4 = new CreateButtons("laserrings4", "tc2");
     const tc2 = new CreateButtons("startron4", "um4");
@@ -420,12 +424,16 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         await i.update({ embeds: [frozentelimps], components: [ftimps2] });
       } else if (i.customId == "ftimps3" || i.customId == "frozentelimps3") {
         await i.update({ embeds: [frozentelimps], components: [ftimps3] });
+      } else if (i.customId == "ftimps4" || i.customId == "frozentelimps4") {
+        await i.update({ embeds: [frozentelimps], components: [ftimps4] });
       } else if (i.customId == "hburn" || i.customId == "healburn") {
         await i.update({ embeds: [healburn], components: [hburn] });
       } else if (i.customId == "hburn2" || i.customId == "healburn2") {
         await i.update({ embeds: [healburn], components: [hburn2] });
       } else if (i.customId == "hburn3" || i.customId == "healburn3") {
         await i.update({ embeds: [healburn], components: [hburn3] });
+      } else if (i.customId == "hburn4" || i.customId == "healburn4") {
+        await i.update({ embeds: [healburn], components: [hburn4] });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

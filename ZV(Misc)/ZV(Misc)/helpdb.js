@@ -71,6 +71,7 @@ module.exports = {
     `ladderdecks`,
     `aggro`,
     `aggrodecks`,
+    `meme`,
     `control`,
     `controldecks`,
     `combo`,

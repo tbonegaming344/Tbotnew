@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 module.exports = {
-  name: `meme`,
-  aliases: [`pvzmeme`, `memes`, `pvzhmeme`],
+  name: `pvzhmeme`,
+  aliases: [`pvzmeme`, `memes`],
   category: `Miscellaneous`,
   run: async (client, message, args) => {
     if (message.channel.id != "780141103558295592") {

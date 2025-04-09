@@ -4,11 +4,21 @@ const {
   ButtonStyle,
   EmbedBuilder,
   MessageFlags,
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
-
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#000000");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `snortingsalt`,
   aliases: [
@@ -27,849 +37,234 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const select =  new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Salt's Decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Budget Deck")
-      .setValue("budget")
-      .setDescription('Decks that are cheap for new players')
-			.setEmoji("💰"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Decks")
-      .setValue("comp")
-      .setDescription('Some of the Best Decks in the game')
-			.setEmoji("<:compemote:1325461143136764060>"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Decks")
-      .setValue("ladder")
-      .setDescription('Decks that mostly only good for ranked games')
-			.setEmoji("<:ladder:1271503994857979964>"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Meme Decks")
-      .setValue("meme")
-      .setDescription('Decks that are built off a weird/fun combo'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Aggro Decks")
-      .setValue("aggro")
-      .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Combo Decks")
-      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
-      .setValue("combo"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Control Decks")
-      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
-      .setValue("control"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Decks")
-      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
-      .setValue("midrange"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("All Decks")
-      .setDescription('View all of Salt\'s Decks')
-      .setValue("all")
-    )
+    const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Salt's Decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("Decks that are cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Decks")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Decks")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setValue("meme")
+          .setDescription("Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Decks")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          )
+          .setValue("combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Control Decks")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          )
+          .setValue("control"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          )
+          .setValue("midrange"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setDescription("View all of Salt's Decks")
+          .setValue("all")
+      );
     const row = new ActionRowBuilder().addComponents(select);
-    let comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sticia")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("budgetykm")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let bykm= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("combohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bustbolt")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    let bust = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bykm")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cyburn")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const cburn = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bust")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const gb2= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("cburn")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gravestache")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const gstache = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargburn2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sea")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const sea4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gstache")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("spacestars")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const stars = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("seacret4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("stacheticia")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sticia = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("stars")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpcombo")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-
-    let combodecks = [
-      "budgetykm",
-      "bustbolt",
-      "cyburn",
-      "gargburn",
-      "gravestache",
-      "seacret",
-      "spacestars",
-      "stacheticia",
-    ]
-    let toBuildCombo = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      let deck = combodecks[i];
-      toBuildCombo += `\n<@1043528908148052089> **${deck}**`;
+    const snortingSaltDecks = {
+      budgetDecks: ["budgetykm"],
+      competitiveDecks: [
+        "abeans",
+        "bustbolt",
+        "chemotherapy",
+        "cyburn",
+        "figlottery",
+        "gargburn",
+        "healcontrol",
+        "logbait",
+        "radiotherapy",
+        "seacret",
+        "shamcontrol",
+        "spacestars",
+        "uncrackabolt",
+        "watertron",
+      ],
+      ladderDecks: ["gravestache", "schoolyard"],
+      memeDecks: ["noplayingallowed", "stacheticia"],
+      aggroDecks: ["abeans", "logbait", "schoolyard", "seacret", "watertron"],
+      comboDecks: [
+        "budgetykm",
+        "bustbolt",
+        "cyburn",
+        "gargburn",
+        "gravestache",
+        "seacret",
+        "spacestars",
+        "stacheticia",
+      ],
+      controlDecks: [
+        "bustbolt",
+        "chemotherapy",
+        "healcontrol",
+        "noplayingallowed",
+        "radiotherapy",
+        "shamcontrol",
+        "uncrackabolt",
+      ],
+      midrangeDecks: [
+        "budgetykm",
+        "cyburn",
+        "figlottery",
+        "gargburn",
+        "spacestars",
+      ],
+      allDecks: [
+        "abeans",
+        "budgetykm",
+        "bustbolt",
+        "chemotherapy",
+        "cyburn",
+        "figlottery",
+        "gargburn",
+        "gravestache",
+        "healcontrol",
+        "logbait",
+        "noplayingallowed",
+        "radiotherapy",
+        "schoolyard",
+        "seacret",
+        "shamcontrolbc",
+        "spacestars",
+        "stacheticia",
+        "uncrackabolt",
+        "watertron",
+      ],
+    };
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    const midrangerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("stars2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("budgetykm2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
+    const toBuildString = buildDeckString(snortingSaltDecks.allDecks);
+    const toBuildCompetitive = buildDeckString(
+      snortingSaltDecks.competitiveDecks
     );
-    const bykm2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("midhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cburn2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const cburn2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bykm2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("flottery")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const flottery = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("cyburn2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gb3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const gb3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("figlottery")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("stars2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const stars2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargburn3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpmid")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let midrangedecks = [
-      "budgetykm",
-      "cyburn",
-      "figlottery",
-      "gargburn",
-      "spacestars",
-    ]
-    let toBuildMid = "";
-    for (let i = 0; i < midrangedecks.length; i++) {
-      let deck = midrangedecks[i];
-      toBuildMid += `\n<@1043528908148052089> **${deck}**`;
+    const toBuildLadder = buildDeckString(snortingSaltDecks.ladderDecks);
+    const toBuildMeme = buildDeckString(snortingSaltDecks.memeDecks);
+    const toBuildAggro = buildDeckString(snortingSaltDecks.aggroDecks);
+    const toBuildCombo = buildDeckString(snortingSaltDecks.comboDecks);
+    const toBuildControl = buildDeckString(snortingSaltDecks.controlDecks);
+    const toBuildMid = buildDeckString(snortingSaltDecks.midrangeDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const competitiverow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("watertron")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ab")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const ab = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcomp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bust3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bust3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("abeans")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("chemotherapy2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const chemo2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bustbolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cyburn3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const cburn3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("chemo2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("flottery2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const flottery2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("cburn3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gb")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const gb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("figlottery2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("healcon2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const healcon2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargburn")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("radio")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const radio = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("healcontrol2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("seacret")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sea = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("radiotherapy")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("shamcontrol2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sham2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sea")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("spacestars3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const stars3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sham2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("uncrack2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const uncrack2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("stars3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("wt")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const wt = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("uncrackabolt2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpcomp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-
-    let competitivedecks = [
-      "abeans",
-      "bustbolt",
-      "chemotherapy",
-      "cyburn",
-      "figlottery",
-      "gargburn",
-      "healcontrol",
-      "radiotherapy",
-      "seacret",
-      "shamcontrol",
-      "spacestars",
-      "uncrackabolt",
-      "watertron"
-    ]
-    let competitive = "";
-    for (let i = 0; i < competitivedecks.length; i++) {
-      let deck = competitivedecks[i];
-      competitive += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const aggrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("watertron2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ab2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const ab2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("aggrohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("syard2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const syard2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("abeans2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sea2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const sea2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("schoolyard2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("wt2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const wt2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("seacret2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpaggro")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-
-    let aggrodecks = [
-      "schoolyard",
-      "seacret",
-      "watertron"
-    ]
-    let toBuildAggro = "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      let deck = aggrodecks[i];
-     toBuildAggro += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let budgetdecks = [
-      "budgetykm",
-    ]
-    let controlrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("uncrackabolt")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bustbolt2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const bust2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcontrol")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")  
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("chemotherapy")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const chemo = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bust2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("healcon3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const healcon3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("chemo")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("npa2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const npa2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("healcontrol3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("radio2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const radio2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("noplayingallowed3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sham")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sham = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("radiotherapy2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("uncrack")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const uncrack = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("shamcontrol")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("controlhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let controldecks =[
-      "bustbolt",
-      "chemotherapy",
-      "healcontrol",
-      "noplayingallowed",
-      "radiotherapy",
-      "shamcontrol",
-      "uncrackabolt",
-    ]
-    let toBuildControl = "";
-    for(let i = 0; i < controldecks.length; i++) {
-      let deck = controldecks[i];
-      toBuildControl += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("syard")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gstache2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const gstache2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("schoolyard")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    const syard = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gravestache2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let ladderdecks = [
-      "gravestache",
-      "schoolyard",
-    ]
-    let toBuildLadder = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadder += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const memerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("stacheticia3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("npa")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const npa = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("memehelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sticia3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sticia3= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("noplaingallowed")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpmeme")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let memedecks = [
-      "noplayingallowed",
-      "stacheticia",
-    ]
-    let toBuildMeme = "";
-    for (let i = 0; i < memedecks.length; i++) {
-      let deck = memedecks[i];
-      toBuildMeme += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("watertron3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ab3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const ab3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("allhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bykm3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const bykm3 = new ActionRowBuilder().addComponents( 
-      new ButtonBuilder()
-      .setCustomId("allhelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("bustbolt4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const bust4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("budgetykm3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("chemotherapy3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const chemo3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("bust4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("cyburn4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const cburn4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("chemo3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("flottery3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const flottery3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("cburn4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gb4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const gb4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("figlottery3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("gstache3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const gstache3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gargburn4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("healcon")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const healcon = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gravestache3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("npa3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const npa3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("gravestache3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("radio3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const radio3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("noplayingallowed3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("schoolyard3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const syard3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("radiotherapy3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sea3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sea3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("schoolyard3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("shamcontrol3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sham3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("seacret3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("spacestars4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const stars4= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sham3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sticia2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const sticia2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("stars4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("uncrack3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const uncrack3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("stacheticia2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("wt3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const wt3= new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("uncrackabolt3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let decks = [
-      "abeans",
-      "budgetykm",
-      "bustbolt",
-      "chemotherapy",
-      "cyburn",
-      "figlottery",
-      "gargburn",
-      "gravestache",
-      "healcontrol",
-      "noplayingallowed",
-      "radiotherapy",
-      "schoolyard",
-      "seacret",
-      "shamcontrolbc",
-      "spacestars",
-      "stacheticia",
-      "uncrackabolt",
-      "watertron"
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
-      toBuildString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let [result] =
-      await db.query(`select abeans, apotk,
+    const competitiverow = new CreateButtons("watertron", "ab");
+    const ab = new CreateButtons("helpcomp", "bust");
+    const bust = new CreateButtons("abeans", "chemo");
+    const chemo = new CreateButtons("bustbolt", "cburn");
+    const cburn = new CreateButtons("chemo", "flottery");
+    const flottery = new CreateButtons("cyburn", "gb");
+    const gb = new CreateButtons("figlottery", "healcon");
+    const healcon = new CreateButtons("gargburn", "lbait");
+    const lbait = new CreateButtons("healcontrol", "radio");
+    const radio = new CreateButtons("logbait", "sea");
+    const sea = new CreateButtons("radiotherapy", "sham");
+    const sham = new CreateButtons("seacret", "stars");
+    const stars = new CreateButtons("shamcontrol", "uncrack");
+    const uncrack = new CreateButtons("spacestars", "wt");
+    const wt = new CreateButtons("uncrackabolt", "helpcomp");
+    const ladderrow = new CreateButtons("schoolyard", "gstache");
+    const gstache = new CreateButtons("ladderhelp", "syard");
+    const syard = new CreateButtons("gravestache", "ladderhelp");
+    const memerow = new CreateButtons("stacheticia", "npa");
+    const npa = new CreateButtons("memehelp", "sticia");
+    const sticia = new CreateButtons("noplaingallowed", "helpmeme");
+    const aggrorow = new CreateButtons("watertron2", "ab2");
+    const ab2 = new CreateButtons("aggrohelp", "lbait2");
+    const lbait2 = new CreateButtons("abeans2", "syard2");
+    const syard2 = new CreateButtons("logbait2", "sea2");
+    const sea2 = new CreateButtons("schoolyard2", "wt2");
+    const wt2 = new CreateButtons("seacret2", "helpaggro");
+    const comborow = new CreateButtons("stacheticia2", "bykm");
+    const bykm = new CreateButtons("combohelp", "bust2");
+    const bust2 = new CreateButtons("budgetykm", "cburn2");
+    const cburn2 = new CreateButtons("bustbolt2", "gb2");
+    const gb2 = new CreateButtons("cyburn2", "gstache2");
+    const gstache2 = new CreateButtons("gargburn2", "sea3");
+    const sea3 = new CreateButtons("gravestache2", "stars2");
+    const stars2 = new CreateButtons("seacret3", "sticia2");
+    const sticia2 = new CreateButtons("spacestars2", "helpcombo");
+    const midrangerow = new CreateButtons("spacestars3", "bykm2");
+    const bykm2 = new CreateButtons("midhelp", "cburn3");
+    const cburn3 = new CreateButtons("budgetykm2", "flottery2");
+    const flottery2 = new CreateButtons("cyburn3", "gb3");
+    const gb3 = new CreateButtons("figlottery2", "stars3");
+    const stars3 = new CreateButtons("gargburn3", "helpmid");
+    const controlrow = new CreateButtons("uncrackabolt2", "bust3");
+    const bust3 = new CreateButtons("helpcontrol", "chemo2");
+    const chemo2 = new CreateButtons("bustbolt3", "healcon2");
+    const healcon2 = new CreateButtons("chemotherapy2", "npa2");
+    const npa2 = new CreateButtons("healcontrol2", "radio2");
+    const radio2 = new CreateButtons("noplayingallowed2", "sham2");
+    const sham2 = new CreateButtons("radiotherapy2", "uncrack2");
+    const uncrack2 = new CreateButtons("shamcontrol2", "controlhelp");
+    const alldecksrow = new CreateButtons("watertron3", "ab3");
+    const ab3 = new CreateButtons("allhelp", "bust4");
+    const bust4 = new CreateButtons("abeans3", "bykm3");
+    const bykm3 = new CreateButtons("bustbolt4", "chemo3");
+    const chemo3 = new CreateButtons("budgetykm3", "cburn4");
+    const cburn4 = new CreateButtons("chemotherapy3", "flottery3");
+    const flottery3 = new CreateButtons("cyburn4", "gb4");
+    const gb4 = new CreateButtons("figlottery3", "gstache3");
+    const gstache3 = new CreateButtons("gargburn4", "healcon3");
+    const healcon3 = new CreateButtons("gravestache3", "lbait3");
+    const lbait3 = new CreateButtons("healcontrol3", "npa3");
+    const npa3 = new CreateButtons("logbait3", "radio3");
+    const radio3 = new CreateButtons("noplayingallowed3", "syard3");
+    const syard3 = new CreateButtons("radiotherapy3", "sea4");
+    const sea4 = new CreateButtons("schoolyard3", "sham3");
+    const sham3 = new CreateButtons("seacret4", "stars4");
+    const stars4 = new CreateButtons("shamcontrol3", "sticia3");
+    const sticia3 = new CreateButtons("spacestars4", "uncrack3");
+    const uncrack3 = new CreateButtons("stacheticia2", "wt3");
+    const wt3 = new CreateButtons("uncrackabolt3", "helpall");
+    const [result] = await db.query(`select abeans, apotk,
 budgetykm, bustbolt, chemotherapy,
-cyburn, gargburn, gravestache, healmidflare, noplayingallowed, 
+cyburn, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
 schoolyard, seacret, shamcontrol, spacestars, stacheticia, radiotherapy, uncrackabolt, watertron
 from gsdecks gs 
 inner join czdecks cz
 on (gs.deckinfo = cz.deckinfo)
+inner join ccdecks cc
+on (gs.deckinfo = cc.deckinfo)
 inner join spdecks sp
 on (gs.deckinfo = sp.deckinfo)
 inner join imdecks im 
@@ -896,695 +291,294 @@ inner join ctdecks ct
 on (gs.deckinfo = ct.deckinfo)
 inner join sfdecks sf
 on (gs.deckinfo = sf.deckinfo)`);
-    let user = await client.users.fetch("599750713509281792");
-    let salt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `To view the Decks Made By ${user.displayName} please select an option from the select menu below
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let combosalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Combo Decks`)
-      .setDescription(
-        `My commands for combo decks made by ${user.displayName} are ${toBuildCombo}`
-      )
-      .setFooter({
-        text: `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${combodecks.length} combo decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let midsalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Midrange Decks`)
-      .setDescription(
-        `My commands for midrange decks made by ${user.displayName} are ${toBuildMid}`
-      )
-      .setFooter({
-        text: `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${midrangedecks.length} midrange decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let compsalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Competitive Decks`)
-      .setDescription(
-        `My commands for competitive decks made by ${user.displayName} are ${competitive}`
-      )
-      .setFooter({
-        text: `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${competitivedecks.length} competitive decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let aggrosalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Aggro Decks`)
-      .setDescription(
-        `My commands for aggro decks made by ${user.displayName} are ${toBuildAggro}`
-      )
-      .setFooter({
-        text: `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${aggrodecks.length} aggro decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let memesalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Meme Decks`)
-      .setDescription(
-        `My commands for meme decks made by ${user.displayName} are ${toBuildMeme}`
-      )
-      .setFooter({
-        text: `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${memedecks.length} meme decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let controlsalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Control Decks`)
-      .setDescription(
-        `My commands for control decks made by ${user.displayName} are ${toBuildControl}`
-      )
-      .setFooter({
-        text: `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${controldecks.length} control decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let laddersalt = new EmbedBuilder()
-      .setTitle(`${user.displayName} Ladder Decks`)
-      .setDescription(
-        `My commands for ladder decks made by ${user.displayName} are ${toBuildLadder}`
-      )
-      .setFooter({
-        text: `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${ladderdecks.length} ladder decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let alldecksEmbed = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `My commands for decks made by ${user.displayName} are ${toBuildString}`
-      )
-      .setFooter({
-        text: `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let abeans = new EmbedBuilder()
-	.setTitle(`${result[5].abeans}`)
-	.setDescription(`${result[3].abeans}`)
-	.setFooter({text: `${result[2].abeans}`})
-			.addFields({
-			name: "Deck Type",
-			value: `${result[6].abeans}`,
-			inline: true
-			},
-			{
-			name: "Archetype",
-			value: `${result[0].abeans}`,
-			inline: true
-			},
-			{
-				name: "Deck Cost", 
-				value: `${result[1].abeans}`,
-				inline: true
-			})
-		.setColor("Random")
-		.setImage(`${result[4].abeans}`)
-    let healcontrol= new EmbedBuilder()
-    .setTitle(`${result[5].apotk}`)
-    .setDescription(`${result[3].apotk}`)
-    .setFooter({text: `${result[2].apotk}`})
+    const user = await client.users.fetch("599750713509281792");
+    const salt = new CreateHelpEmbed(
+      `${user.username} Decks`,
+      `To view the Decks Made By ${user.username} please select an option from the select menu below
+Note: ${user.username} has ${snortingSaltDecks.allDecks.length} total decks in Tbot`,
+      user.displayAvatarURL()
+    );
+    const combosalt = new CreateHelpEmbed(
+      `${user.displayName} Combo Decks`,
+      `My commands for combo decks made by ${user.displayName} are ${toBuildCombo}`,
+      user.displayAvatarURL(),
+      `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.comboDecks.length} combo decks in Tbot`
+    );
+    const midsalt = new CreateHelpEmbed(
+      `${user.displayName} Midrange Decks`,
+      `My commands for midrange decks made by ${user.displayName} are ${toBuildMid}`,
+      user.displayAvatarURL(),
+      `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.midrangeDecks.length} midrange decks in Tbot`
+    );
+    const compsalt = new CreateHelpEmbed(
+      `${user.displayName} Competitive Decks`,
+      `My commands for competitive decks made by ${user.displayName} are ${toBuildCompetitive}`,
+      user.displayAvatarURL(),
+      `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.competitiveDecks.length} competitive decks in Tbot`
+    );
+    const aggrosalt = new CreateHelpEmbed(
+      `${user.displayName} Aggro Decks`,
+      `My commands for aggro decks made by ${user.displayName} are ${toBuildAggro}`,
+      user.displayAvatarURL(),
+      `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.aggroDecks.length} aggro decks in Tbot`
+    );
+    const memesalt = new CreateHelpEmbed(
+      `${user.displayName} Meme Decks`,
+      `My commands for meme decks made by ${user.displayName} are ${toBuildMeme}`,
+      user.displayAvatarURL(),
+      `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.memeDecks.length} meme decks in Tbot`
+    );
+    const controlsalt = new CreateHelpEmbed(
+      `${user.displayName} Control Decks`,
+      `My commands for control decks made by ${user.displayName} are ${toBuildControl}`,
+      user.displayAvatarURL(),
+      `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.controlDecks.length} control decks in Tbot`
+    );
+    const laddersalt = new CreateHelpEmbed(
+      `${user.displayName} Ladder Decks`,
+      `My commands for ladder decks made by ${user.displayName} are ${toBuildLadder}`,
+      user.displayAvatarURL(),
+      `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.ladderDecks.length} ladder decks in Tbot`
+    );
+    const alldecksEmbed = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `My commands for all decks made by ${user.displayName} are ${toBuildString}`,
+      user.displayAvatarURL(),
+      `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks in Tbot`
+    );
+    function CreateDeckEmbed(result, deckName) {
+      const embed = new EmbedBuilder()
+        .setTitle(`${result[5][deckName]}`)
+        .setDescription(`${result[3][deckName]}`)
+        .setFooter({ text: `${result[2][deckName]}` })
         .addFields(
-          {
-          name: "Deck Type",
-          value: `${result[6].apotk}`,
-          inline: true
-          },
-          {
-          name: "Archetype",
-          value: `${result[0].apotk}`,
-          inline: true
-          },
-          {
-          name: "Deck Cost", 
-          value:`${result[1].apotk}`,
-          inline: true
-        })
-      .setColor("Random")		
-      .setImage(`${result[4].apotk}`)
-    let bustbolt = new EmbedBuilder()
-    .setTitle(`${result[5].bustbolt}`)
-		.setDescription(`${result[3].bustbolt}`)
-		.setColor("Random")
-			.setFooter({text: `${result[2].bustbolt}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].bustbolt}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].bustbolt}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].bustbolt}`,
-			inline: true
-		})
-		.setImage(`${result[4].bustbolt}`)
-    let budgetykm= new EmbedBuilder()
-    .setTitle(`${result[5].budgetykm}`)
-    .setDescription(`${result[3].budgetykm}`)
-    .setFooter({ text: `${result[2].budgetykm}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].budgetykm}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].budgetykm}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].budgetykm}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].budgetykm}`);
-    let chemotherapy = new EmbedBuilder()
-    .setTitle(`${result[5].chemotherapy}`)
-		.setDescription(`${result[3].chemotherapy}`)
-		.setFooter({text: `${result[2].chemotherapy}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].chemotherapy}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].chemotherapy}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].chemotherapy}`,
-			inline: true
-		})
-		.setColor("Random")
-		.setImage(`${result[4].chemotherapy}`)
-    let cyburn = new EmbedBuilder()
-    .setTitle(`${result[5].cyburn}`)
-    .setDescription(`${result[3].cyburn}`)
-    .setFooter({ text: `${result[2].cyburn}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].cyburn}`,
-      inline: true
-    },
-      {
-      name: "Archetype",
-      value: `${result[0].cyburn}`,
-      inline: true
-    },
-      { 
-      name: "Deck Cost", 
-      value: `${result[1].cyburn}`,
-      inline: true})
-    .setColor("Random")
-    .setImage(`${result[4].cyburn}`);
-    let gargburn = new EmbedBuilder()
-      .setTitle(`${result[5].gargburn}`)
-      .setDescription(`${result[3].gargburn}`)
-      .setFooter({ text: `${result[2].gargburn}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].gargburn}`,
-        inline: true,
-      },{
-        name: "Archetype",
-        value: `${result[0].gargburn}`,
-        inline: true
-      },{ 
-        name: "Deck Cost", 
-        value: `${result[1].gargburn}`,
-        inline: true
-      })
-      .setColor("Random")
-      .setImage(`${result[4].gargburn}`);
-    let gravestache = new EmbedBuilder()
-    .setTitle(`${result[5].gravestache}`)
-    .setDescription(`${result[3].gravestache}`)
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].gravestache}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].gravestache}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].gravestache}`,
-      inline: true
-    })
-    .setFooter({ text: `${result[2].gravestache}` })
-    .setColor("Random")
-    .setImage(`${result[4].gravestache}`);
-    //Heal Midflare
-    let figlottery = new EmbedBuilder()
-    .setTitle(`${result[5].healmidflare}`)
-    .setDescription(`${result[3].healmidflare}`)
-    .setFooter({ text: `${result[2].healmidflare}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].healmidflare}`,
-      inline: true,
-    },
-    {
-      name: "Archetype",
-      value: `${result[0].healmidflare}`,
-      inline: true,
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].healmidflare}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].healmidflare}`);
-    let noplaingallowed = new EmbedBuilder()
-	.setTitle(`${result[5].noplayingallowed}`)
-	.setDescription(`${result[3].noplayingallowed}`)
-	.setFooter({text: `${result[2].noplayingallowed}`})
-				.addFields({
-					name: "Deck Type",
-					value: `${result[6].noplayingallowed}`,
-					inline: true
-				},{
-					name: "Archetype",
-					value: `${result[0].noplayingallowed}`,
-					inline: true
-				},{
-					name: "Deck Cost", 
-					value: `${result[1].noplayingallowed}`,
-					inline: true
-				})
-		.setColor("Random")
-		.setImage(`${result[4].noplayingallowed}`)
-    let radiotherapy = new EmbedBuilder()
-    .setTitle(`${result[5].radiotherapy}`)
-    .setDescription(`${result[3].radiotherapy}`)
-    .setFooter({text: `${result[2].radiotherapy}`})
-    .addFields({
-        name: "Deck Type",
-        value: `${result[6].radiotherapy}`,
-        inline: true
-    },{
-        name: "Archetype",
-        value: `${result[0].radiotherapy}`,
-        inline: true
-    },{
-        name: "Deck Cost", 
-        value: `${result[1].radiotherapy}`,
-        inline: true
-    })	
-    .setImage(`${result[4].radiotherapy}`)
-    let schoolyard = new EmbedBuilder()
-    .setTitle(`${result[5].schoolyard}`)
-    .setDescription(`${result[3].schoolyard}`)
-    .setFooter({ text: `${result[2].schoolyard}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].schoolyard}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].schoolyard}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].schoolyard}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].schoolyard}`);
-    //Seacret
-    let seacret = new EmbedBuilder()
-    .setTitle(`${result[5].seacret}`)
-		.setDescription(`${result[3].seacret}`)
-		.setColor("Random")
-		.setFooter({text: `${result[2].seacret}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].seacret}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].seacret}`,
-			inline: true
-		},{
-			name: "Deck Cost",
-			value: `${result[1].seacret}`,
-			inline: true
-		})		
-		.setImage(`${result[4].seacret}`)
-    let shamcontrol = new EmbedBuilder()
-    .setTitle(`${result[5].shamcontrol}`)
-      .setDescription(`${result[3].shamcontrol}`)
-      .setFooter({ text: `${result[2].shamcontrol}` })
-      .addFields({ 
-        name: "Deck Type",
-        value: `${result[6].shamcontrol}`,
-        inline: true,   
-      },
-      {
-        name: "Archetype",
-        value: `${result[0].shamcontrol}`,
-        inline: true
-      },
-      {
-        name: "Deck Cost", 
-        value: `${result[1].shamcontrol}`,
-        inline: true,
-      })
-      .setColor("Random")
-      .setImage(`${result[4].shamcontrol}`);
-    let spacestars = new EmbedBuilder()
-    .setTitle(`${result[5].spacestars}`)
-    .setDescription(`${result[3].spacestars}`)
-    .setFooter({ text: `${result[2].spacestars}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].spacestars}`,
-      inline: true
-    },{ 
-      name: "Archetype", 
-      value: `${result[0].spacestars}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].spacestars}`,
-      inline: true  
-    })
-    .setColor("Random")
-    .setImage(`${result[4].spacestars}`);
-    let stacheticia = new EmbedBuilder()
-    .setTitle(`${result[5].stacheticia}`)
-		.setDescription(`${result[3].stacheticia}`)
-		.setColor("Random")
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].stacheticia}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].stacheticia}`,
-			inline: true
-		},{
-			name: "Deck Cost",
-			value: `${result[1].stacheticia}`,
-			inline: true
-		})
-		.setFooter({text: `${result[2].stacheticia}`})
-		.setImage(`${result[4].stacheticia}`)
-      let uncrackabolt = new EmbedBuilder()
-      .setTitle(`${result[5].uncrackabolt}`)
-      .setDescription(`${result[3].uncrackabolt}`)
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].uncrackabolt}`,
-          inline: true
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].uncrackabolt}`,
-          inline: true
-        },
-      {
-          name: "Deck Cost",
-          value: `${result[1].uncrackabolt}`,
-          inline: true
+          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+        )
+        .setColor("White");
+      const imageUrl = result[4][deckName];
+      if (imageUrl) {
+        embed.setImage(imageUrl);
       }
-  )
-  .setFooter({text: `${result[2].uncrackabolt}`})
-  .setColor("Random")
-  .setImage(`${result[4].uncrackabolt}`)
-  let watertron = new EmbedBuilder()
-  .setTitle(`${result[5].watertron}`)
-  .setDescription(`${result[3].watertron}`)
-  .setFooter({ text: `${result[2].watertron}` })
-  .addFields({
-    name: "Deck Type",
-    value: `${result[6].watertron}`,
-    inline: true
-  },
-  {
-    name: "Archetype",
-    value: `${result[0].watertron}`,
-    inline: true
-  },
-  { name: "Deck Cost",
-    value: `${result[1].watertron}`,
-    inline: true
-  })
-  .setImage(`${result[4].watertron}`)
-  .setColor("Random");
+      return embed;
+    }
+    const abeans = new CreateDeckEmbed(result, "abeans");
+    const healcontrol = new CreateDeckEmbed(result, "apotk");
+    const logbait = new CreateDeckEmbed(result, "logbait");
+    const budgetykm = new CreateDeckEmbed(result, "budgetykm");
+    const bustbolt = new CreateDeckEmbed(result, "bustbolt");
+    const chemotherapy = new CreateDeckEmbed(result, "chemotherapy");
+    const cyburn = new CreateDeckEmbed(result, "cyburn");
+    const figlottery = new CreateDeckEmbed(result, "healmidflare");
+    const gargburn = new CreateDeckEmbed(result, "gargburn");
+    const gravestache = new CreateDeckEmbed(result, "gravestache");
+    const noplayingallowed = new CreateDeckEmbed(result, "noplayingallowed");
+    const radiotherapy = new CreateDeckEmbed(result, "radiotherapy");
+    const seacret = new CreateDeckEmbed(result, "seacret");
+    const schoolyard = new CreateDeckEmbed(result, "schoolyard");
+    const shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
+    const spacestars = new CreateDeckEmbed(result, "spacestars");
+    const stacheticia = new CreateDeckEmbed(result, "stacheticia");
+    const uncrackabolt = new CreateDeckEmbed(result, "uncrackabolt");
+    const watertron = new CreateDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [salt], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
+    async function handleSelectMenu(i) {
+      const value = i.values[0];
+      if (value == "budget") {
+        await i.reply({ embeds: [budgetykm], flags: MessageFlags.Ephemeral });
+      } else if (value == "control") {
+        await i.update({ embeds: [controlsalt], components: [controlrow] });
+      } else if (value == "combo") {
+        await i.update({ embeds: [combosalt], components: [comborow] });
+      } else if (value == "comp") {
+        await i.update({ embeds: [compsalt], components: [competitiverow] });
+      } else if (value == "aggro") {
+        await i.update({ embeds: [aggrosalt], components: [aggrorow] });
+      } else if (value == "ladder") {
+        await i.update({ embeds: [laddersalt], components: [ladderrow] });
+      } else if (value == "midrange") {
+        await i.update({ embeds: [midsalt], components: [midrangerow] });
+      } else if (value == "meme") {
+        await i.update({ embeds: [memesalt], components: [memerow] });
+      } else if (value == "all") {
+        await i.update({
+          embeds: [alldecksEmbed],
+          components: [alldecksrow],
+        });
+      }
+    }
+    async function handleButtonInteraction(i) {
+      const buttonActions = {
+        combohelp: { embed: combosalt, component: comborow },
+        helpcombo: { embed: combosalt, component: comborow },
+        controlhelp: { embed: controlsalt, component: controlrow },
+        helpcontrol: { embed: controlsalt, component: controlrow },
+        memehelp: { embed: memesalt, component: memerow },
+        helpmeme: { embed: memesalt, component: memerow },
+        midhelp: { embed: midsalt, component: midrangerow },
+        helpmid: { embed: midsalt, component: midrangerow },
+        aggrohelp: { embed: aggrosalt, component: aggrorow },
+        helpaggro: { embed: aggrosalt, component: aggrorow },
+        ladderhelp: { embed: laddersalt, component: ladderrow },
+        helpladder: { embed: laddersalt, component: ladderrow },
+        comphelp: { embed: compsalt, component: competitiverow },
+        helpcomp: { embed: compsalt, component: competitiverow },
+        allhelp: { embed: alldecksEmbed, component: alldecksrow },
+        helpall: { embed: alldecksEmbed, component: alldecksrow },
+        healcon: { embed: healcontrol, component: healcon },
+        healcon2: { embed: healcontrol, component: healcon2 },
+        healcon3: { embed: healcontrol, component: healcon3 },
+        healcontrol: { embed: healcontrol, component: healcon },
+        healcontrol2: { embed: healcontrol, component: healcon2 },
+        healcontrol3: { embed: healcontrol, component: healcon3 },
+        bykm: { embed: budgetykm, component: bykm },
+        budgetykm: { embed: budgetykm, component: bykm },
+        bykm2: { embed: budgetykm, component: bykm2 },
+        budgetykm2: { embed: budgetykm, component: bykm2 },
+        bykm3: { embed: budgetykm, component: bykm3 },
+        budgetykm3: { embed: budgetykm, component: bykm3 },
+        bust: { embed: bustbolt, component: bust },
+        bust2: { embed: bustbolt, component: bust2 },
+        bust3: { embed: bustbolt, component: bust3 },
+        bust4: { embed: bustbolt, component: bust4 },
+        bustbolt: { embed: bustbolt, component: bust },
+        bustbolt2: { embed: bustbolt, component: bust2 },
+        bustbolt3: { embed: bustbolt, component: bust3 },
+        bustbolt4: { embed: bustbolt, component: bust4 },
+        cburn: { embed: cyburn, component: cburn },
+        cburn2: { embed: cyburn, component: cburn2 },
+        cburn3: { embed: cyburn, component: cburn3 },
+        cburn4: { embed: cyburn, component: cburn4 },
+        cyburn: { embed: cyburn, component: cburn },
+        cyburn2: { embed: cyburn, component: cburn2 },
+        cyburn3: { embed: cyburn, component: cburn3 },
+        cyburn4: { embed: cyburn, component: cburn4 },
+        gb: { embed: gargburn, component: gb },
+        gb2: { embed: gargburn, component: gb2 },
+        gb3: { embed: gargburn, component: gb3 },
+        gb4: { embed: gargburn, component: gb4 },
+        gargburn: { embed: gargburn, component: gb },
+        gargburn2: { embed: gargburn, component: gb2 },
+        gargburn3: { embed: gargburn, component: gb3 },
+        gargburn4: { embed: gargburn, component: gb4 },
+        gstache: { embed: gravestache, component: gstache },
+        gstache2: { embed: gravestache, component: gstache2 },
+        gstache3: { embed: gravestache, component: gstache3 },
+        gravestache: { embed: gravestache, component: gstache },
+        gravestache2: { embed: gravestache, component: gstache2 },
+        gravestache3: { embed: gravestache, component: gstache3 },
+        stars: { embed: spacestars, component: stars },
+        stars2: { embed: spacestars, component: stars2 },
+        stars3: { embed: spacestars, component: stars3 },
+        stars4: { embed: spacestars, component: stars4 },
+        spacestars: { embed: spacestars, component: stars },
+        spacestars2: { embed: spacestars, component: stars2 },
+        spacestars3: { embed: spacestars, component: stars3 },
+        spacestars4: { embed: spacestars, component: stars4 },
+        sticia: { embed: stacheticia, component: sticia },
+        sticia2: { embed: stacheticia, component: sticia2 },
+        sticia3: { embed: stacheticia, component: sticia3 },
+        stacheticia: { embed: stacheticia, component: sticia },
+        stacheticia2: { embed: stacheticia, component: sticia2 },
+        stacheticia3: { embed: stacheticia, component: sticia3 },
+        syard: { embed: schoolyard, component: syard },
+        syard2: { embed: schoolyard, component: syard2 },
+        syard3: { embed: schoolyard, component: syard3 },
+        syard4: { embed: schoolyard, component: syard3 },
+        schoolyard: { embed: schoolyard, component: syard },
+        schoolyard2: { embed: schoolyard, component: syard2 },
+        schoolyard3: { embed: schoolyard, component: syard3 },
+        schoolyard4: { embed: schoolyard, component: syard3 },
+        chemo: { embed: chemotherapy, component: chemo },
+        chemo2: { embed: chemotherapy, component: chemo2 },
+        chemo3: { embed: chemotherapy, component: chemo3 },
+        chemotherapy: { embed: chemotherapy, component: chemo },
+        chemotherapy2: { embed: chemotherapy, component: chemo2 },
+        chemotherapy3: { embed: chemotherapy, component: chemo3 },
+        sea: { embed: seacret, component: sea },
+        sea2: { embed: seacret, component: sea2 },
+        sea3: { embed: seacret, component: sea3 },
+        sea4: { embed: seacret, component: sea4 },
+        seacret: { embed: seacret, component: sea },
+        seacret2: { embed: seacret, component: sea2 },
+        seacret3: { embed: seacret, component: sea3 },
+        seacret4: { embed: seacret, component: sea4 },
+        sham: { embed: shamcontrol, component: sham },
+        sham2: { embed: shamcontrol, component: sham2 },
+        sham3: { embed: shamcontrol, component: sham3 },
+        shamcontrol: { embed: shamcontrol, component: sham },
+        shamcontrol2: { embed: shamcontrol, component: sham2 },
+        shamcontrol3: { embed: shamcontrol, component: sham3 },
+        uncrack: { embed: uncrackabolt, component: uncrack },
+        uncrack2: { embed: uncrackabolt, component: uncrack2 },
+        uncrack3: { embed: uncrackabolt, component: uncrack3 },
+        uncrack4: { embed: uncrackabolt, component: uncrack3 },
+        uncrackabolt: { embed: uncrackabolt, component: uncrack },
+        uncrackabolt2: { embed: uncrackabolt, component: uncrack2 },
+        uncrackabolt3: { embed: uncrackabolt, component: uncrack3 },
+        uncrackabolt4: { embed: uncrackabolt, component: uncrack3 },
+        wt: { embed: watertron, component: wt },
+        wt2: { embed: watertron, component: wt2 },
+        wt3: { embed: watertron, component: wt3 },
+        watertron: { embed: watertron, component: wt },
+        watertron2: { embed: watertron, component: wt2 },
+        watertron3: { embed: watertron, component: wt3 },
+        npa: { embed: noplayingallowed, component: npa },
+        npa2: { embed: noplayingallowed, component: npa2 },
+        npa3: { embed: noplayingallowed, component: npa3 },
+        noplayingallowed: { embed: noplayingallowed, component: npa },
+        noplayingallowed2: { embed: noplayingallowed, component: npa2 },
+        noplayingallowed3: { embed: noplayingallowed, component: npa3 },
+        ab: { embed: abeans, component: ab },
+        ab2: { embed: abeans, component: ab2 },
+        ab3: { embed: abeans, component: ab3 },
+        abeans: { embed: abeans, component: ab },
+        abeans2: { embed: abeans, component: ab2 },
+        abeans3: { embed: abeans, component: ab3 },
+        flottery: { embed: figlottery, component: flottery },
+        flottery2: { embed: figlottery, component: flottery2 },
+        flottery3: { embed: figlottery, component: flottery3 },
+        figlottery: { embed: figlottery, component: flottery },
+        figlottery2: { embed: figlottery, component: flottery2 },
+        figlottery3: { embed: figlottery, component: flottery3 },
+        lbait: { embed: logbait, component: lbait },
+        lbait2: { embed: logbait, component: lbait2 },
+        lbait3: { embed: logbait, component: lbait3 },
+        logbait: { embed: logbait, component: lbait },
+        logbait2: { embed: logbait, component: lbait2 },
+        logbait3: { embed: logbait, component: lbait3 },
+        radio: { embed: radiotherapy, component: radio },
+        radio2: { embed: radiotherapy, component: radio2 },
+        radio3: { embed: radiotherapy, component: radio3 },
+        radiotherapy: { embed: radiotherapy, component: radio },
+        radiotherapy2: { embed: radiotherapy, component: radio2 },
+        radiotherapy3: { embed: radiotherapy, component: radio3 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      }
+    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if(i.customId == "select"){
-        const value = i.values[0];
-        if(value == "budget"){
-          await i.reply({embeds: [budgetykm], flags: MessageFlags.Ephemeral})
-        }
-        else if(value == "control"){
-          await i.update({embeds: [controlsalt], components: [controlrow]});
-        }
-        else if(value == "combo"){
-          await i.update({embeds: [combosalt], components: [comborow]});
-        }
-        else if(value == "comp"){
-          await i.update({embeds: [compsalt], components: [competitiverow]});
-        }
-        else if(value == "aggro"){
-          await i.update({embeds: [aggrosalt], components: [aggrorow]});
-        }
-        else if(value == "ladder"){
-          await i.update({embeds: [laddersalt], components: [ladderrow]});
-        }
-        else if(value == "midrange"){
-          await i.update({embeds: [midsalt], components: [midrangerow]});
-        }
-        else if(value == "meme"){
-          await i.update({embeds: [memesalt], components: [memerow]});
-        }
-        else if(value == "all"){
-          await i.update({embeds: [alldecksEmbed], components: [alldecksrow]});
-        }
+      if (i.customId == "select") {
+        await handleSelectMenu(i);
+      } else {
+        await handleButtonInteraction(i);
       }
-      else if(i.customId == "combohelp" || i.customId == "helpcombo"){
-        await i.update({embeds: [combosalt], components: [comborow]})
-      }
-      else if(i.customId == "controlhelp" || i.customId == "helpcontrol"){
-        await i.update({embeds: [controlsalt], components: [controlrow]})
-      }
-      else if(i.customId == "memehelp" || i.customId == "helpmeme"){
-        await i.update({embeds: [memesalt], components: [memerow]})
-      }
-      else if(i.customId == "midhelp" || i.customId == "helpmid"){
-        await i.update({embeds: [midsalt], components: [midrangerow]})
-      }
-      else if(i.customId == "aggrohelp" || i.customId == "helpaggro"){
-        await i.update({embeds: [aggrosalt], components: [aggrorow]})
-      }
-      else if(i.customId == "ladderhelp" || i.customId == "helpladder"){
-        await i.update({embeds: [laddersalt], components: [ladderrow]})
-      }
-      else if(i.customId == "comphelp" || i.customId == "helpcomp"){
-        await i.update({embeds: [compsalt], components: [competitiverow]})
-      }
-      else if(i.customId == "allhelp" || i.customId == "helpall"){
-        await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-      }
-        else if(i.customId == "healcon" || i.customId == "healcontrol"){
-          await i.update({embeds: [healcontrol], components: [healcon]})
-        }
-        else if(i.customId == "healcon2" || i.customId == "healcontrol2"){
-          await i.update({embeds: [healcontrol], components: [healcon2]})
-        }
-        else if(i.customId == "healcon3" || i.customId == "healcontrol3"){
-          await i.update({embeds: [healcontrol], components: [healcon3]})
-        }
-        else if(i.customId == "bykm" || i.customId == "budgetykm"){
-          await i.update({embeds: [budgetykm], components: [bykm]})
-        }
-        else if(i.customId == "bykm2" || i.customId == "budgetykm2"){
-          await i.update({embeds: [budgetykm], components: [bykm2]})
-        }
-        else if(i.customId == "bykm3" || i.customId == "budgetykm3"){
-          await i.update({embeds: [budgetykm], components: [bykm3]})
-        }
-        else if(i.customId == "bust" || i.customId == "bustbolt"){
-          await i.update({embeds: [bustbolt], components: [bust]})
-        }
-        else if(i.customId == "bust2" || i.customId == "bustbolt2"){
-          await i.update({embeds: [bustbolt], components: [bust2]})
-        }
-        else if(i.customId == "bust3" || i.customId == "bustbolt3"){
-          await i.update({embeds: [bustbolt], components: [bust3]})
-        }
-        else if(i.customId == "bust4" || i.customId == "bustbolt4"){
-          await i.update({embeds: [bustbolt], components: [bust4]})
-        }
-        else if(i.customId == "cburn" || i.customId == "cyburn"){
-          await i.update({embeds: [cyburn], components: [cburn]})
-        }
-        else if(i.customId == "cburn2" || i.customId == "cyburn2"){
-          await i.update({embeds: [cyburn], components: [cburn2]})
-        }
-        else if(i.customId == "cburn3" || i.customId == "cyburn3"){
-          await i.update({embeds: [cyburn], components: [cburn3]})
-        }
-        else if(i.customId == "cburn4" || i.customId == "cyburn4"){
-          await i.update({embeds: [cyburn], components: [cburn4]})
-        }
-        else if(i.customId == "gb" || i.csutomId == "gargburn"){
-          await i.update({embeds: [gargburn], components: [gb]})
-        }
-        else if(i.customId == "gb2" || i.customId == "gargburn2"){
-          await i.update({embeds: [gargburn], components: [gb2]})
-        }
-        else if(i.customId == "gb3" || i.customId == "gargburn3"){
-          await i.update({embeds: [gargburn], components: [gb3]})
-        }
-        else if(i.customId == "gb4" || i.customId == "gargburn4"){
-          await i.update({embeds: [gargburn], components: [gb4]})
-        }
-        else if(i.customId == "gstache" || i.customId == "gravestache"){
-          await i.update({embeds: [gravestache], components: [gstache]})
-        }
-        else if(i.customId == "gstache2" || i.customId == "gravestache2"){
-          await i.update({embeds: [gravestache], components: [gstache2]})
-        }
-        else if(i.customId == "gstache3" || i.customId == "gravestache3"){
-          await i.update({embeds: [gravestache], components: [gstache3]})
-        }
-        else if(i.customId == "stars" || i.customId == "spacestars"){
-          await i.update({embeds: [spacestars], components: [stars]})
-        }
-        else if(i.customId == "stars2" || i.customId == "spacestars2"){
-          await i.update({embeds: [spacestars], components: [stars2]})
-        }
-        else if(i.customId == "stars3" || i.customId == "spacestars3"){
-          await i.update({embeds: [spacestars], components: [stars3]})
-        }
-        else if(i.customId == "stars4" || i.customId == "spacestars4"){
-          await i.update({embeds: [spacestars], components: [stars4]})
-        }
-        else if(i.customId == "sticia" || i.customId == "stacheticia"){
-          await i.update({embeds: [stacheticia], components: [sticia]})
-        }
-        else if(i.customId == "sticia2" || i.customId == "stacheticia2"){
-          await i.update({embeds: [stacheticia], components: [sticia2]})
-        }
-        else if(i.customId == "sticia3" || i.customId == "stacheticia3"){
-          await i.update({embeds: [stacheticia], components: [sticia3]})
-        }
-        else if(i.customId == "chemo" || i.customId == "chemotherapy"){
-          await i.update({embeds: [chemotherapy], components: [chemo]})
-        }
-        else if(i.customId == "chemo2" || i.customId == "chemotherapy2"){
-          await i.update({embeds: [chemotherapy], components: [chemo2]})
-        }
-        else if(i.customId == "chemo3" || i.customId == "chemotherapy3"){
-          await i.update({embeds: [chemotherapy], components: [chemo3]})
-        }
-        else if(i.customId == "sea" || i.customId == "seacret"){
-          await i.update({embeds: [seacret], components: [sea]})
-        }
-        else if(i.customId == "sea2" || i.customId == "seacret2"){
-          await i.update({embeds: [seacret], components: [sea2]})
-        }
-        else if(i.customId == "sea3" || i.customId == "seacret3"){
-          await i.update({embeds: [seacret], components: [sea3]})
-        }
-        else if(i.customId == "sea4" || i.customId == "seacret4"){
-          await i.update({embeds: [seacret], components: [sea4]})
-        }
-        else if(i.customId == "sham" || i.customId == "shamcontrol"){
-          await i.update({embeds: [shamcontrol], components: [sham]})
-        }
-        else if(i.customId == "sham2" || i.customId == "shamcontrol2"){
-          await i.update({embeds: [shamcontrol], components: [sham2]})
-        }
-        else if(i.customId == "sham3" || i.customId == "shamcontrol3"){
-          await i.update({embeds: [shamcontrol], components: [sham3]})
-        }
-        else if(i.customId == "uncrack" || i.customId == "uncrackabolt"){
-          await i.update({embeds: [uncrackabolt], components: [uncrack]})
-        }
-        else if(i.customId == "uncrack2" || i.customId == "uncrackabolt2"){
-          await i.update({embeds: [uncrackabolt], components: [uncrack2]})
-        }
-        else if(i.customId == "uncrack3" || i.customId == "uncrackabolt3"){
-          await i.update({embeds: [uncrackabolt], components: [uncrack3]})
-        }
-        else if(i.customId == "wt" || i.customId == "watertron"){
-          await i.update({embeds: [watertron], components: [wt]})
-        }
-        else if(i.customId == "wt2" || i.customId == "watertron2"){
-          await i.update({embeds: [watertron], components: [wt2]})
-        }
-        else if(i.customId == "wt3" || i.customId == "watertron3"){
-          await i.update({embeds: [watertron], components: [wt3]})
-        }
-        else if(i.customId == "syard" || i.customId == "schoolyard"){
-          await i.update({embeds: [schoolyard], components: [syard]})
-        }
-        else if(i.customId == "syard2" || i.customId == "schoolyard2"){
-          await i.update({embeds: [schoolyard], components: [syard2]})
-        }
-        else if(i.customId == "syard3" || i.customId == "schoolyard3"){
-          await i.update({embeds: [schoolyard], components: [syard3]})
-        }
-        else if(i.customId == "flottery" || i.customId == "figlottery"){
-          await i.update({embeds: [figlottery], components: [flottery]})
-        }
-        else if(i.customId == "flottery2" || i.customId == "figlottery2"){
-          await i.update({embeds: [figlottery], components: [flottery2]})
-        }
-        else if(i.customId == "flottery3" || i.customId == "figlottery3"){
-          await i.update({embeds: [figlottery], components: [flottery3]})
-        }
-        else if(i.customId == "radio" || i.customId == "radiotherapy"){
-          await i.update({embeds: [radiotherapy], components: [radio]})
-        }
-        else if(i.customId == "radio2" || i.customId == "radiotherapy2"){
-          await i.update({embeds: [radiotherapy], components: [radio2]})
-        }
-        else if(i.customId == "radio3" || i.customId == "radiotherapy3"){
-          await i.update({embeds: [radiotherapy], components: [radio3]})
-        }
-        else if(i.customId == "npa" || i.customId == "noplaingallowed"){
-          await i.update({embeds: [noplaingallowed], components: [npa]})
-        }
-        else if(i.customId == "npa2" || i.customId == "noplaingallowed2"){
-          await i.update({embeds: [noplaingallowed], components: [npa2]})
-        }
-        else if(i.customId == "npa3" || i.customId == "noplaingallowed3"){
-          await i.update({embeds: [noplaingallowed], components: [npa3]})
-        }
-        else if(i.customId == "ab" || i.customId == "abeans"){
-          await i.update({embeds: [abeans], components: [ab]})
-        }
-        else if(i.customId == "ab2" || i.customId == "abeans2"){
-          await i.update({embeds: [abeans], components: [ab2]})
-        }
-        else if(i.customId == "ab3" || i.customId == "abeans3"){
-          await i.update({embeds: [abeans], components: [ab3]})
-        }
     });
-  }
-}
+  },
+};

@@ -56,16 +56,16 @@ module.exports = {
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Deck")
+          .setValue("aggro")
+          .setDescription(
+             "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
           .setLabel("Combo Decks")
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
           .setLabel("Tempo Deck")
@@ -82,14 +82,15 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const captainCombustibleDecks = {
       budgetDecks: ["budgetcc"],
-      competitiveDecks: ["reflourished"],
-      memeDecks: ["lifecouldbedream", "mspotk", "plantmop"],
-      comboDecks: ["budgetcc", "mspotk", "plantmop"],
-      midrangedecks: ["reflourished"],
+      competitiveDecks: ["logbait"],
+      memeDecks: ["lifecouldbedream", "mspotk", "plantmop", "reflourished"],
+      aggroDecks: ["logbait"],
+      comboDecks: ["budgetcc", "mspotk", "plantmop", "reflourished"],
       tempoDecks: ["lifecouldbedream"],
       allDecks: [
         "budgetcc",
         "lifecouldbedream",
+        "logbait",
         "mspotk",
         "plantmop",
         "reflourished",
@@ -122,20 +123,23 @@ module.exports = {
     const memerow = new CreateButtons("mspotk", "lcbd");
     const lcbd = new CreateButtons("helpmeme", "msp");
     const msp = new CreateButtons("lifecouldbedream", "pm");
-    const pm = new CreateButtons("mspotk", "memehelp");
-    const comborow = new CreateButtons("plantmop2", "bpm");
+    const pm = new CreateButtons("mspotk", "rfl");
+    const rfl = new CreateButtons("plantmop", "memehelp");
+    const comborow = new CreateButtons("reflourished2", "bpm");
     const bpm = new CreateButtons("helpcombo", "msp2");
     const msp2 = new CreateButtons("budgetplantmop", "pm2");
-    const pm2 = new CreateButtons("mspotk2", "combohelp");
-    const alldecksrow = new CreateButtons("reflourished", "bpm2");
+    const pm2 = new CreateButtons("mspotk2", "rfl2");
+    const rfl2 = new CreateButtons("plantmop2", "combohelp");
+    const alldecksrow = new CreateButtons("reflourished3", "bpm2");
     const bpm2 = new CreateButtons("helpall", "lcbd2");
-    const lcbd2 = new CreateButtons("budgetplantmop2", "msp3");
-    const msp3 = new CreateButtons("lifecouldbedream2", "pm3");
-    const pm3 = new CreateButtons("mspotk3", "rfl");
-    const rfl = new CreateButtons("plantmop3", "allhelp");
+    const lcbd2 = new CreateButtons("budgetplantmop2", "lbait");
+    const lbait = new CreateButtons("lifecouldbedream2", "msp3");
+    const msp3 = new CreateButtons("logbait", "pm3");
+    const pm3 = new CreateButtons("mspotk3", "rfl3");
+    const rfl3 = new CreateButtons("plantmop3", "allhelp");
     let embed = new CreateHelpEmbed(
       "Captain Combustible Decks",
-      `To view the Captain Combustible decks please select an option from the selectt menu below!
+      `To view the Captain Combustible decks please select an option from the select menu below!
 Note: Captain Combustible has ${captainCombustibleDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212"
     );
@@ -181,6 +185,7 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
     }
     const budetplantmop = new CreateDeckEmbed(result, "budgetcc");
     const lcbdream = new CreateDeckEmbed(result, "lcbd");
+    const logbait = new CreateDeckEmbed(result, "logbait");
     const mspotk = new CreateDeckEmbed(result, "mspotk");
     const plantmop = new CreateDeckEmbed(result, "plantmop");
     const reflourished = new CreateDeckEmbed(result, "reflourished");
@@ -196,9 +201,9 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
           embeds: [budetplantmop],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "comp" || value == "midrange") {
+      } else if (value == "comp" || value == "aggro") {
         await i.reply({
-          embeds: [reflourished],
+          embeds: [logbait],
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "meme") {
@@ -212,34 +217,47 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "helpall" || i.customId == "allhelp") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId == "helpmeme" || i.customId == "memehelp") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "pm" || i.customId == "plantmop") {
-        await i.update({ embeds: [plantmop], components: [pm] });
-      } else if (i.customId == "pm2" || i.customId == "plantmop2") {
-        await i.update({ embeds: [plantmop], components: [pm2] });
-      } else if (i.customId == "pm3" || i.customId == "plantmop3") {
-        await i.update({ embeds: [plantmop], components: [pm3] });
-      } else if (i.customId == "lcbd" || i.customId == "lifecouldbedream") {
-        await i.update({ embeds: [lcbdream], components: [lcbd] });
-      } else if (i.customId == "lcbd2" || i.customId == "lifecouldbedream2") {
-        await i.update({ embeds: [lcbdream], components: [lcbd2] });
-      } else if (i.customId == "msp" || i.customId == "mspotk") {
-        await i.update({ embeds: [mspotk], components: [msp] });
-      } else if (i.customId == "msp2" || i.customId == "mspotk2") {
-        await i.update({ embeds: [mspotk], components: [msp2] });
-      } else if (i.customId == "msp3" || i.customId == "mspotk3") {
-        await i.update({ embeds: [mspotk], components: [msp3] });
-      } else if (i.customId == "bpm" || i.customId == "budgetplantmop") {
-        await i.update({ embeds: [budetplantmop], components: [bpm] });
-      } else if (i.customId == "bpm2" || i.customId == "budgetplantmop2") {
-        await i.update({ embeds: [budetplantmop], components: [bpm2] });
-      } else if (i.customId == "rfl" || i.customId == "reflourished") {
-        await i.update({ embeds: [reflourished], components: [rfl] });
+      const buttonActions = {
+        helpall: {embed: allEmbed, component: alldecksrow}, 
+        allhelp: {embed: allEmbed, component: alldecksrow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        pm: {embed: plantmop, component: pm},
+        plantmop: {embed: plantmop, component: pm},
+        pm2: {embed: plantmop, component: pm2},
+        plantmop2: {embed: plantmop, component: pm2},
+        pm3: {embed: plantmop, component: pm3},
+        plantmop3: {embed: plantmop, component: pm3},
+        lcbd: {embed: lcbdream, component: lcbd},
+        lifecouldbedream: {embed: lcbdream, component: lcbd},
+        lcbd2: {embed: lcbdream, component: lcbd2},
+        lifecouldbedream2: {embed: lcbdream, component: lcbd2},
+        msp: {embed: mspotk, component: msp},
+        mspotk: {embed: mspotk, component: msp},
+        msp2: {embed: mspotk, component: msp2},
+        mspotk2: {embed: mspotk, component: msp2},
+        msp3: {embed: mspotk, component: msp3},
+        mspotk3: {embed: mspotk, component: msp3},
+        bpm: {embed: budetplantmop, component: bpm},
+        budgetplantmop: {embed: budetplantmop, component: bpm},
+        bpm2: {embed: budetplantmop, component: bpm2},
+        budgetplantmop2: {embed: budetplantmop, component: bpm2},
+        rfl: {embed: reflourished, component: rfl},
+        reflourished: {embed: reflourished, component: rfl},
+        rfl2: {embed: reflourished, component: rfl2},
+        reflourished2: {embed: reflourished, component: rfl2},
+        rfl3: {embed: reflourished, component: rfl3},
+        reflourished3: {embed: reflourished, component: rfl3},
+        lbait: {embed: logbait, component: lbait},
+        logbait: {embed: logbait, component: lbait},
+      }
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({ embeds: [action.embed], components: [action.component] });
+      } else {
+        await i.reply({ content: "Unknown button action", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

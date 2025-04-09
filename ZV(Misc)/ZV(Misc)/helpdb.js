@@ -242,9 +242,9 @@ module.exports = {
         "figlottery",
         "healcontrol",
         "healmidrose",
+        "logbait",
         "pawntrickstab",
         "radiotherapy",
-        "reflourished",
         "shamcontrolbc",
         "toyotacontrolla",
         "watertron",
@@ -275,13 +275,14 @@ module.exports = {
         "popsicle",
         "psychosolstice",
         "ramp2seedling",
+        "reflourished",
         "savagemayflower",
         "shitknight",
         "starrings",
         "startron",
         "translattail",
       ],
-      aggroDecks: ["abeans", "dinogloves", "pbeans", "watertron"],
+      aggroDecks: ["abeans", "dinogloves", "logbait", "pbeans", "watertron"],
       comboDecks: [
         "budgetcc",
         "carroot",
@@ -299,6 +300,7 @@ module.exports = {
         "plantmop",
         "psychosolstice",
         "ramp2seedling",
+        "reflourished",
         "savagemayflower",
         "starrings",
         "startron",
@@ -331,7 +333,6 @@ module.exports = {
         "mopribus",
         "psychosolstice",
         "ramp2seedling",
-        "reflourished",
         "starrings",
         "startron",
       ],
@@ -380,6 +381,7 @@ module.exports = {
         "highlander",
         "lasersnap",
         "lifecouldbedream",
+        "logbait",
         "midred",
         "mopribus",
         "mspotk",
@@ -778,8 +780,9 @@ module.exports = {
     const hotk = new CreateButtons("healmidrose", "hland");
     const hland = new CreateButtons("healthotk", "lsnap");
     const lsnap = new CreateButtons("highlander", "lcbd");
-    const lcbd = new CreateButtons("lasersnap", "mred");
-    const mred = new CreateButtons("lifecouldbedream", "mopr");
+    const lcbd = new CreateButtons("lasersnap", "lbait");
+    const lbait = new CreateButtons("lifecouldbedream", "mred");
+    const mred = new CreateButtons("logbait", "mopr");
     const mopr = new CreateButtons("midred", "msp");
     const msp = new CreateButtons("mopribus", "pts");
     const pts = new CreateButtons("mspotk", "pb");
@@ -816,11 +819,11 @@ module.exports = {
     const cburn2 = new CreateButtons("chemotherapy2", "flottery2");
     const flottery2 = new CreateButtons("cyburn2", "healcon2");
     const healcon2 = new CreateButtons("figlottery2", "hmr2");
-    const hmr2 = new CreateButtons("healcontrol2", "pts2");
-    const pts2 = new CreateButtons("healmidrose2", "radio2");
-    const radio2 = new CreateButtons("pawntrickstab2", "rfl2");
-    const rfl2 = new CreateButtons("radiotherapy2", "shambc2");
-    const shambc2 = new CreateButtons("reflourished2", "tc2");
+    const hmr2 = new CreateButtons("healcontrol2", "lbait2");
+    const lbait2 = new CreateButtons("healmidrose2", "pts2");
+    const pts2 = new CreateButtons("logbait2", "radio2");
+    const radio2 = new CreateButtons("pawntrickstab2", "shambc2");
+    const shambc2 = new CreateButtons("radiotherapy2", "tc2");
     const tc2 = new CreateButtons("shamcontrolbc2", "wtron2");
     const wtron2 = new CreateButtons("toyotacontrolla2", "helppcomp");
     const ladderprow = new CreateButtons("pbeans2", "carr2");
@@ -847,16 +850,18 @@ module.exports = {
     const plmop2 = new CreateButtons("nuttin2", "pop2");
     const pop2 = new CreateButtons("plantmop2", "psol2");
     const psol2 = new CreateButtons("popsicle2", "r2s2");
-    const r2s2 = new CreateButtons("psychosolstice2", "smf2");
-    const smf2 = new CreateButtons("ramp2seedling2", "sknight2");
+    const r2s2 = new CreateButtons("psychosolstice2", "rfl2");
+    const rfl2 = new CreateButtons("ramp2seedling2", "smf2");
+    const smf2 = new CreateButtons("reflourished2", "sknight2");
     const sknight2 = new CreateButtons("savagemayflower2", "srings2");
     const srings2 = new CreateButtons("shitknight2", "stron2");
     const stron2 = new CreateButtons("starrings2", "tlattail2");
     const tlattail2 = new CreateButtons("startron2", "helppmeme");
     const aggroprow = new CreateButtons("watertron3", "ab3");
     const ab3 = new CreateButtons("helppaggro", "dgloves3");
-    const dgloves3 = new CreateButtons("abeans3", "pb3");
-    const pb3 = new CreateButtons("dinogloves3", "wtron3");
+    const dgloves3 = new CreateButtons("abeans3", "lbait3");
+    const lbait3 = new CreateButtons("dinogloves3", "pb3");
+    const pb3 = new CreateButtons("logbait3", "wtron3");
     const wtron3 = new CreateButtons("pbeans3", "aggrophelp");
     const comboprow = new CreateButtons("translattail3", "bcc3");
     const bcc3 = new CreateButtons("helppcombo", "carr3");
@@ -874,8 +879,9 @@ module.exports = {
     const nut3 = new CreateButtons("mspotk3", "plmop3");
     const plmop3 = new CreateButtons("nuttin3", "psol3");
     const psol3 = new CreateButtons("plantmop3", "r2s3");
-    const r2s3 = new CreateButtons("psychosolstice3", "smf3");
-    const smf3 = new CreateButtons("ramp2seedling3", "srings3");
+    const r2s3 = new CreateButtons("psychosolstice3", "rfl3");
+    const rfl3 = new CreateButtons("ramp2seedling3", "smf3");
+    const smf3 = new CreateButtons("reflourished3", "srings3");
     const srings3 = new CreateButtons("savagemayflower3", "stron3");
     const stron3 = new CreateButtons("starrings3", "tlattail3");
     const tlattail3 = new CreateButtons("startron3", "helppcombo");
@@ -904,9 +910,8 @@ module.exports = {
     const mred4 = new CreateButtons("lasersnap4", "mopr4");
     const mopr4 = new CreateButtons("midred4", "psol4");
     const psol4 = new CreateButtons("mopribus4", "r2s4");
-    const r2s4 = new CreateButtons("psychosolstice4", "rfl3");
-    const rfl3 = new CreateButtons("ramp2seelding4", "srings4");
-    const srings4 = new CreateButtons("reflourished3", "stron4");
+    const r2s4 = new CreateButtons("psychosolstice4", "srings4");
+    const srings4 = new CreateButtons("ramp2seedling4", "stron4");
     const stron4 = new CreateButtons("starrings4", "midrangephelp");
     const tempoprow = new CreateButtons("translattail4", "wr1003");
     const wr1003 = new CreateButtons("tempophelp", "bct3");
@@ -1465,6 +1470,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const watertron = new CreatePlantDeckEmbed(result, "watertron");
     const budgetcc = new CreatePlantDeckEmbed(result, "budgetcc");
     const lifecouldbedream = new CreatePlantDeckEmbed(result, "lcbd");
+    const logbait = new CreatePlantDeckEmbed(result, "logbait");
     const mspotk = new CreatePlantDeckEmbed(result, "mspotk");
     const plantmop = new CreatePlantDeckEmbed(result, "plantmop");
     const reflourished = new CreatePlantDeckEmbed(result, "reflourished");
@@ -1697,6 +1703,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
           components: [tempozrow],
         });
       }
+      else if(value == "allpdecks"){
+        await i.update({ embeds: [allpdecksEmbed], components: [allprow] });
+      }
+      else if(value == "allzdecks"){
+        await i.update({ embeds: [allzdecksEmbed], components: [allzrow] });
+      }
     }
     async function HandleButtonInteraction(i) {
       if (i.customId == "helppbudget" || i.customId == "budgetphelp") {
@@ -1870,14 +1882,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         await i.update({ embeds: [ejection], components: [eject2] });
       } else if (i.customId == "eject3" || i.customId == "ejection3") {
         await i.update({ embeds: [ejection], components: [eject3] });
-      } else if (i.customId == "elus" || i.customId == "elusives") {
-        await i.update({ embeds: [elusives], components: [elus] });
-      } else if (i.customId == "elus2" || i.customId == "elusives2") {
-        await i.update({ embeds: [elusives], components: [elus2] });
-      } else if (i.customId == "elus3" || i.customId == "elusives3") {
-        await i.update({ embeds: [elusives], components: [elus3] });
-      } else if (i.customId == "elus4" || i.customId == "elusives4") {
-        await i.update({ embeds: [elusives], components: [elus4] });
       } else if (i.customId == "fheal" || i.customId == "freezeheal") {
         await i.update({ embeds: [freezeheal], components: [fheal] });
       } else if (i.customId == "fheal2" || i.customId == "freezeheal2") {
@@ -2709,6 +2713,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         await i.update({ embeds: [nohokaistars], components: [nhks2] });
       } else if (i.customId == "nhks3" || i.customId == "nohokaistars3") {
         await i.update({ embeds: [nohokaistars], components: [nhks3] });
+      } else if (i.customId == "lbait" || i.customId == "logbait"){
+        await i.update({ embeds: [logbait], components: [lbait] });
+      } else if (i.customId == "lbait2" || i.customId == "logbait2"){
+        await i.update({ embeds: [logbait], components: [lbait2] });
+      } else if (i.customId == "lbait3" || i.customId == "logbait3"){
+        await i.update({ embeds: [logbait], components: [lbait3] });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

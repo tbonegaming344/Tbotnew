@@ -906,6 +906,7 @@ module.exports = {
             `${result[0].wateron}`,
             //CC TBOT DB
             `${result[0].lcbd}`,
+            `${result[0].logbait}`,
             `${result[0].mspotk}`,
             `${result[0].plantmop}`,
             `${result[0].yrm}`,
@@ -1107,6 +1108,7 @@ module.exports = {
           );
           const deck = [
           `${result[0].lcbd}`,
+          `${result[0].logbait}`,
             `${result[0].mspotk}`,
             `${result[0].plantmop}`,
             `${result[0].yrm}`
@@ -1667,6 +1669,7 @@ module.exports = {
               `${result[0].wateron}`,
               //CC TBOT DB
               `${result[0].lcbd}`,
+              `${result[0].logbait}`,
               `${result[0].mspotk}`,
               `${result[0].plantmop}`,
               `${result[0].yrm}`,

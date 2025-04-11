@@ -7,7 +7,7 @@ module.exports = {
 			let embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/77/PotofGoldCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226110937")
 			.setTitle("Pot of Gold | <:Brainy:1062500939908530246>")
-			.setDescription("**\\- Party Trick  -**")
+			.setDescription("**\\- Trick  -**")
 			.addFields({name: "Stats", 
 									value: "1 <:Brainz:1062503146745774183>"},
 								 {

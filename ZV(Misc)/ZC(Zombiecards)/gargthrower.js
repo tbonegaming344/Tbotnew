@@ -17,7 +17,11 @@ module.exports = {
 							 {
 								 name: "Set-Rarity", 
 								 value: "**Premium - Legendary**"
-							 })
+							 }, 
+							{
+								name: "Flavor Text",
+								value: "The ultimate, epic, last, absolutely final conclusion to the Zombie-throwing Zombie saga. ... or is it?"
+							})
 		.setColor("Random")			
 	
 	message.channel.send({embeds: [ embed ] } ) 

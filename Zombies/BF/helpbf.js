@@ -102,13 +102,14 @@ module.exports = {
         "himpter",
         "lunchtime",
         "petmop",
-        "racism",
+        "banhammer",
         "watersports",
       ],
-      aggroDecks: ["budgetbf", "slavery"],
-      comboDecks: ["himpter", "watersports"],
+      aggroDecks: ["budgetbf"],
+      comboDecks: ["banhammer", "himpter", "watersports"],
       controlDecks: ["bfplankcontrol"],
       midrangeDecks: [
+        "bhammer",
         "bfmidgargs",
         "gargolithtech",
         "himpter",
@@ -116,8 +117,9 @@ module.exports = {
         "petmop",
         "watersports",
       ],
-      tempoDecks: ["lockthebathroom", "racism", "raiserpackage"],
+      tempoDecks: ["lockthebathroom", "raiserpackage"],
       allDecks: [
+        "banhammer",
         "bfmidgargs",
         "bfplankcontrol",
         "budgetbf",
@@ -126,9 +128,7 @@ module.exports = {
         "lunchtime",
         "lockthebathroom",
         "petmop",
-        "racism",
         "raiserpackage",
-        "slavery",
         "watersports",
       ],
     };
@@ -140,7 +140,6 @@ module.exports = {
     const toBuildString = buildDeckString(brainFreezeDecks.allDecks);
     const toBuildLadderString = buildDeckString(brainFreezeDecks.ladderDecks);
     const toBuildMemeString = buildDeckString(brainFreezeDecks.memeDecks);
-    const toBuildAggroString = buildDeckString(brainFreezeDecks.aggroDecks);
     const toBuildComboString = buildDeckString(brainFreezeDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(
       brainFreezeDecks.midrangeDecks
@@ -158,48 +157,44 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("watersports", "bfmg");
-    const bfmg = new CreateButtons("helpall", "bbf");
+    const alldecksrow = new CreateButtons("watersports", "bhammer");
+    const bhammer = new CreateButtons("helpall", "bfmg");
+    const bfmg = new CreateButtons("banhammer", "bbf");
     const bbf = new CreateButtons("bfmidgargs", "bfpc");
     const bfpc = new CreateButtons("budgetbf", "gt");
     const gt = new CreateButtons("bfplankcontrol", "hi");
     const hi = new CreateButtons("gargolithtech", "lt");
     const lt = new CreateButtons("himps", "ltbr");
     const ltbr = new CreateButtons("lunchtime", "pm");
-    const pm = new CreateButtons("lockthebathroom", "rac");
-    const rac = new CreateButtons("petmop", "rp");
-    const rp = new CreateButtons("racism", "sl");
-    const sl = new CreateButtons("raiserpackage", "ws");
-    const ws = new CreateButtons("slavery", "allhelp");
+    const pm = new CreateButtons("lockthebathroom", "rp");
+    const rp = new CreateButtons("petmop", "ws");
+    const ws = new CreateButtons("raiserpackage", "allhelp");
     const ladderrow = new CreateButtons("watersports", "bfmg2");
     const bfmg2 = new CreateButtons("helpladder", "bfpc2");
     const bfpc2 = new CreateButtons("bfmidgargs2", "rp2");
     const rp2 = new CreateButtons("bfplancontrol2", "ladderhelp");
-    const memerow = new CreateButtons("watersports2", "gt2");
-    const gt2 = new CreateButtons("helpmeme", "hi2");
+    const memerow = new CreateButtons("watersports2", "bhammer2");
+    const bhammer2 = new CreateButtons("helpmeme", "gt2");
+    const gt2 = new CreateButtons("banhammer2", "hi2");
     const hi2 = new CreateButtons("gargolithtech2", "lt2");
     const lt2 = new CreateButtons("himps2", "pm2");
-    const pm2 = new CreateButtons("lunchtime2", "rac2");
-    const rac2 = new CreateButtons("petmop2", "sl2");
-    const sl2 = new CreateButtons("racism2", "ws2");
-    const ws2 = new CreateButtons("slavery2", "memehelp");
-    const aggrorow = new CreateButtons("slavery3", "bbf2");
-    const bbf2 = new CreateButtons("helpaggro", "sl3");
-    const sl3 = new CreateButtons("budgetbf2", "aggrohelp");
-    const comborow = new CreateButtons("watersports3", "hi3");
-    const hi3 = new CreateButtons("helpcombo", "ws3");
+    const pm2 = new CreateButtons("lunchtime2", "ws2");
+    const ws2 = new CreateButtons("petmop2", "memehelp");
+    const comborow = new CreateButtons("watersports3", "bhammer3");
+    const bhammer3 = new CreateButtons("helpcombo", "hi3");
+    const hi3 = new CreateButtons("banhammer3", "ws3");
     const ws3 = new CreateButtons("himps3", "combohelp");
-    const midrangerow = new CreateButtons("watersports4", "bfmg3");
-    const bfmg3 = new CreateButtons("helpmid", "gt3");
+    const midrangerow = new CreateButtons("watersports4", "bhammer4");
+    const bhammer4= new CreateButtons("helpmid", "bfmg3");
+    const bfmg3 = new CreateButtons("banhammer4", "gt3");
     const gt3 = new CreateButtons("bfmidgargs3", "hi4");
     const hi4 = new CreateButtons("gargolithtech3", "lt3");
     const lt3 = new CreateButtons("himps4", "pm3");
     const pm3 = new CreateButtons("lunchtime3", "ws4");
     const ws4 = new CreateButtons("petmop3", "midhelp");
     const temporow = new CreateButtons("raiserpackage3", "ltbr2");
-    const ltbr2 = new CreateButtons("helptempo", "rac3");
-    const rac3 = new CreateButtons("lockthebathroom2", "rp3");
-    const rp3 = new CreateButtons("racism3", "tempohelp");
+    const ltbr2 = new CreateButtons("helptempo", "rp3");
+    const rp3 = new CreateButtons("lockthebathroom2", "tempohelp");
     const [result] = await db.query(`SELECT * FROM bfdecks`);
     const allEmbed = new CreateHelpEmbed(
       "Brainfreeze Decks",
@@ -227,13 +222,6 @@ Note: Brainfreeze has ${brainFreezeDecks.ladderDecks.length} Ladder decks in Tbo
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze Meme decks please use the commands listed above or click on the buttons below to navigate through all Meme Decks!
 Note: Brainfreeze has ${brainFreezeDecks.memeDecks.length} Meme decks in Tbot`
-    );
-    const aggroEmbed = new CreateHelpEmbed(
-      "Brainfreeze Aggro Decks",
-      `My Aggro decks for Brain Freeze(BF) are ${toBuildAggroString}`,
-      "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
-      `To view the Brain Freeze Aggro decks please use the commands listed above or click on the buttons below to navigate through all Aggro Decks!
-Note: Brainfreeze has ${brainFreezeDecks.aggroDecks.length} Aggro decks in Tbot`
     );
     const comboEmbed = new CreateHelpEmbed(
       "Brainfreeze Combo Decks",
@@ -281,9 +269,8 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
     const lockthebathroom = new CreateDeckEmbed(result, "lockin");
     const lunchtime = new CreateDeckEmbed(result, "midpets");
     const petmop = new CreateDeckEmbed(result, "petmop");
-    const racism = new CreateDeckEmbed(result, "racism");
+    const banhammer= new CreateDeckEmbed(result, "racism");
     const raiserpackage = new CreateDeckEmbed(result, "raiserpackage");
-    const slavery = new CreateDeckEmbed(result, "slavery");
     const watersports = new CreateDeckEmbed(result, "watersports");
     const m = await message.channel.send({
       embeds: [embed],
@@ -294,7 +281,7 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
       const value = i.values[0];
       if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (value == "budget") {
+      } else if (value == "budget" || value == "aggro") {
         await i.reply({ embeds: [budgetbf], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
         await i.reply({
@@ -305,8 +292,6 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (value == "aggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "control") {
@@ -321,90 +306,95 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "helpall" || i.customId == "allhelp") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId == "helpladder" || i.customId == "ladderhelp") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (i.customId == "helpmeme" || i.customId == "memehelp") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "helpaggro" || i.customId == "aggrohelp") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "helpmid" || i.customId == "midhelp") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "helptempo" || i.customId == "tempohelp") {
-        await i.update({ embeds: [tempoEmbed], components: [temporow] });
-      } else if (i.customId == "bbf" || i.customId == "budgetbf") {
-        await i.update({ embeds: [budgetbf], components: [bbf] });
-      } else if (i.customId == "bbf2" || i.customId == "budgetbf2") {
-        await i.update({ embeds: [budgetbf], components: [bbf2] });
-      } else if (i.customId == "lt" || i.customId == "lunchtime") {
-        await i.update({ embeds: [lunchtime], components: [lt] });
-      } else if (i.customId == "lt2" || i.customId == "lunchtime2") {
-        await i.update({ embeds: [lunchtime], components: [lt2] });
-      } else if (i.customId == "lt3" || i.customId == "lunchtime3") {
-        await i.update({ embeds: [lunchtime], components: [lt3] });
-      } else if (i.customId == "sl" || i.customId == "slavery") {
-        await i.update({ embeds: [slavery], components: [sl] });
-      } else if (i.customId == "sl2" || i.customId == "slavery2") {
-        await i.update({ embeds: [slavery], components: [sl2] });
-      } else if (i.customId == "sl3" || i.customId == "slavery3") {
-        await i.update({ embeds: [slavery], components: [sl3] });
-      } else if (i.customId == "gt" || i.customId == "gargolithtech") {
-        await i.update({ embeds: [gargolithtech], components: [gt] });
-      } else if (i.customId == "gt2" || i.customId == "gargolithtech2") {
-        await i.update({ embeds: [gargolithtech], components: [gt2] });
-      } else if (i.customId == "gt3" || i.customId == "gargolithtech3") {
-        await i.update({ embeds: [gargolithtech], components: [gt3] });
-      } else if (i.customId == "hi" || i.customId == "himps") {
-        await i.update({ embeds: [himps], components: [hi] });
-      } else if (i.customId == "hi2" || i.customId == "himps2") {
-        await i.update({ embeds: [himps], components: [hi2] });
-      } else if (i.customId == "hi3" || i.customId == "himps3") {
-        await i.update({ embeds: [himps], components: [hi3] });
-      } else if (i.customId == "hi4" || i.customId == "himps4") {
-        await i.update({ embeds: [himps], components: [hi4] });
-      } else if (i.customId == "ltbr" || i.customId == "lockthebathroom") {
-        await i.update({ embeds: [lockthebathroom], components: [ltbr] });
-      } else if (i.customId == "ltbr2" || i.customId == "lockthebathroom2") {
-        await i.update({ embeds: [lockthebathroom], components: [ltbr2] });
-      } else if (i.customId == "pm" || i.customId == "petmop") {
-        await i.update({ embeds: [petmop], components: [pm] });
-      } else if (i.customId == "pm2" || i.customId == "petmop2") {
-        await i.update({ embeds: [petmop], components: [pm2] });
-      } else if (i.customId == "pm3" || i.customId == "petmop3") {
-        await i.update({ embeds: [petmop], components: [pm3] });
-      } else if (i.customId == "rac" || i.customId == "racism") {
-        await i.update({ embeds: [racism], components: [rac] });
-      } else if (i.customId == "rac2" || i.customId == "racism2") {
-        await i.update({ embeds: [racism], components: [rac2] });
-      } else if (i.customId == "rac3" || i.customId == "racism3") {
-        await i.update({ embeds: [racism], components: [rac3] });
-      } else if (i.customId == "rp" || i.customId == "raiserpackage") {
-        await i.update({ embeds: [raiserpackage], components: [rp] });
-      } else if (i.customId == "rp2" || i.customId == "raiserpackage2") {
-        await i.update({ embeds: [raiserpackage], components: [rp2] });
-      } else if (i.customId == "rp3" || i.customId == "raiserpackage3") {
-        await i.update({ embeds: [raiserpackage], components: [rp3] });
-      } else if (i.customId == "ws" || i.customId == "watersports") {
-        await i.update({ embeds: [watersports], components: [ws] });
-      } else if (i.customId == "ws2" || i.customId == "watersports2") {
-        await i.update({ embeds: [watersports], components: [ws2] });
-      } else if (i.customId == "ws3" || i.customId == "watersports3") {
-        await i.update({ embeds: [watersports], components: [ws3] });
-      } else if (i.customId == "ws4" || i.customId == "watersports4") {
-        await i.update({ embeds: [watersports], components: [ws4] });
-      } else if (i.customId == "bfmg" || i.customId == "bfmidgargs") {
-        await i.update({ embeds: [bfmidgargs], components: [bfmg] });
-      } else if (i.customId == "bfmg2" || i.customId == "bfmidgargs2") {
-        await i.update({ embeds: [bfmidgargs], components: [bfmg2] });
-      } else if (i.customId == "bfmg3" || i.customId == "bfmidgargs3") {
-        await i.update({ embeds: [bfmidgargs], components: [bfmg3] });
-      } else if (i.customId == "bfpc" || i.customId == "bfplankcontrol") {
-        await i.update({ embeds: [bfplankcontrol], components: [bfpc] });
-      } else if (i.customId == "bfpc2" || i.customId == "bfplankcontrol2") {
-        await i.update({ embeds: [bfplankcontrol], components: [bfpc2] });
+      const buttonActions = {
+        helpall: {embed: allEmbed, component: alldecksrow},
+        allhelp: {embed: allEmbed, component: alldecksrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpmid: {embed: midrangeEmbed, component: midrangerow},
+        midhelp: {embed: midrangeEmbed, component: midrangerow},
+        helptempo: {embed: tempoEmbed, component: temporow},
+        tempohelp: {embed: tempoEmbed, component: temporow},
+        bhammer: {embed: banhammer, component: bhammer},
+        banhammer: {embed: banhammer, component: bhammer},
+        bhammer2: {embed: banhammer, component: bhammer2},
+        banhammer2: {embed: banhammer, component: bhammer2},
+        bhammer3: {embed: banhammer, component: bhammer3},
+        banhammer3: {embed: banhammer, component: bhammer3},
+        bhammer4: {embed: banhammer, component: bhammer4},
+        banhammer4: {embed: banhammer, component: bhammer4},
+        bbfmg: {embed: bfmidgargs, component: bfmg},
+        bfmidgargs: {embed: bfmidgargs, component: bfmg},
+        bfmg2: {embed: bfmidgargs, component: bfmg2},
+        bfmidgargs2: {embed: bfmidgargs, component: bfmg2},
+        bfmg3: {embed: bfmidgargs, component: bfmg3},
+        bfmidgargs3: {embed: bfmidgargs, component: bfmg3},
+        bfpc: {embed: bfplankcontrol, component: bfpc},
+        bfplankcontrol: {embed: bfplankcontrol, component: bfpc},
+        bfpc2: {embed: bfplankcontrol, component: bfpc2},
+        bfplankcontrol2: {embed: bfplankcontrol, component: bfpc2},
+        bbf: {embed: budgetbf, component: bbf},
+        budgetbf: {embed: budgetbf, component: bbf},
+        gt: {embed: gargolithtech, component: gt}, 
+        gargolithtech: {embed: gargolithtech, component: gt},
+        gt2: {embed: gargolithtech, component: gt2}, 
+        gargolithtech2: {embed: gargolithtech, component: gt2},
+        gt3: {embed: gargolithtech, component: gt3}, 
+        gargolithtech3: {embed: gargolithtech, component: gt3},
+        hi: {embed: himps, component: hi}, 
+        himps: {embed: himps, component: hi},
+        hi2: {embed: himps, component: hi2}, 
+        himps2: {embed: himps, component: hi2},
+        hi3: {embed: himps, component: hi3}, 
+        himps3: {embed: himps, component: hi3},
+        hi4: {embed: himps, component: hi4}, 
+        himps4: {embed: himps, component: hi4},
+        ltbr: {embed: lockthebathroom, component: ltbr}, 
+        lockthebathroom: {embed: lockthebathroom, component: ltbr},
+        ltbr2: {embed: lockthebathroom, component: ltbr2}, 
+        lockthebathroom2: {embed: lockthebathroom, component: ltbr2},
+        lt: {embed: lunchtime, component: lt},
+        lunchtime: {embed: lunchtime, component: lt},
+        lt2: {embed: lunchtime, component: lt2},
+        lunchtime2: {embed: lunchtime, component: lt2},
+        lt3: {embed: lunchtime, component: lt3},
+        lunchtime3: {embed: lunchtime, component: lt3},
+        pm: {embed: petmop, component: pm},
+        petmop: {embed: petmop, component: pm},
+        pm2: {embed: petmop, component: pm2},
+        petmop2: {embed: petmop, component: pm2},
+        pm3: {embed: petmop, component: pm3},
+        petmop3: {embed: petmop, component: pm3},
+        rp: {embed: raiserpackage, component: rp},
+        raiserpackage: {embed: raiserpackage, component: rp},
+        rp2: {embed: raiserpackage, component: rp2},
+        raiserpackage2: {embed: raiserpackage, component: rp2},
+        rp3: {embed: raiserpackage, component: rp3},
+        raiserpackage3: {embed: raiserpackage, component: rp3},
+        ws: {embed: watersports, component: ws},
+        watersports: {embed: watersports, component: ws},
+        ws2: {embed: watersports, component: ws2},
+        watersports2: {embed: watersports, component: ws2},
+        ws3: {embed: watersports, component: ws3},
+        watersports3: {embed: watersports, component: ws3},
+        ws4: {embed: watersports, component: ws4},
+        watersports4: {embed: watersports, component: ws4},
+      }
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Unknown button interaction.",
+          ephemeral: true,
+        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

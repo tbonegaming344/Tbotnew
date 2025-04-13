@@ -331,8 +331,6 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
         ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpmeme: { embed: memeEmbed, component: memerow },
         memehelp: { embed: memeEmbed, component: memerow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
         helpcombo: { embed: comboEmbed, component: comborow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcontrol: { embed: controlEmbed, component: controlrow },

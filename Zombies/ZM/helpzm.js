@@ -166,13 +166,13 @@ module.exports = {
     const tm3 = new CreateButtons("dozzamech3", "helpaggro");
     const comborow = new CreateButtons("zmoss3", "bfw3");
     const bfw3 = new CreateButtons("combohelp", "bzm3");
-    const bzm3 = new CreateButtons("binaryflagwar3", "gb3");
-    const gb3 = new CreateButtons("budgetzm3", "um3");
-    const um3 = new CreateButtons("gargburn3", "zm3");
+    const bzm3 = new CreateButtons("binaryflagwar3", "gb2");
+    const gb2 = new CreateButtons("budgetzm3", "um3");
+    const um3 = new CreateButtons("gargburn2", "zm3");
     const zm3 = new CreateButtons("uncrackamech3", "helpcombo");
-    const midrangerow = new CreateButtons("gargburn4", "bfw4");
-    const bfw4 = new CreateButtons("midrangehelp", "gb4");
-    const gb4 = new CreateButtons("binaryflagwar4", "helpmidrange");
+    const midrangerow = new CreateButtons("gargburn3", "bfw4");
+    const bfw4 = new CreateButtons("midrangehelp", "gb3");
+    const gb3 = new CreateButtons("binaryflagwar4", "helpmidrange");
     const embed = new CreateHelpEmbed(
       "Zmech Decks",
       `To view the Zmech decks please select an option from the select menu below!
@@ -323,8 +323,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         gargburn2: {embed: gargburn, component: gb2},
         gb3: {embed: gargburn, component: gb3},
         gargburn3: {embed: gargburn, component: gb3},
-        gb4: {embed: gargburn, component: gb4},
-        gargburn4: {embed: gargburn, component: gb4},
         tm: {embed: trickmech, component: tm},
         trickmech: {embed: trickmech, component: tm},
         tm2: {embed: trickmech, component: tm2},

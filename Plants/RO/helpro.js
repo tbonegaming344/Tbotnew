@@ -108,7 +108,7 @@ module.exports = {
     const midrangerow = new CreateButtons("healmidrose", "bro");
     const bro = new CreateButtons("helpmid", "fmr");
     const fmr = new CreateButtons("budgetro", "hmr");
-    const hmr = new CreateButtons("frymidrose", "allhelp");
+    const hmr = new CreateButtons("frymidrose", "midhelp");
     const alldecksrow = new CreateButtons("healmidrose2", "bro2");
     const bro2 = new CreateButtons("helpall", "fheal");
     const fheal = new CreateButtons("budgetro2", "fmr2");
@@ -181,8 +181,6 @@ Note: Rose has ${roseDecks.midrangeDecks.length} Midrange decks in Tbot`
       const buttonActions = {
         allhelp: { embed: allEmbed, component: alldecksrow },
         helpall: { embed: allEmbed, component: alldecksrow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        helpcombo: { embed: comboEmbed, component: comborow },
         midhelp: { embed: midrangeEmbed, component: midrangerow },
         helpmid: { embed: midrangeEmbed, component: midrangerow },
         bro: { embed: budgetrose, component: bro },

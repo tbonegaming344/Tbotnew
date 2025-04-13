@@ -327,7 +327,7 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
         banhammer3: {embed: banhammer, component: bhammer3},
         bhammer4: {embed: banhammer, component: bhammer4},
         banhammer4: {embed: banhammer, component: bhammer4},
-        bbfmg: {embed: bfmidgargs, component: bfmg},
+        bfmg: {embed: bfmidgargs, component: bfmg},
         bfmidgargs: {embed: bfmidgargs, component: bfmg},
         bfmg2: {embed: bfmidgargs, component: bfmg2},
         bfmidgargs2: {embed: bfmidgargs, component: bfmg2},

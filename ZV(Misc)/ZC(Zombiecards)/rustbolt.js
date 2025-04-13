@@ -251,13 +251,6 @@ module.exports = {
       `To view the RustBolt meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
   Note: Rustbolt has ${rustboltDecks.memeDecks.length} total meme decks in Tbot`
     );
-    const aggroEmbed = new CreateHelpEmbed(
-      "Rustbolt Aggro Decks",
-      `My commands for Rustbolt(RB) are ${toBuildAggroString}`,
-      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
-      `To view the RustBolt aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
-  Note: Rustbolt has ${rustboltDecks.aggroDecks.length} total aggro decks in Tbot`
-    );
     const comboEmbed = new CreateHelpEmbed(
       "Rustbolt Combo Decks",
       `My commands for Rustbolt(RB) are ${toBuildComboString}`,
@@ -357,8 +350,6 @@ module.exports = {
         ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpmeme: { embed: memeEmbed, component: memerow },
         memehelp: { embed: memeEmbed, component: memerow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
         helpcombo: { embed: comboEmbed, component: comborow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcontrol: { embed: controlEmbed, component: controlrow },

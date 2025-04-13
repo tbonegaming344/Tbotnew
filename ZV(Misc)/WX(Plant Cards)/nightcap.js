@@ -123,6 +123,7 @@ module.exports = {
     const comboRow = new CreateButtons("translattail", "cburn2");
     const cburn2 = new CreateButtons("helpcombo", "tl");
     const tl = new CreateButtons("cyburn2", "combohelp");
+    const alldecksrow = new CreateButtons("translattail2", "bnc");
     const bnc = new CreateButtons("helpall", "cburn3");
     const cburn3 = new CreateButtons("budgetnc", "tc2");
     const tc2 = new CreateButtons("cyburn3", "tl2");
@@ -237,8 +238,6 @@ module.exports = {
         helpall: { embed: allEmbed, component: alldecksrow },
         combohelp: { embed: comboEmbed, component: comboRow },
         helpcombo: { embed: comboEmbed, component: comboRow },
-        midhelp: { embed: midrangeEmbed, component: midrangeRow },
-        helpmid: { embed: midrangeEmbed, component: midrangeRow },
         bnc: { embed: budgetnc, component: bnc },
         budgetnc: { embed: budgetnc, component: bnc },
         cburn: { embed: cyburn, component: cburn },

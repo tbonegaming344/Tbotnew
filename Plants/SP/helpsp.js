@@ -67,11 +67,11 @@ module.exports = {
           )
           .setValue("control"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
+          .setLabel("Midrange Deck")
           .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           )
-          .setValue("tempo"),
+          .setValue("midrange"),
         new StringSelectMenuOptionBuilder()
           .setLabel("All Spudow Decks")
           .setValue("all")
@@ -86,7 +86,7 @@ module.exports = {
       memeDecks: ["nutting", "popsicle"],
       comboDecks: ["nutting"],
       controlDecks: ["radiotherapy", "popsicle"],
-      tempoDecks: ["budgetsp"],
+      midrangeDecks: ["budgetsp"],
       allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy"],
     };
 
@@ -152,7 +152,7 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
           { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
           { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
         )
-         .setColor("#964B00");
+        .setColor("#964B00");
       const imageUrl = result[4][deckName];
       if (imageUrl) {
         embed.setImage(imageUrl);
@@ -184,7 +184,7 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
 
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value === "budget" || value === "tempo") {
+      if (value === "budget" || value === "midrange") {
         await i.reply({ embeds: [budgetsp], flags: MessageFlags.Ephemeral });
       } else if (value === "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
@@ -203,28 +203,41 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
     }
 
     async function handleButtonInteraction(i) {
-      if (i.customId === "allhelp" || i.customId === "helpall") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId === "bsp" || i.customId === "budgetsp") {
-        await i.update({ embeds: [budgetsp], components: [bsp] });
-      } else if (i.customId === "nut" || i.customId === "nuttin") {
-        await i.update({ embeds: [nuttin], components: [nut] });
-      } else if (i.customId === "radio" || i.customId === "radiotherapy") {
-        await i.update({ embeds: [radiotherapy], components: [radio] });
-      } else if (i.customId == "pop" || i.customId == "popsicle") {
-        await i.update({ embeds: [popsicle], components: [pop] });
-      } else if (i.customId == "pop2" || i.customId == "popsicle2") {
-        await i.update({ embeds: [popsicle], components: [pop2] });
-      } else if (i.customId == "pop3" || i.customId == "popsicle3") {
-        await i.update({ embeds: [popsicle], components: [pop3] });
-      } else if (i.customId == "radio2" || i.customId == "radiotherapy2") {
-        await i.update({ embeds: [radiotherapy], components: [radio2] });
-      } else if (i.customId == "nut2" || i.customId == "nuttin2") {
-        await i.update({ embeds: [nuttin], components: [nut2] });
-      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "controlhelp" || i.customId == "helpcontrol") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
+      const buttonActions = {
+        allhelp: { embed: allEmbed, component: alldecksrow },
+        helpall: { embed: allEmbed, component: alldecksrow },
+        memehelp: { embed: memeEmbed, component: memerow },
+        helpmeme: { embed: memeEmbed, component: memerow },
+        controlhelp: { embed: controlEmbed, component: controlrow },
+        helpcontrol: { embed: controlEmbed, component: controlrow },
+        bsp: { embed: budgetsp, component: bsp },
+        budgetsp: { embed: budgetsp, component: bsp },
+        nut: { embed: nuttin, component: nut },
+        nuttin: { embed: nuttin, component: nut },
+        nut2: { embed: nuttin, component: nut2 },
+        nuttin2: { embed: nuttin, component: nut2 },
+        radio: { embed: radiotherapy, component: radio },
+        radiotherapy: { embed: radiotherapy, component: radio },
+        radio2: { embed: radiotherapy, component: radio2 },
+        radiotherapy2: { embed: radiotherapy, component: radio2 },
+        pop: { embed: popsicle, component: pop },
+        popsicle: { embed: popsicle, component: pop },
+        pop2: { embed: popsicle, component: pop2 },
+        popsicle2: { embed: popsicle, component: pop2 },
+        pop3: { embed: popsicle, component: pop3 },
+        popsicle3: { embed: popsicle, component: pop3 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Unknown button action",
+          flags: MessageFlags.Ephemeral,
+        });
       }
     }
 

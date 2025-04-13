@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -78,15 +78,9 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("All Chompzilla Decks")
           .setValue("all")
-          .setEmoji("<:LetsFrickenChomp:1100168574829596824>")
+          .setEmoji("<:constsFrickenChomp:1100168574829596824>")
           .setDescription("View all Chompzilla Decks")
       );
     const row = new ActionRowBuilder().addComponents(select);
@@ -95,10 +89,9 @@ module.exports = {
       compDecks: ["healcontrol"],
       memeDecks: ["lasersnap", "moprbius"],
       ladderDecks: ["midred"],
-      comboDecks: ["lasersnap", "midred", "moprbius"],
+      comboDecks: ["budgetmopzilla", "lasersnap", "midred", "moprbius"],
       controlDecks: ["healcontrol"],
-      midrangeDecks: ["lasersnap", "midred", "moprbius"],
-      tempoDecks: ["budgetmopzilla"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "midred", "moprbius"],
       allDecks: [
         "budgetmopzilla",
         "healcontrol",
@@ -133,17 +126,19 @@ module.exports = {
     const memerow = new CreateButtons("mopribus", "lsnap");
     const lsnap = new CreateButtons("helpmeme", "mop");
     const mop = new CreateButtons("lasersnap", "memehelp");
-    const comborow = new CreateButtons("mopribus2", "lsnap2");
-    const lsnap2 = new CreateButtons("helpcombo", "mred");
+    const comborow = new CreateButtons("mopribus2", "bmz");
+    const bmz = new CreateButtons("helpcombo", "lsnap2");
+    const lsnap2 = new CreateButtons("budgetmopzilla", "mred");
     const mred = new CreateButtons("lasersnap2", "mop2");
     const mop2 = new CreateButtons("midred2", "combohelp");
-    const midrangerow = new CreateButtons("mopribus3", "lsnap3");
-    const lsnap3 = new CreateButtons("helpmid", "mred2");
+    const midrangerow = new CreateButtons("mopribus3", "bmz2");
+    const bmz2 = new CreateButtons("helpmid", "lsnap3");
+    const lsnap3 = new CreateButtons("budgetmopzilla2", "mred2");
     const mred2 = new CreateButtons("lasersnap3", "mop3");
     const mop3 = new CreateButtons("midred3", "midhelp");
-    const alldecksrow = new CreateButtons("mopribus4", "bmz");
-    const bmz = new CreateButtons("helpall", "healcon");
-    const healcon = new CreateButtons("budgetmopzilla", "lsnap4");
+    const alldecksrow = new CreateButtons("mopribus4", "bmz3");
+    const bmz3 = new CreateButtons("helpall", "healcon");
+    const healcon = new CreateButtons("budgetmopzilla3", "lsnap4");
     const lsnap4 = new CreateButtons("healcontrol", "mred3");
     const mred3 = new CreateButtons("lasersnap4", "mop4");
     const mop4 = new CreateButtons("midred4", "allhelp");
@@ -181,7 +176,7 @@ Note: Chompzilla has ${chompzillaDecks.comboDecks.length} Combo decks in Tbot`
       `To view the Midrange Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Midrange decks!
 Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
-    let [result] = await db.query(`SELECT * from czdecks`);
+    const [result] = await db.query(`SELECT * from czdecks`);
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -211,7 +206,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
     const iFilter = (i) => i.user.id === message.author.id;
     async function HandleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget" || value == "tempo") {
+      if (value == "budget") {
         await i.reply({ embeds: [budgetcz], flags: MessageFlags.Ephemeral });
       } else if (value == "comp" || value == "control") {
         await i.reply({ embeds: [healcontrol], flags: MessageFlags.Ephemeral });
@@ -228,43 +223,57 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderow] });
-      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      }
-      if (i.customId == "combohelp" || i.customId == "helpcombo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "midhelp" || i.customId == "helpmid") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "healcon" || i.customId == "healcontrol") {
-        await i.update({ embeds: [healcontrol], components: [healcon] });
-      } else if (i.customId == "mop" || i.customId == "mopribus") {
-        await i.update({ embeds: [mopribus], components: [mop] });
-      } else if (i.customId == "mop2" || i.customId == "mopribus2") {
-        await i.update({ embeds: [mopribus], components: [mop2] });
-      } else if (i.customId == "mop3" || i.customId == "mopribus3") {
-        await i.update({ embeds: [mopribus], components: [mop3] });
-      } else if (i.customId == "mop4" || i.customId == "mopribus4") {
-        await i.update({ embeds: [mopribus], components: [mop4] });
-      } else if (i.customId == "lsnap" || i.customId == "lasersnap") {
-        await i.update({ embeds: [lasersnap], components: [lsnap] });
-      } else if (i.customId == "lsnap2" || i.customId == "lasersnap2") {
-        await i.update({ embeds: [lasersnap], components: [lsnap2] });
-      } else if (i.customId == "lsnap3" || i.customId == "lasersnap3") {
-        await i.update({ embeds: [lasersnap], components: [lsnap3] });
-      } else if (i.customId == "lsnap4" || i.customId == "lasersnap4") {
-        await i.update({ embeds: [lasersnap], components: [lsnap4] });
-      } else if (i.customId == "mred" || i.customId == "midred") {
-        await i.update({ embeds: [midred], components: [mred] });
-      } else if (i.customId == "mred2" || i.customId == "midred2") {
-        await i.update({ embeds: [midred], components: [mred2] });
-      } else if (i.customId == "mred3" || i.customId == "midred3") {
-        await i.update({ embeds: [midred], components: [mred3] });
-      } else if (i.customId == "bmz" || i.customId == "budgetmopzilla") {
-        await i.update({ embeds: [budgetcz], components: [bmz] });
+      const buttonActions = {
+        memehelp: { embed: memeEmbed, component: memerow },
+        helpmeme: { embed: memeEmbed, component: memerow },
+        allhelp: { embed: allEmbed, component: alldecksrow },
+        helpall: { embed: allEmbed, component: alldecksrow },
+        combohelp: { embed: comboEmbed, component: comborow },
+        helpcombo: { embed: comboEmbed, component: comborow },
+        midhelp: { embed: midrangeEmbed, component: midrangerow },
+        helpmid: { embed: midrangeEmbed, component: midrangerow },
+        bmz: { embed: budgetcz, component: bmz },
+        budgetmopzilla: { embed: budgetcz, component: bmz },
+        bmz2: { embed: budgetcz, component: bmz2 },
+        budgetmopzilla2: { embed: budgetcz, component: bmz2 },
+        bmz3: { embed: budgetcz, component: bmz3 },
+        budgetmopzilla3: { embed: budgetcz, component: bmz3 },
+        healcon: { embed: healcontrol, component: healcon },
+        healcontrol: { embed: healcontrol, component: healcon },
+        lsnap: { embed: lasersnap, component: lsnap },
+        lasersnap: { embed: lasersnap, component: lsnap },
+        lsnap2: { embed: lasersnap, component: lsnap2 },
+        lasersnap2: { embed: lasersnap, component: lsnap2 },
+        lsnap3: { embed: lasersnap, component: lsnap3 },
+        lasersnap3: { embed: lasersnap, component: lsnap3 },
+        lsnap4: { embed: lasersnap, component: lsnap4 },
+        lasersnap4: { embed: lasersnap, component: lsnap4 },
+        mred: { embed: midred, component: mred },
+        midred: { embed: midred, component: mred },
+        mred2: { embed: midred, component: mred2 },
+        midred2: { embed: midred, component: mred2 },
+        mred3: { embed: midred, component: mred3 },
+        midred3: { embed: midred, component: mred3 },
+        mop: { embed: mopribus, component: mop },
+        mopribus: { embed: mopribus, component: mop },
+        mop2: { embed: mopribus, component: mop2 },
+        mopribus2: { embed: mopribus, component: mop2 },
+        mop3: { embed: mopribus, component: mop3 },
+        mopribus3: { embed: mopribus, component: mop3 },
+        mop4: { embed: mopribus, component: mop4 },
+        mopribus4: { embed: mopribus, component: mop4 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button action",
+          flags: MessageFlags.Ephemeral,
+        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

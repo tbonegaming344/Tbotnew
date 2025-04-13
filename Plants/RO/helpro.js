@@ -71,12 +71,6 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("All Rose Decks")
           .setValue("all")
           .setDescription("View all of Rose's decks")
@@ -89,8 +83,7 @@ module.exports = {
       ladderDecks: ["frymidrose"],
       memeDecks: ["freezeheal"],
       comboDecks: ["freezeheal"],
-      midrangeDecks: ["frymidrose", "healmidrose"],
-      tempoDecks: ["budgetro"],
+      midrangeDecks: ["budgetro", "frymidrose", "healmidrose"],
       allDecks: ["budgetro", "freezeheal", "frymidrose", "healmidrose"],
     };
     function BuildDeckString(decks) {
@@ -112,12 +105,13 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const midrangerow = new CreateButtons("healmidrose", "fmr");
-    const fmr = new CreateButtons("helpmid", "hmr");
+    const midrangerow = new CreateButtons("healmidrose", "bro");
+    const bro = new CreateButtons("helpmid", "fmr");
+    const fmr = new CreateButtons("budgetro", "hmr");
     const hmr = new CreateButtons("frymidrose", "allhelp");
-    const alldecksrow = new CreateButtons("healmidrose2", "bro");
-    const bro = new CreateButtons("helpall", "fheal");
-    const fheal = new CreateButtons("budgetro", "fmr2");
+    const alldecksrow = new CreateButtons("healmidrose2", "bro2");
+    const bro2 = new CreateButtons("helpall", "fheal");
+    const fheal = new CreateButtons("budgetro2", "fmr2");
     const fmr2 = new CreateButtons("freezeheal", "hmr2");
     const hmr2 = new CreateButtons("frymidrose2", "allhelp");
     const embed = new CreateHelpEmbed(
@@ -169,7 +163,7 @@ Note: Rose has ${roseDecks.midrangeDecks.length} Midrange decks in Tbot`
     const iFilter = (i) => i.user.id === message.author.id;
     async function HandleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget" || value == "tempo") {
+      if (value == "budget") {
         await i.reply({ embeds: [budgetrose], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
         await i.reply({ embeds: [healmidrose], flags: MessageFlags.Ephemeral });
@@ -184,24 +178,39 @@ Note: Rose has ${roseDecks.midrangeDecks.length} Midrange decks in Tbot`
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId == "combohelp" || i.customId == "helpcombo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "midhelp" || i.customId == "helpmid") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "fheal" || i.customId == "freezeheal") {
-        await i.update({ embeds: [freezeheal], components: [fheal] });
-      } else if (i.customId == "fmr" || i.customId == "frymidrose") {
-        await i.update({ embeds: [frymidrose], components: [fmr] });
-      } else if (i.customId == "fmr2" || i.customId == "frymidrose2") {
-        await i.update({ embeds: [frymidrose], components: [fmr2] });
-      } else if (i.customId == "hmr" || i.customId == "healmidrose") {
-        await i.update({ embeds: [healmidrose], components: [hmr] });
-      } else if (i.customId == "hmr2" || i.customId == "healmidrose2") {
-        await i.update({ embeds: [healmidrose], components: [hmr2] });
-      } else if (i.customId == "bro" || i.customId == "budgetro") {
-        await i.update({ embeds: [budgetrose], components: [bro] });
+      const buttonActions = {
+        allhelp: { embed: allEmbed, component: alldecksrow },
+        helpall: { embed: allEmbed, component: alldecksrow },
+        combohelp: { embed: comboEmbed, component: comborow },
+        helpcombo: { embed: comboEmbed, component: comborow },
+        midhelp: { embed: midrangeEmbed, component: midrangerow },
+        helpmid: { embed: midrangeEmbed, component: midrangerow },
+        bro: { embed: budgetrose, component: bro },
+        budgetro: { embed: budgetrose, component: bro },
+        bro2: { embed: budgetrose, component: bro2 },
+        budgetro2: { embed: budgetrose, component: bro2 },
+        fheal: { embed: freezeheal, component: fheal },
+        freezeheal: { embed: freezeheal, component: fheal },
+        fmr: { embed: frymidrose, component: fmr },
+        frymidrose: { embed: frymidrose, component: fmr },
+        fmr2: { embed: frymidrose, component: fmr2 },
+        frymidrose2: { embed: frymidrose, component: fmr2 },
+        hmr: { embed: healmidrose, component: hmr },
+        healmidrose: { embed: healmidrose, component: hmr },
+        hmr2: { embed: healmidrose, component: hmr2 },
+        healmidrose2: { embed: healmidrose, component: hmr2 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button action",
+          flags: MessageFlags.Ephemeral,
+        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

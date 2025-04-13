@@ -7,7 +7,7 @@ const {
   let db = require("../../index.js");
   module.exports = {
     name: `hayri`,
-    aliases: [`helphayri`, `hayrihelp`, `decksmadebyhayri`, `hayridecks`],
+    aliases: [`helphayri`, `hayrihelp`, `decksmadebyhayri`, `hayridecks`, `hariyana`],
     category: `DeckBuilders`,
     run: async (client, message, args) => {
       const row = new ActionRowBuilder().addComponents(
@@ -32,8 +32,8 @@ const {
       );
       let decks = ["uncrackamech"];
       let toBuildString = "";
-      for (let i = 0; i < decks.length; i++) {
-        toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+      for (const deck in decks) {
+        toBuildString += `\n<@1043528908148052089> **${deck}**`;
       }
       let [result] = await db.query(`select feastmech from zmdecks`)
       let user = await client.users.fetch("354293785980829696");
@@ -47,11 +47,11 @@ const {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
+      .setColor("#d67fcc");
       let uncrackamech= new EmbedBuilder()
       .setTitle(`${result[5].feastmech}`)
       .setDescription(`${result[3].feastmech}`)
-      .setColor("Random")
+      .setColor("#d67fcc")
       .setImage(`${result[4].feastmech}`)
       .setFooter({ text: `${result[2].feastmech}` })
       .addFields({
@@ -77,7 +77,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         if (i.customId == "um" || i.customId == "uncrackamech") {
           await i.update({ embeds: [uncrackamech], components: [um] });
         }
-        if (i.customId == "helph" || i.customId == "help") {
+        else if (i.customId == "helph" || i.customId == "help") {
           await i.update({ embeds: [hayri], components: [row] });
         }
       });

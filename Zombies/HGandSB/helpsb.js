@@ -59,10 +59,10 @@ module.exports = {
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
+          .setLabel("Midrange Deck")
+          .setValue("midrange")
           .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+           "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           )
       );
     const row = new ActionRowBuilder().addComponents(select);
@@ -71,7 +71,7 @@ module.exports = {
       ladderDecks: ["telimpssb"],
       comboDecks: ["telimpssb"],
       controlDecks: ["telimpssb"],
-      tempoDecks: ["budgetsb"],
+      midrangeDecks: ["budgetsb"],
       allDecks: ["budgetsb", "telimpssb"],
     };
     let helpsb = new CreateHelpEmbed(
@@ -109,10 +109,10 @@ Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz
     collector.on("collect", async (i) => {
       if (i.customId == "select") {
         const value = i.values[0];
-        if (value == "budget" || value == "tempo") {
+        if (value == "budget" || value == "midrange") {
           await i.reply({ embeds: [budgetsb], flags: MessageFlags.Ephemeral });
         }
-        if (value == "ladder" || value == "combo" || value == "control") {
+        else if (value == "ladder" || value == "combo" || value == "control") {
           await i.reply({ embeds: [telimps], flags: MessageFlags.Ephemeral });
         }
       }

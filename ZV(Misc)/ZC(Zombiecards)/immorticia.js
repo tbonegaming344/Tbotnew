@@ -98,7 +98,7 @@ module.exports = {
         "stacheticia",
         "youngcatmartin",
       ],
-      controlDecks: ["kaleidoscope", "mechascope"],
+      controlDecks: ["budgetim", "kaleidoscope", "mechascope"],
       midrangeDecks: ["22savage", "bastet", "budgetim", "youngcatmartin"],
       allDecks: [
         "22savage",
@@ -161,15 +161,16 @@ module.exports = {
     const rim3 = new CreateButtons("mechascope3", "stac3");
     const stac3 = new CreateButtons("rampticia3", "ycm3");
     const ycm3 = new CreateButtons("stacheticia3", "helpcombo");
-    const controlrow = new CreateButtons("mechascope4", "kscope2");
-    const kscope2 = new CreateButtons("controlhelp", "ms4");
+    const controlrow = new CreateButtons("mechascope4", "bim3");
+    const bim3 = new CreateButtons("controlhelp", "kscope2");
+    const kscope2 = new CreateButtons("budgetim3", "ms4");
     const ms4 = new CreateButtons("kaleidoscope3", "helpcontrol");
     const midrangerow = new CreateButtons("youngcatmartin4", "sav4");
     const sav4 = new CreateButtons("midrangehelp", "bas4");
-    const bas4 = new CreateButtons("savage4", "bim3");
-    const bim3 = new CreateButtons("bastet4", "ycm4");
-    const ycm4 = new CreateButtons("budgetim3", "helpmidrange");
-    let embed = new EmbedBuilder()
+    const bas4 = new CreateButtons("savage4", "bim4");
+    const bim4 = new CreateButtons("bastet4", "ycm4");
+    const ycm4 = new CreateButtons("budgetim4", "helpmidrange");
+    const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
       )
@@ -195,7 +196,7 @@ module.exports = {
       )
       .setColor("#FFC0CB");
 
-    let bats = new EmbedBuilder()
+    const bats = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/f/f5/Zom-Bats_%28Card%29.png/revision/latest/scale-to-width-down/250?cb=20161026140138"
       )
@@ -227,54 +228,54 @@ module.exports = {
         }
       )
       .setColor("Random");
-    let alldecksEmbed = new CreateHelpEmbed(
-      "Immorticia Decks",
-      `My commands for Immorticia(IM) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the Immorticia decks please use the commands listed above or click on the buttons below to navigate through all Immorticia decks!
+      const alldecksEmbed = new CreateHelpEmbed(
+        "Immorticia Decks",
+        `My commands for Immorticia(IM) are ${toBuildString}`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
+        `To view the Immorticia decks please use the commands listed above or click on the buttons below to navigate through all Immorticia decks!
   Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`
-    );
-    let helpim = new CreateHelpEmbed(
-      "Immorticia Decks",
-      `To view the Immorticia decks please select an option from the select menu below!
-Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
-    );
-    let ladderEmbed = new CreateHelpEmbed(
-      "Immorticia Ladder Decks",
-      `My ladder decks for Immorticia(IM) are ${toBuildLadderString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the ladder Immorticia decks please use the commands listed above or click on the buttons below to navigate through all ladder Immorticia decks!
-Note: Immorticia has ${immorticiaDecks.ladderDecks.length} ladder decks in Tbot`
-    );
-    let memeEmbed = new CreateHelpEmbed(
-      "Immorticia Meme Decks",
-      `My meme decks for Immorticia(IM) are ${toBuildMemeString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the meme Immorticia decks please use the commands listed above or click on the buttons below to navigate through all meme Immorticia decks!
-Note: Immorticia has ${immorticiaDecks.memeDecks.length} meme decks in Tbot`
-    );
-    let comboEmbed = new CreateHelpEmbed(
-      "Immorticia Combo Decks",
-      `My combo decks for Immorticia(IM) are ${toBuildComboString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the combo Immorticia decks please use the commands listed above or click on the buttons below to navigate through all combo Immorticia decks!
-Note: Immorticia has ${immorticiaDecks.comboDecks.length} combo decks in Tbot`
-    );
-    let controlEmbed = new CreateHelpEmbed(
-      "Immorticia Control Decks",
-      `My control decks for Immorticia(IM) are ${toBuildControlString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the control Immorticia decks please use the commands listed above or click on the buttons below to navigate through all control Immorticia decks!
-Note: Immorticia has ${immorticiaDecks.controlDecks.length} control decks in Tbot`
-    );
-    let midrangeEmbed = new CreateHelpEmbed(
-      "Immorticia Midrange Decks",
-      `My midrange decks for Immorticia(IM) are ${toBuildMidrangeString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the midrange Immorticia decks please use the commands listed above or click on the buttons below to navigate through all midrange Immorticia decks!
-Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in Tbot`
-    );
+      );
+      const helpim = new CreateHelpEmbed(
+        "Immorticia Decks",
+        `To view the Immorticia decks please select an option from the select menu below!
+  Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
+      );
+      const ladderEmbed = new CreateHelpEmbed(
+        "Immorticia Ladder Decks",
+        `My ladder decks for Immorticia(IM) are ${toBuildLadderString}`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
+        `To view the ladder Immorticia decks please use the commands listed above or click on the buttons below to navigate through all ladder Immorticia decks!
+  Note: Immorticia has ${immorticiaDecks.ladderDecks.length} ladder decks in Tbot`
+      );
+      const memeEmbed = new CreateHelpEmbed(
+        "Immorticia Meme Decks",
+        `My meme decks for Immorticia(IM) are ${toBuildMemeString}`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
+        `To view the meme Immorticia decks please use the commands listed above or click on the buttons below to navigate through all meme Immorticia decks!
+  Note: Immorticia has ${immorticiaDecks.memeDecks.length} meme decks in Tbot`
+      );
+      const comboEmbed = new CreateHelpEmbed(
+        "Immorticia Combo Decks",
+        `My combo decks for Immorticia(IM) are ${toBuildComboString}`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
+        `To view the combo Immorticia decks please use the commands listed above or click on the buttons below to navigate through all combo Immorticia decks!
+  Note: Immorticia has ${immorticiaDecks.comboDecks.length} combo decks in Tbot`
+      );
+      const controlEmbed = new CreateHelpEmbed(
+        "Immorticia Control Decks",
+        `My control decks for Immorticia(IM) are ${toBuildControlString}`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
+        `To view the control Immorticia decks please use the commands listed above or click on the buttons below to navigate through all control Immorticia decks!
+  Note: Immorticia has ${immorticiaDecks.controlDecks.length} control decks in Tbot`
+      );
+      const midrangeEmbed = new CreateHelpEmbed(
+        "Immorticia Midrange Decks",
+        `My midrange decks for Immorticia(IM) are ${toBuildMidrangeString}`,
+        "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
+        `To view the midrange Immorticia decks please use the commands listed above or click on the buttons below to navigate through all midrange Immorticia decks!
+  Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in Tbot`
+      );
     let [result] = await db.query(`SELECT * FROM imdecks`);
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
@@ -330,82 +331,91 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "bim" || i.customId == "budgetim") {
-        await i.update({ embeds: [budgetim], components: [bim] });
-      } else if (i.customId == "bim2" || i.customId == "budgetim2") {
-        await i.update({ embeds: [budgetim], components: [bim2] });
-      } else if (i.customId == "bim3" || i.customId == "budgetim3") {
-        await i.update({ embeds: [budgetim], components: [bim3] });
-      } else if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (i.customId == "budgethelp" || i.customId == "helpbudget") {
-        await i.update({ embeds: [budgetEmbed], components: [budgetrow] });
-      } else if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "combohelp" || i.customId == "helpcombo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "controlhelp" || i.customId == "helpcontrol") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      } else if (i.customId == "midrangehelp" || i.customId == "helpmidrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "kscope" || i.customId == "kaleidoscope") {
-        await i.update({ embeds: [kaleidoscope], components: [kscope] });
-      } else if (i.customId == "kscope2" || i.customId == "kaleidoscope2") {
-        await i.update({ embeds: [kaleidoscope], components: [kscope2] });
-      } else if (i.customId == "rim" || i.customId == "rampticia") {
-        await i.update({ embeds: [rampticia], components: [rim] });
-      } else if (i.customId == "rim2" || i.customId == "rampticia2") {
-        await i.update({ embeds: [rampticia], components: [rim2] });
-      } else if (i.customId == "rim3" || i.customId == "rampticia3") {
-        await i.update({ embeds: [rampticia], components: [rim3] });
-      } else if (i.customId == "ycm" || i.customId == "youngcatmartin") {
-        await i.update({ embeds: [youngcatmartin], components: [ycm] });
-      } else if (i.customId == "ycm2" || i.customId == "youngcatmartin2") {
-        await i.update({ embeds: [youngcatmartin], components: [ycm2] });
-      } else if (i.customId == "ycm3" || i.customId == "youngcatmartin3") {
-        await i.update({ embeds: [youngcatmartin], components: [ycm3] });
-      } else if (i.customId == "ycm4" || i.customId == "youngcatmartin4") {
-        await i.update({ embeds: [youngcatmartin], components: [ycm4] });
-      } else if (i.customId == "stac" || i.customId == "stacheticia") {
-        await i.update({ embeds: [stacheticia], components: [stac] });
-      } else if (i.customId == "stac2" || i.customId == "stacheticia2") {
-        await i.update({ embeds: [stacheticia], components: [stac2] });
-      } else if (i.customId == "stac3" || i.customId == "stacheticia3") {
-        await i.update({ embeds: [stacheticia], components: [stac3] });
-      } else if (i.customId == "bas" || i.customId == "bastet") {
-        await i.update({ embeds: [bastet], components: [bas] });
-      } else if (i.customId == "bas2" || i.customId == "bastet2") {
-        await i.update({ embeds: [bastet], components: [bas2] });
-      } else if (i.customId == "bas3" || i.customId == "bastet3") {
-        await i.update({ embeds: [bastet], components: [bas3] });
-      } else if (i.customId == "bas4" || i.customId == "bastet4") {
-        await i.update({ embeds: [bastet], components: [bas4] });
-      } else if (i.customId == "ms" || i.customId == "mechascope") {
-        await i.update({ embeds: [mechascope], components: [ms] });
-      } else if (i.customId == "ms2" || i.customId == "mechascope2") {
-        await i.update({ embeds: [mechascope], components: [ms2] });
-      } else if (i.customId == "ms3" || i.customId == "mechascope3") {
-        await i.update({ embeds: [mechascope], components: [ms3] });
-      } else if (i.customId == "ms4" || i.customId == "mechascope4") {
-        await i.update({ embeds: [mechascope], components: [ms4] });
-      } else if (i.customId == "sav" || i.customId == "savage") {
-        await i.update({ embeds: [savage22], components: [sav] });
-      } else if (i.customId == "sav2" || i.customId == "savage2") {
-        await i.update({ embeds: [savage22], components: [sav2] });
-      } else if (i.customId == "sav3" || i.customId == "savage3") {
-        await i.update({ embeds: [savage22], components: [sav3] });
-      } else if (i.customId == "sav4" || i.customId == "savage4") {
-        await i.update({ embeds: [savage22], components: [sav4] });
+      const buttonActions = {
+        imhelp: {embed: helpim, component: row},
+        allhelp: {embed: alldecksEmbed, component: alldecksrow},
+        helpall: {embed: alldecksEmbed, component: alldecksrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        controlhelp: {embed: controlEmbed, component: controlrow},
+        helpcontrol: {embed: controlEmbed, component: controlrow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+        bas: {embed: bastet, component: bas},
+        bastet: {embed: bastet, component: bas},
+        bas2: {embed: bastet, component: bas2},
+        bastet2: {embed: bastet, component: bas2},
+        bas3: {embed: bastet, component: bas3},
+        bastet3: {embed: bastet, component: bas3},
+        bas4: {embed: bastet, component: bas4},
+        bastet4: {embed: bastet, component: bas4},
+        bim: {embed: budgetim, component: bim},
+        budgetim: {embed: budgetim, component: bim},
+        bim2: {embed: budgetim, component: bim2},
+        budgetim2: {embed: budgetim, component: bim2},
+        bim3: {embed: budgetim, component: bim3},
+        budgetim3: {embed: budgetim, component: bim3},
+        bim4: {embed: budgetim, component: bim4},
+        budgetim4: {embed: budgetim, component: bim4},
+        kscope: {embed: kaleidoscope, component: kscope},
+        kaleidoscope: {embed: kaleidoscope, component: kscope},
+        kscope2: {embed: kaleidoscope, component: kscope2},
+        kaleidoscope2: {embed: kaleidoscope, component: kscope2},
+        rim: {embed: rampticia, component: rim},
+        rampticia: {embed: rampticia, component: rim},
+        rim2: {embed: rampticia, component: rim2},
+        rampticia2: {embed: rampticia, component: rim2},
+        rim3: {embed: rampticia, component: rim3},
+        rampticia3: {embed: rampticia, component: rim3},
+        sav: {embed: savage22, component: sav},
+        savage: {embed: savage22, component: sav},
+        sav2: {embed: savage22, component: sav2},
+        savage2: {embed: savage22, component: sav2},
+        sav3: {embed: savage22, component: sav3},
+        savage3: {embed: savage22, component: sav3},
+        sav4: {embed: savage22, component: sav4},
+        savage4: {embed: savage22, component: sav4},
+        stac: {embed: stacheticia, component: stac},
+        stacheticia: {embed: stacheticia, component: stac},
+        stac2: {embed: stacheticia, component: stac2},
+        stacheticia2: {embed: stacheticia, component: stac2},
+        stac3: {embed: stacheticia, component: stac3},
+        stacheticia3: {embed: stacheticia, component: stac3},
+        ms: {embed: mechascope, component: ms},
+        mechascope: {embed: mechascope, component: ms},
+        ms2: {embed: mechascope, component: ms2},
+        mechascope2: {embed: mechascope, component: ms2},
+        ms3: {embed: mechascope, component: ms3},
+        mechascope3: {embed: mechascope, component: ms3},
+        ms4: {embed: mechascope, component: ms4},
+        mechascope4: {embed: mechascope, component: ms4},
+        ycm: {embed: youngcatmartin, component: ycm},
+        youngcatmartin: {embed: youngcatmartin, component: ycm},
+        ycm2: {embed: youngcatmartin, component: ycm2},
+        youngcatmartin2: {embed: youngcatmartin, component: ycm2},
+        ycm3: {embed: youngcatmartin, component: ycm3},
+        youngcatmartin3: {embed: youngcatmartin, component: ycm3},
+        ycm4: {embed: youngcatmartin, component: ycm4},
+        youngcatmartin4: {embed: youngcatmartin, component: ycm4},  
+      }
+      const action = buttonActions[i.customId]
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({ content: "Invalid button action!", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "Zombats") {
         await i.reply({ embeds: [bats], flags: MessageFlags.Ephemeral });
-      } else if (i.customId == "imhelp") {
-        await i.update({ embeds: [helpim], components: [row] });
       } else if (i.customId == "select") {
         await HandleSelectMenu(i);
       } else {

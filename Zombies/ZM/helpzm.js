@@ -105,7 +105,7 @@ module.exports = {
       ladderDecks: ["binaryflagwar", "brady", "trickmech"],
       memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
       aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
-      comboDecks: ["binaryflagwar", "gargburn", "uncrackamech", "zmoss"],
+      comboDecks: ["binaryflagwar", "budgetzm", "gargburn", "uncrackamech", "zmoss"],
       controlDecks: ["uncrackamech"],
       midrangeDecks: ["binaryflagwar", "gargburn"],
       tempoDecks: ["brady"],
@@ -165,8 +165,9 @@ module.exports = {
     const dm3 = new CreateButtons("budgetzm2", "tm3");
     const tm3 = new CreateButtons("dozzamech3", "helpaggro");
     const comborow = new CreateButtons("zmoss3", "bfw3");
-    const bfw3 = new CreateButtons("combohelp", "gb3");
-    const gb3 = new CreateButtons("binaryflagwar3", "um3");
+    const bfw3 = new CreateButtons("combohelp", "bzm3");
+    const bzm3 = new CreateButtons("binaryflagwar3", "gb3");
+    const gb3 = new CreateButtons("budgetzm3", "um3");
     const um3 = new CreateButtons("gargburn3", "zm3");
     const zm3 = new CreateButtons("uncrackamech3", "helpcombo");
     const midrangerow = new CreateButtons("gargburn4", "bfw4");
@@ -279,66 +280,78 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "aggrohelp" || i.customId == "helpaggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (i.customId == "combohelp" || i.customId == "helpcombo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "midrangehelp" || i.customId == "helpmidrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "bfw" || i.customId == "binaryflagwar") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw] });
-      } else if (i.customId == "bfw2" || i.customId == "binaryflagwar2") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw2] });
-      } else if (i.customId == "bfw3" || i.customId == "binaryflagwar3") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw3] });
-      } else if (i.customId == "bfw4" || i.customId == "binaryflagwar4") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw4] });
-      } else if (i.customId == "bzm" || i.customId == "budgetzm") {
-        await i.update({ embeds: [budgetzm], components: [bzm] });
-      } else if (i.customId == "bzm2" || i.customId == "budgetzm2") {
-        await i.update({ embeds: [budgetzm], components: [bzm2] });
-      } else if (i.customId == "dm" || i.customId == "dozzamech") {
-        await i.update({ embeds: [dozzamech], components: [dm] });
-      } else if (i.customId == "dm2" || i.customId == "dozzamech2") {
-        await i.update({ embeds: [dozzamech], components: [dm2] });
-      } else if (i.customId == "dm3" || i.customId == "dozzamech3") {
-        await i.update({ embeds: [dozzamech], components: [dm3] });
-      } else if (i.customId == "um" || i.customId == "uncrackamech") {
-        await i.update({ embeds: [uncrackamech], components: [um] });
-      } else if (i.customId == "um2" || i.customId == "uncrackamech2") {
-        await i.update({ embeds: [uncrackamech], components: [um2] });
-      } else if (i.customId == "um3" || i.customId == "uncrackamech3") {
-        await i.update({ embeds: [uncrackamech], components: [um3] });
-      } else if (i.customId == "gb" || i.customId == "gargburn") {
-        await i.update({ embeds: [gargburn], components: [gb] });
-      } else if (i.customId == "gb2" || i.customId == "gargburn2") {
-        await i.update({ embeds: [gargburn], components: [gb2] });
-      } else if (i.customId == "gb3" || i.customId == "gargburn3") {
-        await i.update({ embeds: [gargburn], components: [gb3] });
-      } else if (i.customId == "gb4" || i.customId == "gargburn4") {
-        await i.update({ embeds: [gargburn], components: [gb4] });
-      } else if (i.customId == "zm" || i.customId == "zmoss") {
-        await i.update({ embeds: [zmoss], components: [zm] });
-      } else if (i.customId == "zm2" || i.customId == "zmoss2") {
-        await i.update({ embeds: [zmoss], components: [zm2] });
-      } else if (i.customId == "zm3" || i.customId == "zmoss3") {
-        await i.update({ embeds: [zmoss], components: [zm3] });
-      } else if (i.customId == "tm" || i.customId == "trickmech") {
-        await i.update({ embeds: [trickmech], components: [tm] });
-      } else if (i.customId == "tm2" || i.customId == "trickmech2") {
-        await i.update({ embeds: [trickmech], components: [tm2] });
-      } else if (i.customId == "tm3" || i.customId == "trickmech3") {
-        await i.update({ embeds: [trickmech], components: [tm3] });
-      } else if (i.customId == "br" || i.customId == "brady") {
-        await i.update({ embeds: [brady], components: [br] });
-      } else if (i.customId == "br2" || i.customId == "brady2") {
-        await i.update({ embeds: [brady], components: [br2] });
+      const buttonActions = {
+        allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
+        helpall: {embed: alldecksEmbed, component: alldecksrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        aggrohelp: {embed: aggroEmbed, component: aggrorow},
+        helpaggro: {embed: aggroEmbed, component: aggrorow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+        bfw: {embed: binaryflagwar, component: bfw},
+        binaryflagwar: {embed: binaryflagwar, component: bfw},
+        bfw2: {embed: binaryflagwar, component: bfw2},
+        binaryflagwar2: {embed: binaryflagwar, component: bfw2},
+        bfw3: {embed: binaryflagwar, component: bfw3},
+        binaryflagwar3: {embed: binaryflagwar, component: bfw3},
+        bfw4: {embed: binaryflagwar, component: bfw4},
+        binaryflagwar4: {embed: binaryflagwar, component: bfw4},
+        br: {embed: brady, component: br},
+        brady: {embed: brady, component: br},
+        br2: {embed: brady, component: br2},
+        brady2: {embed: brady, component: br2},
+        bzm: {embed: budgetzm, component: bzm},
+        budgetzm: {embed: budgetzm, component: bzm},
+        bzm2: {embed: budgetzm, component: bzm2},
+        budgetzm2: {embed: budgetzm, component: bzm2},
+        bzm3: {embed: budgetzm, component: bzm3},
+        budgetzm3: {embed: budgetzm, component: bzm3},
+        dm: {embed: dozzamech, component: dm},
+        dozzamech: {embed: dozzamech, component: dm},
+        dm2: {embed: dozzamech, component: dm2},
+        dozzamech2: {embed: dozzamech, component: dm2},
+        dm3: {embed: dozzamech, component: dm3},
+        dozzamech3: {embed: dozzamech, component: dm3},
+        gb: {embed: gargburn, component: gb},
+        gargburn: {embed: gargburn, component: gb},
+        gb2: {embed: gargburn, component: gb2},
+        gargburn2: {embed: gargburn, component: gb2},
+        gb3: {embed: gargburn, component: gb3},
+        gargburn3: {embed: gargburn, component: gb3},
+        gb4: {embed: gargburn, component: gb4},
+        gargburn4: {embed: gargburn, component: gb4},
+        tm: {embed: trickmech, component: tm},
+        trickmech: {embed: trickmech, component: tm},
+        tm2: {embed: trickmech, component: tm2},
+        trickmech2: {embed: trickmech, component: tm2},
+        tm3: {embed: trickmech, component: tm3},
+        trickmech3: {embed: trickmech, component: tm3},
+        um: {embed: uncrackamech, component: um},
+        uncrackamech: {embed: uncrackamech, component: um},
+        um2: {embed: uncrackamech, component: um2},
+        uncrackamech2: {embed: uncrackamech, component: um2},
+        um3: {embed: uncrackamech, component: um3},
+        uncrackamech3: {embed: uncrackamech, component: um3},
+        zm: {embed: zmoss, component: zm},
+        zmoss: {embed: zmoss, component: zm},
+        zm2: {embed: zmoss, component: zm2},
+        zmoss2: {embed: zmoss, component: zm2},
+        zm3: {embed: zmoss, component: zm3},
+        zmoss3: {embed: zmoss, component: zm3},
+      }
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({ content: "Unknown button action", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

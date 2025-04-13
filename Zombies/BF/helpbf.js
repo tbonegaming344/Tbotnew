@@ -393,7 +393,7 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
       } else {
         await i.reply({
           content: "Unknown button interaction.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
     }

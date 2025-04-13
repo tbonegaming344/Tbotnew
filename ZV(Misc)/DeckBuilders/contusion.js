@@ -37,8 +37,8 @@ const {
       );
       let decks = ["brady"];
       let toBuildString = "";
-      for (let i = 0; i < decks.length; i++) {
-        toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+      for (const deck of decks) {
+        toBuildString += `\n<@${client.user.id}> **${deck}**`;
       }
       let [result] = await db.query(`SELECT brady FROM zmdecks`);
       let user = await client.users.fetch("758481952725532692");
@@ -52,7 +52,7 @@ const {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
-        .setColor("Random")
+        .setColor("Orange")
         let brady = new EmbedBuilder()
         .setTitle(`${result[5].brady}`)
         .setDescription(`${result[3].brady}`)
@@ -70,7 +70,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
                     value: `${result[1].brady}`,
                     inline: true
                 })
-            .setColor("Random")
+            .setColor("Orange")
     .setImage(`${result[4].brady}`)
       const m = await message.channel.send({
         embeds: [contusion],
@@ -82,7 +82,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         if (i.customId == "br" || i.customId == "brady") {
           await i.update({ embeds: [brady], components: [br] });
         }
-        if (i.customId == "helpc" || i.customId == "help") {
+        else if (i.customId == "helpc" || i.customId == "help") {
           await i.update({ embeds: [contusion], components: [row] });
         }
       });

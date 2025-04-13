@@ -32,81 +32,75 @@ module.exports = {
         .setEmoji("<:The_SmashH:1088162519958425670>")
     );
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Smash's decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setValue("budget")
-        .setDescription("Decks that are cheap for new players")
-        .setEmoji("💰"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("comp")
-        .setDescription("Some of the Best Decks in the game")
-        .setEmoji("<:compemote:1325461143136764060>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Ladder Deck")
-        .setValue("ladder")
-        .setDescription("Decks that mostly only good for ranked games")
-        .setEmoji("<:ladder:1271503994857979964>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setValue("meme")
-        .setDescription("Decks that are built off a weird/fun combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Aggro Deck")
-        .setValue("aggro")
-        .setDescription(
-          "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
-        .setValue("combo")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Control Deck")
-        .setValue("control")
-        .setDescription(
-          'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setValue("midrange")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Tempo Deck")
-        .setValue("tempo")
-        .setDescription(
-          "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Smash Decks")
-        .setValue("all")
-        .setDescription("All of the Smash decks")
-        .setEmoji("<:The_SmashH:1088162519958425670>")
-    );
-  const row = new ActionRowBuilder().addComponents(select);
-  const smashDecks = {
-    budgetDecks: ["budgetsm"],
-    competitiveDecks: ["pablosyeezys"],
-    ladderDecks: ["horts"],
-    memeDecks: ["whalepharaoh"],
-    comboDecks: ["horts", "pablosyeezys", "whalepharaoh"],
-    controlDecks: ["whalepharaoh"],
-    midrangeDecks: ["horts", "pablosyeezys"],
-    tempoDecks: ["budgetsm"],
-    allDecks: [
-      "budgetsm",
-      "horts",
-      "pablosyeezys",
-      "whalepharaoh",
-    ],
-  };
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Smash's decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("Decks that are cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setValue("meme")
+          .setDescription("Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Deck")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setValue("control")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Smash Decks")
+          .setValue("all")
+          .setDescription("All of the Smash decks")
+          .setEmoji("<:The_SmashH:1088162519958425670>")
+      );
+    const row = new ActionRowBuilder().addComponents(select);
+    const smashDecks = {
+      budgetDecks: ["budgetsm"],
+      competitiveDecks: ["pablosyeezys"],
+      ladderDecks: ["horts"],
+      memeDecks: ["whalepharaoh"],
+      aggroDecks: ["budgetsm"],
+      comboDecks: ["budgetsm", "horts", "pablosyeezys", "whalepharaoh"],
+      controlDecks: ["whalepharaoh"],
+      midrangeDecks: ["horts", "pablosyeezys"],
+      allDecks: [
+        "budgetsm",
+        "horts",
+        "pablosyeezys",
+        "whalepharaoh",
+      ],
+    };
   function buildDeckString(decks) {
     return decks
       .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -132,8 +126,9 @@ module.exports = {
   const hor = new CreateButtons("budgetsm", "py");
   const py = new CreateButtons("horts", "wp");
   const wp = new CreateButtons("pablosyeezys", "allhelp");
-  const comborow = new CreateButtons("whalepharoh2", "hor2");
-  const hor2 = new CreateButtons("combohelp", "py2");
+  const comborow = new CreateButtons("whalepharoh2", "bsm2");
+  const bsm2 = new CreateButtons("combohelp", "hor2");
+  const hor2 = new CreateButtons("budgetsm2", "py2");
   const py2 = new CreateButtons("horts2", "wp2");
   const wp2 = new CreateButtons("pablosyeezys2", "helpcombo");
   const midrangerow = new CreateButtons("pablosyeezys3", "hor3");
@@ -240,7 +235,7 @@ module.exports = {
     }
     async function HandleButtonInteraction(i) {
       const buttonActions = {
-        cmd: {embed: helpsm, component: row},
+        helpsm: {embed: helpsm, component: row},
         helpall: {embed: alldecksEmbed, component: alldecksrow}, 
         allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
         combohelp: {embed: comboEmbed, component: comborow}, 
@@ -249,6 +244,8 @@ module.exports = {
         helpmidrange: {embed: midrangeEmbed, component: midrangerow}, 
         bsm: {embed: budgetsm, component: bsm}, 
         budgetsm: {embed: budgetsm, component: bsm},
+        bsm2: {embed: budgetsm, component: bsm2}, 
+        budgetsm2: {embed: budgetsm, component: bsm2}, 
         hor: {embed: horts, component: hor},
         horts: {embed: horts, component: hor},
         hor2: {embed: horts, component: hor2},
@@ -270,7 +267,7 @@ module.exports = {
       if (action) {
         await i.update({ embeds: [action.embed], components: [action.component] });
       } else {
-        await i.reply({ content: "Invalid button interaction", ephemeral: true });
+        await i.reply({ content: "Invalid button interaction", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

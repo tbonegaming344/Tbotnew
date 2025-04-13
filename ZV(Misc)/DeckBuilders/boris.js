@@ -3,323 +3,207 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags, 
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  MessageFlags,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 let db = require("../../index.js");
-const e = require("express");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("Red");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `boris`,
   aliases: [`borishelp`, `borisdecks`, `decksmadebyboris`, `helpboris`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Deck")
-      .setDescription('Some of the Best Decks in the game')
-      .setEmoji("<:compemote:1325461143136764060>")
-      .setValue("comp"), 
-      new  StringSelectMenuOptionBuilder()
-      .setLabel("Meme Decks")
-      .setDescription('Decks that are built off a weird/fun combo')
-      .setValue("meme"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Combo Deck")
-      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
-      .setValue("combo"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Tempo Decks")
-      .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.')
-      .setValue("tempo"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("All Decks")
-      .setDescription('All the decks made by Boris')
-      .setValue("all")
-    )
+      .setCustomId("select")
+      .setPlaceholder("select an option below to view Boris's decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>")
+          .setValue("comp"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setDescription("Decks that are built off a weird/fun combo")
+          .setValue("meme"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Deck")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          )
+          .setValue("combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Decks")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          )
+          .setValue("tempo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setDescription("All the decks made by Boris")
+          .setValue("all")
+      );
     const row = new ActionRowBuilder().addComponents(select);
-    const tempo = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("lo")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("lcbd")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const lcbd = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helptemp")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("lockbr")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const lo = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("lbcdream")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("help")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mspotk2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("lcbd3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const lcbd3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ltbr")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const ltbr = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("lcbdream3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("msp2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const msp2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("lockthebathroom")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("allhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-      
-
-    let decks = ["lifecouldbedream", "lockthebathroom", "mspotk"];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
-      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+    const borisDecks = {
+      competitiveDecks: ["lockthebathroom"],
+      memeDecks: ["lifecouldbedream", "mspotk"],
+      comboDeck: ["mspotk"],
+      tempoDecks: ["lifecouldbedream", "lockthebathroom"],
+      allDecks: ["lifecouldbedream", "lockthebathroom", "mspotk"],
+    };
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    let tempodecks = ["lifecouldbedream", "lockthebathroom"];
-    let toBuildtempo = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      let deck = tempodecks[i];
-      toBuildtempo += `\n<@1043528908148052089> **${deck}**`;
+    const toBuildString = buildDeckString(borisDecks.allDecks);
+    const toBuildTempo = buildDeckString(borisDecks.tempoDecks);
+    const toBuildMeme = buildDeckString(borisDecks.memeDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const memerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("mspotk")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("lcbd2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const lcbd2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpmeme")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("msp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    const msp = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("lbcdream2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("memehelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    )
-    let memedecks = ["lifecouldbedream", "mspotk"]
-    let toBuildMeme = "";
-    for (let i = 0; i < memedecks.length; i++) {
-      let deck = memedecks[i];
-      toBuildMeme += `\n<@1043528908148052089> **${deck}**`;
-    }
+    const tempo = new CreateButtons("lockthebathroom", "lcbd");
+    const lcbd = new CreateButtons("helptempo", "ltbr");
+    const ltbr = new CreateButtons("lifecouldbedream", "tempohelp");
+    const alldecksrow = new CreateButtons("mspotk", "lcbd2");
+    const lcbd2 = new CreateButtons("helpall", "ltbr2");
+    const ltbr2 = new CreateButtons("lifecouldbedream2", "msp");
+    const msp = new CreateButtons("lockthebathroom2", "allhelp");
+    const memerow = new CreateButtons("mspotk2", "lcbd3");
+    const lcbd3 = new CreateButtons("helpmeme", "msp2");
+    const msp2 = new CreateButtons("lifecouldbedream3", "memehelp");
     let [result] = await db.query(`SELECT lockin, lcbd, mspotk FROM bfdecks bf
       inner join ccdecks cc on (bf.deckinfo = cc.deckinfo)`);
     let user = await client.users.fetch("705167235429433435");
-    let boris = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `To find out more about the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let tempbor = new EmbedBuilder()
-      .setTitle(`${user.displayName} tempo Decks`)
-      .setDescription(
-        `My tempo decks made by ${user.displayName} are ${toBuildtempo}`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setFooter({
-        text: `To view the tempo Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${tempodecks.length} tempo decks in Tbot`,
-      })
-      .setColor("Random");
-      let memebor = new EmbedBuilder()
-      .setTitle(`${user.displayName} Meme Decks`)
-      .setDescription(
-        `My Meme decks made by ${user.displayName} are ${toBuildMeme}`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setFooter({
-        text: `To view the meme Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${memedecks.length} meme decks in Tbot`,
-      })
-      .setColor("Random");
-      let allbor = new EmbedBuilder()
-      .setTitle(`${user.displayName} All Decks`)
-      .setDescription(
-        `My Decks made by ${user.displayName} are ${toBuildString}`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setFooter({
-        text: `To view the Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
-      })
-      .setColor("Random");
-    let lockin = new EmbedBuilder()
-    .setTitle(`${result[5].lockin}`)	
-    .setDescription(`${result[3].lockin}`)
-.setFooter({text: `${result[2].lockin}`})
-    .addFields({
-      name: "Deck Type", 
-      value: `${result[6].lockin}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].lockin}`,
-      inline: true
-    },{
-      name: "Deck Cost", 
-      value: `${result[1].lockin}`,
-      inline: true
-    })
-  .setColor("Random")			
-  .setImage(`${result[4].lockin}`)
-      let lcbdream = new EmbedBuilder()
-      .setTitle(`${result[5].lcbd}`)
-      .setDescription(`${result[3].lcbd}`)
-      .setColor("Random")
-      .setFooter({ text: `${result[2].lcbd}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].lcbd}`,
-        inline: true
-      },
-      {
-        name: "Archetype",
-        value: `${result[0].lcbd}`,
-        inline: true
-      },
-        {
-        name: "Deck Cost",
-        value: `${result[1].lcbd}`,
-        inline: true
-      })
-      .setImage(`${result[4].lcbd}`);
-      let mspotk = new EmbedBuilder()
-      .setTitle(`${result[5].mspotk}`)
-      .setDescription(`${result[3].mspotk}`)
-    .setColor("Random")
-    .setFooter({ text: `${result[2].mspotk}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].mspotk}`,
-      inline: true
-    },
-    {
-      name: "Archetype",
-      value: `${result[0].mspotk}`,
-      inline: true
-    },
-      {
-      name: "Deck Cost",
-      value: `${result[1].mspotk}`,
-      inline: true
-    })
-    .setImage(`${result[4].mspotk}`);
+    let boris = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `To find out more about the Decks Made By ${user.displayName} please select an option from the select menu below!
+Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`,
+      user.displayAvatarURL()
+    );
+    let tempbor = new CreateHelpEmbed(
+      `${user.displayName} Tempo Decks`,
+      `My tempo decks made by ${user.displayName} are ${toBuildTempo}`,
+      user.displayAvatarURL(),
+      `To view the tempo Decks Made By ${user.displayName} please click on the buttons below!
+Note: ${user.displayName} has ${borisDecks.tempoDecks.length} tempo decks in Tbot`
+    );
+    let memebor = new CreateHelpEmbed(
+      `${user.displayName} Meme Decks`,
+      `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
+      user.displayAvatarURL(),
+      `To view the meme Decks Made By ${user.displayName} please click on the buttons below!
+Note: ${user.displayName} has ${borisDecks.memeDecks.length} meme decks in Tbot`
+    );
+    let allbor = new CreateHelpEmbed(
+      `${user.displayName} All Decks`,
+      `My decks made by ${user.displayName} are ${toBuildString}`,
+      user.displayAvatarURL(),
+      `To view the Decks Made By ${user.displayName} please click on the buttons below!
+Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
+    );
+    function CreateDeckEmbed(result, deckName) {
+      const embed = new EmbedBuilder()
+        .setTitle(`${result[5][deckName]}`)
+        .setDescription(`${result[3][deckName]}`)
+        .setFooter({ text: `${result[2][deckName]}` })
+        .addFields(
+          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+        )
+        .setColor("White");
+      const imageUrl = result[4][deckName];
+      if (imageUrl) {
+        embed.setImage(imageUrl);
+      }
+      return embed;
+    }
+    let lockin = new CreateDeckEmbed(result, "lockin");
+    let lcbdream = new CreateDeckEmbed(result, "lcbd");
+    let mspotk = new CreateDeckEmbed(result, "mspotk");
     const m = await message.channel.send({
       embeds: [boris],
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
+    async function handleSelectMenu(i) {
+      const value = i.values[0];
+      if (value == "comp") {
+        await i.reply({ embeds: [lockin], flags: MessageFlags.Ephemeral });
+      } else if (value == "meme") {
+        await i.update({ embeds: [memebor], components: [memerow] });
+      } else if (value == "combo") {
+        await i.reply({ embeds: [mspotk], flags: MessageFlags.Ephemeral });
+      } else if (value == "tempo") {
+        await i.update({ embeds: [tempbor], components: [tempo] });
+      } else if (value == "all") {
+        await i.update({ embeds: [allbor], components: [alldecksrow] });
+      }
+    }
+    async function handleButtonInteraction(i) {
+      const buttonActions = {
+        helpmeme: { embed: memebor, component: memerow },
+        memehelp: { embed: memebor, component: memerow },
+        ltbr: { embed: lockin, component: ltbr },
+        lockthebathroom: { embed: lockin, component: ltbr },
+        ltbr2: { embed: lockin, component: ltbr2 },
+        lockthebathroom2: { embed: lockin, component: ltbr2 },
+        lcbd: { embed: lcbdream, component: lcbd },
+        lifecouldbedream: { embed: lcbdream, component: lcbd },
+        lcbd2: { embed: lcbdream, component: lcbd2 },
+        lifecouldbedream2: { embed: lcbdream, component: lcbd2 },
+        lcbd3: { embed: lcbdream, component: lcbd3 },
+        lifecouldbedream3: { embed: lcbdream, component: lcbd3 },
+        msp: { embed: mspotk, component: msp },
+        mspotk: { embed: mspotk, component: msp },
+        msp2: { embed: mspotk, component: msp2 },
+        mspotk2: { embed: mspotk, component: msp2 },
+        allhelp: { embed: allbor, component: alldecksrow },
+        helpall: { embed: allbor, component: alldecksrow },
+        tempohelp: { embed: tempbor, component: tempo },
+        helptempo: { embed: tempbor, component: tempo },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Unkown Button Interaction",
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-   if(i.customId == "select"){
-    const value = i.values[0];
-    if(value == "comp"){
-      await i.reply({embeds: [lockin], flags: MessageFlags.Ephemeral})
-    }
-    if(value == "meme"){
-      await i.update({embeds: [memebor], components: [memerow]})
-    }
-    if(value == "combo"){
-      await i.reply({embeds: [mspotk], flags: MessageFlags.Ephemeral})
-    }
-    if(value == "tempo"){
-      await i.update({embeds: [tempbor], components: [tempo]})
-    }
-    if(value == "all"){
-      await i.update({embeds: [allbor], components: [alldecksrow]})
-    }
-   }
-      if(i.customId == "helpmeme" || i.customId == "memehelp"){
-        await i.update({embeds: [memebor], components: [memerow]})
+      if (i.customId == "select") {
+        await handleSelectMenu(i);
+      } else {
+        await handleButtonInteraction(i);
       }
-      if (i.customId == "lo" || i.customId == "lockbr") {
-        await i.update({ embeds: [lockin], components: [lo] });
-      }
-      if (i.customId == "helptemp" || i.customId == "help") {
-        await i.update({ embeds: [tempbor], components: [tempo] });
-      }
-      if (i.customId == "lcbd" || i.customId == "lbcdream") {
-        await i.update({ embeds: [lcbdream], components: [lcbd] });
-      }
-      if (i.customId == "lcbd2" || i.customId == "lbcdream2") {
-        await i.update({ embeds: [lcbdream], components: [lcbd2] });
-      }
-  if(i.customId == "msp" || i.customId == "mspotk"){
-    await i.update({embeds: [mspotk], components: [msp]})
-  }
-  if(i.customId == "lcbd3" || i.customId == "lcbdream3"){
-    await i.update({embeds: [lcbdream], components: [lcbd3]})
-  }
-  if(i.customId == "msp2" || i.customId == "mspotk2"){
-    await i.update({embeds: [mspotk], components: [msp2]})
-  }
-  if(i.customId == "ltbr" || i.customId == "lockthebathroom"){
-    await i.update({embeds: [lockin], components: [ltbr]})
-  }
-  if(i.customId == "helpall" || i.customId == "allhelp"){
-    await i.update({embeds: [allbor], components: [alldecksrow]})
-  }
-  });
+    });
   },
 };

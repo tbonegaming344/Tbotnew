@@ -32,8 +32,8 @@ const {
       );
       let decks = ["watersports"];
       let toBuildString = "";
-      for (let i = 0; i < decks.length; i++) {
-        toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+      for (const deck of decks) {
+        toBuildString += `\n<@1043528908148052089> **${deck}**`;
       }
       let [result] = await db.query(`SELECT watersports FROM bfdecks`);
       let user = await client.users.fetch("459030035295109120");
@@ -47,11 +47,11 @@ const {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
-        .setColor("Random");
+        .setColor("#DAB1DA");
         let watersports = new EmbedBuilder()
 		.setTitle(`${result[5].watersports}`)
 		.setDescription(`${result[3].watersports}`)
-		.setColor("Random")
+		.setColor("#DAB1DA")
 		.setFooter({text: `${result[2].watersports}`})
 		.addFields({
 			name: "Deck Type", 
@@ -74,7 +74,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         if (i.customId == "ws" || i.customId == "watersports") {
           await i.update({ embeds: [watersports], components: [ws] });
         }
-        if (i.customId == "helpi" || i.customId == "help") {
+        else if (i.customId == "helpi" || i.customId == "help") {
           await i.update({ embeds: [izashi], components: [row] });
         }
       });

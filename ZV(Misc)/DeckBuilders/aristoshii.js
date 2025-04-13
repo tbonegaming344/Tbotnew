@@ -41,15 +41,14 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["icebox"];
+    const decks = ["icebox"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
+    for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select icebox from ntdecks`);
-    let user = await client.users.fetch("758103516504916088");
-    let aris = new EmbedBuilder()
+    const [result] = await db.query(`select icebox from ntdecks`);
+    const user = await client.users.fetch("758103516504916088");
+    const aris = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
         `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -60,7 +59,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("Random");
-    let iceBox = new EmbedBuilder()
+    const iceBox = new EmbedBuilder()
     .setTitle(`${result[5].icebox}`)
     .setDescription(`${result[3].icebox}`)
     .setFooter({text: `${result[2].icebox}`})
@@ -83,19 +82,10 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      //IceBox
-      if (i.customId == "ib") {
+      if (i.customId == "ib" || i.customId == "icebox") {
         await i.update({ embeds: [iceBox], components: [ib] });
       }
-      if (i.customId == "icebox") {
-        await i.update({ embeds: [iceBox], components: [ib] });
-      }
-
-      //Help
-      if (i.customId == "helpar") {
-        await i.update({ embeds: [aris], components: [row] });
-      }
-      if (i.customId == "help") {
+      if (i.customId == "helpar" || i.customId == "help") {
         await i.update({ embeds: [aris], components: [row] });
       }
     });

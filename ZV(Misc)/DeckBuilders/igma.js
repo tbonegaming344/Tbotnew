@@ -45,19 +45,19 @@ module.exports = {
       "igmablobchum",
     ];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
     let [result] =
       await db.query(`select igmablobchum from rbdecks rb`);
     let user = await client.users.fetch("447911877020876802");
     let igma = new EmbedBuilder()
       .setTitle("Igma Decks")
-      .setDescription(` My commands for decks made by Igma are ${toBuildString}`)
+      .setDescription(`My commands for decks made by Igma are ${toBuildString}`)
       .setFooter({text: `To view the Decks Made By Igma please click on the buttons below!
 Note: Igma has ${decks.length} total decks in Tbot`})
       .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
+      .setColor("Green");
     let ichum = new EmbedBuilder()
     .setTitle(`${result[5].igmablobchum}`)
     .setDescription(`${result[3].igmablobchum}`)
@@ -75,7 +75,7 @@ Note: Igma has ${decks.length} total decks in Tbot`})
           value: `${result[1].igmablobchum}`,
           inline: true
         })
-      .setColor("Random")
+      .setColor("Green")
       .setImage(`${result[4].igmablobchum}`)
     const m = await message.channel.send({ embeds: [igma], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -84,7 +84,7 @@ Note: Igma has ${decks.length} total decks in Tbot`})
       if(i.customId == "ibc" || i.customId == "igmablobchum"){
         await i.update({ embeds: [ichum], components: [ibc] });
       }
-      if(i.customId == "helpi" || i.customId == "help"){
+      else if(i.customId == "helpi" || i.customId == "help"){
         await i.update({ embeds: [igma], components: [row] });
       }
     });

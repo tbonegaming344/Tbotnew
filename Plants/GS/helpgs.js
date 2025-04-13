@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -96,8 +96,8 @@ module.exports = {
       memeDecks: ["100%winrate", "savagemayflower", "starrings"],
       aggroDecks: ["abeans", "pbeans"],
       comboDecks: ["savagemayflower", "starrings"],
-      midrangeDecks: ["starrings"],
-      tempoDecks: ["100%winrate", "budgetmopshadow"],
+      midrangeDecks: ["budgetmopshadow", "starrings"],
+      tempoDecks: ["100%winrate"],
       allDecks: [
         "100%winrate",
         "abeans",
@@ -125,6 +125,12 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
+    const toBuildString = BuildDeckString(greenShadowDecks.allDecks);
+    const toBuildAggroString = BuildDeckString(greenShadowDecks.aggroDecks);
+    const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
+    const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
+    const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
+    const toBuildTempoString = BuildDeckString(greenShadowDecks.tempoDecks);
     const memerow = CreateButtons("starrings", "wr100");
     const wr100 = CreateButtons("helpmeme", "smf");
     const smf = CreateButtons("winrate100", "srings");
@@ -132,66 +138,71 @@ module.exports = {
     const comborow = CreateButtons("starrings2", "smf2");
     const smf2 = CreateButtons("helpcombo", "srings2");
     const srings2 = CreateButtons("savagemayflower2", "combohelp");
-    const temporow = CreateButtons("budgetmopshadow", "wr1002");
-    const wr1002 = CreateButtons("helptempo", "bms");
-    const bms = CreateButtons("winrate1002", "tempohelp");
+    const midrangerow = CreateButtons("starrings3", "bms");
+    const bms = CreateButtons("helpmidrange", "srings3");
+    const srings3 = CreateButtons("budgetmopshadow", "midrangehelp");
+    const temporow = CreateButtons("budgetmopshadow2", "wr1002");
+    const wr1002 = CreateButtons("helptempo", "bms2");
+    const bms2 = CreateButtons("winrate1002", "tempohelp");
     const aggrorow = CreateButtons("pbeans", "ab2");
     const ab2 = CreateButtons("aggrohelp", "pb");
     const pb = CreateButtons("abeans2", "helpaggro");
     const alldecksrow = CreateButtons("starrings4", "wr1003");
     const wr1003 = CreateButtons("helpall", "ab");
-    const ab = CreateButtons("winrate1003", "bms2");
-    const bms2 = CreateButtons("ab", "pb2");
-    const pb2 = CreateButtons("bms2", "smf3");
-    const smf3 = CreateButtons("pbeans2", "srings3");
-    const srings3 = CreateButtons("smf3", "allhelp");
-    const toBuildString = BuildDeckString(greenShadowDecks.allDecks);
-    const toBuildAggroString = BuildDeckString(greenShadowDecks.aggroDecks);
-    const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
-    const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
-    const toBuildTempoString = BuildDeckString(greenShadowDecks.tempoDecks);
-    let embed = new CreateHelpEmbed(
+    const ab = CreateButtons("winrate1003", "bms4");
+    const bms3 = CreateButtons("ab", "pb2");
+    const pb2 = CreateButtons("budgetmopshadow3", "smf3");
+    const smf3 = CreateButtons("pbeans2", "srings4");
+    const srings4 = CreateButtons("savagemayflower3", "allhelp");
+    const embed = new CreateHelpEmbed(
       "Green Shadow Decks",
       `To view the Green Shadow decks please select an option using the select menu below
 Note: Green Shadow has ${greenShadowDecks.allDecks.length} decks in Tbot`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
     );
-    let allEmbed = new CreateHelpEmbed(
+    const allEmbed = new CreateHelpEmbed(
       "Green Shadow Decks",
       `My decks for Green Shadow(GS) are ${toBuildString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
       `To view the Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Green Shadow has ${greenShadowDecks.allDecks.length} decks in Tbot`
     );
-    let memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = new CreateHelpEmbed(
       "Green Shadow Meme Decks",
       `My meme decks for Green Shadow(GS) are ${toBuildMemeString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
       `To view the meme Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: Green Shadow has ${greenShadowDecks.memeDecks.length} meme decks in Tbot`
     );
-    let aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = new CreateHelpEmbed(
       "Green Shadow Aggro Decks",
       `My aggro decks for Green Shadow(GS) are ${toBuildAggroString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
       `To view the aggro Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
 Note: Green Shadow has ${greenShadowDecks.aggroDecks.length} aggro decks in Tbot`
     );
-    let comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = new CreateHelpEmbed(
       "Green Shadow Combo Decks",
       `My combo decks for Green Shadow(GS) are ${toBuildComboString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
       `To view the combo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Green Shadow has ${greenShadowDecks.comboDecks.length} combo decks in Tbot`
     );
-    let tempoEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = new CreateHelpEmbed(
+      "Green Shadow Midrange Decks",
+      `My midrange decks for Green Shadow(GS) are ${toBuildMidrangeString}`,
+      "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
+      `To view the midrange Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
+Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks in Tbot`
+    );
+    const tempoEmbed = new CreateHelpEmbed(
       "Green Shadow Tempo Decks",
       `My tempo decks for Green Shadow(GS) are ${toBuildTempoString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
       `To view the tempo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
 Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot`
     );
-    let [result] = await db.query(`SELECT * from gsdecks`);
+    const [result] = await db.query(`SELECT * from gsdecks`);
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -209,11 +220,11 @@ Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot
       }
       return embed;
     }
-    let winrate100 = new CreateDeckEmbed(result, "wr100");
-    let abeans = new CreateDeckEmbed(result, "abeans");
-    let budgetgs = new CreateDeckEmbed(result, "budgetgs");
-    let savagemayflower = new CreateDeckEmbed(result, "savagemayflower");
-    let starrings = new CreateDeckEmbed(result, "sovietonion");
+    const winrate100 = new CreateDeckEmbed(result, "wr100");
+    const abeans = new CreateDeckEmbed(result, "abeans");
+    const budgetgs = new CreateDeckEmbed(result, "budgetgs");
+    const savagemayflower = new CreateDeckEmbed(result, "savagemayflower");
+    const starrings = new CreateDeckEmbed(result, "sovietonion");
     const pbeans = new CreateDeckEmbed(result, "pbeans");
     const m = await message.channel.send({
       embeds: [embed],
@@ -235,7 +246,7 @@ Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.reply({ embeds: [starrings], flags: MessageFlags.Ephemeral });
+        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
         await i.update({ embeds: [tempoEmbed], components: [temporow] });
       } else if (value == "all") {
@@ -243,48 +254,57 @@ Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "helpall" || i.customId == "allhelp") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "combohelp" || i.customId == "helpcombo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "helpmid" || i.customId == "midhelp") {
-        await i.update({ embeds: [midrnageEmbed], components: [midrangerow] });
-      } else if (i.customId == "helptempo" || i.customId == "tempohelp") {
-        await i.update({ embeds: [tempoEmbed], components: [temporow] });
-      } else if (i.customId == "ab" || i.customId == "abeans") {
-        await i.update({ embeds: [abeans], components: [ab] });
-      } else if (i.customId == "srings" || i.customId == "starrings") {
-        await i.update({ embeds: [starrings], components: [srings] });
-      } else if (i.customId == "srings2" || i.customId == "starrings2") {
-        await i.update({ embeds: [starrings], components: [srings2] });
-      } else if (i.customId == "srings3" || i.customId == "starrings3") {
-        await i.update({ embeds: [starrings], components: [srings3] });
-      }else if (i.customId == "wr100" || i.customId == "winrate100") {
-        await i.update({ embeds: [winrate100], components: [wr100] });
-      } else if (i.customId == "wr1002" || i.customId == "winrate1002") {
-        await i.update({ embeds: [winrate100], components: [wr1002] });
-      } else if (i.customId == "wr1003" || i.customId == "winrate1003") {
-        await i.update({ embeds: [winrate100], components: [wr1003] });
-      } else if (i.customId == "smf" || i.customId == "savagemayflower") {
-        await i.update({ embeds: [savagemayflower], components: [smf] });
-      } else if (i.customId == "smf2" || i.customId == "savagemayflower2") {
-        await i.update({ embeds: [savagemayflower], components: [smf2] });
-      } else if (i.customId == "smf3" || i.customId == "savagemayflower3") {
-        await i.update({ embeds: [savagemayflower], components: [smf3] });
-      } else if (i.customId == "bms" || i.customId == "budgetmopshadow") {
-        await i.update({ embeds: [budgetgs], components: [bms] });
-      } else if (i.customId == "bms2" || i.customId == "budgetmopshadow2") {
-        await i.update({ embeds: [budgetgs], components: [bms2] });
-      } else if (i.customId == "helpaggro" || i.customId == "aggrohelp") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (i.customId == "ab2" || i.customId == "abeans2") {
-        await i.update({ embeds: [abeans], components: [ab2] });
-      } else if (i.customId == "pb" || i.customId == "pbeans") {
-        await i.update({ embeds: [pbeans], components: [pb] });
-      } else if (i.customId == "pb2" || i.customId == "pbeans2") {
-        await i.update({ embeds: [pbeans], components: [pb2] });
+      const buttonActions = {
+        helpall: {embed: allEmbed, component: alldecksrow},
+        allhelp: {embed: allEmbed, component: alldecksrow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+        helptempo: {embed: tempoEmbed, component: temporow},
+        tempohelp: {embed: tempoEmbed, component: temporow},
+        ab: {embed: abeans, component: ab},
+        abeans: {embed: abeans, component: ab},
+        ab2: {embed: abeans, component: ab2},
+        abeans2: {embed: abeans, component: ab2},
+        bms: {embed: budgetgs, component: bms},
+        budgetmopshadow: {embed: budgetgs, component: bms},
+        bms2: {embed: budgetgs, component: bms2},
+        budgetmopshadow2: {embed: budgetgs, component: bms2},
+        bms3: {embed: budgetgs, component: bms3},
+        budgetmopshadow3: {embed: budgetgs, component: bms3},
+        pb: {embed: pbeans, component: pb},
+        pbeans: {embed: pbeans, component: pb},
+        pb2: {embed: pbeans, component: pb2},
+        pbeans2: {embed: pbeans, component: pb2},
+        srings: {embed: starrings, component: srings},
+        starrings: {embed: starrings, component: srings},
+        srings2: {embed: starrings, component: srings2},
+        starrings2: {embed: starrings, component: srings2},
+        srings3: {embed: starrings, component: srings3},
+        starrings3: {embed: starrings, component: srings3},
+        srings4: {embed: starrings, component: srings4},
+        starrings4: {embed: starrings, component: srings4},
+        smf: {embed: savagemayflower, component: smf},
+        savagemayflower: {embed: savagemayflower, component: smf},
+        smf2: {embed: savagemayflower, component: smf2},
+        savagemayflower2: {embed: savagemayflower, component: smf2},
+        smf3: {embed: savagemayflower, component: smf3},
+        savagemayflower3: {embed: savagemayflower, component: smf3},
+        wr100: {embed: winrate100, component: wr100},
+        winrate100: {embed: winrate100, component: wr100},
+        wr1002: {embed: winrate100, component: wr1002},
+        winrate1002: {embed: winrate100, component: wr1002},
+        wr1003: {embed: winrate100, component: wr1003},
+        winrate1003: {embed: winrate100, component: wr1003},
+      }
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({ embeds: [action.embed], components: [action.component] });
+      } else {
+        await i.reply({ content: "Invalid button action", flags: MessageFlags.Ephemeral });
       }
     }
     const collect = m.createMessageComponentCollector({ filter: Filter });

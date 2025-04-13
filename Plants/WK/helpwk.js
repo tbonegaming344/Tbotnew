@@ -58,13 +58,9 @@ module.exports = {
       .setValue("control")
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Deck")
+      .setLabel("Midrange Decks")
       .setValue("midrange")
-      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Tempo Deck")
-      .setValue("tempo")
-      .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.'), 
+      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'),
       new StringSelectMenuOptionBuilder()
       .setLabel("All WallKnight Decks")
       .setValue("all")
@@ -77,8 +73,7 @@ module.exports = {
       competitiveDecks: ["chemotherapy"],
       memeDecks: ["cancerknight", "highlander", "shitknight"],
       controlDecks: ["cancerknight", "chemotherapy"],
-      midrangeDecks: ["highlander"],
-      tempoDecks: ["budgetwk"], 
+      midrangeDecks: ["budgetwk", "highlander"],
       allDecks: ["budgetwk", "cancerknight", "chemotherapy", "highlander", "shitknight"]
     }
     function buildDeckString(decks) {
@@ -86,9 +81,10 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildMemeString = buildDeckString(wallKnightDecks.memeDecks)
-    const toBuildControlString = buildDeckString(wallKnightDecks.controlDecks)
-    const toBuildString = buildDeckString(wallKnightDecks.allDecks)
+    const toBuildMemeString = buildDeckString(wallKnightDecks.memeDecks);
+    const toBuildControlString = buildDeckString(wallKnightDecks.controlDecks);
+    const toBuildString = buildDeckString(wallKnightDecks.allDecks);
+    const toBuildMidrangeString = buildDeckString(wallKnightDecks.midrangeDecks);
     function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -101,19 +97,22 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("shitknight", "cknight")
-    const cknight = new CreateButtons("helpmeme", "hl")
-    const hl = new CreateButtons("cancerknight", "sk")
-    const sk = new CreateButtons("highlander", "allhelp")
-    const controlrow = new CreateButtons("chemotherapy", "cknight2")
-    const cknight2 = new CreateButtons("controlhelp", "chemo")
-    const chemo = new CreateButtons("cancerknight", "helpcontrol")
-    const alldecksrow = new CreateButtons("shitknight2", "bwk")
-    const bwk = new CreateButtons("helpall", "cknight3")
-    const cknight3 = new CreateButtons("budgetwk", "chemo2")
-    const chemo2 = new CreateButtons("cancerknight3", "hl2")
-    const hl2 = new CreateButtons("chemotherapy2", "sk2")
-    const sk2 = new CreateButtons("highlander2", "allhelp")
+    const memerow = new CreateButtons("shitknight", "cknight");
+    const cknight = new CreateButtons("helpmeme", "hl");
+    const hl = new CreateButtons("cancerknight", "sk");
+    const sk = new CreateButtons("highlander", "memehelp");
+    const controlrow = new CreateButtons("chemotherapy", "cknight2");
+    const cknight2 = new CreateButtons("controlhelp", "chemo");
+    const chemo = new CreateButtons("cancerknight", "helpcontrol");
+    const midrangerow = new CreateButtons("highlander2", "bwk");
+    const bwk = new CreateButtons("helpmidrange", "hl2");
+    const hl2 = new CreateButtons("budgetwk", "midrangehelp");
+    const alldecksrow = new CreateButtons("shitknight2", "bwk2");
+    const bwk2 = new CreateButtons("helpall", "cknight3");
+    const cknight3 = new CreateButtons("budgetwk2", "chemo2");
+    const chemo2 = new CreateButtons("cancerknight3", "hl3");
+    const hl3 = new CreateButtons("chemotherapy2", "sk2");
+    const sk2 = new CreateButtons("highlander3", "allhelp");
     const embed = new CreateHelpEmbed(
       "WallKnight Decks",
       `To view the WallKnight decks please select an option from the select menu below!
@@ -140,6 +139,13 @@ Note: WallKnight has ${wallKnightDecks.memeDecks.length} meme decks in Tbot`
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
       `To view the Wall-Knight control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
 Note: WallKnight has ${wallKnightDecks.controlDecks.length} control decks in Tbot`
+      )
+      const midrangeEmbed = new CreateHelpEmbed(
+      "WallKnight Midrange Decks",
+      `My midrange decks for Wall Knight(WK) are ${toBuildMidrangeString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
+      `To view the Wall-Knight midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
+Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in Tbot`
       )
     const [result] = await db.query(`SELECT * from wkdecks`);
     function CreateDeckEmbed(result, deckName) {
@@ -184,57 +190,53 @@ Note: WallKnight has ${wallKnightDecks.controlDecks.length} control decks in Tbo
           await i.update({embeds: [controlEmbed], components: [controlrow]})
         }
         else if(value == "midrange"){
-          await i.reply({embeds: [highlander], flags: MessageFlags.Ephemeral})
+          await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
         }
         else if(value == "all"){
           await i.update({embeds: [allEmbed], components: [alldecksrow]})
         }
       }
       async function handleButtonInteraction(i){
-         if(i.customId == "allhelp" || i.customId == "helpall"){
-          await i.update({embeds: [allEmbed], components: [alldecksrow]})
-         }
-         else if(i.customId == "memehelp" || i.customId == "helpmeme"){
-          await i.update({embeds: [memeEmbed], components: [memerow]})
-         }
-         else if(i.customId == "combohelp" || i.customId == "helpcombo"){
-          await i.update({embeds: [comboEmbed], components: [comborow]})
-         }
-         else if(i.customId == "controlhelp" || i.customId == "helpcontrol"){
-          await i.update({embeds: [controlEmbed], components: [controlrow]})
-         }
-         else if(i.customId == "helpmid" || i.customId == "midhelp"){
-          await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
-         }
-        else if(i.customId == "cknight" || i.customId == "cancerknight"){
-          await i.update({embeds: [cancerknight], components: [cknight]})
+        const buttonActions = {
+          allhelp: {embed: allEmbed, component: alldecksrow},
+          helpall: {embed: allEmbed, component: alldecksrow},
+          helpmeme: {embed: memeEmbed, component: memerow},
+          memehelp: {embed: memeEmbed, component: memerow},
+          helpcontrol: {embed: controlEmbed, component: controlrow},
+          controlhelp: {embed: controlEmbed, component: controlrow},
+          helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+          midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+          bwk: {embed: budgetwk, component: bwk},
+          budgetwk: {embed: budgetwk, component: bwk},
+          bwk2: {embed: budgetwk, component: bwk2},
+          budgetwk2: {embed: budgetwk, component: bwk2},
+          cknight: {embed: cancerknight, component: cknight},
+          cancerknight: {embed: cancerknight, component: cknight},
+          cknight2: {embed: cancerknight, component: cknight2},
+          cancerknight2: {embed: cancerknight, component: cknight2},
+          cknight3: {embed: cancerknight, component: cknight3},
+          cancerknight3: {embed: cancerknight, component: cknight3},
+          chemo: {embed: chemotherapy, component: chemo},
+          chemotherapy: {embed: chemotherapy, component: chemo},
+          chemo2: {embed: chemotherapy, component: chemo2},
+          chemotherapy2: {embed: chemotherapy, component: chemo2},
+          hl: {embed: highlander, component: hl},
+          highlander: {embed: highlander, component: hl},
+          hl2: {embed: highlander, component: hl2},
+          highlander2: {embed: highlander, component: hl2},
+          hl3: {embed: highlander, component: hl3},
+          highlander3: {embed: highlander, component: hl3},
+          sk: {embed: shitknight, component: sk}, 
+          shitknight: {embed: shitknight, component: sk},
+          sk2: {embed: shitknight, component: sk2}, 
+          shitknight2: {embed: shitknight, component: sk2},
         }
-        else if(i.customId == "cknight2" || i.customId == "cancerknight2"){
-          await i.update({embeds: [cancerknight], components: [cknight2]})
+        const action = buttonActions[i.customId];
+        if(action){
+          await i.update({embeds: [action.embed], components: [action.component]})
         }
-        else if(i.customId == "cknight3" || i.customId == "cancerknight3"){
-          await i.update({embeds: [cancerknight], components: [cknight3]})
-        }
-        else if(i.customId == "hl" || i.customId == "highlander"){
-          await i.update({embeds: [highlander], components: [hl]})
-        }
-        else if(i.customId == "hl2" || i.customId == "highlander2"){
-          await i.update({embeds: [highlander], components: [hl2]})
-        }
-        else if(i.customId == "sk" || i.customId == "shitknight"){
-          await i.update({embeds: [shitknight], components: [sk]})
-        }
-        else if(i.customId == "sk2" || i.customId == "shitknight2"){
-          await i.update({embeds: [shitknight], components: [sk2]})
-        }
-        else if(i.customId == "chemo" || i.customId == "chemotherapy"){
-          await i.update({embeds: [chemotherapy], components: [chemo]})
-        }
-        else if(i.customId == "chemo2" || i.customId == "chemotherapy2"){
-          await i.update({embeds: [chemotherapy], components: [chemo2]})
-        }
-        else if(i.customId == "bwk" || i.customId == "budgetwk"){
-          await i.update({embeds: [budgetwk], components: [bwk]})
+        else{
+          await i.reply({content: "Invalid button interaction", flags: MessageFlags.Ephemeral})
         }
       }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

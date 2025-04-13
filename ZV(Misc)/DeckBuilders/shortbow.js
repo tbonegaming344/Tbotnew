@@ -152,8 +152,7 @@ const {
         .setDescription("An option to view all decks")
         .setValue("all")
       )
-      const row = new ActionRowBuilder()
-      .addComponents(select);
+      const row = new ActionRowBuilder().addComponents(select);
       let compdecks = ["pawntrickstab"]
       let combodecks = ["gravepiratestache"]
       let contorldecks = ["pawntrickstab"]

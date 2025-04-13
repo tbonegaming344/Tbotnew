@@ -285,7 +285,7 @@ module.exports = {
         "startron",
         "translattail",
       ],
-      aggroDecks: ["abeans", "budgetcc", "budgetct", "budgetnc", "dinogloves", "logbait", "pbeans", "watertron"],
+      aggroDecks: ["abeans", "budgetcc", "budgetct", "budgetnc", "budgetsf", "dinogloves", "logbait", "pbeans", "watertron"],
       comboDecks: [
         "budgetcc",
         "budgetcz",
@@ -324,6 +324,9 @@ module.exports = {
       ],
       midrangeDecks: [
         "budgetcz",
+        "budgetgk",
+        "budgetro",
+        "budgetsp",
         "budgetwk",
         "cyburn",
         "figlottery",
@@ -344,11 +347,6 @@ module.exports = {
       ],
       tempoDecks: [
         "100%winrate",
-        "budgetgk",
-        "budgetgs",
-        "budgetro",
-        "budgetsf",
-        "budgetsp",
         "carroot",
         "lifecouldbedream",
         "translattail",
@@ -499,7 +497,8 @@ module.exports = {
         "budgetbf",
         "budgeteb",
         "budgetif",
-        "budgetrb",
+        "budgetnt",
+        "budgetsm",
         "budgetzm",
         "dozzamech",
         "gravepiratestache",
@@ -517,8 +516,12 @@ module.exports = {
         "binaryflagwar",
         "boltbolt",
         "bonusducks",
+        "budgetim",
+        "budgetnt",
         "budgetpb",
+        "budgetsm",
         "budgetykm",
+        "budgetzm",
         "bustbolt",
         "coggerazzi",
         "congabait",
@@ -557,6 +560,7 @@ module.exports = {
         "antiagoragor",
         "bfplankcontrol",
         "bonusducks",
+        "budgetim",
         "bustbolt",
         "frozentelimps",
         "huntgargs",
@@ -579,7 +583,8 @@ module.exports = {
         "bfmidgargs",
         "binaryflagwar",
         "boltbolt",
-        "budgetim",
+        "budgetrb",
+        "budgetsb",
         "budgetykm",
         "congabait",
         "cryoboy",
@@ -607,10 +612,6 @@ module.exports = {
       ],
       tempoDecks: [
         "brady",
-        "budgetim",
-        "budgetnt",
-        "budgetsm",
-        "budgetsb",
         "coggerazzi",
         "conjureleap",
         "lockthebathroom",
@@ -859,8 +860,9 @@ module.exports = {
     const ab3 = new CreateButtons("helppaggro", "bcc3");
     const bcc3 = new CreateButtons("abeans3", "bct3");
     const bct3 = new CreateButtons("budgetcc3", "bnc3");
-    const bnc3 = new CreateButtons("budgetct3", "dgloves3");
-    const dgloves3 = new CreateButtons("budgetnc3", "lbait3");
+    const bnc3 = new CreateButtons("budgetct3", "bsf3");
+    const bsf3 = new CreateButtons("budgetct3", "dgloves3");
+    const dgloves3 = new CreateButtons("budgetsf3", "lbait3");
     const lbait3 = new CreateButtons("dinogloves3", "pb3");
     const pb3 = new CreateButtons("logbait3", "wtron3");
     const wtron3 = new CreateButtons("pbeans3", "aggrophelp");
@@ -899,8 +901,12 @@ module.exports = {
     const sknight3 = new CreateButtons("shamcontrolbc3", "tc3");
     const tc3 = new CreateButtons("shitknight3", "controlphelp");
     const midrangeprow = new CreateButtons("startron4", "bcz4");
-    const bcz4 = new CreateButtons("helppmidrange", "bwk3");
-    const bwk3 = new CreateButtons("budgetcz4", "cburn4");
+    const bcz4 = new CreateButtons("helppmidrange", "bgk3");
+    const bgk3 = new CreateButtons("budgetcz4", "bgs3");
+    const bgs3 = new CreateButtons("budgetgk3", "bro3");
+    const bro3 = new CreateButtons("budgetgs3", "bsp3");
+    const bsp3 = new CreateButtons("budgetro3", "bwk3");
+    const bwk3 = new CreateButtons("budgetro3", "cburn4");
     const cburn4 = new CreateButtons("budgetwk3", "flottery3");
     const flottery3 = new CreateButtons("cyburn4", "fmr3");
     const fmr3 = new CreateButtons("figlottery3", "fflare4");
@@ -919,11 +925,6 @@ module.exports = {
     const stron4 = new CreateButtons("starrings4", "midrangephelp");
     const tempoprow = new CreateButtons("translattail4", "wr1003");
     const wr1003 = new CreateButtons("tempophelp", "carr4");
-    const bgk3 = new CreateButtons("budgetcz3", "bgs3");
-    const bgs3 = new CreateButtons("budgetgk3", "bnc3");
-    const bro3 = new CreateButtons("budgetnc3", "bsf3");
-    const bsf3 = new CreateButtons("budgetro3", "bsp3");
-    const bsp3 = new CreateButtons("budgetsf3", "carr4");
     const carr4 = new CreateButtons("winrate1003", "lcbd3");
     const lcbd3 = new CreateButtons("carroot4", "tlattail4");
     const tlattail4 = new CreateButtons("lifecouldbedream3", "helpptempo");
@@ -1094,9 +1095,10 @@ module.exports = {
     const agr3 = new CreateButtons("helpzaggro", "bbf3");
     const bbf3 = new CreateButtons("agraves3", "beb3");
     const beb3 = new CreateButtons("budgetbf3", "bif3");
-    const bif3 = new CreateButtons("budgeteb3", "brb3");
-    const brb3 = new CreateButtons("budgetif3", "bzm3");
-    const bzm3 = new CreateButtons("budgetrb3", "dmech3");
+    const bif3 = new CreateButtons("budgeteb3", "bnt3");
+    const bnt3 = new CreateButtons("budgetif3", "bsm3");
+    const bsm3 = new CreateButtons("budgetnt3", "bzm3");
+    const bzm3 = new CreateButtons("budgetsm3", "dmech3");
     const dmech3 = new CreateButtons("budgetzm3", "gps3");
     const gps3 = new CreateButtons("dozzamech3", "mbolt3");
     const mbolt3 = new CreateButtons("gravepiratestache3", "syard3");
@@ -1112,9 +1114,13 @@ module.exports = {
     const bas3 = new CreateButtons("banhammer3", "bfw3");
     const bfw3 = new CreateButtons("bastet3", "bbolt3");
     const bbolt3 = new CreateButtons("binaryflagwar3", "bducks3");
-    const bducks3 = new CreateButtons("boltbolt3", "bpb3");
-    const bpb3 = new CreateButtons("bonusducks3", "bykm3");
-    const bykm3 = new CreateButtons("budgetpb3", "bust3");
+    const bducks3 = new CreateButtons("boltbolt3", "bim3");
+    const bim3 = new CreateButtons("bonusducks3", "bnt4");
+    const bnt4 = new CreateButtons("budgetim3", "bpb3");
+    const bpb3 = new CreateButtons("budgetnt4", "bsm4");
+    const bsm4 = new CreateButtons("budgetpb3", "bykm3");
+    const bykm3 = new CreateButtons("budgetsm4", "bzm4");
+    const bzm4 = new CreateButtons("budgetykm3", "bust3");
     const bust3 = new CreateButtons("budgetykm3", "cog3");
     const cog3 = new CreateButtons("bustbolt3", "cbait3");
     const cbait3 = new CreateButtons("coggerazzi3", "cboy3");
@@ -1150,8 +1156,9 @@ module.exports = {
     const controlzrow = new CreateButtons("whalepharaoh3", "agoragor4");
     const agoragor4 = new CreateButtons("helpzcontrol", "bfpc3");
     const bfpc3 = new CreateButtons("antiagoragor4", "bducks4");
-    const bducks4 = new CreateButtons("bfplankcontrol3", "bust4");
-    const bust4 = new CreateButtons("bonusducks4", "ftimps4");
+    const bducks4 = new CreateButtons("bfplankcontrol3", "bim4");
+    const bim4 = new CreateButtons("bonusducks4", "bust4");
+    const bust4 = new CreateButtons("budgetim4", "ftimps4");
     const ftimps4 = new CreateButtons("bustbolt4", "hgargs3");
     const hgargs3 = new CreateButtons("frozentelimps4", "kscope3");
     const kscope3 = new CreateButtons("frozentelimps4", "mcon3");
@@ -1170,8 +1177,10 @@ module.exports = {
     const bhammer4 = new CreateButtons("savage4", "bas4");
     const bas4 = new CreateButtons("banhammer4", "bfmg3");
     const bfmg3 = new CreateButtons("bastet4", "bfw4");
-    const bfw4 = new CreateButtons("bfmidgargs3", "bbolt4");
-    const bbolt4 = new CreateButtons("binaryflagwar4", "bykm4");
+    const bfw4 = new CreateButtons("bfmidgargs3", "brb3");
+    const brb3 = new CreateButtons("binaryflagwar4", "bsb3");
+    const bsb3 = new CreateButtons("budgetrb3", "bbolt4");
+    const bbolt4 = new CreateButtons("budgetsb3", "bykm4");
     const bykm4 = new CreateButtons("boltbolt4", "cbait4");
     const cbait4 = new CreateButtons("budgetykm4", "cboy4");
     const cboy4 = new CreateButtons("congabait4", "gburn4");
@@ -1197,12 +1206,8 @@ module.exports = {
     const ycmartin4 = new CreateButtons("watersports4", "ykmartin4");
     const ykmartin4 = new CreateButtons("youngcatmartin4", "midzhelp");
     const tempozrow = new CreateButtons("terrifytricksterazzi4", "brad3");
-    const brad3 = new CreateButtons("helpztempo", "bim3");
-    const bim3 = new CreateButtons("brady3", "bnt3");
-    const bnt3 = new CreateButtons("budgetim3", "bsm3");
-    const bsm3 = new CreateButtons("budgetnt3", "bsb3");
-    const bsb3 = new CreateButtons("budgetsm3", "cog4");
-    const cog4 = new CreateButtons("budgetsb3", "cleap3");
+    const brad3 = new CreateButtons("helpztempo", "cog4");
+    const cog4 = new CreateButtons("brady3", "cleap3");
     const cleap3 = new CreateButtons("coggerazzi4", "ltbr3");
     const ltbr3 = new CreateButtons("conjureleap3", "propackage3");
     const propackage3 = new CreateButtons("lockthebathroom3", "rpackage3");
@@ -2137,12 +2142,16 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         await i.update({ embeds: [budgetim], components: [bim2] });
       } else if (i.customId == "bim3" || i.customId == "budgetim3") {
         await i.update({ embeds: [budgetim], components: [bim3] });
+      } else if (i.customId == "bim4" || i.customId == "budgetim4") {
+        await i.update({ embeds: [budgetim], components: [bim4] });
       } else if (i.customId == "bnt" || i.customId == "budgetnt") {
         await i.update({ embeds: [budgetnt], components: [bnt] });
       } else if (i.customId == "bnt2" || i.customId == "budgetnt2") {
         await i.update({ embeds: [budgetnt], components: [bnt2] });
       } else if (i.customId == "bnt3" || i.customId == "budgetnt3") {
         await i.update({ embeds: [budgetnt], components: [bnt3] });
+      } else if (i.customId == "bnt4" || i.customId == "budgetnt4") {
+        await i.update({ embeds: [budgetnt], components: [bnt4] });
       } else if (i.customId == "bpb" || i.customId == "budgetpb") {
         await i.update({ embeds: [budgetpb], components: [bpb] });
       } else if (i.customId == "bpb2" || i.customId == "budgetpb2") {
@@ -2167,6 +2176,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         await i.update({ embeds: [budgetsm], components: [bsm2] });
       } else if (i.customId == "bsm3" || i.customId == "budgetsm3") {
         await i.update({ embeds: [budgetsm], components: [bsm3] });
+      } else if (i.customId == "bsm4" || i.customId == "budgetsm4") {
+        await i.update({ embeds: [budgetsm], components: [bsm4] });
       } else if (i.customId == "bykm" || i.customId == "budgetykm") {
         await i.update({ embeds: [budgetykm], components: [bykm] });
       } else if (i.customId == "bykm2" || i.customId == "budgetykm2") {
@@ -2181,6 +2192,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         await i.update({ embeds: [budgetzm], components: [bzm2] });
       } else if (i.customId == "bzm3" || i.customId == "budgetzm3") {
         await i.update({ embeds: [budgetzm], components: [bzm3] });
+      } else if (i.customId == "bzm4" || i.customId == "budgetzm4") {
+        await i.update({ embeds: [budgetzm], components: [bzm4] });
       } else if (i.customId == "bust" || i.customId == "bustbolt") {
         await i.update({ embeds: [bustbolt], components: [bust] });
       } else if (i.customId == "bust2" || i.customId == "bustbolt2") {

@@ -196,7 +196,7 @@ Note: ${user.displayName} has ${oneBigFlukeDecks.midrangeDecks.length} midrange 
           components: [action.component],
         });
       } else {
-        await i.reply({ content: "Unknown button action", ephemeral: true });
+        await i.reply({ content: "Unknown button action", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

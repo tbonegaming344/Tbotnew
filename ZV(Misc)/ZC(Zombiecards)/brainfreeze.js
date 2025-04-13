@@ -417,7 +417,7 @@ module.exports = {
       } else {
         await i.reply({
           content: "Unknown button interaction.",
-          ephemeral: true,
+          flags: MessageFlags.Ephemeral,
         });
       }
     }

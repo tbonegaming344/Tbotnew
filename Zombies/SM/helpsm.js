@@ -88,12 +88,6 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("All Smash Decks")
           .setValue("all")
           .setDescription("All of the Smash decks")
@@ -105,10 +99,10 @@ module.exports = {
       competitiveDecks: ["pablosyeezys"],
       ladderDecks: ["horts"],
       memeDecks: ["whalepharaoh"],
-      comboDecks: ["horts", "pablosyeezys", "whalepharaoh"],
+      aggroDecks: ["budgetsm"],
+      comboDecks: ["budgetsm", "horts", "pablosyeezys", "whalepharaoh"],
       controlDecks: ["whalepharaoh"],
       midrangeDecks: ["horts", "pablosyeezys"],
-      tempoDecks: ["budgetsm"],
       allDecks: [
         "budgetsm",
         "horts",
@@ -141,8 +135,9 @@ module.exports = {
     const hor = new CreateButtons("budgetsm", "py");
     const py = new CreateButtons("horts", "wp");
     const wp = new CreateButtons("pablosyeezys", "allhelp");
-    const comborow = new CreateButtons("whalepharoh2", "hor2");
-    const hor2 = new CreateButtons("combohelp", "py2");
+    const comborow = new CreateButtons("whalepharoh2", "bsm2");
+    const bsm2 = new CreateButtons("combohelp", "hor2");
+    const hor2 = new CreateButtons("budgetsm2", "py2");
     const py2 = new CreateButtons("horts2", "wp2");
     const wp2 = new CreateButtons("pablosyeezys2", "helpcombo");
     const midrangerow = new CreateButtons("pablosyeezys3", "hor3");
@@ -233,6 +228,8 @@ Note: Smash has ${smashDecks.midrangeDecks.length} midrange decks in Tbot`
         helpmidrange: {embed: midrangeEmbed, component: midrangerow}, 
         bsm: {embed: budgetsm, component: bsm}, 
         budgetsm: {embed: budgetsm, component: bsm},
+        bsm2: {embed: budgetsm, component: bsm2},
+        budgetsm2: {embed: budgetsm, component: bsm2},
         hor: {embed: horts, component: hor},
         horts: {embed: horts, component: hor},
         hor2: {embed: horts, component: hor2},
@@ -254,7 +251,7 @@ Note: Smash has ${smashDecks.midrangeDecks.length} midrange decks in Tbot`
       if (action) {
         await i.update({ embeds: [action.embed], components: [action.component] });
       } else {
-        await i.reply({ content: "Invalid button interaction", ephemeral: true });
+        await i.reply({ content: "Invalid button interaction", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

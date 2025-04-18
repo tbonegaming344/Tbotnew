@@ -981,6 +981,7 @@ module.exports = {
           zmech: "zmdecks",
           mech: "zmdecks",
         };
+        const tableName = heroDeckTables[heroInput];
         if (heroInput == "na") {
           try{
           const [result] = await db.query(`select * from bcdecks bc
@@ -1028,15 +1029,14 @@ module.exports = {
             on (bc.deckinfo = zm.deckinfo)
             where bc.deckinfo = "image link:"`);
             const deck = [];
-            const excludedName = "budget";
             for (const key in result[0]) {
-              const value = result[0][key];
+              const value = result[0][key]
               if (
                 (value.includes(".png") ||
                   value.includes(".jpg") ||
                   value.includes(".jpeg") ||
                   value.includes(".webp")) &&
-                !excludedName.includes(key) // Exclude specific names
+                  !value.includes("budget") // Exclude specific names
               ) {
                 deck.push(value); // Add the image link to the deck array
               }
@@ -1084,15 +1084,14 @@ module.exports = {
                     on (bc.deckinfo = wk.deckinfo)
                     where bc.deckinfo = "image link:"`);
                     const deck = [];
-                    const excludedName = "budget";
                     for (const key in result[0]) {
-                      const value = result[0][key];
+                      const value = result[0][key]
                       if (
                         (value.includes(".png") ||
                           value.includes(".jpg") ||
                           value.includes(".jpeg") ||
                           value.includes(".webp")) &&
-                        !excludedName.includes(key) // Exclude specific names
+                          !value.includes("budget") // Exclude names containing "budget"
                       ) {
                         deck.push(value); // Add the image link to the deck array
                       }
@@ -1137,15 +1136,14 @@ module.exports = {
                     on (bf.deckinfo = sm.deckinfo)
                     where bf.deckinfo = "image link:"`);
                     const deck = [];
-                    const excludedName = "budget";
                     for (const key in result[0]) {
-                      const value = result[0][key];
+                      const value = result[0][key]
                       if (
                         (value.includes(".png") ||
                           value.includes(".jpg") ||
                           value.includes(".jpeg") ||
                           value.includes(".webp")) &&
-                        !excludedName.includes(key) // Exclude specific names
+                          !value.includes("budget") // Exclude names containing "budget"
                       ) {
                         deck.push(value); // Add the image link to the deck array
                       }
@@ -1174,9 +1172,8 @@ module.exports = {
             flags: MessageFlags.Ephemeral,
           });
         }
-        const tableName = heroDeckTables[heroInput];
+       
   try {
-    const excludedName = "budget";
     /**
      * The getRandomDeck function gets a random deck for the user to play
      * @param {*} tableName - The name of the table
@@ -1188,30 +1185,46 @@ module.exports = {
       );
       const deck = [];
       for (const key in result[0]) {
-        const value = result[0][key];
+        const value = result[0][key]
+        console.log("Checking value:", value); // Debugging log
         if (
           (value.includes(".png") ||
             value.includes(".jpg") ||
             value.includes(".jpeg") ||
             value.includes(".webp")) &&
-          !excludedName.includes(key) // Exclude specific names
+          !value.includes("budget") // Exclude names containing "budget"
         ) {
           deck.push(value); // Add the image link to the deck array
         }
       }
+      console.log("Filtered Deck Array:", deck); // Debugging log
+    
+      if (deck.length === 0) {
+        throw new Error("No valid decks found.");
+      }
+    
       return deck;
     }
-    const deck = await getRandomDeck(tableName);
-    const embed = new EmbedBuilder()
-      .setTitle(`Random ${heroInput.charAt(0).toUpperCase() + heroInput.slice(1)} Deck`)
-      .setDescription(`Here is your random ${heroInput} deck`)
-      .setColor("Random")
-      .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-    await interaction.followUp({
-      embeds: [embed],
-      flags: MessageFlags.Ephemeral,
-    });
+    
+    try {
+      const randomDeck = await getRandomDeck(tableName);
+      console.log(randomDeck);
+      const embed = new EmbedBuilder()
+        .setTitle(`Random ${heroInput.charAt(0).toUpperCase() + heroInput.slice(1)} Deck`)
+        .setDescription(`Here is your random ${heroInput} deck`)
+        .setColor("Random")
+        .setImage(randomDeck[Math.floor(Math.random() * randomDeck.length)]);
+      await interaction.followUp({
+        embeds: [embed],
+        flags: MessageFlags.Ephemeral,
+      });
+    } catch (err) {
+      console.error(err);
+      await interaction.followUp({
+        content: "No valid decks found. Please try again later.",
+        flags: MessageFlags.Ephemeral,
+      });
+    }
   } catch (err) {
     console.error(err);
     await interaction.followUp({
@@ -1219,7 +1232,7 @@ module.exports = {
       flags: MessageFlags.Ephemeral,
     });
   }
-      }
+}
       //wheel modal
       else if (interaction.customId === "wheel-modal") {
         await interaction.deferUpdate();

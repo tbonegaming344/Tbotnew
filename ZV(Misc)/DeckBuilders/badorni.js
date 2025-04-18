@@ -46,7 +46,7 @@ module.exports = {
       .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
       .setValue("combo"),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Control Decks")
+      .setLabel("Control Deck")
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
       .setValue("control"),
       new StringSelectMenuOptionBuilder()
@@ -57,20 +57,18 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const badorniDecks = {
       memeDecks: ["antiagor",
-      "antiagoragor",
       "freezeheal",
       "frozentelimps",
       "moprbius",
       "plantmop",
       "psychosolstice"], 
       comboDecks: ["antiagor",
-      "antiagoragor",
       "freezeheal",
       "frozentelimps",
       "moprbius",
       "plantmop",
       "psychosolstice"],
-      controlDecks: ["antiagor", "frozentelimps"],
+      controlDecks: ["frozentelimps"],
       midrangeDecks: [ "moprbius","psychosolstice"]
     }
     function buildDeckString(decks) {
@@ -81,7 +79,6 @@ module.exports = {
     const toBuildMeme = buildDeckString(badorniDecks.memeDecks);
     const toBuildCombo = buildDeckString(badorniDecks.comboDecks);
     const toBuildMid = buildDeckString(badorniDecks.midrangeDecks);
-    const toBuildCon = buildDeckString(badorniDecks.controlDecks);
     function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -110,14 +107,11 @@ module.exports = {
     let mopr2 = new CreateButtons("ftimps2", "pmop");
     let pmop = new CreateButtons("mopribus2", "psy");
     let psy = new CreateButtons("plantmop", "meme2");
-    let control = new CreateButtons("ftimps3", "aaa3");
-    let aaa3 = new CreateButtons("control", "fti3");
-    let fti3 = new CreateButtons("aaagor3", "con");
     let midrange = new CreateButtons("psychosolstice3", "mopr3");
     let mopr3 = new CreateButtons("midrange", "psy3");
     let psy3 = new CreateButtons("mopribus3", "mid");
     let [result] =
-      await db.query(`select antiagor, antiagoragor,
+      await db.query(`select antiagor,
 	freezeheal, frozentelimps, mopribus, plantmop,
 	psychosolstice from ntdecks nt
 	inner join ccdecks cc
@@ -161,13 +155,6 @@ Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbo
         `To view the Midrange Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange decks in Tbot`
       )
-      let conbad = new CreateHelpEmbed(
-        `${user.displayName} Control Decks`,
-        `My Control decks made by ${user.displayName} are ${toBuildCon}`,
-        user.displayAvatarURL(),
-        `To view the Control Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${badorniDecks.controlDecks.length} control decks in Tbot`
-      )
       function CreateDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
@@ -186,7 +173,6 @@ Note: ${user.displayName} has ${badorniDecks.controlDecks.length} control decks 
         return embed;
       }
     let coloboy = new CreateDeckEmbed(result, "antiagor");
-    let a = new CreateDeckEmbed(result, "antiagoragor");
     let freal = new CreateDeckEmbed(result, "freezeheal");
     let fti = new CreateDeckEmbed(result, "frozentelimps");
     let mop = new CreateDeckEmbed(result, "mopribus");
@@ -206,7 +192,7 @@ Note: ${user.displayName} has ${badorniDecks.controlDecks.length} control decks 
         await i.update({embeds: [midbad], components: [midrange]});
       }
       else if(value == "control"){
-        await i.update({embeds: [conbad], components: [control]});
+        await i.reply({embeds: [ftimps], flags: MessageFlags.Ephemeral});
       }     
     }
     async function handleButtonInteraction(i){
@@ -237,10 +223,8 @@ Note: ${user.displayName} has ${badorniDecks.controlDecks.length} control decks 
         control: {embed: conbad, component: control},
         mid: {embed: midbad, component: midrange},
         midrange: {embed: midbad, component: midrange},
-        aaa3: {embed: a, component: aaa3},
         mopribus: {embed: mop, component: mopr},
         antiagor: {embed: coloboy, component: aa},
-        anti2: {embed: a, component: aa2},
         freezeheal: {embed: freal, component: freeze},
         freezeheal2: {embed: freal, component: freeze2},
         plantmop: {embed: plantmop, component: pmop},
@@ -248,13 +232,10 @@ Note: ${user.displayName} has ${badorniDecks.controlDecks.length} control decks 
         mopribus2: {embed: mop, component: mopr2},
         mopribus3: {embed: mop, component: mopr3},
         frozentelimps: {embed: fti, component: ftimps},
-        antiantiagor: {embed: a, component: aanti},
         antiagor2: {embed: coloboy, component: aa2},
         psychosolstice: {embed: pysol, component: psy},
         psychosolstice2: {embed: pysol, component: psy2},
         psychosolstice3: {embed: pysol, component: psy3},
-        aaagor2: {embed: a, component: aaa2},
-        aaagor3: {embed: a, component: aaa3},
       }
       const action = buttonActions[i.customId];
       if(action){

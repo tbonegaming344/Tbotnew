@@ -57,7 +57,7 @@ module.exports = {
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
+          .setLabel("Meme Deck")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
@@ -109,7 +109,7 @@ module.exports = {
         "watertron",
       ],
       ladderDecks: ["gravestache", "schoolyard"],
-      memeDecks: ["noplayingallowed", "stacheticia"],
+      memeDecks: ["noplayingallowed"],
       aggroDecks: ["abeans", "logbait", "schoolyard", "seacret", "watertron"],
       comboDecks: [
         "budgetykm",
@@ -118,8 +118,7 @@ module.exports = {
         "gargburn",
         "gravestache",
         "seacret",
-        "spacestars",
-        "stacheticia",
+        "spacestars"
       ],
       controlDecks: [
         "bustbolt",
@@ -154,7 +153,6 @@ module.exports = {
         "seacret",
         "shamcontrolbc",
         "spacestars",
-        "stacheticia",
         "uncrackabolt",
         "watertron",
       ],
@@ -204,24 +202,20 @@ module.exports = {
     const ladderrow = new CreateButtons("schoolyard", "gstache");
     const gstache = new CreateButtons("ladderhelp", "syard");
     const syard = new CreateButtons("gravestache", "ladderhelp");
-    const memerow = new CreateButtons("stacheticia", "npa");
-    const npa = new CreateButtons("memehelp", "sticia");
-    const sticia = new CreateButtons("noplaingallowed", "helpmeme");
     const aggrorow = new CreateButtons("watertron2", "ab2");
     const ab2 = new CreateButtons("aggrohelp", "lbait2");
     const lbait2 = new CreateButtons("abeans2", "syard2");
     const syard2 = new CreateButtons("logbait2", "sea2");
     const sea2 = new CreateButtons("schoolyard2", "wt2");
     const wt2 = new CreateButtons("seacret2", "helpaggro");
-    const comborow = new CreateButtons("stacheticia2", "bykm");
+    const comborow = new CreateButtons("spacestars2", "bykm");
     const bykm = new CreateButtons("combohelp", "bust2");
     const bust2 = new CreateButtons("budgetykm", "cburn2");
     const cburn2 = new CreateButtons("bustbolt2", "gb2");
     const gb2 = new CreateButtons("cyburn2", "gstache2");
     const gstache2 = new CreateButtons("gargburn2", "sea3");
     const sea3 = new CreateButtons("gravestache2", "stars2");
-    const stars2 = new CreateButtons("seacret3", "sticia2");
-    const sticia2 = new CreateButtons("spacestars2", "helpcombo");
+    const stars2 = new CreateButtons("seacret3", "helpcombo");
     const midrangerow = new CreateButtons("spacestars3", "bykm2");
     const bykm2 = new CreateButtons("midhelp", "cburn3");
     const cburn3 = new CreateButtons("budgetykm2", "flottery2");
@@ -252,14 +246,13 @@ module.exports = {
     const syard3 = new CreateButtons("radiotherapy3", "sea4");
     const sea4 = new CreateButtons("schoolyard3", "sham3");
     const sham3 = new CreateButtons("seacret4", "stars4");
-    const stars4 = new CreateButtons("shamcontrol3", "sticia3");
-    const sticia3 = new CreateButtons("spacestars4", "uncrack3");
-    const uncrack3 = new CreateButtons("stacheticia2", "wt3");
+    const stars4 = new CreateButtons("shamcontrol3", "uncrack3");
+    const uncrack3 = new CreateButtons("spacestars4", "wt3");
     const wt3 = new CreateButtons("uncrackabolt3", "helpall");
     const [result] = await db.query(`select abeans, apotk,
 budgetykm, bustbolt, chemotherapy,
 cyburn, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
-schoolyard, seacret, shamcontrol, spacestars, stacheticia, radiotherapy, uncrackabolt, watertron
+schoolyard, seacret, shamcontrol, spacestars, radiotherapy, uncrackabolt, watertron
 from gsdecks gs 
 inner join czdecks cz
 on (gs.deckinfo = cz.deckinfo)
@@ -387,7 +380,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
     const schoolyard = new CreateDeckEmbed(result, "schoolyard");
     const shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
     const spacestars = new CreateDeckEmbed(result, "spacestars");
-    const stacheticia = new CreateDeckEmbed(result, "stacheticia");
     const uncrackabolt = new CreateDeckEmbed(result, "uncrackabolt");
     const watertron = new CreateDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [salt], components: [row] });
@@ -485,12 +477,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         spacestars2: { embed: spacestars, component: stars2 },
         spacestars3: { embed: spacestars, component: stars3 },
         spacestars4: { embed: spacestars, component: stars4 },
-        sticia: { embed: stacheticia, component: sticia },
-        sticia2: { embed: stacheticia, component: sticia2 },
-        sticia3: { embed: stacheticia, component: sticia3 },
-        stacheticia: { embed: stacheticia, component: sticia },
-        stacheticia2: { embed: stacheticia, component: sticia2 },
-        stacheticia3: { embed: stacheticia, component: sticia3 },
         syard: { embed: schoolyard, component: syard },
         syard2: { embed: schoolyard, component: syard2 },
         syard3: { embed: schoolyard, component: syard3 },

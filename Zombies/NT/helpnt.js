@@ -71,12 +71,6 @@ module.exports = {
           )
           .setValue("combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          )
-          .setValue("control"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -93,15 +87,13 @@ module.exports = {
       budgetDecks: ["budgetnt"],
       competitiveDecks: ["icebox"],
       ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
-      memeDecks: ["antiagor", "antiagoragor", "floss", "sunlord"],
+      memeDecks: ["antiagor", "floss", "sunlord"],
       aggroDecks: ["agraves", "budgetnt", "schoolyard"],
-      comboDecks: ["antiagor", "antiagoragor", "budgetnt", "floss", "sunlord"],
-      controlDecks: ["antiagoragor"],
+      comboDecks: ["antiagor","budgetnt", "floss", "sunlord"],
       midrangeDecks: ["gomorrah", "icebox", "ladytuna", "sunlord"],
       allDecks: [
         "agraves",
         "antiagor",
-        "antiagoragor",
         "budgetnt",
         "floss",
         "gomorrah",
@@ -136,9 +128,8 @@ module.exports = {
     }
     const alldecksrow = new CreateButtons("sunlord", "ag");
     const ag = new CreateButtons("helpall", "anti");
-    const anti = new CreateButtons("agraves", "aaa");
-    const aaa = new CreateButtons("antiagor", "bnt");
-    const bnt = new CreateButtons("antiagoragor", "fl");
+    const anti = new CreateButtons("agraves", "bnt");
+    const bnt = new CreateButtons("antiagor", "fl");
     const fl = new CreateButtons("budgetnt", "go");
     const go = new CreateButtons("floss", "ib");
     const ib = new CreateButtons("gomorrah", "lt");
@@ -150,9 +141,8 @@ module.exports = {
     const go2 = new CreateButtons("agraves2", "sy2");
     const sy2 = new CreateButtons("gomorrah2", "ladderhelp");
     const memerow = new CreateButtons("sunlord2", "anti2");
-    const anti2 = new CreateButtons("helpmeme", "aaa2");
-    const aaa2 = new CreateButtons("antiagor2", "fl2");
-    const fl2 = new CreateButtons("antiagoragor2", "lt2");
+    const anti2 = new CreateButtons("helpmeme", "fl2");
+    const fl2 = new CreateButtons("antiagor2", "lt2");
     const lt2 = new CreateButtons("floss2", "sl2");
     const sl2 = new CreateButtons("ladytuna2", "memehelp");
     const aggrorow = new CreateButtons("schoolyard3", "ag3");
@@ -160,9 +150,8 @@ module.exports = {
     const bnt2 = new CreateButtons("agraves3", "sy3");
     const sy3 = new CreateButtons("budgetnt2", "aggrohelp");
     const comborow = new CreateButtons("sunlord3", "anti3");
-    const anti3 = new CreateButtons("helpcombo", "aaa3");
-    const aaa3 = new CreateButtons("antiagor3", "bnt3");
-    const bnt3 = new CreateButtons("antiagoragor3", "fl3");
+    const anti3 = new CreateButtons("helpcombo", "bnt3");
+    const bnt3 = new CreateButtons("antiagor3", "fl3");
     const fl3 = new CreateButtons("budgetnt3", "sl3");
     const sl3 = new CreateButtons("floss3", "combohelp");
     const midrangerow = new CreateButtons("sunlord4", "go3");
@@ -238,7 +227,6 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
     }
     const agraves = new CreateDeckEmbed(result, "agraves");
     const antiagor = new CreateDeckEmbed(result, "antiagor");
-    const antiagoragor = new CreateDeckEmbed(result, "antiagoragor");
     const budgetnt = new CreateDeckEmbed(result, "budgetnt");
     const floss = new CreateDeckEmbed(result, "floss");
     const gomorrah = new CreateDeckEmbed(result, "gomorrah");
@@ -265,11 +253,6 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "control") {
-        await i.reply({
-          embeds: [antiagoragor],
-          flags: MessageFlags.Ephemeral,
-        });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "budget") {
@@ -302,12 +285,6 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         antiagor2: {embed: antiagor, component: anti2},
         anti3: {embed: antiagor, component: anti3},
         antiagor3: {embed: antiagor, component: anti3},
-        aaa: {embed: antiagoragor, component: aaa},
-        antiagoragor: {embed: antiagoragor, component: aaa},
-        aaa2: {embed: antiagoragor, component: aaa2},
-        antiagoragor2: {embed: antiagoragor, component: aaa2},
-        aaa3: {embed: antiagoragor, component: aaa3},
-        antiagoragor3: {embed: antiagoragor, component: aaa3},
         bnt: {embed: budgetnt, component: bnt},
         budgetnt: {embed: budgetnt, component: bnt},
         bnt2: {embed: budgetnt, component: bnt2},

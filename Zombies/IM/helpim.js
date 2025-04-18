@@ -52,7 +52,7 @@ module.exports = {
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
@@ -88,19 +88,17 @@ module.exports = {
     const immorticiaDecks = {
       budgetDecks: ["budgetim"],
       competitiveDecks: ["kaleidoscope"],
-      ladderDecks: ["mechascope", "youngcatmartin"],
-      memeDecks: ["22savage", "bastet", "rampticia", "stacheticia"],
+      ladderDecks: ["mechascope"],
+      memeDecks: ["22savage", "bastet", "rampticia"],
       comboDecks: [
         "22savage",
         "bastet",
         "budgetim",
         "mechascope",
         "rampticia",
-        "stacheticia",
-        "youngcatmartin",
       ],
       controlDecks: ["budgetim", "kaleidoscope", "mechascope"],
-      midrangeDecks: ["22savage", "bastet", "budgetim", "youngcatmartin"],
+      midrangeDecks: ["22savage", "bastet", "budgetim"],
       allDecks: [
         "22savage",
         "bastet",
@@ -108,8 +106,6 @@ module.exports = {
         "kaleidoscope",
         "mechascope",
         "rampticia",
-        "stacheticia",
-        "youngcatmartin",
       ],
     };
     function buildDeckString(decks) {
@@ -118,7 +114,6 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(immorticiaDecks.allDecks);
-    const toBuildLadderString = buildDeckString(immorticiaDecks.ladderDecks);
     const toBuildMemeString = buildDeckString(immorticiaDecks.memeDecks);
     const toBuildComboString = buildDeckString(immorticiaDecks.comboDecks);
     const toBuildControlString = buildDeckString(immorticiaDecks.controlDecks);
@@ -137,40 +132,31 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("youngcatmartin", "sav");
+    const alldecksrow = new CreateButtons("rampticia", "sav");
     const sav = new CreateButtons("helpall", "bas");
     const bas = new CreateButtons("savage", "bim");
     const bim = new CreateButtons("bastet", "kscope");
     const kscope = new CreateButtons("budgetim", "ms");
     const ms = new CreateButtons("kaleidoscope", "rim");
-    const rim = new CreateButtons("otkmecha", "stac");
-    const stac = new CreateButtons("rampticia", "ycm");
-    const ycm = new CreateButtons("stacheticia", "allhelp");
-    const ladderrow = new CreateButtons("youngcatmartin2", "ms2");
-    const ms2 = new CreateButtons("ladderhelp", "ycm2");
-    const ycm2 = new CreateButtons("mechascope2", "helpladder");
-    const memerow = new CreateButtons("stacheticia2", "sav2");
+    const rim = new CreateButtons("otkmecha", "allhelp");
+    const memerow = new CreateButtons("rampticia2", "sav2");
     const sav2 = new CreateButtons("memehelp", "bas2");
     const bas2 = new CreateButtons("savage2", "rim2");
-    const rim2 = new CreateButtons("bastet2", "stac2");
-    const stac2 = new CreateButtons("rampticia2", "helpmeme");
-    const comborow = new CreateButtons("youngcatmartin3", "sav3");
+    const rim2 = new CreateButtons("bastet2", "helpmeme");
+    const comborow = new CreateButtons("rampticia3", "sav3");
     const sav3 = new CreateButtons("combohelp", "bas3");
     const bas3 = new CreateButtons("savage3", "bim2");
     const bim2 = new CreateButtons("bastet3", "ms3");
     const ms3 = new CreateButtons("budgetim2", "rim3");
-    const rim3 = new CreateButtons("mechascope3", "stac3");
-    const stac3 = new CreateButtons("rampticia3", "ycm3");
-    const ycm3 = new CreateButtons("stacheticia3", "helpcombo");
+    const rim3 = new CreateButtons("mechascope3", "helpcombo");
     const controlrow = new CreateButtons("mechascope4", "bim3");
     const bim3 = new CreateButtons("controlhelp", "kscope2");
     const kscope2 = new CreateButtons("budgetim3", "ms4");
     const ms4 = new CreateButtons("kaleidoscope3", "helpcontrol");
-    const midrangerow = new CreateButtons("youngcatmartin4", "sav4");
+    const midrangerow = new CreateButtons("budgetim4", "sav4");
     const sav4 = new CreateButtons("midrangehelp", "bas4");
     const bas4 = new CreateButtons("savage4", "bim4");
-    const bim4 = new CreateButtons("bastet4", "ycm4");
-    const ycm4 = new CreateButtons("budgetim4", "helpmidrange");
+    const bim4 = new CreateButtons("bastet4", "helpmidrange");
     const alldecksEmbed = new CreateHelpEmbed(
       "Immorticia Decks",
       `My commands for Immorticia(IM) are ${toBuildString}`,
@@ -183,13 +169,6 @@ Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`
       `To view the Immorticia decks please select an option from the select menu below!
 Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
-    );
-    const ladderEmbed = new CreateHelpEmbed(
-      "Immorticia Ladder Decks",
-      `My ladder decks for Immorticia(IM) are ${toBuildLadderString}`,
-      "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
-      `To view the ladder Immorticia decks please use the commands listed above or click on the buttons below to navigate through all ladder Immorticia decks!
-Note: Immorticia has ${immorticiaDecks.ladderDecks.length} ladder decks in Tbot`
     );
     const memeEmbed = new CreateHelpEmbed(
       "Immorticia Meme Decks",
@@ -243,8 +222,6 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
     const mechascope = new CreateDeckEmbed(result, "otkmecha");
     const kaleidoscope = new CreateDeckEmbed(result, "otktrickster");
     const rampticia = new CreateDeckEmbed(result, "rampticia");
-    const stacheticia = new CreateDeckEmbed(result, "stacheticia");
-    const youngcatmartin = new CreateDeckEmbed(result, "ycm");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -262,7 +239,7 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+        await i.reply({embeds: [mechascope], flags: MessageFlags.Ephemeral});
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
@@ -321,12 +298,6 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
         savage3: {embed: savage22, component: sav3},
         sav4: {embed: savage22, component: sav4},
         savage4: {embed: savage22, component: sav4},
-        stac: {embed: stacheticia, component: stac},
-        stacheticia: {embed: stacheticia, component: stac},
-        stac2: {embed: stacheticia, component: stac2},
-        stacheticia2: {embed: stacheticia, component: stac2},
-        stac3: {embed: stacheticia, component: stac3},
-        stacheticia3: {embed: stacheticia, component: stac3},
         ms: {embed: mechascope, component: ms},
         mechascope: {embed: mechascope, component: ms},
         ms2: {embed: mechascope, component: ms2},
@@ -335,14 +306,6 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
         mechascope3: {embed: mechascope, component: ms3},
         ms4: {embed: mechascope, component: ms4},
         mechascope4: {embed: mechascope, component: ms4},
-        ycm: {embed: youngcatmartin, component: ycm},
-        youngcatmartin: {embed: youngcatmartin, component: ycm},
-        ycm2: {embed: youngcatmartin, component: ycm2},
-        youngcatmartin2: {embed: youngcatmartin, component: ycm2},
-        ycm3: {embed: youngcatmartin, component: ycm3},
-        youngcatmartin3: {embed: youngcatmartin, component: ycm3},
-        ycm4: {embed: youngcatmartin, component: ycm4},
-        youngcatmartin4: {embed: youngcatmartin, component: ycm4},  
       }
       const action = buttonActions[i.customId]
       if (action) {

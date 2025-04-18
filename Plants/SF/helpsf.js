@@ -50,11 +50,6 @@ module.exports = {
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
@@ -69,12 +64,6 @@ module.exports = {
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           ),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
@@ -92,11 +81,9 @@ module.exports = {
     const solarFlareDecks = {
       budgetDecks: ["budgetswarmsf"],
       competitiveDecks: ["figlottery"],
-      ladderDecks: ["ejection"],
       memeDecks: ["funnyflare", "healburn", "psychosolstice", "ramp2seedling"],
       aggroDecks: ["budgetswarmsf"],
       comboDecks: ["funnyflare", "healburn", "psychosolstice", "ramp2seedling"],
-      controlDecks: ["ejection"],
       midrangeDecks: [
         "figlottery",
         "funnyflare",
@@ -106,7 +93,6 @@ module.exports = {
       ],
       allDecks: [
         "budgetswarmsf",
-        "ejection",
         "figlottery",
         "funnyflare",
         "healburn",
@@ -143,9 +129,8 @@ module.exports = {
     const psol3 = new CreateButtons("healburn3", "r2s3");
     const r2s3 = new CreateButtons("psychosolstice3", "midhelp");
     const alldecksrow = new CreateButtons("ramp2seedling4", "bsf");
-    const bsf = new CreateButtons("helpall", "eject");
-    const eject = new CreateButtons("budgetsf", "flottery2");
-    const flottery2 = new CreateButtons("ejection", "ff4");
+    const bsf = new CreateButtons("helpall", "flottery2");
+    const flottery2 = new CreateButtons("budgetsf", "ff4");
     const ff4 = new CreateButtons("figlottery2", "hburn4");
     const hburn4 = new CreateButtons("funnyflare3", "psol4");
     const psol4 = new CreateButtons("psol4", "r2s4");
@@ -216,7 +201,6 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
       return embed;
     }
     const budgetsf = new CreateDeckEmbed(result, "budgetswarmsf");
-    const ejection = new CreateDeckEmbed(result, "ejection");
     const funnyflare = new CreateDeckEmbed(result, "funnyflare");
     const healburn = new CreateDeckEmbed(result, "healburn");
     const figlottery = new CreateDeckEmbed(result, "healmidflare");
@@ -231,8 +215,6 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
       const value = i.values[0];
       if (value == "comp") {
         await i.reply({ embeds: [figlottery], flags: MessageFlags.Ephemeral });
-      } else if (value == "ladder" || value == "control") {
-        await i.reply({ embeds: [ejection], flags: MessageFlags.Ephemeral });
       } else if (value == "budget" || value == "aggro") {
         await i.reply({ embeds: [budgetsf], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
@@ -257,8 +239,6 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
         helpmid: { embed: midrangeEmbed, component: midrangerow },
         bsf: { embed: budgetsf, component: bsf },
         budgetsf: { embed: budgetsf, component: bsf },
-        eject: { embed: ejection, component: eject },
-        ejection: { embed: ejection, component: eject },
         flottery: { embed: figlottery, component: flottery },
         figlottery: { embed: figlottery, component: flottery },
         flottery2: { embed: figlottery, component: flottery2 },

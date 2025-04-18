@@ -526,16 +526,12 @@ module.exports = {
         try {
           await owner.send({ embeds: [embed] });
         } catch (e) {
+          console.error("Error while sending bug report:", e); // Log the error for debugging
           await interaction.followUp({
-            content: "Oops, something went wrong.\nUnable to send bug report",
-           flags: MessageFlags.Ephemeral,
+            content: "Oops, something went wrong while sending the bug report. Please try again later.",
+            flags: MessageFlags.Ephemeral,
           });
         }
-
-        await interaction.followUp({
-          content: "Successfully sent the report!",
-         flags: MessageFlags.Ephemeral,
-        });
       }
       //Deck Search
       if (interaction.customId === "Deck-search-modal") {
@@ -556,19 +552,17 @@ module.exports = {
           }
         });
         let decks = [];
-        for (let i = 0; i < commands.length; i++) {
-          let command = commands[i];
+        for (const command of commands) {
           decks.push(command.name);
         }
-        decks.sort();
+        decks.sort((a, b) => a.localeCompare(b));
         const searcher = new FuzzySearch(decks, {
           caseSensitive: false,
         });
         const result = searcher.search(reason);
         try {
           let toBuildString = "";
-          for (let i = 0; i < result.length; i++) {
-            let command = result[i];
+          for (const command of result) {
             toBuildString += `\n<@1043528908148052089> **${command}**`;
           }
           let embed = new EmbedBuilder()
@@ -585,6 +579,7 @@ module.exports = {
           }
           return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
         } catch (err) {
+          console.error(err);
           const errEmbed = new EmbedBuilder()
             .setTitle("❌ | Error")
             .setColor("Red")
@@ -607,11 +602,10 @@ module.exports = {
           }
         });
         let words = [];
-        for (let i = 0; i < commands.length; i++) {
-          let command = commands[i];
+        for (const command of commands) {
           words.push(command.name);
         }
-        words.sort();
+        words.sort((a, b) => a.localeCompare(b));
         const searcher = new FuzzySearch(words, {
           caseSensitive: false,
         });
@@ -620,9 +614,7 @@ module.exports = {
         );
         const result = searcher.search(reason);
         let toBuildString = "";
-        for (let i = 0; i < result.length; i++) {
-          let command = result[i];
-          //   console.log(commands[i])
+        for (const command of result) {
           toBuildString += `\n<@1043528908148052089> **${command}**`;
         }
         try {
@@ -640,6 +632,7 @@ module.exports = {
           }
           return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
         } catch (e) {
+          console.error(e);
           const errEmbed = new EmbedBuilder()
             .setTitle("❌ | Error")
             .setColor("Red")
@@ -741,12 +734,15 @@ module.exports = {
             value:
               name === "Guessed Words"
                 ? [...game.words, guess].map((v) => `\`${v}\``).join(", ")
-                : game.letters.length
-                ? game.letters
-                    .map((v) => `\`${v}\``)
-                    .sort()
-                    .join(", ")
-                : "`N/A`",
+                : (() => {
+                    const lettersValue = game.letters.length
+                        ? game.letters
+                            .map((v) => `\`${v}\``)
+                            .sort((a, b) => a.localeCompare(b))
+                            .join(", ")
+                        : "`N/A`";
+                    return lettersValue;
+                })(),
           }));
 
           const embed = EmbedBuilder.from(embeds[0])
@@ -767,11 +763,14 @@ module.exports = {
               name === "Guessed Letters"
                 ? [...game.letters, guess]
                     .map((v) => `\`${v}\``)
-                    .sort()
+                    .sort((a, b) => a.localeCompare(b))
                     .join(", ")
-                : game.words.length
-                ? game.words.map((v) => `\`${v}\``).join(", ")
-                : "`N/A`",
+                : (() => {
+                    const wordsValue = game.words.length
+                        ? game.words.map((v) => `\`${v}\``).join(", ")
+                        : "`N/A`";
+                    return wordsValue;
+                })(),
           }));
 
           game.unguessed.delete(guess);
@@ -827,13 +826,14 @@ module.exports = {
           unguessed: game.unguessed,
           guesses:
             guess.length === 1
-              ? game.word.includes(guess)
-                ? game.guesses
-                : game.guesses + 1
+              ? (() => {
+                  const newGuesses = game.word.includes(guess) ? game.guesses : game.guesses + 1;
+                  return newGuesses;
+                })()
               : game.guesses + 1,
 
           letters:
-            guess.length === 1 ? [...game.letters, guess].sort() : game.letters,
+            guess.length === 1 ? [...game.letters, guess].sort((a, b) => a.localeCompare(b)) : game.letters,
           words: guess.length === 1 ? game.words : [...game.words, guess],
           text:
             guess.length === 1
@@ -935,8 +935,6 @@ module.exports = {
             `${result[0].frymidrose}`,
             `${result[0].hmr}`,
             //SF TBOT DB
-        
-            `${result[0].ejection}`,
             `${result[0].funnyflare}`,
             `${result[0].healburn}`,
             `${result[0].healmidflare}`,
@@ -996,12 +994,11 @@ module.exports = {
             `${result[0].bastet}`,
             `${result[0].otktrickster}`,
             `${result[0].rampticia}`,
-            `${result[0].stacheticia}`,
             `${result[0].ycm}`,
             //NT TBOT DB
             `${result[0].agraves}`,
             `${result[0].antiagor}`,
-            `${result[0].antiagoragor}`,
+  
             `${result[0].floss}`,
             `${result[0].icebox}`,
             `${result[0].gommorrah}`, 
@@ -1010,7 +1007,6 @@ module.exports = {
             //PB TBOT DB
             `${result[0].bonusducks}`,
             `${result[0].congabait}`,
-            `${result[0].hibird}`,
             `${result[0].pbfeast}`,
             `${result[0].professorpackage}`,
             `${result[0].trickstache}`,
@@ -1249,8 +1245,6 @@ module.exports = {
           );
           const deck = [
             //SF TBOT DB
-        
-            `${result[0].ejection}`,
             `${result[0].funnyflare}`,
             `${result[0].healburn}`,
             `${result[0].healmidflare}`,
@@ -1470,7 +1464,6 @@ module.exports = {
             `${result[0].bastet}`,
             `${result[0].otktrickster}`,
             `${result[0].rampticia}`,
-            `${result[0].stacheticia}`,
             `${result[0].ycm}`,
   
           ];
@@ -1495,7 +1488,6 @@ module.exports = {
             //NT TBOT DB
            `${result[0].agraves}`,
             `${result[0].antiagor}`,
-            `${result[0].antiagoragor}`,
             `${result[0].floss}`,
             `${result[0].icebox}`,
             `${result[0].gommorrah}`, 
@@ -1525,7 +1517,6 @@ module.exports = {
             //PB TBOT DB
            `${result[0].bonusducks}`,
             `${result[0].congabait}`,
-            `${result[0].hibird}`,
             `${result[0].pbfeast}`,
             `${result[0].professorpackage}`,
             `${result[0].trickstache}`,
@@ -1695,8 +1686,6 @@ module.exports = {
               `${result[0].frymidrose}`,
               `${result[0].hmr}`,
               //SF TBOT DB
-          
-              `${result[0].ejection}`,
               `${result[0].funnyflare}`,
               `${result[0].healburn}`,
               `${result[0].healmidflare}`,
@@ -1788,12 +1777,10 @@ module.exports = {
               `${result[0].bastet}`,
               `${result[0].otktrickster}`,
               `${result[0].rampticia}`,
-              `${result[0].stacheticia}`,
               `${result[0].ycm}`,
               //NT TBOT DB
               `${result[0].agraves}`,
               `${result[0].antiagor}`,
-              `${result[0].antiagoragor}`,
               `${result[0].floss}`,
               `${result[0].icebox}`,
               `${result[0].gommorrah}`, 
@@ -1802,7 +1789,6 @@ module.exports = {
               //PB TBOT DB
               `${result[0].bonusducks}`,
               `${result[0].congabait}`,
-              `${result[0].hibird}`,
               `${result[0].pbfeast}`,
               `${result[0].professorpackage}`,
               `${result[0].trickstache}`,
@@ -1984,7 +1970,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2110,7 +2096,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2236,7 +2222,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2361,7 +2347,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2489,7 +2475,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2617,7 +2603,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2748,7 +2734,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -2872,7 +2858,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3000,7 +2986,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3130,7 +3116,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3261,7 +3247,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3392,7 +3378,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3522,7 +3508,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3651,7 +3637,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3780,7 +3766,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -3908,7 +3894,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -4039,7 +4025,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -4167,7 +4153,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -4296,7 +4282,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -4426,7 +4412,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -4557,7 +4543,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );
@@ -4685,7 +4671,7 @@ module.exports = {
           ];
           let randomWords = [];
           let remainingWords = [...wordsArray];
-          for (let i = 0; i != number; i++) {
+          for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
             );

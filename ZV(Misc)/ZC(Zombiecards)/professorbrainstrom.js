@@ -51,7 +51,7 @@ module.exports = {
           .setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
+          .setLabel("Meme Decks")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
         new StringSelectMenuOptionBuilder()
@@ -94,25 +94,23 @@ module.exports = {
     const professorBrainstormDecks = {
       budgetDecks: ["budgetpb"],
       competitiveDecks: ["trickstache"],
-      ladderDecks: ["hibird", "professorpackage", "valkster"],
+      ladderDecks: ["professorpackage", "valkster"],
       memeDecks: ["bonusducks", "congabait", "pbfeast", "youngeggmartin"],
       aggroDecks: ["budgetpb"],
       comboDecks: [
         "bonusducks",
         "congabait",
-        "hibird",
         "trickstache",
         "valkster",
         "youngeggmartin",
       ],
       controlDecks: ["bonusducks", "pbfeast"],
-      midrangeDecks: ["congabait", "hibird", "trickstache", "valkster"],
+      midrangeDecks: ["congabait", "trickstache", "valkster"],
       tempoDecks: ["professorpackage"],
       allDecks: [
         "bonusducks",
         "budgetpb",
         "congabait",
-        "hibird",
         "pbfeast",
         "professorpackage",
         "trickstache",
@@ -156,16 +154,14 @@ module.exports = {
     const alldecksrow = new CreateButtons("youngeggmartin", "bd");
     const bd = new CreateButtons("helpall", "bpb");
     const bpb = new CreateButtons("bonusducks", "cb");
-    const cb = new CreateButtons("budgetpb", "hb");
-    const hb = new CreateButtons("congabait", "pbf");
-    const pbf = new CreateButtons("hibird", "pa");
+    const cb = new CreateButtons("budgetpb", "pbf");
+    const pbf = new CreateButtons("congabait", "pa");
     const pa = new CreateButtons("pbfeast", "ts");
     const ts = new CreateButtons("package", "valk");
     const valk = new CreateButtons("trickstache", "yem");
     const yem = new CreateButtons("valkster", "allhelp");
-    const ladderrow = new CreateButtons("valkster2", "hb2");
-    const hb2 = new CreateButtons("helpladder", "pa2");
-    const pa2 = new CreateButtons("hibird2", "valk2");
+    const ladderrow = new CreateButtons("valkster2", "pa2");
+    const pa2 = new CreateButtons("helpladder", "valk2");
     const valk2 = new CreateButtons("package2", "ladderhelp");
     const memerow = new CreateButtons("youngeggmartin2", "bd2");
     const bd2 = new CreateButtons("helpmeme", "cb2");
@@ -174,18 +170,16 @@ module.exports = {
     const yem2 = new CreateButtons("pbfeast2", "memehelp");
     const comborow = new CreateButtons("youngeggmartin3", "bd3");
     const bd3 = new CreateButtons("helpcombo", "cb3");
-    const cb3 = new CreateButtons("bonusducks3", "hb3");
-    const hb3 = new CreateButtons("congabait3", "ts2");
-    const ts2 = new CreateButtons("hibird3", "valk3");
+    const cb3 = new CreateButtons("bonusducks3", "ts2");
+    const ts2 = new CreateButtons("congabait3", "valk3");
     const valk3 = new CreateButtons("trickstache2", "yem3");
     const yem3 = new CreateButtons("valkster3", "combohelp");
     const controlrow = new CreateButtons("pbfeast3", "bd4");
     const bd4 = new CreateButtons("helpcontrol", "pbf3");
     const pbf3 = new CreateButtons("bonusducks4", "controlhelp");
     const midrangerow = new CreateButtons("valkster4", "cb4");
-    const cb4 = new CreateButtons("helpmid", "hb4");
-    const hb4 = new CreateButtons("congabait4", "ts3");
-    const ts3 = new CreateButtons("hibird4", "valk4");
+    const cb4 = new CreateButtons("helpmid", "ts3");
+    const ts3 = new CreateButtons("congabait4", "valk4");
     const valk4 = new CreateButtons("trickstache3", "midhelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
@@ -280,7 +274,6 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     const bonusducks = new CreateDeckEmbed(result, "bonusducks");
     const budgetpb = new CreateDeckEmbed(result, "budgetpb");
     const congabait = new CreateDeckEmbed(result, "congabait");
-    const hibird = new CreateDeckEmbed(result, "hibird");
     const pbfeast = new CreateDeckEmbed(result, "pbfeast");
     const professorpackage = new CreateDeckEmbed(result, "professorpackage");
     const trickstache = new CreateDeckEmbed(result, "trickstache");
@@ -317,83 +310,85 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (i.customId == "memehelp" || i.customId == "helpmeme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "combohelp" || i.customId == "helpcombo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "controlhelp" || i.customId == "helpcontrol") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      } else if (i.customId == "midhelp" || i.customId == "helpmid") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "bpb" || i.customId == "budgetpb") {
-        await i.update({ embeds: [budgetpb], components: [bpb] });
-      } else if (i.customId == "cb" || i.customId == "congabait") {
-        await i.update({ embeds: [congabait], components: [cb] });
-      } else if (i.customId == "cb2" || i.customId == "congabait2") {
-        await i.update({ embeds: [congabait], components: [cb2] });
-      } else if (i.customId == "cb3" || i.customId == "congabait3") {
-        await i.update({ embeds: [congabait], components: [cb3] });
-      } else if (i.customId == "cb4" || i.customId == "congabait4") {
-        await i.update({ embeds: [congabait], components: [cb4] });
-      } else if (i.customId == "hb" || i.customId == "hibird") {
-        await i.update({ embeds: [hibird], components: [hb] });
-      } else if (i.customId == "hb2" || i.customId == "hibird2") {
-        await i.update({ embeds: [hibird], components: [hb2] });
-      } else if (i.customId == "hb3" || i.customId == "hibird3") {
-        await i.update({ embeds: [hibird], components: [hb3] });
-      } else if (i.customId == "hb4" || i.customId == "hibird4") {
-        await i.update({ embeds: [hibird], components: [hb4] });
-      } else if (i.customId == "pa" || i.customId == "package") {
-        await i.update({ embeds: [professorpackage], components: [pa] });
-      } else if (i.customId == "pa2" || i.customId == "package2") {
-        await i.update({ embeds: [professorpackage], components: [pa2] });
-      } else if (i.customId == "pbf" || i.customId == "pbfeast") {
-        await i.update({ embeds: [pbfeast], components: [pbf] });
-      } else if (i.customId == "pbf2" || i.customId == "pbfeast2") {
-        await i.update({ embeds: [pbfeast], components: [pbf2] });
-      } else if (i.customId == "pbf3" || i.customId == "pbfeast3") {
-        await i.update({ embeds: [pbfeast], components: [pbf3] });
-      } else if (i.customId == "bd" || i.customId == "bonusducks") {
-        await i.update({ embeds: [bonusducks], components: [bd] });
-      } else if (i.customId == "bd2" || i.customId == "bonusducks2") {
-        await i.update({ embeds: [bonusducks], components: [bd2] });
-      } else if (i.customId == "bd3" || i.customId == "bonusducks3") {
-        await i.update({ embeds: [bonusducks], components: [bd3] });
-      } else if (i.customId == "bd4" || i.customId == "bonusducks4") {
-        await i.update({ embeds: [bonusducks], components: [bd4] });
-      } else if (i.customId == "ts" || i.customId == "trickstache") {
-        await i.update({ embeds: [trickstache], components: [ts] });
-      } else if (i.customId == "ts2" || i.customId == "trickstache2") {
-        await i.update({ embeds: [trickstache], components: [ts2] });
-      } else if (i.customId == "ts3" || i.customId == "trickstache3") {
-        await i.update({ embeds: [trickstache], components: [ts3] });
-      } else if (i.customId == "ts4" || i.customId == "trickstache4") {
-        await i.update({ embeds: [trickstache], components: [ts4] });
-      } else if (i.customId == "valk" || i.customId == "valkster") {
-        await i.update({ embeds: [valkster], components: [valk] });
-      } else if (i.customId == "valk2" || i.customId == "valkster2") {
-        await i.update({ embeds: [valkster], components: [valk2] });
-      } else if (i.customId == "valk3" || i.customId == "valkster3") {
-        await i.update({ embeds: [valkster], components: [valk3] });
-      } else if (i.customId == "valk4" || i.customId == "valkster4") {
-        await i.update({ embeds: [valkster], components: [valk4] });
-      } else if (i.customId == "yem" || i.customId == "youngeggmartin") {
-        await i.update({ embeds: [youngeggmartin], components: [yem] });
-      } else if (i.customId == "yem2" || i.customId == "youngeggmartin2") {
-        await i.update({ embeds: [youngeggmartin], components: [yem2] });
-      } else if (i.customId == "yem3" || i.customId == "youngeggmartin3") {
-        await i.update({ embeds: [youngeggmartin], components: [yem3] });
+      const buttonActions = {
+        helppb: { embed: helppb, component: row },
+        allhelp: {embed: alldecksEmbed, component: alldecksrow},
+        helpall: {embed: alldecksEmbed, component: alldecksrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        helpcontrol: {embed: controlEmbed, component: controlrow},
+        helpmid: {embed: midrangeEmbed, component: midrangerow},
+        midhelp: {embed: midrangeEmbed, component: midrangerow},
+        bd: {embed: bonusducks, component: bd},
+        bonusducks: {embed: bonusducks, component: bd},
+        bd2: {embed: bonusducks, component: bd2},
+        bonusducks2: {embed: bonusducks, component: bd2},
+        bd3: {embed: bonusducks, component: bd3},
+        bonusducks3: {embed: bonusducks, component: bd3},
+        bd4: {embed: bonusducks, component: bd4},
+        bonusducks4: {embed: bonusducks, component: bd4},
+        bpb: {embed: budgetpb, component: bpb},
+        budgetpb: {embed: budgetpb, component: bpb},
+        cb: {embed: congabait, component: cb},
+        congabait: {embed: congabait, component: cb},
+        cb2: {embed: congabait, component: cb2},
+        congabait2: {embed: congabait, component: cb2},
+        cb3: {embed: congabait, component: cb3},
+        congabait3: {embed: congabait, component: cb3},
+        cb4: {embed: congabait, component: cb4},
+        congabait4: {embed: congabait, component: cb4},
+        pa: {embed: professorpackage, component: pa},
+        professorpackage: {embed: professorpackage, component: pa},
+        pa2: {embed: professorpackage, component: pa2},
+        professorpackage2: {embed: professorpackage, component: pa2},
+        pbf: {embed: pbfeast, component: pbf},
+        pbfeast: {embed: pbfeast, component: pbf},
+        pbf2: {embed: pbfeast, component: pbf2},
+        pbfeast2: {embed: pbfeast, component: pbf2},
+        pbf3: {embed: pbfeast, component: pbf3},
+        pbfeast3: {embed: pbfeast, component: pbf3},
+        ts: {embed: trickstache, component: ts},
+        trickstache: {embed: trickstache, component: ts},
+        ts2: {embed: trickstache, component: ts2},
+        trickstache2: {embed: trickstache, component: ts2},
+        ts3: {embed: trickstache, component: ts3},
+        trickstache3: {embed: trickstache, component: ts3},
+        ts4: {embed: trickstache, component: ts4},
+        trickstache4: {embed: trickstache, component: ts4},
+        valk: {embed: valkster, component: valk},
+        valkster: {embed: valkster, component: valk},
+        valk2: {embed: valkster, component: valk2},
+        valkster2: {embed: valkster, component: valk2},
+        valk3: {embed: valkster, component: valk3},
+        valkster3: {embed: valkster, component: valk3},
+        valk4: {embed: valkster, component: valk4},
+        valkster4: {embed: valkster, component: valk4},
+        yem: {embed: youngeggmartin, component: yem},
+        youngeggmartin: {embed: youngeggmartin, component: yem},
+        yem2: {embed: youngeggmartin, component: yem2},
+        youngeggmartin2: {embed: youngeggmartin, component: yem2},
+        yem3: {embed: youngeggmartin, component: yem3},
+        youngeggmartin3: {embed: youngeggmartin, component: yem3},
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button interaction.",
+          flags: MessageFlags.Ephemeral,
+        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "helppb") {
-        await i.update({ embeds: [helppb], components: [row] });
-      } else if (i.customId == "select") {
+    if (i.customId == "select") {
         await HandleSelectMenu(i);
       } else {
         await HandleButtonInteraction(i);

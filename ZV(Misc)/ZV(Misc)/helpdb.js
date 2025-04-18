@@ -5,6 +5,7 @@ const {
   EmbedBuilder,
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
+  MessageFlags,
 } = require("discord.js");
 const db = require("../../index.js");
 /**
@@ -254,7 +255,6 @@ module.exports = {
       ],
       ladderDecks: [
         "carroot",
-        "ejection",
         "frymidrose",
         "going3nuts",
         "midred",
@@ -285,7 +285,17 @@ module.exports = {
         "startron",
         "translattail",
       ],
-      aggroDecks: ["abeans", "budgetcc", "budgetct", "budgetnc", "budgetsf", "dinogloves", "logbait", "pbeans", "watertron"],
+      aggroDecks: [
+        "abeans",
+        "budgetcc",
+        "budgetct",
+        "budgetnc",
+        "budgetsf",
+        "dinogloves",
+        "logbait",
+        "pbeans",
+        "watertron",
+      ],
       comboDecks: [
         "budgetcc",
         "budgetcz",
@@ -313,7 +323,6 @@ module.exports = {
       controlDecks: [
         "cancerknight",
         "chemotherapy",
-        "ejection",
         "healcontrol",
         "pawntrickstab",
         "popsicle",
@@ -369,7 +378,6 @@ module.exports = {
         "chemotherapy",
         "cyburn",
         "dinogloves",
-        "ejection",
         "figlottery",
         "freezeheal",
         "frymidrose",
@@ -445,7 +453,6 @@ module.exports = {
         "gomorrah",
         "gravepiratestache",
         "gravestache",
-        "hibird",
         "horts",
         "marxbolt",
         "mechacontrol",
@@ -456,14 +463,13 @@ module.exports = {
         "telimpssb",
         "trickmech",
         "valkster",
-        "youngcatmartin",
       ],
       memeDecks: [
         "22savage",
         "antiagor",
-        "antiagoragor",
         "banhammer",
         "bastet",
+        "bonusducks",
         "coggerazzi",
         "congabait",
         "conjureleap",
@@ -483,7 +489,6 @@ module.exports = {
         "rampticia",
         "sunbandits",
         "sunlord",
-        "stacheticia",
         "terrifytricksterazzi",
         "uncrackamech",
         "watersports",
@@ -510,7 +515,6 @@ module.exports = {
       ],
       comboDecks: [
         "antiagor",
-        "antiagoragor",
         "banhammer",
         "bastet",
         "binaryflagwar",
@@ -531,7 +535,6 @@ module.exports = {
         "gargburn",
         "gravepiratestache",
         "gravestache",
-        "hibird",
         "himpter",
         "horts",
         "igmablobchum",
@@ -540,7 +543,6 @@ module.exports = {
         "pablosyeeyzs",
         "rampticia",
         "spacestars",
-        "stacheticia",
         "sunbandits",
         "sunlord",
         "telimps",
@@ -551,13 +553,11 @@ module.exports = {
         "valkster",
         "watersports",
         "whalepharaoh",
-        "youngcatmartin",
         "youngeggmartin",
         "youngkenmartin",
         "zmoss",
       ],
       controlDecks: [
-        "antiagoragor",
         "bfplankcontrol",
         "bonusducks",
         "budgetim",
@@ -592,7 +592,6 @@ module.exports = {
         "gargolithtech",
         "gargstar22",
         "gomorrah",
-        "hibird",
         "himpter",
         "horts",
         "icebox",
@@ -607,7 +606,6 @@ module.exports = {
         "trickstache",
         "valkster",
         "watersports",
-        "youngcatmartin",
         "youngkenmartin",
       ],
       tempoDecks: [
@@ -623,7 +621,6 @@ module.exports = {
         "22savage",
         "agraves",
         "antiagor",
-        "antiagoragor",
         "banhammer",
         "bfmidgargs",
         "bfplankcontrol",
@@ -657,7 +654,6 @@ module.exports = {
         "gomorrah",
         "gravepiratestache",
         "gravestache",
-        "hibird",
         "himpter",
         "horts",
         "huntgargs",
@@ -683,7 +679,6 @@ module.exports = {
         "seacret",
         "spacestars",
         "splimps",
-        "stacheticia",
         "sunbandits",
         "sunlord",
         "telimps",
@@ -696,7 +691,6 @@ module.exports = {
         "valkster",
         "watersports",
         "whalepharaoh",
-        "youngcatmartin",
         "youngeggmartin",
         "youngkenmartin",
         "zmoss",
@@ -766,9 +760,8 @@ module.exports = {
     const carr = new CreateButtons("cancerknight", "chemo");
     const chemo = new CreateButtons("carroot", "cburn");
     const cburn = new CreateButtons("chemotherapy", "dgloves");
-    const dgloves = new CreateButtons("cyburn", "eject");
-    const eject = new CreateButtons("dinogloves", "flottery");
-    const flottery = new CreateButtons("ejection", "fheal");
+    const dgloves = new CreateButtons("cyburn", "flottery");
+    const flottery = new CreateButtons("dinogloves", "fheal");
     const fheal = new CreateButtons("figlottery", "fmr");
     const fmr = new CreateButtons("freezeheal", "fflare");
     const fflare = new CreateButtons("frymidrose", "g3n");
@@ -826,9 +819,8 @@ module.exports = {
     const tc2 = new CreateButtons("shamcontrolbc2", "wtron2");
     const wtron2 = new CreateButtons("toyotacontrolla2", "helppcomp");
     const ladderprow = new CreateButtons("pbeans2", "carr2");
-    const carr2 = new CreateButtons("helppladder", "eject2");
-    const eject2 = new CreateButtons("carroot2", "fmr2");
-    const fmr2 = new CreateButtons("ejection2", "g3n2");
+    const carr2 = new CreateButtons("helppladder", "fmr2");
+    const fmr2 = new CreateButtons("carroot2", "g3n2");
     const g3n2 = new CreateButtons("frymidrose2", "mred2");
     const mred2 = new CreateButtons("going3nuts2", "pb2");
     const pb2 = new CreateButtons("midred2", "ladderphelp");
@@ -891,9 +883,8 @@ module.exports = {
     const tlattail3 = new CreateButtons("startron3", "helppcombo");
     const controlprow = new CreateButtons("toyotacontrolla3", "cank3");
     const cank3 = new CreateButtons("helppcontrol", "chemo3");
-    const chemo3 = new CreateButtons("cancerknight3", "eject3");
-    const eject3 = new CreateButtons("chemotherapy3", "healcon3");
-    const healcon3 = new CreateButtons("ejection3", "pts3");
+    const chemo3 = new CreateButtons("cancerknight3", "healcon3");
+    const healcon3 = new CreateButtons("chemotherapy3", "pts3");
     const pts3 = new CreateButtons("healcontrol3", "pop3");
     const pop3 = new CreateButtons("popsicle3", "radio3");
     const radio3 = new CreateButtons("pawntrickstab3", "shambc3");
@@ -931,9 +922,8 @@ module.exports = {
     const allzrow = new CreateButtons("zmoss", "sav");
     const sav = new CreateButtons("allzhelp", "agr");
     const agr = new CreateButtons("savage", "agor");
-    const agor = new CreateButtons("agraves", "agoragor");
-    const agoragor = new CreateButtons("antiagor", "bhammer");
-    const bhammer = new CreateButtons("antiagoragor", "bfmg");
+    const agor = new CreateButtons("agraves", "bhammer");
+    const bhammer = new CreateButtons("antiagor", "bfmg");
     const bfmg = new CreateButtons("banhammer", "bfpc");
     const bfpc = new CreateButtons("bfmidgargs", "bas");
     const bas = new CreateButtons("bfplankcontrol", "bfw");
@@ -965,9 +955,8 @@ module.exports = {
     const gstar22 = new CreateButtons("gargolithtech", "gom");
     const gom = new CreateButtons("gargstar22", "gps");
     const gps = new CreateButtons("gomorrah", "gstache");
-    const gstache = new CreateButtons("gravepiratestache", "hbird");
-    const hbird = new CreateButtons("gravestache", "hter");
-    const hter = new CreateButtons("hibird", "hor");
+    const gstache = new CreateButtons("gravepiratestache", "hter");
+    const hter = new CreateButtons("gravestache", "hor");
     const hor = new CreateButtons("himpter", "hgargs");
     const hgargs = new CreateButtons("horts", "ibox");
     const ibox = new CreateButtons("huntgargs", "igbc");
@@ -975,8 +964,9 @@ module.exports = {
     const kscope = new CreateButtons("igmablobchum", "lt");
     const lt = new CreateButtons("kaleidoscope", "ltbr");
     const ltbr = new CreateButtons("ladytuna", "ltime");
-    const ltime = new CreateButtons("lockthebathroom", "mcon");
-    const mcon = new CreateButtons("lunchtime", "mscope");
+    const ltime = new CreateButtons("lockthebathroom", "mbolt");
+    const mbolt = new CreateButtons("lunchtime", "mcon");
+    const mcon = new CreateButtons("marxbolt", "mscope");
     const mscope = new CreateButtons("mechacontrol", "nhks");
     const nhks = new CreateButtons("mechascope", "npa");
     const npa = new CreateButtons("nohokaistars", "otksw");
@@ -990,9 +980,8 @@ module.exports = {
     const syard = new CreateButtons("rampticia", "sea");
     const sea = new CreateButtons("schoolyard", "stars");
     const stars = new CreateButtons("seacret", "spl");
-    const spl = new CreateButtons("spacestars", "sticia");
-    const sticia = new CreateButtons("splimps", "sbandits");
-    const sbandits = new CreateButtons("stacheticia", "slord");
+    const spl = new CreateButtons("spacestars", "sbandits");
+    const sbandits = new CreateButtons("splimps", "slord");
     const slord = new CreateButtons("sunbandits", "timps");
     const timps = new CreateButtons("sunlord", "timpssb");
     const timpssb = new CreateButtons("telimps", "terrifyster");
@@ -1003,9 +992,8 @@ module.exports = {
     const umech = new CreateButtons("uncrackabolt", "vster");
     const vster = new CreateButtons("uncrackamech", "wsports");
     const wsports = new CreateButtons("valkster", "wph");
-    const wph = new CreateButtons("watersports", "ycmartin");
-    const ycmartin = new CreateButtons("whalepharaoh", "yemartin");
-    const yemartin = new CreateButtons("youngcatmartin", "ykmartin");
+    const wph = new CreateButtons("watersports", "yemartin");
+    const yemartin = new CreateButtons("whalepharaoh", "ykmartin");
     const ykmartin = new CreateButtons("youngeggmartin", "zm");
     const zm = new CreateButtons("youngkenmartin", "helpzall");
     const budgetzrow = new CreateButtons("budgetzm2", "bbf2");
@@ -1033,7 +1021,7 @@ module.exports = {
     const timps2 = new CreateButtons("spacestars2", "tstache2");
     const tstache2 = new CreateButtons("telimps2", "ubolt2");
     const ubolt2 = new CreateButtons("trickstache2", "compzhelp");
-    const ladderzrow = new CreateButtons("youngcatmartin2", "agr2");
+    const ladderzrow = new CreateButtons("valkster2", "agr2");
     const agr2 = new CreateButtons("helpzladder", "bfmg2");
     const bfmg2 = new CreateButtons("agraves2", "bfpc2");
     const bfpc2 = new CreateButtons("bfmidgargs2", "bfw2");
@@ -1044,9 +1032,8 @@ module.exports = {
     const gstar222 = new CreateButtons("cryoboy2", "gom2");
     const gom2 = new CreateButtons("gargstar222", "gps2");
     const gps2 = new CreateButtons("gomorrah2", "gstache2");
-    const gstache2 = new CreateButtons("gravepiratestache2", "hbird2");
-    const hbird2 = new CreateButtons("gravestache2", "hor2");
-    const hor2 = new CreateButtons("hibird2", "mbolt2");
+    const gstache2 = new CreateButtons("gravepiratestache2", "hor2");
+    const hor2 = new CreateButtons("gravestache2", "mbolt2");
     const mbolt2 = new CreateButtons("horts2", "mcon2");
     const mcon2 = new CreateButtons("marxbolt2", "mscope2");
     const mscope2 = new CreateButtons("mechacontrol2", "propackage2");
@@ -1056,15 +1043,14 @@ module.exports = {
     const spl2 = new CreateButtons("schoolyard2", "timpssb2");
     const timpssb2 = new CreateButtons("splimps2", "tmech2");
     const tmech2 = new CreateButtons("telimpssb2", "vster2");
-    const vster2 = new CreateButtons("trickmech2", "ycmartin2");
-    const ycmartin2 = new CreateButtons("valkster2", "ladderzhelp");
+    const vster2 = new CreateButtons("trickmech2", "ladderzhelp");
     const memezrow = new CreateButtons("zmoss2", "sav2");
     const sav2 = new CreateButtons("helpzmeme", "agor2");
-    const agor2 = new CreateButtons("savage2", "agoragor2");
-    const agoragor2 = new CreateButtons("antiagor2", "bhammer2");
-    const bhammer2 = new CreateButtons("antiagoragor2", "bas2")
-    const bas2 = new CreateButtons("banhammer2", "cog2");
-    const cog2 = new CreateButtons("bastet2", "cbait2");
+    const agor2 = new CreateButtons("savage2", "bhammer2");
+    const bhammer2 = new CreateButtons("antiagor2", "bas2");
+    const bas2 = new CreateButtons("banhammer2", "bducks2");
+    const bducks2 = new CreateButtons("bastet2", "bif2");
+    const cog2 = new CreateButtons("bonusducks2", "cbait2");
     const cbait2 = new CreateButtons("coggerazzi2", "cleap2");
     const cleap2 = new CreateButtons("congabait2", "dmech2");
     const dmech2 = new CreateButtons("conjureleap2", "flo2");
@@ -1082,9 +1068,8 @@ module.exports = {
     const otksw2 = new CreateButtons("petmop2", "rticia2");
     const rticia2 = new CreateButtons("otkswabbie2", "sticia2");
     const sbandits2 = new CreateButtons("rampticia2", "slord2");
-    const slord2 = new CreateButtons("sunbandits2", "sticia2");
-    const sticia2 = new CreateButtons("sunlord2", "terrifyster2");
-    const terrifyster2 = new CreateButtons("stacheticia2", "umech2");
+    const slord2 = new CreateButtons("sunbandits2", "terrifyster2");
+    const terrifyster2 = new CreateButtons("sunlord2", "umech2");
     const umech2 = new CreateButtons("terrifytricksterazzi2", "wsports2");
     const wsports2 = new CreateButtons("uncrackamech2", "wph2");
     const wph2 = new CreateButtons("watersports2", "yemartin2");
@@ -1108,9 +1093,8 @@ module.exports = {
     const tmech3 = new CreateButtons("splimps3", "aggrozhelp");
     const combozrow = new CreateButtons("zmoss3", "sav3");
     const sav3 = new CreateButtons("helpzcombo", "agor3");
-    const agor3 = new CreateButtons("savage3", "agoragor3");
-    const agoragor3 = new CreateButtons("antiagor3", "bhammer3");
-    const bhammer3 = new CreateButtons("antiagoragor3", "bas3");
+    const agor3 = new CreateButtons("savage3", "bhammer3");
+    const bhammer3 = new CreateButtons("antiagor3", "bas3");
     const bas3 = new CreateButtons("banhammer3", "bfw3");
     const bfw3 = new CreateButtons("bastet3", "bbolt3");
     const bbolt3 = new CreateButtons("binaryflagwar3", "bducks3");
@@ -1129,33 +1113,30 @@ module.exports = {
     const ftimps3 = new CreateButtons("floss3", "gps4");
     const gps4 = new CreateButtons("frozentelimps3", "gburn3");
     const gburn3 = new CreateButtons("gravepiratestache4", "gstache3");
-    const gstache3 = new CreateButtons("gargburn3", "hbird3");
-    const hbird3 = new CreateButtons("gravestache3", "hter3");
-    const hter3 = new CreateButtons("hibird3", "hor3");
+    const gstache3 = new CreateButtons("gargburn3", "hter3");
+    const hter3 = new CreateButtons("gravestache3", "hor3");
     const hor3 = new CreateButtons("himpter3", "igbc3");
     const igbc3 = new CreateButtons("horts3", "mscope3");
     const mscope3 = new CreateButtons("igmablobchum3", "otksw3");
     const otksw3 = new CreateButtons("mechascope3", "pyeeyz3");
     const pyeeyz3 = new CreateButtons("otkswabbie3", "rticia3");
     const rticia3 = new CreateButtons("pablosyeeyzs3", "stars3");
-    const stars3 = new CreateButtons("rampticia3", "sticia3");
-    const sticia3 = new CreateButtons("stacheticia3", "sbandits3");
-    const sbandits3 = new CreateButtons("sunbandits3", "slord3");
-    const slord3 = new CreateButtons("sunlord3", "timps3");
-    const timps3 = new CreateButtons("telimps3", "terrifyster3");
+    const stars3 = new CreateButtons("rampticia3", "sbandits3");
+    const sbandits3 = new CreateButtons("spacestars3", "slord3");
+    const slord3 = new CreateButtons("sunbandits3", "timps3");
+    const timps3 = new CreateButtons("sunlord3", "timpssb3");
+    const timpssb3 = new CreateButtons("telimps3", "terrifyster3");
     const terrifyster3 = new CreateButtons("telimpssb3", "tstache3");
     const tstache3 = new CreateButtons("terrifytricksterazzi3", "umech3");
     const umech3 = new CreateButtons("trickstache3", "vster3");
     const vster3 = new CreateButtons("uncrackamech3", "wsports3");
     const wsports3 = new CreateButtons("valkster3", "wph3");
-    const wph3 = new CreateButtons("watersports3", "ycmartin3");
-    const ycmartin3 = new CreateButtons("whalepharaoh3", "yemartin3");
-    const yemartin3 = new CreateButtons("youngcatmartin3", "ykmartin3");
+    const wph3 = new CreateButtons("watersports3", "yemartin3");
+    const yemartin3 = new CreateButtons("whalepharaoh3", "ykmartin3");
     const ykmartin3 = new CreateButtons("youngeggmartin3", "zm3");
     const zm3 = new CreateButtons("youngkenmartin3", "combozhelp");
-    const controlzrow = new CreateButtons("whalepharaoh3", "agoragor4");
-    const agoragor4 = new CreateButtons("helpzcontrol", "bfpc3");
-    const bfpc3 = new CreateButtons("antiagoragor4", "bducks4");
+    const controlzrow = new CreateButtons("whalepharaoh3", "bfpc3");
+    const bfpc3 = new CreateButtons("helpzcontrol", "bducks4");
     const bducks4 = new CreateButtons("bfplankcontrol3", "bim4");
     const bim4 = new CreateButtons("bonusducks4", "bust4");
     const bust4 = new CreateButtons("budgetim4", "ftimps4");
@@ -1187,9 +1168,8 @@ module.exports = {
     const gburn4 = new CreateButtons("cryoboy4", "gtech3");
     const gtech3 = new CreateButtons("gargburn4", "gstar223");
     const gstar223 = new CreateButtons("gargolithtech3", "gom3");
-    const gom3 = new CreateButtons("gargstar223", "hbird4");
-    const hbird4 = new CreateButtons("gomorrah3", "hter4");
-    const hter4 = new CreateButtons("hibird4", "hor4");
+    const gom3 = new CreateButtons("gargstar223", "hter4");
+    const hter4 = new CreateButtons("gomorrah3", "hor4");
     const hor4 = new CreateButtons("himpter4", "ibox3");
     const ibox3 = new CreateButtons("horts4", "igbc4");
     const igbc4 = new CreateButtons("icebox3", "lt3");
@@ -1202,9 +1182,8 @@ module.exports = {
     const slord4 = new CreateButtons("spacestars4", "tstache4");
     const tstache4 = new CreateButtons("sunlord4", "vster4");
     const vster4 = new CreateButtons("trickstache4", "wsports4");
-    const wsports4 = new CreateButtons("valkster4", "ycmartin4");
-    const ycmartin4 = new CreateButtons("watersports4", "ykmartin4");
-    const ykmartin4 = new CreateButtons("youngcatmartin4", "midzhelp");
+    const wsports4 = new CreateButtons("valkster4", "ykmartin4");
+    const ykmartin4 = new CreateButtons("watersports4", "midzhelp");
     const tempozrow = new CreateButtons("terrifytricksterazzi4", "brad3");
     const brad3 = new CreateButtons("helpztempo", "cog4");
     const cog4 = new CreateButtons("brady3", "cleap3");
@@ -1498,7 +1477,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const frymidrose = new CreatePlantDeckEmbed(result, "frymidrose");
     const healmidrose = new CreatePlantDeckEmbed(result, "hmr");
     const budgetsf = new CreatePlantDeckEmbed(result, "budgetswarmsf");
-    const ejection = new CreatePlantDeckEmbed(result, "ejection");
     const funnyflare = new CreatePlantDeckEmbed(result, "funnyflare");
     const healburn = new CreatePlantDeckEmbed(result, "healburn");
     const figlottery = new CreatePlantDeckEmbed(result, "healmidflare");
@@ -1570,11 +1548,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const mechascope = new CreateZombieDeckEmbed(result, "otkmecha");
     const kaleidoscope = new CreateZombieDeckEmbed(result, "otktrickster");
     const rampticia = new CreateZombieDeckEmbed(result, "rampticia");
-    const stacheticia = new CreateZombieDeckEmbed(result, "stacheticia");
-    const youngcatmartin = new CreateZombieDeckEmbed(result, "ycm");
     const agraves = new CreateZombieDeckEmbed(result, "agraves");
     const antiagor = new CreateZombieDeckEmbed(result, "antiagor");
-    const antiagoragor = new CreateZombieDeckEmbed(result, "antiagoragor");
     const budgetnt = new CreateZombieDeckEmbed(result, "budgetnt");
     const floss = new CreateZombieDeckEmbed(result, "floss");
     const gomorrah = new CreateZombieDeckEmbed(result, "gomorrah");
@@ -1585,7 +1560,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const bonusducks = new CreateZombieDeckEmbed(result, "bonusducks");
     const budgetpb = new CreateZombieDeckEmbed(result, "budgetpb");
     const congabait = new CreateZombieDeckEmbed(result, "congabait");
-    const hibird = new CreateZombieDeckEmbed(result, "hibird");
     const pbfeast = new CreateZombieDeckEmbed(result, "pbfeast");
     const professorpackage = new CreateZombieDeckEmbed(
       result,
@@ -1621,1104 +1595,959 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const zmoss = new CreateZombieDeckEmbed(result, "zmoss");
     const iFilter = (i) => i.user.id === message.author.id;
     async function HandleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "budgetpdecks") {
+      const selectMenuActions = {
+        budgetpdecks: { embed: budgetpdecksEmbed, component: budgetprow },
+        comppdecks: { embed: comppdecksEmbed, component: compprow },
+        ladderpdecks: { embed: ladderpdecksEmbed, component: ladderprow },
+        memepdecks: { embed: memepdecksEmbed, component: memeprow },
+        aggropdecks: { embed: aggropdecksEmbed, component: aggroprow },
+        combopdecks: { embed: combopdecksEmbed, component: comboprow },
+        controlpdecks: { embed: controlpdecksEmbed, component: controlprow },
+        midrangepdecks: { embed: midrangepdecksEmbed, component: midrangeprow },
+        tempopdecks: { embed: tempopdecksEmbed, component: tempoprow },
+        budgetzdecks: { embed: budgetzdecksEmbed, component: budgetzrow },
+        compzdecks: { embed: compzdecksEmbed, component: compzrow },
+        ladderzdecks: { embed: ladderzdecksEmbed, component: ladderzrow },
+        memezdecks: { embed: memezdecksEmbed, component: memezrow },
+        aggrozdecks: { embed: aggrozdecksEmbed, component: aggrozrow },
+        combozdecks: { embed: combozdecksEmbed, component: combozrow },
+        controlzdecks: { embed: controlzdecksEmbed, component: controlzrow },
+        midrangezdecks: { embed: midrangezdecksEmbed, component: midrangezrow },
+        tempozdecks: { embed: tempozdecksEmbed, component: tempozrow },
+        allpdecks: { embed: allpdecksEmbed, component: allprow },
+        allzdecks: { embed: allzdecksEmbed, component: allzrow },
+      };
+      const action = selectMenuActions[i.values[0]];
+      if (action) {
         await i.update({
-          embeds: [budgetpdecksEmbed],
-          components: [budgetprow],
+          embeds: [action.embed],
+          components: [action.component],
         });
-      } else if (value == "comppdecks") {
-        await i.update({ embeds: [comppdecksEmbed], components: [compprow] });
-      } else if (value == "ladderpdecks") {
-        await i.update({
-          embeds: [ladderpdecksEmbed],
-          components: [ladderprow],
+      } else {
+        await i.reply({
+          content: "Invalid selection",
+          flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "memepdecks") {
-        await i.update({ embeds: [memepdecksEmbed], components: [memeprow] });
-      } else if (value == "aggropdecks") {
-        await i.update({
-          embeds: [aggropdecksEmbed],
-          components: [aggroprow],
-        });
-      } else if (value == "combopdecks") {
-        await i.update({
-          embeds: [combopdecksEmbed],
-          components: [comboprow],
-        });
-      } else if (value == "controlpdecks") {
-        await i.update({
-          embeds: [controlpdecksEmbed],
-          components: [controlprow],
-        });
-      } else if (value == "midrangepdecks") {
-        await i.update({
-          embeds: [midrangepdecksEmbed],
-          components: [midrangeprow],
-        });
-      } else if (value == "tempopdecks") {
-        await i.update({
-          embeds: [tempopdecksEmbed],
-          components: [tempoprow],
-        });
-      } else if (value == "budgetzdecks") {
-        await i.update({
-          embeds: [budgetzdecksEmbed],
-          components: [budgetzrow],
-        });
-      } else if (value == "compzdecks") {
-        await i.update({ embeds: [compzdecksEmbed], components: [compzrow] });
-      } else if (value == "ladderzdecks") {
-        await i.update({
-          embeds: [ladderzdecksEmbed],
-          components: [ladderzrow],
-        });
-      } else if (value == "memezdecks") {
-        await i.update({ embeds: [memezdecksEmbed], components: [memezrow] });
-      } else if (value == "aggrozdecks") {
-        await i.update({
-          embeds: [aggrozdecksEmbed],
-          components: [aggrozrow],
-        });
-      } else if (value == "combozdecks") {
-        await i.update({
-          embeds: [combozdecksEmbed],
-          components: [combozrow],
-        });
-      } else if (value == "controlzdecks") {
-        await i.update({
-          embeds: [controlzdecksEmbed],
-          components: [controlzrow],
-        });
-      } else if (value == "midrangezdecks") {
-        await i.update({
-          embeds: [midrangezdecksEmbed],
-          components: [midrangezrow],
-        });
-      } else if (value == "tempozdecks") {
-        await i.update({
-          embeds: [tempozdecksEmbed],
-          components: [tempozrow],
-        });
-      }
-      else if(value == "allpdecks"){
-        await i.update({ embeds: [allpdecksEmbed], components: [allprow] });
-      }
-      else if(value == "allzdecks"){
-        await i.update({ embeds: [allzdecksEmbed], components: [allzrow] });
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "helppbudget" || i.customId == "budgetphelp") {
-        await i.update({
-          embeds: [budgetpdecksEmbed],
-          components: [budgetprow],
-        });
-      } else if (i.customId == "helppcomp" || i.customId == "compphelp") {
-        await i.update({ embeds: [comppdecksEmbed], components: [compprow] });
-      } else if (i.customId == "helppladder" || i.customId == "ladderphelp") {
-        await i.update({
-          embeds: [ladderpdecksEmbed],
-          components: [ladderprow],
-        });
-      } else if (i.customId == "helppmeme" || i.customId == "memephelp") {
-        await i.update({ embeds: [memepdecksEmbed], components: [memeprow] });
-      } else if (i.customId == "helppaggro" || i.customId == "aggrophelp") {
-        await i.update({ embeds: [aggropdecksEmbed], components: [aggroprow] });
-      } else if (i.customId == "helppcombo" || i.customId == "combophelp") {
-        await i.update({ embeds: [combopdecksEmbed], components: [comboprow] });
-      } else if (i.customId == "helppcontrol" || i.customId == "controlphelp") {
-        await i.update({
-          embeds: [controlpdecksEmbed],
-          components: [controlprow],
-        });
-      } else if (
-        i.customId == "helppmidrange" ||
-        i.customId == "midrangephelp"
-      ) {
-        await i.update({
-          embeds: [midrangepdecksEmbed],
-          components: [midrangeprow],
-        });
-      } else if (i.customId == "helpptempo" || i.customId == "tempophelp") {
-        await i.update({ embeds: [tempopdecksEmbed], components: [tempoprow] });
-      } else if (i.customId == "helpzbudget" || i.customId == "helpbudgetz") {
-        await i.update({
-          embeds: [budgetzdecksEmbed],
-          components: [budgetzrow],
-        });
-      } else if (i.customId == "helpzcomp" || i.customId == "compzhelp") {
-        await i.update({ embeds: [compzdecksEmbed], components: [compzrow] });
-      } else if (i.customId == "helpzladder" || i.customId == "ladderzhelp") {
-        await i.update({
-          embeds: [ladderzdecksEmbed],
-          components: [ladderzrow],
-        });
-      } else if (i.customId == "helpzmeme" || i.customId == "memezhelp") {
-        await i.update({ embeds: [memezdecksEmbed], components: [memezrow] });
-      } else if (i.customId == "helpzaggro" || i.customId == "aggrozhelp") {
-        await i.update({ embeds: [aggrozdecksEmbed], components: [aggrozrow] });
-      } else if (i.customId == "helpzcombo" || i.customId == "combozhelp") {
-        await i.update({ embeds: [combozdecksEmbed], components: [combozrow] });
-      } else if (i.customId == "helpzcontrol" || i.customId == "controlzhelp") {
-        await i.update({
-          embeds: [controlzdecksEmbed],
-          components: [controlzrow],
-        });
-      } else if (i.customId == "helpzmid" || i.customId == "midzhelp") {
-        await i.update({
-          embeds: [midrangezdecksEmbed],
-          components: [midrangezrow],
-        });
-      } else if (i.customId == "helpztempo" || i.customId == "tempozhelp") {
-        await i.update({ embeds: [tempozdecksEmbed], components: [tempozrow] });
-      } else if (i.customId == "helpallp" || i.customId == "allphelp") {
-        await i.update({ embeds: [allpdecksEmbed], components: [allprow] });
-      } else if (i.customId == "helpzall" || i.customId == "allzhelp") {
-        await i.update({ embeds: [allzdecksEmbed], components: [allzrow] });
-      } else if (i.customId == "wr100" || i.customId == "winrate100") {
-        await i.update({ embeds: [winrate100], components: [wr100] });
-      } else if (i.customId == "wr1002" || i.customId == "winrate1002") {
-        await i.update({ embeds: [winrate100], components: [wr1002] });
-      } else if (i.customId == "wr1003" || i.customId == "winrate1003") {
-        await i.update({ embeds: [winrate100], components: [wr1003] });
-      } else if (i.customId == "ab" || i.customId == "abeans") {
-        await i.update({ embeds: [abeans], components: [ab] });
-      } else if (i.customId == "ab2" || i.customId == "abeans2") {
-        await i.update({ embeds: [abeans], components: [ab2] });
-      } else if (i.customId == "ab3" || i.customId == "abeans3") {
-        await i.update({ embeds: [abeans], components: [ab3] });
-      } else if (i.customId == "healcon" || i.customId == "healcontrol") {
-        await i.update({ embeds: [healcontrol], components: [healcon] });
-      } else if (i.customId == "healcon2" || i.customId == "healcontrol2") {
-        await i.update({ embeds: [healcontrol], components: [healcon2] });
-      } else if (i.customId == "healcon3" || i.customId == "healcontrol3") {
-        await i.update({ embeds: [healcontrol], components: [healcon3] });
-      } else if (i.customId == "bct" || i.customId == "budgetct") {
-        await i.update({ embeds: [budgetct], components: [bct] });
-      } else if (i.customId == "bct2" || i.customId == "budgetct2") {
-        await i.update({ embeds: [budgetct], components: [bct2] });
-      } else if (i.customId == "bct3" || i.customId == "budgetct3") {
-        await i.update({ embeds: [budgetct], components: [bct3] });
-      } else if (i.customId == "bcc" || i.customId == "budgetcc") {
-        await i.update({ embeds: [budgetcc], components: [bcc] });
-      } else if (i.customId == "bcc2" || i.customId == "budgetcc2") {
-        await i.update({ embeds: [budgetcc], components: [bcc2] });
-      } else if (i.customId == "bcc3" || i.customId == "budgetcc3") {
-        await i.update({ embeds: [budgetcc], components: [bcc3] });
-      } else if (i.customId == "bcc4" || i.customId == "budgetcc4") {
-        await i.update({ embeds: [budgetcc], components: [bcc4] });
-      } else if (i.customId == "bcz" || i.customId == "budgetcz") {
-        await i.update({ embeds: [budgetcz], components: [bcz] });
-      } else if (i.customId == "bcz2" || i.customId == "budgetcz2") {
-        await i.update({ embeds: [budgetcz], components: [bcz2] });
-      } else if (i.customId == "bcz3" || i.customId == "budgetcz3") {
-        await i.update({ embeds: [budgetcz], components: [bcz3] });
-      } else if (i.customId == "bcz4" || i.customId == "budgetcz4") {
-        await i.update({ embeds: [budgetcz], components: [bcz4] });
-      } else if (i.customId == "bgk" || i.customId == "budgetgk") {
-        await i.update({ embeds: [budgetgk], components: [bgk] });
-      } else if (i.customId == "bgk2" || i.customId == "budgetgk2") {
-        await i.update({ embeds: [budgetgk], components: [bgk2] });
-      } else if (i.customId == "bgk3" || i.customId == "budgetgk3") {
-        await i.update({ embeds: [budgetgk], components: [bgk3] });
-      } else if (i.customId == "bgs" || i.customId == "budgetgs") {
-        await i.update({ embeds: [budgetgs], components: [bgs] });
-      } else if (i.customId == "bgs2" || i.customId == "budgetgs2") {
-        await i.update({ embeds: [budgetgs], components: [bgs2] });
-      } else if (i.customId == "bgs3" || i.customId == "budgetgs3") {
-        await i.update({ embeds: [budgetgs], components: [bgs3] });
-      } else if (i.customId == "bnc" || i.customId == "budgetnc") {
-        await i.update({ embeds: [budgetnc], components: [bnc] });
-      } else if (i.customId == "bnc2" || i.customId == "budgetnc2") {
-        await i.update({ embeds: [budgetnc], components: [bnc2] });
-      } else if (i.customId == "bnc3" || i.customId == "budgetnc3") {
-        await i.update({ embeds: [budgetnc], components: [bnc3] });
-      } else if (i.customId == "bro" || i.customId == "budgetro") {
-        await i.update({ embeds: [budgetro], components: [bro] });
-      } else if (i.customId == "bro2" || i.customId == "budgetro2") {
-        await i.update({ embeds: [budgetro], components: [bro2] });
-      } else if (i.customId == "bro3" || i.customId == "budgetro3") {
-        await i.update({ embeds: [budgetro], components: [bro3] });
-      } else if (i.customId == "bsf" || i.customId == "budgetsf") {
-        await i.update({ embeds: [budgetsf], components: [bsf] });
-      } else if (i.customId == "bsf2" || i.customId == "budgetsf2") {
-        await i.update({ embeds: [budgetsf], components: [bsf2] });
-      } else if (i.customId == "bsf3" || i.customId == "budgetsf3") {
-        await i.update({ embeds: [budgetsf], components: [bsf3] });
-      } else if (i.customId == "bsp" || i.customId == "budgetsp") {
-        await i.update({ embeds: [budgetsp], components: [bsp] });
-      } else if (i.customId == "bsp2" || i.customId == "budgetsp2") {
-        await i.update({ embeds: [budgetsp], components: [bsp2] });
-      } else if (i.customId == "bsp3" || i.customId == "budgetsp3") {
-        await i.update({ embeds: [budgetsp], components: [bsp3] });
-      } else if (i.customId == "bwk" || i.customId == "budgetwk") {
-        await i.update({ embeds: [budgetwk], components: [bwk] });
-      } else if (i.customId == "bwk2" || i.customId == "budgetwk2") {
-        await i.update({ embeds: [budgetwk], components: [bwk2] });
-      } else if (i.customId == "bwk3" || i.customId == "budgetwk3") {
-        await i.update({ embeds: [budgetwk], components: [bwk3] });
-      } else if (i.customId == "cank" || i.customId == "cancerknight") {
-        await i.update({ embeds: [cancerknight], components: [cank] });
-      } else if (i.customId == "cank2" || i.customId == "cancerknight2") {
-        await i.update({ embeds: [cancerknight], components: [cank2] });
-      } else if (i.customId == "cank3" || i.customId == "cancerknight3") {
-        await i.update({ embeds: [cancerknight], components: [cank3] });
-      } else if (i.customId == "chemo" || i.customId == "chemotherapy") {
-        await i.update({ embeds: [chemotherapy], components: [chemo] });
-      } else if (i.customId == "chemo2" || i.customId == "chemotherapy2") {
-        await i.update({ embeds: [chemotherapy], components: [chemo2] });
-      } else if (i.customId == "chemo3" || i.customId == "chemotherapy3") {
-        await i.update({ embeds: [chemotherapy], components: [chemo3] });
-      } else if (i.customId == "cburn" || i.customId == "cyburn") {
-        await i.update({ embeds: [cyburn], components: [cburn] });
-      } else if (i.customId == "cburn2" || i.customId == "cyburn2") {
-        await i.update({ embeds: [cyburn], components: [cburn2] });
-      } else if (i.customId == "cburn3" || i.customId == "cyburn3") {
-        await i.update({ embeds: [cyburn], components: [cburn3] });
-      } else if (i.customId == "cburn4" || i.customId == "cyburn4") {
-        await i.update({ embeds: [cyburn], components: [cburn4] });
-      } else if (i.customId == "eject" || i.customId == "ejection") {
-        await i.update({ embeds: [ejection], components: [eject] });
-      } else if (i.customId == "eject2" || i.customId == "ejection2") {
-        await i.update({ embeds: [ejection], components: [eject2] });
-      } else if (i.customId == "eject3" || i.customId == "ejection3") {
-        await i.update({ embeds: [ejection], components: [eject3] });
-      } else if (i.customId == "fheal" || i.customId == "freezeheal") {
-        await i.update({ embeds: [freezeheal], components: [fheal] });
-      } else if (i.customId == "fheal2" || i.customId == "freezeheal2") {
-        await i.update({ embeds: [freezeheal], components: [fheal2] });
-      } else if (i.customId == "fheal3" || i.customId == "freezeheal3") {
-        await i.update({ embeds: [freezeheal], components: [fheal3] });
-      } else if (i.customId == "fmr" || i.customId == "frymidrose") {
-        await i.update({ embeds: [frymidrose], components: [fmr] });
-      } else if (i.customId == "fmr2" || i.customId == "frymidrose2") {
-        await i.update({ embeds: [frymidrose], components: [fmr2] });
-      } else if (i.customId == "fmr3" || i.customId == "frymidrose3") {
-        await i.update({ embeds: [frymidrose], components: [fmr3] });
-      } else if (i.customId == "fflare" || i.customId == "funnyflare") {
-        await i.update({ embeds: [funnyflare], components: [fflare] });
-      } else if (i.customId == "fflare2" || i.customId == "funnyflare2") {
-        await i.update({ embeds: [funnyflare], components: [fflare2] });
-      } else if (i.customId == "fflare3" || i.customId == "funnyflare3") {
-        await i.update({ embeds: [funnyflare], components: [fflare3] });
-      } else if (i.customId == "fflare4" || i.customId == "funnyflare4") {
-        await i.update({ embeds: [funnyflare], components: [fflare4] });
-      } else if (i.customId == "g3n" || i.customId == "going3nuts") {
-        await i.update({ embeds: [going3nuts], components: [g3n] });
-      } else if (i.customId == "g3n2" || i.customId == "going3nuts2") {
-        await i.update({ embeds: [going3nuts], components: [g3n2] });
-      } else if (i.customId == "g3n3" || i.customId == "going3nuts3") {
-        await i.update({ embeds: [going3nuts], components: [g3n3] });
-      } else if (i.customId == "g3n4" || i.customId == "going3nuts4") {
-        await i.update({ embeds: [going3nuts], components: [g3n4] });
-      } else if (i.customId == "hburn" || i.customId == "healburn") {
-        await i.update({ embeds: [healburn], components: [hburn] });
-      } else if (i.customId == "hburn2" || i.customId == "healburn2") {
-        await i.update({ embeds: [healburn], components: [hburn2] });
-      } else if (i.customId == "hburn3" || i.customId == "healburn3") {
-        await i.update({ embeds: [healburn], components: [hburn3] });
-      } else if (i.customId == "hburn4" || i.customId == "healburn4") {
-        await i.update({ embeds: [healburn], components: [hburn4] });
-      } else if (i.customId == "flottery" || i.customId == "figlottery") {
-        await i.update({ embeds: [figlottery], components: [flottery] });
-      } else if (i.customId == "flottery2" || i.customId == "figlottery2") {
-        await i.update({ embeds: [figlottery], components: [flottery2] });
-      } else if (i.customId == "flottery3" || i.customId == "figlottery3") {
-        await i.update({ embeds: [figlottery], components: [flottery3] });
-      } else if (i.customId == "hmr" || i.customId == "healmidrose") {
-        await i.update({ embeds: [healmidrose], components: [hmr] });
-      } else if (i.customId == "hmr2" || i.customId == "healmidrose2") {
-        await i.update({ embeds: [healmidrose], components: [hmr2] });
-      } else if (i.customId == "hmr3" || i.customId == "healmidrose3") {
-        await i.update({ embeds: [healmidrose], components: [hmr3] });
-      } else if (i.customId == "hland" || i.customId == "highlander") {
-        await i.update({ embeds: [highlander], components: [hland] });
-      } else if (i.customId == "hland2" || i.customId == "highlander2") {
-        await i.update({ embeds: [highlander], components: [hland2] });
-      } else if (i.customId == "hland3" || i.customId == "highlander3") {
-        await i.update({ embeds: [highlander], components: [hland3] });
-      } else if (i.customId == "lcbd" || i.customId == "lifecouldbedream") {
-        await i.update({ embeds: [lifecouldbedream], components: [lcbd] });
-      } else if (i.customId == "lcbd2" || i.customId == "lifecouldbedream2") {
-        await i.update({ embeds: [lifecouldbedream], components: [lcbd2] });
-      } else if (i.customId == "lcbd3" || i.customId == "lifecouldbedream3") {
-        await i.update({ embeds: [lifecouldbedream], components: [lcbd3] });
-      } else if (i.customId == "mred" || i.customId == "midred") {
-        await i.update({ embeds: [midred], components: [mred] });
-      } else if (i.customId == "mred2" || i.customId == "midred2") {
-        await i.update({ embeds: [midred], components: [mred2] });
-      } else if (i.customId == "mred3" || i.customId == "midred3") {
-        await i.update({ embeds: [midred], components: [mred3] });
-      } else if (i.customId == "mred4" || i.customId == "midred4") {
-        await i.update({ embeds: [midred], components: [mred4] });
-      } else if (i.customId == "mopr" || i.customId == "mopribus") {
-        await i.update({ embeds: [mopribus], components: [mopr] });
-      } else if (i.customId == "mopr2" || i.customId == "mopribus2") {
-        await i.update({ embeds: [mopribus], components: [mopr2] });
-      } else if (i.customId == "mopr3" || i.customId == "mopribus3") {
-        await i.update({ embeds: [mopribus], components: [mopr3] });
-      } else if (i.customId == "mopr4" || i.customId == "mopribus4") {
-        await i.update({ embeds: [mopribus], components: [mopr4] });
-      } else if (i.customId == "msp" || i.customId == "mspotk") {
-        await i.update({ embeds: [mspotk], components: [msp] });
-      } else if (i.customId == "msp2" || i.customId == "mspotk2") {
-        await i.update({ embeds: [mspotk], components: [msp2] });
-      } else if (i.customId == "msp3" || i.customId == "mspotk3") {
-        await i.update({ embeds: [mspotk], components: [msp3] });
-      } else if (i.customId == "plmop" || i.customId == "plantmop") {
-        await i.update({ embeds: [plantmop], components: [plmop] });
-      } else if (i.customId == "plmop2" || i.customId == "plantmop2") {
-        await i.update({ embeds: [plantmop], components: [plmop2] });
-      } else if (i.customId == "plmop3" || i.customId == "plantmop3") {
-        await i.update({ embeds: [plantmop], components: [plmop3] });
-      } else if (i.customId == "psol" || i.customId == "psychosolstice") {
-        await i.update({ embeds: [psychosolstice], components: [psol] });
-      } else if (i.customId == "psol2" || i.customId == "psychosolstice2") {
-        await i.update({ embeds: [psychosolstice], components: [psol2] });
-      } else if (i.customId == "psol3" || i.customId == "psychosolstice3") {
-        await i.update({ embeds: [psychosolstice], components: [psol3] });
-      } else if (i.customId == "psol4" || i.customId == "psychosolstice4") {
-        await i.update({ embeds: [psychosolstice], components: [psol4] });
-      } else if (i.customId == "radio" || i.customId == "radiotherapy") {
-        await i.update({ embeds: [radiotherapy], components: [radio] });
-      } else if (i.customId == "radio2" || i.customId == "radiotherapy2") {
-        await i.update({ embeds: [radiotherapy], components: [radio2] });
-      } else if (i.customId == "radio3" || i.customId == "radiotherapy3") {
-        await i.update({ embeds: [radiotherapy], components: [radio3] });
-      } else if (i.customId == "r2s" || i.customId == "ramp2seedling") {
-        await i.update({ embeds: [ramp2seedling], components: [r2s] });
-      } else if (i.customId == "r2s2" || i.customId == "ramp2seedling2") {
-        await i.update({ embeds: [ramp2seedling], components: [r2s2] });
-      } else if (i.customId == "r2s3" || i.customId == "ramp2seedling3") {
-        await i.update({ embeds: [ramp2seedling], components: [r2s3] });
-      } else if (i.customId == "r2s4" || i.customId == "ramp2seedling4") {
-        await i.update({ embeds: [ramp2seedling], components: [r2s4] });
-      } else if (i.customId == "smf" || i.customId == "savagemayflower") {
-        await i.update({ embeds: [savagemayflower], components: [smf] });
-      } else if (i.customId == "smf2" || i.customId == "savagemayflower2") {
-        await i.update({ embeds: [savagemayflower], components: [smf2] });
-      } else if (i.customId == "smf3" || i.customId == "savagemayflower3") {
-        await i.update({ embeds: [savagemayflower], components: [smf3] });
-      } else if (i.customId == "shambc" || i.customId == "shamcontrolbc") {
-        await i.update({ embeds: [shamcontrolbc], components: [shambc] });
-      } else if (i.customId == "shambc2" || i.customId == "shamcontrolbc2") {
-        await i.update({ embeds: [shamcontrolbc], components: [shambc2] });
-      } else if (i.customId == "shambc3" || i.customId == "shamcontrolbc3") {
-        await i.update({ embeds: [shamcontrolbc], components: [shambc3] });
-      } else if (i.customId == "sknight" || i.customId == "shitknight") {
-        await i.update({ embeds: [shitknight], components: [sknight] });
-      } else if (i.customId == "sknight2" || i.customId == "shitknight2") {
-        await i.update({ embeds: [shitknight], components: [sknight2] });
-      } else if (i.customId == "sknight3" || i.customId == "shitknight3") {
-        await i.update({ embeds: [shitknight], components: [sknight3] });
-      } else if (i.customId == "srings" || i.customId == "starrings") {
-        await i.update({ embeds: [starrings], components: [srings] });
-      } else if (i.customId == "srings2" || i.customId == "starrings2") {
-        await i.update({ embeds: [starrings], components: [srings2] });
-      } else if (i.customId == "srings3" || i.customId == "starrings3") {
-        await i.update({ embeds: [starrings], components: [srings3] });
-      } else if (i.customId == "srings4" || i.customId == "starrings4") {
-        await i.update({ embeds: [starrings], components: [srings4] });
-      } else if (i.customId == "stron" || i.customId == "startron") {
-        await i.update({ embeds: [startron], components: [stron] });
-      } else if (i.customId == "stron2" || i.customId == "startron2") {
-        await i.update({ embeds: [startron], components: [stron2] });
-      } else if (i.customId == "stron3" || i.customId == "startron3") {
-        await i.update({ embeds: [startron], components: [stron3] });
-      } else if (i.customId == "stron4" || i.customId == "startron4") {
-        await i.update({ embeds: [startron], components: [stron4] });
-      } else if (i.customId == "tc" || i.customId == "toyotacontrolla") {
-        await i.update({ embeds: [toyotacontrolla], components: [tc] });
-      } else if (i.customId == "tc2" || i.customId == "toyotacontrolla2") {
-        await i.update({ embeds: [toyotacontrolla], components: [tc2] });
-      } else if (i.customId == "tc3" || i.customId == "toyotacontrolla3") {
-        await i.update({ embeds: [toyotacontrolla], components: [tc3] });
-      } else if (i.customId == "tlattail" || i.customId == "translattail") {
-        await i.update({ embeds: [translattail], components: [tlattail] });
-      } else if (i.customId == "tlattail2" || i.customId == "translattail2") {
-        await i.update({ embeds: [translattail], components: [tlattail2] });
-      } else if (i.customId == "tlattail3" || i.customId == "translattail3") {
-        await i.update({ embeds: [translattail], components: [tlattail3] });
-      } else if (i.customId == "tlattail4" || i.customId == "translattail4") {
-        await i.update({ embeds: [translattail], components: [tlattail4] });
-      } else if (i.customId == "wtron" || i.customId == "watertron") {
-        await i.update({ embeds: [watertron], components: [wtron] });
-      } else if (i.customId == "wtron2" || i.customId == "watertron2") {
-        await i.update({ embeds: [watertron], components: [wtron2] });
-      } else if (i.customId == "wtron3" || i.customId == "watertron3") {
-        await i.update({ embeds: [watertron], components: [wtron3] });
-      } else if (i.customId == "agr" || i.customId == "agraves") {
-        await i.update({ embeds: [agraves], components: [agr] });
-      } else if (i.customId == "agr2" || i.customId == "agraves2") {
-        await i.update({ embeds: [agraves], components: [agr2] });
-      } else if (i.customId == "agr3" || i.customId == "agraves3") {
-        await i.update({ embeds: [agraves], components: [agr3] });
-      } else if (i.customId == "agor" || i.customId == "antiagor") {
-        await i.update({ embeds: [antiagor], components: [agor] });
-      } else if (i.customId == "agor2" || i.customId == "antiagor2") {
-        await i.update({ embeds: [antiagor], components: [agor2] });
-      } else if (i.customId == "agor3" || i.customId == "antiagor3") {
-        await i.update({ embeds: [antiagor], components: [agor3] });
-      } else if (i.customId == "agoragor" || i.customId == "antiagoragor") {
-        await i.update({ embeds: [antiagoragor], components: [agoragor] });
-      } else if (i.customId == "agoragor2" || i.customId == "antiagoragor2") {
-        await i.update({ embeds: [antiagoragor], components: [agoragor2] });
-      } else if (i.customId == "agoragor3" || i.customId == "antiagoragor3") {
-        await i.update({ embeds: [antiagoragor], components: [agoragor3] });
-      } else if (i.customId == "agoragor4" || i.customId == "antiagoragor4") {
-        await i.update({ embeds: [antiagoragor], components: [agoragor4] });
-      } else if (i.customId == "bfmg" || i.customId == "bfmidgargs") {
-        await i.update({ embeds: [bfmidgargs], components: [bfmg] });
-      } else if (i.customId == "bfmg2" || i.customId == "bfmidgargs2") {
-        await i.update({ embeds: [bfmidgargs], components: [bfmg2] });
-      } else if (i.customId == "bfmg3" || i.customId == "bfmidgargs3") {
-        await i.update({ embeds: [bfmidgargs], components: [bfmg3] });
-      } else if (i.customId == "bfpc" || i.customId == "bfplankcontrol") {
-        await i.update({ embeds: [bfplankcontrol], components: [bfpc] });
-      } else if (i.customId == "bfpc2" || i.customId == "bfplankcontrol2") {
-        await i.update({ embeds: [bfplankcontrol], components: [bfpc2] });
-      } else if (i.customId == "bfpc3" || i.customId == "bfplankcontrol3") {
-        await i.update({ embeds: [bfplankcontrol], components: [bfpc3] });
-      } else if (i.customId == "bas" || i.customId == "bastet") {
-        await i.update({ embeds: [bastet], components: [bas] });
-      } else if (i.customId == "bas2" || i.customId == "bastet2") {
-        await i.update({ embeds: [bastet], components: [bas2] });
-      } else if (i.customId == "bas3" || i.customId == "bastet3") {
-        await i.update({ embeds: [bastet], components: [bas3] });
-      } else if (i.customId == "bas4" || i.customId == "bastet4") {
-        await i.update({ embeds: [bastet], components: [bas4] });
-      } else if (i.customId == "bfw" || i.customId == "binaryflagwar") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw] });
-      } else if (i.customId == "bfw2" || i.customId == "binaryflagwar2") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw2] });
-      } else if (i.customId == "bfw3" || i.customId == "binaryflagwar3") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw3] });
-      } else if (i.customId == "bfw4" || i.customId == "binaryflagwar4") {
-        await i.update({ embeds: [binaryflagwar], components: [bfw4] });
-      } else if (i.customId == "bbolt" || i.customId == "boltbolt") {
-        await i.update({ embeds: [boltbolt], components: [bbolt] });
-      } else if (i.customId == "bbolt2" || i.customId == "boltbolt2") {
-        await i.update({ embeds: [boltbolt], components: [bbolt2] });
-      } else if (i.customId == "bbolt3" || i.customId == "boltbolt3") {
-        await i.update({ embeds: [boltbolt], components: [bbolt3] });
-      } else if (i.customId == "bbolt4" || i.customId == "boltbolt4") {
-        await i.update({ embeds: [boltbolt], components: [bbolt4] });
-      } else if (i.customId == "bducks" || i.customId == "bonusducks") {
-        await i.update({ embeds: [bonusducks], components: [bducks] });
-      } else if (i.customId == "bducks2" || i.customId == "bonusducks2") {
-        await i.update({ embeds: [bonusducks], components: [bducks2] });
-      } else if (i.customId == "bducks3" || i.customId == "bonusducks3") {
-        await i.update({ embeds: [bonusducks], components: [bducks3] });
-      } else if (i.customId == "bducks4" || i.customId == "bonusducks4") {
-        await i.update({ embeds: [bonusducks], components: [bducks4] });
-      } else if (i.customId == "brad" || i.customId == "brady") {
-        await i.update({ embeds: [brady], components: [brad] });
-      } else if (i.customId == "brad2" || i.customId == "brady2") {
-        await i.update({ embeds: [brady], components: [brad2] });
-      } else if (i.customId == "brad3" || i.customId == "brady3") {
-        await i.update({ embeds: [brady], components: [brad3] });
-      } else if (i.customId == "bbf" || i.customId == "budgetbf") {
-        await i.update({ embeds: [budgetbf], components: [bbf] });
-      } else if (i.customId == "bbf2" || i.customId == "budgetbf2") {
-        await i.update({ embeds: [budgetbf], components: [bbf2] });
-      } else if (i.customId == "bbf3" || i.customId == "budgetbf3") {
-        await i.update({ embeds: [budgetbf], components: [bbf3] });
-      } else if (i.customId == "beb" || i.customId == "budgeteb") {
-        await i.update({ embeds: [budgeteb], components: [beb] });
-      } else if (i.customId == "beb2" || i.customId == "budgeteb2") {
-        await i.update({ embeds: [budgeteb], components: [beb2] });
-      } else if (i.customId == "beb3" || i.customId == "budgeteb3") {
-        await i.update({ embeds: [budgeteb], components: [beb3] });
-      } else if (i.customId == "bif" || i.customId == "budgetif") {
-        await i.update({ embeds: [budgetif], components: [bif] });
-      } else if (i.customId == "bif2" || i.customId == "budgetif2") {
-        await i.update({ embeds: [budgetif], components: [bif2] });
-      } else if (i.customId == "bif3" || i.customId == "budgetif3") {
-        await i.update({ embeds: [budgetif], components: [bif3] });
-      } else if (i.customId == "bim" || i.customId == "budgetim") {
-        await i.update({ embeds: [budgetim], components: [bim] });
-      } else if (i.customId == "bim2" || i.customId == "budgetim2") {
-        await i.update({ embeds: [budgetim], components: [bim2] });
-      } else if (i.customId == "bim3" || i.customId == "budgetim3") {
-        await i.update({ embeds: [budgetim], components: [bim3] });
-      } else if (i.customId == "bim4" || i.customId == "budgetim4") {
-        await i.update({ embeds: [budgetim], components: [bim4] });
-      } else if (i.customId == "bnt" || i.customId == "budgetnt") {
-        await i.update({ embeds: [budgetnt], components: [bnt] });
-      } else if (i.customId == "bnt2" || i.customId == "budgetnt2") {
-        await i.update({ embeds: [budgetnt], components: [bnt2] });
-      } else if (i.customId == "bnt3" || i.customId == "budgetnt3") {
-        await i.update({ embeds: [budgetnt], components: [bnt3] });
-      } else if (i.customId == "bnt4" || i.customId == "budgetnt4") {
-        await i.update({ embeds: [budgetnt], components: [bnt4] });
-      } else if (i.customId == "bpb" || i.customId == "budgetpb") {
-        await i.update({ embeds: [budgetpb], components: [bpb] });
-      } else if (i.customId == "bpb2" || i.customId == "budgetpb2") {
-        await i.update({ embeds: [budgetpb], components: [bpb2] });
-      } else if (i.customId == "bpb3" || i.customId == "budgetpb3") {
-        await i.update({ embeds: [budgetpb], components: [bpb3] });
-      } else if (i.customId == "brb" || i.customId == "budgetrb") {
-        await i.update({ embeds: [budgetrb], components: [brb] });
-      } else if (i.customId == "brb2" || i.customId == "budgetrb2") {
-        await i.update({ embeds: [budgetrb], components: [brb2] });
-      } else if (i.customId == "brb3" || i.customId == "budgetrb3") {
-        await i.update({ embeds: [budgetrb], components: [brb3] });
-      } else if (i.customId == "bsb" || i.customId == "budgetsb") {
-        await i.update({ embeds: [budgetsb], components: [bsb] });
-      } else if (i.customId == "bsb2" || i.customId == "budgetsb2") {
-        await i.update({ embeds: [budgetsb], components: [bsb2] });
-      } else if (i.customId == "bsb3" || i.customId == "budgetsb3") {
-        await i.update({ embeds: [budgetsb], components: [bsb3] });
-      } else if (i.customId == "bsm" || i.customId == "budgetsm") {
-        await i.update({ embeds: [budgetsm], components: [bsm] });
-      } else if (i.customId == "bsm2" || i.customId == "budgetsm2") {
-        await i.update({ embeds: [budgetsm], components: [bsm2] });
-      } else if (i.customId == "bsm3" || i.customId == "budgetsm3") {
-        await i.update({ embeds: [budgetsm], components: [bsm3] });
-      } else if (i.customId == "bsm4" || i.customId == "budgetsm4") {
-        await i.update({ embeds: [budgetsm], components: [bsm4] });
-      } else if (i.customId == "bykm" || i.customId == "budgetykm") {
-        await i.update({ embeds: [budgetykm], components: [bykm] });
-      } else if (i.customId == "bykm2" || i.customId == "budgetykm2") {
-        await i.update({ embeds: [budgetykm], components: [bykm2] });
-      } else if (i.customId == "bykm3" || i.customId == "budgetykm3") {
-        await i.update({ embeds: [budgetykm], components: [bykm3] });
-      } else if (i.customId == "bykm4" || i.customId == "budgetykm4") {
-        await i.update({ embeds: [budgetykm], components: [bykm4] });
-      } else if (i.customId == "bzm" || i.customId == "budgetzm") {
-        await i.update({ embeds: [budgetzm], components: [bzm] });
-      } else if (i.customId == "bzm2" || i.customId == "budgetzm2") {
-        await i.update({ embeds: [budgetzm], components: [bzm2] });
-      } else if (i.customId == "bzm3" || i.customId == "budgetzm3") {
-        await i.update({ embeds: [budgetzm], components: [bzm3] });
-      } else if (i.customId == "bzm4" || i.customId == "budgetzm4") {
-        await i.update({ embeds: [budgetzm], components: [bzm4] });
-      } else if (i.customId == "bust" || i.customId == "bustbolt") {
-        await i.update({ embeds: [bustbolt], components: [bust] });
-      } else if (i.customId == "bust2" || i.customId == "bustbolt2") {
-        await i.update({ embeds: [bustbolt], components: [bust2] });
-      } else if (i.customId == "bust3" || i.customId == "bustbolt3") {
-        await i.update({ embeds: [bustbolt], components: [bust3] });
-      } else if (i.customId == "bust4" || i.customId == "bustbolt4") {
-        await i.update({ embeds: [bustbolt], components: [bust4] });
-      } else if (i.customId == "cog" || i.customId == "coggerazzi") {
-        await i.update({ embeds: [coggerazzi], components: [cog] });
-      } else if (i.customId == "cog2" || i.customId == "coggerazzi2") {
-        await i.update({ embeds: [coggerazzi], components: [cog2] });
-      } else if (i.customId == "cog3" || i.customId == "coggerazzi3") {
-        await i.update({ embeds: [coggerazzi], components: [cog3] });
-      } else if (i.customId == "cog4" || i.customId == "coggerazzi4") {
-        await i.update({ embeds: [coggerazzi], components: [cog4] });
-      } else if (i.customId == "cbait" || i.customId == "congabait") {
-        await i.update({ embeds: [congabait], components: [cbait] });
-      } else if (i.customId == "cbait2" || i.customId == "congabait2") {
-        await i.update({ embeds: [congabait], components: [cbait2] });
-      } else if (i.customId == "cbait3" || i.customId == "congabait3") {
-        await i.update({ embeds: [congabait], components: [cbait3] });
-      } else if (i.customId == "cbait4" || i.customId == "congabait4") {
-        await i.update({ embeds: [congabait], components: [cbait4] });
-      } else if (i.customId == "cleap" || i.customId == "conjureleap") {
-        await i.update({ embeds: [conjureleap], components: [cleap] });
-      } else if (i.customId == "cleap2" || i.customId == "conjureleap2") {
-        await i.update({ embeds: [conjureleap], components: [cleap2] });
-      } else if (i.customId == "cleap3" || i.customId == "conjureleap3") {
-        await i.update({ embeds: [conjureleap], components: [cleap3] });
-      } else if (i.customId == "cboy" || i.customId == "cryoboy") {
-        await i.update({ embeds: [cryoboy], components: [cboy] });
-      } else if (i.customId == "cboy2" || i.customId == "cryoboy2") {
-        await i.update({ embeds: [cryoboy], components: [cboy2] });
-      } else if (i.customId == "cboy3" || i.customId == "cryoboy3") {
-        await i.update({ embeds: [cryoboy], components: [cboy3] });
-      } else if (i.customId == "cboy4" || i.customId == "cryoboy4") {
-        await i.update({ embeds: [cryoboy], components: [cboy4] });
-      } else if (i.customId == "dmech" || i.customId == "dozzamech") {
-        await i.update({ embeds: [dozzamech], components: [dmech] });
-      } else if (i.customId == "dmech2" || i.customId == "dozzamech2") {
-        await i.update({ embeds: [dozzamech], components: [dmech2] });
-      } else if (i.customId == "dmech3" || i.customId == "dozzamech3") {
-        await i.update({ embeds: [dozzamech], components: [dmech3] });
-      } else if (i.customId == "flo" || i.customId == "floss") {
-        await i.update({ embeds: [floss], components: [flo] });
-      } else if (i.customId == "flo2" || i.customId == "floss2") {
-        await i.update({ embeds: [floss], components: [flo2] });
-      } else if (i.customId == "flo3" || i.customId == "floss3") {
-        await i.update({ embeds: [floss], components: [flo3] });
-      } else if (i.customId == "ftimps" || i.customId == "frozentelimps") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps] });
-      } else if (i.customId == "ftimps2" || i.customId == "frozentelimps2") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps2] });
-      } else if (i.customId == "ftimps3" || i.customId == "frozentelimps3") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps3] });
-      } else if (i.customId == "ftimps4" || i.customId == "frozentelimps4") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps4] });
-      } else if (i.customId == "gburn" || i.customId == "gargburn") {
-        await i.update({ embeds: [gargburn], components: [gburn] });
-      } else if (i.customId == "gburn2" || i.customId == "gargburn2") {
-        await i.update({ embeds: [gargburn], components: [gburn2] });
-      } else if (i.customId == "gburn3" || i.customId == "gargburn3") {
-        await i.update({ embeds: [gargburn], components: [gburn3] });
-      } else if (i.customId == "gburn4" || i.customId == "gargburn4") {
-        await i.update({ embeds: [gargburn], components: [gburn4] });
-      } else if (i.customId == "gtech" || i.customId == "gargolithtech") {
-        await i.update({ embeds: [gargolithtech], components: [gtech] });
-      } else if (i.customId == "gtech2" || i.customId == "gargolithtech2") {
-        await i.update({ embeds: [gargolithtech], components: [gtech2] });
-      } else if (i.customId == "gtech3" || i.customId == "gargolithtech3") {
-        await i.update({ embeds: [gargolithtech], components: [gtech3] });
-      } else if (i.customId == "gstar22" || i.customId == "gargstar22") {
-        await i.update({ embeds: [gargstar22], components: [gstar22] });
-      } else if (i.customId == "gstar222" || i.customId == "gargstar222") {
-        await i.update({ embeds: [gargstar22], components: [gstar222] });
-      } else if (i.customId == "gstar223" || i.customId == "gargstar223") {
-        await i.update({ embeds: [gargstar22], components: [gstar223] });
-      } else if (i.customId == "gom" || i.customId == "gomorrah") {
-        await i.update({ embeds: [gomorrah], components: [gom] });
-      } else if (i.customId == "gom2" || i.customId == "gomorrah2") {
-        await i.update({ embeds: [gomorrah], components: [gom2] });
-      } else if (i.customId == "gom3" || i.customId == "gomorrah3") {
-        await i.update({ embeds: [gomorrah], components: [gom3] });
-      } else if (i.customId == "gps" || i.customId == "gravepiratestache") {
-        await i.update({ embeds: [gravepiratestache], components: [gps] });
-      } else if (i.customId == "gps2" || i.customId == "gravepiratestache2") {
-        await i.update({ embeds: [gravepiratestache], components: [gps2] });
-      } else if (i.customId == "gps3" || i.customId == "gravepiratestache3") {
-        await i.update({ embeds: [gravepiratestache], components: [gps3] });
-      } else if (i.customId == "gps4" || i.customId == "gravepiratestache4") {
-        await i.update({ embeds: [gravepiratestache], components: [gps4] });
-      } else if (i.customId == "gstache" || i.customId == "gravestache") {
-        await i.update({ embeds: [gravestache], components: [gstache] });
-      } else if (i.customId == "gstache2" || i.customId == "gravestache2") {
-        await i.update({ embeds: [gravestache], components: [gstache2] });
-      } else if (i.customId == "gstache3" || i.customId == "gravestache3") {
-        await i.update({ embeds: [gravestache], components: [gstache3] });
-      } else if (i.customId == "hbird" || i.customId == "hibird") {
-        await i.update({ embeds: [hibird], components: [hbird] });
-      } else if (i.customId == "hbird2" || i.customId == "hibird2") {
-        await i.update({ embeds: [hibird], components: [hbird2] });
-      } else if (i.customId == "hbird3" || i.customId == "hibird3") {
-        await i.update({ embeds: [hibird], components: [hbird3] });
-      } else if (i.customId == "hbird4" || i.customId == "hibird4") {
-        await i.update({ embeds: [hibird], components: [hbird4] });
-      } else if (i.customId == "hter" || i.customId == "himpter") {
-        await i.update({ embeds: [himps], components: [hter] });
-      } else if (i.customId == "hter2" || i.customId == "himpter2") {
-        await i.update({ embeds: [himps], components: [hter2] });
-      } else if (i.customId == "hter3" || i.customId == "himpter3") {
-        await i.update({ embeds: [himps], components: [hter3] });
-      } else if (i.customId == "hter4" || i.customId == "himpter4") {
-        await i.update({ embeds: [himps], components: [hter4] });
-      } else if (i.customId == "hor" || i.customId == "horts") {
-        await i.update({ embeds: [horts], components: [hor] });
-      } else if (i.customId == "hor2" || i.customId == "horts2") {
-        await i.update({ embeds: [horts], components: [hor2] });
-      } else if (i.customId == "hor3" || i.customId == "horts3") {
-        await i.update({ embeds: [horts], components: [hor3] });
-      } else if (i.customId == "hor4" || i.customId == "horts4") {
-        await i.update({ embeds: [horts], components: [hor4] });
-      } else if (i.customId == "ibox" || i.customId == "icebox") {
-        await i.update({ embeds: [icebox], components: [ibox] });
-      } else if (i.customId == "ibox2" || i.customId == "icebox2") {
-        await i.update({ embeds: [icebox], components: [ibox2] });
-      } else if (i.customId == "ibox3" || i.customId == "icebox3") {
-        await i.update({ embeds: [icebox], components: [ibox3] });
-      } else if (i.customId == "igbc" || i.customId == "igmablobchum") {
-        await i.update({ embeds: [igmablobchum], components: [igbc] });
-      } else if (i.customId == "igbc2" || i.customId == "igmablobchum2") {
-        await i.update({ embeds: [igmablobchum], components: [igbc2] });
-      } else if (i.customId == "igbc3" || i.customId == "igmablobchum3") {
-        await i.update({ embeds: [igmablobchum], components: [igbc3] });
-      } else if (i.customId == "igbc4" || i.customId == "igmablobchum4") {
-        await i.update({ embeds: [igmablobchum], components: [igbc4] });
-      } else if (i.customId == "ltbr" || i.customId == "lockthebathroom") {
-        await i.update({ embeds: [lockthebathroom], components: [ltbr] });
-      } else if (i.customId == "ltbr2" || i.customId == "lockthebathroom2") {
-        await i.update({ embeds: [lockthebathroom], components: [ltbr2] });
-      } else if (i.customId == "ltbr3" || i.customId == "lockthebathroom3") {
-        await i.update({ embeds: [lockthebathroom], components: [ltbr3] });
-      } else if (i.customId == "tmech" || i.customId == "trickmech") {
-        await i.update({ embeds: [trickmech], components: [tmech] });
-      } else if (i.customId == "tmech2" || i.customId == "trickmech2") {
-        await i.update({ embeds: [trickmech], components: [tmech2] });
-      } else if (i.customId == "tmech3" || i.customId == "trickmech3") {
-        await i.update({ embeds: [trickmech], components: [tmech3] });
-      } else if (i.customId == "mbolt" || i.customId == "marxbolt") {
-        await i.update({ embeds: [marxbolt], components: [mbolt] });
-      } else if (i.customId == "mbolt2" || i.customId == "marxbolt2") {
-        await i.update({ embeds: [marxbolt], components: [mbolt2] });
-      } else if (i.customId == "mbolt3" || i.customId == "marxbolt3") {
-        await i.update({ embeds: [marxbolt], components: [mbolt3] });
-      } else if (i.customId == "mcon" || i.customId == "mechacontrol") {
-        await i.update({ embeds: [mechacontrol], components: [mcon] });
-      } else if (i.customId == "mcon2" || i.customId == "mechacontrol2") {
-        await i.update({ embeds: [mechacontrol], components: [mcon2] });
-      } else if (i.customId == "mcon3" || i.customId == "mechacontrol3") {
-        await i.update({ embeds: [mechacontrol], components: [mcon3] });
-      } else if (i.customId == "mscope" || i.customId == "mechascope") {
-        await i.update({ embeds: [mechascope], components: [mscope] });
-      } else if (i.customId == "mscope2" || i.customId == "mechascope2") {
-        await i.update({ embeds: [mechascope], components: [mscope2] });
-      } else if (i.customId == "mscope3" || i.customId == "mechascope3") {
-        await i.update({ embeds: [mechascope], components: [mscope3] });
-      } else if (i.customId == "mscope4" || i.customId == "mechascope4") {
-        await i.update({ embeds: [mechascope], components: [mscope4] });
-      } else if (i.customId == "ltime" || i.customId == "lunchtime") {
-        await i.update({ embeds: [lunchtime], components: [ltime] });
-      } else if (i.customId == "ltime2" || i.customId == "lunchtime2") {
-        await i.update({ embeds: [lunchtime], components: [ltime2] });
-      } else if (i.customId == "ltime3" || i.customId == "lunchtime3") {
-        await i.update({ embeds: [lunchtime], components: [ltime3] });
-      } else if (i.customId == "npa" || i.customId == "noplayingallowed") {
-        await i.update({ embeds: [noplayingallowed], components: [npa] });
-      } else if (i.customId == "npa2" || i.customId == "noplayingallowed2") {
-        await i.update({ embeds: [noplayingallowed], components: [npa2] });
-      } else if (i.customId == "npa3" || i.customId == "noplayingallowed3") {
-        await i.update({ embeds: [noplayingallowed], components: [npa3] });
-      } else if (i.customId == "otksw" || i.customId == "otkswabbie") {
-        await i.update({ embeds: [otkswabbie], components: [otksw] });
-      } else if (i.customId == "otksw2" || i.customId == "otkswabbie2") {
-        await i.update({ embeds: [otkswabbie], components: [otksw2] });
-      } else if (i.customId == "otksw3" || i.customId == "otkswabbie3") {
-        await i.update({ embeds: [otkswabbie], components: [otksw3] });
-      } else if (i.customId == "kscope" || i.customId == "kaleidoscope") {
-        await i.update({ embeds: [kaleidoscope], components: [kscope] });
-      } else if (i.customId == "kscope2" || i.customId == "kaleidoscope2") {
-        await i.update({ embeds: [kaleidoscope], components: [kscope2] });
-      } else if (i.customId == "kscope3" || i.customId == "kaleidoscope3") {
-        await i.update({ embeds: [kaleidoscope], components: [kscope3] });
-      } else if (i.customId == "pyeeyz" || i.customId == "pablosyeeyzs") {
-        await i.update({ embeds: [pablosyeezys], components: [pyeeyz] });
-      } else if (i.customId == "pyeeyz2" || i.customId == "pablosyeeyzs2") {
-        await i.update({ embeds: [pablosyeezys], components: [pyeeyz2] });
-      } else if (i.customId == "pyeeyz3" || i.customId == "pablosyeeyzs3") {
-        await i.update({ embeds: [pablosyeezys], components: [pyeeyz3] });
-      } else if (i.customId == "pyeeyz4" || i.customId == "pablosyeeyzs4") {
-        await i.update({ embeds: [pablosyeezys], components: [pyeeyz4] });
-      } else if (i.customId == "pfeast" || i.customId == "pbfeast") {
-        await i.update({ embeds: [pbfeast], components: [pfeast] });
-      } else if (i.customId == "pfeast2" || i.customId == "pbfeast2") {
-        await i.update({ embeds: [pbfeast], components: [pfeast2] });
-      } else if (i.customId == "pfeast3" || i.customId == "pbfeast3") {
-        await i.update({ embeds: [pbfeast], components: [pfeast3] });
-      } else if (i.customId == "pmop" || i.customId == "petmop") {
-        await i.update({ embeds: [petmop], components: [pmop] });
-      } else if (i.customId == "pmop2" || i.customId == "petmop2") {
-        await i.update({ embeds: [petmop], components: [pmop2] });
-      } else if (i.customId == "pmop3" || i.customId == "petmop3") {
-        await i.update({ embeds: [petmop], components: [pmop3] });
-      } else if (
-        i.customId == "propackage" ||
-        i.customId == "professorpackage"
-      ) {
-        await i.update({
-          embeds: [professorpackage],
-          components: [propackage],
-        });
-      } else if (
-        i.customId == "propackage2" ||
-        i.customId == "professorpackage2"
-      ) {
-        await i.update({
-          embeds: [professorpackage],
-          components: [propackage2],
-        });
-      } else if (
-        i.customId == "propackage3" ||
-        i.customId == "professorpackage3"
-      ) {
-        await i.update({
-          embeds: [professorpackage],
-          components: [propackage3],
-        });
-      } else if (i.customId == "bhammer" || i.customId == "banhammer") {
-        await i.update({ embeds: [banhammer], components: [bhammer] });
-      } else if (i.customId == "bhammer2" || i.customId == "banhammer2") {
-        await i.update({ embeds: [banhammer], components: [bhammer2] });
-      }else if (i.customId == "bhammer3" || i.customId == "banhammer3") {
-        await i.update({ embeds: [banhammer], components: [bhammer3] });
-      } else if (i.customId == "bhammer4" || i.customId == "banhammer4") {
-        await i.update({ embeds: [banhammer], components: [bhammer4] });
-      } else if (i.customId == "rpackage" || i.customId == "raiserpackage") {
-        await i.update({ embeds: [raiserpackage], components: [rpackage] });
-      } else if (i.customId == "rpackage2" || i.customId == "raiserpackage2") {
-        await i.update({ embeds: [raiserpackage], components: [rpackage2] });
-      } else if (i.customId == "rpackage3" || i.customId == "raiserpackage3") {
-        await i.update({ embeds: [raiserpackage], components: [rpackage3] });
-      } else if (i.customId == "rticia" || i.customId == "rampticia") {
-        await i.update({ embeds: [rampticia], components: [rticia] });
-      } else if (i.customId == "rticia2" || i.customId == "rampticia2") {
-        await i.update({ embeds: [rampticia], components: [rticia2] });
-      } else if (i.customId == "rticia3" || i.customId == "rampticia3") {
-        await i.update({ embeds: [rampticia], components: [rticia3] });
-      } else if (i.customId == "syard" || i.customId == "schoolyard") {
-        await i.update({ embeds: [schoolyard], components: [syard] });
-      } else if (i.customId == "syard2" || i.customId == "schoolyard2") {
-        await i.update({ embeds: [schoolyard], components: [syard2] });
-      } else if (i.customId == "syard3" || i.customId == "schoolyard3") {
-        await i.update({ embeds: [schoolyard], components: [syard3] });
-      } else if (i.customId == "sea" || i.customId == "seacret") {
-        await i.update({ embeds: [seacret], components: [sea] });
-      } else if (i.customId == "sea2" || i.customId == "seacret2") {
-        await i.update({ embeds: [seacret], components: [sea2] });
-      } else if (i.customId == "sea3" || i.customId == "seacret3") {
-        await i.update({ embeds: [seacret], components: [sea3] });
-      } else if (i.customId == "stars" || i.customId == "spacestars") {
-        await i.update({ embeds: [spacestars], components: [stars] });
-      } else if (i.customId == "stars2" || i.customId == "spacestars2") {
-        await i.update({ embeds: [spacestars], components: [stars2] });
-      } else if (i.customId == "stars3" || i.customId == "spacestars3") {
-        await i.update({ embeds: [spacestars], components: [stars3] });
-      } else if (i.customId == "stars4" || i.customId == "spacestars4") {
-        await i.update({ embeds: [spacestars], components: [stars4] });
-      } else if (i.customId == "spl" || i.customId == "splimps") {
-        await i.update({ embeds: [splimps], components: [spl] });
-      } else if (i.customId == "spl2" || i.customId == "splimps2") {
-        await i.update({ embeds: [splimps], components: [spl2] });
-      } else if (i.customId == "spl3" || i.customId == "splimps3") {
-        await i.update({ embeds: [splimps], components: [spl3] });
-      } else if (i.customId == "sticia" || i.customId == "stacheticia") {
-        await i.update({ embeds: [stacheticia], components: [sticia] });
-      } else if (i.customId == "sticia2" || i.customId == "stacheticia2") {
-        await i.update({ embeds: [stacheticia], components: [sticia2] });
-      } else if (i.customId == "sticia3" || i.customId == "stacheticia3") {
-        await i.update({ embeds: [stacheticia], components: [sticia3] });
-      } else if (i.customId == "saggro" || i.customId == "sushiaggro") {
-        await i.update({ embeds: [sushiaggro], components: [saggro] });
-      } else if (i.customId == "saggro2" || i.customId == "sushiaggro2") {
-        await i.update({ embeds: [sushiaggro], components: [saggro2] });
-      } else if (i.customId == "saggro3" || i.customId == "sushiaggro3") {
-        await i.update({ embeds: [sushiaggro], components: [saggro3] });
-      } else if (i.customId == "sbandits" || i.customId == "sunbandits") {
-        await i.update({ embeds: [sunbandits], components: [sbandits] });
-      } else if (i.customId == "sbandits2" || i.customId == "sunbandits2") {
-        await i.update({ embeds: [sunbandits], components: [sbandits2] });
-      } else if (i.customId == "sbandits3" || i.customId == "sunbandits3") {
-        await i.update({ embeds: [sunbandits], components: [sbandits3] });
-      } else if (i.customId == "sbandits4" || i.customId == "sunbandits4") {
-        await i.update({ embeds: [sunbandits], components: [sbandits4] });
-      } else if (i.customId == "slord" || i.customId == "sunlord") {
-        await i.update({ embeds: [sunlord], components: [slord] });
-      } else if (i.customId == "slord2" || i.customId == "sunlord2") {
-        await i.update({ embeds: [sunlord], components: [slord2] });
-      } else if (i.customId == "slord3" || i.customId == "sunlord3") {
-        await i.update({ embeds: [sunlord], components: [slord3] });
-      } else if (i.customId == "slord4" || i.customId == "sunlord4") {
-        await i.update({ embeds: [sunlord], components: [slord4] });
-      } else if (i.customId == "timps" || i.customId == "telimps") {
-        await i.update({ embeds: [telimps], components: [timps] });
-      } else if (i.customId == "timps2" || i.customId == "telimps2") {
-        await i.update({ embeds: [telimps], components: [timps2] });
-      } else if (i.customId == "timps3" || i.customId == "telimps3") {
-        await i.update({ embeds: [telimps], components: [timps3] });
-      } else if (i.customId == "timps4" || i.customId == "telimps4") {
-        await i.update({ embeds: [telimps], components: [timps4] });
-      } else if (i.customId == "timpssb" || i.customId == "telimpssb") {
-        await i.update({ embeds: [telimpssb], components: [timpssb] });
-      } else if (i.customId == "timpssb2" || i.customId == "telimpssb2") {
-        await i.update({ embeds: [telimpssb], components: [timpssb2] });
-      } else if (i.customId == "timpssb3" || i.customId == "telimpssb3") {
-        await i.update({ embeds: [telimpssb], components: [timpssb3] });
-      } else if (i.customId == "timpssb4" || i.customId == "telimpssb4") {
-        await i.update({ embeds: [telimpssb], components: [timpssb4] });
-      } else if (
-        i.customId == "terrifyster" ||
-        i.customId == "terrifytricksterazzi"
-      ) {
-        await i.update({
-          embeds: [terrifytricksterazzi],
-          components: [terrifyster],
-        });
-      } else if (
-        i.customId == "terrifyster2" ||
-        i.customId == "terrifytricksterazzi2"
-      ) {
-        await i.update({
-          embeds: [terrifytricksterazzi],
-          components: [terrifyster2],
-        });
-      } else if (
-        i.customId == "terrifyster3" ||
-        i.customId == "terrifytricksterazzi3"
-      ) {
-        await i.update({
-          embeds: [terrifytricksterazzi],
-          components: [terrifyster3],
-        });
-      } else if (
-        i.customId == "terrifyster4" ||
-        i.customId == "terrifytricksterazzi4"
-      ) {
-        await i.update({
-          embeds: [terrifytricksterazzi],
-          components: [terrifyster4],
-        });
-      } else if (i.customId == "tstache" || i.customId == "trickstache") {
-        await i.update({ embeds: [trickstache], components: [tstache] });
-      } else if (i.customId == "tstache2" || i.customId == "trickstache2") {
-        await i.update({ embeds: [trickstache], components: [tstache2] });
-      } else if (i.customId == "tstache3" || i.customId == "trickstache3") {
-        await i.update({ embeds: [trickstache], components: [tstache3] });
-      } else if (i.customId == "tstache4" || i.customId == "trickstache4") {
-        await i.update({ embeds: [trickstache], components: [tstache4] });
-      } else if (i.customId == "ubolt" || i.customId == "uncrackabolt") {
-        await i.update({ embeds: [uncrackabolt], components: [ubolt] });
-      } else if (i.customId == "ubolt2" || i.customId == "uncrackabolt2") {
-        await i.update({ embeds: [uncrackabolt], components: [ubolt2] });
-      } else if (i.customId == "ubolt3" || i.customId == "uncrackabolt3") {
-        await i.update({ embeds: [uncrackabolt], components: [ubolt3] });
-      } else if (i.customId == "umech" || i.customId == "uncrackamech") {
-        await i.update({ embeds: [uncrackamech], components: [umech] });
-      } else if (i.customId == "umech2" || i.customId == "uncrackamech2") {
-        await i.update({ embeds: [uncrackamech], components: [umech2] });
-      } else if (i.customId == "umech3" || i.customId == "uncrackamech3") {
-        await i.update({ embeds: [uncrackamech], components: [umech3] });
-      } else if (i.customId == "umech4" || i.customId == "uncrackamech4") {
-        await i.update({ embeds: [uncrackamech], components: [umech4] });
-      } else if (i.customId == "vster" || i.customId == "valkster") {
-        await i.update({ embeds: [valkster], components: [vster] });
-      } else if (i.customId == "vster2" || i.customId == "valkster2") {
-        await i.update({ embeds: [valkster], components: [vster2] });
-      } else if (i.customId == "vster3" || i.customId == "valkster3") {
-        await i.update({ embeds: [valkster], components: [vster3] });
-      } else if (i.customId == "vster4" || i.customId == "valkster4") {
-        await i.update({ embeds: [valkster], components: [vster4] });
-      } else if (i.customId == "wsports" || i.customId == "watersports") {
-        await i.update({ embeds: [watersports], components: [wsports] });
-      } else if (i.customId == "wsports2" || i.customId == "watersports2") {
-        await i.update({ embeds: [watersports], components: [wsports2] });
-      } else if (i.customId == "wsports3" || i.customId == "watersports3") {
-        await i.update({ embeds: [watersports], components: [wsports3] });
-      } else if (i.customId == "wsports4" || i.customId == "watersports4") {
-        await i.update({ embeds: [watersports], components: [wsports4] });
-      } else if (i.customId == "wph" || i.customId == "whalepharaoh") {
-        await i.update({ embeds: [whalepharaoh], components: [wph] });
-      } else if (i.customId == "wph2" || i.customId == "whalepharaoh2") {
-        await i.update({ embeds: [whalepharaoh], components: [wph2] });
-      } else if (i.customId == "wph3" || i.customId == "whalepharaoh3") {
-        await i.update({ embeds: [whalepharaoh], components: [wph3] });
-      } else if (i.customId == "wph4" || i.customId == "whalepharaoh4") {
-        await i.update({ embeds: [whalepharaoh], components: [wph4] });
-      } else if (i.customId == "ycmartin" || i.customId == "youngcatmartin") {
-        await i.update({ embeds: [youngcatmartin], components: [ycmartin] });
-      } else if (i.customId == "ycmartin2" || i.customId == "youngcatmartin2") {
-        await i.update({ embeds: [youngcatmartin], components: [ycmartin2] });
-      } else if (i.customId == "ycmartin3" || i.customId == "youngcatmartin3") {
-        await i.update({ embeds: [youngcatmartin], components: [ycmartin3] });
-      } else if (i.customId == "ycmartin4" || i.customId == "youngcatmartin4") {
-        await i.update({ embeds: [youngcatmartin], components: [ycmartin4] });
-      } else if (i.customId == "yemartin" || i.customId == "youngeggmartin") {
-        await i.update({ embeds: [youngeggmartin], components: [yemartin] });
-      } else if (i.customId == "yemartin2" || i.customId == "youngeggmartin2") {
-        await i.update({ embeds: [youngeggmartin], components: [yemartin2] });
-      } else if (i.customId == "yemartin3" || i.customId == "youngeggmartin3") {
-        await i.update({ embeds: [youngeggmartin], components: [yemartin3] });
-      } else if (i.customId == "ykmartin" || i.customId == "youngkenmartin") {
-        await i.update({ embeds: [youngkenmartin], components: [ykmartin] });
-      } else if (i.customId == "ykmartin2" || i.customId == "youngkenmartin2") {
-        await i.update({ embeds: [youngkenmartin], components: [ykmartin2] });
-      } else if (i.customId == "ykmartin3" || i.customId == "youngkenmartin3") {
-        await i.update({ embeds: [youngkenmartin], components: [ykmartin3] });
-      } else if (i.customId == "ykmartin4" || i.customId == "youngkenmartin4") {
-        await i.update({ embeds: [youngkenmartin], components: [ykmartin4] });
-      } else if (i.customId == "zm" || i.customId == "zmoss") {
-        await i.update({ embeds: [zmoss], components: [zm] });
-      } else if (i.customId == "zm2" || i.customId == "zmoss2") {
-        await i.update({ embeds: [zmoss], components: [zm2] });
-      } else if (i.customId == "zm3" || i.customId == "zmoss3") {
-        await i.update({ embeds: [zmoss], components: [zm3] });
-      } else if (i.customId == "lt" || i.customId == "ladytuna") {
-        await i.update({ embeds: [ladytuna], components: [lt] });
-      } else if (i.customId == "lt2" || i.customId == "ladytuna2") {
-        await i.update({ embeds: [ladytuna], components: [lt2] });
-      } else if (i.customId == "lt3" || i.customId == "ladytuna3") {
-        await i.update({ embeds: [ladytuna], components: [lt3] });
-      } else if (i.customId == "lsnap" || i.customId == "lasersnap") {
-        await i.update({ embeds: [lasersnap], components: [lsnap] });
-      } else if (i.customId == "lsnap2" || i.customId == "lasersnap2") {
-        await i.update({ embeds: [lasersnap], components: [lsnap2] });
-      } else if (i.customId == "lsnap3" || i.customId == "lasersnap3") {
-        await i.update({ embeds: [lasersnap], components: [lsnap3] });
-      } else if (i.customId == "lsnap4" || i.customId == "lasersnap4") {
-        await i.update({ embeds: [lasersnap], components: [lsnap4] });
-      } else if (i.customId == "hotk" || i.customId == "healthotk") {
-        await i.update({ embeds: [healthotk], components: [hotk] });
-      } else if (i.customId == "hotk2" || i.customId == "healthotk2") {
-        await i.update({ embeds: [healthotk], components: [hotk2] });
-      } else if (i.customId == "hotk3" || i.customId == "healthotk3") {
-        await i.update({ embeds: [healthotk], components: [hotk3] });
-      } else if (i.customId == "hotk4" || i.customId == "healthotk4") {
-        await i.update({ embeds: [healthotk], components: [hotk4] });
-      } else if (i.customId == "pts" || i.customId == "pawntrickstab") {
-        await i.update({ embeds: [pawntrickstab], components: [pts] });
-      } else if (i.customId == "pts2" || i.customId == "pawntrickstab2") {
-        await i.update({ embeds: [pawntrickstab], components: [pts2] });
-      } else if (i.customId == "pts3" || i.customId == "pawntrickstab3") {
-        await i.update({ embeds: [pawntrickstab], components: [pts3] });
-      } else if (i.customId == "nut" || i.customId == "nuttin") {
-        await i.update({ embeds: [nuttin], components: [nut] });
-      } else if (i.customId == "nut2" || i.customId == "nuttin2") {
-        await i.update({ embeds: [nuttin], components: [nut2] });
-      } else if (i.customId == "nut3" || i.customId == "nuttin3") {
-        await i.update({ embeds: [nuttin], components: [nut3] });
-      } else if (i.customId == "rfl" || i.customId == "reflourished") {
-        await i.update({ embeds: [reflourished], components: [rfl] });
-      } else if (i.customId == "rfl2" || i.customId == "reflourished2") {
-        await i.update({ embeds: [reflourished], components: [rfl2] });
-      } else if (i.customId == "rfl3" || i.customId == "reflourished3") {
-        await i.update({ embeds: [reflourished], components: [rfl3] });
-      } else if (i.customId == "sav" || i.customId == "savage") {
-        await i.update({ embeds: [savage22], components: [sav] });
-      } else if (i.customId == "sav2" || i.customId == "savage2") {
-        await i.update({ embeds: [savage22], components: [sav2] });
-      } else if (i.customId == "sav3" || i.customId == "savage3") {
-        await i.update({ embeds: [savage22], components: [sav3] });
-      } else if (i.customId == "sav4" || i.customId == "savage4") {
-        await i.update({ embeds: [savage22], components: [sav4] });
-      } else if (i.customId == "carr" || i.customId == "carroot") {
-        await i.update({ embeds: [carroot], components: [carr] });
-      } else if (i.customId == "carr2" || i.customId == "carroot2") {
-        await i.update({ embeds: [carroot], components: [carr2] });
-      } else if (i.customId == "carr3" || i.customId == "carroot3") {
-        await i.update({ embeds: [carroot], components: [carr3] });
-      } else if (i.customId == "carr4" || i.customId == "carroot4") {
-        await i.update({ embeds: [carroot], components: [carr4] });
-      } else if (i.customId == "hgargs" || i.customId == "huntgargs") {
-        await i.update({ embeds: [huntgargs], components: [hgargs] });
-      } else if (i.customId == "hgargs2" || i.customId == "huntgargs2") {
-        await i.update({ embeds: [huntgargs], components: [hgargs2] });
-      } else if (i.customId == "hgargs3" || i.customId == "huntgargs3") {
-        await i.update({ embeds: [huntgargs], components: [hgargs3] });
-      } else if (i.customId == "pb" || i.customId == "pbeans") {
-        await i.update({ embeds: [pbeans], components: [pb] });
-      } else if (i.customId == "pb2" || i.customId == "pbeans2") {
-        await i.update({ embeds: [pbeans], components: [pb2] });
-      }
-      if (i.customId == "pb3" || i.customId == "pbeans3") {
-        await i.update({ embeds: [pbeans], components: [pb3] });
-      } else if (i.customId == "pop" || i.customId == "popsicle") {
-        await i.update({ embeds: [popsicle], components: [pop] });
-      } else if (i.customId == "pop2" || i.customId == "popsicle2") {
-        await i.update({ embeds: [popsicle], components: [pop2] });
-      } else if (i.customId == "pop3" || i.customId == "popsicle3") {
-        await i.update({ embeds: [popsicle], components: [pop3] });
-      } else if (i.customId == "dgloves" || i.customId == "dinogloves") {
-        await i.update({ embeds: [dinogloves], components: [dgloves] });
-      } else if (i.customId == "dgloves2" || i.customId == "dinogloves2") {
-        await i.update({ embeds: [dinogloves], components: [dgloves2] });
-      } else if (i.customId == "dgloves3" || i.customId == "dinogloves3") {
-        await i.update({ embeds: [dinogloves], components: [dgloves3] });
-      } else if (i.customId == "nhks" || i.customId == "nohokaistars") {
-        await i.update({ embeds: [nohokaistars], components: [nhks] });
-      } else if (i.customId == "nhks2" || i.customId == "nohokaistars2") {
-        await i.update({ embeds: [nohokaistars], components: [nhks2] });
-      } else if (i.customId == "nhks3" || i.customId == "nohokaistars3") {
-        await i.update({ embeds: [nohokaistars], components: [nhks3] });
-      } else if (i.customId == "lbait" || i.customId == "logbait"){
-        await i.update({ embeds: [logbait], components: [lbait] });
-      } else if (i.customId == "lbait2" || i.customId == "logbait2"){
-        await i.update({ embeds: [logbait], components: [lbait2] });
-      } else if (i.customId == "lbait3" || i.customId == "logbait3"){
-        await i.update({ embeds: [logbait], components: [lbait3] });
+      const buttonActions = {
+        helppbudget: { embed: budgetpdecksEmbed, component: budgetprow },
+        budgetphelp: { embed: budgetpdecksEmbed, component: budgetprow },
+        helppcomp: { embed: comppdecksEmbed, component: compprow },
+        compphelp: { embed: comppdecksEmbed, component: compprow },
+        helppladder: { embed: ladderpdecksEmbed, component: ladderprow },
+        ladderphelp: { embed: ladderpdecksEmbed, component: ladderprow },
+        helppmeme: { embed: memepdecksEmbed, component: memeprow },
+        memephelp: { embed: memepdecksEmbed, component: memeprow },
+        helppaggro: { embed: aggropdecksEmbed, component: aggroprow },
+        aggrophelp: { embed: aggropdecksEmbed, component: aggroprow },
+        helppcombo: { embed: combopdecksEmbed, component: comboprow },
+        combophelp: { embed: combopdecksEmbed, component: comboprow },
+        helppcontrol: { embed: controlpdecksEmbed, component: controlprow },
+        controlphelp: { embed: controlpdecksEmbed, component: controlprow },
+        helppmidrange: { embed: midrangepdecksEmbed, component: midrangeprow },
+        midrangephelp: { embed: midrangepdecksEmbed, component: midrangeprow },
+        helpptempo: { embed: tempopdecksEmbed, component: tempoprow },
+        tempophelp: { embed: tempopdecksEmbed, component: tempoprow },
+        helpzbudget: { embed: budgetzdecksEmbed, component: budgetzrow },
+        helpbudgetz: { embed: budgetzdecksEmbed, component: budgetzrow },
+        helpzcomp: { embed: compzdecksEmbed, component: compzrow },
+        compzhelp: { embed: compzdecksEmbed, component: compzrow },
+        helpzladder: { embed: ladderzdecksEmbed, component: ladderzrow },
+        ladderzhelp: { embed: ladderzdecksEmbed, component: ladderzrow },
+        helpzmeme: { embed: memezdecksEmbed, component: memezrow },
+        memezhelp: { embed: memezdecksEmbed, component: memezrow },
+        helpzaggro: { embed: aggrozdecksEmbed, component: aggrozrow },
+        aggrozhelp: { embed: aggrozdecksEmbed, component: aggrozrow },
+        helpzcombo: { embed: combozdecksEmbed, component: combozrow },
+        combozhelp: { embed: combozdecksEmbed, component: combozrow },
+        helpzcontrol: { embed: controlzdecksEmbed, component: controlzrow },
+        controlzhelp: { embed: controlzdecksEmbed, component: controlzrow },
+        helpzmid: { embed: midrangezdecksEmbed, component: midrangezrow },
+        midzhelp: { embed: midrangezdecksEmbed, component: midrangezrow },
+        helpztempo: { embed: tempozdecksEmbed, component: tempozrow },
+        tempozhelp: { embed: tempozdecksEmbed, component: tempozrow },
+        helpallp: { embed: allpdecksEmbed, component: allprow },
+        allphelp: { embed: allpdecksEmbed, component: allprow },
+        helpzall: { embed: allzdecksEmbed, component: allzrow },
+        allzhelp: { embed: allzdecksEmbed, component: allzrow },
+        wr100: { embed: winrate100, component: wr100 },
+        winrate100: { embed: winrate100, component: wr100 },
+        wr1002: { embed: winrate100, component: wr1002 },
+        winrate1002: { embed: winrate100, component: wr1002 },
+        wr1003: { embed: winrate100, component: wr1003 },
+        winrate1003: { embed: winrate100, component: wr1003 },
+        ab: { embed: abeans, component: ab },
+        abeans: { embed: abeans, component: ab },
+        ab2: { embed: abeans, component: ab2 },
+        abeans2: { embed: abeans, component: ab2 },
+        ab3: { embed: abeans, component: ab3 },
+        abeans3: { embed: abeans, component: ab3 },
+        healcon: { embed: healcontrol, component: healcon },
+        healcontrol: { embed: healcontrol, component: healcon },
+        healcon2: { embed: healcontrol, component: healcon2 },
+        healcontrol2: { embed: healcontrol, component: healcon2 },
+        healcon3: { embed: healcontrol, component: healcon3 },
+        healcontrol3: { embed: healcontrol, component: healcon3 },
+        bct: { embed: budgetct, component: bct },
+        budgetct: { embed: budgetct, component: bct },
+        bct2: { embed: budgetct, component: bct2 },
+        budgetct2: { embed: budgetct, component: bct2 },
+        bct3: { embed: budgetct, component: bct3 },
+        budgetct3: { embed: budgetct, component: bct3 },
+        bcc: { embed: budgetcc, component: bcc },
+        budgetcc: { embed: budgetcc, component: bcc },
+        bcc2: { embed: budgetcc, component: bcc2 },
+        budgetcc2: { embed: budgetcc, component: bcc2 },
+        bcc3: { embed: budgetcc, component: bcc3 },
+        budgetcc3: { embed: budgetcc, component: bcc3 },
+        bcc4: { embed: budgetcc, component: bcc4 },
+        budgetcc4: { embed: budgetcc, component: bcc4 },
+        bcz: { embed: budgetcz, component: bcz },
+        budgetcz: { embed: budgetcz, component: bcz },
+        bcz2: { embed: budgetcz, component: bcz2 },
+        budgetcz2: { embed: budgetcz, component: bcz2 },
+        bcz3: { embed: budgetcz, component: bcz3 },
+        budgetcz3: { embed: budgetcz, component: bcz3 },
+        bcz4: { embed: budgetcz, component: bcz4 },
+        budgetcz4: { embed: budgetcz, component: bcz4 },
+        bgk: { embed: budgetgk, component: bgk },
+        budgetgk: { embed: budgetgk, component: bgk },
+        bgk2: { embed: budgetgk, component: bgk2 },
+        budgetgk2: { embed: budgetgk, component: bgk2 },
+        bgk3: { embed: budgetgk, component: bgk3 },
+        budgetgk3: { embed: budgetgk, component: bgk3 },
+        bgs: { embed: budgetgs, component: bgs },
+        budgetgs: { embed: budgetgs, component: bgs },
+        bgs2: { embed: budgetgs, component: bgs2 },
+        budgetgs2: { embed: budgetgs, component: bgs2 },
+        bgs3: { embed: budgetgs, component: bgs3 },
+        budgetgs3: { embed: budgetgs, component: bgs3 },
+        bnc: { embed: budgetnc, component: bnc },
+        budgetnc: { embed: budgetnc, component: bnc },
+        bnc2: { embed: budgetnc, component: bnc2 },
+        budgetnc2: { embed: budgetnc, component: bnc2 },
+        bnc3: { embed: budgetnc, component: bnc3 },
+        budgetnc3: { embed: budgetnc, component: bnc3 },
+        bro: { embed: budgetro, component: bro },
+        budgetro: { embed: budgetro, component: bro },
+        bro2: { embed: budgetro, component: bro2 },
+        budgetro2: { embed: budgetro, component: bro2 },
+        bro3: { embed: budgetro, component: bro3 },
+        budgetro3: { embed: budgetro, component: bro3 },
+        bsf: { embed: budgetsf, component: bsf },
+        budgetsf: { embed: budgetsf, component: bsf },
+        bsf2: { embed: budgetsf, component: bsf2 },
+        budgetsf2: { embed: budgetsf, component: bsf2 },
+        bsf3: { embed: budgetsf, component: bsf3 },
+        budgetsf3: { embed: budgetsf, component: bsf3 },
+        bsp: { embed: budgetsp, component: bsp },
+        budgetsp: { embed: budgetsp, component: bsp },
+        bsp2: { embed: budgetsp, component: bsp2 },
+        budgetsp2: { embed: budgetsp, component: bsp2 },
+        bsp3: { embed: budgetsp, component: bsp3 },
+        budgetsp3: { embed: budgetsp, component: bsp3 },
+        bwk: { embed: budgetwk, component: bwk },
+        budgetwk: { embed: budgetwk, component: bwk },
+        bwk2: { embed: budgetwk, component: bwk2 },
+        budgetwk2: { embed: budgetwk, component: bwk2 },
+        bwk3: { embed: budgetwk, component: bwk3 },
+        budgetwk3: { embed: budgetwk, component: bwk3 },
+        cank: { embed: cancerknight, component: cank },
+        cancerknight: { embed: cancerknight, component: cank },
+        cank2: { embed: cancerknight, component: cank2 },
+        cancerknight2: { embed: cancerknight, component: cank2 },
+        cank3: { embed: cancerknight, component: cank3 },
+        cancerknight3: { embed: cancerknight, component: cank3 },
+        chemo: { embed: chemotherapy, component: chemo },
+        chemotherapy: { embed: chemotherapy, component: chemo },
+        chemo2: { embed: chemotherapy, component: chemo2 },
+        chemotherapy2: { embed: chemotherapy, component: chemo2 },
+        chemo3: { embed: chemotherapy, component: chemo3 },
+        chemotherapy3: { embed: chemotherapy, component: chemo3 },
+        cburn: { embed: cyburn, component: cburn },
+        cyburn: { embed: cyburn, component: cburn },
+        cburn2: { embed: cyburn, component: cburn2 },
+        cyburn2: { embed: cyburn, component: cburn2 },
+        cburn3: { embed: cyburn, component: cburn3 },
+        cyburn3: { embed: cyburn, component: cburn3 },
+        cburn4: { embed: cyburn, component: cburn4 },
+        cyburn4: { embed: cyburn, component: cburn4 },
+        flottery: { embed: figlottery, component: flottery },
+        figlottery: { embed: figlottery, component: flottery },
+        flottery2: { embed: figlottery, component: flottery2 },
+        figlottery2: { embed: figlottery, component: flottery2 },
+        flottery3: { embed: figlottery, component: flottery3 },
+        figlottery3: { embed: figlottery, component: flottery3 },
+        fheal: { embed: freezeheal, component: fheal },
+        freezeheal: { embed: freezeheal, component: fheal },
+        fheal2: { embed: freezeheal, component: fheal2 },
+        freezeheal2: { embed: freezeheal, component: fheal2 },
+        fheal3: { embed: freezeheal, component: fheal3 },
+        freezeheal3: { embed: freezeheal, component: fheal3 },
+        frymid: { embed: frymidrose, component: fmr },
+        frymidrose: { embed: frymidrose, component: fmr },
+        frymid2: { embed: frymidrose, component: fmr2 },
+        frymidrose2: { embed: frymidrose, component: fmr2 },
+        frymid3: { embed: frymidrose, component: fmr3 },
+        frymidrose3: { embed: frymidrose, component: fmr3 },
+        fflare: { embed: funnyflare, component: fflare },
+        funnyflare: { embed: funnyflare, component: fflare },
+        fflare2: { embed: funnyflare, component: fflare2 },
+        funnyflare2: { embed: funnyflare, component: fflare2 },
+        fflare3: { embed: funnyflare, component: fflare3 },
+        funnyflare3: { embed: funnyflare, component: fflare3 },
+        fflare4: { embed: funnyflare, component: fflare4 },
+        funnyflare4: { embed: funnyflare, component: fflare4 },
+        g3n: { embed: going3nuts, component: g3n },
+        going3nuts: { embed: going3nuts, component: g3n },
+        g3n2: { embed: going3nuts, component: g3n2 },
+        going3nuts2: { embed: going3nuts, component: g3n2 },
+        g3n3: { embed: going3nuts, component: g3n3 },
+        going3nuts3: { embed: going3nuts, component: g3n3 },
+        g3n4: { embed: going3nuts, component: g3n4 },
+        going3nuts4: { embed: going3nuts, component: g3n4 },
+        hburn: { embed: healburn, component: hburn },
+        healburn: { embed: healburn, component: hburn },
+        hburn2: { embed: healburn, component: hburn2 },
+        healburn2: { embed: healburn, component: hburn2 },
+        hburn3: { embed: healburn, component: hburn3 },
+        healburn3: { embed: healburn, component: hburn3 },
+        hburn4: { embed: healburn, component: hburn4 },
+        healburn4: { embed: healburn, component: hburn4 },
+        hmr: { embed: healmidrose, component: hmr },
+        healmidrose: { embed: healmidrose, component: hmr },
+        hmr2: { embed: healmidrose, component: hmr2 },
+        healmidrose2: { embed: healmidrose, component: hmr2 },
+        hmr3: { embed: healmidrose, component: hmr3 },
+        healmidrose3: { embed: healmidrose, component: hmr3 },
+        hland: { embed: highlander, component: hland },
+        highlander: { embed: highlander, component: hland },
+        hland2: { embed: highlander, component: hland2 },
+        highlander2: { embed: highlander, component: hland2 },
+        hland3: { embed: highlander, component: hland3 },
+        highlander3: { embed: highlander, component: hland3 },
+        lcbd: { embed: lifecouldbedream, component: lcbd },
+        lifecouldbedream: { embed: lifecouldbedream, component: lcbd },
+        lcbd2: { embed: lifecouldbedream, component: lcbd2 },
+        lifecouldbedream2: { embed: lifecouldbedream, component: lcbd2 },
+        lcbd3: { embed: lifecouldbedream, component: lcbd3 },
+        lifecouldbedream3: { embed: lifecouldbedream, component: lcbd3 },
+        mred: { embed: midred, component: mred },
+        midred: { embed: midred, component: mred },
+        mred2: { embed: midred, component: mred2 },
+        midred2: { embed: midred, component: mred2 },
+        mred3: { embed: midred, component: mred3 },
+        midred3: { embed: midred, component: mred3 },
+        mred4: { embed: midred, component: mred4 },
+        midred4: { embed: midred, component: mred4 },
+        mopr: { embed: mopribus, component: mopr },
+        mopribus: { embed: mopribus, component: mopr },
+        mopr2: { embed: mopribus, component: mopr2 },
+        mopribus2: { embed: mopribus, component: mopr2 },
+        mopr3: { embed: mopribus, component: mopr3 },
+        mopribus3: { embed: mopribus, component: mopr3 },
+        mopr4: { embed: mopribus, component: mopr4 },
+        mopribus4: { embed: mopribus, component: mopr4 },
+        msp: { embed: mspotk, component: msp },
+        mspotk: { embed: mspotk, component: msp },
+        msp2: { embed: mspotk, component: msp2 },
+        mspotk2: { embed: mspotk, component: msp2 },
+        msp3: { embed: mspotk, component: msp3 },
+        mspotk3: { embed: mspotk, component: msp3 },
+        plmop: { embed: plantmop, component: plmop },
+        plantmop: { embed: plantmop, component: plmop },
+        plmop2: { embed: plantmop, component: plmop2 },
+        plantmop2: { embed: plantmop, component: plmop2 },
+        plmop3: { embed: plantmop, component: plmop3 },
+        plantmop3: { embed: plantmop, component: plmop3 },
+        psol: { embed: psychosolstice, component: psol },
+        psychosolstice: { embed: psychosolstice, component: psol },
+        psol2: { embed: psychosolstice, component: psol2 },
+        psychosolstice2: { embed: psychosolstice, component: psol2 },
+        psol3: { embed: psychosolstice, component: psol3 },
+        psychosolstice3: { embed: psychosolstice, component: psol3 },
+        psol4: { embed: psychosolstice, component: psol4 },
+        psychosolstice4: { embed: psychosolstice, component: psol4 },
+        radio: { embed: radiotherapy, component: radio },
+        radiotherapy: { embed: radiotherapy, component: radio },
+        radio2: { embed: radiotherapy, component: radio2 },
+        radiotherapy2: { embed: radiotherapy, component: radio2 },
+        radio3: { embed: radiotherapy, component: radio3 },
+        radiotherapy3: { embed: radiotherapy, component: radio3 },
+        r2s: { embed: ramp2seedling, component: r2s },
+        ramp2seedling: { embed: ramp2seedling, component: r2s },
+        r2s2: { embed: ramp2seedling, component: r2s2 },
+        ramp2seedling2: { embed: ramp2seedling, component: r2s2 },
+        r2s3: { embed: ramp2seedling, component: r2s3 },
+        ramp2seedling3: { embed: ramp2seedling, component: r2s3 },
+        r2s4: { embed: ramp2seedling, component: r2s4 },
+        ramp2seedling4: { embed: ramp2seedling, component: r2s4 },
+        smf: { embed: savagemayflower, component: smf },
+        savagemayflower: { embed: savagemayflower, component: smf },
+        smf2: { embed: savagemayflower, component: smf2 },
+        savagemayflower2: { embed: savagemayflower, component: smf2 },
+        smf3: { embed: savagemayflower, component: smf3 },
+        savagemayflower3: { embed: savagemayflower, component: smf3 },
+        shambc: { embed: shamcontrolbc, component: shambc },
+        shamcontrolbc: { embed: shamcontrolbc, component: shambc },
+        shambc2: { embed: shamcontrolbc, component: shambc2 },
+        shamcontrolbc2: { embed: shamcontrolbc, component: shambc2 },
+        shambc3: { embed: shamcontrolbc, component: shambc3 },
+        shamcontrolbc3: { embed: shamcontrolbc, component: shambc3 },
+        sknight: { embed: shitknight, component: sknight },
+        shitknight: { embed: shitknight, component: sknight },
+        sknight2: { embed: shitknight, component: sknight2 },
+        shitknight2: { embed: shitknight, component: sknight2 },
+        sknight3: { embed: shitknight, component: sknight3 },
+        shitknight3: { embed: shitknight, component: sknight3 },
+        srings: { embed: starrings, component: srings },
+        starrings: { embed: starrings, component: srings },
+        srings2: { embed: starrings, component: srings2 },
+        starrings2: { embed: starrings, component: srings2 },
+        srings3: { embed: starrings, component: srings3 },
+        starrings3: { embed: starrings, component: srings3 },
+        srings4: { embed: starrings, component: srings4 },
+        starrings4: { embed: starrings, component: srings4 },
+        stron: { embed: startron, component: stron },
+        startron: { embed: startron, component: stron },
+        stron2: { embed: startron, component: stron2 },
+        startron2: { embed: startron, component: stron2 },
+        stron3: { embed: startron, component: stron3 },
+        startron3: { embed: startron, component: stron3 },
+        stron4: { embed: startron, component: stron4 },
+        startron4: { embed: startron, component: stron4 },
+        tc: { embed: toyotacontrolla, component: tc },
+        toyotacontrolla: { embed: toyotacontrolla, component: tc },
+        tc2: { embed: toyotacontrolla, component: tc2 },
+        toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
+        tc3: { embed: toyotacontrolla, component: tc3 },
+        toyotacontrolla3: { embed: toyotacontrolla, component: tc3 },
+        tlattail: { embed: translattail, component: tlattail },
+        translattail: { embed: translattail, component: tlattail },
+        tlattail2: { embed: translattail, component: tlattail2 },
+        translattail2: { embed: translattail, component: tlattail2 },
+        tlattail3: { embed: translattail, component: tlattail3 },
+        translattail3: { embed: translattail, component: tlattail3 },
+        tlattail4: { embed: translattail, component: tlattail4 },
+        translattail4: { embed: translattail, component: tlattail4 },
+        wtron: { embed: watertron, component: wtron },
+        watertron: { embed: watertron, component: wtron },
+        wtron2: { embed: watertron, component: wtron2 },
+        watertron2: { embed: watertron, component: wtron2 },
+        wtron3: { embed: watertron, component: wtron3 },
+        watertron3: { embed: watertron, component: wtron3 },
+        agr: { embed: agraves, component: agr },
+        agraves: { embed: agraves, component: agr },
+        agr2: { embed: agraves, component: agr2 },
+        agraves2: { embed: agraves, component: agr2 },
+        agr3: { embed: agraves, component: agr3 },
+        agraves3: { embed: agraves, component: agr3 },
+        agor: { embed: antiagor, component: agor },
+        antiagor: { embed: antiagor, component: agor },
+        agor2: { embed: antiagor, component: agor2 },
+        antiagor2: { embed: antiagor, component: agor2 },
+        agor3: { embed: antiagor, component: agor3 },
+        antiagor3: { embed: antiagor, component: agor3 },
+        bfmg: { embed: bfmidgargs, component: bfmg },
+        bfmidgargs: { embed: bfmidgargs, component: bfmg },
+        bfmg2: { embed: bfmidgargs, component: bfmg2 },
+        bfmidgargs2: { embed: bfmidgargs, component: bfmg2 },
+        bfmg3: { embed: bfmidgargs, component: bfmg3 },
+        bfmidgargs3: { embed: bfmidgargs, component: bfmg3 },
+        bfpc: { embed: bfplankcontrol, component: bfpc },
+        bfplankcontrol: { embed: bfplankcontrol, component: bfpc },
+        bfpc2: { embed: bfplankcontrol, component: bfpc2 },
+        bfplankcontrol2: { embed: bfplankcontrol, component: bfpc2 },
+        bfpc3: { embed: bfplankcontrol, component: bfpc3 },
+        bfplankcontrol3: { embed: bfplankcontrol, component: bfpc3 },
+        bas: { embed: bastet, component: bas },
+        bastet: { embed: bastet, component: bas },
+        bas2: { embed: bastet, component: bas2 },
+        bastet2: { embed: bastet, component: bas2 },
+        bas3: { embed: bastet, component: bas3 },
+        bastet3: { embed: bastet, component: bas3 },
+        bas4: { embed: bastet, component: bas4 },
+        bastet4: { embed: bastet, component: bas4 },
+        bfw: { embed: binaryflagwar, component: bfw },
+        binaryflagwar: { embed: binaryflagwar, component: bfw },
+        bfw2: { embed: binaryflagwar, component: bfw2 },
+        binaryflagwar2: { embed: binaryflagwar, component: bfw2 },
+        bfw3: { embed: binaryflagwar, component: bfw3 },
+        binaryflagwar3: { embed: binaryflagwar, component: bfw3 },
+        bfw4: { embed: binaryflagwar, component: bfw4 },
+        binaryflagwar4: { embed: binaryflagwar, component: bfw4 },
+        bbolt: { embed: boltbolt, component: bbolt },
+        boltbolt: { embed: boltbolt, component: bbolt },
+        bbolt2: { embed: boltbolt, component: bbolt2 },
+        boltbolt2: { embed: boltbolt, component: bbolt2 },
+        bbolt3: { embed: boltbolt, component: bbolt3 },
+        boltbolt3: { embed: boltbolt, component: bbolt3 },
+        bbolt4: { embed: boltbolt, component: bbolt4 },
+        boltbolt4: { embed: boltbolt, component: bbolt4 },
+        bducks: { embed: bonusducks, component: bducks },
+        bonusducks: { embed: bonusducks, component: bducks },
+        bducks2: { embed: bonusducks, component: bducks2 },
+        bonusducks2: { embed: bonusducks, component: bducks2 },
+        bducks3: { embed: bonusducks, component: bducks3 },
+        bonusducks3: { embed: bonusducks, component: bducks3 },
+        bducks4: { embed: bonusducks, component: bducks4 },
+        bonusducks4: { embed: bonusducks, component: bducks4 },
+        brad: { embed: brady, component: brad },
+        brady: { embed: brady, component: brad },
+        brad2: { embed: brady, component: brad2 },
+        brady2: { embed: brady, component: brad2 },
+        brad3: { embed: brady, component: brad3 },
+        brady3: { embed: brady, component: brad3 },
+        bbf: { embed: budgetbf, component: bbf },
+        budgetbf: { embed: budgetbf, component: bbf },
+        bbf2: { embed: budgetbf, component: bbf2 },
+        budgetbf2: { embed: budgetbf, component: bbf2 },
+        bbf3: { embed: budgetbf, component: bbf3 },
+        budgetbf3: { embed: budgetbf, component: bbf3 },
+        beb: { embed: budgeteb, component: beb },
+        budgeteb: { embed: budgeteb, component: beb },
+        beb2: { embed: budgeteb, component: beb2 },
+        budgeteb2: { embed: budgeteb, component: beb2 },
+        beb3: { embed: budgeteb, component: beb3 },
+        budgeteb3: { embed: budgeteb, component: beb3 },
+        bif: { embed: budgetif, component: bif },
+        budgetif: { embed: budgetif, component: bif },
+        bif2: { embed: budgetif, component: bif2 },
+        budgetif2: { embed: budgetif, component: bif2 },
+        bif3: { embed: budgetif, component: bif3 },
+        budgetif3: { embed: budgetif, component: bif3 },
+        bim: { embed: budgetim, component: bim },
+        budgetim: { embed: budgetim, component: bim },
+        bim2: { embed: budgetim, component: bim2 },
+        budgetim2: { embed: budgetim, component: bim2 },
+        bim3: { embed: budgetim, component: bim3 },
+        budgetim3: { embed: budgetim, component: bim3 },
+        bim4: { embed: budgetim, component: bim4 },
+        budgetim4: { embed: budgetim, component: bim4 },
+        bnt: { embed: budgetnt, component: bnt },
+        budgetnt: { embed: budgetnt, component: bnt },
+        bnt2: { embed: budgetnt, component: bnt2 },
+        budgetnt2: { embed: budgetnt, component: bnt2 },
+        bnt3: { embed: budgetnt, component: bnt3 },
+        budgetnt3: { embed: budgetnt, component: bnt3 },
+        bnt4: { embed: budgetnt, component: bnt4 },
+        budgetnt4: { embed: budgetnt, component: bnt4 },
+        bpb: { embed: budgetpb, component: bpb },
+        budgetpb: { embed: budgetpb, component: bpb },
+        bpb2: { embed: budgetpb, component: bpb2 },
+        budgetpb2: { embed: budgetpb, component: bpb2 },
+        bpb3: { embed: budgetpb, component: bpb3 },
+        budgetpb3: { embed: budgetpb, component: bpb3 },
+        brb: { embed: budgetrb, component: brb },
+        budgetrb: { embed: budgetrb, component: brb },
+        brb2: { embed: budgetrb, component: brb2 },
+        budgetrb2: { embed: budgetrb, component: brb2 },
+        brb3: { embed: budgetrb, component: brb3 },
+        budgetrb3: { embed: budgetrb, component: brb3 },
+        bsb: { embed: budgetsb, component: bsb },
+        budgetsb: { embed: budgetsb, component: bsb },
+        bsb2: { embed: budgetsb, component: bsb2 },
+        budgetsb2: { embed: budgetsb, component: bsb2 },
+        bsb3: { embed: budgetsb, component: bsb3 },
+        budgetsb3: { embed: budgetsb, component: bsb3 },
+        bsm: { embed: budgetsm, component: bsm },
+        budgetsm: { embed: budgetsm, component: bsm },
+        bsm2: { embed: budgetsm, component: bsm2 },
+        budgetsm2: { embed: budgetsm, component: bsm2 },
+        bsm3: { embed: budgetsm, component: bsm3 },
+        budgetsm3: { embed: budgetsm, component: bsm3 },
+        bsm4: { embed: budgetsm, component: bsm4 },
+        budgetsm4: { embed: budgetsm, component: bsm4 },
+        bykm: { embed: budgetykm, component: bykm },
+        budgetykm: { embed: budgetykm, component: bykm },
+        bykm2: { embed: budgetykm, component: bykm2 },
+        budgetykm2: { embed: budgetykm, component: bykm2 },
+        bykm3: { embed: budgetykm, component: bykm3 },
+        budgetykm3: { embed: budgetykm, component: bykm3 },
+        bykm4: { embed: budgetykm, component: bykm4 },
+        budgetykm4: { embed: budgetykm, component: bykm4 },
+        bzm: { embed: budgetzm, component: bzm },
+        budgetzm: { embed: budgetzm, component: bzm },
+        bzm2: { embed: budgetzm, component: bzm2 },
+        budgetzm2: { embed: budgetzm, component: bzm2 },
+        bzm3: { embed: budgetzm, component: bzm3 },
+        budgetzm3: { embed: budgetzm, component: bzm3 },
+        bzm4: { embed: budgetzm, component: bzm4 },
+        budgetzm4: { embed: budgetzm, component: bzm4 },
+        bust: { embed: bustbolt, component: bust },
+        bustbolt: { embed: bustbolt, component: bust },
+        bust2: { embed: bustbolt, component: bust2 },
+        bustbolt2: { embed: bustbolt, component: bust2 },
+        bust3: { embed: bustbolt, component: bust3 },
+        bustbolt3: { embed: bustbolt, component: bust3 },
+        bust4: { embed: bustbolt, component: bust4 },
+        bustbolt4: { embed: bustbolt, component: bust4 },
+        cog: { embed: coggerazzi, component: cog },
+        coggerazzi: { embed: coggerazzi, component: cog },
+        cog2: { embed: coggerazzi, component: cog2 },
+        coggerazzi2: { embed: coggerazzi, component: cog2 },
+        cog3: { embed: coggerazzi, component: cog3 },
+        coggerazzi3: { embed: coggerazzi, component: cog3 },
+        cog4: { embed: coggerazzi, component: cog4 },
+        coggerazzi4: { embed: coggerazzi, component: cog4 },
+        cbait: { embed: congabait, component: cbait },
+        congabait: { embed: congabait, component: cbait },
+        cbait2: { embed: congabait, component: cbait2 },
+        congabait2: { embed: congabait, component: cbait2 },
+        cbait3: { embed: congabait, component: cbait3 },
+        congabait3: { embed: congabait, component: cbait3 },
+        cbait4: { embed: congabait, component: cbait4 },
+        congabait4: { embed: congabait, component: cbait4 },
+        cleap: { embed: conjureleap, component: cleap },
+        conjureleap: { embed: conjureleap, component: cleap },
+        cleap2: { embed: conjureleap, component: cleap2 },
+        conjureleap2: { embed: conjureleap, component: cleap2 },
+        cleap3: { embed: conjureleap, component: cleap3 },
+        conjureleap3: { embed: conjureleap, component: cleap3 },
+        cboy: { embed: cryoboy, component: cboy },
+        cryoboy: { embed: cryoboy, component: cboy },
+        cboy2: { embed: cryoboy, component: cboy2 },
+        cryoboy2: { embed: cryoboy, component: cboy2 },
+        cboy3: { embed: cryoboy, component: cboy3 },
+        cryoboy3: { embed: cryoboy, component: cboy3 },
+        cboy4: { embed: cryoboy, component: cboy4 },
+        cryoboy4: { embed: cryoboy, component: cboy4 },
+        dmech: { embed: dozzamech, component: dmech },
+        dozzamech: { embed: dozzamech, component: dmech },
+        dmech2: { embed: dozzamech, component: dmech2 },
+        dozzamech2: { embed: dozzamech, component: dmech2 },
+        dmech3: { embed: dozzamech, component: dmech3 },
+        dozzamech3: { embed: dozzamech, component: dmech3 },
+        flo: { embed: floss, component: flo },
+        floss: { embed: floss, component: flo },
+        flo2: { embed: floss, component: flo2 },
+        floss2: { embed: floss, component: flo2 },
+        flo3: { embed: floss, component: flo3 },
+        floss3: { embed: floss, component: flo3 },
+        ftimps: { embed: frozentelimps, component: ftimps },
+        frozentelimps: { embed: frozentelimps, component: ftimps },
+        ftimps2: { embed: frozentelimps, component: ftimps2 },
+        frozentelimps2: { embed: frozentelimps, component: ftimps2 },
+        ftimps3: { embed: frozentelimps, component: ftimps3 },
+        frozentelimps3: { embed: frozentelimps, component: ftimps3 },
+        ftimps4: { embed: frozentelimps, component: ftimps4 },
+        frozentelimps4: { embed: frozentelimps, component: ftimps4 },
+        gburn: { embed: gargburn, component: gburn },
+        gargburn: { embed: gargburn, component: gburn },
+        gburn2: { embed: gargburn, component: gburn2 },
+        gargburn2: { embed: gargburn, component: gburn2 },
+        gburn3: { embed: gargburn, component: gburn3 },
+        gargburn3: { embed: gargburn, component: gburn3 },
+        gburn4: { embed: gargburn, component: gburn4 },
+        gargburn4: { embed: gargburn, component: gburn4 },
+        gtech: { embed: gargolithtech, component: gtech },
+        gargolithtech: { embed: gargolithtech, component: gtech },
+        gtech2: { embed: gargolithtech, component: gtech2 },
+        gargolithtech2: { embed: gargolithtech, component: gtech2 },
+        gtech3: { embed: gargolithtech, component: gtech3 },
+        gargolithtech3: { embed: gargolithtech, component: gtech3 },
+        gstar22: { embed: gargstar22, component: gstar22 },
+        gargstar22: { embed: gargstar22, component: gstar22 },
+        gstar222: { embed: gargstar22, component: gstar222 },
+        gargstar222: { embed: gargstar22, component: gstar222 },
+        gstar223: { embed: gargstar22, component: gstar223 },
+        gargstar223: { embed: gargstar22, component: gstar223 },
+        gom: { embed: gomorrah, component: gom },
+        gomorrah: { embed: gomorrah, component: gom },
+        gom2: { embed: gomorrah, component: gom2 },
+        gomorrah2: { embed: gomorrah, component: gom2 },
+        gom3: { embed: gomorrah, component: gom3 },
+        gomorrah3: { embed: gomorrah, component: gom3 },
+        gps: { embed: gravepiratestache, component: gps },
+        gravepiratestache: { embed: gravepiratestache, component: gps },
+        gps2: { embed: gravepiratestache, component: gps2 },
+        gravepiratestache2: { embed: gravepiratestache, component: gps2 },
+        gps3: { embed: gravepiratestache, component: gps3 },
+        gravepiratestache3: { embed: gravepiratestache, component: gps3 },
+        gps4: { embed: gravepiratestache, component: gps4 },
+        gravepiratestache4: { embed: gravepiratestache, component: gps4 },
+        gstache: { embed: gravestache, component: gstache },
+        gravestache: { embed: gravestache, component: gstache },
+        gstache2: { embed: gravestache, component: gstache2 },
+        gravestache2: { embed: gravestache, component: gstache2 },
+        gstache3: { embed: gravestache, component: gstache3 },
+        gravestache3: { embed: gravestache, component: gstache3 },
+        hter: { embed: himps, component: hter },
+        himpter: { embed: himps, component: hter },
+        hter2: { embed: himps, component: hter2 },
+        himpter2: { embed: himps, component: hter2 },
+        hter3: { embed: himps, component: hter3 },
+        himpter3: { embed: himps, component: hter3 },
+        hter4: { embed: himps, component: hter4 },
+        himpter4: { embed: himps, component: hter4 },
+        hor: { embed: horts, component: hor },
+        horts: { embed: horts, component: hor },
+        hor2: { embed: horts, component: hor2 },
+        horts2: { embed: horts, component: hor2 },
+        hor3: { embed: horts, component: hor3 },
+        horts3: { embed: horts, component: hor3 },
+        hor4: { embed: horts, component: hor4 },
+        horts4: { embed: horts, component: hor4 },
+        ibox: { embed: icebox, component: ibox },
+        icebox: { embed: icebox, component: ibox },
+        ibox2: { embed: icebox, component: ibox2 },
+        icebox2: { embed: icebox, component: ibox2 },
+        ibox3: { embed: icebox, component: ibox3 },
+        icebox3: { embed: icebox, component: ibox3 },
+        igbc: { embed: igmablobchum, component: igbc },
+        igmablobchum: { embed: igmablobchum, component: igbc },
+        igbc2: { embed: igmablobchum, component: igbc2 },
+        igmablobchum2: { embed: igmablobchum, component: igbc2 },
+        igbc3: { embed: igmablobchum, component: igbc3 },
+        igmablobchum3: { embed: igmablobchum, component: igbc3 },
+        igbc4: { embed: igmablobchum, component: igbc4 },
+        igmablobchum4: { embed: igmablobchum, component: igbc4 },
+        ltbr: { embed: lockthebathroom, component: ltbr },
+        lockthebathroom: { embed: lockthebathroom, component: ltbr },
+        ltbr2: { embed: lockthebathroom, component: ltbr2 },
+        lockthebathroom2: { embed: lockthebathroom, component: ltbr2 },
+        ltbr3: { embed: lockthebathroom, component: ltbr3 },
+        lockthebathroom3: { embed: lockthebathroom, component: ltbr3 },
+        tmech: { embed: trickmech, component: tmech },
+        trickmech: { embed: trickmech, component: tmech },
+        tmech2: { embed: trickmech, component: tmech2 },
+        trickmech2: { embed: trickmech, component: tmech2 },
+        tmech3: { embed: trickmech, component: tmech3 },
+        trickmech3: { embed: trickmech, component: tmech3 },
+        mbolt: { embed: marxbolt, component: mbolt },
+        marxbolt: { embed: marxbolt, component: mbolt },
+        mbolt2: { embed: marxbolt, component: mbolt2 },
+        marxbolt2: { embed: marxbolt, component: mbolt2 },
+        mbolt3: { embed: marxbolt, component: mbolt3 },
+        marxbolt3: { embed: marxbolt, component: mbolt3 },
+        mcon: { embed: mechacontrol, component: mcon },
+        mechacontrol: { embed: mechacontrol, component: mcon },
+        mcon2: { embed: mechacontrol, component: mcon2 },
+        mechacontrol2: { embed: mechacontrol, component: mcon2 },
+        mcon3: { embed: mechacontrol, component: mcon3 },
+        mechacontrol3: { embed: mechacontrol, component: mcon3 },
+        mscope: { embed: mechascope, component: mscope },
+        mechascope: { embed: mechascope, component: mscope },
+        mscope2: { embed: mechascope, component: mscope2 },
+        mechascope2: { embed: mechascope, component: mscope2 },
+        mscope3: { embed: mechascope, component: mscope3 },
+        mechascope3: { embed: mechascope, component: mscope3 },
+        mscope4: { embed: mechascope, component: mscope4 },
+        mechascope4: { embed: mechascope, component: mscope4 },
+        ltime: { embed: lunchtime, component: ltime },
+        lunchtime: { embed: lunchtime, component: ltime },
+        ltime2: { embed: lunchtime, component: ltime2 },
+        lunchtime2: { embed: lunchtime, component: ltime2 },
+        ltime3: { embed: lunchtime, component: ltime3 },
+        lunchtime3: { embed: lunchtime, component: ltime3 },
+        npa: { embed: noplayingallowed, component: npa },
+        noplayingallowed: { embed: noplayingallowed, component: npa },
+        npa2: { embed: noplayingallowed, component: npa2 },
+        noplayingallowed2: { embed: noplayingallowed, component: npa2 },
+        npa3: { embed: noplayingallowed, component: npa3 },
+        noplayingallowed3: { embed: noplayingallowed, component: npa3 },
+        otksw: { embed: otkswabbie, component: otksw },
+        otkswabbie: { embed: otkswabbie, component: otksw },
+        otksw2: { embed: otkswabbie, component: otksw2 },
+        otkswabbie2: { embed: otkswabbie, component: otksw2 },
+        otksw3: { embed: otkswabbie, component: otksw3 },
+        otkswabbie3: { embed: otkswabbie, component: otksw3 },
+        kscope: { embed: kaleidoscope, component: kscope },
+        kaleidoscope: { embed: kaleidoscope, component: kscope },
+        kscope2: { embed: kaleidoscope, component: kscope2 },
+        kaleidoscope2: { embed: kaleidoscope, component: kscope2 },
+        kscope3: { embed: kaleidoscope, component: kscope3 },
+        kaleidoscope3: { embed: kaleidoscope, component: kscope3 },
+        pyeeyz: { embed: pablosyeezys, component: pyeeyz },
+        pablosyeezys: { embed: pablosyeezys, component: pyeeyz },
+        pyeeyz2: { embed: pablosyeezys, component: pyeeyz2 },
+        pablosyeezys2: { embed: pablosyeezys, component: pyeeyz2 },
+        pyeeyz3: { embed: pablosyeezys, component: pyeeyz3 },
+        pablosyeezys3: { embed: pablosyeezys, component: pyeeyz3 },
+        pyeeyz4: { embed: pablosyeezys, component: pyeeyz4 },
+        pablosyeezys4: { embed: pablosyeezys, component: pyeeyz4 },
+        pfeast: { embed: pbfeast, component: pfeast },
+        pbfeast: { embed: pbfeast, component: pfeast },
+        pfeast2: { embed: pbfeast, component: pfeast2 },
+        pbfeast2: { embed: pbfeast, component: pfeast2 },
+        pfeast3: { embed: pbfeast, component: pfeast3 },
+        pbfeast3: { embed: pbfeast, component: pfeast3 },
+        pmop: { embed: petmop, component: pmop },
+        petmop: { embed: petmop, component: pmop },
+        pmop2: { embed: petmop, component: pmop2 },
+        petmop2: { embed: petmop, component: pmop2 },
+        pmop3: { embed: petmop, component: pmop3 },
+        petmop3: { embed: petmop, component: pmop3 },
+        propackage: { embed: professorpackage, component: propackage },
+        professorpackage: { embed: professorpackage, component: propackage },
+        propackage2: { embed: professorpackage, component: propackage2 },
+        professorpackage2: { embed: professorpackage, component: propackage2 },
+        propackage3: { embed: professorpackage, component: propackage3 },
+        professorpackage3: { embed: professorpackage, component: propackage3 },
+        bhammer: { embed: banhammer, component: bhammer },
+        banhammer: { embed: banhammer, component: bhammer },
+        bhammer2: { embed: banhammer, component: bhammer2 },
+        banhammer2: { embed: banhammer, component: bhammer2 },
+        bhammer3: { embed: banhammer, component: bhammer3 },
+        banhammer3: { embed: banhammer, component: bhammer3 },
+        bhammer4: { embed: banhammer, component: bhammer4 },
+        banhammer4: { embed: banhammer, component: bhammer4 },
+        rpackage: { embed: raiserpackage, component: rpackage },
+        raiserpackage: { embed: raiserpackage, component: rpackage },
+        rpackage2: { embed: raiserpackage, component: rpackage2 },
+        raiserpackage2: { embed: raiserpackage, component: rpackage2 },
+        rpackage3: { embed: raiserpackage, component: rpackage3 },
+        raiserpackage3: { embed: raiserpackage, component: rpackage3 },
+        rticia: { embed: rampticia, component: rticia },
+        rampticia: { embed: rampticia, component: rticia },
+        rticia2: { embed: rampticia, component: rticia2 },
+        rampticia2: { embed: rampticia, component: rticia2 },
+        rticia3: { embed: rampticia, component: rticia3 },
+        rampticia3: { embed: rampticia, component: rticia3 },
+        syard: { embed: schoolyard, component: syard },
+        schoolyard: { embed: schoolyard, component: syard },
+        syard2: { embed: schoolyard, component: syard2 },
+        schoolyard2: { embed: schoolyard, component: syard2 },
+        syard3: { embed: schoolyard, component: syard3 },
+        schoolyard3: { embed: schoolyard, component: syard3 },
+        sea: { embed: seacret, component: sea },
+        seacret: { embed: seacret, component: sea },
+        sea2: { embed: seacret, component: sea2 },
+        seacret2: { embed: seacret, component: sea2 },
+        sea3: { embed: seacret, component: sea3 },
+        seacret3: { embed: seacret, component: sea3 },
+        stars: { embed: spacestars, component: stars },
+        spacestars: { embed: spacestars, component: stars },
+        stars2: { embed: spacestars, component: stars2 },
+        spacestars2: { embed: spacestars, component: stars2 },
+        stars3: { embed: spacestars, component: stars3 },
+        spacestars3: { embed: spacestars, component: stars3 },
+        stars4: { embed: spacestars, component: stars4 },
+        spacestars4: { embed: spacestars, component: stars4 },
+        spl: { embed: splimps, component: spl },
+        splimps: { embed: splimps, component: spl },
+        spl2: { embed: splimps, component: spl2 },
+        splimps2: { embed: splimps, component: spl2 },
+        spl3: { embed: splimps, component: spl3 },
+        splimps3: { embed: splimps, component: spl3 },
+        sbandits: { embed: sunbandits, component: sbandits },
+        sunbandits: { embed: sunbandits, component: sbandits },
+        sbandits2: { embed: sunbandits, component: sbandits2 },
+        sunbandits2: { embed: sunbandits, component: sbandits2 },
+        sbandits3: { embed: sunbandits, component: sbandits3 },
+        sunbandits3: { embed: sunbandits, component: sbandits3 },
+        sbandits4: { embed: sunbandits, component: sbandits4 },
+        sunbandits4: { embed: sunbandits, component: sbandits4 },
+        slord: { embed: sunlord, component: slord },
+        sunlord: { embed: sunlord, component: slord },
+        slord2: { embed: sunlord, component: slord2 },
+        sunlord2: { embed: sunlord, component: slord2 },
+        slord3: { embed: sunlord, component: slord3 },
+        sunlord3: { embed: sunlord, component: slord3 },
+        slord4: { embed: sunlord, component: slord4 },
+        sunlord4: { embed: sunlord, component: slord4 },
+        timps: { embed: telimps, component: timps },
+        telimps: { embed: telimps, component: timps },
+        timps2: { embed: telimps, component: timps2 },
+        telimps2: { embed: telimps, component: timps2 },
+        timps3: { embed: telimps, component: timps3 },
+        telimps3: { embed: telimps, component: timps3 },
+        timps4: { embed: telimps, component: timps4 },
+        telimps4: { embed: telimps, component: timps4 },
+        timpssb: { embed: telimpssb, component: timpssb },
+        telimpssb: { embed: telimpssb, component: timpssb },
+        timpssb2: { embed: telimpssb, component: timpssb2 },
+        telimpssb2: { embed: telimpssb, component: timpssb2 },
+        timpssb3: { embed: telimpssb, component: timpssb3 },
+        telimpssb3: { embed: telimpssb, component: timpssb3 },
+        timpssb4: { embed: telimpssb, component: timpssb4 },
+        telimpssb4: { embed: telimpssb, component: timpssb4 },
+        terrifyster: { embed: terrifytricksterazzi, component: terrifyster },
+        terrifytricksterazzi: {
+          embed: terrifytricksterazzi,
+          component: terrifyster,
+        },
+        terrifyster2: { embed: terrifytricksterazzi, component: terrifyster2 },
+        terrifytricksterazzi2: {
+          embed: terrifytricksterazzi,
+          component: terrifyster2,
+        },
+        terrifyster3: { embed: terrifytricksterazzi, component: terrifyster3 },
+        terrifytricksterazzi3: {
+          embed: terrifytricksterazzi,
+          component: terrifyster3,
+        },
+        terrifyster4: { embed: terrifytricksterazzi, component: terrifyster4 },
+        terrifytricksterazzi4: {
+          embed: terrifytricksterazzi,
+          component: terrifyster4,
+        },
+        tstache: { embed: trickstache, component: tstache },
+        trickstache: { embed: trickstache, component: tstache },
+        tstache2: { embed: trickstache, component: tstache2 },
+        trickstache2: { embed: trickstache, component: tstache2 },
+        tstache3: { embed: trickstache, component: tstache3 },
+        trickstache3: { embed: trickstache, component: tstache3 },
+        tstache4: { embed: trickstache, component: tstache4 },
+        trickstache4: { embed: trickstache, component: tstache4 },
+        ubolt: { embed: uncrackabolt, component: ubolt },
+        uncrackabolt: { embed: uncrackabolt, component: ubolt },
+        ubolt2: { embed: uncrackabolt, component: ubolt2 },
+        uncrackabolt2: { embed: uncrackabolt, component: ubolt2 },
+        ubolt3: { embed: uncrackabolt, component: ubolt3 },
+        uncrackabolt3: { embed: uncrackabolt, component: ubolt3 },
+        umech: { embed: uncrackamech, component: umech },
+        uncrackamech: { embed: uncrackamech, component: umech },
+        umech2: { embed: uncrackamech, component: umech2 },
+        uncrackamech2: { embed: uncrackamech, component: umech2 },
+        umech3: { embed: uncrackamech, component: umech3 },
+        uncrackamech3: { embed: uncrackamech, component: umech3 },
+        umech4: { embed: uncrackamech, component: umech4 },
+        uncrackamech4: { embed: uncrackamech, component: umech4 },
+        vster: { embed: valkster, component: vster },
+        valkster: { embed: valkster, component: vster },
+        vster2: { embed: valkster, component: vster2 },
+        valkster2: { embed: valkster, component: vster2 },
+        vster3: { embed: valkster, component: vster3 },
+        valkster3: { embed: valkster, component: vster3 },
+        vster4: { embed: valkster, component: vster4 },
+        valkster4: { embed: valkster, component: vster4 },
+        wsports: { embed: watersports, component: wsports },
+        watersports: { embed: watersports, component: wsports },
+        wsports2: { embed: watersports, component: wsports2 },
+        watersports2: { embed: watersports, component: wsports2 },
+        wsports3: { embed: watersports, component: wsports3 },
+        watersports3: { embed: watersports, component: wsports3 },
+        wsports4: { embed: watersports, component: wsports4 },
+        watersports4: { embed: watersports, component: wsports4 },
+        wph: { embed: whalepharaoh, component: wph },
+        whalepharaoh: { embed: whalepharaoh, component: wph },
+        wph2: { embed: whalepharaoh, component: wph2 },
+        whalepharaoh2: { embed: whalepharaoh, component: wph2 },
+        wph3: { embed: whalepharaoh, component: wph3 },
+        whalepharaoh3: { embed: whalepharaoh, component: wph3 },
+        wph4: { embed: whalepharaoh, component: wph4 },
+        whalepharaoh4: { embed: whalepharaoh, component: wph4 },
+        yemartin: { embed: youngeggmartin, component: yemartin },
+        youngeggmartin: { embed: youngeggmartin, component: yemartin },
+        yemartin2: { embed: youngeggmartin, component: yemartin2 },
+        youngeggmartin2: { embed: youngeggmartin, component: yemartin2 },
+        yemartin3: { embed: youngeggmartin, component: yemartin3 },
+        youngeggmartin3: { embed: youngeggmartin, component: yemartin3 },
+        ykmartin: { embed: youngkenmartin, component: ykmartin },
+        youngkenmartin: { embed: youngkenmartin, component: ykmartin },
+        ykmartin2: { embed: youngkenmartin, component: ykmartin2 },
+        youngkenmartin2: { embed: youngkenmartin, component: ykmartin2 },
+        ykmartin3: { embed: youngkenmartin, component: ykmartin3 },
+        youngkenmartin3: { embed: youngkenmartin, component: ykmartin3 },
+        ykmartin4: { embed: youngkenmartin, component: ykmartin4 },
+        youngkenmartin4: { embed: youngkenmartin, component: ykmartin4 },
+        zm: { embed: zmoss, component: zm },
+        zmoss: { embed: zmoss, component: zm },
+        zm2: { embed: zmoss, component: zm2 },
+        zmoss2: { embed: zmoss, component: zm2 },
+        zm3: { embed: zmoss, component: zm3 },
+        zmoss3: { embed: zmoss, component: zm3 },
+        lt: { embed: ladytuna, component: lt },
+        ladytuna: { embed: ladytuna, component: lt },
+        lt2: { embed: ladytuna, component: lt2 },
+        ladytuna2: { embed: ladytuna, component: lt2 },
+        lt3: { embed: ladytuna, component: lt3 },
+        ladytuna3: { embed: ladytuna, component: lt3 },
+        lsnap: { embed: lasersnap, component: lsnap },
+        lasersnap: { embed: lasersnap, component: lsnap },
+        lsnap2: { embed: lasersnap, component: lsnap2 },
+        lasersnap2: { embed: lasersnap, component: lsnap2 },
+        lsnap3: { embed: lasersnap, component: lsnap3 },
+        lasersnap3: { embed: lasersnap, component: lsnap3 },
+        lsnap4: { embed: lasersnap, component: lsnap4 },
+        lasersnap4: { embed: lasersnap, component: lsnap4 },
+        hotk: { embed: healthotk, component: hotk },
+        healthotk: { embed: healthotk, component: hotk },
+        hotk2: { embed: healthotk, component: hotk2 },
+        healthotk2: { embed: healthotk, component: hotk2 },
+        hotk3: { embed: healthotk, component: hotk3 },
+        healthotk3: { embed: healthotk, component: hotk3 },
+        hotk4: { embed: healthotk, component: hotk4 },
+        healthotk4: { embed: healthotk, component: hotk4 },
+        pts: { embed: pawntrickstab, component: pts },
+        pawntrickstab: { embed: pawntrickstab, component: pts },
+        pts2: { embed: pawntrickstab, component: pts2 },
+        pawntrickstab2: { embed: pawntrickstab, component: pts2 },
+        pts3: { embed: pawntrickstab, component: pts3 },
+        pawntrickstab3: { embed: pawntrickstab, component: pts3 },
+        nut: { embed: nuttin, component: nut },
+        nuttin: { embed: nuttin, component: nut },
+        nut2: { embed: nuttin, component: nut2 },
+        nuttin2: { embed: nuttin, component: nut2 },
+        nut3: { embed: nuttin, component: nut3 },
+        nuttin3: { embed: nuttin, component: nut3 },
+        rfl: { embed: reflourished, component: rfl },
+        reflourished: { embed: reflourished, component: rfl },
+        rfl2: { embed: reflourished, component: rfl2 },
+        reflourished2: { embed: reflourished, component: rfl2 },
+        rfl3: { embed: reflourished, component: rfl3 },
+        reflourished3: { embed: reflourished, component: rfl3 },
+        sav: { embed: savage22, component: sav },
+        savage: { embed: savage22, component: sav },
+        sav2: { embed: savage22, component: sav2 },
+        savage2: { embed: savage22, component: sav2 },
+        sav3: { embed: savage22, component: sav3 },
+        savage3: { embed: savage22, component: sav3 },
+        sav4: { embed: savage22, component: sav4 },
+        savage4: { embed: savage22, component: sav4 },
+        carr: { embed: carroot, component: carr },
+        carroot: { embed: carroot, component: carr },
+        carr2: { embed: carroot, component: carr2 },
+        carroot2: { embed: carroot, component: carr2 },
+        carr3: { embed: carroot, component: carr3 },
+        carroot3: { embed: carroot, component: carr3 },
+        carr4: { embed: carroot, component: carr4 },
+        carroot4: { embed: carroot, component: carr4 },
+        hgargs: { embed: huntgargs, component: hgargs },
+        huntgargs: { embed: huntgargs, component: hgargs },
+        hgargs2: { embed: huntgargs, component: hgargs2 },
+        huntgargs2: { embed: huntgargs, component: hgargs2 },
+        hgargs3: { embed: huntgargs, component: hgargs3 },
+        huntgargs3: { embed: huntgargs, component: hgargs3 },
+        pb: { embed: pbeans, component: pb },
+        pbeans: { embed: pbeans, component: pb },
+        pb2: { embed: pbeans, component: pb2 },
+        pbeans2: { embed: pbeans, component: pb2 },
+        pb3: { embed: pbeans, component: pb3 },
+        pbeans3: { embed: pbeans, component: pb3 },
+        pop: { embed: popsicle, component: pop },
+        popsicle: { embed: popsicle, component: pop },
+        pop2: { embed: popsicle, component: pop2 },
+        popsicle2: { embed: popsicle, component: pop2 },
+        pop3: { embed: popsicle, component: pop3 },
+        popsicle3: { embed: popsicle, component: pop3 },
+        dgloves: { embed: dinogloves, component: dgloves },
+        dinogloves: { embed: dinogloves, component: dgloves },
+        dgloves2: { embed: dinogloves, component: dgloves2 },
+        dinogloves2: { embed: dinogloves, component: dgloves2 },
+        dgloves3: { embed: dinogloves, component: dgloves3 },
+        dinogloves3: { embed: dinogloves, component: dgloves3 },
+        nhks: { embed: nohokaistars, component: nhks },
+        nohokaistars: { embed: nohokaistars, component: nhks },
+        nhks2: { embed: nohokaistars, component: nhks2 },
+        nohokaistars2: { embed: nohokaistars, component: nhks2 },
+        nhks3: { embed: nohokaistars, component: nhks3 },
+        nohokaistars3: { embed: nohokaistars, component: nhks3 },
+        lbait: { embed: logbait, component: lbait },
+        logbait: { embed: logbait, component: lbait },
+        lbait2: { embed: logbait, component: lbait2 },
+        logbait2: { embed: logbait, component: lbait2 },
+        lbait3: { embed: logbait, component: lbait3 },
+        logbait3: { embed: logbait, component: lbait3 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({ embeds: [action.embed], components: [action.component] });
+      } else {
+        await i.reply({ content: "Invalid button action", flags: MessageFlags.Ephemeral });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

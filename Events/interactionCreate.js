@@ -982,6 +982,7 @@ module.exports = {
           mech: "zmdecks",
         };
         if (heroInput == "na") {
+          try{
           const [result] = await db.query(`select * from bcdecks bc
             inner join bfdecks bf
             on (bc.deckinfo = bf.deckinfo)
@@ -1026,31 +1027,40 @@ module.exports = {
             inner join zmdecks zm
             on (bc.deckinfo = zm.deckinfo)
             where bc.deckinfo = "image link:"`);
-          const deck = [];
-          const excludedName = "budget";
-          for (const key in result[0]) {
-            const value = result[0][key];
-            if (
-              (value.includes(".png") ||
-                value.includes(".jpg") ||
-                value.includes(".jpeg") ||
-                value.includes(".webp")) &&
-              !excludedName.includes(key) // Exclude specific names
-            ) {
-              deck.push(value); // Add the image link to the deck array
+            const deck = [];
+            const excludedName = "budget";
+            for (const key in result[0]) {
+              const value = result[0][key];
+              if (
+                (value.includes(".png") ||
+                  value.includes(".jpg") ||
+                  value.includes(".jpeg") ||
+                  value.includes(".webp")) &&
+                !excludedName.includes(key) // Exclude specific names
+              ) {
+                deck.push(value); // Add the image link to the deck array
+              }
             }
+            const embed = new EmbedBuilder()
+              .setTitle("Random Deck")
+              .setDescription("Here is your random deck")
+              .setColor("Random")
+              .setImage(deck[Math.floor(Math.random() * deck.length)]);
+      
+            return await interaction.followUp({
+              embeds: [embed],
+              flags: MessageFlags.Ephemeral,
+            });
+          } catch (err) {
+            console.error(err);
+            return interaction.followUp({
+              content: "Oops, something went wrong. Please try again later.",
+              flags: MessageFlags.Ephemeral,
+            });
           }
-          const embed = new EmbedBuilder()
-            .setTitle("Random Deck")
-            .setDescription(`Here is your random Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({
-            embeds: [embed],
-            flags: MessageFlags.Ephemeral,
-          });
-        } else if (heroInput == "plants") {
+        }
+          else if (heroInput == "plants") {
+            try{
           const [result] = await db.query(`select * from bcdecks bc
                     inner join ccdecks cc 
                     on (bc.deckinfo = cc.deckinfo)
@@ -1073,31 +1083,39 @@ module.exports = {
                     inner join wkdecks wk 
                     on (bc.deckinfo = wk.deckinfo)
                     where bc.deckinfo = "image link:"`);
-          const deck = [];
-          const excludedName = "budget";
-          for (const key in result[0]) {
-            const value = result[0][key];
-            if (
-              (value.includes(".png") ||
-                value.includes(".jpg") ||
-                value.includes(".jpeg") ||
-                value.includes(".webp")) &&
-              !excludedName.includes(key) // Exclude specific names
-            ) {
-              deck.push(value); // Add the image link to the deck array
-            }
-          }
+                    const deck = [];
+                    const excludedName = "budget";
+                    for (const key in result[0]) {
+                      const value = result[0][key];
+                      if (
+                        (value.includes(".png") ||
+                          value.includes(".jpg") ||
+                          value.includes(".jpeg") ||
+                          value.includes(".webp")) &&
+                        !excludedName.includes(key) // Exclude specific names
+                      ) {
+                        deck.push(value); // Add the image link to the deck array
+                      }
+                    }
           const embed = new EmbedBuilder()
             .setTitle("Random Plant Deck")
             .setDescription(`Here is your random plant Deck`)
             .setColor("Random")
             .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
-          await interaction.followUp({
-            embeds: [embed],
-            flags: MessageFlags.Ephemeral,
-          });
+            return await interaction.followUp({
+              embeds: [embed],
+              flags: MessageFlags.Ephemeral,
+            });
+          } catch (err) {
+            console.error(err);
+            return interaction.followUp({
+              content: "Oops, something went wrong. Please try again later.",
+              flags: MessageFlags.Ephemeral,
+            });
+          }
         } else if (heroInput == "zombies") {
+          try{
           const [result] = await db.query(`select * from bfdecks bf
                     inner join ebdecks eb 
                     on (bf.deckinfo = eb.deckinfo)
@@ -1118,86 +1136,89 @@ module.exports = {
                     inner join smdecks sm 
                     on (bf.deckinfo = sm.deckinfo)
                     where bf.deckinfo = "image link:"`);
-          const deck = [];
-          const excludedName = "budget";
-          for (const key in result[0]) {
-            const value = result[0][key];
-            if (
-              (value.includes(".png") ||
-                value.includes(".jpg") ||
-                value.includes(".jpeg") ||
-                value.includes(".webp")) &&
-              !excludedName.includes(key) // Exclude specific names
-            ) {
-              deck.push(value); // Add the image link to the deck array
-            }
-          }
+                    const deck = [];
+                    const excludedName = "budget";
+                    for (const key in result[0]) {
+                      const value = result[0][key];
+                      if (
+                        (value.includes(".png") ||
+                          value.includes(".jpg") ||
+                          value.includes(".jpeg") ||
+                          value.includes(".webp")) &&
+                        !excludedName.includes(key) // Exclude specific names
+                      ) {
+                        deck.push(value); // Add the image link to the deck array
+                      }
+                    }
           const embed = new EmbedBuilder()
             .setTitle("Random Zombie Deck")
             .setDescription(`Here is your random Zombie Deck`)
             .setColor("Random")
             .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
-          await interaction.followUp({
-            embeds: [embed],
-            flags: MessageFlags.Ephemeral,
-          });
-        }
-        const excludedName = "budget";
-        /**
-         * The getRandomDeck function gets a random deck for the user to play
-         * @param {*} tableName - The name of the table
-         * @returns - The users deck
-         */
-        async function getRandomDeck(tableName) {
-          const [result] = await db.query(
-            `SELECT * FROM ${tableName} WHERE deckinfo = 'image link:'`
-          );
-          const deck = [];
-          for (const key in result[0]) {
-            const value = result[0][key];
-            if (
-              (value.includes(".png") ||
-                value.includes(".jpg") ||
-                value.includes(".jpeg") ||
-                value.includes(".webp")) &&
-              !excludedName.includes(key) // Exclude specific names
-            ) {
-              deck.push(value); // Add the image link to the deck array
-            }
+            return await interaction.followUp({
+              embeds: [embed],
+              flags: MessageFlags.Ephemeral,
+            });
+          } catch (err) {
+            console.error(err);
+            return interaction.followUp({
+              content: "Oops, something went wrong. Please try again later.",
+              flags: MessageFlags.Ephemeral,
+            });
           }
-          return deck;
-        }
-        const tableName = heroDeckTables[heroInput];
-        if (!tableName) {
+        } 
+        else if (!tableName) {
           return interaction.followUp({
             content: "Invalid hero name. Please try again.",
             flags: MessageFlags.Ephemeral,
           });
         }
-        try {
-          const deck = await getRandomDeck(tableName);
-          const embed = new EmbedBuilder()
-            .setTitle(
-              `Random ${
-                heroInput.charAt(0).toUpperCase() + heroInput.slice(1)
-              } Deck`
-            )
-            .setDescription(`Here is your random ${heroInput} deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({
-            embeds: [embed],
-            flags: MessageFlags.Ephemeral,
-          });
-        } catch (err) {
-          console.error(err);
-          await interaction.followUp({
-            content: "Oops, something went wrong. Please try again later.",
-            flags: MessageFlags.Ephemeral,
-          });
+        const tableName = heroDeckTables[heroInput];
+  try {
+    const excludedName = "budget";
+    /**
+     * The getRandomDeck function gets a random deck for the user to play
+     * @param {*} tableName - The name of the table
+     * @returns - The users deck
+     */
+    async function getRandomDeck(tableName) {
+      const [result] = await db.query(
+        `SELECT * FROM ${tableName} WHERE deckinfo = 'image link:'`
+      );
+      const deck = [];
+      for (const key in result[0]) {
+        const value = result[0][key];
+        if (
+          (value.includes(".png") ||
+            value.includes(".jpg") ||
+            value.includes(".jpeg") ||
+            value.includes(".webp")) &&
+          !excludedName.includes(key) // Exclude specific names
+        ) {
+          deck.push(value); // Add the image link to the deck array
         }
+      }
+      return deck;
+    }
+    const deck = await getRandomDeck(tableName);
+    const embed = new EmbedBuilder()
+      .setTitle(`Random ${heroInput.charAt(0).toUpperCase() + heroInput.slice(1)} Deck`)
+      .setDescription(`Here is your random ${heroInput} deck`)
+      .setColor("Random")
+      .setImage(deck[Math.floor(Math.random() * deck.length)]);
+
+    await interaction.followUp({
+      embeds: [embed],
+      flags: MessageFlags.Ephemeral,
+    });
+  } catch (err) {
+    console.error(err);
+    await interaction.followUp({
+      content: "Oops, something went wrong. Please try again later.",
+      flags: MessageFlags.Ephemeral,
+    });
+  }
       }
       //wheel modal
       else if (interaction.customId === "wheel-modal") {

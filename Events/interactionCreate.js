@@ -7,7 +7,7 @@ const {
   ButtonBuilder,
   ButtonStyle,
   TextInputStyle,
-  MessageFlags
+  MessageFlags,
 } = require("discord.js");
 const { ascii, hangmanGuesses } = require("../Utilities/hangman");
 const db = require("../index.js");
@@ -32,8 +32,166 @@ module.exports = {
         const dDesc = interaction.fields.getTextInputValue("deckDesc");
         const dCred = interaction.fields.getTextInputValue("deckCred");
         const dLink = interaction.fields.getTextInputValue("deckLink");
-        let dHero = uHero.toLowerCase();
+        const heroTags = {
+          // Neptuna
+          nt: "1100170647050649620",
+          neptuna: "1100170647050649620",
+          tuna: "1100170647050649620",
+          np: "1100170647050649620",
+          nept: "1100170647050649620",
 
+          // Brain Freeze
+          bf: "1100170721994477668",
+          "brain freeze": "1100170721994477668",
+          freeze: "1100170721994477668",
+          bfreeze: "1100170721994477668",
+          brainfreeze: "1100170721994477668",
+
+          // Impfinity
+          if: "1100170791594762260",
+          impfinity: "1100170791594762260",
+          imp: "1100170791594762260",
+          infinity: "1100170791594762260",
+          impf: "1100170791594762260",
+          impfinty: "1100170791594762260",
+
+          // Super Brainz
+          sb: "1100170925208502282",
+          "super brains": "1100170925208502282",
+          super: "1100170925208502282",
+          sbrains: "1100170925208502282",
+          superb: "1100170925208502282",
+          superbrain: "1100170925208502282",
+          superbrainz: "1100170925208502282",
+          "super brainz": "1100170925208502282",
+          sbrainz: "1100170925208502282",
+          brainz: "1100170925208502282",
+
+          // Huge-Gigantacus
+          hg: "1100170925208502282",
+          huge: "1100170925208502282",
+          "huge giganticus": "1100170925208502282",
+          hugegiganticus: "1100170925208502282",
+          giganticus: "1100170925208502282",
+          "huge-giganticus": "1100170925208502282",
+
+          // Z-Mech
+          zmech: "1100170981013729410",
+          zm: "1100170981013729410",
+          "z-mech": "1100170981013729410",
+          mech: "1100170981013729410",
+
+          // Electric Boogaloo
+          eb: "1100171042380578857",
+          "electric boogaloo": "1100171042380578857",
+          electric: "1100171042380578857",
+          boogaloo: "1100171042380578857",
+          boog: "1100171042380578857",
+          electricboogaloo: "1100171042380578857",
+
+          // Professor Brainstorm
+          pb: "1100171115504078901",
+          professor: "1100171115504078901",
+          brainstorm: "1100171115504078901",
+          "professor brainstorm": "1100171115504078901",
+          professorbrainstorm: "1100171115504078901",
+
+          // The Smash
+          sm: "1100171177529446492",
+          tsm: "1100171177529446492",
+          smash: "1100171177529446492",
+          "the smash": "1100171177529446492",
+          thesmash: "1100171177529446492",
+
+          // Immorticia
+          im: "1100171253790285904",
+          immort: "1100171253790285904",
+          ticia: "1100171253790285904",
+          immorticia: "1100171253790285904",
+          iticia: "1100171253790285904",
+
+          // Rustbolt
+          rb: "1100171459785150585",
+          rust: "1100171459785150585",
+          bolt: "1100171459785150585",
+          "rust bolt": "1100171459785150585",
+          rusty: "1100171459785150585",
+          rustbolt: "1100171459785150585",
+
+          // Beta Carrotina
+          bc: "1100171558263193700",
+          ct: "1100171558263193700",
+          beta: "1100171558263193700",
+          carrot: "1100171558263193700",
+          betacarrotina: "1100171558263193700",
+          betacarrot: "1100171558263193700",
+          carrotina: "1100171558263193700",
+          tron: "1100171558263193700",
+          citron: "1100171558263193700",
+          "beta carrotina": "1100171558263193700",
+          "beta-carrotina": "1100171558263193700",
+
+          // Chompzilla
+          cz: "1100171601045106819",
+          chomp: "1100171601045106819",
+          zilla: "1100171601045106819",
+          chompzilla: "1100171601045106819",
+
+          // Solar Flare
+          sf: "1100171646557491220",
+          solar: "1100171646557491220",
+          flare: "1100171646557491220",
+          solarflare: "1100171646557491220",
+          "solar flare": "1100171646557491220",
+
+          // Wall-Knight
+          wall: "1100171712391295006",
+          knight: "1100171712391295006",
+          wallknight: "1100171712391295006",
+          "wall knight": "1100171712391295006",
+          wk: "1100171712391295006",
+          "wall-knight": "1100171712391295006",
+
+          // Spudow
+          sp: "1100171758256013412",
+          dow: "1100171758256013412",
+          spudow: "1100171758256013412",
+          spud: "1100171758256013412",
+
+          // Grass Knuckles
+          gk: "1100171819148906628",
+          grass: "1100171819148906628",
+          knuckles: "1100171819148906628",
+          "grass knuckles": "1100171819148906628",
+          grassknuckles: "1100171819148906628",
+
+          // Rose
+          ro: "1100171855316406343",
+          rose: "1100171855316406343",
+
+          // Nightcap
+          nc: "1100171997167747172",
+          cap: "1100171997167747172",
+          nightcap: "1100171997167747172",
+          night: "1100171997167747172",
+          "night cap": "1100171997167747172",
+
+          // Captain Combustible
+          cc: "1100172143603482786",
+          captain: "1100172143603482786",
+          combustible: "1100172143603482786",
+          "captain combustible": "1100172143603482786",
+          captaincombustible: "1100172143603482786",
+
+          // Green Shadow
+          gs: "1100172254983241820",
+          green: "1100172254983241820",
+          shadow: "1100172254983241820",
+          "green shadow": "1100172254983241820",
+          greenshadow: "1100172254983241820",
+          penelopea: "1100172254983241820",
+          "green-shadow": "1100172254983241820",
+        };
         if (
           dLink.includes(".png") ||
           dLink.includes(".jpg") ||
@@ -52,182 +210,12 @@ module.exports = {
               "1100160031128830104"
             );
             console.log(forum.availableTags);
-            if (
-              dHero == "nt" ||
-              dHero == "neptuna" ||
-              dHero == "tuna" ||
-              dHero == "np" ||
-              dHero == "nept"
-            ) {
-              dHero = "1100170647050649620";
-            } else if (
-              dHero == "bf" ||
-              dHero == "brain freeze" ||
-              dHero == "freeze" ||
-              dHero == "bfreeze" ||
-              dHero == "brainfreeze"
-            ) {
-              dHero = "1100170721994477668";
-            } else if (
-              dHero == "if" ||
-              dHero == "impfinity" ||
-              dHero == "imp" ||
-              dHero == "infinity" ||
-              dHero == "impf" ||
-              dHero == "impfinty"
-            ) {
-              dHero = "1100170791594762260";
-            } else if (
-              dHero == "sb" ||
-              dHero == "super brains" ||
-              dHero == "super" ||
-              dHero == "sbrains" ||
-              dHero == "superb" ||
-              dHero == "superbrain" ||
-              dHero == "superbrainz" ||
-              dHero == "super brainz" ||
-              dHero == "sbrainz" ||
-              dHero == "super" ||
-              dHero == "brainz" ||
-              dHero == "hg" ||
-              dHero == "huge" ||
-              dHero == "huge giganticus" ||
-              dHero == "hugegiganticus" ||
-              dHero == "giganticus" ||
-              dHero == "huge-giganticus"
-            ) {
-              dHero = "1100170925208502282";
-            } else if (
-              dHero == "zmech" ||
-              dHero == "zm" ||
-              dHero == "z-mech" ||
-              dHero == "mech"
-            ) {
-              dHero = "1100170981013729410";
-            } else if (
-              dHero == "eb" ||
-              dHero == "electric boogaloo" ||
-              dHero == "electric" ||
-              dHero == "boogaloo" ||
-              dHero == "boog" ||
-              dHero == "electricboogaloo"
-            ) {
-              dHero = "1100171042380578857";
-            } else if (
-              dHero == "pb" ||
-              dHero == "professor" ||
-              dHero == "brainstorm" ||
-              dHero == "professor brainstorm" ||
-              dHero == "professorbrainstorm"
-            ) {
-              dHero = "1100171115504078901";
-            } else if (
-              dHero == "sm" ||
-              dHero == "tsm" ||
-              dHero == "smash" ||
-              dHero == "the smash" ||
-              dHero == "thesmash"
-            ) {
-              dHero = "1100171177529446492";
-            } else if (
-              dHero == "im" ||
-              dHero == "immort" ||
-              dHero == "ticia" ||
-              dHero == "immorticia" ||
-              dHero == "iticia"
-            ) {
-              dHero = "1100171253790285904";
-            } else if (
-              dHero == "rb" ||
-              dHero == "rust" ||
-              dHero == "bolt" ||
-              dHero == "rust bolt" ||
-              dHero == "rusty" ||
-              dHero == "rustbolt"
-            ) {
-              dHero = "1100171459785150585";
-            } else if (
-              dHero == "bc" ||
-              dHero == "ct" ||
-              dHero == "beta" ||
-              dHero == "carrot" ||
-              dHero == "betacarrotina" ||
-              dHero == "betacarrot" ||
-              dHero == "carrotina" ||
-              dHero == "tron" ||
-              dHero == "citron" ||
-              dHero == "beta carrotina" ||
-              dHero == "beta-carrotina"
-            ) {
-              dHero = "1100171558263193700";
-            } else if (
-              dHero == "cz" ||
-              dHero == "chomp" ||
-              dHero == "zilla" ||
-              dHero == "chompzilla"
-            ) {
-              dHero = "1100171601045106819";
-            } else if (
-              dHero == "sf" ||
-              dHero == "solar" ||
-              dHero == "flare" ||
-              dHero == "solarflare" ||
-              dHero == "solar flare"
-            ) {
-              dHero = "1100171646557491220";
-            } else if (
-              dHero == "wall" ||
-              dHero == "knight" ||
-              dHero == "wallknight" ||
-              dHero == "wall knight" ||
-              dHero == "wk" ||
-              dHero == "wall-knight"
-            ) {
-              dHero = "1100171712391295006";
-            } else if (
-              dHero == "sp" ||
-              dHero == "dow" ||
-              dHero == "spudow" ||
-              dHero == "spud"
-            ) {
-              dHero = "1100171758256013412";
-            } else if (
-              dHero == "gk" ||
-              dHero == "grass" ||
-              dHero == "knuckles" ||
-              dHero == "grass knuckles" ||
-              dHero == "grassknuckles"
-            ) {
-              dHero = "1100171819148906628";
-            } else if (dHero == "ro" || dHero == "rose") {
-              dHero = "1100171855316406343";
-            } else if (
-              dHero == "nc" ||
-              dHero == "cap" ||
-              dHero == "nightcap" ||
-              dHero == "night" ||
-              dHero == "night cap"
-            ) {
-              dHero = "1100171997167747172";
-            } else if (
-              dHero == "cc" ||
-              dHero == "captain" ||
-              dHero == "combustible" ||
-              dHero == "captain combustible" ||
-              dHero == "captaincombustible"
-            ) {
-              dHero = "1100172143603482786";
-            } else if (
-              dHero == "gs" ||
-              dHero == "green" ||
-              dHero == "shadow" ||
-              dHero == "green shadow" ||
-              dHero == "greenshadow" || dHero == "penelopea" || dHero == "green-shadow"
-            ) {
-              dHero = "1100172254983241820";
-            }
-            else{
-              await interaction.followUp({content: "Please enter a valid hero name", flags: MessageFlags.Ephemeral});
+            let dHero = heroTags[uHero.toLowerCase()];
+            if (!dHero) {
+              await interaction.followUp({
+                content: "Please enter a valid hero name",
+                flags: MessageFlags.Ephemeral,
+              });
               console.log(dHero);
             }
             // Create a new forum post
@@ -246,13 +234,13 @@ module.exports = {
               content:
                 "Your suggestion has been sent!, Please joined the discord linked below to defend and check in on your suggestion",
               components: [discord],
-             flags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           } catch (err) {
             await interaction.followUp({
               content:
                 "Oops, something went wrong.\nUnable to send suggestion.\n Please contact tbone for help! (PS: Please provide image of what was typed in the fourm)",
-             flags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
             console.log(err);
           }
@@ -260,11 +248,10 @@ module.exports = {
           await interaction.followUp({
             content:
               "Oops, something went wrong.\nUnable to send suggestion \n incorrect image link please contact tbone for help! \n (PS: the correct link should contain .png, .jpg, .jpeg, or .webp)",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
-      }
-      if (interaction.customId === "dUps") {
+      } else if (interaction.customId === "dUps") {
         await interaction.deferUpdate();
 
         const uName = interaction.fields.getTextInputValue("upName");
@@ -272,7 +259,166 @@ module.exports = {
         const uDesc = interaction.fields.getTextInputValue("upDesc");
         const uLink = interaction.fields.getTextInputValue("upLink");
         const uCreds = interaction.fields.getTextInputValue("upCredits");
-        let dHero = uHero.toLowerCase();
+        const heroTags = {
+          // Neptuna
+          nt: "1100170647050649620",
+          neptuna: "1100170647050649620",
+          tuna: "1100170647050649620",
+          np: "1100170647050649620",
+          nept: "1100170647050649620",
+
+          // Brain Freeze
+          bf: "1100170721994477668",
+          "brain freeze": "1100170721994477668",
+          freeze: "1100170721994477668",
+          bfreeze: "1100170721994477668",
+          brainfreeze: "1100170721994477668",
+
+          // Impfinity
+          if: "1100170791594762260",
+          impfinity: "1100170791594762260",
+          imp: "1100170791594762260",
+          infinity: "1100170791594762260",
+          impf: "1100170791594762260",
+          impfinty: "1100170791594762260",
+
+          // Super Brainz
+          sb: "1100170925208502282",
+          "super brains": "1100170925208502282",
+          super: "1100170925208502282",
+          sbrains: "1100170925208502282",
+          superb: "1100170925208502282",
+          superbrain: "1100170925208502282",
+          superbrainz: "1100170925208502282",
+          "super brainz": "1100170925208502282",
+          sbrainz: "1100170925208502282",
+          brainz: "1100170925208502282",
+
+          // Huge-Gigantacus
+          hg: "1100170925208502282",
+          huge: "1100170925208502282",
+          "huge giganticus": "1100170925208502282",
+          hugegiganticus: "1100170925208502282",
+          giganticus: "1100170925208502282",
+          "huge-giganticus": "1100170925208502282",
+
+          // Z-Mech
+          zmech: "1100170981013729410",
+          zm: "1100170981013729410",
+          "z-mech": "1100170981013729410",
+          mech: "1100170981013729410",
+
+          // Electric Boogaloo
+          eb: "1100171042380578857",
+          "electric boogaloo": "1100171042380578857",
+          electric: "1100171042380578857",
+          boogaloo: "1100171042380578857",
+          boog: "1100171042380578857",
+          electricboogaloo: "1100171042380578857",
+
+          // Professor Brainstorm
+          pb: "1100171115504078901",
+          professor: "1100171115504078901",
+          brainstorm: "1100171115504078901",
+          "professor brainstorm": "1100171115504078901",
+          professorbrainstorm: "1100171115504078901",
+
+          // The Smash
+          sm: "1100171177529446492",
+          tsm: "1100171177529446492",
+          smash: "1100171177529446492",
+          "the smash": "1100171177529446492",
+          thesmash: "1100171177529446492",
+
+          // Immorticia
+          im: "1100171253790285904",
+          immort: "1100171253790285904",
+          ticia: "1100171253790285904",
+          immorticia: "1100171253790285904",
+          iticia: "1100171253790285904",
+
+          // Rustbolt
+          rb: "1100171459785150585",
+          rust: "1100171459785150585",
+          bolt: "1100171459785150585",
+          "rust bolt": "1100171459785150585",
+          rusty: "1100171459785150585",
+          rustbolt: "1100171459785150585",
+
+          // Beta Carrotina
+          bc: "1100171558263193700",
+          ct: "1100171558263193700",
+          beta: "1100171558263193700",
+          carrot: "1100171558263193700",
+          betacarrotina: "1100171558263193700",
+          betacarrot: "1100171558263193700",
+          carrotina: "1100171558263193700",
+          tron: "1100171558263193700",
+          citron: "1100171558263193700",
+          "beta carrotina": "1100171558263193700",
+          "beta-carrotina": "1100171558263193700",
+
+          // Chompzilla
+          cz: "1100171601045106819",
+          chomp: "1100171601045106819",
+          zilla: "1100171601045106819",
+          chompzilla: "1100171601045106819",
+
+          // Solar Flare
+          sf: "1100171646557491220",
+          solar: "1100171646557491220",
+          flare: "1100171646557491220",
+          solarflare: "1100171646557491220",
+          "solar flare": "1100171646557491220",
+
+          // Wall-Knight
+          wall: "1100171712391295006",
+          knight: "1100171712391295006",
+          wallknight: "1100171712391295006",
+          "wall knight": "1100171712391295006",
+          wk: "1100171712391295006",
+          "wall-knight": "1100171712391295006",
+
+          // Spudow
+          sp: "1100171758256013412",
+          dow: "1100171758256013412",
+          spudow: "1100171758256013412",
+          spud: "1100171758256013412",
+
+          // Grass Knuckles
+          gk: "1100171819148906628",
+          grass: "1100171819148906628",
+          knuckles: "1100171819148906628",
+          "grass knuckles": "1100171819148906628",
+          grassknuckles: "1100171819148906628",
+
+          // Rose
+          ro: "1100171855316406343",
+          rose: "1100171855316406343",
+
+          // Nightcap
+          nc: "1100171997167747172",
+          cap: "1100171997167747172",
+          nightcap: "1100171997167747172",
+          night: "1100171997167747172",
+          "night cap": "1100171997167747172",
+
+          // Captain Combustible
+          cc: "1100172143603482786",
+          captain: "1100172143603482786",
+          combustible: "1100172143603482786",
+          "captain combustible": "1100172143603482786",
+          captaincombustible: "1100172143603482786",
+
+          // Green Shadow
+          gs: "1100172254983241820",
+          green: "1100172254983241820",
+          shadow: "1100172254983241820",
+          "green shadow": "1100172254983241820",
+          greenshadow: "1100172254983241820",
+          penelopea: "1100172254983241820",
+          "green-shadow": "1100172254983241820",
+        };
         if (
           uLink.includes(".png") ||
           uLink.includes(".jpg") ||
@@ -291,182 +437,12 @@ module.exports = {
               "1100160031128830104"
             );
             console.log(forum.availableTags);
-            if (
-              dHero == "nt" ||
-              dHero == "neptuna" ||
-              dHero == "tuna" ||
-              dHero == "np" ||
-              dHero == "nept"
-            ) {
-              dHero = "1100170647050649620";
-            } else if (
-              dHero == "bf" ||
-              dHero == "brain freeze" ||
-              dHero == "freeze" ||
-              dHero == "bfreeze" ||
-              dHero == "brainfreeze"
-            ) {
-              dHero = "1100170721994477668";
-            } else if (
-              dHero == "if" ||
-              dHero == "impfinity" ||
-              dHero == "imp" ||
-              dHero == "infinity" ||
-              dHero == "impf" ||
-              dHero == "impfinty"
-            ) {
-              dHero = "1100170791594762260";
-            } else if (
-              dHero == "sb" ||
-              dHero == "super brains" ||
-              dHero == "super" ||
-              dHero == "sbrains" ||
-              dHero == "superb" ||
-              dHero == "superbrain" ||
-              dHero == "superbrainz" ||
-              dHero == "super brainz" ||
-              dHero == "sbrainz" ||
-              dHero == "super" ||
-              dHero == "brainz" ||
-              dHero == "hg" ||
-              dHero == "huge" ||
-              dHero == "huge giganticus" ||
-              dHero == "hugegiganticus" ||
-              dHero == "giganticus" ||
-              dHero == "huge-giganticus"
-            ) {
-              dHero = "1100170925208502282";
-            } else if (
-              dHero == "zmech" ||
-              dHero == "zm" ||
-              dHero == "z-mech" ||
-              dHero == "mech"
-            ) {
-              dHero = "1100170981013729410";
-            } else if (
-              dHero == "eb" ||
-              dHero == "electric boogaloo" ||
-              dHero == "electric" ||
-              dHero == "boogaloo" ||
-              dHero == "boog" ||
-              dHero == "electricboogaloo"
-            ) {
-              dHero = "1100171042380578857";
-            } else if (
-              dHero == "pb" ||
-              dHero == "professor" ||
-              dHero == "brainstorm" ||
-              dHero == "professor brainstorm" ||
-              dHero == "professorbrainstorm"
-            ) {
-              dHero = "1100171115504078901";
-            } else if (
-              dHero == "sm" ||
-              dHero == "tsm" ||
-              dHero == "smash" ||
-              dHero == "the smash" ||
-              dHero == "thesmash"
-            ) {
-              dHero = "1100171177529446492";
-            } else if (
-              dHero == "im" ||
-              dHero == "immort" ||
-              dHero == "ticia" ||
-              dHero == "immorticia" ||
-              dHero == "iticia"
-            ) {
-              dHero = "1100171253790285904";
-            } else if (
-              dHero == "rb" ||
-              dHero == "rust" ||
-              dHero == "bolt" ||
-              dHero == "rust bolt" ||
-              dHero == "rusty" ||
-              dHero == "rustbolt"
-            ) {
-              dHero = "1100171459785150585";
-            } else if (
-              dHero == "bc" ||
-              dHero == "ct" ||
-              dHero == "beta" ||
-              dHero == "carrot" ||
-              dHero == "betacarrotina" ||
-              dHero == "betacarrot" ||
-              dHero == "carrotina" ||
-              dHero == "tron" ||
-              dHero == "citron" ||
-              dHero == "beta carrotina" ||
-              dHero == "beta-carrotina"
-            ) {
-              dHero = "1100171558263193700";
-            } else if (
-              dHero == "cz" ||
-              dHero == "chomp" ||
-              dHero == "zilla" ||
-              dHero == "chompzilla"
-            ) {
-              dHero = "1100171601045106819";
-            } else if (
-              dHero == "sf" ||
-              dHero == "solar" ||
-              dHero == "flare" ||
-              dHero == "solarflare" ||
-              dHero == "solar flare"
-            ) {
-              dHero = "1100171646557491220";
-            } else if (
-              dHero == "wall" ||
-              dHero == "knight" ||
-              dHero == "wallknight" ||
-              dHero == "wall knight" ||
-              dHero == "wk" ||
-              dHero == "wall-knight"
-            ) {
-              dHero = "1100171712391295006";
-            } else if (
-              dHero == "sp" ||
-              dHero == "dow" ||
-              dHero == "spudow" ||
-              dHero == "spud"
-            ) {
-              dHero = "1100171758256013412";
-            } else if (
-              dHero == "gk" ||
-              dHero == "grass" ||
-              dHero == "knuckles" ||
-              dHero == "grass knuckles" ||
-              dHero == "grassknuckles"
-            ) {
-              dHero = "1100171819148906628";
-            } else if (dHero == "ro" || dHero == "rose") {
-              dHero = "1100171855316406343";
-            } else if (
-              dHero == "nc" ||
-              dHero == "cap" ||
-              dHero == "nightcap" ||
-              dHero == "night" || 
-              dHero == "night cap"
-            ) {
-              dHero = "1100171997167747172";
-            } else if (
-              dHero == "cc" ||
-              dHero == "captain" ||
-              dHero == "combustible" ||
-              dHero == "captain combustible" ||
-              dHero == "captaincombustible"
-            ) {
-              dHero = "1100172143603482786";
-            } else if (
-              dHero == "gs" ||
-              dHero == "green" ||
-              dHero == "shadow" ||
-              dHero == "green shadow" ||
-              dHero == "greenshadow" || dHero == "penelopea" || dHero == "green-shadow"
-            ) {
-              dHero = "1100172254983241820";
-            }
-            else{
-              await interaction.followUp({content: "Please enter a valid hero name",flags: MessageFlags.Ephemeral});
+            let dHero = heroTags[uHero.toLowerCase()];
+            if (!dHero) {
+              await interaction.followUp({
+                content: "Please enter a valid hero name",
+                flags: MessageFlags.Ephemeral,
+              });
               console.log(dHero);
             }
             // Create a new forum post
@@ -485,13 +461,13 @@ module.exports = {
               content:
                 "Your suggestion has been sent!, Please joined the discord linked below to defend and check in on your suggestion",
               components: [discord],
-             flags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           } catch (err) {
             await interaction.followUp({
               content:
                 "Oops, something went wrong.\nUnable to send suggestion.\n Please contact tbone for help! (PS: Please provide image of what was typed in the fourm)",
-             flags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
             console.log(err);
           }
@@ -499,11 +475,10 @@ module.exports = {
           await interaction.followUp({
             content:
               "Oops, something went wrong.\nUnable to send suggestion \n incorrect image link please contact tbone for help! \n (PS: the correct link should contain .png, .jpg, .jpeg, or .webp)",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
-      }
-      if (interaction.customId === "bug-report-modal") {
+      } else if (interaction.customId === "bug-report-modal") {
         await interaction.deferUpdate();
 
         const input = interaction.fields.getTextInputValue("bug-report-input");
@@ -528,13 +503,14 @@ module.exports = {
         } catch (e) {
           console.error("Error while sending bug report:", e); // Log the error for debugging
           await interaction.followUp({
-            content: "Oops, something went wrong while sending the bug report. Please try again later.",
+            content:
+              "Oops, something went wrong while sending the bug report. Please try again later.",
             flags: MessageFlags.Ephemeral,
           });
         }
       }
       //Deck Search
-      if (interaction.customId === "Deck-search-modal") {
+      else if (interaction.customId === "Deck-search-modal") {
         await interaction.deferUpdate();
         const reason =
           interaction.fields.getTextInputValue("deck-search-input");
@@ -577,7 +553,10 @@ module.exports = {
               `Your search for ${reason} decks came back blank`
             );
           }
-          return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
+          return interaction.followUp({
+            embeds: [embed],
+            flags: MessageFlags.Ephemeral,
+          });
         } catch (err) {
           console.error(err);
           const errEmbed = new EmbedBuilder()
@@ -585,11 +564,14 @@ module.exports = {
             .setColor("Red")
             .setDescription(`Too many search results, please be more specific
               Note: There are ${result.length} total results for ${reason} in Tbot`);
-          return interaction.followUp({ embeds: [errEmbed],flags: MessageFlags.Ephemeral });
+          return interaction.followUp({
+            embeds: [errEmbed],
+            flags: MessageFlags.Ephemeral,
+          });
         }
       }
       //Card Search
-      if (interaction.customId === "Card-search-modal") {
+      else if (interaction.customId === "Card-search-modal") {
         await interaction.deferUpdate();
         const Ccommands = Array.from(client.commands.values());
         const commands = Ccommands.filter((command) => {
@@ -630,18 +612,24 @@ module.exports = {
               `Your search for ${reason} cards came back blank`
             );
           }
-          return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
+          return interaction.followUp({
+            embeds: [embed],
+            flags: MessageFlags.Ephemeral,
+          });
         } catch (e) {
           console.error(e);
           const errEmbed = new EmbedBuilder()
             .setTitle("❌ | Error")
             .setColor("Red")
             .setDescription(`Too many search results, please be more specific`);
-          return interaction.followUp({ embeds: [errEmbed],flags: MessageFlags.Ephemeral });
+          return interaction.followUp({
+            embeds: [errEmbed],
+            flags: MessageFlags.Ephemeral,
+          });
         }
       }
       //8 Ball
-      if (interaction.customId === "8ball-modal") {
+      else if (interaction.customId === "8ball-modal") {
         await interaction.deferUpdate();
         const ball = [
           "It is certain",
@@ -665,7 +653,9 @@ module.exports = {
           "maybe",
           "never",
         ];
-        const reason = await interaction.fields.getTextInputValue("8ball-input");
+        const reason = await interaction.fields.getTextInputValue(
+          "8ball-input"
+        );
         const embed = new EmbedBuilder()
           .setTitle(`:8ball: ${reason}`)
           .setDescription(
@@ -673,10 +663,13 @@ module.exports = {
           )
           .setColor("Random");
 
-        return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
+        return interaction.followUp({
+          embeds: [embed],
+          flags: MessageFlags.Ephemeral,
+        });
       }
       //Hangman
-      if (interaction.customId.startsWith("hangman-")) {
+      else if (interaction.customId.startsWith("hangman-")) {
         await interaction.deferUpdate();
 
         const game = hangmanGuesses.get(interaction.message.id);
@@ -684,7 +677,7 @@ module.exports = {
         if (!game || game.guesses === 7) {
           return interaction.followUp({
             content: "Sorry, this game is no longer active.",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
 
@@ -696,14 +689,14 @@ module.exports = {
         if (guess.length === 1 && !guess.match(/[a-z]/i)) {
           return interaction.followUp({
             content: "You can only guess a letter.",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
 
         if (game.letters.includes(guess)) {
           return interaction.followUp({
             content: "This letter has already been guessed.",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
 
@@ -722,7 +715,7 @@ module.exports = {
 
           return interaction.followUp({
             content: "You win!",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
 
@@ -736,13 +729,13 @@ module.exports = {
                 ? [...game.words, guess].map((v) => `\`${v}\``).join(", ")
                 : (() => {
                     const lettersValue = game.letters.length
-                        ? game.letters
-                            .map((v) => `\`${v}\``)
-                            .sort((a, b) => a.localeCompare(b))
-                            .join(", ")
-                        : "`N/A`";
+                      ? game.letters
+                          .map((v) => `\`${v}\``)
+                          .sort((a, b) => a.localeCompare(b))
+                          .join(", ")
+                      : "`N/A`";
                     return lettersValue;
-                })(),
+                  })(),
           }));
 
           const embed = EmbedBuilder.from(embeds[0])
@@ -767,10 +760,10 @@ module.exports = {
                     .join(", ")
                 : (() => {
                     const wordsValue = game.words.length
-                        ? game.words.map((v) => `\`${v}\``).join(", ")
-                        : "`N/A`";
+                      ? game.words.map((v) => `\`${v}\``).join(", ")
+                      : "`N/A`";
                     return wordsValue;
-                })(),
+                  })(),
           }));
 
           game.unguessed.delete(guess);
@@ -790,7 +783,7 @@ module.exports = {
 
             return interaction.followUp({
               content: "You win!",
-             flags: MessageFlags.Ephemeral,
+              flags: MessageFlags.Ephemeral,
             });
           }
 
@@ -827,13 +820,17 @@ module.exports = {
           guesses:
             guess.length === 1
               ? (() => {
-                  const newGuesses = game.word.includes(guess) ? game.guesses : game.guesses + 1;
+                  const newGuesses = game.word.includes(guess)
+                    ? game.guesses
+                    : game.guesses + 1;
                   return newGuesses;
                 })()
               : game.guesses + 1,
 
           letters:
-            guess.length === 1 ? [...game.letters, guess].sort((a, b) => a.localeCompare(b)) : game.letters,
+            guess.length === 1
+              ? [...game.letters, guess].sort((a, b) => a.localeCompare(b))
+              : game.letters,
           words: guess.length === 1 ? game.words : [...game.words, guess],
           text:
             guess.length === 1
@@ -844,12 +841,147 @@ module.exports = {
         });
       }
       //random deck
-      if (interaction.customId === "random-decks-modal") {
+      else if (interaction.customId === "random-decks-modal") {
         await interaction.deferUpdate();
-        const heroinput =
-          interaction.fields.getTextInputValue("random-decks-input");
-        const hero = heroinput.toLowerCase();
-        if (hero == "na") {
+        const heroInput = interaction.fields
+          .getTextInputValue("random-decks-input")
+          .toLowerCase();
+        const heroDeckTables = {
+          // Beta Carrotina
+          bc: "bcdecks",
+          betacarrotina: "bcdecks",
+          beta: "bcdecks",
+          carrotina: "bcdecks",
+          carrot: "bcdecks",
+          "beta carrotina": "bcdecks",
+
+          // Citron
+          ct: "ctdecks",
+          citron: "ctdecks",
+          tron: "ctdecks",
+
+          // Captain Combustible
+          cc: "ccdecks",
+          "captain combustible": "ccdecks",
+          captain: "ccdecks",
+          combustible: "ccdecks",
+          captaincombustible: "ccdecks",
+
+          // Chompzilla
+          cz: "czdecks",
+          chompzilla: "czdecks",
+          chomp: "czdecks",
+          zilla: "czdecks",
+
+          // Grass Knuckles
+          gk: "gkdecks",
+          "grass knuckles": "gkdecks",
+          grass: "gkdecks",
+          knuckles: "gkdecks",
+
+          // Green Shadow
+          gs: "gsdecks",
+          "green shadow": "gsdecks",
+          green: "gsdecks",
+          shadow: "gsdecks",
+
+          // Nightcap
+          nc: "ncdecks",
+          nightcap: "ncdecks",
+          cap: "ncdecks",
+          night: "ncdecks",
+          "night cap": "ncdecks",
+
+          // Rose
+          ro: "rodecks",
+          rose: "rodecks",
+
+          // Solar Flare
+          sf: "sfdecks",
+          "solar flare": "sfdecks",
+          solar: "sfdecks",
+          flare: "sfdecks",
+          solarflare: "sfdecks",
+
+          // Spudow
+          sp: "spdecks",
+          spudow: "spdecks",
+          spud: "spdecks",
+          dow: "spdecks",
+
+          // Wall-Knight
+          wk: "wkdecks",
+          "wall-knight": "wkdecks",
+          wall: "wkdecks",
+          knight: "wkdecks",
+          wallknight: "wkdecks",
+          "wall knight": "wkdecks",
+
+          // Brain Freeze
+          bf: "bfdecks",
+          "brain freeze": "bfdecks",
+          brain: "bfdecks",
+          freeze: "bfdecks",
+          brainfreeze: "bfdecks",
+
+          // Electric Boogaloo
+          eb: "ebdecks",
+          "electric boogaloo": "ebdecks",
+          electric: "ebdecks",
+          boogaloo: "ebdecks",
+
+          // Huge-Gigantacus
+          hg: "hgdecks",
+          "huge-giganticus": "hgdecks",
+          huge: "hgdecks",
+          giganticus: "hgdecks",
+          "huge giganticus": "hgdecks",
+
+          // Impfinity
+          if: "ifdecks",
+          impfinity: "ifdecks",
+          imp: "ifdecks",
+          finity: "ifdecks",
+
+          // Immorticia
+          im: "imdecks",
+          immorticia: "imdecks",
+          immort: "imdecks",
+          ticia: "imdecks",
+
+          // Neptuna
+          nt: "ntdecks",
+          neptuna: "ntdecks",
+          nept: "ntdecks",
+          tuna: "ntdecks",
+
+          // Professor Brainstorm
+          pb: "pbdecks",
+          "professor brainstorm": "pbdecks",
+          professor: "pbdecks",
+          brainstorm: "pbdecks",
+
+          // Rustbolt
+          rb: "rbdecks",
+          rustbolt: "rbdecks",
+          rust: "rbdecks",
+          bolt: "rbdecks",
+          rusty: "rbdecks",
+          "rust bolt": "rbdecks",
+
+          // The Smash
+          sm: "smdecks",
+          "the smash": "smdecks",
+          smash: "smdecks",
+          thesmash: "smdecks",
+
+          // Z-Mech
+          zm: "zmdecks",
+          "z-mech": "zmdecks",
+          zmech: "zmdecks",
+          mech: "zmdecks",
+        };
+        if (heroInput == "na") {
           const [result] = await db.query(`select * from bcdecks bc
             inner join bfdecks bf
             on (bc.deckinfo = bf.deckinfo)
@@ -894,735 +1026,31 @@ module.exports = {
             inner join zmdecks zm
             on (bc.deckinfo = zm.deckinfo)
             where bc.deckinfo = "image link:"`);
-          const deck = [
-            //BC Tbot DB
-            `${result[0].carroot}`,
-            `${result[0].shamcontrol}`,
-      
-            //CT TBOT DB
-            `${result[0].going3nuts}`,
-    
-            `${result[0].startron}`,
-            `${result[0].wateron}`,
-            //CC TBOT DB
-            `${result[0].lcbd}`,
-            `${result[0].logbait}`,
-            `${result[0].mspotk}`,
-            `${result[0].plantmop}`,
-            `${result[0].yrm}`,
-            `${result[0].apotk}`, 
-            `${result[0].lasersnap}`,
-            `${result[0].midred}`,
-            //Mopribus
-            `${result[0].mopribus}`,
-            //GK TBOT DB
-            `${result[0].dinogloves}`,
-            `${result[0].healthotk}`, 
-            `${result[0].pawntrickstab}`,
-            `${result[0].wr100}`,
-            `${result[0].abeans}`,
-            `${result[0].pbeans}`,
-            `${result[0].savagemayflower}`,
-            `${result[0].sovietonion}`,
-            
-            //NC TBOT DB
-            `${result[0].cyburn}`,
-            `${result[0].toyotacontrolla}`, 
-            `${result[0].translattail}`,
-            // RO TBOT DB
-           
-            `${result[0].freezeheal}`,
-            `${result[0].frymidrose}`,
-            `${result[0].hmr}`,
-            //SF TBOT DB
-            `${result[0].funnyflare}`,
-            `${result[0].healburn}`,
-            `${result[0].healmidflare}`,
-           
-            `${result[0].physcosolstice}`,
-            `${result[0].ramp2seedling}`,
-            //SP TBOT DB
-            `${result[0].popsicle}`,
-            `${result[0].radiotherapy}`,
-           `${result[0].nuttin}`,
-            //WK TBOT DB
-          
-            `${result[0].cancerknight}`,
-            `${result[0].chemotherapy}`,
-            `${result[0].highlander}`,   
-            `${result[0].shitknight}`,
-            //Zombies
-
-            //BF TBOT DB
-            `${result[0].bfmidgargs}`, 
-            `${result[0].bfplankcontrol}`,
-            `${result[0].garolithtech}`,
-            `${result[0].himps}`,
-            `${result[0].lockin}`,
-            `${result[0].midpets}`,
-            `${result[0].petmop}`,
-            `${result[0].racism}`,
-            `${result[0].raiserpackage}`,
-            `${result[0].watersports}`,
-            //EB TBOT DB
-            
-            `${result[0].gargstar22}`,
-            `${result[0].huntgargs}`,
-          
-            
-            `${result[0].noplayingallowed}`,
-        
-            `${result[0].seacret}`,
-      
-            //SB TBOT DB
-            `${result[0].telimpssb}`,
-            //HG TBOT DB
-            `${result[0].conjureleap}`,
-            `${result[0].cyroboy}`,
-            `${result[0].frozentelimps}`,
-            `${result[0].gravestache}`,
-            `${result[0].gravepiratestache}`,
-            `${result[0].otkswabbie}`, 
-            `${result[0].telimps}`,
-            `${result[0].ykm}`,
-            //IF TBOT DB
-           `${result[0].nohokaistars}`,
-            `${result[0].spacestars}`,
-            `${result[0].splimps}`,
-            //IM TBOT DB
-            `${result[0].savage22}`,
-            `${result[0].bastet}`,
-            `${result[0].otktrickster}`,
-            `${result[0].rampticia}`,
-            `${result[0].ycm}`,
-            //NT TBOT DB
-            `${result[0].agraves}`,
-            `${result[0].antiagor}`,
-  
-            `${result[0].floss}`,
-            `${result[0].icebox}`,
-            `${result[0].gommorrah}`, 
-            `${result[0].schoolyard}`,
-            `${result[0].wimps}`,
-            //PB TBOT DB
-            `${result[0].bonusducks}`,
-            `${result[0].congabait}`,
-            `${result[0].pbfeast}`,
-            `${result[0].professorpackage}`,
-            `${result[0].trickstache}`,
-            `${result[0].valkster}`,
-            `${result[0].youngeggmartin}`,
-
-            //RB TBOT DB
-            
-            `${result[0].boltbolt}`,
-          
-            `${result[0].bustbolt}`,
-            `${result[0].igmablobchum}`,
-            
-            `${result[0].marxbolt}`,
-            `${result[0].pharaohster}`,
-            `${result[0].poggerrazzi}`,
-            `${result[0].sunbandits}`,
-            `${result[0].terrifytrickazzi}`,
-  
-            //SM TBOT DB
-            `${result[0].horts}`,
-            `${result[0].pablosyeezys}`,
-            `${result[0].whalepharaoh}`,
-
-            //ZM TBOT DB
-
-            `${result[0].binaryflagwar}`,
-           `${result[0].brady}`,
-            `${result[0].dozzamech}`,
-            `${result[0].feastmech}`,
-           
-            `${result[0].gargburn}`,
-            `${result[0].trickmech}`,
-            `${result[0].zmoss}`,
-          ];
+          const deck = [];
+          const excludedName = "budget";
+          for (const key in result[0]) {
+            const value = result[0][key];
+            if (
+              (value.includes(".png") ||
+                value.includes(".jpg") ||
+                value.includes(".jpeg") ||
+                value.includes(".webp")) &&
+              !excludedName.includes(key) // Exclude specific names
+            ) {
+              deck.push(value); // Add the image link to the deck array
+            }
+          }
           const embed = new EmbedBuilder()
             .setTitle("Random Deck")
             .setDescription(`Here is your random Deck`)
             .setColor("Random")
             .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero === "bc" ||
-          hero === "betacarrotina" ||
-          hero === "beta" ||
-          hero === "carrotina" ||
-          hero === "carrot" ||
-          hero === "beta carrotina"
-        ) {
-          const [result] = await db.query(
-            "SELECT * FROM bcdecks where deckinfo ='image link:'"
-          );
-          const deck = [
-            //BC Tbot DB
-            `${result[0].carroot}`,
-            `${result[0].shamcontrol}`,
-         
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Beta Carrotina Deck")
-            .setDescription(`Here is your random Beta Carrotina deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (hero === "citron" || hero === "ct" || hero === "tron") {
-          const [result] = await db.query(
-            "SELECT * FROM ctdecks WHERE deckinfo = 'image link:'"
-          );
-          const deck = [
-            `${result[0].going3nuts}`,
-            `${result[0].startron}`,
-            `${result[0].wateron}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Citron(CT) Deck")
-            .setDescription(`Here is your random Citron(CT) Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "captain combustible" ||
-          hero == "cc" ||
-          hero == "captain" ||
-          hero == "combustible" ||
-          hero == "captaincombustible"
-        ) {
-          const [result] = await db.query(
-            `SELECT * from ccdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-          `${result[0].lcbd}`,
-          `${result[0].logbait}`,
-            `${result[0].mspotk}`,
-            `${result[0].plantmop}`,
-            `${result[0].yrm}`
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Deck for Captain Combustible(CC)")
-            .setDescription(`Here is your random Captain Combustible(CC) Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero === "cz" ||
-          hero === "chompzilla" ||
-          hero === "chomp" ||
-          hero === "zilla" ||
-          hero === "chompzilla"
-        ) {
-          const [result] = await db.query(`SELECT * from czdecks
-                    where deckinfo = 'image link:'`);
-          const deck = [
-            `${result[0].apotk}`, 
-            `${result[0].lasersnap}`,
-            `${result[0].midred}`,
-            //Mopribus
-            `${result[0].mopribus}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Chompzilla Deck")
-            .setDescription(`Here is your random Chompzilla deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero === "gk" ||
-          hero === "grass" ||
-          hero === "knuckles" ||
-          hero === "grassknuckles" ||
-          hero === "grass knuckles"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM gkdecks where deckinfo = 'image link:'`
-          );
-          const gk = [
-            //GK TBOT DB
-            `${result[0].dinogloves}`,
-            `${result[0].healthotk}`, 
-            `${result[0].pawntrickstab}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Grass Knuckles Deck")
-            .setDescription(`Here is your Random Grass Knuckles Deck`)
-            .setColor("Random")
-            .setImage(gk[Math.floor(Math.random() * gk.length)]);
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "gs" ||
-          hero == "green shadow" ||
-          hero == "green" ||
-          hero == "shadow"
-        ) {
-          const [result] = await db.query(
-            `SELECT * from gsdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //GS TBOT DB
-           `${result[0].wr100}`,
-            `${result[0].abeans}`,
-            `${result[0].pbeans}`,
-            `${result[0].savagemayflower}`,
-            `${result[0].sovietonion}`,
-            
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Green Shadow Deck")
-            .setDescription(`Here is your Random Green Shadow(GS) Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "nightcap" ||
-          hero == "nc" ||
-          hero == "cap" ||
-          hero == "night" || 
-          hero== "night cap"
-        ) {
-          const [result] = await db.query(
-            `SELECT * from ncdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //NC TBOT DB
-            
-            `${result[0].cyburn}`,
-            `${result[0].toyotacontrolla}`, 
-            `${result[0].translattail}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random NightCap(NC) Deck")
-            .setDescription(`Here is your random NightCap(NC) Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (hero == "rose" || hero == "ro") {
-          const [result] = await db.query(
-            `SELECT * from rodecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            // RO TBOT DB
-           
-            `${result[0].freezeheal}`,
-            `${result[0].frymidrose}`,
-            `${result[0].hmr}`,
-           
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Rose(RO) Deck")
-            .setDescription(`Here is your Random Rose(RO) Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "solar flare" ||
-          hero == "sf" ||
-          hero == "solar" ||
-          hero == "flare" ||
-          hero == "solarflare"
-        ) {
-          const [result] = await db.query(
-            `SELECT * from sfdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //SF TBOT DB
-            `${result[0].funnyflare}`,
-            `${result[0].healburn}`,
-            `${result[0].healmidflare}`,
-           
-            `${result[0].physcosolstice}`,
-            `${result[0].ramp2seedling}`,
-          
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Solar Flare Deck")
-            .setDescription(`Here is your Random Solar Flare(SF) Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "spudow" ||
-          hero == "sp" ||
-          hero == "spud" ||
-          hero == "dow"
-        ) {
-          const [result] = await db.query(`select * from spdecks 
-                    where deckinfo = 'image link:'`);
-          const deck = [
-            //SP TBOT DB
-            `${result[0].popsicle}`,
-            `${result[0].radiotherapy}`,
-           `${result[0].nuttin}`,
-           
-          
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Spudow(SP) Deck")
-            .setDescription(`Here is your Random Spudow(SP) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "wall-knight" ||
-          hero == "wk" ||
-          hero == "wall" ||
-          hero == "knight" ||
-          hero == "wallknight" ||
-          hero == "wall knight"
-        ) {
-          const [result] = await db.query(`select * from wkdecks 
-                    where deckinfo = 'image link:'`);
-          const deck = [
-            //WK TBOT DB
-          
-            `${result[0].cancerknight}`,
-            `${result[0].chemotherapy}`,
-            `${result[0].highlander}`,   
-            `${result[0].shitknight}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Wall Knight(WK) Deck")
-            .setDescription(`Here is your Random Wall Knight Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "bf" ||
-          hero == "brain freeze" ||
-          hero == "brain" ||
-          hero == "freeze" ||
-          hero == "brainfreeze"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM bfdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //BF TBOT DB
-            
-            `${result[0].bfmidgargs}`, 
-            `${result[0].bfplankcontrol}`,
-            `${result[0].garolithtech}`,
-            `${result[0].himps}`,
-            `${result[0].lockin}`,
-            `${result[0].midpets}`,
-            `${result[0].petmop}`,
-            `${result[0].racism}`,
-            `${result[0].raiserpackage}`,
-            `${result[0].watersports}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Brain Freeze(BF) Deck")
-            .setDescription(`Here is your random Brain Freeze(BF) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "eb" ||
-          hero == "electric" ||
-          hero == "boogaloo" ||
-          hero == "electric boogaloo"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM ebdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //EB TBOT DB
-            
-            `${result[0].gargstar22}`,
-            `${result[0].huntgargs}`,
-          
-            
-            `${result[0].noplayingallowed}`,
-        
-            `${result[0].seacret}`,
-      
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Electric Boogaloo(EB) Deck")
-            .setDescription(`Here is your random Electric Boogaloo(EB) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "hg" ||
-          hero == "huge" ||
-          hero == "huge giganticus" ||
-          hero == "giganticus" ||
-          hero == "huge-giganticus"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM hgdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //HG TBOT DB
-            `${result[0].conjureleap}`,
-            `${result[0].cyroboy}`,
-            `${result[0].frozentelimps}`,
-            `${result[0].gravestache}`,
-            `${result[0].gravepiratestache}`,
-            `${result[0].otkswabbie}`, 
-            `${result[0].telimps}`,
-            `${result[0].ykm}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Huge-Gigantacus(HG) Deck")
-            .setDescription(`Here is your random Huge-Gigantacus(HG) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "sb" ||
-          heroinput == "super" ||
-          heroinput == "brainz" ||
-          heroinput == "super brainz" ||
-          heroinput == "superbrainz"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM sbdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //SB TBOT DB
-      
-            `${result[0].telimpssb}`,
-        
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Super Brains(SB) Deck")
-            .setDescription(`Here is your random Super Brains(SB) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "if" ||
-          hero == "impfinity" ||
-          hero == "imp" ||
-          hero == "finity"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM ifdecks WHERE deckinfo = 'image link:'`
-          );
-          const deck = [
-            //IF TBOT DB
-           `${result[0].nohokaistars}`,
-            `${result[0].spacestars}`,
-            `${result[0].splimps}`,         
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Impfinity(IF) Deck")
-            .setDescription(`Here is your random Impfinity(IF) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "immorticia" ||
-          hero == "immort" ||
-          hero == "immor" ||
-          hero == "ticia" ||
-          hero == "im"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM imdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //IM TBOT DB
-            `${result[0].savage22}`,
-            `${result[0].bastet}`,
-            `${result[0].otktrickster}`,
-            `${result[0].rampticia}`,
-            `${result[0].ycm}`,
-  
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Immorticia(IM) Deck")
-            .setDescription(`Here is your random Immorticia(IM) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "nt" ||
-          hero == "neptuna" ||
-          hero == "nept" ||
-          hero == "tuna"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM ntdecks WHERE deckinfo = 'image link:'`
-          );
-          const deck = [
-            //NT TBOT DB
-           `${result[0].agraves}`,
-            `${result[0].antiagor}`,
-            `${result[0].floss}`,
-            `${result[0].icebox}`,
-            `${result[0].gommorrah}`, 
-            `${result[0].schoolyard}`,
-            `${result[0].wimps}`,
-           
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Neptuna(NT) Deck")
-            .setDescription(`Here is your random Neptuna(NT) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "pb" ||
-          hero == "professor" ||
-          hero == "brainstorm" ||
-          hero == "professor brainstorm" ||
-          hero == "professorbrainstorm"
-        ) {
-          const [result] = await db.query(
-            `select * from pbdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //PB TBOT DB
-           `${result[0].bonusducks}`,
-            `${result[0].congabait}`,
-            `${result[0].pbfeast}`,
-            `${result[0].professorpackage}`,
-            `${result[0].trickstache}`,
-            `${result[0].valkster}`,
-            `${result[0].youngeggmartin}`,
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Professor Brainstorm(PB) Deck")
-            .setDescription(
-              `Here is your random Professor Brainstorm(PB) Deck `
-            )
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "rb" ||
-          hero == "rustbolt" ||
-          hero == "rust" ||
-          hero == "bolt" ||
-          hero == "rusty" ||
-          hero == "rust bolt"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM rbdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //RB TBOT DB
-            
-           `${result[0].boltbolt}`,
-          
-            `${result[0].bustbolt}`,
-            `${result[0].igmablobchum}`,
-            
-            `${result[0].marxbolt}`,
-            `${result[0].pharaohster}`,
-            `${result[0].poggerrazzi}`,
-            `${result[0].sunbandits}`,
-            `${result[0].terrifytrickazzi}`,
-            
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Rustbolt(RB) Deck")
-            .setDescription(`Here is your random Rustbolt(RB) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "sm" ||
-          hero == "smash" ||
-          hero == "smash" ||
-          hero == "the smash" ||
-          hero == "thesmash"
-        ) {
-          const [result] = await db.query(
-            `SELECT * FROM smdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //SM TBOT DB
-            `${result[0].horts}`,
-            `${result[0].pablosyeezys}`,
-            `${result[0].whalepharaoh}`,
-           
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Smash(SM) Deck")
-            .setDescription(`Here is your random Smash(SM) Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          hero == "zm" ||
-          hero == "zmech" ||
-          hero == "mech" ||
-          hero == "z-mech"
-        ) {
-          const [result] = await db.query(
-            `select * from zmdecks where deckinfo = 'image link:'`
-          );
-          const deck = [
-            //ZM TBOT DB
-            
-            `${result[0].binaryflagwar}`,
-           `${result[0].brady}`,
-            `${result[0].dozzamech}`,
-            `${result[0].feastmech}`,
-           
-            `${result[0].gargburn}`,
-            `${result[0].trickmech}`,
-            `${result[0].zmoss}`,
-          
-          ];
-          const embed = new EmbedBuilder()
-            .setTitle("Random Zmech(ZM) Deck")
-            .setDescription(`Here is your Random Zmech Deck `)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
-
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (hero == "plants") {
+          await interaction.followUp({
+            embeds: [embed],
+            flags: MessageFlags.Ephemeral,
+          });
+        } else if (heroInput == "plants") {
           const [result] = await db.query(`select * from bcdecks bc
                     inner join ccdecks cc 
                     on (bc.deckinfo = cc.deckinfo)
@@ -1645,74 +1073,31 @@ module.exports = {
                     inner join wkdecks wk 
                     on (bc.deckinfo = wk.deckinfo)
                     where bc.deckinfo = "image link:"`);
-          const deck = [
-              //BC Tbot DB
-              `${result[0].carroot}`,
-              `${result[0].shamcontrol}`,
-        
-              //CT TBOT DB
-              `${result[0].going3nuts}`,
-              `${result[0].startron}`,
-              `${result[0].wateron}`,
-              //CC TBOT DB
-              `${result[0].lcbd}`,
-              `${result[0].logbait}`,
-              `${result[0].mspotk}`,
-              `${result[0].plantmop}`,
-              `${result[0].yrm}`,
-              `${result[0].apotk}`, 
-              `${result[0].lasersnap}`,
-              `${result[0].midred}`,
-              //Mopribus
-              `${result[0].mopribus}`,
-              //GK TBOT DB
-              `${result[0].dinogloves}`,
-              `${result[0].healthotk}`, 
-              `${result[0].pawntrickstab}`,
-              `${result[0].wr100}`,
-              `${result[0].abeans}`,
-              `${result[0].pbeans}`,
-              `${result[0].savagemayflower}`,
-              `${result[0].sovietonion}`,
-              
-              //NC TBOT DB
-              
-              `${result[0].cyburn}`,
-              `${result[0].toyotacontrolla}`, 
-              `${result[0].translattail}`,
-              // RO TBOT DB
-             
-              `${result[0].freezeheal}`,
-              `${result[0].frymidrose}`,
-              `${result[0].hmr}`,
-              //SF TBOT DB
-              `${result[0].funnyflare}`,
-              `${result[0].healburn}`,
-              `${result[0].healmidflare}`,
-             
-              `${result[0].physcosolstice}`,
-              `${result[0].ramp2seedling}`,
-              //SP TBOT DB
-              `${result[0].popsicle}`,
-              `${result[0].radiotherapy}`,
-             `${result[0].nuttin}`,
-              //WK TBOT DB
-            
-              `${result[0].cancerknight}`,
-              `${result[0].chemotherapy}`,
-              `${result[0].highlander}`,   
-              `${result[0].shitknight}`,
-            
-          ];
+          const deck = [];
+          const excludedName = "budget";
+          for (const key in result[0]) {
+            const value = result[0][key];
+            if (
+              (value.includes(".png") ||
+                value.includes(".jpg") ||
+                value.includes(".jpeg") ||
+                value.includes(".webp")) &&
+              !excludedName.includes(key) // Exclude specific names
+            ) {
+              deck.push(value); // Add the image link to the deck array
+            }
+          }
           const embed = new EmbedBuilder()
             .setTitle("Random Plant Deck")
             .setDescription(`Here is your random plant Deck`)
             .setColor("Random")
             .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (hero == "zombies") {
+          await interaction.followUp({
+            embeds: [embed],
+            flags: MessageFlags.Ephemeral,
+          });
+        } else if (heroInput == "zombies") {
           const [result] = await db.query(`select * from bfdecks bf
                     inner join ebdecks eb 
                     on (bf.deckinfo = eb.deckinfo)
@@ -1733,2964 +1118,855 @@ module.exports = {
                     inner join smdecks sm 
                     on (bf.deckinfo = sm.deckinfo)
                     where bf.deckinfo = "image link:"`);
-          const deck = [
-            //Zombies
-
-              //BF TBOT DB
-              `${result[0].bfmidgargs}`, 
-              `${result[0].bfplankcontrol}`,
-              `${result[0].garolithtech}`,
-              `${result[0].himps}`,
-              `${result[0].lockin}`,
-              `${result[0].midpets}`,
-              `${result[0].petmop}`,
-              `${result[0].racism}`,
-              `${result[0].raiserpackage}`,
-              `${result[0].watersports}`,
-              //EB TBOT DB
-              
-              `${result[0].gargstar22}`,
-              `${result[0].huntgargs}`,
-            
-              
-              `${result[0].noplayingallowed}`,
-          
-              `${result[0].seacret}`,
-        
-              //SB TBOT DB
-              `${result[0].telimpssb}`,
-              //HG TBOT DB
-              `${result[0].conjureleap}`,
-              `${result[0].cyroboy}`,
-              `${result[0].frozentelimps}`,
-              `${result[0].gravestache}`,
-              `${result[0].gravepiratestache}`,
-              `${result[0].otkswabbie}`, 
-              `${result[0].telimps}`,
-              `${result[0].ykm}`,
-              //IF TBOT DB
-             `${result[0].nohokaistars}`,
-              `${result[0].spacestars}`,
-              `${result[0].splimps}`,
-              //IM TBOT DB
-              `${result[0].savage22}`,
-              `${result[0].bastet}`,
-              `${result[0].otktrickster}`,
-              `${result[0].rampticia}`,
-              `${result[0].ycm}`,
-              //NT TBOT DB
-              `${result[0].agraves}`,
-              `${result[0].antiagor}`,
-              `${result[0].floss}`,
-              `${result[0].icebox}`,
-              `${result[0].gommorrah}`, 
-              `${result[0].schoolyard}`,
-              `${result[0].wimps}`,
-              //PB TBOT DB
-              `${result[0].bonusducks}`,
-              `${result[0].congabait}`,
-              `${result[0].pbfeast}`,
-              `${result[0].professorpackage}`,
-              `${result[0].trickstache}`,
-              `${result[0].valkster}`,
-              `${result[0].youngeggmartin}`,
-  
-              //RB TBOT DB
-              
-              `${result[0].boltbolt}`,
-            
-              `${result[0].bustbolt}`,
-              `${result[0].igmablobchum}`,
-              
-              `${result[0].marxbolt}`,
-              `${result[0].pharaohster}`,
-              `${result[0].poggerrazzi}`,
-              `${result[0].sunbandits}`,
-              `${result[0].terrifytrickazzi}`,
-    
-              //SM TBOT DB
-              `${result[0].horts}`,
-              `${result[0].pablosyeezys}`,
-              `${result[0].whalepharaoh}`,
-  
-              //ZM TBOT DB
-              `${result[0].binaryflagwar}`,
-             `${result[0].brady}`,
-              `${result[0].dozzamech}`,
-              `${result[0].feastmech}`,
-             
-              `${result[0].gargburn}`,
-              `${result[0].trickmech}`,
-              `${result[0].zmoss}`,
-            
-          ];
-
+          const deck = [];
+          const excludedName = "budget";
+          for (const key in result[0]) {
+            const value = result[0][key];
+            if (
+              (value.includes(".png") ||
+                value.includes(".jpg") ||
+                value.includes(".jpeg") ||
+                value.includes(".webp")) &&
+              !excludedName.includes(key) // Exclude specific names
+            ) {
+              deck.push(value); // Add the image link to the deck array
+            }
+          }
           const embed = new EmbedBuilder()
             .setTitle("Random Zombie Deck")
             .setDescription(`Here is your random Zombie Deck`)
             .setColor("Random")
             .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
+          await interaction.followUp({
+            embeds: [embed],
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+        const excludedName = "budget";
+        /**
+         * The getRandomDeck function gets a random deck for the user to play
+         * @param {*} tableName - The name of the table
+         * @returns - The users deck
+         */
+        async function getRandomDeck(tableName) {
+          const [result] = await db.query(
+            `SELECT * FROM ${tableName} WHERE deckinfo = 'image link:'`
+          );
+          const deck = [];
+          for (const key in result[0]) {
+            const value = result[0][key];
+            if (
+              (value.includes(".png") ||
+                value.includes(".jpg") ||
+                value.includes(".jpeg") ||
+                value.includes(".webp")) &&
+              !excludedName.includes(key) // Exclude specific names
+            ) {
+              deck.push(value); // Add the image link to the deck array
+            }
+          }
+          return deck;
+        }
+        const tableName = heroDeckTables[heroInput];
+        if (!tableName) {
+          return interaction.followUp({
+            content: "Invalid hero name. Please try again.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+        try {
+          const deck = await getRandomDeck(tableName);
+          const embed = new EmbedBuilder()
+            .setTitle(
+              `Random ${
+                heroInput.charAt(0).toUpperCase() + heroInput.slice(1)
+              } Deck`
+            )
+            .setDescription(`Here is your random ${heroInput} deck`)
+            .setColor("Random")
+            .setImage(deck[Math.floor(Math.random() * deck.length)]);
+
+          await interaction.followUp({
+            embeds: [embed],
+            flags: MessageFlags.Ephemeral,
+          });
+        } catch (err) {
+          console.error(err);
+          await interaction.followUp({
+            content: "Oops, something went wrong. Please try again later.",
+            flags: MessageFlags.Ephemeral,
+          });
         }
       }
       //wheel modal
-      if (interaction.customId === "wheel-modal") {
+      else if (interaction.customId === "wheel-modal") {
         await interaction.deferUpdate();
         const hero = await interaction.fields.getTextInputValue("wheel-input");
-        const number = await interaction.fields.getTextInputValue("number-input");
-        const heroinput = hero.toLowerCase();
+        const number = await interaction.fields.getTextInputValue(
+          "number-input"
+        );
+        const gurdianWords = [
+          "Small-Nut",
+          "Sting Bean",
+          "Wall-Nut",
+          "Pismashio",
+          "Spineapple",
+          "Potato Mine",
+          "Cactus",
+          "Gardening Gloves",
+          "Sea-Shroom",
+          "Water Chestnut",
+          "Pea-Nut",
+          "Steel Magnolia",
+          "Photosynthesizer",
+          "Spikeweed Sector",
+          "Plantern",
+          "Grape Responsibility",
+          "Primal Potato Mine",
+          "Grizzly Pear",
+          "Grave Buster",
+          "Hibernating Beary",
+          "Prickly Pear",
+          "Smackadamia",
+          "Tough Beets",
+          "Cosmic Nut",
+          "Starch-Lord",
+          "Blockbuster",
+          "Pumpkin Shell",
+          "Jugger-Nut",
+          "Mirror-Nut",
+          "Guacodile",
+          "Doom-Shroom",
+          "Galacta-Cactus",
+          "Force Field",
+          "Gravitree",
+          "Three-Nut",
+          "Marine Bean",
+          "Primal Wall-Nut",
+          "Poppin' Poppies",
+          "Soul Patch",
+          "Wall-Nut Bowling",
+          "Body-Gourd",
+          "Pecanolith",
+          "Tricarrotops",
+          "Loco Coco",
+          "Forget-Me-Nuts",
+          "Garlic",
+          "Corn Dog",
+          "Hot Date",
+          "Health-Nut",
+          "Pear Cub",
+          "Shamrocket",
+          "Red Stinger",
+        ];
+        const smartyWords = [
+          "Snowdrop",
+          "Weenie Beanie",
+          "Snow Pea",
+          "Cattail",
+          "Smoosh-Shroom",
+          "Threepeater",
+          "Iceberg Lettuce",
+          "Shellery",
+          "Rescue Radish",
+          "Spring Bean",
+          "Vanilla",
+          "Carrotillery",
+          "Mars Flytrap",
+          "Planet of the Grapes",
+          "Leaf Blower",
+          "Grave Mistake",
+          "Pear Pal",
+          "Primal Peashooter",
+          "Admiral Navy Bean",
+          "Lightning Reed",
+          "Chilly Pepper",
+          "Navy Bean",
+          "Jumping Bean",
+          "Cosmic Bean",
+          "Melon-Pult",
+          "Tricorn",
+          "Lily Pad",
+          "Sow Magic Beans",
+          "Bean Counter",
+          "Snapdragon",
+          "Winter Squash",
+          "Laser Cattail",
+          "Bog of Enlightenment",
+          "Cool Bean",
+          "Jelly Bean",
+          "Rotobaga",
+          "Shrinking Violet",
+          "Brainana",
+          "Winter Melon",
+          "The Great Zucchini",
+          "Shooting Starfruit",
+          "Dark Matter Dragonfruit",
+          "Lima-Pleurodon",
+          "Bird of Paradise",
+          "Spyris",
+          "Go-Nuts",
+          "Mayflower",
+          "Sportacus",
+          "Snake Grass",
+          "Witch Hazel",
+          "Jolly Holly",
+          "Sap-Fling",
+        ];
+        const kabloomWords = [
+          "Button Mushroom",
+          "Berry Blast",
+          "Buff-Shroom",
+          "Seedling",
+          "Zapricot",
+          "Poison Mushroom",
+          "Berry Angry",
+          "Mushroom Ringleader",
+          "Poison Ivy",
+          "Pair of Pears",
+          "Bluesberry",
+          "Sizzle",
+          "Banana Bomb",
+          "Mushroom Grotto",
+          "Invasive Species",
+          "Puff-Shroom",
+          "Veloci-Radish Hatchling",
+          "Hot Lava",
+          "Shroom for Two",
+          "Wild Berry",
+          "Petal-Morphosis",
+          "Sour Grapes",
+          "Poison Oak",
+          "Cosmic Mushroom",
+          "Lava Guava",
+          "Cro-Magnolia",
+          "Shelf Mushroom",
+          "Punish-Shroom",
+          "Sergeant Strongberry",
+          "Cherry Bomb",
+          "Grapes of Wrath",
+          "Astro-Shroom",
+          "Banana Launcher",
+          "Pair Pearadise",
+          "Fireweed",
+          "Imitater",
+          "Strawberrian",
+          "Pineclone",
+          "Dandy Lion King",
+          "Kernel Corn",
+          "Reincarnation",
+          "Molekale",
+          "Gloom-Shroom",
+          "Veloci-Radish Hunter",
+          "Blooming Heart",
+          "High-Voltage Currant",
+          "Sonic Bloom",
+          "Transfiguration",
+          "Atomic Bombegranate",
+          "Electric Blueberry",
+        ];
+        const megaGrowWords = [
+          "Peashooter",
+          "Torchwood",
+          "Cabbage-Pult",
+          "Fertilize",
+          "Flourish",
+          "Grow-Shroom",
+          "Repeater",
+          "Bonk Choy",
+          "Pea Pod",
+          "Sweet Potato",
+          "Fire Peashooter",
+          "Skyshooter",
+          "Coffee Grounds",
+          "Sweet Pea",
+          "Vegetation Mutation",
+          "Umbrella Leaf",
+          "Half-Banana",
+          "Typical Beanstalk",
+          "The Podfather",
+          "Plant Food",
+          "Re-Peat Moss",
+          "Whipvine",
+          "Super-Phat Beets",
+          "Banana Peel",
+          "Cosmic Pea",
+          "Bamboozle",
+          "Pea Patch",
+          "Party Thyme",
+          "Black-Eyed Pea",
+          "Potted Powerhouse",
+          "Espresso Fiesta",
+          "Moonbean",
+          "Pod Fighter",
+          "The Red Plant-It",
+          "Split Pea",
+          "Grape Power",
+          "Savage Spinach",
+          "Doubled Mint",
+          "Muscle Sprout",
+          "Bananasaurus Rex",
+          "Captain Cucumber",
+          "Onion Rings",
+          "Gatling Pea",
+          "Apotatosaurus",
+          "Clique Peas",
+          "Lily of the Valley",
+          "Banana Split",
+          "Plucky Clover",
+        ];
+        const solarWords = [
+          "Bellflower",
+          "Sunflower",
+          "Mixed Nuts",
+          "Squash",
+          "Smashing Pumpkin",
+          "Morning Glory",
+          "Fume-Shroom",
+          "Pepper M.D.",
+          "Water Balloons",
+          "Venus Flytrap",
+          "Bloomerang",
+          "Metal Petal Sunflower",
+          "Cosmoss",
+          "Apple-Saucer",
+          "Venus Flytraplanet",
+          "Kernel-Pult",
+          "Lil' Buddy",
+          "Sunnier-Shroom",
+          "Sage Sage",
+          "Whack-a-Zombie",
+          "Lawnmower",
+          "Magnifying Grass",
+          "Power Flower",
+          "Cosmic Flower",
+          "Heartichoke",
+          "Elderberry",
+          "Eyespore",
+          "Twin Sunflower",
+          "2nd-Best Taco of All Time",
+          "Chomper",
+          "Laser Bean",
+          "Solar Winds",
+          "Wing-Nut",
+          "Tactical Cuke",
+          "Primal Sunflower",
+          "Sunflower Seed",
+          "Sun Strike",
+          "Briar Rose",
+          "Three-Headed Chomper",
+          "Cornucopia",
+          "Astrocado",
+          "Astro Vera",
+          "Cob Cannon",
+          "Aloesaurus",
+          "Haunted Pumpking",
+          "Sun-Shroom",
+          "Jack O' Lantern",
+          "Ketchup Mechanic",
+          "Toadstool",
+        ];
+        const sneakyWords = [
+          "Imp",
+          "Mini-Ninja",
+          "Smoke Bomb",
+          "Fishy Imp",
+          "Smelly Zombie",
+          "Headstone Carver",
+          "Zombie Chicken",
+          "Hot Dog Imp",
+          "Swashbuckler Zombie",
+          "Backyard Bounce",
+          "Stealthy Imp",
+          "Firefighter",
+          "Graveyard",
+          "Ice Pirate",
+          "Frosty Mustache",
+          "Swabbie",
+          "Barrel of Barrels",
+          "Monkey Smuggler",
+          "Imp Commander",
+          "Barrel Roller Zombie",
+          "Surprise Gargantuar",
+          "Walrus Rider",
+          "Zombot Stomp",
+          "Cosmic Imp",
+          "Space Pirate",
+          "Blowgun Imp",
+          "Buried Treasure",
+          "Toxic Waste Imp",
+          "Line Dancing Zombie",
+          "Pogo Bouncer",
+          "Tomb Raiser Zombie",
+          "Ducky Tube Zombie",
+          "Dr. Spacetime",
+          "Laser Base Alpha",
+          "Cursed Gargolith",
+          "Excavator Zombie",
+          "Unthawed Viking",
+          "Mixed-Up Gravedigger",
+          "Zombot Sharktronic Sub",
+          "Zombot Plank Walker",
+          "Space Cowboy",
+          "Cryo-Yeti",
+          "Zombot Aerostatic Gondola",
+          "Raiding Raptor",
+          "Imposter",
+          "Fire Rooster",
+          "Imp-Throwing Imp",
+          "Captain Flameface",
+          "Zombie High Diver",
+          "Trapper Zombie",
+          //Beastly
+          "Skunk Punk",
+          "Pied Piper",
+          "Zookeeper",
+          "Dolphin Rider",
+          "Locust Swarm",
+          "Dog Walker",
+          "Nibble",
+          "Snorkel Zombie",
+          "Yeti Lunchbox",
+          "Haunting Zombie",
+          "Loudmouth",
+          "B-flat",
+          "Total Eclipse",
+          "Alien Ooze",
+          "Surfer Zombie",
+          "Haunting Ghost",
+          "Goat",
+          "Vengeful Cyborg",
+          "Squirrel Herder",
+          "Vimpire",
+          "Vitamin Z",
+          "Kangaroo Rider",
+          "Smashing Gargantuar",
+          "Biodome Botanist",
+          "Cosmic Yeti",
+          "Primordial Cheese Shover",
+          "Killer Whale",
+          "Cat Lady",
+          "Zombie Yeti",
+          "Deep Sea Gargantuar",
+          "Maniacal Laugh",
+          "Cheese Cutter",
+          "Cyborg Zombie",
+          "Area 22",
+          "Extinction Event",
+          "Ancient Vimpire",
+          "Hunting Grounds",
+          "Nurse Gargantuar",
+          "Octo Zombie",
+          "Zombot 1000",
+          "Interstellar Bounty Hunter",
+          "Supernova Gargantuar",
+          "Mondo Bronto",
+          "Gargantuar-Throwing Gargantuar",
+          "Fraidy Cat",
+          "Secret Agent",
+          "Energy Drink Zombie",
+          "Synchronized Swimmer",
+          "Hover-Goat 3000",
+          "Overstuffed Zombie",
+          "Sneezing Zombie",
+          "King of the Grill",
+        ];
+        const beastlyWords = [
+          "Skunk Punk",
+          "Pied Piper",
+          "Zookeeper",
+          "Dolphin Rider",
+          "Locust Swarm",
+          "Dog Walker",
+          "Nibble",
+          "Snorkel Zombie",
+          "Yeti Lunchbox",
+          "Haunting Zombie",
+          "Loudmouth",
+          "B-flat",
+          "Total Eclipse",
+          "Alien Ooze",
+          "Surfer Zombie",
+          "Haunting Ghost",
+          "Goat",
+          "Vengeful Cyborg",
+          "Squirrel Herder",
+          "Vimpire",
+          "Vitamin Z",
+          "Kangaroo Rider",
+          "Smashing Gargantuar",
+          "Biodome Botanist",
+          "Cosmic Yeti",
+          "Primordial Cheese Shover",
+          "Killer Whale",
+          "Cat Lady",
+          "Zombie Yeti",
+          "Deep Sea Gargantuar",
+          "Maniacal Laugh",
+          "Cheese Cutter",
+          "Cyborg Zombie",
+          "Area 22",
+          "Extinction Event",
+          "Ancient Vimpire",
+          "Hunting Grounds",
+          "Nurse Gargantuar",
+          "Octo Zombie",
+          "Zombot 1000",
+          "Interstellar Bounty Hunter",
+          "Supernova Gargantuar",
+          "Mondo Bronto",
+          "Gargantuar-Throwing Gargantuar",
+          "Fraidy Cat",
+          "Secret Agent",
+          "Energy Drink Zombie",
+          "Synchronized Swimmer",
+          "Hover-Goat 3000",
+          "Overstuffed Zombie",
+          "Sneezing Zombie",
+          "King of the Grill",
+        ];
+        const crazyWords = [
+          "Backup Dancer",
+          "Bungee Plumber",
+          "Cuckoo Zombie",
+          "Disco Zombie",
+          "Flamenco Zombie",
+          "Tennis Champ",
+          "Unlife of the Party",
+          "Conga Zombie",
+          "Newspaper Zombie",
+          "Cakesplosion",
+          "Orchestra Conductor",
+          "Foot Soldier Zombie",
+          "Loose Cannon",
+          "Meteor Z",
+          "Space Ninja",
+          "Mystery Egg",
+          "Sugary Treat",
+          "Trapper Territory",
+          "Exploding Imp",
+          "Jester",
+          "Zombot's Wrath",
+          "The Chickening",
+          "Imp-Throwing Gargantuar",
+          "Final Mission",
+          "Cosmic Dancer",
+          "Gizzard Lizard",
+          "Disco Dance Floor",
+          "Aerobics Instructor",
+          "Abracadaver",
+          "Fireworks Zombie",
+          "Disco-Tron 3000",
+          "Disco-Naut",
+          "Moon Base Z",
+          "Gas Giant",
+          "Quickdraw Con Man",
+          "Grave Robber",
+          "Zombie's Best Friend",
+          "Barrel of Deadbeards",
+          "Valkyrie",
+          "Gargantuars' Feast",
+          "Quasar Wizard",
+          "Binary Stars",
+          "Tankylosaurus",
+          "Headhunter",
+          "Exploding Fruitcake",
+          "Unexpected Gifts",
+          "Stupid Cupid",
+          "Frankentuar",
+          "Gargantuar-Throwing Imp",
+          "Hippity Hop Gargantuar",
+        ];
+        const brainyWords = [
+          "Cardboard Robot Zombie",
+          "Paparazzi Zombie",
+          "Lurch for Lunch",
+          "Fun-Dead Raiser",
+          "Drum Major",
+          "Chimney Sweep",
+          "Beam Me Up",
+          "Cell Phone Zombie",
+          "Pool Shark",
+          "Zombot Drone Engineer",
+          "Brain Vendor",
+          "Mountain Climber",
+          "Cryo-Brain",
+          "Medulla Nebula",
+          "Moonwalker",
+          "Copter Commando",
+          "Mustache Waxer",
+          "Pirate's Booty",
+          "Gentleman Zombie",
+          "Kite Flyer",
+          "Gadget Scientist",
+          "Hail-a-Copter",
+          "Wizard Gargantuar",
+          "Cosmic Scientist",
+          "Triplication",
+          "Zom-Blob",
+          "Mustache Monument",
+          "Electrician",
+          "Rocket Science",
+          "Mad Chemist",
+          "Portal Technician",
+          "Neutron Imp",
+          "Transformation Station",
+          "Wormhole Gatekeeper",
+          "Evolutionary Leap",
+          "Parasol Zombie",
+          "Duckstache",
+          "Teleport",
+          "Shieldcrusher Viking",
+          "Trickster",
+          "Interdimensional Zombie",
+          "Teleportation Zombie",
+          "Gargantuar Mime",
+          "Zombot Dinotronic Mechasaur",
+          "Leprechaun Imp",
+          "Regifting Zombie",
+          "Trick-or-Treater",
+          "Thinking Cap",
+          "Kitchen Sink Zombie",
+          "Bad Moon Rising",
+        ];
+        const heartyWords = [
+          "Baseball Zombie",
+          "Rolling Stone",
+          "Conehead",
+          "Team Mascot",
+          "Medic",
+          "Arm Wrestler",
+          "Camel Crossing",
+          "Flag Zombie",
+          "Terrify",
+          "Trash Can Zombie",
+          "Buckethead",
+          "Ra Zombie",
+          "Cone Zone",
+          "Celestial Custodian",
+          "Screen Door Zombie",
+          "Healthy Treat",
+          "Zombie Middle Manager",
+          "Leftovers",
+          "Sumo Wrestler",
+          "Zombie Coach",
+          "Monster Mash",
+          "Knight of the Living Dead",
+          "Rodeo Gargantuar",
+          "Escape through Time",
+          "Cosmic Sports Star",
+          "Primeval Yeti",
+          "Lost Colosseum",
+          "Landscaper",
+          "Weed Spray",
+          "All-Star Zombie",
+          "Coffee Zombie",
+          "Black Hole",
+          "Genetic Experiment",
+          "Planetary Gladiator",
+          "Jurassic Fossilhead",
+          "Knockout",
+          "Turquoise Skull Zombie",
+          "Zombie King",
+          "Undying Pharaoh",
+          "Wannabe hero",
+          "Intergalactic Warlord",
+          "Zombot Battlecruiser 5000",
+          "Stompadon",
+          "Chum Champion",
+          "Zombology Teacher",
+          "Gargologist",
+          "Turkey Rider",
+          "Going Viral",
+          "Bonus Track Buckethead",
+          "Defensive End",
+        ];
         if (number < 1 || number > 40) {
           return interaction.followUp({
             content: "Please input a number between 1-40",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
-        }
-        if (isNaN(number)) {
+        } else if (isNaN(number)) {
           return interaction.followUp({
             content: "please input a number",
-           flags: MessageFlags.Ephemeral,
+            flags: MessageFlags.Ephemeral,
           });
         }
-        if (
-          heroinput == "betacarrotina" ||
-          heroinput == "bc" ||
-          heroinput == "beta" ||
-          heroinput == "carrotina" ||
-          heroinput == "carrot" ||
-          heroinput == "beta carrotina"
-        ) {
-          const wordsArray = [
-            //Guardian
-            "Small-Nut",
-            "Sting Bean",
-            "Wall-Nut",
-            "Pismashio",
-            "Spineapple",
-            "Potato Mine",
-            "Cactus",
-            "Gardening Gloves",
-            "Sea-Shroom",
-            "Water Chestnut",
-            "Pea-Nut",
-            "Steel Magnolia",
-            "Photosynthesizer",
-            "Spikeweed Sector",
-            "Plantern",
-            "Grape Responsibility",
-            "Primal Potato Mine",
-            "Grizzly Pear",
-            "Grave Buster",
-            "Hibernating Beary",
-            "Prickly Pear",
-            "Smackadamia",
-            "Tough Beets",
-            "Cosmic Nut",
-            "Starch-Lord",
-            "Blockbuster",
-            "Pumpkin Shell",
-            "Jugger-Nut",
-            "Mirror-Nut",
-            "Guacodile",
-            "Doom-Shroom",
-            "Galacta-Cactus",
-            "Force Field",
-            "Gravitree",
-            "Three-Nut",
-            "Marine Bean",
-            "Primal Wall-Nut",
-            "Poppin' Poppies",
-            "Soul Patch",
-            "Wall-Nut Bowling",
-            "Body-Gourd",
-            "Pecanolith",
-            "Tricarrotops",
-            "Loco Coco",
-            "Forget-Me-Nuts",
-            "Garlic",
-            "Corn Dog",
-            "Hot Date",
-            "Health-Nut",
-            "Pear Cub",
-            "Shamrocket",
-            "Red Stinger",
-            //Smarty
-            "Snowdrop",
-            "Weenie Beanie",
-            "Snow Pea",
-            "Cattail",
-            "Smoosh-Shroom",
-            "Threepeater",
-            "Iceberg Lettuce",
-            "Shellery",
-            "Rescue Radish",
-            "Spring Bean",
-            "Vanilla",
-            "Carrotillery",
-            "Mars Flytrap",
-            "Planet of the Grapes",
-            "Leaf Blower",
-            "Grave Mistake",
-            "Pear Pal",
-            "Primal Peashooter",
-            "Admiral Navy Bean",
-            "Lightning Reed",
-            "Chilly Pepper",
-            "Navy Bean",
-            "Jumping Bean",
-            "Cosmic Bean",
-            "Melon-Pult",
-            "Tricorn",
-            "Lily Pad",
-            "Sow Magic Beans",
-            "Bean Counter",
-            "Snapdragon",
-            "Winter Squash",
-            "Laser Cattail",
-            "Bog of Enlightenment",
-            "Cool Bean",
-            "Jelly Bean",
-            "Rotobaga",
-            "Shrinking Violet",
-            "Brainana",
-            "Winter Melon",
-            "The Great Zucchini",
-            "Shooting Starfruit",
-            "Dark Matter Dragonfruit",
-            "Lima-Pleurodon",
-            "Bird of Paradise",
-            "Spyris",
-            "Go-Nuts",
-            "Mayflower",
-            "Sportacus",
-            "Snake Grass",
-            "Witch Hazel",
-            "Jolly Holly",
-            "Sap-Fling",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel BC Deck`)
-            .setDescription(
-              `Here is your wheel for bc \n **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (heroinput == "citron" || heroinput == "ct" || heroinput == "tron") {
-          const wordsArray = [
-            //Guardian
-            "Small-Nut",
-            "Sting Bean",
-            "Wall-Nut",
-            "Pismashio",
-            "Spineapple",
-            "Potato Mine",
-            "Cactus",
-            "Gardening Gloves",
-            "Sea-Shroom",
-            "Water Chestnut",
-            "Pea-Nut",
-            "Steel Magnolia",
-            "Photosynthesizer",
-            "Spikeweed Sector",
-            "Plantern",
-            "Grape Responsibility",
-            "Primal Potato Mine",
-            "Grizzly Pear",
-            "Grave Buster",
-            "Hibernating Beary",
-            "Prickly Pear",
-            "Smackadamia",
-            "Tough Beets",
-            "Cosmic Nut",
-            "Starch-Lord",
-            "Blockbuster",
-            "Pumpkin Shell",
-            "Jugger-Nut",
-            "Mirror-Nut",
-            "Guacodile",
-            "Doom-Shroom",
-            "Galacta-Cactus",
-            "Force Field",
-            "Gravitree",
-            "Three-Nut",
-            "Marine Bean",
-            "Primal Wall-Nut",
-            "Poppin' Poppies",
-            "Soul Patch",
-            "Wall-Nut Bowling",
-            "Body-Gourd",
-            "Pecanolith",
-            "Tricarrotops",
-            "Loco Coco",
-            "Forget-Me-Nuts",
-            "Garlic",
-            "Corn Dog",
-            "Hot Date",
-            "Health-Nut",
-            "Pear Cub",
-            "Shamrocket",
-            "Red Stinger",
-            //Smarty
-            "Snowdrop",
-            "Weenie Beanie",
-            "Snow Pea",
-            "Cattail",
-            "Smoosh-Shroom",
-            "Threepeater",
-            "Iceberg Lettuce",
-            "Shellery",
-            "Rescue Radish",
-            "Spring Bean",
-            "Vanilla",
-            "Carrotillery",
-            "Mars Flytrap",
-            "Planet of the Grapes",
-            "Leaf Blower",
-            "Grave Mistake",
-            "Pear Pal",
-            "Primal Peashooter",
-            "Admiral Navy Bean",
-            "Lightning Reed",
-            "Chilly Pepper",
-            "Navy Bean",
-            "Jumping Bean",
-            "Cosmic Bean",
-            "Melon-Pult",
-            "Tricorn",
-            "Lily Pad",
-            "Sow Magic Beans",
-            "Bean Counter",
-            "Snapdragon",
-            "Winter Squash",
-            "Laser Cattail",
-            "Bog of Enlightenment",
-            "Cool Bean",
-            "Jelly Bean",
-            "Rotobaga",
-            "Shrinking Violet",
-            "Brainana",
-            "Winter Melon",
-            "The Great Zucchini",
-            "Shooting Starfruit",
-            "Dark Matter Dragonfruit",
-            "Lima-Pleurodon",
-            "Bird of Paradise",
-            "Spyris",
-            "Go-Nuts",
-            "Mayflower",
-            "Sportacus",
-            "Snake Grass",
-            "Witch Hazel",
-            "Jolly Holly",
-            "Sap-Fling",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Citron Deck`)
-            .setDescription(
-              `Here is your wheel for Citron \n **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          return interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "captain combustible" ||
-          heroinput == "cc" ||
-          heroinput == "captain" ||
-          heroinput == "combustible" ||
-          heroinput == "captaincombustible"
-        ) {
-          const wordsArray = [
-            //Kabloom
-            "Button Mushroom",
-            "Berry Blast",
-            "Buff-Shroom",
-            "Seedling",
-            "Zapricot",
-            "Poison Mushroom",
-            "Berry Angry",
-            "Mushroom Ringleader",
-            "Poison Ivy",
-            "Pair of Pears",
-            "Bluesberry",
-            "Sizzle",
-            "Banana Bomb",
-            "Mushroom Grotto",
-            "Invasive Species",
-            "Puff-Shroom",
-            "Veloci-Radish Hatchling",
-            "Hot Lava",
-            "Shroom for Two",
-            "Wild Berry",
-            "Petal-Morphosis",
-            "Sour Grapes",
-            "Poison Oak",
-            "Cosmic Mushroom",
-            "Lava Guava",
-            "Cro-Magnolia",
-            "Shelf Mushroom",
-            "Punish-Shroom",
-            "Sergeant Strongberry",
-            "Cherry Bomb",
-            "Grapes of Wrath",
-            "Astro-Shroom",
-            "Banana Launcher",
-            "Pair Pearadise",
-            "Fireweed",
-            "Imitater",
-            "Strawberrian",
-            "Pineclone",
-            "Dandy Lion King",
-            "Kernel Corn",
-            "Reincarnation",
-            "Molekale",
-            "Gloom-Shroom",
-            "Veloci-Radish Hunter",
-            "Blooming Heart",
-            "High-Voltage Currant",
-            "Sonic Bloom",
-            "Transfiguration",
-            "Atomic Bombegranate",
-            "Electric Blueberry",
-            //Mega-Grow
-            "Peashooter",
-            "Torchwood",
-            "Cabbage-Pult",
-            "Fertilize",
-            "Flourish",
-            "Grow-Shroom",
-            "Repeater",
-            "Bonk Choy",
-            "Pea Pod",
-            "Sweet Potato",
-            "Fire Peashooter",
-            "Skyshooter",
-            "Coffee Grounds",
-            "Sweet Pea",
-            "Vegetation Mutation",
-            "Umbrella Leaf",
-            "Half-Banana",
-            "Typical Beanstalk",
-            "The Podfather",
-            "Plant Food",
-            "Re-Peat Moss",
-            "Whipvine",
-            "Super-Phat Beets",
-            "Banana Peel",
-            "Cosmic Pea",
-            "Bamboozle",
-            "Pea Patch",
-            "Party Thyme",
-            "Black-Eyed Pea",
-            "Potted Powerhouse",
-            "Espresso Fiesta",
-            "Moonbean",
-            "Pod Fighter",
-            "The Red Plant-It",
-            "Split Pea",
-            "Grape Power",
-            "Savage Spinach",
-            "Doubled Mint",
-            "Muscle Sprout",
-            "Bananasaurus Rex",
-            "Captain Cucumber",
-            "Onion Rings",
-            "Gatling Pea",
-            "Apotatosaurus",
-            "Clique Peas",
-            "Lily of the Valley",
-            "Banana Split",
-            "Plucky Clover",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Captain Combustible Deck`)
-            .setDescription(
-              `Here is your wheel for Captain Combustible
- **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "chompzilla" ||
-          heroinput == "cz" ||
-          heroinput == "chomp" ||
-          heroinput == "zilla"
-        ) {
-          const wordsArray = [
-            //Solar
-            "Bellflower",
-            "Sunflower",
-            "Mixed Nuts",
-            "Squash",
-            "Smashing Pumpkin",
-            "Morning Glory",
-            "Fume-Shroom",
-            "Pepper M.D.",
-            "Water Balloons",
-            "Venus Flytrap",
-            "Bloomerang",
-            "Metal Petal Sunflower",
-            "Cosmoss",
-            "Apple-Saucer",
-            "Venus Flytraplanet",
-            "Kernel-Pult",
-            "Lil' Buddy",
-            "Sunnier-Shroom",
-            "Sage Sage",
-            "Whack-a-Zombie",
-            "Lawnmower",
-            "Magnifying Grass",
-            "Power Flower",
-            "Cosmic Flower",
-            "Heartichoke",
-            "Elderberry",
-            "Eyespore",
-            "Twin Sunflower",
-            "2nd-Best Taco of All Time",
-            "Chomper",
-            "Laser Bean",
-            "Solar Winds",
-            "Wing-Nut",
-            "Tactical Cuke",
-            "Primal Sunflower",
-            "Sunflower Seed",
-            "Sun Strike",
-            "Briar Rose",
-            "Three-Headed Chomper",
-            "Cornucopia",
-            "Astrocado",
-            "Astro Vera",
-            "Cob Cannon",
-            "Aloesaurus",
-            "Haunted Pumpking",
-            "Sun-Shroom",
-            "Jack O' Lantern",
-            "Ketchup Mechanic",
-            "Toadstool",
-            //Mega-Grow
-            "Peashooter",
-            "Torchwood",
-            "Cabbage-Pult",
-            "Fertilize",
-            "Flourish",
-            "Grow-Shroom",
-            "Repeater",
-            "Bonk Choy",
-            "Pea Pod",
-            "Sweet Potato",
-            "Fire Peashooter",
-            "Skyshooter",
-            "Coffee Grounds",
-            "Sweet Pea",
-            "Vegetation Mutation",
-            "Umbrella Leaf",
-            "Half-Banana",
-            "Typical Beanstalk",
-            "The Podfather",
-            "Plant Food",
-            "Re-Peat Moss",
-            "Whipvine",
-            "Super-Phat Beets",
-            "Banana Peel",
-            "Cosmic Pea",
-            "Bamboozle",
-            "Pea Patch",
-            "Party Thyme",
-            "Black-Eyed Pea",
-            "Potted Powerhouse",
-            "Espresso Fiesta",
-            "Moonbean",
-            "Pod Fighter",
-            "The Red Plant-It",
-            "Split Pea",
-            "Grape Power",
-            "Savage Spinach",
-            "Doubled Mint",
-            "Muscle Sprout",
-            "Bananasaurus Rex",
-            "Captain Cucumber",
-            "Onion Rings",
-            "Gatling Pea",
-            "Apotatosaurus",
-            "Clique Peas",
-            "Lily of the Valley",
-            "Banana Split",
-            "Plucky Clover",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Chompzilla Deck`)
-            .setDescription(
-              `Here is your wheel for Chompzila
-                 **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "gk" ||
-          heroinput == "grass knuckles" ||
-          heroinput == "grass" ||
-          heroinput == "knuckles"
-        ) {
-          const wordsArray = [
-            //Gurdian
-            "Small-Nut",
-            "Sting Bean",
-            "Wall-Nut",
-            "Pismashio",
-            "Spineapple",
-            "Potato Mine",
-            "Cactus",
-            "Gardening Gloves",
-            "Sea-Shroom",
-            "Water Chestnut",
-            "Pea-Nut",
-            "Steel Magnolia",
-            "Photosynthesizer",
-            "Spikeweed Sector",
-            "Plantern",
-            "Grape Responsibility",
-            "Primal Potato Mine",
-            "Grizzly Pear",
-            "Grave Buster",
-            "Hibernating Beary",
-            "Prickly Pear",
-            "Smackadamia",
-            "Tough Beets",
-            "Cosmic Nut",
-            "Starch-Lord",
-            "Blockbuster",
-            "Pumpkin Shell",
-            "Jugger-Nut",
-            "Mirror-Nut",
-            "Guacodile",
-            "Doom-Shroom",
-            "Galacta-Cactus",
-            "Force Field",
-            "Gravitree",
-            "Three-Nut",
-            "Marine Bean",
-            "Primal Wall-Nut",
-            "Poppin' Poppies",
-            "Soul Patch",
-            "Wall-Nut Bowling",
-            "Body-Gourd",
-            "Pecanolith",
-            "Tricarrotops",
-            "Loco Coco",
-            "Forget-Me-Nuts",
-            "Garlic",
-            "Corn Dog",
-            "Hot Date",
-            "Health-Nut",
-            "Pear Cub",
-            "Shamrocket",
-            "Red Stinger",
-            //Mega-Grow
-            "Peashooter",
-            "Torchwood",
-            "Cabbage-Pult",
-            "Fertilize",
-            "Flourish",
-            "Grow-Shroom",
-            "Repeater",
-            "Bonk Choy",
-            "Pea Pod",
-            "Sweet Potato",
-            "Fire Peashooter",
-            "Skyshooter",
-            "Coffee Grounds",
-            "Sweet Pea",
-            "Vegetation Mutation",
-            "Umbrella Leaf",
-            "Half-Banana",
-            "Typical Beanstalk",
-            "The Podfather",
-            "Plant Food",
-            "Re-Peat Moss",
-            "Whipvine",
-            "Super-Phat Beets",
-            "Banana Peel",
-            "Cosmic Pea",
-            "Bamboozle",
-            "Pea Patch",
-            "Party Thyme",
-            "Black-Eyed Pea",
-            "Potted Powerhouse",
-            "Espresso Fiesta",
-            "Moonbean",
-            "Pod Fighter",
-            "The Red Plant-It",
-            "Split Pea",
-            "Grape Power",
-            "Savage Spinach",
-            "Doubled Mint",
-            "Muscle Sprout",
-            "Bananasaurus Rex",
-            "Captain Cucumber",
-            "Onion Rings",
-            "Gatling Pea",
-            "Apotatosaurus",
-            "Clique Peas",
-            "Lily of the Valley",
-            "Banana Split",
-            "Plucky Clover",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Grass Knuckles Deck`)
-            .setDescription(
-              `Here is your wheel for Grass Knuckles
- **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "gs" ||
-          heroinput == "green shadow" ||
-          heroinput == "green" ||
-          heroinput == "shadow"
-        ) {
-          const wordsArray = [
-            //Smarty
-            "Snowdrop",
-            "Weenie Beanie",
-            "Snow Pea",
-            "Cattail",
-            "Smoosh-Shroom",
-            "Threepeater",
-            "Iceberg Lettuce",
-            "Shellery",
-            "Rescue Radish",
-            "Spring Bean",
-            "Vanilla",
-            "Carrotillery",
-            "Mars Flytrap",
-            "Planet of the Grapes",
-            "Leaf Blower",
-            "Grave Mistake",
-            "Pear Pal",
-            "Primal Peashooter",
-            "Admiral Navy Bean",
-            "Lightning Reed",
-            "Chilly Pepper",
-            "Navy Bean",
-            "Jumping Bean",
-            "Cosmic Bean",
-            "Melon-Pult",
-            "Tricorn",
-            "Lily Pad",
-            "Sow Magic Beans",
-            "Bean Counter",
-            "Snapdragon",
-            "Winter Squash",
-            "Laser Cattail",
-            "Bog of Enlightenment",
-            "Cool Bean",
-            "Jelly Bean",
-            "Rotobaga",
-            "Shrinking Violet",
-            "Brainana",
-            "Winter Melon",
-            "The Great Zucchini",
-            "Shooting Starfruit",
-            "Dark Matter Dragonfruit",
-            "Lima-Pleurodon",
-            "Bird of Paradise",
-            "Spyris",
-            "Go-Nuts",
-            "Mayflower",
-            "Sportacus",
-            "Snake Grass",
-            "Witch Hazel",
-            "Jolly Holly",
-            "Sap-Fling",
-            //Mega-Grow
-            "Peashooter",
-            "Torchwood",
-            "Cabbage-Pult",
-            "Fertilize",
-            "Flourish",
-            "Grow-Shroom",
-            "Repeater",
-            "Bonk Choy",
-            "Pea Pod",
-            "Sweet Potato",
-            "Fire Peashooter",
-            "Skyshooter",
-            "Coffee Grounds",
-            "Sweet Pea",
-            "Vegetation Mutation",
-            "Umbrella Leaf",
-            "Half-Banana",
-            "Typical Beanstalk",
-            "The Podfather",
-            "Plant Food",
-            "Re-Peat Moss",
-            "Whipvine",
-            "Super-Phat Beets",
-            "Banana Peel",
-            "Cosmic Pea",
-            "Bamboozle",
-            "Pea Patch",
-            "Party Thyme",
-            "Black-Eyed Pea",
-            "Potted Powerhouse",
-            "Espresso Fiesta",
-            "Moonbean",
-            "Pod Fighter",
-            "The Red Plant-It",
-            "Split Pea",
-            "Grape Power",
-            "Savage Spinach",
-            "Doubled Mint",
-            "Muscle Sprout",
-            "Bananasaurus Rex",
-            "Captain Cucumber",
-            "Onion Rings",
-            "Gatling Pea",
-            "Apotatosaurus",
-            "Clique Peas",
-            "Lily of the Valley",
-            "Banana Split",
-            "Plucky Clover",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Green Shadow Deck`)
-            .setDescription(
-              `Here is your wheel for Green Shadow
-     **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "nightcap" ||
-          heroinput == "nc" ||
-          heroinput == "cap" ||
-          heroinput == "night" || 
-          heroinput == "night cap"
-        ) {
-          const wordsArray = [
-            //Smarty
-            "Snowdrop",
-            "Weenie Beanie",
-            "Snow Pea",
-            "Cattail",
-            "Smoosh-Shroom",
-            "Threepeater",
-            "Iceberg Lettuce",
-            "Shellery",
-            "Rescue Radish",
-            "Spring Bean",
-            "Vanilla",
-            "Carrotillery",
-            "Mars Flytrap",
-            "Planet of the Grapes",
-            "Leaf Blower",
-            "Grave Mistake",
-            "Pear Pal",
-            "Primal Peashooter",
-            "Admiral Navy Bean",
-            "Lightning Reed",
-            "Chilly Pepper",
-            "Navy Bean",
-            "Jumping Bean",
-            "Cosmic Bean",
-            "Melon-Pult",
-            "Tricorn",
-            "Lily Pad",
-            "Sow Magic Beans",
-            "Bean Counter",
-            "Snapdragon",
-            "Winter Squash",
-            "Laser Cattail",
-            "Bog of Enlightenment",
-            "Cool Bean",
-            "Jelly Bean",
-            "Rotobaga",
-            "Shrinking Violet",
-            "Brainana",
-            "Winter Melon",
-            "The Great Zucchini",
-            "Shooting Starfruit",
-            "Dark Matter Dragonfruit",
-            "Lima-Pleurodon",
-            "Bird of Paradise",
-            "Spyris",
-            "Go-Nuts",
-            "Mayflower",
-            "Sportacus",
-            "Snake Grass",
-            "Witch Hazel",
-            "Jolly Holly",
-            "Sap-Fling",
-            //Kabloom
-            "Button Mushroom",
-            "Berry Blast",
-            "Buff-Shroom",
-            "Seedling",
-            "Zapricot",
-            "Poison Mushroom",
-            "Berry Angry",
-            "Mushroom Ringleader",
-            "Poison Ivy",
-            "Pair of Pears",
-            "Bluesberry",
-            "Sizzle",
-            "Banana Bomb",
-            "Mushroom Grotto",
-            "Invasive Species",
-            "Puff-Shroom",
-            "Veloci-Radish Hatchling",
-            "Hot Lava",
-            "Shroom for Two",
-            "Wild Berry",
-            "Petal-Morphosis",
-            "Sour Grapes",
-            "Poison Oak",
-            "Cosmic Mushroom",
-            "Lava Guava",
-            "Cro-Magnolia",
-            "Shelf Mushroom",
-            "Punish-Shroom",
-            "Sergeant Strongberry",
-            "Cherry Bomb",
-            "Grapes of Wrath",
-            "Astro-Shroom",
-            "Banana Launcher",
-            "Pair Pearadise",
-            "Fireweed",
-            "Imitater",
-            "Strawberrian",
-            "Pineclone",
-            "Dandy Lion King",
-            "Kernel Corn",
-            "Reincarnation",
-            "Molekale",
-            "Gloom-Shroom",
-            "Veloci-Radish Hunter",
-            "Blooming Heart",
-            "High-Voltage Currant",
-            "Sonic Bloom",
-            "Transfiguration",
-            "Atomic Bombegranate",
-            "Electric Blueberry",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Nightcap Deck`)
-            .setDescription(
-              `Here is your wheel for Nightcap
-     **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (heroinput == "rose" || heroinput == "ro") {
-          const wordsArray = [
-            //Smarty
-            "Snowdrop",
-            "Weenie Beanie",
-            "Snow Pea",
-            "Cattail",
-            "Smoosh-Shroom",
-            "Threepeater",
-            "Iceberg Lettuce",
-            "Shellery",
-            "Rescue Radish",
-            "Spring Bean",
-            "Vanilla",
-            "Carrotillery",
-            "Mars Flytrap",
-            "Planet of the Grapes",
-            "Leaf Blower",
-            "Grave Mistake",
-            "Pear Pal",
-            "Primal Peashooter",
-            "Admiral Navy Bean",
-            "Lightning Reed",
-            "Chilly Pepper",
-            "Navy Bean",
-            "Jumping Bean",
-            "Cosmic Bean",
-            "Melon-Pult",
-            "Tricorn",
-            "Lily Pad",
-            "Sow Magic Beans",
-            "Bean Counter",
-            "Snapdragon",
-            "Winter Squash",
-            "Laser Cattail",
-            "Bog of Enlightenment",
-            "Cool Bean",
-            "Jelly Bean",
-            "Rotobaga",
-            "Shrinking Violet",
-            "Brainana",
-            "Winter Melon",
-            "The Great Zucchini",
-            "Shooting Starfruit",
-            "Dark Matter Dragonfruit",
-            "Lima-Pleurodon",
-            "Bird of Paradise",
-            "Spyris",
-            "Go-Nuts",
-            "Mayflower",
-            "Sportacus",
-            "Snake Grass",
-            "Witch Hazel",
-            "Jolly Holly",
-            "Sap-Fling",
-            //Solar
-            "Bellflower",
-            "Sunflower",
-            "Mixed Nuts",
-            "Squash",
-            "Smashing Pumpkin",
-            "Morning Glory",
-            "Fume-Shroom",
-            "Pepper M.D.",
-            "Water Balloons",
-            "Venus Flytrap",
-            "Bloomerang",
-            "Metal Petal Sunflower",
-            "Cosmoss",
-            "Apple-Saucer",
-            "Venus Flytraplanet",
-            "Kernel-Pult",
-            "Lil' Buddy",
-            "Sunnier-Shroom",
-            "Sage Sage",
-            "Whack-a-Zombie",
-            "Lawnmower",
-            "Magnifying Grass",
-            "Power Flower",
-            "Cosmic Flower",
-            "Heartichoke",
-            "Elderberry",
-            "Eyespore",
-            "Twin Sunflower",
-            "2nd-Best Taco of All Time",
-            "Chomper",
-            "Laser Bean",
-            "Solar Winds",
-            "Wing-Nut",
-            "Tactical Cuke",
-            "Primal Sunflower",
-            "Sunflower Seed",
-            "Sun Strike",
-            "Briar Rose",
-            "Three-Headed Chomper",
-            "Cornucopia",
-            "Astrocado",
-            "Astro Vera",
-            "Cob Cannon",
-            "Aloesaurus",
-            "Haunted Pumpking",
-            "Sun-Shroom",
-            "Jack O' Lantern",
-            "Ketchup Mechanic",
-            "Toadstool",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Rose Deck`)
-            .setDescription(
-              `Here is your wheel for Rose
-     **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "solar flare" ||
-          heroinput == "sf" ||
-          heroinput == "solar" ||
-          heroinput == "flare" ||
-          heroinput == "solarflare"
-        ) {
-          const wordsArray = [
-            //Kabloom
-            "Button Mushroom",
-            "Berry Blast",
-            "Buff-Shroom",
-            "Seedling",
-            "Zapricot",
-            "Poison Mushroom",
-            "Berry Angry",
-            "Mushroom Ringleader",
-            "Poison Ivy",
-            "Pair of Pears",
-            "Bluesberry",
-            "Sizzle",
-            "Banana Bomb",
-            "Mushroom Grotto",
-            "Invasive Species",
-            "Puff-Shroom",
-            "Veloci-Radish Hatchling",
-            "Hot Lava",
-            "Shroom for Two",
-            "Wild Berry",
-            "Petal-Morphosis",
-            "Sour Grapes",
-            "Poison Oak",
-            "Cosmic Mushroom",
-            "Lava Guava",
-            "Cro-Magnolia",
-            "Shelf Mushroom",
-            "Punish-Shroom",
-            "Sergeant Strongberry",
-            "Cherry Bomb",
-            "Grapes of Wrath",
-            "Astro-Shroom",
-            "Banana Launcher",
-            "Pair Pearadise",
-            "Fireweed",
-            "Imitater",
-            "Strawberrian",
-            "Pineclone",
-            "Dandy Lion King",
-            "Kernel Corn",
-            "Reincarnation",
-            "Molekale",
-            "Gloom-Shroom",
-            "Veloci-Radish Hunter",
-            "Blooming Heart",
-            "High-Voltage Currant",
-            "Sonic Bloom",
-            "Transfiguration",
-            "Atomic Bombegranate",
-            "Electric Blueberry",
-            //Solar
-            "Bellflower",
-            "Sunflower",
-            "Mixed Nuts",
-            "Squash",
-            "Smashing Pumpkin",
-            "Morning Glory",
-            "Fume-Shroom",
-            "Pepper M.D.",
-            "Water Balloons",
-            "Venus Flytrap",
-            "Bloomerang",
-            "Metal Petal Sunflower",
-            "Cosmoss",
-            "Apple-Saucer",
-            "Venus Flytraplanet",
-            "Kernel-Pult",
-            "Lil' Buddy",
-            "Sunnier-Shroom",
-            "Sage Sage",
-            "Whack-a-Zombie",
-            "Lawnmower",
-            "Magnifying Grass",
-            "Power Flower",
-            "Cosmic Flower",
-            "Heartichoke",
-            "Elderberry",
-            "Eyespore",
-            "Twin Sunflower",
-            "2nd-Best Taco of All Time",
-            "Chomper",
-            "Laser Bean",
-            "Solar Winds",
-            "Wing-Nut",
-            "Tactical Cuke",
-            "Primal Sunflower",
-            "Sunflower Seed",
-            "Sun Strike",
-            "Briar Rose",
-            "Three-Headed Chomper",
-            "Cornucopia",
-            "Astrocado",
-            "Astro Vera",
-            "Cob Cannon",
-            "Aloesaurus",
-            "Haunted Pumpking",
-            "Sun-Shroom",
-            "Jack O' Lantern",
-            "Ketchup Mechanic",
-            "Toadstool",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Solar Flare Deck`)
-            .setDescription(
-              `Here is your wheel for Solar Flare
- **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "spudow" ||
-          heroinput == "sp" ||
-          heroinput == "spud" ||
-          heroinput == "dow"
-        ) {
-          const wordsArray = [
-            //Kabloom
-            "Button Mushroom",
-            "Berry Blast",
-            "Buff-Shroom",
-            "Seedling",
-            "Zapricot",
-            "Poison Mushroom",
-            "Berry Angry",
-            "Mushroom Ringleader",
-            "Poison Ivy",
-            "Pair of Pears",
-            "Bluesberry",
-            "Sizzle",
-            "t Bomb",
-            "Mushroom Grotto",
-            "Invasive Species",
-            "Puff-Shroom",
-            "Veloci-Radish Hatchling",
-            "Hot Lava",
-            "Shroom for Two",
-            "Wild Berry",
-            "Petal-Morphosis",
-            "Sour Grapes",
-            "Poison Oak",
-            "Cosmic Mushroom",
-            "Lava Guava",
-            "Cro-Magnolia",
-            "Shelf Mushroom",
-            "Punish-Shroom",
-            "Sergeant Strongberry",
-            "Cherry Bomb",
-            "Grapes of Wrath",
-            "Astro-Shroom",
-            "Banana Launcher",
-            "Pair Pearadise",
-            "Fireweed",
-            "Imitater",
-            "Strawberrian",
-            "Pineclone",
-            "Dandy Lion King",
-            "Kernel Corn",
-            "Reincarnation",
-            "Molekale",
-            "Gloom-Shroom",
-            "Veloci-Radish Hunter",
-            "Blooming Heart",
-            "High-Voltage Currant",
-            "Sonic Bloom",
-            "Transfiguration",
-            "Atomic Bombegranate",
-            "Electric Blueberry",
-            //Gurdian
-            "Small-Nut",
-            "Sting Bean",
-            "Wall-Nut",
-            "Pismashio",
-            "Spineapple",
-            "Potato Mine",
-            "Cactus",
-            "Gardening Gloves",
-            "Sea-Shroom",
-            "Water Chestnut",
-            "Pea-Nut",
-            "Steel Magnolia",
-            "Photosynthesizer",
-            "Spikeweed Sector",
-            "Plantern",
-            "Grape Responsibility",
-            "Primal Potato Mine",
-            "Grizzly Pear",
-            "Grave Buster",
-            "Hibernating Beary",
-            "Prickly Pear",
-            "Smackadamia",
-            "Tough Beets",
-            "Cosmic Nut",
-            "Starch-Lord",
-            "Blockbuster",
-            "Pumpkin Shell",
-            "Jugger-Nut",
-            "Mirror-Nut",
-            "Guacodile",
-            "Doom-Shroom",
-            "Galacta-Cactus",
-            "Force Field",
-            "Gravitree",
-            "Three-Nut",
-            "Marine Bean",
-            "Primal Wall-Nut",
-            "Poppin' Poppies",
-            "Soul Patch",
-            "Wall-Nut Bowling",
-            "Body-Gourd",
-            "Pecanolith",
-            "Tricarrotops",
-            "Loco Coco",
-            "Forget-Me-Nuts",
-            "Garlic",
-            "Corn Dog",
-            "Hot Date",
-            "Health-Nut",
-            "Pear Cub",
-            "Shamrocket",
-            "Red Stinger",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Spudow Deck`)
-            .setDescription(
-              `Here is your wheel for Spudow 
-        **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "wall-knight" ||
-          heroinput == "wk" ||
-          heroinput == "wall" ||
-          heroinput == "knight" ||
-          heroinput == "wallknight" ||
-          heroinput == "wall knight"
-        ) {
-          const wordsArray = [
-            //Solar
-            "Bellflower",
-            "Sunflower",
-            "Mixed Nuts",
-            "Squash",
-            "Smashing Pumpkin",
-            "Morning Glory",
-            "Fume-Shroom",
-            "Pepper M.D.",
-            "Water Balloons",
-            "Venus Flytrap",
-            "Bloomerang",
-            "Metal Petal Sunflower",
-            "Cosmoss",
-            "Apple-Saucer",
-            "Venus Flytraplanet",
-            "Kernel-Pult",
-            "Lil' Buddy",
-            "Sunnier-Shroom",
-            "Sage Sage",
-            "Whack-a-Zombie",
-            "Lawnmower",
-            "Magnifying Grass",
-            "Power Flower",
-            "Cosmic Flower",
-            "Heartichoke",
-            "Elderberry",
-            "Eyespore",
-            "Twin Sunflower",
-            "2nd-Best Taco of All Time",
-            "Chomper",
-            "Laser Bean",
-            "Solar Winds",
-            "Wing-Nut",
-            "Tactical Cuke",
-            "Primal Sunflower",
-            "Sunflower Seed",
-            "Sun Strike",
-            "Briar Rose",
-            "Three-Headed Chomper",
-            "Cornucopia",
-            "Astrocado",
-            "Astro Vera",
-            "Cob Cannon",
-            "Aloesaurus",
-            "Haunted Pumpking",
-            "Sun-Shroom",
-            "Jack O' Lantern",
-            "Ketchup Mechanic",
-            "Toadstool",
-            //Gurdian
-            "Small-Nut",
-            "Sting Bean",
-            "Wall-Nut",
-            "Pismashio",
-            "Spineapple",
-            "Potato Mine",
-            "Cactus",
-            "Gardening Gloves",
-            "Sea-Shroom",
-            "Water Chestnut",
-            "Pea-Nut",
-            "Steel Magnolia",
-            "Photosynthesizer",
-            "Spikeweed Sector",
-            "Plantern",
-            "Grape Responsibility",
-            "Primal Potato Mine",
-            "Grizzly Pear",
-            "Grave Buster",
-            "Hibernating Beary",
-            "Prickly Pear",
-            "Smackadamia",
-            "Tough Beets",
-            "Cosmic Nut",
-            "Starch-Lord",
-            "Blockbuster",
-            "Pumpkin Shell",
-            "Jugger-Nut",
-            "Mirror-Nut",
-            "Guacodile",
-            "Doom-Shroom",
-            "Galacta-Cactus",
-            "Force Field",
-            "Gravitree",
-            "Three-Nut",
-            "Marine Bean",
-            "Primal Wall-Nut",
-            "Poppin' Poppies",
-            "Soul Patch",
-            "Wall-Nut Bowling",
-            "Body-Gourd",
-            "Pecanolith",
-            "Tricarrotops",
-            "Loco Coco",
-            "Forget-Me-Nuts",
-            "Garlic",
-            "Corn Dog",
-            "Hot Date",
-            "Health-Nut",
-            "Pear Cub",
-            "Shamrocket",
-            "Red Stinger",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Wall-Knight Deck`)
-            .setDescription(
-              `Here is your wheel for Wall-Knight
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "bf" ||
-          heroinput == "brain freeze" ||
-          heroinput == "brain" ||
-          heroinput == "freeze" ||
-          heroinput == "brainfreeze"
-        ) {
-          const wordsArray = [
-            //Sneaky
-            "Imp",
-            "Mini-Ninja",
-            "Smoke Bomb",
-            "Fishy Imp",
-            "Smelly Zombie",
-            "Headstone Carver",
-            "Zombie Chicken",
-            "Hot Dog Imp",
-            "Swashbuckler Zombie",
-            "Backyard Bounce",
-            "Stealthy Imp",
-            "Firefighter",
-            "Graveyard",
-            "Ice Pirate",
-            "Frosty Mustache",
-            "Swabbie",
-            "Barrel of Barrels",
-            "Monkey Smuggler",
-            "Imp Commander",
-            "Barrel Roller Zombie",
-            "Surprise Gargantuar",
-            "Walrus Rider",
-            "Zombot Stomp",
-            "Cosmic Imp",
-            "Space Pirate",
-            "Blowgun Imp",
-            "Buried Treasure",
-            "Toxic Waste Imp",
-            "Line Dancing Zombie",
-            "Pogo Bouncer",
-            "Tomb Raiser Zombie",
-            "Ducky Tube Zombie",
-            "Dr. Spacetime",
-            "Laser Base Alpha",
-            "Cursed Gargolith",
-            "Excavator Zombie",
-            "Unthawed Viking",
-            "Mixed-Up Gravedigger",
-            "Zombot Sharktronic Sub",
-            "Zombot Plank Walker",
-            "Space Cowboy",
-            "Cryo-Yeti",
-            "Zombot Aerostatic Gondola",
-            "Raiding Raptor",
-            "Imposter",
-            "Fire Rooster",
-            "Imp-Throwing Imp",
-            "Captain Flameface",
-            "Zombie High Diver",
-            "Trapper Zombie",
-            //Beastly
-            "Skunk Punk",
-            "Pied Piper",
-            "Zookeeper",
-            "Dolphin Rider",
-            "Locust Swarm",
-            "Dog Walker",
-            "Nibble",
-            "Snorkel Zombie",
-            "Yeti Lunchbox",
-            "Haunting Zombie",
-            "Loudmouth",
-            "B-flat",
-            "Total Eclipse",
-            "Alien Ooze",
-            "Surfer Zombie",
-            "Haunting Ghost",
-            "Goat",
-            "Vengeful Cyborg",
-            "Squirrel Herder",
-            "Vimpire",
-            "Vitamin Z",
-            "Kangaroo Rider",
-            "Smashing Gargantuar",
-            "Biodome Botanist",
-            "Cosmic Yeti",
-            "Primordial Cheese Shover",
-            "Killer Whale",
-            "Cat Lady",
-            "Zombie Yeti",
-            "Deep Sea Gargantuar",
-            "Maniacal Laugh",
-            "Cheese Cutter",
-            "Cyborg Zombie",
-            "Area 22",
-            "Extinction Event",
-            "Ancient Vimpire",
-            "Hunting Grounds",
-            "Nurse Gargantuar",
-            "Octo Zombie",
-            "Zombot 1000",
-            "Interstellar Bounty Hunter",
-            "Supernova Gargantuar",
-            "Mondo Bronto",
-            "Gargantuar-Throwing Gargantuar",
-            "Fraidy Cat",
-            "Secret Agent",
-            "Energy Drink Zombie",
-            "Synchronized Swimmer",
-            "Hover-Goat 3000",
-            "Overstuffed Zombie",
-            "Sneezing Zombie",
-            "King of the Grill",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Brain Freeze Deck`)
-            .setDescription(
-              `Here is your wheel for Brain Freeze
- **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "eb" ||
-          heroinput == "electric" ||
-          heroinput == "boogaloo" ||
-          heroinput == "electric boogaloo"
-        ) {
-          const wordsArray = [
-            //Crazy
-            "Backup Dancer",
-            "Bungee Plumber",
-            "Cuckoo Zombie",
-            "Disco Zombie",
-            "Flamenco Zombie",
-            "Tennis Champ",
-            "Unlife of the Party",
-            "Conga Zombie",
-            "Newspaper Zombie",
-            "Cakesplosion",
-            "Orchestra Conductor",
-            "Foot Soldier Zombie",
-            "Loose Cannon",
-            "Meteor Z",
-            "Space Ninja",
-            "Mystery Egg",
-            "Sugary Treat",
-            "Trapper Territory",
-            "Exploding Imp",
-            "Jester",
-            "Zombot's Wrath",
-            "The Chickening",
-            "Imp-Throwing Gargantuar",
-            "Final Mission",
-            "Cosmic Dancer",
-            "Gizzard Lizard",
-            "Disco Dance Floor",
-            "Aerobics Instructor",
-            "Abracadaver",
-            "Fireworks Zombie",
-            "Disco-Tron 3000",
-            "Disco-Naut",
-            "Moon Base Z",
-            "Gas Giant",
-            "Quickdraw Con Man",
-            "Grave Robber",
-            "Zombie's Best Friend",
-            "Barrel of Deadbeards",
-            "Valkyrie",
-            "Gargantuars' Feast",
-            "Quasar Wizard",
-            "Binary Stars",
-            "Tankylosaurus",
-            "Headhunter",
-            "Exploding Fruitcake",
-            "Unexpected Gifts",
-            "Stupid Cupid",
-            "Frankentuar",
-            "Gargantuar-Throwing Imp",
-            "Hippity Hop Gargantuar",
-            //Beastly
-            "Skunk Punk",
-            "Pied Piper",
-            "Zookeeper",
-            "Dolphin Rider",
-            "Locust Swarm",
-            "Dog Walker",
-            "Nibble",
-            "Snorkel Zombie",
-            "Yeti Lunchbox",
-            "Haunting Zombie",
-            "Loudmouth",
-            "B-flat",
-            "Total Eclipse",
-            "Alien Ooze",
-            "Surfer Zombie",
-            "Haunting Ghost",
-            "Goat",
-            "Vengeful Cyborg",
-            "Squirrel Herder",
-            "Vimpire",
-            "Vitamin Z",
-            "Kangaroo Rider",
-            "Smashing Gargantuar",
-            "Biodome Botanist",
-            "Cosmic Yeti",
-            "Primordial Cheese Shover",
-            "Killer Whale",
-            "Cat Lady",
-            "Zombie Yeti",
-            "Deep Sea Gargantuar",
-            "Maniacal Laugh",
-            "Cheese Cutter",
-            "Cyborg Zombie",
-            "Area 22",
-            "Extinction Event",
-            "Ancient Vimpire",
-            "Hunting Grounds",
-            "Nurse Gargantuar",
-            "Octo Zombie",
-            "Zombot 1000",
-            "Interstellar Bounty Hunter",
-            "Supernova Gargantuar",
-            "Mondo Bronto",
-            "Gargantuar-Throwing Gargantuar",
-            "Fraidy Cat",
-            "Secret Agent",
-            "Energy Drink Zombie",
-            "Synchronized Swimmer",
-            "Hover-Goat 3000",
-            "Overstuffed Zombie",
-            "Sneezing Zombie",
-            "King of the Grill",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Electric Boogaloo(EB) Deck`)
-            .setDescription(
-              `Here is your wheel for Electric Boogaloo(EB)
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "hg" ||
-          heroinput == "huge" ||
-          heroinput == "huge giganticus" ||
-          heroinput == "giganticus" ||
-          heroinput == "huge-giganticus"
-        ) {
-          const wordsArray = [
-            //Brainy
-            "Cardboard Robot Zombie",
-            "Paparazzi Zombie",
-            "Lurch for Lunch",
-            "Fun-Dead Raiser",
-            "Drum Major",
-            "Chimney Sweep",
-            "Beam Me Up",
-            "Cell Phone Zombie",
-            "Pool Shark",
-            "Zombot Drone Engineer",
-            "Brain Vendor",
-            "Mountain Climber",
-            "Cryo-Brain",
-            "Medulla Nebula",
-            "Moonwalker",
-            "Copter Commando",
-            "Mustache Waxer",
-            "Pirate's Booty",
-            "Gentleman Zombie",
-            "Kite Flyer",
-            "Gadget Scientist",
-            "Hail-a-Copter",
-            "Wizard Gargantuar",
-            "Cosmic Scientist",
-            "Triplication",
-            "Zom-Blob",
-            "Mustache Monument",
-            "Electrician",
-            "Rocket Science",
-            "Mad Chemist",
-            "Portal Technician",
-            "Neutron Imp",
-            "Transformation Station",
-            "Wormhole Gatekeeper",
-            "Evolutionary Leap",
-            "Parasol Zombie",
-            "Duckstache",
-            "Teleport",
-            "Shieldcrusher Viking",
-            "Trickster",
-            "Interdimensional Zombie",
-            "Teleportation Zombie",
-            "Gargantuar Mime",
-            "Zombot Dinotronic Mechasaur",
-            "Leprechaun Imp",
-            "Regifting Zombie",
-            "Trick-or-Treater",
-            "Thinking Cap",
-            "Kitchen Sink Zombie",
-            "Bad Moon Rising",
-            //Sneaky
-            "Imp",
-            "Mini-Ninja",
-            "Smoke Bomb",
-            "Fishy Imp",
-            "Smelly Zombie",
-            "Headstone Carver",
-            "Zombie Chicken",
-            "Hot Dog Imp",
-            "Swashbuckler Zombie",
-            "Backyard Bounce",
-            "Stealthy Imp",
-            "Firefighter",
-            "Graveyard",
-            "Ice Pirate",
-            "Frosty Mustache",
-            "Swabbie",
-            "Barrel of Barrels",
-            "Monkey Smuggler",
-            "Imp Commander",
-            "Barrel Roller Zombie",
-            "Surprise Gargantuar",
-            "Walrus Rider",
-            "Zombot Stomp",
-            "Cosmic Imp",
-            "Space Pirate",
-            "Blowgun Imp",
-            "Buried Treasure",
-            "Toxic Waste Imp",
-            "Line Dancing Zombie",
-            "Pogo Bouncer",
-            "Tomb Raiser Zombie",
-            "Ducky Tube Zombie",
-            "Dr. Spacetime",
-            "Laser Base Alpha",
-            "Cursed Gargolith",
-            "Excavator Zombie",
-            "Unthawed Viking",
-            "Mixed-Up Gravedigger",
-            "Zombot Sharktronic Sub",
-            "Zombot Plank Walker",
-            "Space Cowboy",
-            "Cryo-Yeti",
-            "Zombot Aerostatic Gondola",
-            "Raiding Raptor",
-            "Imposter",
-            "Fire Rooster",
-            "Imp-Throwing Imp",
-            "Captain Flameface",
-            "Zombie High Diver",
-            "Trapper Zombie",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Huge-Gigantacus(HG) Deck`)
-            .setDescription(
-              `Here is your wheel for Huge-Gigantacus(HG)
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "sb" ||
-          heroinput == "super" ||
-          heroinput == "brainz" ||
-          heroinput == "super brainz" ||
-          heroinput == "superbrainz"
-        ) {
-          const wordsArray = [
-            //Brainy
-            "Cardboard Robot Zombie",
-            "Paparazzi Zombie",
-            "Lurch for Lunch",
-            "Fun-Dead Raiser",
-            "Drum Major",
-            "Chimney Sweep",
-            "Beam Me Up",
-            "Cell Phone Zombie",
-            "Pool Shark",
-            "Zombot Drone Engineer",
-            "Brain Vendor",
-            "Mountain Climber",
-            "Cryo-Brain",
-            "Medulla Nebula",
-            "Moonwalker",
-            "Copter Commando",
-            "Mustache Waxer",
-            "Pirate's Booty",
-            "Gentleman Zombie",
-            "Kite Flyer",
-            "Gadget Scientist",
-            "Hail-a-Copter",
-            "Wizard Gargantuar",
-            "Cosmic Scientist",
-            "Triplication",
-            "Zom-Blob",
-            "Mustache Monument",
-            "Electrician",
-            "Rocket Science",
-            "Mad Chemist",
-            "Portal Technician",
-            "Neutron Imp",
-            "Transformation Station",
-            "Wormhole Gatekeeper",
-            "Evolutionary Leap",
-            "Parasol Zombie",
-            "Duckstache",
-            "Teleport",
-            "Shieldcrusher Viking",
-            "Trickster",
-            "Interdimensional Zombie",
-            "Teleportation Zombie",
-            "Gargantuar Mime",
-            "Zombot Dinotronic Mechasaur",
-            "Leprechaun Imp",
-            "Regifting Zombie",
-            "Trick-or-Treater",
-            "Thinking Cap",
-            "Kitchen Sink Zombie",
-            "Bad Moon Rising",
-            //Sneaky
-            "Imp",
-            "Mini-Ninja",
-            "Smoke Bomb",
-            "Fishy Imp",
-            "Smelly Zombie",
-            "Headstone Carver",
-            "Zombie Chicken",
-            "Hot Dog Imp",
-            "Swashbuckler Zombie",
-            "Backyard Bounce",
-            "Stealthy Imp",
-            "Firefighter",
-            "Graveyard",
-            "Ice Pirate",
-            "Frosty Mustache",
-            "Swabbie",
-            "Barrel of Barrels",
-            "Monkey Smuggler",
-            "Imp Commander",
-            "Barrel Roller Zombie",
-            "Surprise Gargantuar",
-            "Walrus Rider",
-            "Zombot Stomp",
-            "Cosmic Imp",
-            "Space Pirate",
-            "Blowgun Imp",
-            "Buried Treasure",
-            "Toxic Waste Imp",
-            "Line Dancing Zombie",
-            "Pogo Bouncer",
-            "Tomb Raiser Zombie",
-            "Ducky Tube Zombie",
-            "Dr. Spacetime",
-            "Laser Base Alpha",
-            "Cursed Gargolith",
-            "Excavator Zombie",
-            "Unthawed Viking",
-            "Mixed-Up Gravedigger",
-            "Zombot Sharktronic Sub",
-            "Zombot Plank Walker",
-            "Space Cowboy",
-            "Cryo-Yeti",
-            "Zombot Aerostatic Gondola",
-            "Raiding Raptor",
-            "Imposter",
-            "Fire Rooster",
-            "Imp-Throwing Imp",
-            "Captain Flameface",
-            "Zombie High Diver",
-            "Trapper Zombie",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Super Brainz Deck`)
-            .setDescription(
-              `Here is your wheel for Super Brainz
-     **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "if" ||
-          heroinput == "impfinity" ||
-          heroinput == "imp" ||
-          heroinput == "finity"
-        ) {
-          const wordsArray = [
-            //crazy
-            "Backup Dancer",
-            "Bungee Plumber",
-            "Cuckoo Zombie",
-            "Disco Zombie",
-            "Flamenco Zombie",
-            "Tennis Champ",
-            "Unlife of the Party",
-            "Conga Zombie",
-            "Newspaper Zombie",
-            "Cakesplosion",
-            "Orchestra Conductor",
-            "Foot Soldier Zombie",
-            "Loose Cannon",
-            "Meteor Z",
-            "Space Ninja",
-            "Mystery Egg",
-            "Sugary Treat",
-            "Trapper Territory",
-            "Exploding Imp",
-            "Jester",
-            "Zombot's Wrath",
-            "The Chickening",
-            "Imp-Throwing Gargantuar",
-            "Final Mission",
-            "Cosmic Dancer",
-            "Gizzard Lizard",
-            "Disco Dance Floor",
-            "Aerobics Instructor",
-            "Abracadaver",
-            "Fireworks Zombie",
-            "Disco-Tron 3000",
-            "Disco-Naut",
-            "Moon Base Z",
-            "Gas Giant",
-            "Quickdraw Con Man",
-            "Grave Robber",
-            "Zombie's Best Friend",
-            "Barrel of Deadbeards",
-            "Valkyrie",
-            "Gargantuars' Feast",
-            "Quasar Wizard",
-            "Binary Stars",
-            "Tankylosaurus",
-            "Headhunter",
-            "Exploding Fruitcake",
-            "Unexpected Gifts",
-            "Stupid Cupid",
-            "Frankentuar",
-            "Gargantuar-Throwing Imp",
-            "Hippity Hop Gargantuar",
-            //Sneaky
-            "Imp",
-            "Mini-Ninja",
-            "Smoke Bomb",
-            "Fishy Imp",
-            "Smelly Zombie",
-            "Headstone Carver",
-            "Zombie Chicken",
-            "Hot Dog Imp",
-            "Swashbuckler Zombie",
-            "Backyard Bounce",
-            "Stealthy Imp",
-            "Firefighter",
-            "Graveyard",
-            "Ice Pirate",
-            "Frosty Mustache",
-            "Swabbie",
-            "Barrel of Barrels",
-            "Monkey Smuggler",
-            "Imp Commander",
-            "Barrel Roller Zombie",
-            "Surprise Gargantuar",
-            "Walrus Rider",
-            "Zombot Stomp",
-            "Cosmic Imp",
-            "Space Pirate",
-            "Blowgun Imp",
-            "Buried Treasure",
-            "Toxic Waste Imp",
-            "Line Dancing Zombie",
-            "Pogo Bouncer",
-            "Tomb Raiser Zombie",
-            "Ducky Tube Zombie",
-            "Dr. Spacetime",
-            "Laser Base Alpha",
-            "Cursed Gargolith",
-            "Excavator Zombie",
-            "Unthawed Viking",
-            "Mixed-Up Gravedigger",
-            "Zombot Sharktronic Sub",
-            "Zombot Plank Walker",
-            "Space Cowboy",
-            "Cryo-Yeti",
-            "Zombot Aerostatic Gondola",
-            "Raiding Raptor",
-            "Imposter",
-            "Fire Rooster",
-            "Imp-Throwing Imp",
-            "Captain Flameface",
-            "Zombie High Diver",
-            "Trapper Zombie",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Impfinity Deck`)
-            .setDescription(
-              `Here is your wheel for Impfinity
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "immorticia" ||
-          heroinput == "immort" ||
-          heroinput == "immor" ||
-          heroinput == "ticia" ||
-          heroinput == "im"
-        ) {
-          const wordsArray = [
-            //Beastly
-            "Skunk Punk",
-            "Pied Piper",
-            "Zookeeper",
-            "Dolphin Rider",
-            "Locust Swarm",
-            "Dog Walker",
-            "Nibble",
-            "Snorkel Zombie",
-            "Yeti Lunchbox",
-            "Haunting Zombie",
-            "Loudmouth",
-            "B-flat",
-            "Total Eclipse",
-            "Alien Ooze",
-            "Surfer Zombie",
-            "Haunting Ghost",
-            "Goat",
-            "Vengeful Cyborg",
-            "Squirrel Herder",
-            "Vimpire",
-            "Vitamin Z",
-            "Kangaroo Rider",
-            "Smashing Gargantuar",
-            "Biodome Botanist",
-            "Cosmic Yeti",
-            "Primordial Cheese Shover",
-            "Killer Whale",
-            "Cat Lady",
-            "Zombie Yeti",
-            "Deep Sea Gargantuar",
-            "Maniacal Laugh",
-            "Cheese Cutter",
-            "Cyborg Zombie",
-            "Area 22",
-            "Extinction Event",
-            "Ancient Vimpire",
-            "Hunting Grounds",
-            "Nurse Gargantuar",
-            "Octo Zombie",
-            "Zombot 1000",
-            "Interstellar Bounty Hunter",
-            "Supernova Gargantuar",
-            "Mondo Bronto",
-            "Gargantuar-Throwing Gargantuar",
-            "Fraidy Cat",
-            "Secret Agent",
-            "Energy Drink Zombie",
-            "Synchronized Swimmer",
-            "Hover-Goat 3000",
-            "Overstuffed Zombie",
-            "Sneezing Zombie",
-            "King of the Grill",
-            //Brainy
-            "Cardboard Robot Zombie",
-            "Paparazzi Zombie",
-            "Lurch for Lunch",
-            "Fun-Dead Raiser",
-            "Drum Major",
-            "Chimney Sweep",
-            "Beam Me Up",
-            "Cell Phone Zombie",
-            "Pool Shark",
-            "Zombot Drone Engineer",
-            "Brain Vendor",
-            "Mountain Climber",
-            "Cryo-Brain",
-            "Medulla Nebula",
-            "Moonwalker",
-            "Copter Commando",
-            "Mustache Waxer",
-            "Pirate's Booty",
-            "Gentleman Zombie",
-            "Kite Flyer",
-            "Gadget Scientist",
-            "Hail-a-Copter",
-            "Wizard Gargantuar",
-            "Cosmic Scientist",
-            "Triplication",
-            "Zom-Blob",
-            "Mustache Monument",
-            "Electrician",
-            "Rocket Science",
-            "Mad Chemist",
-            "Portal Technician",
-            "Neutron Imp",
-            "Transformation Station",
-            "Wormhole Gatekeeper",
-            "Evolutionary Leap",
-            "Parasol Zombie",
-            "Duckstache",
-            "Teleport",
-            "Shieldcrusher Viking",
-            "Trickster",
-            "Interdimensional Zombie",
-            "Teleportation Zombie",
-            "Gargantuar Mime",
-            "Zombot Dinotronic Mechasaur",
-            "Leprechaun Imp",
-            "Regifting Zombie",
-            "Trick-or-Treater",
-            "Thinking Cap",
-            "Kitchen Sink Zombie",
-            "Bad Moon Rising",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Immorticia Deck`)
-            .setDescription(
-              `Here is your wheel for Immorticia
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "nt" ||
-          heroinput == "neptuna" ||
-          heroinput == "nept" ||
-          heroinput == "tuna"
-        ) {
-          const wordsArray = [
-            //Hearty
-            "Baseball Zombie",
-            "Rolling Stone",
-            "Conehead",
-            "Team Mascot",
-            "Medic",
-            "Arm Wrestler",
-            "Camel Crossing",
-            "Flag Zombie",
-            "Terrify",
-            "Trash Can Zombie",
-            "Buckethead",
-            "Ra Zombie",
-            "Cone Zone",
-            "Celestial Custodian",
-            "Screen Door Zombie",
-            "Healthy Treat",
-            "Zombie Middle Manager",
-            "Leftovers",
-            "Sumo Wrestler",
-            "Zombie Coach",
-            "Monster Mash",
-            "Knight of the Living Dead",
-            "Rodeo Gargantuar",
-            "Escape through Time",
-            "Cosmic Sports Star",
-            "Primeval Yeti",
-            "Lost Colosseum",
-            "Landscaper",
-            "Weed Spray",
-            "All-Star Zombie",
-            "Coffee Zombie",
-            "Black Hole",
-            "Genetic Experiment",
-            "Planetary Gladiator",
-            "Jurassic Fossilhead",
-            "Knockout",
-            "Turquoise Skull Zombie",
-            "Zombie King",
-            "Undying Pharaoh",
-            "Wannabe hero",
-            "Intergalactic Warlord",
-            "Zombot Battlecruiser 5000",
-            "Stompadon",
-            "Chum Champion",
-            "Zombology Teacher",
-            "Gargologist",
-            "Turkey Rider",
-            "Going Viral",
-            "Bonus Track Buckethead",
-            "Defensive End",
-            //Sneaky
-            "Imp",
-            "Mini-Ninja",
-            "Smoke Bomb",
-            "Fishy Imp",
-            "Smelly Zombie",
-            "Headstone Carver",
-            "Zombie Chicken",
-            "Hot Dog Imp",
-            "Swashbuckler Zombie",
-            "Backyard Bounce",
-            "Stealthy Imp",
-            "Firefighter",
-            "Graveyard",
-            "Ice Pirate",
-            "Frosty Mustache",
-            "Swabbie",
-            "Barrel of Barrels",
-            "Monkey Smuggler",
-            "Imp Commander",
-            "Barrel Roller Zombie",
-            "Surprise Gargantuar",
-            "Walrus Rider",
-            "Zombot Stomp",
-            "Cosmic Imp",
-            "Space Pirate",
-            "Blowgun Imp",
-            "Buried Treasure",
-            "Toxic Waste Imp",
-            "Line Dancing Zombie",
-            "Pogo Bouncer",
-            "Tomb Raiser Zombie",
-            "Ducky Tube Zombie",
-            "Dr. Spacetime",
-            "Laser Base Alpha",
-            "Cursed Gargolith",
-            "Excavator Zombie",
-            "Unthawed Viking",
-            "Mixed-Up Gravedigger",
-            "Zombot Sharktronic Sub",
-            "Zombot Plank Walker",
-            "Space Cowboy",
-            "Cryo-Yeti",
-            "Zombot Aerostatic Gondola",
-            "Raiding Raptor",
-            "Imposter",
-            "Fire Rooster",
-            "Imp-Throwing Imp",
-            "Captain Flameface",
-            "Zombie High Diver",
-            "Trapper Zombie",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`WheelNeptuna Deck`)
-            .setDescription(
-              `Here is your wheel for Neptuna
- **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "pb" ||
-          heroinput == "professor" ||
-          heroinput == "brainstorm" ||
-          heroinput == "professor brainstorm" ||
-          heroinput == "professorbrainstorm"
-        ) {
-          const wordsArray = [
-            //Crazy
-            "Backup Dancer",
-            "Bungee Plumber",
-            "Cuckoo Zombie",
-            "Disco Zombie",
-            "Flamenco Zombie",
-            "Tennis Champ",
-            "Unlife of the Party",
-            "Conga Zombie",
-            "Newspaper Zombie",
-            "Cakesplosion",
-            "Orchestra Conductor",
-            "Foot Soldier Zombie",
-            "Loose Cannon",
-            "Meteor Z",
-            "Space Ninja",
-            "Mystery Egg",
-            "Sugary Treat",
-            "Trapper Territory",
-            "Exploding Imp",
-            "Jester",
-            "Zombot's Wrath",
-            "The Chickening",
-            "Imp-Throwing Gargantuar",
-            "Final Mission",
-            "Cosmic Dancer",
-            "Gizzard Lizard",
-            "Disco Dance Floor",
-            "Aerobics Instructor",
-            "Abracadaver",
-            "Fireworks Zombie",
-            "Disco-Tron 3000",
-            "Disco-Naut",
-            "Moon Base Z",
-            "Gas Giant",
-            "Quickdraw Con Man",
-            "Grave Robber",
-            "Zombie's Best Friend",
-            "Barrel of Deadbeards",
-            "Valkyrie",
-            "Gargantuars' Feast",
-            "Quasar Wizard",
-            "Binary Stars",
-            "Tankylosaurus",
-            "Headhunter",
-            "Exploding Fruitcake",
-            "Unexpected Gifts",
-            "Stupid Cupid",
-            "Frankentuar",
-            "Gargantuar-Throwing Imp",
-            "Hippity Hop Gargantuar",
-            //Brainy
-            "Cardboard Robot Zombie",
-            "Paparazzi Zombie",
-            "Lurch for Lunch",
-            "Fun-Dead Raiser",
-            "Drum Major",
-            "Chimney Sweep",
-            "Beam Me Up",
-            "Cell Phone Zombie",
-            "Pool Shark",
-            "Zombot Drone Engineer",
-            "Brain Vendor",
-            "Mountain Climber",
-            "Cryo-Brain",
-            "Medulla Nebula",
-            "Moonwalker",
-            "Copter Commando",
-            "Mustache Waxer",
-            "Pirate's Booty",
-            "Gentleman Zombie",
-            "Kite Flyer",
-            "Gadget Scientist",
-            "Hail-a-Copter",
-            "Wizard Gargantuar",
-            "Cosmic Scientist",
-            "Triplication",
-            "Zom-Blob",
-            "Mustache Monument",
-            "Electrician",
-            "Rocket Science",
-            "Mad Chemist",
-            "Portal Technician",
-            "Neutron Imp",
-            "Transformation Station",
-            "Wormhole Gatekeeper",
-            "Evolutionary Leap",
-            "Parasol Zombie",
-            "Duckstache",
-            "Teleport",
-            "Shieldcrusher Viking",
-            "Trickster",
-            "Interdimensional Zombie",
-            "Teleportation Zombie",
-            "Gargantuar Mime",
-            "Zombot Dinotronic Mechasaur",
-            "Leprechaun Imp",
-            "Regifting Zombie",
-            "Trick-or-Treater",
-            "Thinking Cap",
-            "Kitchen Sink Zombie",
-            "Bad Moon Rising",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Professor Brainstorm Deck`)
-            .setDescription(
-              `Here is your wheel for Professor Brainstorm
- **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "rb" ||
-          heroinput == "rustbolt" ||
-          heroinput == "rust" ||
-          heroinput == "bolt" ||
-          heroinput == "rusty" ||
-          heroinput == "rust bolt"
-        ) {
-          const wordsArray = [
-            //Hearty
-            "Baseball Zombie",
-            "Rolling Stone",
-            "Conehead",
-            "Team Mascot",
-            "Medic",
-            "Arm Wrestler",
-            "Camel Crossing",
-            "Flag Zombie",
-            "Terrify",
-            "Trash Can Zombie",
-            "Buckethead",
-            "Ra Zombie",
-            "Cone Zone",
-            "Celestial Custodian",
-            "Screen Door Zombie",
-            "Healthy Treat",
-            "Zombie Middle Manager",
-            "Leftovers",
-            "Sumo Wrestler",
-            "Zombie Coach",
-            "Monster Mash",
-            "Knight of the Living Dead",
-            "Rodeo Gargantuar",
-            "Escape through Time",
-            "Cosmic Sports Star",
-            "Primeval Yeti",
-            "Lost Colosseum",
-            "Landscaper",
-            "Weed Spray",
-            "All-Star Zombie",
-            "Coffee Zombie",
-            "Black Hole",
-            "Genetic Experiment",
-            "Planetary Gladiator",
-            "Jurassic Fossilhead",
-            "Knockout",
-            "Turquoise Skull Zombie",
-            "Zombie King",
-            "Undying Pharaoh",
-            "Wannabe hero",
-            "Intergalactic Warlord",
-            "Zombot Battlecruiser 5000",
-            "Stompadon",
-            "Chum Champion",
-            "Zombology Teacher",
-            "Gargologist",
-            "Turkey Rider",
-            "Going Viral",
-            "Bonus Track Buckethead",
-            "Defensive End",
-            //Brainy
-            "Cardboard Robot Zombie",
-            "Paparazzi Zombie",
-            "Lurch for Lunch",
-            "Fun-Dead Raiser",
-            "Drum Major",
-            "Chimney Sweep",
-            "Beam Me Up",
-            "Cell Phone Zombie",
-            "Pool Shark",
-            "Zombot Drone Engineer",
-            "Brain Vendor",
-            "Mountain Climber",
-            "Cryo-Brain",
-            "Medulla Nebula",
-            "Moonwalker",
-            "Copter Commando",
-            "Mustache Waxer",
-            "Pirate's Booty",
-            "Gentleman Zombie",
-            "Kite Flyer",
-            "Gadget Scientist",
-            "Hail-a-Copter",
-            "Wizard Gargantuar",
-            "Cosmic Scientist",
-            "Triplication",
-            "Zom-Blob",
-            "Mustache Monument",
-            "Electrician",
-            "Rocket Science",
-            "Mad Chemist",
-            "Portal Technician",
-            "Neutron Imp",
-            "Transformation Station",
-            "Wormhole Gatekeeper",
-            "Evolutionary Leap",
-            "Parasol Zombie",
-            "Duckstache",
-            "Teleport",
-            "Shieldcrusher Viking",
-            "Trickster",
-            "Interdimensional Zombie",
-            "Teleportation Zombie",
-            "Gargantuar Mime",
-            "Zombot Dinotronic Mechasaur",
-            "Leprechaun Imp",
-            "Regifting Zombie",
-            "Trick-or-Treater",
-            "Thinking Cap",
-            "Kitchen Sink Zombie",
-            "Bad Moon Rising",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Rustbolt Deck`)
-            .setDescription(
-              `Here is your wheel for Rustbolt
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "sm" ||
-          heroinput == "smash" ||
-          heroinput == "smash" ||
-          heroinput == "the smash" ||
-          heroinput == "thesmash"
-        ) {
-          const wordsArray = [
-            //Hearty
-            "Baseball Zombie",
-            "Rolling Stone",
-            "Conehead",
-            "Team Mascot",
-            "Medic",
-            "Arm Wrestler",
-            "Camel Crossing",
-            "Flag Zombie",
-            "Terrify",
-            "Trash Can Zombie",
-            "Buckethead",
-            "Ra Zombie",
-            "Cone Zone",
-            "Celestial Custodian",
-            "Screen Door Zombie",
-            "Healthy Treat",
-            "Zombie Middle Manager",
-            "Leftovers",
-            "Sumo Wrestler",
-            "Zombie Coach",
-            "Monster Mash",
-            "Knight of the Living Dead",
-            "Rodeo Gargantuar",
-            "Escape through Time",
-            "Cosmic Sports Star",
-            "Primeval Yeti",
-            "Lost Colosseum",
-            "Landscaper",
-            "Weed Spray",
-            "All-Star Zombie",
-            "Coffee Zombie",
-            "Black Hole",
-            "Genetic Experiment",
-            "Planetary Gladiator",
-            "Jurassic Fossilhead",
-            "Knockout",
-            "Turquoise Skull Zombie",
-            "Zombie King",
-            "Undying Pharaoh",
-            "Wannabe hero",
-            "Intergalactic Warlord",
-            "Zombot Battlecruiser 5000",
-            "Stompadon",
-            "Chum Champion",
-            "Zombology Teacher",
-            "Gargologist",
-            "Turkey Rider",
-            "Going Viral",
-            "Bonus Track Buckethead",
-            "Defensive End",
-            //Beastly
-            "Skunk Punk",
-            "Pied Piper",
-            "Zookeeper",
-            "Dolphin Rider",
-            "Locust Swarm",
-            "Dog Walker",
-            "Nibble",
-            "Snorkel Zombie",
-            "Yeti Lunchbox",
-            "Haunting Zombie",
-            "Loudmouth",
-            "B-flat",
-            "Total Eclipse",
-            "Alien Ooze",
-            "Surfer Zombie",
-            "Haunting Ghost",
-            "Goat",
-            "Vengeful Cyborg",
-            "Squirrel Herder",
-            "Vimpire",
-            "Vitamin Z",
-            "Kangaroo Rider",
-            "Smashing Gargantuar",
-            "Biodome Botanist",
-            "Cosmic Yeti",
-            "Primordial Cheese Shover",
-            "Killer Whale",
-            "Cat Lady",
-            "Zombie Yeti",
-            "Deep Sea Gargantuar",
-            "Maniacal Laugh",
-            "Cheese Cutter",
-            "Cyborg Zombie",
-            "Area 22",
-            "Extinction Event",
-            "Ancient Vimpire",
-            "Hunting Grounds",
-            "Nurse Gargantuar",
-            "Octo Zombie",
-            "Zombot 1000",
-            "Interstellar Bounty Hunter",
-            "Supernova Gargantuar",
-            "Mondo Bronto",
-            "Gargantuar-Throwing Gargantuar",
-            "Fraidy Cat",
-            "Secret Agent",
-            "Energy Drink Zombie",
-            "Synchronized Swimmer",
-            "Hover-Goat 3000",
-            "Overstuffed Zombie",
-            "Sneezing Zombie",
-            "King of the Grill",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Smash Deck`)
-            .setDescription(
-              `Here is your wheel for Smash
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-        if (
-          heroinput == "zm" ||
-          heroinput == "zmech" ||
-          heroinput == "mech" ||
-          heroinput == "z-mech"
-        ) {
-          const wordsArray = [
-            //Hearty
-            "Baseball Zombie",
-            "Rolling Stone",
-            "Conehead",
-            "Team Mascot",
-            "Medic",
-            "Arm Wrestler",
-            "Camel Crossing",
-            "Flag Zombie",
-            "Terrify",
-            "Trash Can Zombie",
-            "Buckethead",
-            "Ra Zombie",
-            "Cone Zone",
-            "Celestial Custodian",
-            "Screen Door Zombie",
-            "Healthy Treat",
-            "Zombie Middle Manager",
-            "Leftovers",
-            "Sumo Wrestler",
-            "Zombie Coach",
-            "Monster Mash",
-            "Knight of the Living Dead",
-            "Rodeo Gargantuar",
-            "Escape through Time",
-            "Cosmic Sports Star",
-            "Primeval Yeti",
-            "Lost Colosseum",
-            "Landscaper",
-            "Weed Spray",
-            "All-Star Zombie",
-            "Coffee Zombie",
-            "Black Hole",
-            "Genetic Experiment",
-            "Planetary Gladiator",
-            "Jurassic Fossilhead",
-            "Knockout",
-            "Turquoise Skull Zombie",
-            "Zombie King",
-            "Undying Pharaoh",
-            "Wannabe Hero",
-            "Intergalactic Warlord",
-            "Zombot Battlecruiser 5000",
-            "Stompadon",
-            "Chum Champion",
-            "Zombology Teacher",
-            "Gargologist",
-            "Turkey Rider",
-            "Going Viral",
-            "Bonus Track Buckethead",
-            "Defensive End",
-            //Crazy
-            "Backup Dancer",
-            "Bungee Plumber",
-            "Cuckoo Zombie",
-            "Disco Zombie",
-            "Flamenco Zombie",
-            "Tennis Champ",
-            "Unlife of the Party",
-            "Conga Zombie",
-            "Newspaper Zombie",
-            "Cakesplosion",
-            "Orchestra Conductor",
-            "Foot Soldier Zombie",
-            "Loose Cannon",
-            "Meteor Z",
-            "Space Ninja",
-            "Mystery Egg",
-            "Sugary Treat",
-            "Trapper Territory",
-            "Exploding Imp",
-            "Jester",
-            "Zombot's Wrath",
-            "The Chickening",
-            "Imp-Throwing Gargantuar",
-            "Final Mission",
-            "Cosmic Dancer",
-            "Gizzard Lizard",
-            "Disco Dance Floor",
-            "Aerobics Instructor",
-            "Abracadaver",
-            "Fireworks Zombie",
-            "Disco-Tron 3000",
-            "Disco-Naut",
-            "Moon Base Z",
-            "Gas Giant",
-            "Quickdraw Con Man",
-            "Grave Robber",
-            "Zombie's Best Friend",
-            "Barrel of Deadbeards",
-            "Valkyrie",
-            "Gargantuars' Feast",
-            "Quasar Wizard",
-            "Binary Stars",
-            "Tankylosaurus",
-            "Headhunter",
-            "Exploding Fruitcake",
-            "Unexpected Gifts",
-            "Stupid Cupid",
-            "Frankentuar",
-            "Gargantuar-Throwing Imp",
-            "Hippity Hop Gargantuar",
-          ];
-          const randomWords = [];
-          const remainingWords = [...wordsArray];
-          for (let i = 0; i < number; i++) {
-            const randomIndex = Math.floor(
-              Math.random() * remainingWords.length
-            );
-            const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
-            randomWords.push(selectedWord);
-          }
-          const embed = new EmbedBuilder()
-            .setTitle(`Wheel Zmech Deck`)
-            .setDescription(
-              `Here is your wheel for Zmech
-         **${randomWords.join("\n")}**`
-            )
-            .setColor("Random");
-          await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
-        }
-      }
-    }
+        const heroWordsMap = {
+          // Beta Carrotina
+          betacarrotina: gurdianWords.concat(smartyWords),
+          bc: gurdianWords.concat(smartyWords),
+          beta: gurdianWords.concat(smartyWords),
+          carrotina: gurdianWords.concat(smartyWords),
+          carrot: gurdianWords.concat(smartyWords),
+          "beta carrotina": gurdianWords.concat(smartyWords),
 
-    if (interaction.type === InteractionType.MessageComponent) {
+          // Citron
+          citron: gurdianWords.concat(smartyWords),
+          ct: gurdianWords.concat(smartyWords),
+          tron: gurdianWords.concat(smartyWords),
+
+          // Captain Combustible
+          "captain combustible": kabloomWords.concat(megaGrowWords),
+          cc: kabloomWords.concat(megaGrowWords),
+          captain: kabloomWords.concat(megaGrowWords),
+          combustible: kabloomWords.concat(megaGrowWords),
+          captaincombustible: kabloomWords.concat(megaGrowWords),
+
+          // Chompzilla
+          chompzilla: kabloomWords.concat(gurdianWords),
+          cz: kabloomWords.concat(gurdianWords),
+          chomp: kabloomWords.concat(gurdianWords),
+          zilla: kabloomWords.concat(gurdianWords),
+
+          // Grass Knuckles
+          "grass knuckles": gurdianWords.concat(megaGrowWords),
+          gk: gurdianWords.concat(megaGrowWords),
+          grass: gurdianWords.concat(megaGrowWords),
+          knuckles: gurdianWords.concat(megaGrowWords),
+
+          // Green Shadow
+          "green shadow": megaGrowWords.concat(smartyWords),
+          gs: megaGrowWords.concat(smartyWords),
+          green: megaGrowWords.concat(smartyWords),
+          shadow: megaGrowWords.concat(smartyWords),
+
+          // Nightcap
+          nightcap: kabloomWords.concat(smartyWords),
+          nc: kabloomWords.concat(smartyWords),
+          cap: kabloomWords.concat(smartyWords),
+          night: kabloomWords.concat(smartyWords),
+          "night cap": kabloomWords.concat(smartyWords),
+
+          // Rose
+          rose: smartyWords.concat(solarWords),
+          ro: smartyWords.concat(solarWords),
+
+          // Solar Flare
+          "solar flare": kabloomWords.concat(solarWords),
+          sf: kabloomWords.concat(solarWords),
+          solar: kabloomWords.concat(solarWords),
+          flare: kabloomWords.concat(solarWords),
+          solarflare: kabloomWords.concat(solarWords),
+
+          // Spudow
+          spudow: kabloomWords.concat(gurdianWords),
+          sp: kabloomWords.concat(gurdianWords),
+          spud: kabloomWords.concat(gurdianWords),
+          dow: kabloomWords.concat(gurdianWords),
+
+          // Wall-Knight
+          "wall-knight": gurdianWords.concat(heartyWords),
+          wk: gurdianWords.concat(heartyWords),
+          wall: gurdianWords.concat(heartyWords),
+          knight: gurdianWords.concat(heartyWords),
+          wallknight: gurdianWords.concat(heartyWords),
+          "wall knight": gurdianWords.concat(heartyWords),
+
+          // Brain Freeze
+          "brain freeze": sneakyWords.concat(heartyWords),
+          bf: sneakyWords.concat(heartyWords),
+          brain: sneakyWords.concat(heartyWords),
+          freeze: sneakyWords.concat(heartyWords),
+          brainfreeze: sneakyWords.concat(heartyWords),
+
+          // Electric Boogaloo
+          "electric boogaloo": sneakyWords.concat(crazyWords),
+          eb: sneakyWords.concat(crazyWords),
+          electric: sneakyWords.concat(crazyWords),
+          boogaloo: sneakyWords.concat(crazyWords),
+
+          // Huge-Gigantacus
+          "huge-giganticus": beastlyWords.concat(brainyWords),
+          hg: beastlyWords.concat(brainyWords),
+          huge: beastlyWords.concat(brainyWords),
+          giganticus: beastlyWords.concat(brainyWords),
+          "huge giganticus": beastlyWords.concat(brainyWords),
+
+          // Impfinity
+          impfinity: sneakyWords.concat(brainyWords),
+          if: sneakyWords.concat(brainyWords),
+          imp: sneakyWords.concat(brainyWords),
+          finity: sneakyWords.concat(brainyWords),
+
+          // Immorticia
+          immorticia: beastlyWords.concat(solarWords),
+          im: beastlyWords.concat(solarWords),
+          immort: beastlyWords.concat(solarWords),
+          ticia: beastlyWords.concat(solarWords),
+
+          // Neptuna
+          neptuna: sneakyWords.concat(solarWords),
+          nt: sneakyWords.concat(solarWords),
+          nept: sneakyWords.concat(solarWords),
+          tuna: sneakyWords.concat(solarWords),
+
+          // Professor Brainstorm
+          "professor brainstorm": crazyWords.concat(brainyWords),
+          pb: crazyWords.concat(brainyWords),
+          professor: crazyWords.concat(brainyWords),
+          brainstorm: crazyWords.concat(brainyWords),
+
+          // Rustbolt
+          rustbolt: crazyWords.concat(heartyWords),
+          rb: crazyWords.concat(heartyWords),
+          rust: crazyWords.concat(heartyWords),
+          bolt: crazyWords.concat(heartyWords),
+          rusty: crazyWords.concat(heartyWords),
+          "rust bolt": crazyWords.concat(heartyWords),
+
+          // The Smash
+          "the smash": beastlyWords.concat(heartyWords),
+          sm: beastlyWords.concat(heartyWords),
+          smash: beastlyWords.concat(heartyWords),
+          thesmash: beastlyWords.concat(heartyWords),
+
+          // Z-Mech
+          "z-mech": heartyWords.concat(crazyWords),
+          zm: heartyWords.concat(crazyWords),
+          zmech: heartyWords.concat(crazyWords),
+          mech: heartyWords.concat(crazyWords),
+        };
+        const heroinput = hero.toLowerCase();
+        const wordsArray = heroWordsMap[heroinput];
+
+        if (!wordsArray) {
+          return interaction.followUp({
+            content: "Invalid hero name. Please try again.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+
+        // Generate random words
+        const randomWords = [];
+        const remainingWords = [...wordsArray];
+        for (let i = 0; i < number; i++) {
+          const randomIndex = Math.floor(Math.random() * remainingWords.length);
+          const selectedWord = remainingWords.splice(randomIndex, 1)[0];
+          randomWords.push(selectedWord);
+        }
+
+        // Create and send the embed
+        const embed = new EmbedBuilder()
+          .setTitle(
+            `Wheel ${
+              heroinput.charAt(0).toUpperCase() + heroinput.slice(1)
+            } Deck`
+          )
+          .setDescription(
+            `Here is your wheel deck for ${heroinput}:\n**${randomWords.join(
+              "\n"
+            )}**`
+          )
+          .setColor("Random");
+
+        await interaction.followUp({
+          embeds: [embed],
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+    } else if (interaction.type === InteractionType.MessageComponent) {
       if (interaction.customId === "bug-report") {
         const modalInput = new TextInputBuilder()
           .setCustomId("bug-report-input")
@@ -4709,7 +1985,7 @@ module.exports = {
         await interaction.showModal(modal);
       }
       //Deck Search
-      if (interaction.customId === "deck-search") {
+      else if (interaction.customId === "deck-search") {
         const modalInput = new TextInputBuilder()
           .setCustomId("deck-search-input")
           .setLabel("input search term")
@@ -4725,7 +2001,7 @@ module.exports = {
         await interaction.showModal(modal);
       }
       //Card Search
-      if (interaction.customId === "card-search") {
+      else if (interaction.customId === "card-search") {
         const modalInput = new TextInputBuilder()
           .setCustomId("card-search-input")
           .setLabel("input search term")
@@ -4741,7 +2017,7 @@ module.exports = {
         await interaction.showModal(modal);
       }
       //8 Ball
-      if (interaction.customId === "8-ball") {
+      else if (interaction.customId === "8-ball") {
         const modalInput = new TextInputBuilder()
           .setCustomId("8ball-input")
           .setLabel("input question")
@@ -4757,7 +2033,7 @@ module.exports = {
         await interaction.showModal(modal);
       }
       //Wheel
-      if (interaction.customId === "wheel-spin") {
+      else if (interaction.customId === "wheel-spin") {
         const modalInput = new TextInputBuilder()
           .setCustomId("wheel-input")
           .setLabel("input Hero")
@@ -4779,7 +2055,7 @@ module.exports = {
         await interaction.showModal(modal);
       }
       //Random Deck
-      if (interaction.customId === "random-deck") {
+      else if (interaction.customId === "random-deck") {
         const modalInput = new TextInputBuilder()
           .setCustomId("random-decks-input")
           .setLabel("input hero NA for none")
@@ -4792,8 +2068,7 @@ module.exports = {
           .setCustomId("random-decks-modal")
           .addComponents(hero);
         await interaction.showModal(modal);
-      }
-      if (interaction.customId === "suggestnew") {
+      } else if (interaction.customId === "suggestnew") {
         const deckName = new TextInputBuilder()
           .setCustomId("deckName")
           .setLabel("Deck name")
@@ -4805,11 +2080,13 @@ module.exports = {
         const deckDesc = new TextInputBuilder()
           .setCustomId("deckDesc")
           .setLabel("Deck Description")
-          .setPlaceholder(`Description:
+          .setPlaceholder(
+            `Description:
 Aliases: 
 Cost:
 Type:
-Archetype:`)
+Archetype:`
+          )
           .setStyle(TextInputStyle.Paragraph);
         const deckCred = new TextInputBuilder()
           .setCustomId("deckCred")
@@ -4841,8 +2118,7 @@ Archetype:`)
           .addComponents(dNames, dHeroes, dDescs, dCreds, dLinks);
 
         await interaction.showModal(deckSuggest);
-      }
-      if (interaction.customId === "suggestup") {
+      } else if (interaction.customId === "suggestup") {
         const upName = new TextInputBuilder()
           .setCustomId("upName")
           .setLabel("Deck name")

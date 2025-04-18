@@ -887,8 +887,8 @@ module.exports = {
     const chemo3 = new CreateButtons("cancerknight3", "healcon3");
     const healcon3 = new CreateButtons("chemotherapy3", "pts3");
     const pts3 = new CreateButtons("healcontrol3", "pop3");
-    const pop3 = new CreateButtons("popsicle3", "radio3");
-    const radio3 = new CreateButtons("pawntrickstab3", "shambc3");
+    const pop3 = new CreateButtons("pawntrickstab3", "radio3");
+    const radio3 = new CreateButtons("popsicle3", "shambc3");
     const shambc3 = new CreateButtons("radiotherapy3", "sknight3");
     const sknight3 = new CreateButtons("shamcontrolbc3", "tc3");
     const tc3 = new CreateButtons("shitknight3", "controlphelp");
@@ -1007,8 +1007,8 @@ module.exports = {
     const brb2 = new CreateButtons("budgetpb2", "bsb2");
     const bsb2 = new CreateButtons("budgetrb2", "bsm2");
     const bsm2 = new CreateButtons("budgetsb2", "bykm2");
-    const bykm2 = new CreateButtons("budgetykm2", "bzm2");
-    const bzm2 = new CreateButtons("budgetsm2", "helpzbudget");
+    const bykm2 = new CreateButtons("budgetsm2", "bzm2");
+    const bzm2 = new CreateButtons("budgetykm2", "helpzbudget");
     const compzrow = new CreateButtons("uncrackabolt2", "bust2");
     const bust2 = new CreateButtons("helpzcomp", "gburn2");
     const gburn2 = new CreateButtons("bustbolt2", "ibox2");
@@ -1050,7 +1050,7 @@ module.exports = {
     const agor2 = new CreateButtons("savage2", "bhammer2");
     const bhammer2 = new CreateButtons("antiagor2", "bas2");
     const bas2 = new CreateButtons("banhammer2", "bducks2");
-    const bducks2 = new CreateButtons("bastet2", "bif2");
+    const bducks2 = new CreateButtons("bastet2", "cog2");
     const cog2 = new CreateButtons("bonusducks2", "cbait2");
     const cbait2 = new CreateButtons("coggerazzi2", "cleap2");
     const cleap2 = new CreateButtons("congabait2", "dmech2");
@@ -1067,7 +1067,7 @@ module.exports = {
     const pfeast2 = new CreateButtons("noplayingallowed2", "pmop2");
     const pmop2 = new CreateButtons("pbfeast2", "otksw2");
     const otksw2 = new CreateButtons("petmop2", "rticia2");
-    const rticia2 = new CreateButtons("otkswabbie2", "sticia2");
+    const rticia2 = new CreateButtons("otkswabbie2", "sbandits2");
     const sbandits2 = new CreateButtons("rampticia2", "slord2");
     const slord2 = new CreateButtons("sunbandits2", "terrifyster2");
     const terrifyster2 = new CreateButtons("sunlord2", "umech2");
@@ -1177,7 +1177,7 @@ module.exports = {
     const lt3 = new CreateButtons("igmablobchum4", "ltime3");
     const ltime3 = new CreateButtons("ladytuna3", "pyeeyz4");
     const pyeeyz4 = new CreateButtons("lunchtime3", "pmop3");
-    const pmop3 = new CreateButtons(" pablosyeezys4", "nhks3");
+    const pmop3 = new CreateButtons("pablosyeezys4", "nhks3");
     const nhks3 = new CreateButtons("petmop3", "stars4");
     const stars4 = new CreateButtons("nohokaistars3", "slord4");
     const slord4 = new CreateButtons("spacestars4", "tstache4");
@@ -1807,11 +1807,11 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         freezeheal2: { embed: freezeheal, component: fheal2 },
         fheal3: { embed: freezeheal, component: fheal3 },
         freezeheal3: { embed: freezeheal, component: fheal3 },
-        frymid: { embed: frymidrose, component: fmr },
+        fmr: { embed: frymidrose, component: fmr },
         frymidrose: { embed: frymidrose, component: fmr },
-        frymid2: { embed: frymidrose, component: fmr2 },
+        fmr2: { embed: frymidrose, component: fmr2 },
         frymidrose2: { embed: frymidrose, component: fmr2 },
-        frymid3: { embed: frymidrose, component: fmr3 },
+        fmr3: { embed: frymidrose, component: fmr3 },
         frymidrose3: { embed: frymidrose, component: fmr3 },
         fflare: { embed: funnyflare, component: fflare },
         funnyflare: { embed: funnyflare, component: fflare },

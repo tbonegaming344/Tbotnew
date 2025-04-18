@@ -92,17 +92,15 @@ module.exports = {
       );
     }
     const combo = new CreateButtons("psychosolstice2", "aa");
-    const aa = new CreateButtons("combo", "aanti");
-    const aanti = new CreateButtons("antiagor", "freeze");
-    const freeze = new CreateButtons("antiantiagor", "ftimps");
+    const aa = new CreateButtons("combo", "freeze");
+    const freeze = new CreateButtons("antiagor", "ftimps");
     const ftimps = new CreateButtons("freezeheal", "mopr");
     const mopr = new CreateButtons("frozentelimps", "pmop2");
     const pmop2 = new CreateButtons("moprbius", "psy2");
     const psy2 = new CreateButtons("plantmop2", "helpcombo");
     const meme = new CreateButtons("psychosolstice", "aa2");
-    const aa2 = new CreateButtons("meme", "aaa2");
-    const aaa2 = new CreateButtons("antiagor2", "freeze2");
-    const freeze2 = new CreateButtons("antiantiagor2", "fti2");
+    const aa2 = new CreateButtons("meme", "freeze2");
+    const freeze2 = new CreateButtons("antiagor2", "fti2");
     const fti2 = new CreateButtons("freezeheal2", "mopr2");
     const mopr2 = new CreateButtons("ftimps2", "pmop");
     const pmop = new CreateButtons("mopribus2", "psy");
@@ -202,25 +200,19 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         psy: {embed: pysol, component: psy},
         combo: {embed: combobad, component: combo},
         aa: {embed: coloboy, component: aa},
-        aanti: {embed: a, component: aanti},
         freeze: {embed: freal, component: freeze},
         ftimps: {embed: fti, component: ftimps},
         ftimps2: {embed: fti, component: fti2},
-        ftimps3: {embed: fti, component: fti3},
         mopr2: {embed: mop, component: mopr2},
         pmop2: {embed: plantmop, component: pmop2},
         psy2: {embed: pysol, component: psy2},
         meme: {embed: memebad, component: meme},
         meme2: {embed: memebad, component: meme},
         aa2: {embed: coloboy, component: aa2},
-        aaa2: {embed: a, component: aaa2},
         freeze2: {embed: freal, component: freeze2},
         fti2: {embed: fti, component: fti2},
-        fti3: {embed: fti, component: fti3},
         mopr3: {embed: mop, component: mopr3},
         psy3: {embed: pysol, component: psy3},
-        con: {embed: conbad, component: control},
-        control: {embed: conbad, component: control},
         mid: {embed: midbad, component: midrange},
         midrange: {embed: midbad, component: midrange},
         mopribus: {embed: mop, component: mopr},

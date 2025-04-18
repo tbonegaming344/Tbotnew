@@ -356,8 +356,6 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         trickstache2: {embed: trickstache, component: ts2},
         ts3: {embed: trickstache, component: ts3},
         trickstache3: {embed: trickstache, component: ts3},
-        ts4: {embed: trickstache, component: ts4},
-        trickstache4: {embed: trickstache, component: ts4},
         valk: {embed: valkster, component: valk},
         valkster: {embed: valkster, component: valk},
         valk2: {embed: valkster, component: valk2},

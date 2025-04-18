@@ -327,8 +327,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         conjureleap: {embed: conjureleap, component: cl},
         cl2: {embed: conjureleap, component: cl2},
         conjureleap2: {embed: conjureleap, component: cl2},
-        cl3: {embed: conjureleap, component: cl3},
-        conjureleap3: {embed: conjureleap, component: cl3},
         ft: {embed: frozentelimps, component: ft},
         frozentelimps: {embed: frozentelimps, component: ft},
         ft2: {embed: frozentelimps, component: ft2},

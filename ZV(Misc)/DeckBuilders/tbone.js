@@ -86,10 +86,10 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildMeme = new buildDeckString(tboneDecks.memeDecks);
-    const toBuildComb = new buildDeckString(tboneDecks.comboDecks);
-    const toBuildControl = new buildDeckString(tboneDecks.controlDecks);
-    const toBuildString = new buildDeckString(tboneDecks.allDecks);
+    const toBuildMeme = buildDeckString(tboneDecks.memeDecks);
+    const toBuildComb = buildDeckString(tboneDecks.comboDecks);
+    const toBuildControl =  buildDeckString(tboneDecks.controlDecks);
+    const toBuildString = buildDeckString(tboneDecks.allDecks);
     const row = new ActionRowBuilder().addComponents(select);
     /**
      * The CreateButtons function creates a row of buttons for the embed
@@ -251,9 +251,7 @@ Note: ${user.displayName} has ${tboneDecks.controlDecks.length} Control decks in
         wp2: { embed: whalepharaoh, component: wp2 },
         whalepharaoh2: { embed: whalepharaoh, component: wp2 },
         wp3: { embed: whalepharaoh, component: wp3 },
-        whalepharaoh3: { embed: whalepharaoh, component: wp3 },
-        wp4: { embed: whalepharaoh, component: wp4 },
-        whalepharaoh4: { embed: whalepharaoh, component: wp4 },
+        whalepharaoh3: { embed: whalepharaoh, component: wp3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`fire3`, `firepea`, `flame`, `flamepea`, `fp`, `fps`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let fp = new EmbedBuilder()
+		const fp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1d/By_A.Qu%E1%BB%91c.png/revision/latest/scale-to-width-down/250?cb=20171127084525")
 		.setTitle("Fire Peashooter | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

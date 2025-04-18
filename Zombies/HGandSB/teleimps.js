@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `telimps`,
   aliases: [`teleimps`, `teleportimps`, `ti`, `hgtelimps`, `telimpshg`, `hgteleimps`, `teleimpshg`, `telimp`],
   category: `Huge-Gigantacus/SuperBrainz`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT telimps FROM hgdecks`);
-    let embed = new EmbedBuilder()
+    const [result] = await db.query(`SELECT telimps FROM hgdecks`);
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].telimps}`)
       
       .setDescription(`${result[3].telimps}`)

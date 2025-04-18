@@ -4,7 +4,7 @@ const {
     ButtonStyle,
     EmbedBuilder,
   } = require("discord.js");
-  let db = require("../../index.js")
+  const db = require("../../index.js")
   module.exports = {
     name: `lumpymilktea`,
     aliases: [
@@ -37,15 +37,14 @@ const {
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      let decks = ["translattail"];
-      let toBuildString = "";
-      for (let i = 0; i < decks.length; i++) {
-        let deck = decks[i];
-        toBuildString += `\n<@1043528908148052089> **${deck}**`;
-      }
-      let user = await client.users.fetch("733617302401974322");
-        let [result] = await db.query(`select translattail from ncdecks`)
-        let lumpy = new EmbedBuilder()
+      const decks = ["translattail"];
+       let toBuildString = "";
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+    }
+      const user = await client.users.fetch("733617302401974322");
+        const [result] = await db.query(`select translattail from ncdecks`)
+        const lumpy = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
         .setDescription(
           `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -55,8 +54,8 @@ const {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
-        .setColor("Random");
-        let translattail = new EmbedBuilder()
+        .setColor("#99838b");
+        const translattail = new EmbedBuilder()
 	.setTitle(`${result[5].translattail}`)
 	.setDescription(`${result[3].translattail}`)
 	.setFooter({text: `${result[2].translattail}`})
@@ -75,7 +74,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
 				value:`${result[1].translattail}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("#99838b")		
 		.setImage(`${result[4].translattail}`)
         const m = await message.channel.send({ embeds: [lumpy], components: [row] });
         const iFilter = (i) => i.user.id === message.author.id;
@@ -84,7 +83,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
             if (i.customId == "tl" || i.customId == "translattail") {
                 await i.update({ embeds: [translattail], components: [tl] });
             }
-            if (i.customId == "helplumpy" || i.customId == "help") {
+            else if (i.customId == "helplumpy" || i.customId == "help") {
                 await i.update({ embeds: [lumpy], components: [row] });
             }
         }); 

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cp3`, `cpea`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cp = new EmbedBuilder()
+		const cp = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bf/CosmicPeaCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226140258")
 		.setTitle("Cosmic Pea | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

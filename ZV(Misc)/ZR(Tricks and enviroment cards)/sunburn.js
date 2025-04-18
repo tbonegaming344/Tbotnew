@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`burn`, `sfsig`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/24/SunburnCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226204403")
 		.setTitle("Sunburn | <:Kabloom:1062502137826910268><:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Superpower Trick -**")

@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `healcontrol`,
 	aliases: [`otktcz`, `czotk`, `otktrickstercz`, `czotktrickster`, `apotatootk`, `apotk`],
 	category: `Chompzilla(CZ)`,
 		run: async(client, message, args) => {
-			let [result]= await db.query(`SELECT apotk from czdecks`)
-					let embed = new EmbedBuilder()
+			const [result]= await db.query(`SELECT apotk from czdecks`)
+					const embed = new EmbedBuilder()
 	.setTitle(`${result[5].apotk}`)
 	.setDescription(`${result[3].apotk}`)
 	.setFooter({text: `${result[2].apotk}`})

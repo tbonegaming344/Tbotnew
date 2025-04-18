@@ -5,8 +5,8 @@ module.exports = {
   aliases: [`peabeans`, `pbean`],
   category: `Green Shadow(GS)`,
     run: async(client, message, args)=> {
-        let [result] = await db.query(`SELECT pbeans from gsdecks`);
-        let pbeans = new EmbedBuilder()
+        const [result] = await db.query(`SELECT pbeans from gsdecks`);
+        const pbeans = new EmbedBuilder()
         .setTitle(`${result[5].pbeans}`)
         .setDescription(`${result[3].pbeans}`)
         .setColor("White")

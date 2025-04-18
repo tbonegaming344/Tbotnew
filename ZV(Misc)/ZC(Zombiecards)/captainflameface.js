@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cf`, `flame`, `flameface`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/39/CaptainFlameface.png/revision/latest/scale-to-width-down/250?cb=20170825083222")
 			.setTitle("Captain Flameface | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Mustache Pirate Zombie -**")

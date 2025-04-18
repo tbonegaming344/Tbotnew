@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`walnut`, `nut`, `wn1`, `lgcard`,`lgtyqzcard`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let nut = new EmbedBuilder()
+		const nut = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/67/HD_Wall-nut.png/revision/latest?cb=20220414061652")
 		.setTitle("Wall-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

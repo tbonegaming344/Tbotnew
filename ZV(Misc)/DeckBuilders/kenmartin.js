@@ -7,7 +7,18 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#E5AA70");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `kenmartin`,
   aliases: [
@@ -39,191 +50,46 @@ module.exports = {
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setValue("midrange")
-          .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Decks")
-          .setValue("all")
-          .setDescription('View all the decks made by Ken Martin')
+          .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
       );
     const row = new ActionRowBuilder().addComponents(select);
-    let ladderdecks = [
-      "boltbolt",
-    ]
-    const comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("yongkenmartin")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bb2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bb2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpcombo")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("yem")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const yem = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("boltbolt2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ykmartin")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const ykmartin = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("yemartin")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("combohelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let combodecks = [
-      "boltbolt",
-      "youngeggmartin",
-      "ykm",
-    ]
-    let toBuildCombo = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      toBuildCombo += `\n<@1043528908148052089> **${combodecks[i]}**`;
+    const kenMartinDecks = {
+      ladderDecks: ["boltbolt"],
+      memeDecks: ["youngeggmartin", "ykm"],
+      comboDecks: ["boltbolt", "youngeggmartin", "ykm"],
+      midrangeDecks: ["boltbolt", "ykm"],
     }
-    const memerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("youngkenmartin2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("yem2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const yem2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpmeme")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ykm2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const ykm2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("yemartin2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("memehelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let memedecks = [
-      "youngeggmartin",
-      "ykm",
-    ]
-    let toBuildMeme = "";
-    for (let i = 0; i < memedecks.length; i++) {
-      toBuildMeme += `\n<@1043528908148052089> **${memedecks[i]}**`;
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    const midrangerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("youngkenmartin3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bb3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const bb3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpmidrange")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ykm3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const ykm3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("boltbolt3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("midrangehelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let midrangedecks = [
-      "boltbolt",
-      "ykm",
-    ]
-    let toBuildMidrange = "";
-    for (let i = 0; i < midrangedecks.length; i++) {
-      toBuildMidrange += `\n<@1043528908148052089> **${midrangedecks[i]}**`;
+    const toBuildMeme = buildDeckString(kenMartinDecks.memeDecks);
+    const toBuildCombo = buildDeckString(kenMartinDecks.comboDecks);
+    const toBuildMidrange = buildDeckString(kenMartinDecks.midrangeDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("youngkenmartin4")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("bb4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const bb4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpall")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("yem3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const yem3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("boltbolt4")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ykm4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const ykm4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("yemartin3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("allhelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let decks = [
-      "boltbolt",
-      "youngeggmartin",
-      "ykm",
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
-    }
-    let [result] =
+    const comborow = new CreateButtons("youngkenmartin", "bb");
+    const bb = new CreateButtons("helpcombo", "yem");
+    const yem = new CreateButtons("boltbolt", "ykm");
+    const ykm= new CreateButtons("youngeggmartin", "combohelp");
+    const memerow = new CreateButtons("youngkenmartin2", "yem2");
+    const yem2 = new CreateButtons("helpmeme", "ykm2");
+    const ykm2 = new CreateButtons("youngeggmartin2", "memehelp");
+    const midrangerow = new CreateButtons("youngkenmartin3", "bb2");
+    const bb2 = new CreateButtons("helpmidrange", "ykm3");
+    const ykm3 = new CreateButtons("boltbolt3", "midrangehelp");
+    const [result] =
       await db.query(`select boltbolt,
 youngeggmartin, ykm 
 from rbdecks rb 
@@ -231,197 +97,110 @@ inner join pbdecks pb
 on (rb.deckinfo = pb.deckinfo)
 inner join hgdecks hg
 on (rb.deckinfo = hg.deckinfo)`);
-    let ken = new EmbedBuilder()
-      .setTitle("Ken Martin Decks")
-      .setDescription(
-        `To view the Decks Made By Ken Martin please select an option from the select menu below!
-Note: Ken Martin has ${decks.length} total decks in Tbot`
-      )
-      .setThumbnail(
+    const ken = new CreateHelpEmbed(
+      "Ken Martin Decks",
+      `To view the Decks Made By Ken Martin please select an option from the select menu below!
+Select combo to view all decks made by Ken Martin
+Note: Ken Martin has ${kenMartinDecks.ladderDecks.length} total decks in Tbot`,
         "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
+    )
+      const comboken = new CreateHelpEmbed(
+        "Combo Decks Made By Ken Martin",
+        `My combo decks made by Ken Martin are ${toBuildCombo}`,
+        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604", 
+        `To view the Combo Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
+Note: Ken Martin has ${kenMartinDecks.comboDecks.length} combo decks in Tbot`
       )
-      .setColor("Random");
-      let comboken = new EmbedBuilder()
-      .setTitle("Combo Decks Made By Ken Martin")
-      .setDescription(
-        `My combo decks made by Ken Martin are ${toBuildCombo}`
+      const midrangeken = new CreateHelpEmbed(
+        "Midrange Decks Made By Ken Martin",
+        `My midrange decks made by Ken Martin are ${toBuildMidrange}`,
+        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604",
+        `To view the Midrange Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
+Note: Ken Martin has ${kenMartinDecks.midrangeDecks.length} midrange decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Combo Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
-Note: Ken Martin has ${combodecks.length} combo decks in Tbot`,
-      })
-      .setThumbnail(
-        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
+      const memeken = new CreateHelpEmbed(
+        "Meme Decks Made By Ken Martin",
+        `My meme decks made by Ken Martin are ${toBuildMeme}`,
+        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604",
+        `To view the Meme Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
+Note: Ken Martin has ${kenMartinDecks.memeDecks.length} meme decks in Tbot`
       )
-      .setColor("Random");
-      let midrangeken = new EmbedBuilder()
-      .setTitle("Midrange Decks Made By Ken Martin")
-      .setDescription(
-        `My midrange decks made by Ken Martin are ${toBuildMidrange}`
-      )
-      .setFooter({
-        text: `To view the Midrange Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
-Note: Ken Martin has ${midrangedecks.length} midrange decks in Tbot`,
-      })
-      .setThumbnail(
-        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
-      )
-      .setColor("Random");
-      let memeken = new EmbedBuilder()
-      .setTitle("Meme Decks Made By Ken Martin")
-      .setDescription(
-        `My meme decks made by Ken Martin are ${toBuildMeme}`
-      )
-      .setFooter({
-        text: `To view the Meme Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
-Note: Ken Martin has ${memedecks.length} meme decks in Tbot`,
-      })
-      .setThumbnail(
-        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
-      )
-      .setColor("Random");
-      let allken = new EmbedBuilder()
-      .setTitle("All Decks Made By Ken Martin")
-      .setDescription(
-        `My decks made by Ken Martin are ${toBuildString}`
-      )
-      .setFooter({
-        text: `To view the Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
-Note: Ken Martin has ${decks.length} total decks in Tbot`,
-      })
-      .setThumbnail(
-        "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
-      )
-      .setColor("Random");
-    let bbolt = new EmbedBuilder()
-    .setTitle(`${result[5].boltbolt}`)
-    .setDescription(`${result[3].boltbolt}`)
-    .setFooter({ text: `${result[2].boltbolt}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].boltbolt}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].boltbolt}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].boltbolt}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].boltbolt}`);
-    //Young Egg Martin
-    let youngeggmartin = new EmbedBuilder()
-    .setTitle(`${result[5].youngeggmartin}`)
-    .setDescription(`${result[3].youngeggmartin}`)
-    .setColor("Random")
-    .setFooter({ text: `${result[2].youngeggmartin}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].youngeggmartin}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].youngeggmartin}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].youngeggmartin}`,
-      inline: true
-    })
-    .setImage(`${result[4].youngeggmartin}`);
-    let ykm = new EmbedBuilder()
-    .setTitle(`${result[5].ykm}`)
-    .setDescription(`${result[3].ykm}`)
-    .setFooter({ text: `${result[2].ykm}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].ykm}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].ykm}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].ykm}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].ykm}`);
+      function CreateDeckEmbed(result, deckName) {
+        const embed = new EmbedBuilder()
+          .setTitle(`${result[5][deckName]}`)
+          .setDescription(`${result[3][deckName]}`)
+          .setFooter({ text: `${result[2][deckName]}` })
+          .addFields(
+            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+          )
+          .setColor("#E5AA70");
+        const imageUrl = result[4][deckName];
+        if (imageUrl) {
+          embed.setImage(imageUrl);
+        }
+        return embed;
+      }
+    const boltbolt = new CreateDeckEmbed(result, "boltbolt");
+    const youngeggmartin = new CreateDeckEmbed(result, "youngeggmartin");
+    const youngkenmartin = new CreateDeckEmbed(result, "ykm");
     const m = await message.channel.send({ embeds: [ken], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
-    collector.on("collect", async (i) => {
-     if(i.customId == "select"){
+    async function handleSelectMenu(i) {
       const value = i.values[0];
       if(value == "ladder"){
         await i.reply({ embeds: [bbolt], flags: MessageFlags.Ephemeral });
       }
-      if(value == "meme"){
+      else if(value == "meme"){
         await i.update({ embeds: [memeken], components: [memerow] });
       }
-      if(value == "combo"){
+      else if(value == "combo"){
         await i.update({ embeds: [comboken], components: [comborow] });
       }
-      if(value == "midrange"){
+      else if(value == "midrange"){
         await i.update({ embeds: [midrangeken], components: [midrangerow] });
       }
-      if(value == "all"){
-        await i.update({ embeds: [allken], components: [alldecksrow] });
+    }
+    async function handleButtonInteraction(i){
+      const buttonActions = {
+        helpmeme: {embed: memeken, component: memerow},
+        memehelp: {embed: memeken, component: memerow},
+        helpcombo: {embed: comboken, component: comborow},
+        combohelp: {embed: comboken, component: comborow},
+        helpmidrange: {embed: midrangeken, component: midrangerow},
+        midrangehelp: {embed: midrangeken, component: midrangerow},
+        bb: {embed: bbolt, component: bb},
+        boltbolt: {embed: bbolt, component: bb},
+        bb2: {embed: boltbolt, component: bb2},
+        boltbolt2: {embed: boltbolt, component: bb2},
+        yem: {embed: youngeggmartin, component: yem},
+        youngeggmartin: {embed: youngeggmartin, component: yem},
+        yem2: {embed: youngeggmartin, component: yem2},
+        youngeggmartin2: {embed: youngeggmartin, component: yem2},
+        ykm: {embed: youngkenmartin, component: ykm},
+        youngkenmartin: {embed: youngkenmartin, component: ykm},
+        ykm2: {embed: youngkenmartin, component: ykm2},
+        youngkenmartin2: {embed: youngkenmartin, component: ykm2},
+        ykm3: {embed: youngkenmartin, component: ykm3},
+        youngkenmartin3: {embed: youngkenmartin, component: ykm3},
       }
+     const action = buttonActions[i.customId];
+      if(action){
+        await i.update({ embeds: [action.embed], components: [action.component] });
+      }
+      else {
+        await i.reply({content: "Invalid button interaction", flags: MessageFlags.Ephemeral});
+      }
+    }
+    const collector = m.createMessageComponentCollector({ filter: iFilter });
+    collector.on("collect", async (i) => {
+     if(i.customId == "select"){
+      await handleSelectMenu(i);
      }
-      if (i.customId == "ykmartin" || i.customId == "ykmartin") {
-        await i.update({ embeds: [ykm], components: [ykmartin] });
-      }
-      if (i.customId == "bb2" || i.customId == "boltbolt2") {
-        await i.update({ embeds: [bbolt], components: [bb2] });
-      }
-      if(i.customId == "yem" || i.customId == "yemartin"){
-        await i.update({ embeds: [youngeggmartin], components: [yem] });
-      }
-      if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboken], components: [comborow] });
-      }
-      if (i.customId == "ykm3" || i.customId == "youngkenmartin3") {
-        await i.update({ embeds: [ykm], components: [ykm3] });
-      }
-      if (i.customId == "bb3" || i.customId == "boltbolt3") {
-        await i.update({ embeds: [bbolt], components: [bb3] });
-      }
-      if (i.customId == "helpmidrange" || i.customId == "midrangehelp") {
-        await i.update({ embeds: [midrangeken], components: [midrangerow] });
-      }
-      if (i.customId == "ykm2" || i.customId == "youngkenmartin2") {
-        await i.update({ embeds: [ykm], components: [ykm2] });
-      }
-      if(i.customId == "yem2" || i.customId == "yemartin2"){
-        await i.update({ embeds: [youngeggmartin], components: [yem2] });
-      }
-      if(i.customId == "helpmeme" || i.customId == "memehelp"){
-        await i.update({ embeds: [memeken], components: [memerow] });
-      }
-      if(i.customId == "yem3" || i.customId == "yemartin3"){
-        await i.update({ embeds: [youngeggmartin], components: [yem3] });
-      }
-      if(i.customId == "allhelp" || i.customId == "allhelp"){
-        await i.update({ embeds: [allken], components: [alldecksrow] });
-      }
-      if(i.customId == "ykm4" || i.customId == "youngkenmartin4"){
-        await i.update({ embeds: [ykm], components: [ykm4] });
-      }
-      // Ladder Decks
-      if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderken], components: [ladderrow] });
-      }
-      if(i.customId == "bb" || i.customId == "boltbolt"){
-        await i.update({ embeds: [bbolt], components: [bb] });
-      }
-      if(i.customId == "bb4" || i.customId == "boltbolt4"){
-        await i.update({ embeds: [bbolt], components: [bb4] });
-      }
+     else{
+      await handleButtonInteraction(i);
+     }
     });
   },
 };

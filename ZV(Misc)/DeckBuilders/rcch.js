@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `rcch`,
   aliases: [
@@ -41,18 +41,17 @@ module.exports = {
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = [
+    const decks = [
       "healmidrose",
     ]
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
+    for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select hmr
+    const [result] = await db.query(`select hmr
 from  rodecks ro;`);
-    let user = await client.users.fetch("371765420576866304");
-    let rcch = new EmbedBuilder()
+    const user = await client.users.fetch("371765420576866304");
+    const rcch = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)
     .setDescription(
       `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -62,8 +61,8 @@ from  rodecks ro;`);
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     })
     .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let healmidrose= new EmbedBuilder()
+    .setColor("#2d8553");
+    const healmidrose= new EmbedBuilder()
     .setTitle(`${result[5].hmr}`)
     .setDescription(`${result[3].hmr}`)
     .setFooter({ text: `${result[2].hmr}` })
@@ -80,7 +79,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       value: `${result[1].hmr}`,
       inline: true
     })
-    .setColor("Random")
+    .setColor("#2d8553")
     .setImage(`${result[4].hmr}`);
     const m = await message.channel.send({ embeds: [rcch], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -89,7 +88,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       if (i.customId == "hmr" || i.customId == "healmidrose") {
         await i.update({ embeds: [healmidrose], components: [hmr] });
       }
-      if(i.customId == "helpr" || i.customId == "help") {
+      else if(i.customId == "helpr" || i.customId == "help") {
         await i.update({ embeds: [rcch], components: [row] });
       }
     });

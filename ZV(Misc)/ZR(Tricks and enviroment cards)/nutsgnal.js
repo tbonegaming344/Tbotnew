@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:HD_Wallnut:1089674209443205192>')
             );
-		let ns = new EmbedBuilder()
+		const ns = new EmbedBuilder()
 		.setThumbnail("https://images-ext-2.discordapp.net/external/LFthbRUEDsQ-dijeCQ0doJHdU-kbB2Y1KRBLkvwB_X4/%3Fcb%3D20180206061932/https/static.wikia.nocookie.net/plantsvszombies/images/e/e8/NutSignalCardImage.png/revision/latest")
 		.setTitle("Nut Signal | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Superpower Trick -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Call on Wall-Nut any time. His schedule is wide open."
 							 })
-		let nut = new EmbedBuilder()
+		const nut = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/67/HD_Wall-nut.png/revision/latest?cb=20220414061652")
 		.setTitle("Wall-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

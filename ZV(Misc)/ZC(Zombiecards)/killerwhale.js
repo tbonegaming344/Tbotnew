@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`whale`, `killer`, `Killerwhale`, `Killer`, `Whale`, `orca`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/48/KillerWhale.png/revision/latest/scale-to-width-down/250?cb=20180213104922")
 			.setTitle("Killer Whale | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Zombie  -**")

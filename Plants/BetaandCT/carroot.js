@@ -5,8 +5,8 @@ module.exports = {
     aliases: [`bctempo`, `bcroots`, `caroot`], 
     category: `Beta-Carrotina/Citron`,
     run: async (client, message, args) => {
-        let [result] = await db.query(`SELECT carroot FROM bcdecks`);
-        let carroot = new EmbedBuilder()
+        const [result] = await db.query(`SELECT carroot FROM bcdecks`);
+        const carroot = new EmbedBuilder()
             .setTitle(`${result[5].carroot}`)
             .setDescription(`${result[3].carroot}`)
             .setFooter({ text: `${result[2].carroot}` })

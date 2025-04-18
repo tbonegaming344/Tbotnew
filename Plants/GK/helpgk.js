@@ -18,7 +18,7 @@ function CreateHelpEmbed(title, description, thumbnail, footer) {
   }
   return embed;
 }
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `helpgk`,
   aliases: [
@@ -148,7 +148,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.midrangeDecks.length} midrange dec
       `To view the Grass Knuckles decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
     );
-    let [result] = await db.query(`SELECT * FROM gkdecks`);
+    const [result] = await db.query(`SELECT * FROM gkdecks`);
 
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()

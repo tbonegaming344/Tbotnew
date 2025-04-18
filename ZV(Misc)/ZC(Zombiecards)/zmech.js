@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -340,8 +340,6 @@ module.exports = {
         gargburn2: {embed: gargburn, component: gb2},
         gb3: {embed: gargburn, component: gb3},
         gargburn3: {embed: gargburn, component: gb3},
-        gb4: {embed: gargburn, component: gb4},
-        gargburn4: {embed: gargburn, component: gb4},
         tm: {embed: trickmech, component: tm},
         trickmech: {embed: trickmech, component: tm},
         tm2: {embed: trickmech, component: tm2},

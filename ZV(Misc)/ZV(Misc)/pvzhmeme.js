@@ -96,7 +96,7 @@ module.exports = {
       "https://i.redd.it/s8uyqin0g3021.jpg",
       "https://preview.redd.it/of86oifjxbq51.png?auto=webp&s=d496037987dfaab657abcdad1cf2f33523294954",
     ];
-    let embed = new EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setTitle("PVZ meme")
       .setDescription("A random pvz meme")
       .setColor("Random")

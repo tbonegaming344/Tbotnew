@@ -3,7 +3,7 @@ module.exports = {
 	name: `fertilize`,
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let fert = new EmbedBuilder()
+		const fert = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1104417231401664672/FertilizerCardImage.webp")
 		.setTitle("Fertilize | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Trick -**")

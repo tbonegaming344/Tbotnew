@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`wrath`, `zw`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4b/Zombot%27s_Wrath_HD.png/revision/latest?cb=20161012011434")
 			.setTitle("Zombot's Wrath | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Science Gargantuar Trick -**")

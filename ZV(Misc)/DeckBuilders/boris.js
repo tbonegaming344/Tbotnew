@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -92,30 +92,30 @@ module.exports = {
     const memerow = new CreateButtons("mspotk2", "lcbd3");
     const lcbd3 = new CreateButtons("helpmeme", "msp2");
     const msp2 = new CreateButtons("lifecouldbedream3", "memehelp");
-    let [result] = await db.query(`SELECT lockin, lcbd, mspotk FROM bfdecks bf
+    const [result] = await db.query(`SELECT lockin, lcbd, mspotk FROM bfdecks bf
       inner join ccdecks cc on (bf.deckinfo = cc.deckinfo)`);
-    let user = await client.users.fetch("705167235429433435");
-    let boris = new CreateHelpEmbed(
+    const user = await client.users.fetch("705167235429433435");
+    const boris = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To find out more about the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    let tempbor = new CreateHelpEmbed(
+    const tempbor = new CreateHelpEmbed(
       `${user.displayName} Tempo Decks`,
       `My tempo decks made by ${user.displayName} are ${toBuildTempo}`,
       user.displayAvatarURL(),
       `To view the tempo Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${borisDecks.tempoDecks.length} tempo decks in Tbot`
     );
-    let memebor = new CreateHelpEmbed(
+    const memebor = new CreateHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the meme Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${borisDecks.memeDecks.length} meme decks in Tbot`
     );
-    let allbor = new CreateHelpEmbed(
+    const allbor = new CreateHelpEmbed(
       `${user.displayName} All Decks`,
       `My decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
@@ -139,9 +139,9 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
       }
       return embed;
     }
-    let lockin = new CreateDeckEmbed(result, "lockin");
-    let lcbdream = new CreateDeckEmbed(result, "lcbd");
-    let mspotk = new CreateDeckEmbed(result, "mspotk");
+    const lockin = new CreateDeckEmbed(result, "lockin");
+    const lcbdream = new CreateDeckEmbed(result, "lcbd");
+    const mspotk = new CreateDeckEmbed(result, "mspotk");
     const m = await message.channel.send({
       embeds: [boris],
       components: [row],

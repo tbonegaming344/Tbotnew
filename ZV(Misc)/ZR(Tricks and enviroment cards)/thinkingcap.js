@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cap`, `thinking`, `tc`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ed/Thinking_Cap_card_face.png/revision/latest?cb=20171022084127")
 			.setTitle("Thinking Cap | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Gourmet  Trick  -**")

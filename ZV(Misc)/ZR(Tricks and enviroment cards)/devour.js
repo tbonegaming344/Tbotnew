@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chomp`, `czsig`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let cz = new EmbedBuilder()
+		const cz = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c0/DevourCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226185049")
 		.setTitle("Devour | <:MegaGrow:1062501412992458802><:Solar:1062502678384607262>")
 		.setDescription("**\\- Flytrap Superpower Trick -**")

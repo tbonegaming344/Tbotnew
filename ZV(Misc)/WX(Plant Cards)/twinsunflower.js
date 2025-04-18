@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`twin`, `twinsun`, `tsf`, `ts3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tsf = new EmbedBuilder()
+		const tsf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/4/42/Twin_Sunflower_%28PvZH%29.png/revision/latest/scale-to-width-down/250?cb=20211125200301")
 		.setTitle("Twin Sunflower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

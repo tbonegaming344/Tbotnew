@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tm`, `mascot`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e1/HD_Team-Mascot.png/revision/latest?cb=20200831094253")
 			.setTitle("Team Mascot | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Sports Imp Zombie  -**")

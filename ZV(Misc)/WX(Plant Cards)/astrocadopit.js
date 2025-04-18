@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pit`, `ap`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ap = new EmbedBuilder()
+		const ap = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c7/AstrocadoPitCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135314")
 		.setTitle("Astrocado Pit | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Seed Plant -**")

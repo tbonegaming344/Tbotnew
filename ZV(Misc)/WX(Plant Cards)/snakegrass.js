@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`snake`, `grass`, `sneec`, `sg2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sg = new EmbedBuilder()
+		const sg = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106271469719261286/SnakeGrassHD.webp")
 		.setTitle("Snake Grass | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Animal Plant -**")

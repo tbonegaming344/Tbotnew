@@ -175,7 +175,7 @@ module.exports = {
     const ftimps2 = new CreateButtons("savage2", "ff2");
     const ff2 = new CreateButtons("frozentelimps2", "gps2");
     const gps2 = new CreateButtons("funnyflare2", "hburn2");
-    const hburn2 = new CreateButtons("gravepiratestace2", "hi2");
+    const hburn2 = new CreateButtons("gravepiratestache2", "hi2");
     const hi2 = new CreateButtons("healburn2", "lrings2");
     const lrings2 = new CreateButtons("himps2", "star2");
     const star2 = new CreateButtons("laserrings2", "um2");
@@ -329,112 +329,125 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         await i.reply({ embeds: [brady], flags: MessageFlags.Ephemeral });
       }
     }
-    async function handleButtonInteraction(i) {
-      if (i.customId == "hi" || i.customId == "himps") {
-        await i.update({ embeds: [himps], components: [hi] });
-      } else if (i.customId == "hi2" || i.customId == "himps2") {
-        await i.update({ embeds: [himps], components: [hi2] });
-      } else if (i.customId == "hi3" || i.customId == "himps3") {
-        await i.update({ embeds: [himps], components: [hi3] });
-      } else if (i.customId == "hi4" || i.customId == "himps4") {
-        await i.update({ embeds: [himps], components: [hi4] });
-      } else if (i.customId == "star" || i.customId == "startron") {
-        await i.update({ embeds: [startron], components: [star] });
-      } else if (i.customId == "star2" || i.customId == "startron2") {
-        await i.update({ embeds: [startron], components: [star2] });
-      } else if (i.customId == "star3" || i.customId == "startron3") {
-        await i.update({ embeds: [startron], components: [star3] });
-      } else if (i.customId == "star4" || i.customId == "startron4") {
-        await i.update({ embeds: [startron], components: [star4] });
-      } else if (i.customId == "controlhelp" || i.customId == "helpcontrol") {
-        await i.update({ embeds: [controlxera], components: [controlrow] });
-      } else if (i.customId == "helpmeme" || i.customId == "memehelp") {
-        await i.update({ embeds: [memexera], components: [memerow] });
-      } else if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboxera], components: [comborow] });
-      } else if (i.customId == "helpmid" || i.customId == "midhelp") {
-        await i.update({ embeds: [midrangexera], components: [midrangerow] });
-      } else if (i.customId == "ws" || i.customId == "watersports") {
-        await i.update({ embeds: [watersports], components: [ws] });
-      } else if (i.customId == "ws2" || i.customId == "watersports2") {
-        await i.update({ embeds: [watersports], components: [ws2] });
-      } else if (i.customId == "ws3" || i.customId == "watersports3") {
-        await i.update({ embeds: [watersports], components: [ws3] });
-      } else if (i.customId == "ws4" || i.customId == "watersports4") {
-        await i.update({ embeds: [watersports], components: [ws4] });
-      } else if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderxera], components: [ladderrow] });
-      } else if (i.customId == "gps" || i.customId == "gravepiratestache") {
-        await i.update({ embeds: [gravepiratestache], components: [gps] });
-      } else if (i.customId == "gps2" || i.customId == "gravepiratestache2") {
-        await i.update({ embeds: [gravepiratestache], components: [gps2] });
-      } else if (i.customId == "gps3" || i.customId == "gravepiratestache3") {
-        await i.update({ embeds: [gravepiratestache], components: [gps3] });
-      } else if (i.customId == "go" || i.customId == "gomorrah") {
-        await i.update({ embeds: [gomorrah], components: [go] });
-      } else if (i.customId == "go2" || i.customId == "gomorrah2") {
-        await i.update({ embeds: [gomorrah], components: [go2] });
-      } else if (i.customId == "go3" || i.customId == "gomorrah3") {
-        await i.update({ embeds: [gomorrah], components: [go3] });
-      } else if (i.customId == "um" || i.customId == "uncrackamech") {
-        await i.update({ embeds: [uncrackamech], components: [um] });
-      } else if (i.customId == "um2" || i.customId == "uncrackamech2") {
-        await i.update({ embeds: [uncrackamech], components: [um2] });
-      } else if (i.customId == "um3" || i.customId == "uncrackmech3") {
-        await i.update({ embeds: [uncrackamech], components: [um3] });
-      } else if (i.customId == "um4" || i.customId == "uncrackamech4") {
-        await i.update({ embeds: [uncrackamech], components: [um4] });
-      } else if (i.customId == "tc" || i.customId == "toyotacontrolla") {
-        await i.update({ embeds: [toyotacontrolla], components: [tc] });
-      } else if (i.customId == "tc2" || i.customId == "toyotacontrolla2") {
-        await i.update({ embeds: [toyotacontrolla], components: [tc2] });
-      } else if (i.customId == "br" || i.customId == "brady") {
-        await i.update({ embeds: [brady], components: [br] });
-      } else if (i.customId == "br2" || i.customId == "brady2") {
-        await i.update({ embeds: [brady], components: [br2] });
-      } else if (i.customId == "lrings" || i.customId == "laserrings") {
-        await i.update({ embeds: [laserrings], components: [lrings] });
-      } else if (i.customId == "lrings2" || i.customId == "laserrings2") {
-        await i.update({ embeds: [laserrings], components: [lrings2] });
-      } else if (i.customId == "lrings3" || i.customId == "laserrings3") {
-        await i.update({ embeds: [laserrings], components: [lrings3] });
-      } else if (i.customId == "lrings4" || i.customId == "laserrings4") {
-        await i.update({ embeds: [laserrings], components: [lrings4] });
-      } else if (i.customId == "helpall" || i.customId == "allhelp") {
-        await i.update({ embeds: [allxera], components: [alldecksrow] });
-      } else if (i.customId == "sav" || i.customId == "savage") {
-        await i.update({ embeds: [savage22], components: [sav] });
-      } else if (i.customId == "sav2" || i.customId == "savage2") {
-        await i.update({ embeds: [savage22], components: [sav2] });
-      } else if (i.customId == "sav3" || i.customId == "savage3") {
-        await i.update({ embeds: [savage22], components: [sav3] });
-      } else if (i.customId == "sav4" || i.customId == "savage4") {
-        await i.update({ embeds: [savage22], components: [sav4] });
-      } else if (i.customId == "ff" || i.customId == "funnyflare") {
-        await i.update({ embeds: [funnyflare], components: [ff] });
-      } else if (i.customId == "ff2" || i.customId == "funnyflare2") {
-        await i.update({ embeds: [funnyflare], components: [ff2] });
-      } else if (i.customId == "ff3" || i.customId == "funnyflare3") {
-        await i.update({ embeds: [funnyflare], components: [ff3] });
-      } else if (i.customId == "ff4" || i.customId == "funnyflare4") {
-        await i.update({ embeds: [funnyflare], components: [ff4] });
-      } else if (i.customId == "ftimps" || i.customId == "frozentelimps") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps] });
-      } else if (i.customId == "ftimps2" || i.customId == "frozentelimps2") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps2] });
-      } else if (i.customId == "ftimps3" || i.customId == "frozentelimps3") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps3] });
-      } else if (i.customId == "ftimps4" || i.customId == "frozentelimps4") {
-        await i.update({ embeds: [frozentelimps], components: [ftimps4] });
-      } else if (i.customId == "hburn" || i.customId == "healburn") {
-        await i.update({ embeds: [healburn], components: [hburn] });
-      } else if (i.customId == "hburn2" || i.customId == "healburn2") {
-        await i.update({ embeds: [healburn], components: [hburn2] });
-      } else if (i.customId == "hburn3" || i.customId == "healburn3") {
-        await i.update({ embeds: [healburn], components: [hburn3] });
-      } else if (i.customId == "hburn4" || i.customId == "healburn4") {
-        await i.update({ embeds: [healburn], components: [hburn4] });
-      }
+      async function handleButtonInteraction(i) {
+        const buttonActions = {
+          ladderhelp: { embed: ladderxera, component: ladderrow },
+          helpladder: { embed: ladderxera, component: ladderrow },
+          hi: { embed: himps, component: hi },
+          himps: { embed: himps, component: hi },
+          hi2: { embed: himps, component: hi2 },
+          himps2: { embed: himps, component: hi2 },
+          hi3: { embed: himps, component: hi3 },
+          himps3: { embed: himps, component: hi3 },
+          hi4: { embed: himps, component: hi4 },
+          himps4: { embed: himps, component: hi4 },
+          star: { embed: startron, component: star },
+          startron: { embed: startron, component: star },
+          star2: { embed: startron, component: star2 },
+          startron2: { embed: startron, component: star2 },
+          star3: { embed: startron, component: star3 },
+          startron3: { embed: startron, component: star3 },
+          star4: { embed: startron, component: star4 },
+          startron4: { embed: startron, component: star4 },
+          controlhelp: { embed: controlxera, component: controlrow },
+          helpcontrol: { embed: controlxera, component: controlrow },
+          helpmeme: { embed: memexera, component: memerow },
+          memehelp: { embed: memexera, component: memerow },
+          helpcombo: { embed: comboxera, component: comborow },
+          combohelp: { embed: comboxera, component: comborow },
+          helpmid: { embed: midrangexera, component: midrangerow },
+          midhelp: { embed: midrangexera, component: midrangerow },
+          ws: { embed: watersports, component: ws },
+          watersports: { embed: watersports, component: ws },
+          ws2: { embed: watersports, component: ws2 },
+          watersports2: { embed: watersports, component: ws2 },
+          ws3: { embed: watersports, component: ws3 },
+          watersports3: { embed: watersports, component: ws3 },
+          ws4: { embed: watersports, component: ws4 },
+          watersports4: { embed: watersports, component: ws4 },
+          gps: { embed: gravepiratestache, component: gps },
+          gravepiratestache: { embed: gravepiratestache, component: gps },
+          gps2: { embed: gravepiratestache, component: gps2 },
+          gravepiratestache2: { embed: gravepiratestache, component: gps2 },
+          gps3: { embed: gravepiratestache, component: gps3 },
+          gravepiratestache3: { embed: gravepiratestache, component: gps3 },
+          go: { embed: gomorrah, component: go },
+          gomorrah: { embed: gomorrah, component: go },
+          go2: { embed: gomorrah, component: go2 },
+          gomorrah2: { embed: gomorrah, component: go2 },
+          go3: { embed: gomorrah, component: go3 },
+          gomorrah3: { embed: gomorrah, component: go3 },
+          um: { embed: uncrackamech, component: um },
+          uncrackamech: { embed: uncrackamech, component: um },
+          um2: { embed: uncrackamech, component: um2 },
+          uncrackamech2: { embed: uncrackamech, component: um2 },
+          um3: { embed: uncrackamech, component: um3 },
+          uncrackmech3: { embed: uncrackamech, component: um3 },
+          um4: { embed: uncrackamech, component: um4 },
+          uncrackamech4: { embed: uncrackamech, component: um4 },
+          tc: { embed: toyotacontrolla, component: tc },
+          toyotacontrolla: { embed: toyotacontrolla, component: tc },
+          tc2: { embed: toyotacontrolla, component: tc2 },
+          toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
+          br: { embed: brady, component: br },
+          brady: { embed: brady, component: br },
+          br2: { embed: brady, component: br2 },
+          brady2: { embed: brady, component: br2 },
+          lrings: { embed: laserrings, component: lrings },
+          laserrings: { embed: laserrings, component: lrings },
+          lrings2: { embed: laserrings, component: lrings2 },
+          laserrings2: { embed: laserrings, component: lrings2 },
+          lrings3: { embed: laserrings, component: lrings3 },
+          laserrings3: { embed: laserrings, component: lrings3 },
+          lrings4: { embed: laserrings, component: lrings4 },
+          laserrings4: { embed: laserrings, component: lrings4 },
+          helpall: { embed: allxera, component: alldecksrow },
+          allhelp: { embed: allxera, component: alldecksrow },
+          sav: { embed: savage22, component: sav },
+          savage: { embed: savage22, component: sav },
+          sav2: { embed: savage22, component: sav2 },
+          savage2: { embed: savage22, component: sav2 },
+          sav3: { embed: savage22, component: sav3 },
+          savage3: { embed: savage22, component: sav3 },
+          sav4: { embed: savage22, component: sav4 },
+          savage4: { embed: savage22, component: sav4 },
+          ff: { embed: funnyflare, component: ff },
+          funnyflare: { embed: funnyflare, component: ff },
+          ff2: { embed: funnyflare, component: ff2 },
+          funnyflare2: { embed: funnyflare, component: ff2 },
+          ff3: { embed: funnyflare, component: ff3 },
+          funnyflare3: { embed: funnyflare, component: ff3 },
+          ff4: { embed: funnyflare, component: ff4 },
+          funnyflare4: { embed: funnyflare, component: ff4 },
+          ftimps: { embed: frozentelimps, component: ftimps },
+          frozentelimps: { embed: frozentelimps, component: ftimps },
+          ftimps2: { embed: frozentelimps, component: ftimps2 },
+          frozentelimps2: { embed: frozentelimps, component: ftimps2 },
+          ftimps3: { embed: frozentelimps, component: ftimps3 },
+          frozentelimps3: { embed: frozentelimps, component: ftimps3 },
+          ftimps4: { embed: frozentelimps, component: ftimps4 },
+          frozentelimps4: { embed: frozentelimps, component: ftimps4 },
+          hburn: { embed: healburn, component: hburn },
+          healburn: { embed: healburn, component: hburn },
+          hburn2: { embed: healburn, component: hburn2 },
+          healburn2: { embed: healburn, component: hburn2 },
+          hburn3: { embed: healburn, component: hburn3 },
+          healburn3: { embed: healburn, component: hburn3 },
+          hburn4: { embed: healburn, component: hburn4 },
+          healburn4: { embed: healburn, component: hburn4 },
+
+        };
+      
+        const action = buttonActions[i.customId];
+        if (action) {
+          await i.update({ embeds: [action.embed], components: [action.component] });
+        }
+        else{
+          await i.reply({
+            content: "Invalid button interaction.",
+            flags: MessageFlags.Ephemeral
+          });
+        }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {

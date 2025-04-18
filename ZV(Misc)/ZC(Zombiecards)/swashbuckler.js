@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`swash`, `buckler`, `swashbuckler`, `main`, `mainpirate`, `sz3`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/23/SwashbucklerZombieCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227162819")
 			.setTitle("Swashbuckler Zombie | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pirate Zombie  -**")

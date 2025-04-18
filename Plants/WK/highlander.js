@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `highlander`,
 	aliases: [`wkhighlander`, `highlanderwk`, `13-0`],
 	category: `Wall Knight(WK)`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT highlander from wkdecks`);
-		let hl = new EmbedBuilder()
+		const [result] = await db.query(`SELECT highlander from wkdecks`);
+		const hl = new EmbedBuilder()
 		.setTitle(`${result[5].highlander}`)
 		.setDescription(`${result[3].highlander}`)
 		.setColor("Yellow")

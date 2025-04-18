@@ -14,7 +14,7 @@ module.exports = {
   ],
   category: `Plant Cards`,
   run: async (client, message, args) => {
-    let vrh = new EmbedBuilder()
+    const vrh = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/3/37/Veloci-Radish_card_face.png/revision/latest?cb=20170717214410"
       )

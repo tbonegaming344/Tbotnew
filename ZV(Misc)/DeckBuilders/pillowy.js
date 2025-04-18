@@ -7,7 +7,7 @@ const {
     StringSelectMenuOptionBuilder,
     MessageFlags
   } = require("discord.js");
-  let db = require("../../index.js");
+  const db = require("../../index.js");
   function CreateHelpEmbed(title, description, thumbnail, footer) {
     const embed = new EmbedBuilder()
       .setTitle(title)
@@ -106,37 +106,37 @@ const {
       const ab = new CreateButtons("helpall", "hburn4");
       const hburn4 = new CreateButtons("abeans", "srings4");
       const srings4 = new CreateButtons("healburn4", "allhelp");
-          let [result] = await db.query(`SELECT abeans, healburn, sovietonion FROM gsdecks gs
+          const [result] = await db.query(`SELECT abeans, healburn, sovietonion FROM gsdecks gs
             inner join sfdecks sf on (gs.deckinfo = sf.deckinfo)`)
-          let user = await client.users.fetch("1157720864679272549");
-          let pillowy = new CreateHelpEmbed(
+          const user = await client.users.fetch("1157720864679272549");
+          const pillowy = new CreateHelpEmbed(
             `${user.displayName} Decks`,
             `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`,
             user.displayAvatarURL()
           )
-          let memeEmbed = new CreateHelpEmbed(
+          const memeEmbed = new CreateHelpEmbed(
             `${user.displayName} Meme Decks`,
             `My meme decks created by ${user.displayName} are ${toBuildMemeString}`,
             user.displayAvatarURL(), 
             `To view the meme decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: ${user.displayName} has ${pillowyDecks.memeDecks.length} total meme decks in Tbot`
           )
-          let comboEmbed = new CreateHelpEmbed(
+          const comboEmbed = new CreateHelpEmbed(
             `${user.displayName} Combo Decks`,
             `My combo decks created by ${user.displayName} are ${toBuildComboString}`,
             user.displayAvatarURL(),
             `To view the combo decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: ${user.displayName} has ${pillowyDecks.comboDecks.length} total combo decks in Tbot`
           )
-          let midrangeEmbed = new CreateHelpEmbed(
+          const midrangeEmbed = new CreateHelpEmbed(
             `${user.displayName} Midrange Decks`,
             `My midrange decks created by ${user.displayName} are ${toBuildMidrangeString}`,
             user.displayAvatarURL(),
             `To view the midrange decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrange decks in Tbot`
           )
-          let allDecksEmbed = new CreateHelpEmbed(
+          const allDecksEmbed = new CreateHelpEmbed(
             `${user.displayName} Decks`,
             `My decks created by ${user.displayName} are ${toBuildString}`,
             user.displayAvatarURL(),
@@ -160,9 +160,9 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
             }
             return embed;
           }
-            let abeans = new CreateDeckEmbed(result, "abeans")
-            let healburn = new CreateDeckEmbed(result, "healburn")
-            let starrings = new CreateDeckEmbed(result, "sovietonion")
+            const abeans = new CreateDeckEmbed(result, "abeans")
+            const healburn = new CreateDeckEmbed(result, "healburn")
+            const starrings = new CreateDeckEmbed(result, "sovietonion")
           const m = await message.channel.send({ embeds: [pillowy], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
           async function handleSelectMenu(i){

@@ -39,12 +39,12 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["popsicle"];
-    let toBuildString = decks
+    const decks = ["popsicle"];
+    const toBuildString = decks
       .map((deck) => `\n<@1043528908148052089> **${deck}**`)
       .join("");
-    let [result] = await db.query(`select popsicle from spdecks`);
-    let user = await client.users.fetch("1060179032852930560");
+    const [result] = await db.query(`select popsicle from spdecks`);
+    const user = await client.users.fetch("1060179032852930560");
     const wreko = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
@@ -55,12 +55,12 @@ module.exports = {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
+      .setColor("#000000");
     const popsicle = new EmbedBuilder()
       .setTitle(`${result[5].popsicle}`)
       .setDescription(`${result[3].popsicle}`)
       .setFooter({ text: `${result[2].popsicle}` })
-      .setColor("Random")
+      .setColor("#000000")
       .setImage(`${result[4].popsicle}`)
       .addFields(
         {
@@ -89,7 +89,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       if (i.customId == "pop" || i.customId == "popsicle") {
         await i.update({ embeds: [popsicle], components: [pop] });
       }
-      if (i.customId == "help" || i.customId == "helpwreko") {
+      else if (i.customId == "help" || i.customId == "helpwreko") {
         await i.update({ embeds: [wreko], components: [row] });
       }
     });

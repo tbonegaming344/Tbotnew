@@ -1,12 +1,12 @@
-let {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const {EmbedBuilder} = require("discord.js");
+const db = require("../../index.js")
 module.exports = {
   name: `uncrackabolt`,
   aliases: [ `invincibolt`, `gladcontrol`],   
   category: `Rustbolt(RB)`, 
   run: async(client, message, args)=> {
-    let [result]= await db.query(`select uncrackabolt from rbdecks`)
-    let uncrackabolt = new EmbedBuilder()
+    const [result]= await db.query(`select uncrackabolt from rbdecks`)
+    const uncrackabolt = new EmbedBuilder()
     .setTitle(`${result[5].uncrackabolt}`)
     .setDescription(`${result[3].uncrackabolt}`)
     .addFields(

@@ -1,12 +1,12 @@
-let {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const {EmbedBuilder} = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
     name: `zmoss`,
     aliases: [`stompamech`, `zmechofsomesize`, `nonbinary`],
     category: `Zmech(ZM)`,
     run: async(client, message, args) => {
-        let [result] = await db.query(`SELECT zmoss FROM zmdecks`);
-        let zmoss = new EmbedBuilder()
+        const [result] = await db.query(`SELECT zmoss FROM zmdecks`);
+        const zmoss = new EmbedBuilder()
         .setTitle(`${result[5].zmoss}`)
         .setDescription(`${result[3].zmoss}`)
         .setColor("Purple")

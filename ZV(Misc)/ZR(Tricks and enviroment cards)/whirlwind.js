@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`whirl`, `wind`, `blow1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ww = new EmbedBuilder()
+		const ww = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107674795442708500/WhirlwindCardImage.webp")
 		.setTitle("Whirlwind | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Superpower Trick -**")

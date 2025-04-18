@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`zk`, `king`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
       .setThumbnail("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/11c1d4dc-5483-433e-a5e6-d51a36c6ca1d/dexgont-0945222a-48a0-4834-ad4d-981b95ac5a6c.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzExYzFkNGRjLTU0ODMtNDMzZS1hNWU2LWQ1MWEzNmM2Y2ExZFwvZGV4Z29udC0wOTQ1MjIyYS00OGEwLTQ4MzQtYWQ0ZC05ODFiOTVhYzVhNmMuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.B0PdE8Xcy7XP5dlMN1qp6wtg3OeM0UixdbfLbkXdAuw")
 			.setTitle("Zombie King | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Mustache History Zombie   -**")

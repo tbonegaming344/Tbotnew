@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `budgetswarmsf`,
   aliases: [
@@ -17,8 +17,8 @@ module.exports = {
   ],
   category: `Solar Flare(SF)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT budgetswarmsf from sfdecks`);
-    let budgetswarm = new EmbedBuilder()
+    const [result] = await db.query(`SELECT budgetswarmsf from sfdecks`);
+    const budgetswarm = new EmbedBuilder()
       .setTitle(`${result[5].budgetswarmsf}`)
       .setDescription(`${result[3].budgetswarmsf}`)
       .setFooter({ text: `${result[2].budgetswarmsf}` })

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`laser`, `lasercat`, `lc3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let lc = new EmbedBuilder()
+		const lc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b9/LaserCattailCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226142031")
 		.setTitle("Laser Cattail | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Animal Plant -**")

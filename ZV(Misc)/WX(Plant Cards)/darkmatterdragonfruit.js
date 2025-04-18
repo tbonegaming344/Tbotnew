@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`dmd`, `darkmattter`, `dragonfruit`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let dmd = new EmbedBuilder()
+		const dmd = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/12/Deep_Space_Dragonfruit_HD.png/revision/latest?cb=20170225055135")
 		.setTitle("Dark Matter Dragonfruit | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Dragon Fruit Plant -**")

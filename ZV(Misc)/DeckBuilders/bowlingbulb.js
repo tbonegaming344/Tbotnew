@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -97,35 +97,35 @@ module.exports = {
     const bfmg2 = new CreateButtons("helpmid", "bfw3");
     const bfw3 = new CreateButtons("bfmidgargs2", "g3n3");
     const g3n3 = new CreateButtons("binaryflagwar3", "midhelp");
-    let [result] = await db.query(`select bfmidgargs, binaryflagwar, going3nuts 
+    const [result] = await db.query(`select bfmidgargs, binaryflagwar, going3nuts 
 		from zmdecks zm
 		inner join ctdecks ct
 		on (zm.deckinfo = ct.deckinfo)
     inner join bfdecks bf
 		on (zm.deckinfo = bf.deckinfo)`);
-    let user = await client.users.fetch("1051916947253629030");
-    let bowlingbulbenjoyer = new CreateHelpEmbed(
+    const user = await client.users.fetch("1051916947253629030");
+    const bowlingbulbenjoyer = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks made by ${user.displayName} please select an option from the select menu below!
 Select either ladder or midrange decks to view all of ${user.displayName} decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    let ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = new CreateHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My Ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
       user.displayAvatarURL(),
       `To view the Ladder Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Ladder decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} Ladder decks in Tbot`
     );
-    let comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = new CreateHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo decks made by ${user.displayName} are ${toBuildComboString}`,
       user.displayAvatarURL(),
       `To view the Combo Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Combo decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.comboDecks.length} Combo decks in Tbot`
     );
-    let midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = new CreateHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My Midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
       user.displayAvatarURL(),
@@ -149,9 +149,9 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
       }
       return embed;
     }
-    let bfmidgargs = new CreateDeckEmbed(result, "bfmidgargs");
-    let binaryflagwar = new CreateDeckEmbed(result, "binaryflagwar");
-    let going3nuts = new CreateDeckEmbed(result, "going3nuts");
+    const bfmidgargs = new CreateDeckEmbed(result, "bfmidgargs");
+    const binaryflagwar = new CreateDeckEmbed(result, "binaryflagwar");
+    const going3nuts = new CreateDeckEmbed(result, "going3nuts");
     const m = await message.channel.send({
       embeds: [bowlingbulbenjoyer],
       components: [row],

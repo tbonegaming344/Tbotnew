@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`coffee1`, `cg1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let cg = new EmbedBuilder()
+		const cg = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6c/CoffeeGroundsCardImage.png/revision/latest/scale-to-width-down/250?cb=20170923033112")
 		.setTitle("Coffee Grounds | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Bean Environment -**")

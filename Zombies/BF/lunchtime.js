@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `lunchtime`,
 	aliases: [`petsmid`, `mid-pets`, `pets-mid`, `midpets`],
 		category: `Brain Freeze(BF)`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT midpets FROM bfdecks`)
-		let mp = new EmbedBuilder()
+		const [result] = await db.query(`SELECT midpets FROM bfdecks`)
+		const mp = new EmbedBuilder()
 		.setTitle(`${result[5].midpets}`)
 		.setDescription(`${result[3].midpets}`)
 		.setColor("Blue")

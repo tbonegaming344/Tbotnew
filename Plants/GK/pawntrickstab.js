@@ -5,8 +5,8 @@ module.exports = {
     aliases: [`ptstab`, `ptstab`, `ptstab`, `ptstab`, `pawn`],
     category: `Grass Knuckles(GK)`,
     run: async (client, message, args) => {
-        let [result] = await db.query(`SELECT pawntrickstab from gkdecks`);
-        let pawntrickstab= new EmbedBuilder()
+        const [result] = await db.query(`SELECT pawntrickstab from gkdecks`);
+        const pawntrickstab= new EmbedBuilder()
           .setTitle(`${result[5].pawntrickstab}`)
           .setDescription(`${result[3].pawntrickstab}`)
           .setFooter({ text: `${result[2].pawntrickstab}` })

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bsplit`, `bs3`, `split2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let half = new ActionRowBuilder()
+		const half = new ActionRowBuilder()
 		.addComponents(
 			new ButtonBuilder()
 			.setCustomId("hb")
@@ -13,7 +13,7 @@ module.exports = {
 			.setEmoji("<:Half_Banana:1105118939631059055>")
 		)
 		
-		let bs = new EmbedBuilder()
+		const bs = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/16/Banana_Split_HD.png/revision/latest?cb=20170225005900")
 		.setTitle("Banana Split | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Fruit Plant -**")
@@ -33,7 +33,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: `"I don't want to brag, hanging out in a tub full of ice cream all day... not a bad gig if you can get it."`
 							 })
-		let hb = new EmbedBuilder()
+		const hb = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/30/Half-Banana_card_face.png/revision/latest?cb=20171015065628")
 		.setTitle("Half-Banana | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Fruit Plant -**")

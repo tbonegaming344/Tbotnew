@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pepper`, `pmd`],
 	category: `Plant Cards`, 
 	run: async(client, message, args)=> {
-		let pmd = new EmbedBuilder()
+		const pmd = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9c/HD_Pepper_M.D..png/revision/latest?cb=20160502034855")
 		.setTitle("Pepper M.D. | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Fruit Plant -**")

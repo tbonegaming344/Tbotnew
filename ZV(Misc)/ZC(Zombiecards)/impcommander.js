@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ic3`, `commander`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://o.remove.bg/downloads/92ab4239-1f3d-43c4-a51c-fc4cbfcdca69/imp_commander_pvz_heroes_custom_image_by_allstarzombie55_df7xeig-pre-removebg-preview.png")
 			.setTitle("Imp Commander | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pirate Imp Zombie -**")

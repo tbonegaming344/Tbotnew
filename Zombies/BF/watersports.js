@@ -5,8 +5,8 @@ module.exports= {
     aliases: [`omorashi`, `bffreeze`, `freezebf`],
     category: `Brain Freeze(BF)`,
 	run: async(client, message, args)=> {
-		let [result] =	await db.query("select watersports from bfdecks")
-		let ws = new EmbedBuilder()
+		const [result] =	await db.query("select watersports from bfdecks")
+		const ws = new EmbedBuilder()
 		.setTitle(`${result[5].watersports}`)
 		.setDescription(`${result[3].watersports}`)
 		.setColor("Blue")

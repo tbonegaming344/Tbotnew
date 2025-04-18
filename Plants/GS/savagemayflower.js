@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `savagemayflower`,
 	aliases: [`savagemay`, `savageflower`, `mayflowersavage`, `smf`],
 	category: `Green Shadow(GS)`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT savagemayflower from gsdecks`);
-		let smf = new EmbedBuilder()
+		const [result] = await db.query(`SELECT savagemayflower from gsdecks`);
+		const smf = new EmbedBuilder()
 		.setTitle(`${result[5].savagemayflower}`)
 		.setDescription(`${result[3].savagemayflower}`)
 		.setColor("White")

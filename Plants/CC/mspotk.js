@@ -5,8 +5,8 @@ module.exports = {
     aliases:[`pOdTK`, `borotk`, `bortk`, `mossspinachpodotk`],
     category: `Captain Combustible(CC)`,
     run: async(client, message, args)=> {
-        let [result] = await db.query("select mspotk from ccdecks")
-        let mspotk = new EmbedBuilder()
+        const [result] = await db.query("select mspotk from ccdecks")
+        const mspotk = new EmbedBuilder()
         .setTitle(`${result[5].mspotk}`)
         .setDescription(`${result[3].mspotk}`)
       .setColor("Green")

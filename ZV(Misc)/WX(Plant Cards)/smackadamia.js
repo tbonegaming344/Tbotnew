@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`smack`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let smack = new EmbedBuilder()
+		const smack = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/79/HD_Smackadamia.png/revision/latest?cb=20160429142535")
 		.setTitle("Smackadamia | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

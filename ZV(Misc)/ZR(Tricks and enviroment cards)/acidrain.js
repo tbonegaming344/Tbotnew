@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`acid`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://media.contentapi.ea.com/content/dam/eacom/en-us/migrated-images/2016/10/powers-acidrain.png.adapt.crop16x9.png")
 			.setTitle("Acid Rain | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Superpower Trick  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`blooming`, `heart`, `bh1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let bh = new EmbedBuilder()
+		const bh = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/47/Blooming_Heart.png/revision/latest?cb=20190502193328")
 		.setTitle("Blooming Heart | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Flower Plant -**")

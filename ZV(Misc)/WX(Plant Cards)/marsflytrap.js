@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mars`, `flytrap1`, `mf`, `mft`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let mf = new EmbedBuilder()
+		const mf = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/38/MarsFlytrapCardIMage.png/revision/latest/scale-to-width-down/250?cb=20170226142427")
 		.setTitle("Mars Flytrap | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flytrap Plant -**")

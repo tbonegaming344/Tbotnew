@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`nerf`, `shrink`, `ray`, `rbsig`, `sr`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a2/ShrinkRayCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225221222")
 			.setTitle("Shrink Ray | <:Brainy:1062500939908530246><:Hearty:1062501636557242429>")
 			.setDescription("**\\- Science Superpower Trick -**")

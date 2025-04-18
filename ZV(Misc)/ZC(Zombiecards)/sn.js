@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sneezing`, `sneze`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1125478796846452850/sneeze.webp?width=657&height=588")
 			.setTitle("Sneezing Zombie | <:Beastly:1062500894744264714>")
 					.setDescription("**\\- Party Zombie -**")

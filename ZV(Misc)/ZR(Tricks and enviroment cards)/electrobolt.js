@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bolt`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f3/Electrobolt_%28Card%29.png/revision/latest/scale-to-width-down/250?cb=20161026140531")
 			.setTitle("Electrobolt | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Superpower Trick  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`storm`, `front`, `sf1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let sf = new EmbedBuilder()
+		const sf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1c/StormFrontCardImage.png/revision/latest/scale-to-width-down/250?cb=20180208073759")
 		.setTitle("Storm Front | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Superpower Trick -**")

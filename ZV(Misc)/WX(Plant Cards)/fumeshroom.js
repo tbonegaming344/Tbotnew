@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`fume`, `fs`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let fs = new EmbedBuilder()
+		const fs = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107357801153568931/HD_Fume-Shroom.webp")
 		.setTitle("Fume-Shroom | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Mushroom Plant -**")

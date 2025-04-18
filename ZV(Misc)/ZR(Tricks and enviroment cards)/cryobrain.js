@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cb`],
 	category: `Tricks Phase`, 
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8a/CryoBrainCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226140501")
+			const embed = new EmbedBuilder()			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8a/CryoBrainCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226140501")
 			.setTitle("Cryo-Brain | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Gourmet Science Trick  -**")
 			.addFields({name: "Stats", 

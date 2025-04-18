@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`scorch`, `scorched`, `se`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let se = new EmbedBuilder()
+		const se = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b3/ScorchedEarthCardIcon.png/revision/latest/scale-to-width-down/250?cb=20170225102630")
 		.setTitle("Scorched Earth | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Superpower Trick -**")

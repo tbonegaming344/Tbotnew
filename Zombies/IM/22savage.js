@@ -5,8 +5,8 @@ module.exports = {
   aliases: [`savage22`, `frenzyrange`, `imavimp`],
   category: `Immorticia(IM)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT savage22 FROM imdecks`);
-    let savage22 = new EmbedBuilder()
+    const [result] = await db.query(`SELECT savage22 FROM imdecks`);
+    const savage22 = new EmbedBuilder()
       .setTitle(`${result[5].savage22}`)
       .setDescription(`${result[3].savage22}`)
       .setFooter({ text: `${result[2].savage22}` })

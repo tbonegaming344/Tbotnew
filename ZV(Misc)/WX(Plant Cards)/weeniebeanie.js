@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`weenie`, `beanie`, `wb2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let wb= new EmbedBuilder()
+		const wb= new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6f/HD_Weenie_Beanie.png/revision/latest?cb=20160606171414")
 		.setTitle("Weenie Beanie | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Plant -**")

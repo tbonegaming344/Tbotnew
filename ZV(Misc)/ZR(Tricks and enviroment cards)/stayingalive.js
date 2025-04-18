@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`stayingalive`, `ebbolt`, `ebsig`, `sa1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b7/StayinAliveCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225223626")
 			.setTitle("Stayin' Alive | <:Beastly:1062500894744264714><:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Superpower Trick  -**")

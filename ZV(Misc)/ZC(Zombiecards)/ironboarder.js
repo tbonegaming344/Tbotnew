@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`guy`, `iron`, `boarder`, `ib`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8e/Nakedgoldboi.png/revision/latest?cb=20170820043928")
 			.setTitle("Iron Boarder | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Sports Imp Superpower Zombie -**")

@@ -12,7 +12,7 @@ module.exports = {
 			.setStyle(ButtonStyle.Primary)
 			.setEmoji('<:teleport:1087160283534991472>')
 		)
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/5a/TransformationLabCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226144156")
 			.setTitle("Teleportation Station | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Superpower Environment   -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-				let teleport = new EmbedBuilder()
+				const teleport = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4c/Teleport_HD.png/revision/latest?cb=20181016041010")
 			.setTitle("Teleport | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Trick  -**")

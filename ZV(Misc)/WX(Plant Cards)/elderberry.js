@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`elder`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let eld = new EmbedBuilder()
+		const eld = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/31/Elderberry_cardface.png/revision/latest?cb=20170701155820")
 		.setTitle("Elderberry | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Berry Plant -**")

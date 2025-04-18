@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`spring`, `sb3`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let sb = new EmbedBuilder()
+		const sb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/6/6f/Spring_Bean_HD.png/revision/latest?cb=20220118164514")
 		.setTitle("Spring Bean | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Trick -**")

@@ -3,7 +3,7 @@ module.exports = {
 	name: `squash`,
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let sq = new EmbedBuilder()
+		const sq = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107477157732692058/squash.webp?width=231&height=282")
 		.setTitle("Squash | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Squash Trick -**")

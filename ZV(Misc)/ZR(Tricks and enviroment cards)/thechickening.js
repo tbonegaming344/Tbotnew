@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chickening`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/64/TheChickeningCardImage.png/revision/latest/scale-to-width-down/250?cb=20170301202006")
 			.setTitle("The Chickening | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Pet Trick -**")

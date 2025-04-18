@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bog`, `enlightenment`, `boe`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let boe = new EmbedBuilder()
+		const boe = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/99/Bog_of_Enlightenment_HD.png/revision/latest?cb=20170616162337")
 		.setTitle("Bog of Enlightenment | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Environment -**")

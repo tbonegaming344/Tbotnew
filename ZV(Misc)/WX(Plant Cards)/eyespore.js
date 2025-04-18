@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`eye`],
 	category: `Plant Cards`,
 	run: async(client,message, args)=> {
-		let eye = new EmbedBuilder()
+		const eye = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/93/Eye-Spore.png/revision/latest/scale-to-width-down/250?cb=20201120095447")
 		.setTitle("Eyespore | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Moss Plant -**")

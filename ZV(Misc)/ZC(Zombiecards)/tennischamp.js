@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tennis`, `tc2`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/55/TennisChampCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227163206")
 			.setTitle("Tennis Champ | <:Crazy:1062502046474973224>")
 					.setDescription("**\\- Sports Zombie -**")

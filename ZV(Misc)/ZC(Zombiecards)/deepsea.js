@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`deepseagargantuar`, `dsg`, `seagarg`, `deepsea`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/11c1d4dc-5483-433e-a5e6-d51a36c6ca1d/deneq38-7877cec2-6c67-4c15-9137-cdceb4a78c74.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzExYzFkNGRjLTU0ODMtNDMzZS1hNWU2LWQ1MWEzNmM2Y2ExZFwvZGVuZXEzOC03ODc3Y2VjMi02YzY3LTRjMTUtOTEzNy1jZGNlYjRhNzhjNzQuanBnIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.X9nAWErs97baiwAhgyIo0pkGEa0IZEan_BxQ4zfvPaM")
 			.setTitle("Deep Sea Gargantuar | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gargantuar Monster Zombie  -**")

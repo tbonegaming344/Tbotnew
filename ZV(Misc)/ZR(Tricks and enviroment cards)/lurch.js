@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lurch`, `bonus`, `bonusattack`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f4/LurchForLunchCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225125305")
 			.setTitle("Lurch for Lunch | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Gourmet Trick  -**")

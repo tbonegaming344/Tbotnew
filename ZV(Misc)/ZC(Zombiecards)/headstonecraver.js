@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`headstone`, `carver`, `hc`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/fd/HeadstoneCarverCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227153307")
 			.setTitle("Headstone Carver | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Professional Mustache Zombie  -**")

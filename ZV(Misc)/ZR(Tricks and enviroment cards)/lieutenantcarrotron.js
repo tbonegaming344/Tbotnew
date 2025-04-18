@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lieutenant`, `carrotron`, `lc1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let lc = new EmbedBuilder()
+		const lc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/db/Lieutenant_Carrot_HD.png/revision/latest?cb=20170305043656")
 		.setTitle("Lieutenant Carrotron | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Root Superpower Plant -**")

@@ -4,7 +4,7 @@ const {
     ButtonStyle,
     EmbedBuilder,
   } = require("discord.js");
-  let db = require("../../index.js");
+  const db = require("../../index.js");
   module.exports = {
     name: `hayri`,
     aliases: [`helphayri`, `hayrihelp`, `decksmadebyhayri`, `hayridecks`, `hariyana`],
@@ -30,14 +30,14 @@ const {
           .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      let decks = ["uncrackamech"];
+      const decks = ["uncrackamech"];
       let toBuildString = "";
       for (const deck in decks) {
         toBuildString += `\n<@1043528908148052089> **${deck}**`;
       }
-      let [result] = await db.query(`select feastmech from zmdecks`)
-      let user = await client.users.fetch("354293785980829696");
-      let hayri = new EmbedBuilder()
+      const [result] = await db.query(`select feastmech from zmdecks`)
+      const user = await client.users.fetch("354293785980829696");
+      const hayri = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
         `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -48,7 +48,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("#d67fcc");
-      let uncrackamech= new EmbedBuilder()
+      const uncrackamech= new EmbedBuilder()
       .setTitle(`${result[5].feastmech}`)
       .setDescription(`${result[3].feastmech}`)
       .setColor("#d67fcc")

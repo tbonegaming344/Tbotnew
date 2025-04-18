@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`iceberg`, `lettuce`, `il`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let il = new EmbedBuilder()
+		const il = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a2/HD_Iceberg_Lettuce%EF%BC%88PvZH%EF%BC%89.png/revision/latest?cb=20160429142558")
 		.setTitle("Iceberg Lettuce | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Trick -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`Dolphin`, `dolphin`, `Dolphinrider`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/0a/DolphinRider.png/revision/latest/scale-to-width-down/250?cb=20180213105007")
 			.setTitle("Dolphin Rider | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Zombie  -**")

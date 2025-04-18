@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 										.setEmoji('<:BerryBlastCardImage:1092164792082505849>')
             );
-		let str = new EmbedBuilder()
+		const str = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/7a/StrawberrianHD.png/revision/latest/scale-to-width-down/250?cb=20180131202731")
 		.setTitle("Strawberrian | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Plant -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "When it's time to fight, he gets pretty juiced."
 							 })
-		let bb = new EmbedBuilder()
+		const bb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f0/BerryBlastCardImage.png/revision/latest?cb=20180207012728")
 		.setTitle("Berry Blast | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Trick -**")

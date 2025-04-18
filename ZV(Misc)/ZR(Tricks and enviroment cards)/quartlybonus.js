@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`booty`, `potofsilver`, `piratesbooty`, `quarterly`, `qb`],
 	category: `Tricks Phase`, 
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/ae/Pot_of_Silver_cardface.png/revision/latest?cb=20170701060324")
 			.setTitle("Quarterly Bonus | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Barrel Professional Trick  -**")

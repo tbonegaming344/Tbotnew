@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cherry`, `bomb3`, `cb1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let cb = new EmbedBuilder()
+		const cb = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1094727365042634902/png-transparent-plants-vs-zombies-2-it-s-about-time-cherry-bomb-bomb-cartoon-thumbnail-removebg-preview.png")
 		.setTitle("Cherry Bomb | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Trick -**")

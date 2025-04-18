@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pearadise`, `pairadise`, `pp4`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let pp = new EmbedBuilder()
+		const pp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/dd/PairPearadiseCardFace.png/revision/latest?cb=20220508044622")
 		.setTitle("Pair Pearadise | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Fruit Environment -**")

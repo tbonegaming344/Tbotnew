@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `igma`,
   aliases: [
@@ -41,24 +41,24 @@ module.exports = {
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = [
+    const decks = [
       "igmablobchum",
     ];
     let toBuildString = "";
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] =
+    const [result] =
       await db.query(`select igmablobchum from rbdecks rb`);
-    let user = await client.users.fetch("447911877020876802");
-    let igma = new EmbedBuilder()
+    const user = await client.users.fetch("447911877020876802");
+    const igma = new EmbedBuilder()
       .setTitle("Igma Decks")
       .setDescription(`My commands for decks made by Igma are ${toBuildString}`)
       .setFooter({text: `To view the Decks Made By Igma please click on the buttons below!
 Note: Igma has ${decks.length} total decks in Tbot`})
       .setThumbnail(user.displayAvatarURL())
       .setColor("Green");
-    let ichum = new EmbedBuilder()
+    const ichum = new EmbedBuilder()
     .setTitle(`${result[5].igmablobchum}`)
     .setDescription(`${result[3].igmablobchum}`)
     .setFooter({text: `${result[2].igmablobchum}`})

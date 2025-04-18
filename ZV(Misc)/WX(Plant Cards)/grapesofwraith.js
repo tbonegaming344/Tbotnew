@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`grapes2`, `wrath2`, `gow`, `gw`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let gw = new EmbedBuilder()
+		const gw = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/37/GrapesofWrathCardImage.png/revision/latest?cb=20180208070040")
 		.setTitle("Grapes of Wrath | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Plant -**")

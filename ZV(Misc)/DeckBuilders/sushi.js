@@ -7,7 +7,18 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#de8d5d");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `sushi`,
   aliases: [
@@ -56,7 +67,7 @@ module.exports = {
       .setValue("midrange")
       .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Tempo Decks")
+      .setLabel("Tempo Deck")
       .setValue("tempo")
       .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.'), 
       new StringSelectMenuOptionBuilder()
@@ -65,313 +76,62 @@ module.exports = {
       .setDescription("View all of Sushi's decks")
     );
     const row = new ActionRowBuilder().addComponents(select);
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("trickmech")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("propack")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const propack =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpladder")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tisb3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const tisb3 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("professorpackage")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tmech")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const tmech =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimpssb3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ladderhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    let ladderdecks = [
-      "professorpackage",
-      "telimpssb",
-      "trickmech",
-    ]
-    let toBuildLadder = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadder += `\n<@1043528908148052089> **${deck}**`;
+    const sushiDecks = {
+      competitiveDecks: ["healmidrose", "telimps"], 
+      ladderDecks: ["professorpackage", "telimpssb", "trickmech"], 
+      memeDecks: ["sunbandits"], 
+      aggroDecks: ["trickmech"], 
+      comboDecks: ["sunbandits", "telimps", "telimpssb"], 
+      controlDecks: ["sunbandits", "telimps", "telimpssb"], 
+      midrangeDecks: ["healmidrose"], 
+      tempoDecks: ["professorpackage"],
+      allDecks: ["healmidrose", "professorpackage", "sunbandits", "telimps", "telimpssb", "trickmech"]
     }
-    const comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimpssb")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sb")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const sb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("combohelp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ti")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const ti = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sunbandits")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tisb")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const tisb = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimps")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("helpcombo")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    let combodecks = [
-      "sunbandits",
-      "telimps",
-      "telimpssb"
-    ]
-    let toBuildCombo = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      let deck = combodecks[i];
-      toBuildCombo += `\n<@1043528908148052089> **${deck}**`;
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    let aggrodecks = [
-      "trickmech"
-    ]
-    const competitiverow =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimps2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("hmrose2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const hmrose2 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcomp")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ti2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const ti2 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("healmidrose2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("comphelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    let competitivedecks = [
-      "healmidrose",
-      "telimps",
-    ]
-    let toBuildCompetitive = "";
-    for (let i = 0; i < competitivedecks.length; i++) {
-      let deck = competitivedecks[i];
-      toBuildCompetitive += `\n<@1043528908148052089> **${deck}**`;
+    const toBuildCompetitive = buildDeckString(sushiDecks.competitiveDecks);
+    const toBuildLadder = buildDeckString(sushiDecks.ladderDecks);
+    const toBuildCombo = buildDeckString(sushiDecks.comboDecks);
+    const toBuildControl = buildDeckString(sushiDecks.controlDecks);
+    const toBuildString = buildDeckString(sushiDecks.allDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const controlrow =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimpssb2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ti3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const ti3 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpcontrol")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tisb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const tisb2 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimps3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("controlhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    let controldecks = [
-      "telimps",
-      "telimpssb",
-    ]
-    let toBuildControl = "";
-    for (let i = 0; i < controldecks.length; i++) {
-      let deck = controldecks[i];
-      toBuildControl += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const temporow =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sunbandits2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("propack2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    const propack2 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helptempo")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sb2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-const sb2 =  new ActionRowBuilder().addComponents(
-  new ButtonBuilder()
-  .setCustomId("professorpackage2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-  .setStyle(ButtonStyle.Primary),
-  new ButtonBuilder()
-  .setCustomId("tempohelp")
-  .setEmoji("<:arrowright:1271446796207525898>")
-  .setStyle(ButtonStyle.Primary),
-);
-    let tempodecks = [
-      "professorpackage",
-      "sunbandits",
-    ]
-    let toBuildTempo = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      let deck = tempodecks[i];
-      toBuildTempo += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let memedecks = [
-      "sunbandits"
-    ]
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("trickmech2")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("hmrose3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const hmrose3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("helpall")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("propack3")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const propack3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("healmidrose3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("sb4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const sb4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("professorpackage3")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("ti4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const ti4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("sunbandits4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tisb4")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const tisb4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimps4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("tmech2")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    )
-    const tmech2 =  new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setCustomId("telimpssb4")
-      .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-      .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("allhelp")
-      .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary),
-    );
-    let decks = [
-      "healmidrose",
-      "professorpackage", 
-      "sunbandits",
-      "telimps",
-      "telimpssb",
-      "trickmech",
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
-      toBuildString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let [result] =
+    const ladderrow = new CreateButtons("trickmech", "propack");
+    const propack =  new CreateButtons("helpladder", "tisb");
+    const tisb =  new CreateButtons("professorpackage", "tmech");
+    const tmech =  new CreateButtons("telimpssb", "ladderhelp");
+    const comborow = new CreateButtons("telimpssb2", "sb");
+    const sb = new CreateButtons("combohelp", "ti");
+    const ti = new CreateButtons("sunbandits", "tisb2");
+    const tisb2 = new CreateButtons("telimps", "helpcombo")
+    const competitiverow =  new CreateButtons("telimps2", "hmrose");
+    const hmrose =  new CreateButtons("helpcomp", "ti2");
+    const ti2 =  new CreateButtons("healmidrose2", "comphelp");
+    const controlrow =  new CreateButtons("telimpssb3", "sb2");
+    const sb2 = new CreateButtons("helpcontrol", "ti3")
+    const ti3 =  new CreateButtons("sunbandits2", "tisb3");
+    const tisb3 =  new CreateButtons("telimps3", "controlhelp");
+    const alldecksrow = new CreateButtons("trickmech2", "hmrose2");
+    const hmrose2 = new CreateButtons("helpall", "propack2");
+    const propack2 = new CreateButtons("healmidrose2", "sb3");
+    const sb3 = new CreateButtons("professorpackage2", "ti4");
+    const ti4 = new CreateButtons("sunbandits3", "tisb4");
+    const tisb4 = new CreateButtons("telimps4", "tmech2");
+    const tmech2 =  new CreateButtons("telimpssb4", "allhelp");
+    const [result] =
       await db.query(`select hmr, professorpackage, sunbandits, telimps, telimpssb,trickmech
 from rodecks ro
 inner join pbdecks pb 
@@ -384,325 +144,176 @@ inner join sbdecks sb
 on (ro.deckinfo = sb.deckinfo)
 inner join zmdecks zm
 on (ro.deckinfo = zm.deckinfo)`);
-    let user = await client.users.fetch("198942472565555200");
-    let sushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
+    const user = await client.users.fetch("198942472565555200");
+    const sushi = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
+Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`,
+      user.displayAvatarURL()
+    )
+      const alldecksEmbed = new CreateHelpEmbed(
+        `${user.displayName} Decks`,
+        `My commands for decks made by ${user.displayName} are ${toBuildString}`,
+        user.displayAvatarURL(), 
+        `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`
       )
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let alldecksEmbed = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `My commands for decks made by ${user.displayName} are ${toBuildString}`
+      const combosushi = new CreateHelpEmbed(
+        `${user.displayName} Combo Decks`,
+        `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
+        user.displayAvatarURL(), 
+        `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${sushiDecks.comboDecks.length} Combo decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let combosushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Combo Decks`)
-      .setDescription(
-        `My Combo decks made by ${user.displayName} are ${toBuildCombo}`
+      const controlsushi = new CreateHelpEmbed(
+        `${user.displayName} Control Decks`,
+        `My Control decks made by ${user.displayName} are ${toBuildControl}`,
+        user.displayAvatarURL(), 
+        `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${sushiDecks.controlDecks.length} Control decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${combodecks.length} Combo decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let controlsushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Control Decks`)
-      .setDescription(
-        `My Control decks made by ${user.displayName} are ${toBuildControl}`
+      const competitivesushi = new CreateHelpEmbed(
+        `${user.displayName} Competitive Decks`,
+        `My Competitive decks made by ${user.displayName} are ${toBuildCompetitive}`,
+        user.displayAvatarURL(), 
+        `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${sushiDecks.competitiveDecks.length} Competitive decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${controldecks.length} Control decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let competitivesushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Competitive Decks`)
-      .setDescription(
-        `My Competitive decks made by ${user.displayName} are ${toBuildCompetitive}`
+      const laddersushi = new CreateHelpEmbed(
+        `${user.displayName} Ladder Decks`, 
+         `My Ladder decks made by ${user.displayName} are ${toBuildLadder}`, 
+         user.displayAvatarURL(), 
+        `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${competitivedecks.length} Competitive decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let laddersushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Ladder Decks`)
-      .setDescription(
-        `My Ladder decks made by ${user.displayName} are ${toBuildLadder}`
-      )
-      .setFooter({
-        text: `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${ladderdecks.length} Ladder decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let temposushi = new EmbedBuilder()
-      .setTitle(`${user.displayName} Tempo Decks`)
-      .setDescription(
-        `My Tempo decks made by ${user.displayName} are ${toBuildTempo}`
-      )
-      .setFooter({
-        text: `To view the Tempo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${tempodecks.length} Tempo decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-    let hmr = new EmbedBuilder()
-    .setTitle(`${result[5].hmr}`)
-    .setDescription(`${result[3].hmr}`)
-    .setFooter({ text: `${result[2].hmr}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].hmr}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].hmr}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].hmr}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].hmr}`);
-    let professorpackage= new EmbedBuilder()
-    .setTitle(`${result[5].professorpackage}`)
-    .setDescription(`${result[3].professorpackage}`)
-    .setFooter({ text: `${result[2].professorpackage}` })
-    .setColor("Random")
-    .setImage(`${result[4].professorpackage}`)
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].professorpackage}`,
-      inline: true
-    },{ 
-      name: "Archetype",
-      value: `${result[0].professorpackage}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].professorpackage}`,
-      inline: true
-    });
-    let sband = new EmbedBuilder()
-    .setTitle(`${result[5].sunbandits}`)
-    .setDescription(`${result[3].sunbandits}`)
-    .setFooter({ text: `${result[2].sunbandits}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].sunbandits}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].sunbandits}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].sunbandits}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].sunbandits}`);
-    let timps = new EmbedBuilder()
-    .setTitle(`${result[5].telimps}`)
-    .setDescription(`${result[3].telimps}`)
-    .setFooter({ text: `${result[2].telimps}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].telimps}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].telimps}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].telimps}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].telimps}`);
-    let trickmech = new EmbedBuilder()
-    .setTitle(`${result[5].trickmech}`)
-    .setDescription(`${result[3].trickmech}`)
-    .setFooter({ text: `${result[2].trickmech}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].trickmech}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].trickmech}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].trickmech}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].trickmech}`);
-    let timpsb = new EmbedBuilder()
-    .setTitle(`${result[5].telimpssb}`)
-      .setDescription(`${result[3].telimpssb}`)
-      .setFooter({ text: `	${result[2].telimpssb}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].telimpssb}`,
-        inline: true,
-      },{
-        name: "Archetype",
-        value: `${result[0].telimpssb}`,
-        inline: true
-      },{ 
-        name: "Deck Cost", 
-        value: `${result[1].telimpssb}`,
-        inline: true
-      })
-      .setColor("Random")
-      .setImage(`${result[4].telimpssb}`);
+    
+      function CreateDeckEmbed(result, deckName) {
+        const embed = new EmbedBuilder()
+          .setTitle(`${result[5][deckName]}`)
+          .setDescription(`${result[3][deckName]}`)
+          .setFooter({ text: `${result[2][deckName]}` })
+          .addFields(
+            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+          )
+          .setColor("#de8d5d");
+        const imageUrl = result[4][deckName];
+        if (imageUrl) {
+          embed.setImage(imageUrl);
+        }
+        return embed;
+      }
+    const hmr = new CreateDeckEmbed(result, "hmr");
+    const professorpackage= new CreateDeckEmbed(result, "professorpackage");
+    const sband = new CreateDeckEmbed(result, "sunbandits");
+    const timps = new CreateDeckEmbed(result, "telimps");
+    const trickmech = new CreateDeckEmbed(result, "trickmech");
+    const timpsb = new CreateDeckEmbed(result, "telimpssb")
     const m = await message.channel.send({
       embeds: [sushi],
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
+    async function handleSelectMenu(i){
+      const value = i.values[0];
+      if(value == "comp"){
+        await i.update({embeds: [competitivesushi], components: [competitiverow]})
+      }
+      else if(value == "aggro"){
+        await i.update({embeds: [aggrosushi], components: [aggrorow]})
+      }
+      else if(value == "combo"){
+        await i.update({embeds: [combosushi], components: [comborow]})
+      }
+      else if(value == "control"){
+        await i.update({embeds: [controlsushi], components: [controlrow]})
+      }
+      else if(value == "midrange"){
+        await i.update({embeds: [midrangesushi], components: [midrangerow]})
+      }
+      else if(value == "tempo"){
+        await i.reply({embeds: [professorpackage], flags: MessageFlags.Ephemeral})
+      }
+      else if(value == "all"){
+        await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
+      }
+      else if(value == "ladder"){
+        await i.update({embeds: [laddersushi], components: [ladderrow]})
+      }
+      else if(value == "meme"){
+        await i.reply({embeds: [sband], flags: MessageFlags.Ephemeral})
+      }
+    }
+    async function handleButtonInteraction(i){
+      const buttonActions = {
+        helpcomp: {embed: competitivesushi, component: competitiverow}, 
+        comphelp: {embed: competitivesushi, component: competitiverow}, 
+        combohelp: {embed: combosushi, component: comborow},
+        helpcombo: {embed: combosushi, component: comborow},
+        helpcontrol: {embed: controlsushi, component: controlrow},
+        controlhelp: {embed: controlsushi, component: controlrow},
+        helpmidrange: {embed: midrangesushi, component: midrangerow},
+        midrangehelp: {embed: midrangesushi, component: midrangerow},
+        sb: {embed: sband, component: sb},
+        sunbandits: {embed: sband, component: sb},
+        sb2: {embed: sband, component: sb2},
+        sunbandits2: {embed: sband, component: sb2},
+        sb3: {embed: sband, component: sb3},
+        sunbandits3: {embed: sband, component: sb3},
+        ti: {embed: timps, component: ti},
+        telimps: {embed: timps, component: ti},
+        ti2: {embed: timps, component: ti2},
+        telimps2: {embed: timps, component: ti2},
+        ti3: {embed: timps, component: ti3},
+        telimps3: {embed: timps, component: ti3},
+        ti4: {embed: timps, component: ti4},
+        telimps4: {embed: timps, component: ti4},
+        tisb: {embed: timpsb, component: tisb},
+        telimpssb: {embed: timpsb, component: tisb},
+        tisb2: {embed: timpsb, component: tisb2},
+        telimpssb2: {embed: timpsb, component: tisb2},
+        tisb3: {embed: timpsb, component: tisb3},
+        telimpssb3: {embed: timpsb, component: tisb3},
+        tisb4: {embed: timpsb, component: tisb4},
+        telimpssb4: {embed: timpsb, component: tisb4},
+        hmrose: {embed: hmr, component: hmrose},
+        healmidrose: {embed: hmr, component: hmrose},
+        hmrose2: {embed: hmr, component: hmrose2},
+        healmidrose2: {embed: hmr, component: hmrose2},
+        helpall: {embed: alldecksEmbed, component: alldecksrow},
+        allhelp: {embed: alldecksEmbed, component: alldecksrow},
+        ladderhelp: {embed: laddersushi, component: ladderrow},
+        helpladder: {embed: laddersushi, component: ladderrow}, 
+        propack: {embed: professorpackage, component: propack},
+        professorpackage: {embed: professorpackage, component: propack},
+        propack2: {embed: professorpackage, component: propack2},
+        professorpackage2: {embed: professorpackage, component: propack2},
+        tmech: {embed: trickmech, component: tmech},
+        trickmech: {embed: trickmech, component: tmech},
+        tmech2: {embed: trickmech, component: tmech2},
+        trickmech2: {embed: trickmech, component: tmech2},
+      };
+     const action = buttonActions[i.customId]
+     if (action) {
+      await i.update({
+        embeds: [action.embed],
+        components: action.components,
+      });
+    } else {
+      await i.reply({
+        content: "Invalid button action.",
+        flags: MessageFlags.Ephemeral,
+      });
+    }
+  }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if(i.customId == "select"){
-        const value = i.values[0];
-        if(value == "comp"){
-          await i.update({embeds: [competitivesushi], components: [competitiverow]})
-        }
-        if(value == "aggro"){
-          await i.update({embeds: [aggrosushi], components: [aggrorow]})
-        }
-        if(value == "combo"){
-          await i.update({embeds: [combosushi], components: [comborow]})
-        }
-        if(value == "control"){
-          await i.update({embeds: [controlsushi], components: [controlrow]})
-        }
-        if(value == "midrange"){
-          await i.update({embeds: [midrangesushi], components: [midrangerow]})
-        }
-        if(value == "tempo"){
-          await i.update({embeds: [temposushi], components: [temporow]})
-        }
-        if(value == "all"){
-          await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-        }
-        if(value == "ladder"){
-          await i.update({embeds: [laddersushi], components: [ladderrow]})
-        }
-        if(value == "meme"){
-          await i.reply({embeds: [sband], flags: MessageFlags.Ephemeral})
-        }
+        await handleSelectMenu(i)
       }
-      if(i.customId == "helpcomp" || i.customId === "comphelp"){
-        await i.update({embeds: [competitivesushi], components: [competitiverow]})
-      }
-      if(i.customId == "combohelp" || i.customId == "helpcombo"){
-        await i.update({embeds: [combosushi], components: [comborow]})
-      }
-      if(i.customId == "helpcontrol" || i.customId == "controlhelp"){
-        await i.update({embeds: [controlsushi], components: [controlrow]})
-      }
-      if(i.customId == "helpmidrange" || i.customId == "midrangehelp"){
-        await i.update({embeds: [midrangesushi], components: [midrangerow]})
-      }
-      if(i.customId === "helptempo" || i.customId === "tempohelp"){
-        await i.update({embeds: [temposushi], components: [temporow]})
-      }
-      //Sun Bandits
-      if(i.customId == "sb" || i.customId == "sunbandits"){
-        await i.update({embeds: [sband], components: [sb]})
-      }
-      if(i.customId == "sb2" || i.customId == "sunbandits2"){
-        await i.update({embeds: [sband], components: [sb2]})
-      }
-      if(i.customId == "sb3" || i.customId == "sunbandits3"){
-        await i.update({embeds: [sband], components: [sb3]})
-      }
-      if(i.customId == "sb4" || i.customId == "sunbandits4"){
-        await i.update({embeds: [sband], components: [sb4]})
-      }
-      //Telimps 
-      if(i.customId == "ti" || i.customId == "telimps"){
-        await i.update({embeds: [timps], components: [ti]})
-      }
-      if(i.customId == "ti2"  || i.customId == "telimps2"){
-        await i.update({embeds: [timps], components: [ti2]})
-      }
-      if(i.customId == "ti3" || i.customId == "telimps3"){
-        await i.update({embeds: [timps], components: [ti3]})
-      }
-      if(i.customId == "ti4" || i.customId == "telimps4"){
-        await i.update({embeds: [timps], components: [ti4]})
-      }
-      //Telimps sb 
-      if(i.customId == "tisb" || i.customId == "telimpssb"){
-        await i.update({embeds: [timpsb], components: [tisb]})
-      }
-      if(i.customId == "tisb2" || i.customId == "telimpssb2"){
-        await i.update({embeds: [timpsb], components: [tisb2]})
-      }
-      if(i.customId == "tisb3" || i.customId == "telimpssb3"){
-        await i.update({embeds: [timpsb], components: [tisb3]})
-      }
-      if(i.customId == "tisb4" || i.customId == "telimpssb4"){
-        await i.update({embeds: [timpsb], components: [tisb4]})
-      }
-      // Heal Mid Rose
-      if(i.customId == "hmrose" || i.customId == "healmidrose"){
-        await i.update({embeds: [hmr], components: [hmrose]})
-      }
-      if(i.customId == "hmrose2" || i.customId == "healmidrose2"){
-        await i.update({embeds: [hmr], components: [hmrose2]})
-      }
-      if(i.customId == "hmrose3" || i.customId == "healmidrose3"){
-        await i.update({embeds: [hmr], components: [hmrose3]})
-      }
-      if(i.customId == "helpall" || i.customId == "allhelp"){
-        await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-      }
-      if(i.customId == "ladderhelp" || i.customId == "helpladder"){
-        await i.update({embeds: [laddersushi], components: [ladderrow]})
-      }
-      if(i.customId == "helpmeme" || i.customId == "memehelp"){
-        await i.update({embeds: [memesushi], components: [memerow]})
-      }
-      if(i.customId == "propack" || i.customId == "professorpackage"){
-        await i.update({embeds: [professorpackage], components: [propack]})
-      }
-      if(i.customId == "propack2" || i.customId == "professorpackage2"){
-        await i.update({embeds: [professorpackage], components: [propack2]})
-      }
-      if(i.customId == "propack3" || i.customId == "professorpackage3"){
-        await i.update({embeds: [professorpackage], components: [propack3]})
-      }
-      if(i.customId == "tmech" || i.customId == "trickmech"){
-        await i.update({embeds: [trickmech], components: [tmech]})
-      }
-      if(i.customId == "tmech2" || i.customId == "trickmech2"){
-        await i.update({embeds: [trickmech], components: [tmech2]})
-      }
-      if(i.customId == "tmech3" || i.customId == "trickmech3"){
-        await i.update({embeds: [trickmech], components: [tmech3]})
-      }
-      if(i.customId == "aggrohelp" || i.customId == "helpaggro"){
-        await i.update({embeds: [aggrosushi], components: [aggrorow]})
+      else {
+        await handleButtonInteraction(i)
       }
     });
   },

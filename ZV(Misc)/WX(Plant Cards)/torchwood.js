@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`torch`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let torch = new EmbedBuilder()
+		const torch = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/p__/images/0/04/TorchwoodCardImage.png/revision/latest?cb=20191225214028&path-prefix=protagonist")
 		.setTitle("Torchwood | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Tree Plant -**")

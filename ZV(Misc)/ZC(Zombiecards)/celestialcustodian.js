@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cc6`, `jaintor`, `spacejanitor`, `mop`, `custodian`, `celestial`, `janitor`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/13/Space_Custodian.png/revision/latest/scale-to-width-down/250?cb=20180520031216")
 			.setTitle("Celestial Custodian | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Professional Mustache Zombie  -**")

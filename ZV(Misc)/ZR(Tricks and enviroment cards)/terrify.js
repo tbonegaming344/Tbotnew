@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`terr`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9f/TerrifyPvZH.png/revision/latest/scale-to-width-down/250?cb=20170830134404")
 			.setTitle("Terrify | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Trick  -**")

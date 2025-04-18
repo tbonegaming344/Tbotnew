@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`dandy`, `lion`, `dandylion`, `lionking`, `dlk`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let dlk = new EmbedBuilder()
+		const dlk = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/19/DandyLionKingCardImage.png/revision/latest?cb=20180208071438")
 		.setTitle("Dandy Lion King | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Flower Animal Plant -**")

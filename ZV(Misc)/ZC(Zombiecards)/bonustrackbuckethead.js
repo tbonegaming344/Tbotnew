@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`btb`, `bonustrack`, `bonustrackbucketboi`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 	.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d3/Bonus_Track_Buckethead_HD_Twitter.png/revision/latest/scale-to-width-down/250?cb=20170310185205")
 			.setTitle("Bonus Track Buckethead | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Dancing Zombie  -**")

@@ -4,7 +4,7 @@ module.exports ={
 	aliases: [`ntsig`, `op1`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2f/OctoPultCardImage.png/revision/latest/scale-to-width-down/250?cb=20170303220440")
 			.setTitle("Octo-Pult | <:Hearty:1062501636557242429><:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pet Superpower Trick -**")

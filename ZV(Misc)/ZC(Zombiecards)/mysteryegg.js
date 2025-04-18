@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`egg`, `me`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let egg = new EmbedBuilder()
+			const egg = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/63/MysteryHD.png/revision/latest/scale-to-width-down/250?cb=20170406143736")
 			.setTitle("Mystery Egg | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Zombie  -**")

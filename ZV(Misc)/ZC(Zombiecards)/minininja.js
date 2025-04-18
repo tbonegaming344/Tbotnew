@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mini`, `ninja`, `mn4`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/61/MiniNinjaCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225122438")
 			.setTitle("Mini-Ninja | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Professional Imp Zombie  -**")

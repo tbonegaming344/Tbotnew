@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pcs`, `cheeseshover`, `primordcheese`, `shover`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1125145336042762331/PrimordialCheeseShover.webp")
 		.setTitle("Primordial Cheese Shover | <:Beastly:1062500894744264714>")
 		.setDescription("- **Gourmet History Zombie** -")	

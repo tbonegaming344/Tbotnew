@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`unthawed`, `instead`, `uv`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/Unthawed_Viking.png/revision/latest/scale-to-width-down/250?cb=20180510073852")
 			.setTitle("Unthawed Viking | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pirate Zombie   -**")

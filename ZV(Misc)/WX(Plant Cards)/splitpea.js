@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`split`, `sp3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sp = new EmbedBuilder()
+		const sp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/10/SplitPea.png/revision/latest/scale-to-width-down/250?cb=20220209001732")
 		.setTitle("Split Pea | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

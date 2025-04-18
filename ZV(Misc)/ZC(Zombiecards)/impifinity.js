@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer){
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -111,7 +111,7 @@ module.exports = {
     const midrangeRow = new CreateButtons("spacestars3", "nhks3")
     const nhks3 = new CreateButtons("helpmidrange", "stars3")
     const stars3 = new CreateButtons("nohokaistars3", "midrangehelp")
-    let embed = new EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/magnificentbaddie/images/8/83/Impfinity.webp/revision/latest?cb=20220421015258"
       )
@@ -224,58 +224,48 @@ module.exports = {
       }
     }
     async function HandleButtonInteraction(i){
-      if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
+      const buttonActions = {
+        ifhelp: {embed: helpif, component: row},
+        allhelp: {embed: alldecksEmbed, component: alldecksrow},
+        helpall: {embed: alldecksEmbed, component: alldecksrow},
+        helpcomp: {embed: competitiveEmbed, component: competitiveRow},
+        comphelp: {embed: competitiveEmbed, component: competitiveRow},
+        helpaggro: {embed: aggroEmbed, component: aggroRow},
+        aggrohelp: {embed: aggroEmbed, component: aggroRow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangeRow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangeRow},
+        bif: {embed: budgetif, component: bif},
+        budgetif: {embed: budgetif, component: bif},
+        bif2: {embed: budgetif, component: bif2},
+        budgetif2: {embed: budgetif, component: bif2},
+        stars: {embed: spacestars, component: stars},
+        spacestars: {embed: spacestars, component: stars},
+        stars2: {embed: spacestars, component: stars2},
+        spacestars2: {embed: spacestars, component: stars2},
+        stars3: {embed: spacestars, component: stars3},
+        spacestars3: {embed: spacestars, component: stars3},
+        spl: {embed: splimps, component: spl},
+        splimps: {embed: splimps, component: spl},
+        spl2: {embed: splimps, component: spl2},
+        splimps2: {embed: splimps, component: spl2},
+        nhks: {embed: nohokaistars, component: nhks},
+        nohokaistars: {embed: nohokaistars, component: nhks},
+        nhks2: {embed: nohokaistars, component: nhks2},
+        nohokaistars2: {embed: nohokaistars, component: nhks2},
+        nhks3: {embed: nohokaistars, component: nhks3},
+        nohokaistars3: {embed: nohokaistars, component: nhks3},
       }
-      else if (i.customId == "helpcomp" || i.customId == "comphelp"){
-        await i.update({embeds: [competitiveEmbed], components: [competitiveRow]});
+      const action = buttonActions[i.customId];
+      if(action) {
+        await i.update({ embeds: [action.embed], components: [action.component] });
       }
-      else if (i.customId == "helpmidrange" || i.customId == "midrangehelp"){
-        await i.update({embeds: [midrangeEmbed], components: [midrangeRow]});
-      }
-      else if (i.customId == "helpaggro" || i.customId == "aggrohelp") {
-        await i.update({ embeds: [aggroEmbed], components: [aggroRow] });
-      }
-      else if (i.customId == "bif" || i.customId == "budgetif") {
-        await i.update({ embeds: [budgetif], components: [bif] });
-      }
-      else if (i.customId == "bif2" || i.customId == "budgetif2") {
-        await i.update({ embeds: [budgetif], components: [bif2] });
-      }
-      else if (i.customId == "stars" || i.customId == "spacestars") {
-        await i.update({ embeds: [spacestars], components: [stars] });
-      }
-      else if (i.customId == "stars2" || i.customId == "spacestars2") {
-        await i.update({ embeds: [spacestars], components: [stars2] });
-      }
-      else if (i.customId == "stars3" || i.customId == "spacestars3") {
-        await i.update({ embeds: [spacestars], components: [stars3] });
-      }
-      else if (i.customId == "spl" || i.customId == "splimps") {
-        await i.update({ embeds: [splimps], components: [spl] });
-      }
-      else if (i.customId == "spl2" || i.customId == "splimps2") {
-        await i.update({ embeds: [splimps], components: [spl2] });
-      }
-      else if (i.customId == "nhks" || i.customId == "nohokaistars") {
-        await i.update({ embeds: [nohokaistars], components: [nhks] });
-      }
-      else if (i.customId == "nhks2" || i.customId == "nohokaistars2") {
-        await i.update({ embeds: [nohokaistars], components: [nhks2] });
-      }
-      else if (i.customId == "nhks3" || i.customId == "nohokaistars3") {
-        await i.update({ embeds: [nohokaistars], components: [nhks3] });
-      }
-      else if (i.customId == "helpladder" || i.customId == "ladderhelp") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+      else{
+        await i.reply({content: "Invalid button interaction", flags: MessageFlags.Ephemeral});
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "ifhelp") {
-        await i.update({ embeds: [helpif], components: [row] });
-      }
-      else if(i.customId == "select") {
+      if(i.customId == "select") {
         await HandleSelectMenu(i);
       }
       else{

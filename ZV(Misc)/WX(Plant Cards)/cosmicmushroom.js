@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cm1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cm = new EmbedBuilder()
+		const cm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e4/Cosmic_Mushroom_HD.png/revision/latest?cb=20170619175749")
 		.setTitle("Cosmic Mushroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

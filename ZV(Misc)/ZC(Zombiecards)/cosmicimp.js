@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ci`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/24/Cosmic_ImpH.png/revision/latest?cb=20170611051911")
 			.setTitle("Cosmic Imp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Imp Zombie  -**")

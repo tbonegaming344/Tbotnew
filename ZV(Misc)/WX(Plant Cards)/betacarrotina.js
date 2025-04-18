@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -64,7 +64,7 @@ module.exports = {
           .setValue("tempo")
       );
     const row = new ActionRowBuilder().addComponents(select);
-    let bc = new EmbedBuilder()
+    const bc = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist"
       )
@@ -105,7 +105,7 @@ It gets +2<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>, __Amp
       tempoDecks: ["carroot"],
       allDecks: ["carroot", "shamcontrolbc"],
     };
-    let [result] = await db.query("SELECT * FROM bcdecks");
+    const [result] = await db.query("SELECT * FROM bcdecks");
     const embed = new CreateHelpEmbed(
       "Beta Carrotina Commands",
       `To view the Beta Carrotina decks please select an option from the select menu below
@@ -129,8 +129,8 @@ It gets +2<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>, __Amp
       }
       return embed;
     }
-    let carroot = new CreateDeckEmbed(result, "carroot");
-    let shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
+    const carroot = new CreateDeckEmbed(result, "carroot");
+    const shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
     const m = await message.channel.send({ embeds: [bc], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({

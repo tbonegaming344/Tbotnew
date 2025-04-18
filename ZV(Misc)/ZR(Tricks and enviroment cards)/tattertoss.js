@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 										.setEmoji('<:HD_Hot_Head:1107737371048423454>')
             );
-		let tt= new EmbedBuilder()
+		const tt= new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107713726917922897/TaterTossCardImage.webp")
 		.setTitle("Tater Toss | <:Kabloom:1062502137826910268><:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Superpower Trick -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Spudow is one tranquil tuber. Still, sometimes he loses his head."
 							 })
-		let hh = new EmbedBuilder()
+		const hh = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/cd/HD_Hot_Head_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210219173637")
 		.setTitle("Hothead | <:Kabloom:1062502137826910268><:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Plant -**")

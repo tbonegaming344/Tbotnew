@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`dickweed`, `pokey`, `pokeyprovince`, `ss4`, `spikeweed`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let dickweed = new EmbedBuilder()
+		const dickweed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e4/HD_SIKRE.png/revision/latest/scale-to-width-down/1200?cb=20200411233900")
 		.setTitle("Spikeweed Sector | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Enviromment -**")

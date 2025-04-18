@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `healmidrose`,
   aliases: [`hmr`, `roheal`, `midhealrose`, `healmidro`, `hmrose`, `healrose`],
   category: `Rose(RO)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT hmr from rodecks`);
-    let embed = new EmbedBuilder()
+    const [result] = await db.query(`SELECT hmr from rodecks`);
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].hmr}`)
       .setDescription(`${result[3].hmr}`)
       .setFooter({ text: `${result[2].hmr}` })

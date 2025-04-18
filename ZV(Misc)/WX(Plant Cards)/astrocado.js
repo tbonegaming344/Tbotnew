@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Success)
 										.setEmoji('<:AstrocadoPitCardImage:1107464101103411280>')
             );
-		let cado = new EmbedBuilder()
+		const cado = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/22/AstrocadoCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135303")
 		.setTitle("Astrocado | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Fruit Plant -**")

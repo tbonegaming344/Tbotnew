@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `lockthebathroom`,
 	aliases: [`lockinbf`, `loi`, `lockedin`, `loin`, `lockin`, `lockin`, `ltb`, `ltbath`, `ltbr`, `lthbroom`],
 	category: `Brain Freeze(BF)`,
 		run: async(client, message, args) => {
-			let [result] = await db.query(`SELECT lockin FROM bfdecks`)
-				let embed = new EmbedBuilder()
+			const [result] = await db.query(`SELECT lockin FROM bfdecks`)
+				const embed = new EmbedBuilder()
 	.setTitle(`${result[5].lockin}`)	
 			.setDescription(`${result[3].lockin}`)
 	.setFooter({text: `${result[2].lockin}`})

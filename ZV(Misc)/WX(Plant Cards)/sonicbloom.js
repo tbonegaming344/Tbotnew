@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sonic`, `bloom`, `sb2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sb = new EmbedBuilder()
+		const sb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c5/Sonic_Bloom_HD.png/revision/latest/scale-to-width-down/250?cb=20171126142501")
 		.setTitle("Sonic Bloom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Flower Plant -**")

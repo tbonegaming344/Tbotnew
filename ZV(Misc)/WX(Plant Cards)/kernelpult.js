@@ -4,7 +4,7 @@ name: `kernelpult`,
 aliases: [`kernel2`, `kp`],
 category: `Plant Cards`,
 run: async(client, message, args)=> {
-	let kp = new EmbedBuilder()
+	const kp = new EmbedBuilder()
 	.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107309838100344842/KernelPult.webp")
 .setTitle("Kernel-Pult | <:Solar:1062502678384607262>")
 	.setDescription("**\\- Corn Plant -**")

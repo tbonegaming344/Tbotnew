@@ -17,7 +17,7 @@ module.exports = {
 const row = new ActionRowBuilder({
     components: [button],
 });
-   let search = new EmbedBuilder()
+   const search = new EmbedBuilder()
     .setTitle("Card Search")
     .setDescription("Please use the button below to search for cards")
     .setColor("Random")

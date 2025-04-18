@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pwn`, `primalwall`, `primalnut`, `chunkofcoal`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pwn = new EmbedBuilder()
+		const pwn = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/70/HD_Primal_Wall-Nut.png/revision/latest?cb=20200224084305")
 		.setTitle("Primal Wall-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

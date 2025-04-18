@@ -3,7 +3,7 @@ module.exports = {
 	name: `tricorn`,
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let tr = new EmbedBuilder()
+		const tr = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8b/HDTricorn.png/revision/latest/scale-to-width-down/250?cb=20191005185131")
 		.setTitle("Tricorn | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Nut Plant -**")

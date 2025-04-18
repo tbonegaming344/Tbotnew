@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cone`, `ch`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/12/ConeheadH.png/revision/latest?cb=20161229021644")
 			.setTitle("Conehead | <:Hearty:1062501636557242429>")
 			.setDescription("**\\-  Professional Zombie  -**")

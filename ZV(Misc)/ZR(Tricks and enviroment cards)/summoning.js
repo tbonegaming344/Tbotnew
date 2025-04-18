@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`summon`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/13/SummoningCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226201612")
 			.setTitle("Summoning | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Superpower Trick   -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`potg`, `planet`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let potg = new EmbedBuilder()
+		const potg = new EmbedBuilder()
 		.setThumbnail("https://images-ext-2.discordapp.net/external/mwvcig1p9OF10m6xMeCced8W3CReA5w5CuMVY_EF4YQ/%3Fcb%3D20170627005948/https/static.wikia.nocookie.net/plantsvszombies/images/4/4c/Planet_of_the_Grapes_HD.png/revision/latest/scale-to-width-down/250")
 		.setTitle("Planet of the Grapes | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Berry Environment -**")

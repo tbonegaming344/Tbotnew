@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`venus`, `flytrap2`, `vf1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let vf = new EmbedBuilder()
+		const vf = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107430921520558161/HD_Venus_Flytrap.webp")
 		.setTitle("Venus Flytrap | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flytrap Plant -**")

@@ -9,7 +9,7 @@ module.exports = {
 	aliases: [`ball8`],
 	category: `Miscellaneous`,
 	run: async(client, message, args) => {
-		if(message.guild.id == "285818469960646657") return message.author.send("This command is disabled in this server please use it in another server")
+		if(message.guild && message.guild.id == "285818469960646657") return message.author.send("This command is disabled in this server please use it in another server")
 		else{
 		const button = new ButtonBuilder()
 		.setLabel('🎱 8 ball')
@@ -19,7 +19,7 @@ module.exports = {
 	const row = new ActionRowBuilder({
 		components: [button],
 	});
-	   let search = new EmbedBuilder()
+	   const search = new EmbedBuilder()
 		.setTitle("8 ball")
 		.setDescription("Please use the button below to use the 8ball")
 		.setColor("Random")

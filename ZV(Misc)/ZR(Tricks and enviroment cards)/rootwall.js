@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`root`, `wall1`, `rw1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let rw = new EmbedBuilder()
+		const rw = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107659128358305802/RootWallCard.webp")
 		.setTitle("Root Wall | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Superpower Trick -**")

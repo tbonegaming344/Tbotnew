@@ -5,8 +5,8 @@ module.exports= {
     aliases: [`midgargsbf`],
     category: `Brain Freeze(BF)`,
 	run: async(client, message, args)=> {
-		let [result] =	await db.query("select bfmidgargs from bfdecks")
-		let bfmg = new EmbedBuilder()
+		const [result] =	await db.query("select bfmidgargs from bfdecks")
+		const bfmg = new EmbedBuilder()
 		.setTitle(`${result[5].bfmidgargs}`)
 		.setDescription(`${result[3].bfmidgargs}`)
 		.setColor("Blue")

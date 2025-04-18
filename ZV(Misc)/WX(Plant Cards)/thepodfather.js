@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`podfather`, `father`, `fatherofpods`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pf = new EmbedBuilder()
+		const pf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ea/PodfatherHD.png/revision/latest/scale-to-width-down/250?cb=20170901023535")
 		.setTitle("The Podfather | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

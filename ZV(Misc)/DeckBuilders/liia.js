@@ -7,10 +7,10 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `liia`,
-  aliases: [`decksmadebytwig`, `twigdecks`, `twighelp`, `helptwig`, `lyraah`, `decksmadebyliia`, `liiadecks`, `liiahelp`, `helpllia`,],
+  aliases: [`decksmadebytwig`, `twigdecks`, `twighelp`, `helptwig`, `lyraah`, `decksmadebyliia`, `liiadecks`, `liiahelp`, `helpllia`, `twig`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
     const row = new ActionRowBuilder().addComponents(
@@ -33,17 +33,16 @@ module.exports = {
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["translattail"];
+    const decks = ["translattail"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
+    for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] =
+    const [result] =
       await db.query(`select translattail 
 from ncdecks nc`);
-    let user = await client.users.fetch("712967053870628984");
-    let twig = new EmbedBuilder()
+    const user = await client.users.fetch("712967053870628984");
+    const twig = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)
         .setDescription(
           `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -53,8 +52,8 @@ from ncdecks nc`);
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
-        .setColor("Random");
-      let translattail = new EmbedBuilder()
+        .setColor("#afd6e2");
+      const translattail = new EmbedBuilder()
 	.setTitle(`${result[5].translattail}`)
 	.setDescription(`${result[3].translattail}`)
 	.setFooter({text: `${result[2].translattail}`})
@@ -73,7 +72,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
 				value:`${result[1].translattail}`,
 				inline: true
 			})
-		.setColor("Random")		
+		.setColor("#afd6e2")		
 		.setImage(`${result[4].translattail}`)
       
     const m = await message.channel.send({
@@ -86,7 +85,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
      if(i.customId == "tl" || i.customId == "translattail") {
       await i.update({ embeds: [translattail], components: [tl] });
      }
-      if(i.customId == "helpl" || i.customId == "help") {
+      else if(i.customId == "helpl" || i.customId == "help") {
         await i.update({ embeds: [twig], components: [row] });
       }
     });

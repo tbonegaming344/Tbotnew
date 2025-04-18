@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:zombats:1087159395965734962>')
             );
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/48/WitchsFamiliarCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226111928")
 			.setTitle("Witch's Familiar | <:Brainy:1062500939908530246><:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Superpower Trick  -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-			let test = new EmbedBuilder()
+			const test = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f5/Zom-Bats_%28Card%29.png/revision/latest/scale-to-width-down/250?cb=20161026140138")
 			.setTitle("Zom-Bats | <:Brainy:1062500939908530246><:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Zombie  -**")

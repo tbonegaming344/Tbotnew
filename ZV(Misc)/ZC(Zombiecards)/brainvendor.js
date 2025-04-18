@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`vendor`, `bv`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/BrainVendorCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226165700")
 			.setTitle("Brain Vendor | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Gourmet Sports Zombie  -**")

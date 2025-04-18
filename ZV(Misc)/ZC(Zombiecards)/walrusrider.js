@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`walrus`, `wr`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/49/WeaselImpperino.png/revision/latest?cb=20170407171035")
 			.setTitle("Walrus Rider | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\-  Imp Pet Zombie   -**")

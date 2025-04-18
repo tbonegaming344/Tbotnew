@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`3nut`, `3`, `three`, `tn`, `3n`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tn = new EmbedBuilder()
+		const tn = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e8/Three-Nut_cardface.png/revision/latest?cb=20170701063428")
 		.setTitle("Three-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Pea Nut Plant -**")

@@ -17,7 +17,7 @@ module.exports = {
     const row = new ActionRowBuilder({
       components: [button],
   });
-      let search = new EmbedBuilder()
+      const search = new EmbedBuilder()
       .setTitle("Randomized Deck")
       .setDescription(`Please use the button below to get a random deck
 Put NA for no heroes just completely random 
@@ -26,6 +26,7 @@ Put zombies for a random zombie deck or just put the hero name for a random deck
       .setColor("Random")
       await message.channel.send({embeds: [search], components: [row]})
     }catch(err){
+      console.error(err)
     return message.channel.send({content: "Please use this command in a server"})
   }
 

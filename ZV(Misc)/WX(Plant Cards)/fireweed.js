@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 							.setEmoji('<:hotlava:1091074880251891893>')
 							);
-		let fire= new EmbedBuilder()
+		const fire= new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/de/Blushing_bush.png/revision/latest/scale-to-width-down/250?cb=20170816030419")
 		.setTitle("Fireweed | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Flower Root Plant -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Don't touch the floor. The floor is lava."
 							 })
-		let hl = new EmbedBuilder()
+		const hl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8a/Hot_Lava_Environment.png/revision/latest/scale-to-width-down/148?cb=20170625202848")
 		.setTitle("Hot Lava | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Environment -**")

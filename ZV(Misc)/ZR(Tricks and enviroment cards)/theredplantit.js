@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`red`, `plantit`, `rp`, `rpi`, `trpi`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let rp = new EmbedBuilder()
+		const rp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/26/The_Red_Plant-It_%28Card%29.png/revision/latest/scale-to-width-down/250?cb=20170424025124")
 		.setTitle("The Red Plant-It | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Root Environment -**")

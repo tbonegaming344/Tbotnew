@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`fmn`, `forgor`, `forgorme`, `forgormenuts`, `forgetme`, `forget`],
 	category: `Plant Cards`,
 	run: async(client,message,args)=> {
-		let fmn = new EmbedBuilder()
+		const fmn = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8f/HD_ForgetMeNuts.png/revision/latest/scale-to-width-down/250?cb=20170814002443")
 		.setTitle("Forget-Me-Nuts | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Flower Nut Plant -**")

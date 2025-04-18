@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:cyborg:1087161586487152753>')
             );
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/cb/HD_Cyborg_Zombie_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210304225649")
 			.setTitle("Cyborg Zombie | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Science Zombie  -**")
@@ -37,7 +37,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-			let venge = new EmbedBuilder()
+			const venge = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a8/HD_Vengeful_Cyborg_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210304225754")
 			.setTitle("Vengeful Cyborg | <:Beastly:1062500894744264714>")
 					.setDescription("**\\- Science Zombie  -**")

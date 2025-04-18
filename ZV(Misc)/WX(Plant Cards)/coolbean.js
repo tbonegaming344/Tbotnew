@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cool`, `cb3`, `cbean`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cb = new EmbedBuilder()
+		const cb = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106221433996181645/Carbeanite_HD.webp")
 		.setTitle("Cool Bean | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Plant -**")

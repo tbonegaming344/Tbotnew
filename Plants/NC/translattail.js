@@ -1,11 +1,11 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `translattail`,
 	category: `Night Cap(NC)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT translattail from ncdecks`);
-	let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT translattail from ncdecks`);
+	const embed = new EmbedBuilder()
 	.setTitle(`${result[5].translattail}`)
 	.setDescription(`${result[3].translattail}`)
 	.setFooter({text: `${result[2].translattail}`})

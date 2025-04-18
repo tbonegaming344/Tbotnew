@@ -3,7 +3,7 @@ module.exports = {
 	name: `vanilla`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let v = new EmbedBuilder()
+		const v = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/31/1598834321656.png/revision/latest/scale-to-width-down/250?cb=20200831003941")
 		.setTitle("Vanilla | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Flower Plant -**")

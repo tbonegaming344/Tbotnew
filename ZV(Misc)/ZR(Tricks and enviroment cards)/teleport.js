@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tp`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4c/Teleport_HD.png/revision/latest?cb=20181016041010")
 			.setTitle("Teleport | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Trick  -**")

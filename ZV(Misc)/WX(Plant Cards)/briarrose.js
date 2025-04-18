@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`briar`, `br2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let br = new EmbedBuilder()
+		const br = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/95/BriarRoseCardImage.png/revision/latest/scale-to-width-down/250?cb=20170303220252")
 		.setTitle("Briar Rose | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

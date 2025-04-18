@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -90,18 +90,18 @@ module.exports = {
     const midrange = new CreateButtons("watersports", "sun3");
     const sun3 = new CreateButtons("midhelp", "ws3");
     const ws3 = new CreateButtons("sunlord", "helpmid");
-    let [result] = await db.query(`select watersports, wimps 
+    const [result] = await db.query(`select watersports, wimps 
 from bfdecks bf
 inner join ntdecks nt
 on (bf.deckinfo = nt.deckinfo)`);
-    let user = await client.users.fetch("1044624858933383209");
-    let cgp = new CreateHelpEmbed(
+    const user = await client.users.fetch("1044624858933383209");
+    const cgp = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks made by ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${cgpDecks.memeDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     )
-      let memecgp = new CreateHelpEmbed(
+      const memecgp = new CreateHelpEmbed(
         `${user.displayName} Meme Decks`,
         `My meme decks made by ${user.displayName} are 
 ${toBuildMemeString}`,
@@ -109,7 +109,7 @@ ${toBuildMemeString}`,
         `To view the Meme decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${cgpDecks.memeDecks.length} Meme decks in Tbot`
       )
-      let combocgp = new CreateHelpEmbed(
+      const combocgp = new CreateHelpEmbed(
         `${user.displayName} Combo Decks`,
         `My Combo decks made by ${user.displayName} are 
 ${toBuildComb}`,
@@ -117,7 +117,7 @@ ${toBuildComb}`,
         `To view the Combo decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${cgpDecks.comboDecks.length} Combo decks in Tbot`
       )
-      let midcgp = new CreateHelpEmbed(
+      const midcgp = new CreateHelpEmbed(
         `${user.displayName} Midrange Decks`,
         `My Midrange decks made by ${user.displayName} are 
 ${toBuildmid}`,
@@ -142,8 +142,8 @@ Note: ${user.displayName} has ${cgpDecks.midrangeDecks.length} Midrange decks in
         }
         return embed;
       }
-      let sunlord = new CreateDeckEmbed(result, "wimps");
-      let watersports = new CreateDeckEmbed(result, "watersports");
+      const sunlord = new CreateDeckEmbed(result, "wimps");
+      const watersports = new CreateDeckEmbed(result, "watersports");
     const m = await message.channel.send({ embeds: [cgp], 
       components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;

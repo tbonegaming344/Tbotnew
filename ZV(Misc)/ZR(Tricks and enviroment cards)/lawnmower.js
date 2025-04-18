@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lawn`, `mower`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let lawn = new EmbedBuilder()
+		const lawn = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ea/Lawn_Mower_HD.png/revision/latest?cb=20160602163233")
 		.setTitle("Lawnmower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Trick -**")

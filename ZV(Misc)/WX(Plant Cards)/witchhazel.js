@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`witch`, `hazel`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let wh = new EmbedBuilder()
+		const wh = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/7c/HD_Witch_Hazel.png/revision/latest?cb=20161002014613")
 		.setTitle("Witch Hazel | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flower Plant -**")

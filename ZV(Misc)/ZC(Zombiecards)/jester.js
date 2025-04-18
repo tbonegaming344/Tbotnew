@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`jes`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e1/HDJester.png/revision/latest/scale-to-width-down/250?cb=20170831054641")
 			.setTitle("Jester | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Party Zombie  -**")

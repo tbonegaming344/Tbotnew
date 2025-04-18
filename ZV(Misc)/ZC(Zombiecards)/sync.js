@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sync`, `syncswimmer`, `swimmer`, `Sync`, `Syncswimmer`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6e/SynchronizedSwimmerCardImage.png/revision/latest?cb=20171022064547")
 			.setTitle("Synchronized Swimmer | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Dancing Sports Zombie  -**")

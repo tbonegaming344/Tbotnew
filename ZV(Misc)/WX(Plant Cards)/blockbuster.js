@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`block`, `buster2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let bust = new EmbedBuilder()
+		const bust = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/00/Blockbuster_vectorized.png/revision/latest/scale-to-width-down/250?cb=20180118204243")
 		.setTitle("Blockbuster | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Plant -**")

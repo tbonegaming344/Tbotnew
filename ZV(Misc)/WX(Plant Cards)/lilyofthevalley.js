@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lily1`, `valley`, `lotv`, `lv`, `lilyof`, `lilyofthe`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let lotv = new EmbedBuilder()
+		const lotv = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/77/IMG_2736.png/revision/latest/scale-to-width-down/250?cb=20180404031433")
 		.setTitle("Lily of the Valley | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Flower Plant -**")

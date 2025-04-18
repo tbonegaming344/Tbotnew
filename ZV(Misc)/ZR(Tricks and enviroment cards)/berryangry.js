@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`angry`, `ba`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ba = new EmbedBuilder()
+		const ba = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9a/HD_Berry_Angry.png/revision/latest?cb=20160429141501")
 		.setTitle("Berry Angry | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Trick -**")

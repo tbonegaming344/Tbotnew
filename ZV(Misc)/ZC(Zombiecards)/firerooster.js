@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`fr`, `frooster`, `rooster`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e9/Fire_Rooster_HD_2.png/revision/latest/scale-to-width-down/250?cb=20180114041606")
 			.setTitle("Fire Rooster | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pet Zombie  -**")

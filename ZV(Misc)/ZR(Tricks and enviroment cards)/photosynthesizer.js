@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`photo`, `photosynthesize`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let photo = new EmbedBuilder()
+		const photo = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/PhotosynthesizerHD.png/revision/latest/scale-to-width-down/250?cb=20171128203234")
 		.setTitle("Photosynthesizer | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Trick -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`haunted`, `pumpkin`, `hp`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let hp = new EmbedBuilder()
+		const hp = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107115930577813595/Pumpking_HD.webp")
 		.setTitle("Haunted Pumpking | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Squash Plant -**")

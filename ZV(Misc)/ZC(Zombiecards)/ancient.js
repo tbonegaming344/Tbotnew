@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ancient`, `Ancientvimpire`, `ancientvimp`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b9/Ancient_Vimpire_cardface.png/revision/latest?cb=20170701125643")
 			.setTitle("Ancient Vimpire | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Imp Monster Zombie  -**")

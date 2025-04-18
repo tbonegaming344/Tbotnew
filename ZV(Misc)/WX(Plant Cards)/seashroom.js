@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sea`, `ss3`],
 	category: `Plant Cards`,
 	run: async(client, message, args) => {
-		let sea = new EmbedBuilder()
+		const sea = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e4/Heroes_seashroom.png/revision/latest/scale-to-width-down/250?cb=20190313160408")
 		.setTitle("Sea-Shroom | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Mushroom Plant -**")

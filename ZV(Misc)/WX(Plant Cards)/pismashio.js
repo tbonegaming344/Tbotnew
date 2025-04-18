@@ -4,7 +4,7 @@ module.exports= {
 	aliases: [`pismash`, `pis`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pis = new EmbedBuilder()
+		const pis = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/74/PismashioCardImage.png/revision/latest?cb=20170924175510")
 		.setTitle("Pismashio | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

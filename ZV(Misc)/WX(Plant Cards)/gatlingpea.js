@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gatling`, `gpea`, `gp3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let gp = new EmbedBuilder()
+		const gp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/7f/HDplus_gatling.png/revision/latest?cb=20161001120328")
 		.setTitle("Gatling Pea | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `cancerknight`,
 	aliases: [`cancer`, `cancerwk`],
 	category: `Wall Knight(WK)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT cancerknight from wkdecks`);
-		let cancer = new EmbedBuilder()
+		const [result] = await db.query(`SELECT cancerknight from wkdecks`);
+		const cancer = new EmbedBuilder()
 		.setTitle(`${result[5].cancerknight}`)
 		.setDescription(`${result[3].cancerknight}`)
 		.setColor("Yellow")

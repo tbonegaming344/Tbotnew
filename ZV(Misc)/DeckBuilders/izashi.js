@@ -4,7 +4,7 @@ const {
     ButtonStyle,
     EmbedBuilder,
   } = require("discord.js");
-  let db = require("../../index.js");
+  const db = require("../../index.js");
   module.exports = {
     name: `izashi`,
     aliases: [`decksmadebyizashi`, `izashidecks`, `helpizashi`, `izashihelp`],
@@ -30,14 +30,14 @@ const {
            .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      let decks = ["watersports"];
+      const decks = ["watersports"];
       let toBuildString = "";
       for (const deck of decks) {
         toBuildString += `\n<@1043528908148052089> **${deck}**`;
       }
-      let [result] = await db.query(`SELECT watersports FROM bfdecks`);
-      let user = await client.users.fetch("459030035295109120");
-      let izashi = new EmbedBuilder()
+      const [result] = await db.query(`SELECT watersports FROM bfdecks`);
+      const user = await client.users.fetch("459030035295109120");
+      const izashi = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
         .setDescription(
           `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -48,7 +48,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
         .setColor("#DAB1DA");
-        let watersports = new EmbedBuilder()
+        const watersports = new EmbedBuilder()
 		.setTitle(`${result[5].watersports}`)
 		.setDescription(`${result[3].watersports}`)
 		.setColor("#DAB1DA")

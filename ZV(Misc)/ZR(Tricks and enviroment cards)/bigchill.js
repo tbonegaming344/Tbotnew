@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chill`, `bc1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let bc = new EmbedBuilder()
+		const bc = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107671902283104296/BigChillCardImage.webp")
 		.setTitle("Big Chill | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Superpower Trick -**")

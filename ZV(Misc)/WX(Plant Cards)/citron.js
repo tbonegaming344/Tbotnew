@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -124,7 +124,7 @@ module.exports = {
   const g3n3 = new CreateButtons("budgetct", "star3");
   const star3 = new CreateButtons("going3nuts3", "wt2");
   const wt2 = new CreateButtons("startron3", "helpall");
-    let ct = new EmbedBuilder()
+    const ct = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
       )

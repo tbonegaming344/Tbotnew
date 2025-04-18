@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`regifting`, `rz`, `regifter`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/51/REgift.png/revision/latest/scale-to-width-down/250?cb=20180325231534")
 			.setTitle("Regifting Zombie | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Party Pirate Zombie  -**")

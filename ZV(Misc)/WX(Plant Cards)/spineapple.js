@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`spine`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let spi = new EmbedBuilder()
+		const spi = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/be/Spineapple_HD.png/revision/latest?cb=20190118035009")
 		.setTitle("Spineapple | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Fruit Plant -**")
@@ -22,7 +22,7 @@ module.exports = {
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Don't let his gruff exterior fool you. He's always looking out for the little guy."
+								 value: "Don't const his gruff exterior fool you. He's always looking out for the little guy."
 							 })
 		message.channel.send({embeds: [spi]})
 	}

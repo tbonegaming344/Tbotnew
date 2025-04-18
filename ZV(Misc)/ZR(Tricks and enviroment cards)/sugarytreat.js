@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sugary`, `st`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e2/SugaryTreatCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226102512")
 			.setTitle("Sugary Treat | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Trick  -**")

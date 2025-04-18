@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bamboo`, `bam`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let bam = new EmbedBuilder()
+		const bam = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a9/Bamboozle_HD.png/revision/latest?cb=20170227030606")
 		.setTitle("Bamboozle | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Root Plant -**")

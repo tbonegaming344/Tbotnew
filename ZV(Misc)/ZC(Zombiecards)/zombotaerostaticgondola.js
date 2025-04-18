@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`aerostatic`, `gondola`, `aerostaticgondola`, `aristotle`, `goondala`, `zombot6`, `zag`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9f/GONDOLA.png/revision/latest/scale-to-width-down/250?cb=20170809191912")
 			.setTitle("Zombot Aerostatic Gondola | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\-  Science Pirate Zombie    -**")

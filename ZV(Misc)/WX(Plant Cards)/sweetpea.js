@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sweet2`, `sp4`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sp = new EmbedBuilder()
+		const sp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4e/Sweet_Pea_HD.png/revision/latest?cb=20170624185127")
 		.setTitle("Sweet Pea | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

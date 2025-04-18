@@ -3,7 +3,7 @@ module.exports = {
 	name: `cactus`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cac = new EmbedBuilder()
+		const cac = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/d/d2/HD_Cactus%28PvZH%29.webp/revision/latest?cb=20211114213945")
 		.setTitle("Cactus | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Cactus Flower Plant -**")

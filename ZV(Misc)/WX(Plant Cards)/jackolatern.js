@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`jack`, `jacko`, `lantern`, `jol`, `jl`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let jl = new EmbedBuilder()
+		const jl = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107413783871234048/JackOLantern.webp")
 		.setTitle("Jack O' Lantern | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Squash Plant -**")

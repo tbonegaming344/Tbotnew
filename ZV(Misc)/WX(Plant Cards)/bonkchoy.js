@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bonk`, `choy`, `bc2`, `bchoy`],
 	category: `Plant Cards`, 
 	run: async(client, message, args)=> {
-		let bc = new EmbedBuilder()
+		const bc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plants-vs-zombies-heroes-through-time/images/2/27/HD_Bonk_Choy_%28PvZH%29.png/revision/latest/thumbnail/width/360/height/360?cb=20170330140458")
 		.setTitle("Bonk Choy | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Plant -**")

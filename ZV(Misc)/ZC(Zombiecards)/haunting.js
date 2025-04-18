@@ -12,7 +12,7 @@ module.exports = {
 			.setStyle(ButtonStyle.Primary)
 			.setEmoji('<:boo:1087162445627400292>')
 		);
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/15/HauntingZombieCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226203920")
 			.setTitle("Haunting Zombie | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Monster Zombie  -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-		let ghost = new EmbedBuilder()
+		const ghost = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/04/HD_Haunting_Ghost_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20221022222105")
 			.setTitle("Haunting Ghost | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Monster Zombie  -**")

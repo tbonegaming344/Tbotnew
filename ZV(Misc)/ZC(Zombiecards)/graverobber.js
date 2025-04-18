@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`grobber`, `robber`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d3/Grave_robber_trabsparent_rig%28Not_made_by_me%29.png/revision/latest/scale-to-width-down/250?cb=20180311064147")
 			.setTitle("Grave Robber | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Mustache Pirate Zombie  -**")

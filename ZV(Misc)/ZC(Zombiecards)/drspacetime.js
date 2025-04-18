@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`drspacetime`, `spacetime`, `drwho`, `space`, `ds2`, `st2`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9f/Dr._SpacetimeH.png/revision/latest?cb=20170620060335")
 			.setTitle("Dr. Spacetime | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- History Science Zombie  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`zucc`, `jewcchini`, `tgz`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tgz = new EmbedBuilder()
+		const tgz = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2e/Official_HD_The_Great_Zucchini.png/revision/latest/scale-to-width-down/250?cb=20160623214711")
 		.setTitle("The Great Zucchini | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Squash Plant -**")

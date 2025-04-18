@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:sunflowers:1107425771263361174>')
             );
-		let sw = new EmbedBuilder()
+		const sw = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b5/ZenGardenCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226144402")
 		.setTitle("Solar Winds | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Environment -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "There's something in the wind. Sunflower seeds, in fact."
 							 })
-		let sun = new EmbedBuilder()
+		const sun = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/p__/images/b/b3/HD_Sunflower.png/revision/latest?cb=20201121031511&path-prefix=protagonist")
 		.setTitle("Sunflower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

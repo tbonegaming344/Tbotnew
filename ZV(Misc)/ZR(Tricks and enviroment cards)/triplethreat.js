@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`triple`, `threat`, `ifsig`, `imps`, `clones1`, `ifclones`, `tt2`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/87/TripleThreatCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225130254")
 			.setTitle("Triple Threat | <:Sneaky:1062502187781075094><:Crazy:1062502046474973224>")
 			.setDescription("**\\-  Imp Superpower Trick  -**")

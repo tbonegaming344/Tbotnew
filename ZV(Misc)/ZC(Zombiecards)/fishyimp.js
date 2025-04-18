@@ -4,7 +4,7 @@ module.exports = {
 	aliases:[`fishy`, `fi`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/41/By_Bluzacy.png/revision/latest/scale-to-width-down/250?cb=20200725172906")
 			.setTitle("Fishy Imp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\-  Imp Pet Zombie  -**")

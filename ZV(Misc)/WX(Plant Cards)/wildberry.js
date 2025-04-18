@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`wild`, `wb1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let wb = new EmbedBuilder()
+		const wb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/70/HD_Wild_Berry.png/revision/latest/scale-to-width-down/250?cb=20160624030845")
 		.setTitle("Wild Berry | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Plant -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bob`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()	.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2f/Barrel_of_Barrels_cardface.png/revision/latest?cb=20170701155232")
+			const embed = new EmbedBuilder()	.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2f/Barrel_of_Barrels_cardface.png/revision/latest?cb=20170701155232")
 			.setTitle("Barrel of Barrels | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Barrel Trick   -**")
 			.addFields({

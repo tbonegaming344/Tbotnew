@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -139,8 +139,8 @@ module.exports = {
       );
     }
 
-    const alldecksrow = new CreateButtons("seacret", "budeb");
-    const budeb = new CreateButtons("helpall", "gstar22");
+    const alldecksrow = new CreateButtons("seacret", "beb");
+    const beb = new CreateButtons("helpall", "gstar22");
     const gstar22 = new CreateButtons("budgeteb", "hgargs");
     const hgargs = new CreateButtons("gargstar22", "npa");
     const npa = new CreateButtons("huntgargs", "sea");
@@ -148,21 +148,21 @@ module.exports = {
     const memerow = new CreateButtons("noplayingallowed2", "hgargs2");
     const hgargs2 = new CreateButtons("helpmeme", "npa2");
     const npa2 = new CreateButtons("huntgargs2", "memehelp");
-    const aggrorow = new CreateButtons("seacret2", "bburn");
-    const bburn = new CreateButtons("helpaggro", "sea2");
-    const sea2 = new CreateButtons("budgetburn", "aggrohelp");
+    const aggrorow = new CreateButtons("seacret2", "beb2");
+    const beb2 = new CreateButtons("helpaggro", "sea2");
+    const sea2 = new CreateButtons("budgeteb2", "aggrohelp");
     const controlrow = new CreateButtons("noplayingallowed3", "hgargs3");
     const hgargs3 = new CreateButtons("helpcontrol", "npa3");
     const npa3 = new CreateButtons("huntgargs3", "controlhelp");
-    let [result] = await db.query(`SELECT * FROM ebdecks`);
+    const [result] = await db.query(`SELECT * FROM ebdecks`);
     // Help EB command
-    let embed = new CreateHelpEmbed(
+    const embed = new CreateHelpEmbed(
       "Electric Boogaloo Decks",
       `To view the Electric Boogaloo decks please select an option from the select menu below!
 Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks in Tbot`,
       "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png"
     );
-    let allEmbed = new CreateHelpEmbed(
+    const allEmbed = new CreateHelpEmbed(
       "Electric Boogaloo Decks",
       `My Decks for Electric Boogaloo(EB) are ${toBuildString}`
     )
@@ -181,7 +181,7 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks
       `To view the Meme Electric Boogaloo decks please use the commands listed above or navigate through all of the Meme decks using the buttons below!
 Note: Electric Boogaloo has ${electricBoogalooDecks.memeDecks.length} Meme decks in Tbot`
     );
-    let aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = new CreateHelpEmbed(
       "Electric Boogaloo Aggro Decks",
       `My Aggro Decks for Electric Boogaloo(EB) are ${toBuildAggroString}`,
       "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
@@ -213,11 +213,11 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control
       return embed;
     }
     //Deck Embeds
-    let budgetburn = new CreateDeckEmbed(result, "budgetburn");
-    let gargstar22 = new CreateDeckEmbed(result, "gargstar22");
+    const budgetburn = new CreateDeckEmbed(result, "budgetburn");
+    const gargstar22 = new CreateDeckEmbed(result, "gargstar22");
     const huntgargs = new CreateDeckEmbed(result, "huntgargs");
-    let noplayingallowed = new CreateDeckEmbed(result, "noplayingallowed");
-    let seacret = new CreateDeckEmbed(result, "seacret");
+    const noplayingallowed = new CreateDeckEmbed(result, "noplayingallowed");
+    const seacret = new CreateDeckEmbed(result, "seacret");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -242,46 +242,49 @@ Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId == "helpmeme" || i.customId == "memehelp") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "aggrohelp" || i.customId == "helpaggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (i.customId == "controlhelp" || i.customId == "helpcontrol") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      } else if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      }
-      //Budget Burn
-      else if (i.customId == "bburn" || i.customId == "budgetburn") {
-        await i.update({ embeds: [budgetburn], components: [bburn] });
-      }
-      //Seacret
-      else if (i.customId == "sea" || i.customId == "seacret") {
-        await i.update({ embeds: [seacret], components: [sea] });
-      } else if (i.customId == "sea2" || i.customId == "seacret2") {
-        await i.update({ embeds: [seacret], components: [sea2] });
-      }
-      //No Playing Allowed
-      else if (i.customId == "npa" || i.customId == "noplayingallowed") {
-        await i.update({ embeds: [noplayingallowed], components: [npa] });
-      } else if (i.customId == "npa2" || i.customId == "noplayingallowed2") {
-        await i.update({ embeds: [noplayingallowed], components: [npa2] });
-      } else if (i.customId == "npa3" || i.customId == "noplayingallowed3") {
-        await i.update({ embeds: [noplayingallowed], components: [npa3] });
-      } else if (i.customId == "gstar22" || i.customId == "gargstar22") {
-        await i.update({ embeds: [gargstar22], components: [gstar22] });
-      } else if (i.customId == "gstar222" || i.customId == "gargstar222") {
-        await i.update({ embeds: [gargstar22], components: [gstar222] });
-      } else if (i.customId == "hgargs" || i.customId == "huntgargs") {
-        await i.update({ embeds: [huntgargs], components: [hgargs] });
-      } else if (i.customId == "hgargs2" || i.customId == "huntgargs2") {
-        await i.update({ embeds: [huntgargs], components: [hgargs2] });
-      } else if (i.customId == "hgargs3" || i.customId == "huntgargs3") {
-        await i.update({ embeds: [huntgargs], components: [hgargs3] });
-      } else if (i.customId == "budeb" || i.customId == "budgeteb") {
-        await i.update({ embeds: [budgetburn], components: [budeb] });
+      const buttonActions = {
+        allhelp: { embed: allEmbed, component: alldecksrow },
+        helpall: { embed: allEmbed, component: alldecksrow },
+        helpmeme: { embed: memeEmbed, component: memerow },
+        memehelp: { embed: memeEmbed, component: memerow },
+        helpaggro: { embed: aggroEmbed, component: aggrorow },
+        aggrohelp: { embed: aggroEmbed, component: aggrorow },
+        helpcontrol: { embed: controlEmbed, component: controlrow },
+        controlhelp: { embed: controlEmbed, component: controlrow },
+        beb: { embed: budgetburn, component: beb },
+        budgeteb: { embed: budgetburn, component: bburn },
+        beb2: { embed: budgetburn, component: beb2 },
+        budgeteb2: { embed: budgetburn, component: bburn },
+        gstar22: { embed: gargstar22, component: gstar22 },
+        gargstar22: { embed: gargstar22, component: gstar22 },
+        hgargs: { embed: huntgargs, component: hgargs },
+        huntgargs: { embed: huntgargs, component: hgargs },
+        hgargs2: { embed: huntgargs, component: hgargs2 },
+        huntgargs2: { embed: huntgargs, component: hgargs2 },
+        hgargs3: { embed: huntgargs, component: hgargs3 },
+        huntgargs3: { embed: huntgargs, component: hgargs3 },
+        npa: { embed: noplayingallowed, component: npa },
+        noplayingallowed: { embed: noplayingallowed, component: npa },
+        npa2: { embed: noplayingallowed, component: npa2 },
+        noplayingallowed2: { embed: noplayingallowed, component: npa2 },
+        npa3: { embed: noplayingallowed, component: npa3 },
+        noplayingallowed3: { embed: noplayingallowed, component: npa3 },
+        sea: { embed: seacret, component: sea },
+        seacret: { embed: seacret, component: sea },
+        sea2: { embed: seacret, component: sea2 },
+        seacret2: { embed: seacret, component: sea2 },
+      };
+     const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button interaction.",
+          flags: MessageFlags.Ephemeral,
+        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

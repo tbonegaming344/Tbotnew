@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ms4`, `monkey`, `smuggler`],
 	category: `Zombie Cards`, 
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c2/Monkey_Smuggler.png/revision/latest/scale-to-width-down/250?cb=20200919153229")
 			.setTitle("Monkey Smuggler | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pirate Pet Zombie -**")

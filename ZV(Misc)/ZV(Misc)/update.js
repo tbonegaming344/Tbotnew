@@ -7,7 +7,7 @@ module.exports = {
 	run: async(client, message, args)=> {
 		if(message.author.id != "625172218120372225") return message.author.send("Only for tbone");
 		const channel = client.channels.cache.get("1100197206822228058")
-		let deck = new EmbedBuilder()
+		const deck = new EmbedBuilder()
 		.setTitle("Deck Additions for tbot")
 		.addFields({
 			name: "Deck Guidelines/Requirements before sumbitting",
@@ -34,8 +34,7 @@ There is also a link attached onto one of the buttons if you need help`})
 Afterwards interact with the buttons below to suggest a deck or to suggest a deck update`})
 		.setColor("Random")
 		.setImage("https://media.discordapp.net/attachments/1152624944262414436/1237412377427968142/image.png?ex=663b8d94&is=663a3c14&hm=a4acee0e703c00ad5654019a1a102f25b5d5141150bd67a753dd35664881ce4b&=&format=webp&quality=lossless")
-const m = await	
-	channel.messages.edit("1100197251588051076", {embeds: [ deck ]} )
+	await channel.messages.edit("1100197251588051076", {embeds: [ deck ]} )
 		console.log("Updated")
 		message.channel.send("Deck Guideline edited and updated in <#1100197206822228058> you can recheck pinned message and notice the edited message!")
 	}

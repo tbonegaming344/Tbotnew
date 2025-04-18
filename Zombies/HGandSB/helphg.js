@@ -265,7 +265,7 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
     const otkswabbie = new CreateDeckEmbed(result, "otkswabbie");
     const telimps = new CreateDeckEmbed(result, "telimps");
     const youngkenmartin = new CreateDeckEmbed(result, "ykm");
-    const t = await message.channel.send({
+    const m = await message.channel.send({
       embeds: [embed],
       components: [row],
     });
@@ -298,81 +298,89 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
       }
     }
     async function HandleButtonInteraction(i) {
-      if (i.customId == "bgus" || i.customId == "budgetgus") {
-        await i.update({ embeds: [budgetykm], components: [bgus] });
-      } else if (i.customId == "bgus2" || i.customId == "budgetgus2") {
-        await i.update({ embeds: [budgetykm], components: [bgus2] });
-      } else if (i.customId == "helpall" || i.customId == "allhelp") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (i.customId == "helpladder" || i.customId == "ladderhelp") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (i.customId == "helpmeme" || i.customId == "memehelp") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (i.customId == "helpcontrol" || i.customId == "controlhelp") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      } else if (i.customId == "helpmidrange" || i.customId == "midrangehelp") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (i.customId == "cl" || i.customId == "conjureleap") {
-        await i.update({ embeds: [conjureleap], components: [cl] });
-      } else if (i.customId == "cl2" || i.customId == "conjureleap2") {
-        await i.update({ embeds: [conjureleap], components: [cl2] });
-      } else if (i.customId == "cl3" || i.customId == "conjureleap3") {
-        await i.update({ embeds: [conjureleap], components: [cl3] });
-      } else if (i.customId == "ft" || i.customId == "frozentelimps") {
-        await i.update({ embeds: [frozentelimps], components: [ft] });
-      } else if (i.customId == "ft2" || i.customId == "frozentelimps2") {
-        await i.update({ embeds: [frozentelimps], components: [ft2] });
-      } else if (i.customId == "ft3" || i.customId == "frozentelimps3") {
-        await i.update({ embeds: [frozentelimps], components: [ft3] });
-      } else if (i.customId == "ft4" || i.customId == "frozentelimps4") {
-        await i.update({ embeds: [frozentelimps], components: [ft4] });
-      } else if (i.customId == "gs" || i.customId == "gravestache") {
-        await i.update({ embeds: [gravestache], components: [gs] });
-      } else if (i.customId == "gs2" || i.customId == "gravestache2") {
-        await i.update({ embeds: [gravestache], components: [gs2] });
-      } else if (i.customId == "gs3" || i.customId == "gravestache3") {
-        await i.update({ embeds: [gravestache], components: [gs3] });
-      } else if (i.customId == "gps" || i.customId == "gravepiratestache") {
-        await i.update({ embeds: [gravepiratestache], components: [gps] });
-      } else if (i.customId == "gps2" || i.customId == "gravepiratestache2") {
-        await i.update({ embeds: [gravepiratestache], components: [gps2] });
-      } else if (i.customId == "gps3" || i.customId == "gravepiratestache3") {
-        await i.update({ embeds: [gravepiratestache], components: [gps3] });
+      const buttonActions = {
+        helpall: {embed: allEmbed, component: alldecksrow},
+        allhelp: {embed: allEmbed, component: alldecksrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpcontrol: {embed: controlEmbed, component: controlrow},
+        controlhelp: {embed: controlEmbed, component: controlrow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+        bgus: {embed: budgetykm, component: bgus},
+        budgetgus: {embed: budgetykm, component: bgus},
+        bgus2: {embed: budgetykm, component: bgus2},
+        budgetgus2: {embed: budgetykm, component: bgus2},
+        cboy: {embed: cryoboy, component: cboy},
+        cyroboy: {embed: cryoboy, component: cboy},
+        cboy2: {embed: cryoboy, component: cboy2},
+        cyroboy2: {embed: cryoboy, component: cboy2},
+        cboy3: {embed: cryoboy, component: cboy3},
+        cyroboy3: {embed: cryoboy, component: cboy3},
+        cboy4: {embed: cryoboy, component: cboy4},
+        cyroboy4: {embed: cryoboy, component: cboy4},
+        cl: {embed: conjureleap, component: cl},
+        conjureleap: {embed: conjureleap, component: cl},
+        cl2: {embed: conjureleap, component: cl2},
+        conjureleap2: {embed: conjureleap, component: cl2},
+        cl3: {embed: conjureleap, component: cl3},
+        conjureleap3: {embed: conjureleap, component: cl3},
+        ft: {embed: frozentelimps, component: ft},
+        frozentelimps: {embed: frozentelimps, component: ft},
+        ft2: {embed: frozentelimps, component: ft2},
+        frozentelimps2: {embed: frozentelimps, component: ft2},
+        ft3: {embed: frozentelimps, component: ft3},
+        frozentelimps3: {embed: frozentelimps, component: ft3},
+        ft4: {embed: frozentelimps, component: ft4},
+        frozentelimps4: {embed: frozentelimps, component: ft4},
+        gs: {embed: gravestache, component: gs},
+        gravestache: {embed: gravestache, component: gs},
+        gs2: {embed: gravestache, component: gs2},
+        gravestache2: {embed: gravestache, component: gs2},
+        gs3: {embed: gravestache, component: gs3},
+        gravestache3: {embed: gravestache, component: gs3},
+        gps: {embed: gravepiratestache, component: gps},
+        gravepiratestache: {embed: gravepiratestache, component: gps},
+        gps2: {embed: gravepiratestache, component: gps2},
+        gravepiratestache2: {embed: gravepiratestache, component: gps2},
+        gps3: {embed: gravepiratestache, component: gps3},
+        gravepiratestache3: {embed: gravepiratestache, component: gps3},
+        otks: {embed: otkswabbie, component: otks},
+        otkswabbie: {embed: otkswabbie, component: otks},
+        otks2: {embed: otkswabbie, component: otks2},
+        otkswabbie2: {embed: otkswabbie, component: otks2},
+        otks3: {embed: otkswabbie, component: otks3},
+        otkswabbie3: {embed: otkswabbie, component: otks3},
+        ti: {embed: telimps, component: ti},
+        telimps: {embed: telimps, component: ti},
+        ti2: {embed: telimps, component: ti2},
+        telimps2: {embed: telimps, component: ti2},
+        ti3: {embed: telimps, component: ti3},
+        telimps3: {embed: telimps, component: ti3},
+        ykm: {embed: youngkenmartin, component: ykm},
+        youngkenmartin: {embed: youngkenmartin, component: ykm},
+        ykm2: {embed: youngkenmartin, component: ykm2},
+        youngkenmartin2: {embed: youngkenmartin, component: ykm2},
+        ykm3: {embed: youngkenmartin, component: ykm3},
+        youngkenmartin3: {embed: youngkenmartin, component: ykm3},
+        ykm4: {embed: youngkenmartin, component: ykm4},
+        youngkenmartin4: {embed: youngkenmartin, component: ykm4},
       }
-      //CyroBoy
-      else if (i.customId == "cboy" || i.customId == "cryoboy") {
-        await i.update({ embeds: [cryoboy], components: [cboy] });
-      } else if (i.customId == "cboy2" || i.customId == "cryoboy2") {
-        await i.update({ embeds: [cryoboy], components: [cboy2] });
-      } else if (i.customId == "cboy3" || i.customId == "cryoboy3") {
-        await i.update({ embeds: [cryoboy], components: [cboy3] });
-      } else if (i.customId == "cboy4" || i.customId == "cryoboy4") {
-        await i.update({ embeds: [cryoboy], components: [cboy4] });
-      } else if (i.customId == "otks" || i.customId == "otkswabbie") {
-        await i.update({ embeds: [otkswabbie], components: [otks] });
-      } else if (i.customId == "otks2" || i.customId == "otkswabbie2") {
-        await i.update({ embeds: [otkswabbie], components: [otks2] });
-      } else if (i.customId == "otks3" || i.customId == "otkswabbie3") {
-        await i.update({ embeds: [otkswabbie], components: [otks3] });
-      } else if (i.customId == "ti" || i.customId == "telimps") {
-        await i.update({ embeds: [telimps], components: [ti] });
-      } else if (i.customId == "ti2" || i.customId == "telimps2") {
-        await i.update({ embeds: [telimps], components: [ti2] });
-      } else if (i.customId == "ti3" || i.customId == "telimps3") {
-        await i.update({ embeds: [telimps], components: [ti3] });
-      } else if (i.customId == "ykm" || i.customId == "youngkenmartin") {
-        await i.update({ embeds: [youngkenmartin], components: [ykm] });
-      } else if (i.customId == "ykm2" || i.customId == "youngkenmartin2") {
-        await i.update({ embeds: [youngkenmartin], components: [ykm2] });
-      } else if (i.customId == "ykm3" || i.customId == "youngkenmartin3") {
-        await i.update({ embeds: [youngkenmartin], components: [ykm3] });
-      } else if (i.customId == "ykm4" || i.customId == "youngkenmartin4") {
-        await i.update({ embeds: [youngkenmartin], components: [ykm4] });
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({ content: "Unknown button interactiom", flags: MessageFlags.Ephemeral });
       }
     }
-    const collector = t.createMessageComponentCollector({ filter: iFilter });
+    const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "select") {
         await HandleSelectMenu(i);

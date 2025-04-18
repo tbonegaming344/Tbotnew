@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lily2`, `pad`, `lp1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let lp = new EmbedBuilder()
+		const lp = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1105880151377575986/78-782316_lily-pad-tried-it-out-lily-pad-pvz-removebg-preview.png")
 		.setTitle("Lily Pad | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Plant -**")

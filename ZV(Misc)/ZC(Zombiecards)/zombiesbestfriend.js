@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`zbf`, `bestfriend`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2f/ZombiesBestFriend.png/revision/latest?cb=20180210123914")
 			.setTitle("Zombie's Best Friend | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Pet Zombie  -**")

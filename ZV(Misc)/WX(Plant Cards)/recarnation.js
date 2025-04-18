@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`carnation`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let rec = new EmbedBuilder()
+		const rec = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/36/Reincarnation_HD.png/revision/latest/scale-to-width-down/250?cb=20171207230413")
 		.setTitle("Reincarnation | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Flower Plant -**")

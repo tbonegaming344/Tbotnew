@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gravit`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let grav = new EmbedBuilder()	
+		const grav = new EmbedBuilder()	
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d9/Gravitree_HD.png/revision/latest/scale-to-width-down/250?cb=20170702201533")
 		.setTitle("Gravitree | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Fruit Tree Plant -**")

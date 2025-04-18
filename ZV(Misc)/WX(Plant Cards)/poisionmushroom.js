@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`poisonshroom`, `poison1`, `pm2`],
 	category: `Plant Cards`,
 	run: async(client,message,args)=> {
-		let pm = new EmbedBuilder()
+		const pm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/25/Poison_Mushroom_HD_PvZ_twitter_post.png/revision/latest/scale-to-width-down/250?cb=20161109010321")
 		.setTitle("Poison Mushroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

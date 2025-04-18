@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chestnut`, `wc`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let wc = new EmbedBuilder()
+		const wc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/57/WaterChestnut.png/revision/latest/scale-to-width-down/250?cb=20170901170011")
 		.setTitle("Water Chestnut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Nut Plant -**")

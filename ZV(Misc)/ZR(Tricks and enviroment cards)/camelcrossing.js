@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`camel`, `crossing`, `camelcross`, `animalcrossing`, `cc5`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9b/CamelCrossingCardImage.png/revision/latest/scale-to-width-down/250?cb=20170228173054")
 			.setTitle("Camel Crossing | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- History Pet Trick  -**")

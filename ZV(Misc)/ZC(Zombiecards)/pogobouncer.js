@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pogo`, `bouncer`, `pb3`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://o.remove.bg/downloads/192d3866-f261-4d75-a171-1aa57162ed8f/df7ahi6-56991baf-5ddf-4be5-9be5-933c5a7325c3-removebg-preview.png")
 			.setTitle("Pogo Bouncer | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Sports Zombie   -**")

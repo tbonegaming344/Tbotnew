@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`doom`, `thanosshroom`, `thanos`, `ds1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ds = new EmbedBuilder()
+		const ds = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b4/Doom-shroom-hd.png/revision/latest?cb=20220410211537")
 		.setTitle("Doom-Shroom | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Mushroom Trick -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`shooting`, `starfruit`, `ss7`, `ssf`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://i.imgur.com/8DdQp7j.jpg")
 		.setTitle("Shooting Starfruit | <:Smarty:1062502890448638022>")
 		.setDescription("** - Fruit Plant - **")

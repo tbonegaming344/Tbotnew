@@ -4,11 +4,21 @@ const {
   ButtonStyle,
   EmbedBuilder,
   MessageFlags,
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
-
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#ffcd59");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `yoyo`,
   aliases: [
@@ -27,159 +37,135 @@ module.exports = {
         new StringSelectMenuOptionBuilder()
           .setLabel("Competitive Deck")
           .setValue("competitive")
-          .setDescription('Some of the Best Decks in the game')
-					.setEmoji("<:compemote:1325461143136764060>"), 
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Deck")
           .setValue("meme")
-          .setDescription('Decks that are built off a weird/fun combo'),
+          .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Combo Decks")
           .setValue("combo")
-          .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
+          .setLabel("Midrange Decks")
           .setValue("midrange")
-          .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
-      )
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          )
+      );
     const row = new ActionRowBuilder().addComponents(select);
-    const comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("trickstache")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("rfl")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const rfl = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpcombo")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("ts")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const ts = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("reflourished")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("combohelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let combodecks = ["reflourished", "trickstache"];
-    let toBuildCombo = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      toBuildCombo += `\n<@1043528908148052089> **${combodecks[i]}**`;
+    const yoyoDecks = {
+      competitiveDecks: ["trickstache"],
+      memeDecks: ["reflourished"],
+      comboDecks: ["trickstache", "reflourished"],
+      midrangeDecks: ["trickstache"],
+    };
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    let competitivedecks = ["trickstache"];
-    let memedecks = ["reflourished"];
-    let midrangedecks = ["reflourished"];
-    let [result] = await db.query(`select reflourished, trickstache
+    const toBuildCombo = buildDeckString(yoyoDecks.comboDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const comborow = new CreateButtons("trickstache", "rfl");
+    const rfl = new CreateButtons("helpcombo", "ts");
+    const ts = new CreateButtons("reflourished", "combohelp");
+    const [result] = await db.query(`select reflourished, trickstache
 from ccdecks cc
 inner join pbdecks pb 
 on (cc.deckinfo = pb.deckinfo)`);
-    let yoyo = new EmbedBuilder()
-      .setTitle("Yoyo Decks")
-      .setDescription(
-        `To view the Decks Made By Yoyo please select an option from the select menu below! To view all of Yoyo decks select the combo decks option from the select menu
-Note: Yoyo has ${combodecks.length} total decks in Tbot`
-      )
-      .setThumbnail(
-        "https://media.discordapp.net/attachments/832984002633269258/1159176803122946129/D85BDC68-3C9B-4F69-93B0-34BE08842E28.png?ex=651eef06&is=651d9d86&hm=635d383184d2aa08482b520b&=&width=492&height=580"
-      )
-      .setColor("Random");
-    let comboyoyo = new EmbedBuilder()
-      .setTitle("Combo Decks Made By Yoyo")
-      .setDescription(`My combo Decks made by Yoyo are ${toBuildCombo}`)
-      .setFooter({
-        text: `To view the Combo Decks Made By Yoyo please use the commands listed above or click on the buttons below!
-Note: Yoyo has ${combodecks.length} Combo decks in Tbot`,
-      })
-      .setThumbnail(
-        "https://media.discordapp.net/attachments/832984002633269258/1159176803122946129/D85BDC68-3C9B-4F69-93B0-34BE08842E28.png?ex=651eef06&is=651d9d86&hm=635d383184d2aa08482b520b&=&width=492&height=580"
-      )
-      .setColor("Random");
-      let reflourished = new EmbedBuilder()
-        .setTitle(`${result[5].reflourished}`)
-        .setDescription(`${result[3].reflourished}`)
-      .setColor("Random")
-      .setFooter({ text: `${result[2].reflourished}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].reflourished}`,
-        inline: true
-      },
-      {
-        name: "Archetype",
-        value: `${result[0].reflourished}`,
-        inline: true
-      },
-        {
-        name: "Deck Cost",
-        value: `${result[1].reflourished}`,
-        inline: true
-      })
-      .setImage(`${result[4].reflourished}`);
-    let tstache = new EmbedBuilder()
-      .setTitle(`${result[5].trickstache}`)
-      .setDescription(`${result[3].trickstache}`)
-      .setFooter({ text: `${result[2].trickstache}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].trickstache}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].trickstache}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].trickstache}`,
-          inline: true,
-        }
-      )
-      .setColor("Random")
-      .setImage(`${result[4].trickstache}`);
+    const yoyo = new CreateHelpEmbed(
+      "Yoyo Decks",
+      `To view the Decks Made By Yoyo please select an option from the select menu below! To view all of Yoyo decks select the combo decks option from the select menu
+Note: Yoyo has ${yoyoDecks.comboDecks} total decks in Tbot`,
+      "https://media.discordapp.net/attachments/832984002633269258/1159176803122946129/D85BDC68-3C9B-4F69-93B0-34BE08842E28.png?ex=651eef06&is=651d9d86&hm=635d383184d2aa08482b520b&=&width=492&height=580"
+    );
+    const comboyoyo = new CreateHelpEmbed(
+      "Combo Decks Made By Yoyo",
+      `My combo Decks made by Yoyo are ${toBuildCombo}`,
+      "https://media.discordapp.net/attachments/832984002633269258/1159176803122946129/D85BDC68-3C9B-4F69-93B0-34BE08842E28.png?ex=651eef06&is=651d9d86&hm=635d383184d2aa08482b520b&=&width=492&height=580",
+      `To view the Combo Decks Made By Yoyo please use the commands listed above or click on the buttons below!
+Note: Yoyo has ${yoyoDecks.comboDecks.length} Combo decks in Tbot`
+    );
+    function CreateDeckEmbed(result, deckName) {
+      const embed = new EmbedBuilder()
+        .setTitle(`${result[5][deckName]}`)
+        .setDescription(`${result[3][deckName]}`)
+        .setFooter({ text: `${result[2][deckName]}` })
+        .addFields(
+          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+        )
+        .setColor("#ffcd59");
+      const imageUrl = result[4][deckName];
+      if (imageUrl) {
+        embed.setImage(imageUrl);
+      }
+      return embed;
+    }
+    const reflourished = new CreateDeckEmbed(result, "reflourished");
+    const trickstache = new CreateDeckEmbed(result, "trickstache");
     const m = await message.channel.send({
       embeds: [yoyo],
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
+    async function handleSelectMenu(i) {
+      const value = i.values[0];
+      if (value == "combo") {
+        await i.update({ embeds: [comboyoyo], components: [comborow] });
+      } else if (value == "competitive" || value == "midrange") {
+        await i.reply({ embeds: [trickstache], flags: MessageFlags.Ephemeral });
+      } else if (value == "meme") {
+        await i.reply({
+          embeds: [reflourished],
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+    }
+    async function handleButtonInteraction(i) {
+      const buttonActions = {
+        helpcombo: { embed: comboyoyo, component: comborow },
+        combohelp: { embed: comboyoyo, component: comborow },
+        ts: { embed: trickstache, component: ts },
+        trickstache: { embed: trickstache, component: ts },
+        rfl: { embed: reflourished, component: rfl },
+        reflourished: { embed: reflourished, component: rfl },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button interaction.",
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if(i.customId == "select"){
-        const value = i.values[0]; 
-        if(value == "combo"){
-          await i.update({embeds: [comboyoyo], components: [comborow]})
-        }
-        else if(value == "competitive" || value == "midrange"){
-          await i.reply({embeds: [tstache], flags: MessageFlags.Ephemeral})
-        }
-        else if(value == "meme"){
-          await i.reply({embeds: [reflourished], flags: MessageFlags.Ephemeral})
-        }
-      }
-      else if (i.customId === "ts" || i.customId == "trickstache") {
-        await i.update({ embeds: [tstache], components: [ts] });
-      }
-      else if (i.customId == "ts2" || i.customId == "trickstache2") {
-        await i.update({ embeds: [tstache], components: [ts2] });
-      }
-      else if (i.customId == "helpcombo" || i.customId == "combohelp") {
-        await i.update({ embeds: [comboyoyo], components: [comborow] });
-      }
-      else if(i.customId == "rfl" || i.customId == "reflourished"){
-        await i.update({ embeds: [reflourished], components: [rfl] });
+      if (i.customId == "select") {
+        await handleSelectMenu(i);
+      } else {
+        await handleButtonInteraction(i);
       }
     });
   },

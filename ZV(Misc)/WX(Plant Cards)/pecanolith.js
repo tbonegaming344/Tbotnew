@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pecan`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pecan = new EmbedBuilder()
+		const pecan = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/b/b3/Pecanolith_HD.png/revision/latest?cb=20180212042554")
 		.setTitle("Pecanolith | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

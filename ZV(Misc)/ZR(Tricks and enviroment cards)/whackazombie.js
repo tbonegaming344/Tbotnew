@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`hammer`, `whack`, `waz`, `wz`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let wz = new EmbedBuilder()
+		const wz = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/34/Whack-a-Zombie_HD.png/revision/latest?cb=20160531183216")
 		.setTitle("Whack-a-Zombie | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Trick -**")

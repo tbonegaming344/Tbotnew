@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`grotto`, `mg1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let mg = new EmbedBuilder()
+		const mg = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a6/Mushroom_Grotto_Environment.png/revision/latest/scale-to-width-down/150?cb=20170614061958")
 		.setTitle("Mushroom Grotto | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Environment -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`iti`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-				let embed = new EmbedBuilder()
+				const embed = new EmbedBuilder()
 				.setThumbnail("https://o.remove.bg/downloads/b75516f5-2716-440e-8384-00b2c38ebb33/dfc8he2-6ae3ef2c-abe1-46ab-800b-2366da8cb033-removebg-preview.png")
 			.setTitle("Imp-Throwing Imp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Imp Zombie -**")

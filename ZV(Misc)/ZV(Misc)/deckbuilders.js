@@ -13,19 +13,17 @@ module.exports = {
   ],
   category: `Miscellaneous`,
   run: async (client, message, args) => {
-    let Ccommands = Array.from(client.commands.values());
-    let commands = Ccommands.filter((command) => {
+    const Ccommands = Array.from(client.commands.values());
+    const commands = Ccommands.filter((command) => {
       if (command.category === "DeckBuilders") {
         return command.name;
       }
     });
-    let toBuildString = "";
-    for (let i = 0; i < commands.length; i++) {
-      let command = commands[i];
-      //   console.log(commands[i])
+    const toBuildString = "";
+    for (const command of commands) {
       toBuildString += `\n<@1043528908148052089> **${command.name}**`;
     }
-    let db = new EmbedBuilder()
+    const db = new EmbedBuilder()
       .setTitle("Deck Creators in tbot")
       .setDescription(
         `My Commands for deckbuilders are ${toBuildString}

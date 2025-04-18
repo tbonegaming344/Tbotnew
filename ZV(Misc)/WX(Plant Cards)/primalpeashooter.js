@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`primalpea`, `pps`, `pp8`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let pp = new EmbedBuilder()
+		const pp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f7/Primalpeashooterpvz2.png/revision/latest/scale-to-width-down/250?cb=20190502155146")
 		.setTitle("Primal Peashooter | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Pea Plant -**")

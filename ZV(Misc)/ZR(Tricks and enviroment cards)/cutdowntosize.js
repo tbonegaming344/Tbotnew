@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chop`, `cutdown`, `cdts`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1c/CutDowntoSizeCardImage.png/revision/latest/scale-to-width-down/250?cb=20170228172308")
 			.setTitle("Cut Down To Size | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Superpower Trick  -**")

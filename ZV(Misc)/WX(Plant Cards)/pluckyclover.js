@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`plucky`, `clover`, `pc2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pc = new EmbedBuilder()
+		const pc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/ad/UnpluckyC.png/revision/latest?cb=20180216045827")
 		.setTitle("Plucky Clover | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Plant -**")

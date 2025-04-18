@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `brickasuarcontrol`,
   aliases: [
@@ -13,8 +13,8 @@ module.exports = {
   ],
   category: `Rustbolt(RB)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`select mechacontrol from rbdecks`);
-    let mc = new EmbedBuilder()
+    const [result] = await db.query(`select mechacontrol from rbdecks`);
+    const mc = new EmbedBuilder()
       .setTitle(`${result[5].mechacontrol}`)
       .setDescription(`${result[3].mechacontrol}`)
       .setFooter({ text: `${result[2].mechacontrol}` })

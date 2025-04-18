@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
   MessageFlags
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 const e = require("express");
 module.exports = {
   name: `non`,
@@ -42,17 +42,17 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["floss", "zmoss"];
+    const decks = ["floss", "zmoss"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select floss, zmoss
+    const [result] = await db.query(`select floss, zmoss
 		from ntdecks nt
 		inner join zmdecks zm 
 		on (nt.deckinfo = zm.deckinfo);`);
-    let user = await client.users.fetch("761810528606617602");
-    let non = new EmbedBuilder()
+    const user = await client.users.fetch("761810528606617602");
+    const non = new EmbedBuilder()
     .setTitle(`Non Decks`)
     .setDescription(
       `My commands for decks made by Non are ${toBuildString}`
@@ -62,11 +62,11 @@ module.exports = {
 Note: Non has ${decks.length} total decks in Tbot`,
     })
     .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let floss = new EmbedBuilder()
+    .setColor("Grey");
+    const floss = new EmbedBuilder()
     .setTitle(`${result[5].floss}`)
     .setDescription(`${result[3].floss}`)
-    .setColor('Random')
+    .setColor('Grey')
     .addFields({
         name: 'Deck Type',
         value: `${result[6].floss}`,
@@ -82,10 +82,10 @@ Note: Non has ${decks.length} total decks in Tbot`,
     })
     .setFooter({text: `${result[2].floss}`})
     .setImage(`${result[4].floss}`)
-    let zmoss = new EmbedBuilder()
+    const zmoss = new EmbedBuilder()
     .setTitle(`${result[5].zmoss}`)
         .setDescription(`${result[3].zmoss}`)
-        .setColor("Random")
+        .setColor("Grey")
         .setFooter({text: `${result[2].zmoss}`})
         .addFields({
             name: "Deck Type",
@@ -108,10 +108,10 @@ Note: Non has ${decks.length} total decks in Tbot`,
       if (i.customId === "flo" || i.customId === "floss") {
         await i.update({ embeds: [floss], components: [flo] });
       }
-      if (i.customId === "zm" || i.customId === "zmoss") {
+      else if (i.customId === "zm" || i.customId === "zmoss") {
         await i.update({ embeds: [zmoss], components: [zm] });
       }
-      if(i.customId == "helpn" || i.customId == "help"){
+      else if(i.customId == "helpn" || i.customId == "help"){
         await i.update({embeds: [non], components: [row]});
       }
     });

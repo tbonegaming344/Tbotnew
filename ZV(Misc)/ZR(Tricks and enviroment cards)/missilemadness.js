@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mm1`, `zmsig`, `missle`, `madness`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()	
+			const embed = new EmbedBuilder()	
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/15/MissileMadnessCardImage.png/revision/latest/scale-to-width-down/250?cb=20170301210051")
 				.setTitle("Missile Madness | <:Hearty:1062501636557242429><:Crazy:1062502046474973224>")
 			.setDescription("**\\-  Science Imp Superpower Trick  -**")

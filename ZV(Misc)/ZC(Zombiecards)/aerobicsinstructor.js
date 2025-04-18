@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`aerobics`, `richardsimmons`, `ai`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://media.discordapp.net/attachments/1152624944262414436/1335226139161002078/HD_Aerobics_Instructor_by_Flag_Zombie_no_hole.webp?ex=679f65be&is=679e143e&hm=bb6e59f786220482354215198ad5bd671f5ed0f0a5df442112f57f8f45b1f77c&=&format=webp")
 			.setTitle("Aerobics Instructor | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Zombie  -**")

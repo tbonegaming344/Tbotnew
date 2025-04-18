@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`electric`, `blueberry`, `eb1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let eb = new EmbedBuilder()
+		const eb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/ab/HD_Electric_Blueberry_a.png/revision/latest/scale-to-width-down/250?cb=20150929173024")
 		.setTitle("Electric Blueberry | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Plant -**")

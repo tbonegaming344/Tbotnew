@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`force`, `field`, `ff`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ff = new EmbedBuilder()
+		const ff = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c0/Forcefield_card.png/revision/latest/scale-to-width-down/250?cb=20190609010220")
 		.setTitle("Force Field | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Environment -**")

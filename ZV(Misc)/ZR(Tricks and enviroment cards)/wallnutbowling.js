@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:HD_Wallnut:1089674209443205192>')
             );
-		let wnb = new EmbedBuilder()
+		const wnb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b9/Wall-Nut_Bowling_HD.png/revision/latest?cb=20160610205319")
 		.setTitle("Wall-Nut Bowling | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Trick -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Ugly shoes not required!"
 							 })
-		let nut = new EmbedBuilder()
+		const nut = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/67/HD_Wall-nut.png/revision/latest?cb=20220414061652")
 		.setTitle("Wall-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

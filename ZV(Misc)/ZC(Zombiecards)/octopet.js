@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`op2`, `octopus`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e8/OctoPetCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226204208")
 			.setTitle("Octo-Pet | <:Hearty:1062501636557242429><:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pet Zombie   -**")

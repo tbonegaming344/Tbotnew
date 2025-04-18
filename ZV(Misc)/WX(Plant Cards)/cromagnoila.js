@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cromag`,`cm2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cm = new EmbedBuilder()
+		const cm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9d/Mesozoic_Magnolia_card_face.png/revision/latest?cb=20170706062111")
 		.setTitle("Cro-Magnolia | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Flower Plant -**")

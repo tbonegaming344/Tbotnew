@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:leftovers:1087163362133151764>')
             );
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/ba/TurkeyRider.png/revision/latest/scale-to-width-down/250?cb=20180120130844")
 			.setTitle("Turkey Rider | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Imp Pet Zombie  -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-				let leftovers = new EmbedBuilder()
+				const leftovers = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6e/LeftoversCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226113102")
 			.setTitle("Leftovers | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Gourmet Pet Trick  -**")

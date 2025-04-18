@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `regster`,
   aliases: [
@@ -40,16 +40,16 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
- let decks = [
+ const decks = [
   "professorpackage",
  ]
  let toBuildString = "";
-  for (let i = 0; i < decks.length; i++) {
-    toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+  for (const deck of decks) {
+    toBuildString += `\n<@1043528908148052089> **${deck}**`;
   }
-    let [result] =
+    const [result] =
       await db.query(`select professorpackage from pbdecks pb`);
-      let reg = new EmbedBuilder()
+      const reg = new EmbedBuilder()
       .setTitle(`Regster Decks`)
         .setDescription(
           `My commands for decks made by Regster are ${toBuildString}`
@@ -59,7 +59,7 @@ module.exports = {
 Note: Regster has ${decks.length} total decks in Tbot`,
         })
         .setColor("Random");
-    let professorpackage = new EmbedBuilder()
+    const professorpackage = new EmbedBuilder()
     .setTitle(`${result[5].professorpackage}`)
     .setDescription(`${result[3].professorpackage}`)
     .setFooter({ text: `${result[2].professorpackage}` })
@@ -85,7 +85,7 @@ Note: Regster has ${decks.length} total decks in Tbot`,
       if(i.customId == "propack" || i.customId == "professorpackage"){
         await i.update({ embeds: [professorpackage], components: [propack] });
       }
-      if(i.customId == "helpreg" || i.customId == "help"){
+      else if(i.customId == "helpreg" || i.customId == "help"){
         await i.update({ embeds: [reg], components: [row] });
       }
     });

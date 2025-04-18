@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`rumble`, `pummel`, `gksig`, `pp1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let pp= new EmbedBuilder()
+		const pp= new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107731730305142834/PowerPummelCardImage.webp")
 		.setTitle("Power Pummel | <:MegaGrow:1062501412992458802><:Guardian:1062501130501885973>")
 		.setDescription("**\\- Leafy Superpower Trick -**")

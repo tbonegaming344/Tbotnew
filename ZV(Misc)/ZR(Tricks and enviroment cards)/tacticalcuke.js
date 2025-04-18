@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tactical`, `cuke`, `tc1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=>{
-		let tc = new EmbedBuilder()
+		const tc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e2/Tactical_Cuke_HD.png/revision/latest?cb=20170227010025")
 		.setTitle("Tactical Cuke | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Fruit Trick -**")

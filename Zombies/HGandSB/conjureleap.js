@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `conjureleap`,
 	aliases: [`conjureleaphg`, `cleap`],
 	category: `Huge-Gigantacus/SuperBrainz`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT conjureleap FROM hgdecks`)
-			let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT conjureleap FROM hgdecks`)
+			const embed = new EmbedBuilder()
 	.setTitle(`${result[5].conjureleap}`)	
 			.setDescription(`${result[3].conjureleap}`)
 	.setFooter({text: `${result[2].conjureleap}`})

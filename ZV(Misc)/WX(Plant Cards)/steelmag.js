@@ -4,7 +4,7 @@ module.exports= {
 	aliases: [`steel`, `magnolia`, `sm2`, `steelmag`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sm = new EmbedBuilder()
+		const sm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/af/Not_HD_Steel_Magnolia.png/revision/latest/scale-to-width-down/250?cb=20200224084250")
 		.setTitle("Steel Magnolia | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Flower Plant -**")

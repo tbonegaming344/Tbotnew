@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`stomp`, `whatarethose`, `whatarethooooose`, `feet`, `zombot8`, `zs`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/20/ZombotStompCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226101300")
 			.setTitle("Zombot Stomp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Science Gargantuar Trick  -**")

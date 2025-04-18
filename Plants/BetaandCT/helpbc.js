@@ -5,13 +5,13 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-     .setColor("#964B00");
+    .setColor("#964B00");
   if (footer) {
     embed.setFooter({ text: `${footer}` });
   }
@@ -103,8 +103,8 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total decks in Tb
       }
       return embed;
     }
-    let carroot = new CreateDeckEmbed(result, "carroot");
-    let shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
+    const carroot = new CreateDeckEmbed(result, "carroot");
+    const shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -116,8 +116,7 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total decks in Tb
         const value = i.values[0];
         if (value == "ladder" || value == "combo" || value == "tempo") {
           await i.reply({ embeds: [carroot], flags: MessageFlags.Ephemeral });
-        }
-        if (value == "control" || value == "competitive") {
+        } else if (value == "control" || value == "competitive") {
           await i.reply({
             embeds: [shamcontrol],
             flags: MessageFlags.Ephemeral,

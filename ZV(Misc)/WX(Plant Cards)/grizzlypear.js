@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`grizzly`, `gp1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let gp = new EmbedBuilder()
+		const gp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1f/HDGrizzlyPear.png/revision/latest?cb=20170217102445")
 		.setTitle("Grizzly Pear | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Fruit Animal Plant -**")

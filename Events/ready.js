@@ -1,5 +1,4 @@
-const { Events, ActivityType, ChannelType } = require("discord.js");
-const fs = require("fs")
+const { Events, ActivityType } = require("discord.js");
 module.exports = {
   name: Events.ClientReady,
   async run(client) {
@@ -9,8 +8,8 @@ module.exports = {
       .reduce((a, b) => a + b, 0);
     client.user.setStatus("dnd");
     console.log(`${client.user.username} is online`);
-    let Ccommands = Array.from(client.commands.values());
-    let commands = Ccommands.filter((command) => {
+    const Ccommands = Array.from(client.commands.values());
+    const commands = Ccommands.filter((command) => {
       if (
         command.category != "Miscellaneous" &&
         command.category != "DeckBuilders" &&

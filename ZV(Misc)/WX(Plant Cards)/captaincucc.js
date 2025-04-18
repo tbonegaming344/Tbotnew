@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cucc`, `ccuc`, `cucumber`, `cc1`, `captaincucc`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cucc = new EmbedBuilder()
+		const cucc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2a/CaptainCucumberCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135731")
 		.setTitle("Captain Cucumber | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Fruit Plant -**")

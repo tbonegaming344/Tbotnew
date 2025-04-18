@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`shark`, `sharktronicsub`, `sharktronic`, `sub`, `zombot7`, `zss`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/66/HDSHARK.png/revision/latest?cb=20170128135827")
 			.setTitle("Zombot Sharktronic Sub | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Science Pet Zombie   -**")

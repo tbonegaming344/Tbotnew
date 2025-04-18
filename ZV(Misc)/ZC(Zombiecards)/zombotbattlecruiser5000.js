@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`zbc`, `battlecruiser`, `cruiser`, `barrelboi`, `zb3`, `zombot5`, `zb5`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9e/ZombotBattlecruiser.png/revision/latest/scale-to-width-down/250?cb=20180209223917")
 			.setTitle("Zombot Battlecruiser 5000 | <:Hearty:1062501636557242429>")
 			.setDescription("**\\-  Science Barrel Zombie -**")

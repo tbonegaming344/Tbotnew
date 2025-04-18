@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chilly`, `cp4`, `cpepper`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cp = new EmbedBuilder()
+		const cp = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106217265822707854/HD_Chilly_Pepper.webp")
 		.setTitle("Chilly Pepper | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Fruit Plant -**")

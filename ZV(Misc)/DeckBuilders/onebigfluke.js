@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -90,7 +90,7 @@ module.exports = {
     const bhammer3 = new CreateButtons("helpmeme", "cbait3");
     const cbait3 = new CreateButtons("banhammer3", "r2s3");
     const r2s3 = new CreateButtons("congabait3", "memehelp");
-    let [result] = await db.query(`select congabait, racism,
+    const [result] = await db.query(`select congabait, racism,
 ramp2seedling
 from pbdecks pb 
 inner join smdecks sm 
@@ -99,28 +99,28 @@ inner join bfdecks bf
 on (pb.deckinfo = bf.deckinfo)
 inner join sfdecks sf
 on (pb.deckinfo = sf.deckinfo)`);
-    let user = await client.users.fetch("756689141416198215");
-    let fluke = new CreateHelpEmbed(
+    const user = await client.users.fetch("756689141416198215");
+    const fluke = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${oneBigFlukeDecks.memeDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    let memefluke = new CreateHelpEmbed(
+    const memefluke = new CreateHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${oneBigFlukeDecks.memeDecks.length} meme decks in Tbot`
     );
-    let combofluke = new CreateHelpEmbed(
+    const combofluke = new CreateHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My combo decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${oneBigFlukeDecks.comboDecks.length} combo decks in Tbot`
     );
-    let midrangefluke = new CreateHelpEmbed(
+    const midrangefluke = new CreateHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
       user.displayAvatarURL(),
@@ -144,9 +144,9 @@ Note: ${user.displayName} has ${oneBigFlukeDecks.midrangeDecks.length} midrange 
       }
       return embed;
     }
-    let congabait = new CreateDeckEmbed(result, "congabait");
-    let ramp2seedling = new CreateDeckEmbed(result, "ramp2seedling");
-    let banhammer = new CreateDeckEmbed(result, "racism");
+    const congabait = new CreateDeckEmbed(result, "congabait");
+    const ramp2seedling = new CreateDeckEmbed(result, "ramp2seedling");
+    const banhammer = new CreateDeckEmbed(result, "racism");
     const m = await message.channel.send({
       embeds: [fluke],
       components: [row],

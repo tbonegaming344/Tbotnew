@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`latern`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let late = new EmbedBuilder()
+		const late = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/fb/PlanternPvZAS.png/revision/latest?cb=20140620094543")
 		.setTitle("Plantern | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Tree Root Plant -**")

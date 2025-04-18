@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`anb`, `broth`, `admiral`, `admiralnavy`, `admiralbean`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let anb = new EmbedBuilder()
+		const anb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/80/Another_HD_Admiral_Navy_Bean.png/revision/latest?cb=20161023084810")
 		.setTitle("Admiral Navy Bean | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Plant -**")

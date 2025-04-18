@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`hgsig`, `terror`, `terrorformer`, `former`, `tf1`, `tf`, `terror-former10,000`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c9/Terror-Former_2000_card.png/revision/latest/scale-to-width-down/250?cb=20170414224508")
 			.setTitle("Terror-Former 10,000 | <:Brainy:1062500939908530246><:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Science Imp Superpower Trick  -**")

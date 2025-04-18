@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `professorpackage`,
   aliases: [`pbpackage`, `packagepb`, `packagebrainstorm`, `packpb`, `pbpack`],
   category: `Professor Brainstorm(PB)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT professorpackage FROM pbdecks`);
-    let embed = new EmbedBuilder()
+    const [result] = await db.query(`SELECT professorpackage FROM pbdecks`);
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].professorpackage}`)
       .setDescription(`${result[3].professorpackage}`)
       .setFooter({ text: `${result[2].professorpackage}` })

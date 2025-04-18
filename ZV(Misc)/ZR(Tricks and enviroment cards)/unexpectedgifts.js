@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gifts`, `unexpected`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setTitle("https://static.wikia.nocookie.net/plantsvszombies/images/c/c5/UnexpectedGifts.png/revision/latest/scale-to-width-down/250?cb=20180119081611")
 			.setTitle("Unexpected Gifts | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Party Trick   -**")

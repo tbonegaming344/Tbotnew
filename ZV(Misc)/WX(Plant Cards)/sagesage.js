@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sage`, `ss9`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ea/HD_Sage_Sage.png/revision/latest?cb=20160429141436")
 		.setTitle("Sage Sage | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Leafy Plant -**")

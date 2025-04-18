@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`clique`, `cp1`, `cpeas`],
 	category: `Plant Cards`, 
 	run: async(client, message, args)=> {
-		let cp = new EmbedBuilder()
+		const cp = new EmbedBuilder()
 		.setThumbnail("https://pbs.twimg.com/media/DFwAtCsU0AE4INR.png")
 		.setTitle("Clique Peas | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Bean Pea Plant -**")

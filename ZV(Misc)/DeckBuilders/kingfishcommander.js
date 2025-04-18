@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -96,36 +96,36 @@ module.exports = {
     const lt3 = new CreateButtons("helpcombo", "pm3");
     const pm3 = new CreateButtons("lunchtime3", "sl3");
     const sl3 = new CreateButtons("petmop3", "combohelp");
-    let user = await client.users.fetch("1160392548423061516");
-    let kfish = new CreateHelpEmbed(
+    const user = await client.users.fetch("1160392548423061516");
+    const kfish = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below! 
       Select meme to view all the decks made by ${user.displayName} or select combo to view all the combo decks made by ${user.displayName}
 Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    let memekfish = new CreateHelpEmbed(
+    const memekfish = new CreateHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} Meme decks in Tbot`
     );
-    let combookfish = new CreateHelpEmbed(
+    const combookfish = new CreateHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${kingFishCommanderDecks.comboDecks.length} Combo decks in Tbot`
     );
-    let midrangekfish = new CreateHelpEmbed(
+    const midrangekfish = new CreateHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My Midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
       user.displayAvatarURL(),
       `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
-    let [result] =
+    const [result] =
       await db.query(`select petmop, midpets, savagemayflower, wimps
 		from gsdecks gs 
     inner join bfdecks bf 
@@ -149,10 +149,10 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
       }
       return embed;
     }
-    let lunchtime = new CreateDeckEmbed(result, "midpets");
-    let savagemayflower = new CreateDeckEmbed(result, "savagemayflower");
-    let pmop = new CreateDeckEmbed(result, "petmop");
-    let sunlord = new CreateDeckEmbed(result, "wimps");
+    const lunchtime = new CreateDeckEmbed(result, "midpets");
+    const savagemayflower = new CreateDeckEmbed(result, "savagemayflower");
+    const pmop = new CreateDeckEmbed(result, "petmop");
+    const sunlord = new CreateDeckEmbed(result, "wimps");
     const m = await message.channel.send({
       embeds: [kfish],
       components: [row],

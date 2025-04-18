@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`stinger`, `rs1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let rs = new EmbedBuilder()
+		const rs = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/10/Red_Stinger_HD.png/revision/latest?cb=20150603123043")
 		.setTitle("Red Stinger | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Flower Plant -**")

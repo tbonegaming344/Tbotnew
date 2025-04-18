@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gargfeast`, `feast`, `gf`, `gargantuars'feast`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/65/Gargantuars%27_FeastH.png/revision/latest?cb=20210607151837")
 			.setTitle("Gargantuars' Feast | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Gargantuar Trick -**")

@@ -17,7 +17,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 										.setEmoji('<:hearty:1087158979936919643>')
             );
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2b/Trick_or_Treater.png/revision/latest/scale-to-width-down/250?cb=20171130094628")
 			.setTitle("Trick-or-Treater | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Gourmet Party Zombie  -**")
@@ -40,7 +40,7 @@ module.exports = {
 									 value: `Trick or treat? He is haunted by that question - and by an answer that continues to elude him.`
 								 })
 	
-			let sugary = new EmbedBuilder()
+			const sugary = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e2/SugaryTreatCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226102512")
 			.setTitle("Sugary Treat | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Trick  -**")
@@ -60,7 +60,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-				let hearty = new EmbedBuilder()
+				const hearty = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8e/Healthhh.png/revision/latest/scale-to-width-down/250?cb=20170107053505")
 			.setTitle("Healthy Treat | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Gourmet Trick -**")

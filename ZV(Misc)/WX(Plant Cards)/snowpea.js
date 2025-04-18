@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sp5`, `spea`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sp = new EmbedBuilder()
+		const sp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a2/Snow_Pea_%28HD_size%29.png/revision/latest/scale-to-width-down/250?cb=20230328030953")
 		.setTitle("Snow Pea | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Pea Plant -**")

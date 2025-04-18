@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`shieldcrusher`, `viking`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4b/ShieldcrusherViking.png/revision/latest/scale-to-width-down/1000?cb=20170831054602")
 			.setTitle("Shieldcrusher Viking | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Mustache Pirate Zombie  -**")

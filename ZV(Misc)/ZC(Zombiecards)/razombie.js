@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ra`, `rz2`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/55/Ra_Zombie_HD.png/revision/latest?cb=20161012010546")
 			.setTitle("Ra Zombie | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- History Zombie  -**")

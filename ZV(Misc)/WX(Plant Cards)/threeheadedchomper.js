@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`threeheaded`, `3headed`, `3headedchomper`, `thc`, `3hc`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tch = new EmbedBuilder()
+		const tch = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ef/HD_Three-Headed_Chomper.png/revision/latest?cb=20200808213148")
 		.setTitle("Three-Headed Chomper | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flytrap Plant -**")

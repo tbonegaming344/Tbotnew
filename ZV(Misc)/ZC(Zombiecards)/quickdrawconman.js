@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`conman`, `qdc`, `qcm`, `quickdraw`, 	`con-man`, `con`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/28/Nice_shootin_kid.png/revision/latest/scale-to-width-down/250?cb=20170901151109")
 			.setTitle("Quickdraw Con Man | <:Crazy:1062502046474973224>")
 			.setDescription("**\\-  Monster Zombie  -**")

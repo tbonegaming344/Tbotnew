@@ -4,9 +4,9 @@ module.exports = {
 	aliases: [`shrinking`, `violet`, `sv1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let sv = new EmbedBuilder()
+		const sv = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/98/Shrinking_Ultra_Violet_cardface.png/revision/latest?cb=20170826054940")
-		.setTitle("Shrinking Violet | <:Smarty:1062502890448638022>")
+		.setTitle("Shrinking Vioconst | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flower Trick -**")
 		.setColor("Random")
 		

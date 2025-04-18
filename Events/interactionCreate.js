@@ -10,7 +10,7 @@ const {
   MessageFlags
 } = require("discord.js");
 const { ascii, hangmanGuesses } = require("../Utilities/hangman");
-let db = require("../index.js");
+const db = require("../index.js");
 const FuzzySearch = require("fuzzy-search");
 const discord = new ActionRowBuilder().addComponents(
   new ButtonBuilder()
@@ -22,7 +22,7 @@ const discord = new ActionRowBuilder().addComponents(
 module.exports = {
   name: "interactionCreate",
   async run(interaction) {
-    let client = interaction.client;
+    const client = interaction.client;
     if (interaction.type === InteractionType.ModalSubmit) {
       if (interaction.customId === "dSugg") {
         await interaction.deferUpdate();
@@ -538,8 +538,8 @@ module.exports = {
         await interaction.deferUpdate();
         const reason =
           interaction.fields.getTextInputValue("deck-search-input");
-        let Ccommands = Array.from(client.commands.values());
-        let commands = Ccommands.filter((command) => {
+        const Ccommands = Array.from(client.commands.values());
+        const commands = Ccommands.filter((command) => {
           if (
             command.category != "Miscellaneous" &&
             command.category != "DeckBuilders" &&
@@ -551,7 +551,7 @@ module.exports = {
             return command.name;
           }
         });
-        let decks = [];
+        const decks = [];
         for (const command of commands) {
           decks.push(command.name);
         }
@@ -565,7 +565,7 @@ module.exports = {
           for (const command of result) {
             toBuildString += `\n<@1043528908148052089> **${command}**`;
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`you searched for ${reason} decks`)
             .setDescription(
               `Your search for ${reason} decks came back with ${toBuildString}
@@ -591,8 +591,8 @@ module.exports = {
       //Card Search
       if (interaction.customId === "Card-search-modal") {
         await interaction.deferUpdate();
-        let Ccommands = Array.from(client.commands.values());
-        let commands = Ccommands.filter((command) => {
+        const Ccommands = Array.from(client.commands.values());
+        const commands = Ccommands.filter((command) => {
           if (
             command.category == "Zombie Cards" ||
             command.category == "Tricks Phase" ||
@@ -601,7 +601,7 @@ module.exports = {
             return command.name;
           }
         });
-        let words = [];
+        const words = [];
         for (const command of commands) {
           words.push(command.name);
         }
@@ -609,7 +609,7 @@ module.exports = {
         const searcher = new FuzzySearch(words, {
           caseSensitive: false,
         });
-        let reason = await interaction.fields.getTextInputValue(
+        const reason = await interaction.fields.getTextInputValue(
           "card-search-input"
         );
         const result = searcher.search(reason);
@@ -618,7 +618,7 @@ module.exports = {
           toBuildString += `\n<@1043528908148052089> **${command}**`;
         }
         try {
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`you searched for ${reason} cards`)
             .setDescription(
               `Your search for ${reason} cards came back with ${toBuildString}`
@@ -665,8 +665,8 @@ module.exports = {
           "maybe",
           "never",
         ];
-        let reason = await interaction.fields.getTextInputValue("8ball-input");
-        let embed = new EmbedBuilder()
+        const reason = await interaction.fields.getTextInputValue("8ball-input");
+        const embed = new EmbedBuilder()
           .setTitle(`:8ball: ${reason}`)
           .setDescription(
             `:8ball: says  ${ball[Math.floor(Math.random() * ball.length)]}`
@@ -850,7 +850,7 @@ module.exports = {
           interaction.fields.getTextInputValue("random-decks-input");
         const hero = heroinput.toLowerCase();
         if (hero == "na") {
-          let [result] = await db.query(`select * from bcdecks bc
+          const [result] = await db.query(`select * from bcdecks bc
             inner join bfdecks bf
             on (bc.deckinfo = bf.deckinfo)
             inner join ccdecks cc 
@@ -1042,7 +1042,7 @@ module.exports = {
             `${result[0].trickmech}`,
             `${result[0].zmoss}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Deck")
             .setDescription(`Here is your random Deck`)
             .setColor("Random")
@@ -1058,7 +1058,7 @@ module.exports = {
           hero === "carrot" ||
           hero === "beta carrotina"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             "SELECT * FROM bcdecks where deckinfo ='image link:'"
           );
           const deck = [
@@ -1067,7 +1067,7 @@ module.exports = {
             `${result[0].shamcontrol}`,
          
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Beta Carrotina Deck")
             .setDescription(`Here is your random Beta Carrotina deck`)
             .setColor("Random")
@@ -1075,7 +1075,7 @@ module.exports = {
           await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
         }
         if (hero === "citron" || hero === "ct" || hero === "tron") {
-          let [result] = await db.query(
+          const [result] = await db.query(
             "SELECT * FROM ctdecks WHERE deckinfo = 'image link:'"
           );
           const deck = [
@@ -1083,7 +1083,7 @@ module.exports = {
             `${result[0].startron}`,
             `${result[0].wateron}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Citron(CT) Deck")
             .setDescription(`Here is your random Citron(CT) Deck`)
             .setColor("Random")
@@ -1097,7 +1097,7 @@ module.exports = {
           hero == "combustible" ||
           hero == "captaincombustible"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * from ccdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1107,7 +1107,7 @@ module.exports = {
             `${result[0].plantmop}`,
             `${result[0].yrm}`
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Deck for Captain Combustible(CC)")
             .setDescription(`Here is your random Captain Combustible(CC) Deck`)
             .setColor("Random")
@@ -1122,7 +1122,7 @@ module.exports = {
           hero === "zilla" ||
           hero === "chompzilla"
         ) {
-          let [result] = await db.query(`SELECT * from czdecks
+          const [result] = await db.query(`SELECT * from czdecks
                     where deckinfo = 'image link:'`);
           const deck = [
             `${result[0].apotk}`, 
@@ -1131,7 +1131,7 @@ module.exports = {
             //Mopribus
             `${result[0].mopribus}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Chompzilla Deck")
             .setDescription(`Here is your random Chompzilla deck`)
             .setColor("Random")
@@ -1146,7 +1146,7 @@ module.exports = {
           hero === "grassknuckles" ||
           hero === "grass knuckles"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM gkdecks where deckinfo = 'image link:'`
           );
           const gk = [
@@ -1155,7 +1155,7 @@ module.exports = {
             `${result[0].healthotk}`, 
             `${result[0].pawntrickstab}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Grass Knuckles Deck")
             .setDescription(`Here is your Random Grass Knuckles Deck`)
             .setColor("Random")
@@ -1168,7 +1168,7 @@ module.exports = {
           hero == "green" ||
           hero == "shadow"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * from gsdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1180,7 +1180,7 @@ module.exports = {
             `${result[0].sovietonion}`,
             
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Green Shadow Deck")
             .setDescription(`Here is your Random Green Shadow(GS) Deck`)
             .setColor("Random")
@@ -1195,7 +1195,7 @@ module.exports = {
           hero == "night" || 
           hero== "night cap"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * from ncdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1205,7 +1205,7 @@ module.exports = {
             `${result[0].toyotacontrolla}`, 
             `${result[0].translattail}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random NightCap(NC) Deck")
             .setDescription(`Here is your random NightCap(NC) Deck`)
             .setColor("Random")
@@ -1214,7 +1214,7 @@ module.exports = {
           await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
         }
         if (hero == "rose" || hero == "ro") {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * from rodecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1225,7 +1225,7 @@ module.exports = {
             `${result[0].hmr}`,
            
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Rose(RO) Deck")
             .setDescription(`Here is your Random Rose(RO) Deck`)
             .setColor("Random")
@@ -1240,7 +1240,7 @@ module.exports = {
           hero == "flare" ||
           hero == "solarflare"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * from sfdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1253,7 +1253,7 @@ module.exports = {
             `${result[0].ramp2seedling}`,
           
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Solar Flare Deck")
             .setDescription(`Here is your Random Solar Flare(SF) Deck`)
             .setColor("Random")
@@ -1267,7 +1267,7 @@ module.exports = {
           hero == "spud" ||
           hero == "dow"
         ) {
-          let [result] = await db.query(`select * from spdecks 
+          const [result] = await db.query(`select * from spdecks 
                     where deckinfo = 'image link:'`);
           const deck = [
             //SP TBOT DB
@@ -1277,7 +1277,7 @@ module.exports = {
            
           
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Spudow(SP) Deck")
             .setDescription(`Here is your Random Spudow(SP) Deck `)
             .setColor("Random")
@@ -1293,7 +1293,7 @@ module.exports = {
           hero == "wallknight" ||
           hero == "wall knight"
         ) {
-          let [result] = await db.query(`select * from wkdecks 
+          const [result] = await db.query(`select * from wkdecks 
                     where deckinfo = 'image link:'`);
           const deck = [
             //WK TBOT DB
@@ -1303,7 +1303,7 @@ module.exports = {
             `${result[0].highlander}`,   
             `${result[0].shitknight}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Wall Knight(WK) Deck")
             .setDescription(`Here is your Random Wall Knight Deck `)
             .setColor("Random")
@@ -1318,7 +1318,7 @@ module.exports = {
           hero == "freeze" ||
           hero == "brainfreeze"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM bfdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1335,7 +1335,7 @@ module.exports = {
             `${result[0].raiserpackage}`,
             `${result[0].watersports}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Brain Freeze(BF) Deck")
             .setDescription(`Here is your random Brain Freeze(BF) Deck `)
             .setColor("Random")
@@ -1349,7 +1349,7 @@ module.exports = {
           hero == "boogaloo" ||
           hero == "electric boogaloo"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM ebdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1364,7 +1364,7 @@ module.exports = {
             `${result[0].seacret}`,
       
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Electric Boogaloo(EB) Deck")
             .setDescription(`Here is your random Electric Boogaloo(EB) Deck `)
             .setColor("Random")
@@ -1379,7 +1379,7 @@ module.exports = {
           hero == "giganticus" ||
           hero == "huge-giganticus"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM hgdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1393,7 +1393,7 @@ module.exports = {
             `${result[0].telimps}`,
             `${result[0].ykm}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Huge-Gigantacus(HG) Deck")
             .setDescription(`Here is your random Huge-Gigantacus(HG) Deck `)
             .setColor("Random")
@@ -1408,7 +1408,7 @@ module.exports = {
           heroinput == "super brainz" ||
           heroinput == "superbrainz"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM sbdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1417,7 +1417,7 @@ module.exports = {
             `${result[0].telimpssb}`,
         
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Super Brains(SB) Deck")
             .setDescription(`Here is your random Super Brains(SB) Deck `)
             .setColor("Random")
@@ -1431,7 +1431,7 @@ module.exports = {
           hero == "imp" ||
           hero == "finity"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM ifdecks WHERE deckinfo = 'image link:'`
           );
           const deck = [
@@ -1440,7 +1440,7 @@ module.exports = {
             `${result[0].spacestars}`,
             `${result[0].splimps}`,         
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Impfinity(IF) Deck")
             .setDescription(`Here is your random Impfinity(IF) Deck `)
             .setColor("Random")
@@ -1455,7 +1455,7 @@ module.exports = {
           hero == "ticia" ||
           hero == "im"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM imdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1467,7 +1467,7 @@ module.exports = {
             `${result[0].ycm}`,
   
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Immorticia(IM) Deck")
             .setDescription(`Here is your random Immorticia(IM) Deck `)
             .setColor("Random")
@@ -1481,7 +1481,7 @@ module.exports = {
           hero == "nept" ||
           hero == "tuna"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM ntdecks WHERE deckinfo = 'image link:'`
           );
           const deck = [
@@ -1495,7 +1495,7 @@ module.exports = {
             `${result[0].wimps}`,
            
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Neptuna(NT) Deck")
             .setDescription(`Here is your random Neptuna(NT) Deck `)
             .setColor("Random")
@@ -1510,7 +1510,7 @@ module.exports = {
           hero == "professor brainstorm" ||
           hero == "professorbrainstorm"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `select * from pbdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1523,7 +1523,7 @@ module.exports = {
             `${result[0].valkster}`,
             `${result[0].youngeggmartin}`,
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Professor Brainstorm(PB) Deck")
             .setDescription(
               `Here is your random Professor Brainstorm(PB) Deck `
@@ -1541,7 +1541,7 @@ module.exports = {
           hero == "rusty" ||
           hero == "rust bolt"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM rbdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1559,7 +1559,7 @@ module.exports = {
             `${result[0].terrifytrickazzi}`,
             
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Rustbolt(RB) Deck")
             .setDescription(`Here is your random Rustbolt(RB) Deck `)
             .setColor("Random")
@@ -1574,7 +1574,7 @@ module.exports = {
           hero == "the smash" ||
           hero == "thesmash"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `SELECT * FROM smdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1584,7 +1584,7 @@ module.exports = {
             `${result[0].whalepharaoh}`,
            
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Smash(SM) Deck")
             .setDescription(`Here is your random Smash(SM) Deck `)
             .setColor("Random")
@@ -1598,7 +1598,7 @@ module.exports = {
           hero == "mech" ||
           hero == "z-mech"
         ) {
-          let [result] = await db.query(
+          const [result] = await db.query(
             `select * from zmdecks where deckinfo = 'image link:'`
           );
           const deck = [
@@ -1614,7 +1614,7 @@ module.exports = {
             `${result[0].zmoss}`,
           
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Zmech(ZM) Deck")
             .setDescription(`Here is your Random Zmech Deck `)
             .setColor("Random")
@@ -1623,7 +1623,7 @@ module.exports = {
           await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
         }
         if (hero == "plants") {
-          let [result] = await db.query(`select * from bcdecks bc
+          const [result] = await db.query(`select * from bcdecks bc
                     inner join ccdecks cc 
                     on (bc.deckinfo = cc.deckinfo)
                     inner join ctdecks ct 
@@ -1704,7 +1704,7 @@ module.exports = {
               `${result[0].shitknight}`,
             
           ];
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Plant Deck")
             .setDescription(`Here is your random plant Deck`)
             .setColor("Random")
@@ -1713,7 +1713,7 @@ module.exports = {
           await interaction.followUp({ embeds: [embed],flags: MessageFlags.Ephemeral });
         }
         if (hero == "zombies") {
-          let [result] = await db.query(`select * from bfdecks bf
+          const [result] = await db.query(`select * from bfdecks bf
                     inner join ebdecks eb 
                     on (bf.deckinfo = eb.deckinfo)
                     inner join hgdecks hg
@@ -1825,7 +1825,7 @@ module.exports = {
             
           ];
 
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle("Random Zombie Deck")
             .setDescription(`Here is your random Zombie Deck`)
             .setColor("Random")
@@ -1837,9 +1837,9 @@ module.exports = {
       //wheel modal
       if (interaction.customId === "wheel-modal") {
         await interaction.deferUpdate();
-        let hero = await interaction.fields.getTextInputValue("wheel-input");
-        let number = await interaction.fields.getTextInputValue("number-input");
-        let heroinput = hero.toLowerCase();
+        const hero = await interaction.fields.getTextInputValue("wheel-input");
+        const number = await interaction.fields.getTextInputValue("number-input");
+        const heroinput = hero.toLowerCase();
         if (number < 1 || number > 40) {
           return interaction.followUp({
             content: "Please input a number between 1-40",
@@ -1968,8 +1968,8 @@ module.exports = {
             "Jolly Holly",
             "Sap-Fling",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -1977,7 +1977,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel BC Deck`)
             .setDescription(
               `Here is your wheel for bc \n **${randomWords.join("\n")}**`
@@ -2094,8 +2094,8 @@ module.exports = {
             "Jolly Holly",
             "Sap-Fling",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2103,7 +2103,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Citron Deck`)
             .setDescription(
               `Here is your wheel for Citron \n **${randomWords.join("\n")}**`
@@ -2220,8 +2220,8 @@ module.exports = {
             "Banana Split",
             "Plucky Clover",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2229,7 +2229,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Captain Combustible Deck`)
             .setDescription(
               `Here is your wheel for Captain Combustible
@@ -2345,8 +2345,8 @@ module.exports = {
             "Banana Split",
             "Plucky Clover",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2354,7 +2354,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Chompzilla Deck`)
             .setDescription(
               `Here is your wheel for Chompzila
@@ -2473,8 +2473,8 @@ module.exports = {
             "Banana Split",
             "Plucky Clover",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2482,7 +2482,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Grass Knuckles Deck`)
             .setDescription(
               `Here is your wheel for Grass Knuckles
@@ -2601,8 +2601,8 @@ module.exports = {
             "Banana Split",
             "Plucky Clover",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2610,7 +2610,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Green Shadow Deck`)
             .setDescription(
               `Here is your wheel for Green Shadow
@@ -2732,8 +2732,8 @@ module.exports = {
             "Atomic Bombegranate",
             "Electric Blueberry",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2741,7 +2741,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Nightcap Deck`)
             .setDescription(
               `Here is your wheel for Nightcap
@@ -2856,8 +2856,8 @@ module.exports = {
             "Ketchup Mechanic",
             "Toadstool",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2865,7 +2865,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Rose Deck`)
             .setDescription(
               `Here is your wheel for Rose
@@ -2984,8 +2984,8 @@ module.exports = {
             "Ketchup Mechanic",
             "Toadstool",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -2993,7 +2993,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Solar Flare Deck`)
             .setDescription(
               `Here is your wheel for Solar Flare
@@ -3114,8 +3114,8 @@ module.exports = {
             "Shamrocket",
             "Red Stinger",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3123,7 +3123,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Spudow Deck`)
             .setDescription(
               `Here is your wheel for Spudow 
@@ -3245,8 +3245,8 @@ module.exports = {
             "Shamrocket",
             "Red Stinger",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3254,7 +3254,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Wall-Knight Deck`)
             .setDescription(
               `Here is your wheel for Wall-Knight
@@ -3376,8 +3376,8 @@ module.exports = {
             "Sneezing Zombie",
             "King of the Grill",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3385,7 +3385,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Brain Freeze Deck`)
             .setDescription(
               `Here is your wheel for Brain Freeze
@@ -3506,8 +3506,8 @@ module.exports = {
             "Sneezing Zombie",
             "King of the Grill",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3515,7 +3515,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Electric Boogaloo(EB) Deck`)
             .setDescription(
               `Here is your wheel for Electric Boogaloo(EB)
@@ -3635,8 +3635,8 @@ module.exports = {
             "Zombie High Diver",
             "Trapper Zombie",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3644,7 +3644,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Huge-Gigantacus(HG) Deck`)
             .setDescription(
               `Here is your wheel for Huge-Gigantacus(HG)
@@ -3764,8 +3764,8 @@ module.exports = {
             "Zombie High Diver",
             "Trapper Zombie",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3773,7 +3773,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Super Brainz Deck`)
             .setDescription(
               `Here is your wheel for Super Brainz
@@ -3892,8 +3892,8 @@ module.exports = {
             "Zombie High Diver",
             "Trapper Zombie",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -3901,7 +3901,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Impfinity Deck`)
             .setDescription(
               `Here is your wheel for Impfinity
@@ -4023,8 +4023,8 @@ module.exports = {
             "Kitchen Sink Zombie",
             "Bad Moon Rising",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -4032,7 +4032,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Immorticia Deck`)
             .setDescription(
               `Here is your wheel for Immorticia
@@ -4151,8 +4151,8 @@ module.exports = {
             "Zombie High Diver",
             "Trapper Zombie",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -4160,7 +4160,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`WheelNeptuna Deck`)
             .setDescription(
               `Here is your wheel for Neptuna
@@ -4280,8 +4280,8 @@ module.exports = {
             "Kitchen Sink Zombie",
             "Bad Moon Rising",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -4289,7 +4289,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Professor Brainstorm Deck`)
             .setDescription(
               `Here is your wheel for Professor Brainstorm
@@ -4410,8 +4410,8 @@ module.exports = {
             "Kitchen Sink Zombie",
             "Bad Moon Rising",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -4419,7 +4419,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Rustbolt Deck`)
             .setDescription(
               `Here is your wheel for Rustbolt
@@ -4541,8 +4541,8 @@ module.exports = {
             "Sneezing Zombie",
             "King of the Grill",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -4550,7 +4550,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Smash Deck`)
             .setDescription(
               `Here is your wheel for Smash
@@ -4669,8 +4669,8 @@ module.exports = {
             "Gargantuar-Throwing Imp",
             "Hippity Hop Gargantuar",
           ];
-          let randomWords = [];
-          let remainingWords = [...wordsArray];
+          const randomWords = [];
+          const remainingWords = [...wordsArray];
           for (let i = 0; i < number; i++) {
             const randomIndex = Math.floor(
               Math.random() * remainingWords.length
@@ -4678,7 +4678,7 @@ module.exports = {
             const selectedWord = remainingWords.splice(randomIndex, 1)[0]; // Remove the word from the remainingWords array
             randomWords.push(selectedWord);
           }
-          let embed = new EmbedBuilder()
+          const embed = new EmbedBuilder()
             .setTitle(`Wheel Zmech Deck`)
             .setDescription(
               `Here is your wheel for Zmech

@@ -4,7 +4,7 @@ const {
     ButtonStyle,
     EmbedBuilder,
   } = require("discord.js");
-  let db = require("../../index.js");
+  const db = require("../../index.js");
   module.exports = {
     name: `contusion`,
     aliases: [
@@ -35,14 +35,14 @@ const {
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      let decks = ["brady"];
+      const decks = ["brady"];
       let toBuildString = "";
       for (const deck of decks) {
         toBuildString += `\n<@${client.user.id}> **${deck}**`;
       }
-      let [result] = await db.query(`SELECT brady FROM zmdecks`);
-      let user = await client.users.fetch("758481952725532692");
-      let contusion = new EmbedBuilder()
+      const [result] = await db.query(`SELECT brady FROM zmdecks`);
+      const user = await client.users.fetch("758481952725532692");
+      const contusion = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
         .setDescription(
           `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -53,7 +53,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
         .setColor("Orange")
-        let brady = new EmbedBuilder()
+        const brady = new EmbedBuilder()
         .setTitle(`${result[5].brady}`)
         .setDescription(`${result[3].brady}`)
         .setFooter({text: `${result[2].brady}`})

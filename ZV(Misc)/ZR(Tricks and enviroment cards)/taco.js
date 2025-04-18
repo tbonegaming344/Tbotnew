@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`2ndbesttacoofalltime`, `2ndbest`, `secondbest`, `secondbesttaco`, `besttaco`, `tacoofalltime`, `secondbesttacoofalltime`, `2btoat`, `sbtoat`],
 	category: `Tricks Phase`,
 	run: async(client, message,args)=> {
-		let taco = new EmbedBuilder()
+		const taco = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/af/2nd_Best_Taco_HD.png/revision/latest?cb=20160604175353")
 		.setTitle("2nd-Best Taco of All Time | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Trick -**")

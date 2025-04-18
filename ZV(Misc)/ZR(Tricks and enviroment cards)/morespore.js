@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`more`, `spore`, `ms2`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ms = new EmbedBuilder()
+		const ms = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107663155871612969/MoreSporeCardIcon.webp")
 		.setTitle("More Spore | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Superpower Trick -**")

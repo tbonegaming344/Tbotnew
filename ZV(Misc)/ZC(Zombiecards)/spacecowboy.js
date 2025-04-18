@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cowboy`, `sc3`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e8/SpaceCowboy.png/revision/latest/scale-to-width-down/250?cb=20180209223755")
 			.setTitle("Space Cowboy | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\-  Imp Pet Zombie   -**")

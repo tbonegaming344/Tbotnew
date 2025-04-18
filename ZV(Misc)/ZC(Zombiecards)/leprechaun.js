@@ -12,7 +12,7 @@ module.exports = {
 			.setStyle(ButtonStyle.Success)
 			.setEmoji('<:pot:1087161021602476182>')
 		);
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2c/Leprechaun_Imp_pvzh.png/revision/latest?cb=20180310220615")
 			.setTitle("Leprechaun Imp | <:Brainy:1062500939908530246>")
 			.setDescription("**\\-  Imp Zombie  -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-					let pog = new EmbedBuilder()
+					const pog = new EmbedBuilder()
 					.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/77/PotofGoldCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226110937")
 			.setTitle("Pot of Gold | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Party Trick  -**")

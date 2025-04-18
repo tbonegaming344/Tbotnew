@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`threepea1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tp = new EmbedBuilder()
+		const tp = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106573600863043584/HD_Threepeater_29.webp")
 		.setTitle("Threepeater | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Pea Plant -**")

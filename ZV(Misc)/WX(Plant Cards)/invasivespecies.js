@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`invasive`, `is`, `species`, `weed2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let is = new EmbedBuilder()
+		const is = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4a/Not_HD_Invasive_Species.png/revision/latest?cb=20200224090056")
 		.setTitle("Invasive Species | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Leafy Flower Plant -**")

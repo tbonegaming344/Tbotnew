@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`go`, `gn`, `gnuts`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let go = new EmbedBuilder()
+		const go = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106223694889623652/Gonuts.webp")
 		.setTitle("Go-Nuts | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flower Nut Plant -**")

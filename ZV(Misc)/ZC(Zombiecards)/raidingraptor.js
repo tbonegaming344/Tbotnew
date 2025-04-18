@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`raiding`, `raptor`, `rr2`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bb/Raptor_Rider_cardface.png/revision/latest/scale-to-width-down/250?cb=20170701155445")
 			.setTitle("Raiding Raptor | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- History Pet Zombie  -**")

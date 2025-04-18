@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:eggyy:1087162887396663417>')
             );
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6b/Eastergarg.png/revision/latest/scale-to-width-down/250?cb=20170406020547")
 			.setTitle("Hippity Hop Gargantuar | <:Crazy:1062502046474973224>")
 					.setDescription("**\\- Pet Gargantuar Zombie -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 })
 			.setColor("Random")			
 	
-		let egg = new EmbedBuilder()
+		const egg = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/63/MysteryHD.png/revision/latest/scale-to-width-down/250?cb=20170406143736")
 			.setTitle("Mystery Egg | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Zombie  -**")

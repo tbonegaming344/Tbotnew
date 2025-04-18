@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:HD_Wallnut:1089674209443205192>')
             );
-		let loco = new EmbedBuilder()
+		const loco = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/LocoCoco.png/revision/latest/scale-to-width-down/250?cb=20180212025014")
 		.setTitle("Loco Coco | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Fruit Nut Plant -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "He crowned himself King of All Hollow Earth. No one had the heart to tell him it was actually a parliamentary democracy."
 							 })
-			let nut = new EmbedBuilder()
+			const nut = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/67/HD_Wall-nut.png/revision/latest?cb=20220414061652")
 		.setTitle("Wall-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

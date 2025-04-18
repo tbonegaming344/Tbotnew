@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`highvoltage`, `high`, `voltage`, `currant`, `hvc`,`oafishcard`, `oafish1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let hvc = new EmbedBuilder()
+		const hvc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/10/HighVoltageCurrant_RealHD.png/revision/latest/scale-to-width-down/250?cb=20181117025735")
 		.setTitle("High-Voltage Currant | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Plant -**")

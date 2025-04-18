@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`power`, `pf3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pf = new EmbedBuilder()
+		const pf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/13/Power_Flower....png/revision/latest?cb=20160423151116")
 		.setTitle("Power Flower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

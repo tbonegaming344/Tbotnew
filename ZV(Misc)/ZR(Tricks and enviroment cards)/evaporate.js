@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`evap`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c8/Evaporate_HD.png/revision/latest?cb=20160607165353")
 			.setTitle("Evaporate | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Superpower Trick  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`stupid`, `cupid`],
 	category: `Zombie Cards`, 
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/41/StupidCupidHD.png/revision/latest/scale-to-width-down/250?cb=20170215014353")
 			.setTitle("Stupid Cupid | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Imp Zombie  -**")

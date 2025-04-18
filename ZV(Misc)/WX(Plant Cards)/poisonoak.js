@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`poison3`, `oak`, `po`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let po = new EmbedBuilder()
+		const po = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/80/HD_Poison_Oak.png/revision/latest/scale-to-width-down/250?cb=20191005194804")
 		.setTitle("Poison Oak | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Leafy Tree Plant -**")

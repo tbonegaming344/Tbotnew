@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`metal`, `petal`, `metalpetal`, `metalpetalsun`, `mps`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let mps = new EmbedBuilder()
+		const mps = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/39/HD_Metal_Petal_Sunflower.png/revision/latest?cb=20161004034638")
 		.setTitle("Metal Petal Sunflower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

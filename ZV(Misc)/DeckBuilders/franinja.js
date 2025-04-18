@@ -43,11 +43,14 @@ module.exports = {
     const fran = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
-        `To view the Decks Made By ${user.displayName} please selectan option from the select menu below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
+        `My decks made by ${user.displayName} are ${toBuildString}`
       )
       .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
+      .setColor("#e0e0de")
+      .setFooter({
+        text: `To view Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+${user.displayName} has ${decks.length} total decks in Tbot`,
+      })
     const marxbolt = new EmbedBuilder()
       .setTitle(`${result[5].marxbolt}`)
       .setDescription(`${result[3].marxbolt}`)
@@ -69,7 +72,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
           inline: true,
         }
       )
-      .setColor("Random")
+      .setColor("#e0e0de")
       .setImage(`${result[4].marxbolt}`);
     const m = await message.channel.send({ embeds: [fran], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;

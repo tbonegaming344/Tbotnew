@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bell`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let bell = new EmbedBuilder()
+		const bell = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106977548925157446/Bellflower.webp")
 		.setTitle("Bellflower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

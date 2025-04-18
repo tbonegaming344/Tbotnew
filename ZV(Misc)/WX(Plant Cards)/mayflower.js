@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`may`, `rcch1`, `rcchcard`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let may = new EmbedBuilder()
+		const may = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/06/HD_Mayflower.png/revision/latest?cb=20161120091038")
 		.setTitle("Mayflower |<:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flower Plant -**")

@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `bustbolt`,
 	aliases: [`boltbust`, `bustingbolts`],
 	category: `Rustbolt(RB)`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`select bustbolt from rbdecks`)
-		let bust = new EmbedBuilder()
+		const [result] = await db.query(`select bustbolt from rbdecks`)
+		const bust = new EmbedBuilder()
 		.setTitle(`${result[5].bustbolt}`)
 		.setDescription(`${result[3].bustbolt}`)
 		.setColor("Orange")

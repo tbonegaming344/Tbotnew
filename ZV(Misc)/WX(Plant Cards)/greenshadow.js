@@ -72,7 +72,7 @@ module.exports = {
           "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
         ),
       new StringSelectMenuOptionBuilder()
-        .setLabel("Tempo Decks")
+        .setLabel("Tempo Deck")
         .setValue("tempo")
         .setDescription(
           "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
@@ -125,7 +125,6 @@ module.exports = {
   const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
   const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
   const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
-  const toBuildTempoString = BuildDeckString(greenShadowDecks.tempoDecks);
   const memerow = CreateButtons("starrings", "wr100");
   const wr100 = CreateButtons("helpmeme", "smf");
   const smf = CreateButtons("winrate100", "srings");
@@ -136,17 +135,14 @@ module.exports = {
   const midrangerow = CreateButtons("starrings3", "bms");
   const bms = CreateButtons("helpmidrange", "srings3");
   const srings3 = CreateButtons("budgetmopshadow", "midrangehelp");
-  const temporow = CreateButtons("budgetmopshadow2", "wr1002");
-  const wr1002 = CreateButtons("helptempo", "bms2");
-  const bms2 = CreateButtons("winrate1002", "tempohelp");
   const aggrorow = CreateButtons("pbeans", "ab2");
   const ab2 = CreateButtons("aggrohelp", "pb");
   const pb = CreateButtons("abeans2", "helpaggro");
-  const alldecksrow = CreateButtons("starrings4", "wr1003");
-  const wr1003 = CreateButtons("helpall", "ab");
-  const ab = CreateButtons("winrate1003", "bms3");
-  const bms3 = CreateButtons("ab", "pb2");
-  const pb2 = CreateButtons("budgetmopshadow3", "smf3");
+  const alldecksrow = CreateButtons("starrings4", "wr1002");
+  const wr1002 = CreateButtons("helpall", "ab");
+  const ab = CreateButtons("winrate1002", "bms2");
+  const bms2 = CreateButtons("ab", "pb2");
+  const pb2 = CreateButtons("budgetmopshadow2", "smf3");
   const smf3 = CreateButtons("pbeans2", "srings4");
   const srings4 = CreateButtons("savagemayflower3", "allhelp");
     const gs = new EmbedBuilder()
@@ -216,13 +212,6 @@ module.exports = {
         `To view the midrange Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
   Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks in Tbot`
       );
-      const tempoEmbed = new CreateHelpEmbed(
-        "Green Shadow Tempo Decks",
-        `My tempo decks for Green Shadow(GS) are ${toBuildTempoString}`,
-        "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
-        `To view the tempo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-  Note: Green Shadow has ${greenShadowDecks.tempoDecks.length} tempo decks in Tbot`
-      );
       const [result] = await db.query(`SELECT * from gsdecks`);
       function CreateDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
@@ -265,7 +254,7 @@ module.exports = {
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
-        await i.update({ embeds: [tempoEmbed], components: [temporow] });
+        await i.reply({embeds: [winrate100], flags: MessageFlags.Ephemeral});
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
@@ -281,8 +270,6 @@ module.exports = {
         combohelp: {embed: comboEmbed, component: comborow},
         helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         midrangehelp: {embed: midrangeEmbed, component: midrangerow},
-        helptempo: {embed: tempoEmbed, component: temporow},
-        tempohelp: {embed: tempoEmbed, component: temporow},
         ab: {embed: abeans, component: ab},
         abeans: {embed: abeans, component: ab},
         ab2: {embed: abeans, component: ab2},
@@ -291,8 +278,6 @@ module.exports = {
         budgetmopshadow: {embed: budgetgs, component: bms},
         bms2: {embed: budgetgs, component: bms2},
         budgetmopshadow2: {embed: budgetgs, component: bms2},
-        bms3: {embed: budgetgs, component: bms3},
-        budgetmopshadow3: {embed: budgetgs, component: bms3},
         pb: {embed: pbeans, component: pb},
         pbeans: {embed: pbeans, component: pb},
         pb2: {embed: pbeans, component: pb2},
@@ -315,8 +300,6 @@ module.exports = {
         winrate100: {embed: winrate100, component: wr100},
         wr1002: {embed: winrate100, component: wr1002},
         winrate1002: {embed: winrate100, component: wr1002},
-        wr1003: {embed: winrate100, component: wr1003},
-        winrate1003: {embed: winrate100, component: wr1003},
       }
       const action = buttonActions[i.customId];
       if (action) {

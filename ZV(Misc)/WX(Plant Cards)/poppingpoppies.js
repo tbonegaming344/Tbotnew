@@ -12,7 +12,7 @@ module.exports= {
                     .setStyle(ButtonStyle.Success)
 										.setEmoji('<:LilBuddyHD:1089676851653394463>')
             );
-		let pp = new EmbedBuilder()
+		const pp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/30/HD_Poppin%27_Poppies.png/revision/latest/scale-to-width-down/250?cb=20160619021325")
 		.setTitle("Poppin' Poppies | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Flower Plant -**")
@@ -32,7 +32,7 @@ module.exports= {
 								 name: "Flavor Text",
 								 value: "Makes friends wherever she goes."
 							 })
-		let buddy = new EmbedBuilder()
+		const buddy = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/16/LilBuddyHD.png/revision/latest/scale-to-width-down/250?cb=20220402085330")
 		.setTitle("Lil' Buddy | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Seed Plant -**")

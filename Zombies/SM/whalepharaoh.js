@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
   name: `whalepharaoh`,
   aliases: [`wph`, `whalepharoah`, `whaleorah`, `whaleroah`, `whaleraoh`, `whalepharoh`],
     category: `Smash(SM)`,
   run: async(client, message, args) => {
-	let [result] = await db.query(`SELECT whalepharaoh FROM smdecks`); 
-     let embed = new EmbedBuilder()
+	const [result] = await db.query(`SELECT whalepharaoh FROM smdecks`); 
+     const embed = new EmbedBuilder()
 	.setTitle(`${result[5].whalepharaoh}`)
 	.setDescription(`${result[3].whalepharaoh}`)
 	.setFooter({text: `${result[2].whalepharaoh}`})

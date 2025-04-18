@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`asz`, `allstar`, `football`, `footballzombie`, `az`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/villains/images/3/35/PvZH_All-Star_Zombie_HD.png/revision/latest?cb=20200911174112")
 			.setTitle("All-Star Zombie | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Sports Zombie  -**")

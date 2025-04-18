@@ -3,7 +3,7 @@ module.exports = {
 	name: `repeater`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let rep = new EmbedBuilder()
+		const rep = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/f/f4/HD_Repeater_%28PvZH%29.webp/revision/latest/scale-to-width-down/250?cb=20211107175839")
 		.setTitle("Repeater | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

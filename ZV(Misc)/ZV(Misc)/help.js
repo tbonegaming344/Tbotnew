@@ -13,19 +13,15 @@ const {
       aliases: ["helpcommand", "decks", "decklists", "commands", "cmds", "deck", "names", "list"],
       category: "Miscellaneous",
       run: async (client, message, args) => {
-      const { default: ms } = await import("pretty-ms")
-      let commands = Array.from(client.commands.values())
-      let categories = commands.reduce((acc, command) => {
+      const commands = Array.from(client.commands.values())
+      const categories = commands.reduce((acc, command) => {
           if (!acc[command.category]) {
               acc[command.category] = [];
           }
           acc[command.category].push(command);
           return acc;
-      }, {});
-      //console.log(slashCommandscat)
-      //let testing = Arr
-      //console.log(categories);
-      let embed = new EmbedBuilder()
+      }, {});     
+      const embed = new EmbedBuilder()
           .setColor("Random")
           .setTitle("Select category")
           .setDescription(
@@ -33,7 +29,7 @@ const {
           )
           .setImage("https://media.discordapp.net/attachments/1044626284346605588/1257720785129312306/all_characters.jpg?ex=66856f42&is=66841dc2&hm=121286e871f2f84b7db1cc561a509a729596e8105b623225d85f3d36cd9b5b43&=&format=webp&width=707&height=614")
 
-      let cat = Object.keys(categories).map(category => {
+      const cat = Object.keys(categories).map(category => {
           if (!category) category = `Default`;
           return {
               label: category,
@@ -41,7 +37,7 @@ const {
           }
       })
   
-    let menu = new ActionRowBuilder().addComponents(
+    const menu = new ActionRowBuilder().addComponents(
          new StringSelectMenuBuilder()
               .setCustomId("help_" + message.author.id)
               .setPlaceholder(
@@ -52,32 +48,30 @@ const {
   
       try {
       
-          let msg = await message.reply({
+          const msg = await message.reply({
               embeds: [embed],
               components: [menu],
           })
                   const iFilter = i => i.user.id === message.author.id
-          let collector = msg.createMessageComponentCollector({
-             componentType: ComponentType.SelectMenu, filter: iFilter,
+          const collector = msg.createMessageComponentCollector({
+             componentType: ComponentType.StringSelectMenuBuilder, filter: iFilter,
           })
           collector.on('collect', async m  => {
                           if(m.customId == "help_" + message.author.id){
               
            //   console.log(client.slashcommands.values())
   
-              let category = m.values[0].split("_")[1];
-              let Ccommands = Array.from(client.commands.values())
-              let commands = Ccommands.filter((command) => {
+              const category = m.values[0].split("_")[1];
+              const Ccommands = Array.from(client.commands.values())
+              const commands = Ccommands.filter((command) => {
                   return command.category === category;
               })
-             let embed = new EmbedBuilder()
+             const embed = new EmbedBuilder()
                   .setColor("Random")
                   .setTitle("Help | " + category)
 
-              let toBuildString = "";
-              for (let i = 0; i < commands.length; i++) {
-                  let command = commands[i];
-               //   console.log(commands[i])
+              const toBuildString = "";
+              for (const command of commands) {
                   toBuildString += `**${command.name}** \n`;
               }
               embed.setDescription(toBuildString)

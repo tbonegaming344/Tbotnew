@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`backup`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9a/BackupDancerCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226202055")
 			.setTitle("Backup Dancer | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Mustache Zombie  -**")

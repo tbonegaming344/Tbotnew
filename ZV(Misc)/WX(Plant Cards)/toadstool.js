@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`toad`, `stool`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ts = new EmbedBuilder()
+		const ts = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4d/ToadstoolHD.png/revision/latest/scale-to-width-down/250?cb=20150701111051")
 		.setTitle("Toadstool | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Mushroom Animal Plant -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bloom`, `bloomer`, `boomerang`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let bl = new EmbedBuilder()
+		const bl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6a/Plants-vs-Zombies-2-13.png/revision/latest/scale-to-width-down/1200?cb=20200407205412")
 		.setTitle("Bloomerang | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

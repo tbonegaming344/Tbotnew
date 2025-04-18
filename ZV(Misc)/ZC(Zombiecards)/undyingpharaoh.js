@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`up2`, `undying`, `pharaoh`, `pharoah`, `undyingfairy`, `fairy`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/12/UndyingHD.png/revision/latest/scale-to-width-down/250?cb=20170305074618")
 			.setTitle("Undying Pharaoh | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- History Zombie  -**")

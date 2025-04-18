@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`snap1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let snap = new EmbedBuilder()
+		const snap = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/3f/SnapdragonPvZH.png/revision/latest?cb=20170902104555")
 		.setTitle("Snapdragon | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Dragon Flower Plant -**")

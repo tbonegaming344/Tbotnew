@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`clone1`, `ifclone`, `ic1`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/3/37/Comic_Book_Imp.png/revision/latest?cb=20200126160850")
 			.setTitle("Impfinity Clone | <:Sneaky:1062502187781075094><:Crazy:1062502046474973224>")
 			.setDescription("**\\- Imp Zombie  -**")

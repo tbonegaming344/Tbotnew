@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`defensive`, `end`, `de`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d0/Defensive_End_HD.png/revision/latest/scale-to-width-down/250?cb=20181112144811")
 			.setTitle("Defensive End | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Sports Gargantuar Zombie  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`hovergoat`, `hog`, `Hovergoat`, `Hovergoat3000`, `hover`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1125142122148941824/HD_Hover-Goat_3000.webp")
 			.setTitle("Hover-Goat 3000 | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Science Pet Zombie  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gargthrowing`, `gargthrower`, `gtg`, `gargantuar-throwinggargantuar`, `gargantuarthrowinggargantuar`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a5/Gargantuar-Throwing_Gargatuar_Card_Face.png/revision/latest/scale-to-width-down/250?cb=20170725062254")
 		.setTitle("Gargantuar-Throwing Gargantuar | <:Beastly:1062500894744264714>")
 		.setDescription("**\\- Pirate Gargantuar Zombie -**")	

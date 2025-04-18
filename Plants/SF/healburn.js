@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `healburn`,
 	aliases: [`burnheal`, `hburn`, `comboflare`, `xpcomboflare`, `xphealburn`],
 	category: `Solar Flare(SF)`,
 	run: async(client,message, args) => {
-		let [result] = await db.query(`SELECT healburn from sfdecks`);
-		let hb = new EmbedBuilder()
+		const [result] = await db.query(`SELECT healburn from sfdecks`);
+		const hb = new EmbedBuilder()
 		.setTitle(`${result[5].healburn}`)
 		.setDescription(`${result[3].healburn}`)
 		.setFooter({text: `${result[2].healburn}`})

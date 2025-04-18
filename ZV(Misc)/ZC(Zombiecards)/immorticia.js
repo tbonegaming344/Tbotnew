@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -255,7 +255,7 @@ module.exports = {
         `To view the midrange Immorticia decks please use the commands listed above or click on the buttons below to navigate through all midrange Immorticia decks!
   Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in Tbot`
       );
-    let [result] = await db.query(`SELECT * FROM imdecks`);
+    const [result] = await db.query(`SELECT * FROM imdecks`);
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)

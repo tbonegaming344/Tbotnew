@@ -3,7 +3,7 @@ module.exports = {
 	name: `hothead`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let hh = new EmbedBuilder()
+		const hh = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/cd/HD_Hot_Head_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210219173637")
 		.setTitle("Hothead | <:Kabloom:1062502137826910268><:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Plant -**")

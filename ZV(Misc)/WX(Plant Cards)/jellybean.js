@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`jelly`, `jb1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let jb = new EmbedBuilder()
+		const jb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/38/Jelly_Bean_cardface.png/revision/latest?cb=20170701141516")
 		.setTitle("Jelly Bean | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Plant -**")

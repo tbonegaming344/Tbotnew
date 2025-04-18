@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`typical`, `beanstalk2`, `tb2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tb = new EmbedBuilder()
+		const tb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/de/Typical_Beanstalk_card_face.png/revision/latest?cb=20170830152900")
 		.setTitle("Typical Beanstalk | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Bean Plant -**")

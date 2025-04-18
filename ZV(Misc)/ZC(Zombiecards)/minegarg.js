@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gargmime`, `mimegargantuar`, `gargantuarmime`, `mime`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/MimeGargHD.png/revision/latest/scale-to-width-down/250?cb=20171128184309")
 			.setTitle("Gargantuar Mime | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Gargantuar Mime Zombie  -**")

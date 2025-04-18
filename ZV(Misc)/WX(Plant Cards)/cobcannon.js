@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cob`, `cannon1`, `cc2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cob = new EmbedBuilder()
+		const cob = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107480342337691748/Cob_Cannon_cardface.webp?width=294&height=270")
 		.setTitle("Cob Cannon | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Corn Plant -**")

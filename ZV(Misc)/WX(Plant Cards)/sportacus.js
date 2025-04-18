@@ -3,7 +3,7 @@ module.exports = {
 	name: `sportacus`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sp = new EmbedBuilder()
+		const sp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b1/HDSportaflop.png/revision/latest/scale-to-width-down/250?cb=20170217102230")
 		.setTitle("Sportacus | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Mushroom Nut Plant -**")

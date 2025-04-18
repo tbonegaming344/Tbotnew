@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `budgetro`,
 	aliases: [`robudget`, `budgethmr`, `budgethealmidrose`, `bro`, `budgetrose`, `rosebudget`],
 	category: `Rose(RO)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT budgetro from rodecks`);
-			let bhmr = new EmbedBuilder()
+		const [result] = await db.query(`SELECT budgetro from rodecks`);
+			const bhmr = new EmbedBuilder()
 	.setTitle(`${result[5].budgetro}`)
 	.setDescription(`${result[3].budgetro}`)
 	.setFooter({text:`${result[2].budgetro}`})

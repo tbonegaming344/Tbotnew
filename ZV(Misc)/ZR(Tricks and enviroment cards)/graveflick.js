@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`graveflick`, `mistake`, `gflick`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let gf = new EmbedBuilder()
+		const gf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/35/Grave_Mistake_cardface.png/revision/latest?cb=20170701135045")
 		.setTitle("Grave Mistake | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Trick -**")

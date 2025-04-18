@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`stealthy`, `si`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/50/StealthyImpCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225124837")
 			.setTitle("Stealthy Imp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pirate Imp Zombie  -**")

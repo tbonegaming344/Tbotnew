@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`galv`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1f/GalvanizeCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225133640")
 			.setTitle("Galvanize | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Superpower Trick  -**")

@@ -4,7 +4,7 @@ name: `medullanebula`,
 aliases: [`nebula`,`medulla`, `mn`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a0/BrainSiloCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135709")
 			.setTitle("Medulla Nebula | <:Brainy:1062500939908530246>")
 			.setDescription("**\\-  Gourmet Environment  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`frenzy`, `possess`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/0d/PossessedCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225213354")
 			.setTitle("Possessed | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Superpower Trick  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`brex`, `bananasaurus`, `rex`, `br1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let brex = new EmbedBuilder()
+		const brex = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1140729997942861954/Bananasaurus_rex.webp")
 		.setTitle("Bananasaurus Rex | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Animal Fruit Plant -**")

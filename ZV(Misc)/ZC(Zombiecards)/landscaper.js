@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`scaper`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9a/HD_Landscaper_with_hole_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210526164547")
 			.setTitle("Landscaper | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Professional Mustache Zombie  -**")

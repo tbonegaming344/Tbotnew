@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`baseball`, `bz`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ec/BaseballZombieCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226133136")
 		.setTitle("Baseball Zombie | <:Hearty:1062501636557242429>")
 		.setDescription("- **Sports Zombie** -")	

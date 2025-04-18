@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`kinggrill`, `grillking`, `kotg`, `kingof`, `grill`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1125478631427293254/kotg.webp?width=650&height=588")
 			.setTitle("King of the Grill | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Professional Gargantuar Zombie -**")

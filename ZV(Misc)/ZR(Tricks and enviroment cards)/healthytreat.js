@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`hearty`, `healthy`, `ht`, `heartytreat`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8e/Healthhh.png/revision/latest/scale-to-width-down/250?cb=20170107053505")
 			.setTitle("Healthy Treat | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Gourmet Trick -**")

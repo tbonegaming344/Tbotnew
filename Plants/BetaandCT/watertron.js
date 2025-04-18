@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `watertron`,
   aliases: [`wettron`, `wetron`],
   category: `Beta-Carrotina/Citron`,
   run: async (client, message, args) => {
-    let [result] = await db.query("SELECT watertron FROM ctdecks");
-    let watertron = new EmbedBuilder()
+    const [result] = await db.query("SELECT watertron FROM ctdecks");
+    const watertron = new EmbedBuilder()
       .setTitle(`${result[5].watertron}`)
       .setDescription(`${result[3].watertron}`)
       .setFooter({ text: `${result[2].watertron}` })

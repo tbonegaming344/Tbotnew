@@ -3,7 +3,7 @@ module.exports = {
 	name: `shellery`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let shell = new EmbedBuilder()
+		const shell = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d0/HD_Shellery.png/revision/latest?cb=20160619054822")
 		.setTitle("Shellery | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Plant -**")

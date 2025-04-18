@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`apotato`, `asurus`, `apo`, `bowlingcard`, `bowlingcard`, `bowlingbulbcard`, `bowlingbulbenjoyercard`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ap = new EmbedBuilder()
+		const ap = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ea/Tater_titan.png/revision/latest/scale-to-width-down/250?cb=20170816155348")
 		.setTitle("Apotatosaurus | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Root Plant -**")

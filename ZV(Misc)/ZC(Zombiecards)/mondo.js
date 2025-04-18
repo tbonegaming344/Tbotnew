@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mondo`, `bronto`, `mb`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c5/HD_Mondo_Bronto_by_Flag_Zombies.png/revision/latest/scale-to-width-down/250?cb=20210227224646")
 		.setTitle("Mondo Bronto | <:Beastly:1062500894744264714>")
 		.setDescription("-**History Pet Zombie**-")	

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gentleman`, `gz`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HDgentlemanzombie.png/revision/latest/scale-to-width-down/250?cb=20170104015931")
+			const embed = new EmbedBuilder()		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HDgentlemanzombie.png/revision/latest/scale-to-width-down/250?cb=20170104015931")
 			.setTitle("Gentleman Zombie | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Mustache Party Zombie  -**")
 			.addFields({name: "Stats", 

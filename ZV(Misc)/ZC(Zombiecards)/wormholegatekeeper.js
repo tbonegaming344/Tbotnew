@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`wormhole`, `gatekeeper`, `wgk`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/3c/Wormhole_Gatekeeper.png/revision/latest/scale-to-width-down/250?cb=20161019181010")
 			.setTitle("Wormhole Gatekeeper | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Zombie  -**")

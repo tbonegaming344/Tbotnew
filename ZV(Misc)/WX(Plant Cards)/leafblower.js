@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`blower`, `blover`, `lb1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let lb = new EmbedBuilder()
+		const lb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/90/Leaf_Blower_HD.png/revision/latest?cb=20170423042942")
 		.setTitle("Leaf Blower | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Plant -**")

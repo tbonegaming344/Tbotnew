@@ -3,7 +3,7 @@ module.exports = {
 	name: `embiggen`,
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let em = new EmbedBuilder()
+		const em = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107667591092248676/EmbiggenCardImage.webp")
 		.setTitle("Embiggen | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Superpower Trick -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`heal1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let gy = new EmbedBuilder()
+		const gy = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107677302407581696/GeyserCardSprite.webp")
 		.setTitle("Geyser | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Superpower Trick -**")

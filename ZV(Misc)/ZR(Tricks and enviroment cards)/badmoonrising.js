@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bmr`, `badmoon`, `badrising`, `moonrising`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2b/Bad_Moon_RisingH.png/revision/latest?cb=20170801062736")
+			const embed = new EmbedBuilder()			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2b/Bad_Moon_RisingH.png/revision/latest?cb=20170801062736")
 			.setTitle("Bad Moon Rising | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Trick  -**")
 			.addFields({

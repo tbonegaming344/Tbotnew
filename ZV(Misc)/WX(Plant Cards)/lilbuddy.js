@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lil`, `buddy`, `lb2`, `lil'buddy`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let buddy = new EmbedBuilder()
+		const buddy = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/16/LilBuddyHD.png/revision/latest/scale-to-width-down/250?cb=20220402085330")
 		.setTitle("Lil' Buddy | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Seed Plant -**")

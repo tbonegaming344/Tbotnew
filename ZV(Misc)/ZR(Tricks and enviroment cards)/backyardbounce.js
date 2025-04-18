@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`byb`, `bb5`, `backyard`, `bounce`, `trampoline`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/dc/BackyardBounceCardSpirte.png/revision/latest/scale-to-width-down/250?cb=20170225130414")
 			.setTitle("Backyard Bounce | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Party Sports Trick  -**")

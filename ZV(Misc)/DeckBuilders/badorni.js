@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -99,18 +99,18 @@ module.exports = {
     const mopr = new CreateButtons("frozentelimps", "pmop2");
     const pmop2 = new CreateButtons("moprbius", "psy2");
     const psy2 = new CreateButtons("plantmop2", "helpcombo");
-    let meme = new CreateButtons("psychosolstice", "aa2");
-    let aa2 = new CreateButtons("meme", "aaa2");
-    let aaa2 = new CreateButtons("antiagor2", "freeze2");
-    let freeze2 = new CreateButtons("antiantiagor2", "fti2");
-    let fti2 = new CreateButtons("freezeheal2", "mopr2");
-    let mopr2 = new CreateButtons("ftimps2", "pmop");
-    let pmop = new CreateButtons("mopribus2", "psy");
-    let psy = new CreateButtons("plantmop", "meme2");
-    let midrange = new CreateButtons("psychosolstice3", "mopr3");
-    let mopr3 = new CreateButtons("midrange", "psy3");
-    let psy3 = new CreateButtons("mopribus3", "mid");
-    let [result] =
+    const meme = new CreateButtons("psychosolstice", "aa2");
+    const aa2 = new CreateButtons("meme", "aaa2");
+    const aaa2 = new CreateButtons("antiagor2", "freeze2");
+    const freeze2 = new CreateButtons("antiantiagor2", "fti2");
+    const fti2 = new CreateButtons("freezeheal2", "mopr2");
+    const mopr2 = new CreateButtons("ftimps2", "pmop");
+    const pmop = new CreateButtons("mopribus2", "psy");
+    const psy = new CreateButtons("plantmop", "meme2");
+    const midrange = new CreateButtons("psychosolstice3", "mopr3");
+    const mopr3 = new CreateButtons("midrange", "psy3");
+    const psy3 = new CreateButtons("mopribus3", "mid");
+    const [result] =
       await db.query(`select antiagor,
 	freezeheal, frozentelimps, mopribus, plantmop,
 	psychosolstice from ntdecks nt
@@ -127,28 +127,28 @@ module.exports = {
   inner join ctdecks ct 
   on (nt.deckinfo = ct.deckinfo)`);
     const user = await client.users.fetch("749149322561716294");
-    let bad = new CreateHelpEmbed(
+    const bad = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 To view all decks made by Badorni select the meme or combo decks option
 Note: ${user.displayName} has ${badorniDecks.memeDecks.length} decks in Tbot`,
         user.displayAvatarURL(),
     )
-      let combobad = new CreateHelpEmbed(
+      const combobad = new CreateHelpEmbed(
         `${user.displayName} Combo Decks`,
         `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
         user.displayAvatarURL(),
         `To view the Combo Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${badorniDecks.comboDecks.length} combo decks in Tbot`
       )
-      let memebad = new CreateHelpEmbed(
+      const memebad = new CreateHelpEmbed(
         `${user.displayName} Meme Decks`,
         `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
         user.displayAvatarURL(),
         `To view the Meme Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbot`
       )
-      let midbad = new CreateHelpEmbed(
+      const midbad = new CreateHelpEmbed(
         `${user.displayName} Midrange Decks`,
         `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
         user.displayAvatarURL(),
@@ -172,12 +172,12 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         }
         return embed;
       }
-    let coloboy = new CreateDeckEmbed(result, "antiagor");
-    let freal = new CreateDeckEmbed(result, "freezeheal");
-    let fti = new CreateDeckEmbed(result, "frozentelimps");
-    let mop = new CreateDeckEmbed(result, "mopribus");
-    let plantmop = new CreateDeckEmbed(result, "plantmop");
-    let pysol = new CreateDeckEmbed(result, "psychosolstice");
+    const coloboy = new CreateDeckEmbed(result, "antiagor");
+    const freal = new CreateDeckEmbed(result, "freezeheal");
+    const fti = new CreateDeckEmbed(result, "frozentelimps");
+    const mop = new CreateDeckEmbed(result, "mopribus");
+    const plantmop = new CreateDeckEmbed(result, "plantmop");
+    const pysol = new CreateDeckEmbed(result, "psychosolstice");
     const m = await message.channel.send({ embeds: [bad], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleSelectMenu(i) {

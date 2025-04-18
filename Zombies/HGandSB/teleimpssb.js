@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `telimpssb`,
   aliases: [
@@ -15,8 +15,8 @@ module.exports = {
   ],
   category: `Huge-Gigantacus/SuperBrainz`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT telimpssb FROM sbdecks`);
-    let embed = new EmbedBuilder()
+    const [result] = await db.query(`SELECT telimpssb FROM sbdecks`);
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].telimpssb}`)
       .setDescription(`${result[3].telimpssb}`)
       .setFooter({ text: `	${result[2].telimpssb}` })

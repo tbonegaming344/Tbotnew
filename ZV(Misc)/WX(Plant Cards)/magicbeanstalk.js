@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`magic`, `magicbean`, `beanstalk1`, `mb3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-			let mgb = new EmbedBuilder()
+			const mgb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1f/MagicBeanstalk.png/revision/latest/scale-to-width-down/250?cb=20180212114409")
 		.setTitle("Magic Beanstalk | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Bean Plant -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`counter`, `bc3`, `bcounter`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let bc = new EmbedBuilder()
+		const bc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d5/HD_Bean_Counter.png/revision/latest?cb=20160630041122")
 		.setTitle("Bean Counter | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Plant -**")

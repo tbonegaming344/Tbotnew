@@ -4,7 +4,7 @@ const {
   ButtonStyle,
   EmbedBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `justini12`,
   aliases: [
@@ -36,15 +36,15 @@ module.exports = {
          .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["100wr"];
+    const decks = ["100wr"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select wr100
+    const [result] = await db.query(`select wr100
 from gsdecks gs`);
-    let user = await client.users.fetch("112000146107113472");
-    let just = new EmbedBuilder()
+    const user = await client.users.fetch("112000146107113472");
+    const just = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)
     .setDescription(
       `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -54,8 +54,8 @@ from gsdecks gs`);
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     })
     .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let winrate = new EmbedBuilder()
+    .setColor("#ad5f6e");
+    const winrate = new EmbedBuilder()
     .setTitle(`${result[5].wr100}`)
     .setDescription(`${result[3].wr100}`)
     .setFooter({text: `${result[2].wr100}`})
@@ -74,7 +74,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
           value: `${result[1].wr100}`,
           inline: true
         })
-      .setColor("Random")
+      .setColor("#ad5f6e")
   .setImage(`${result[4].wr100}`)
     const m = await message.channel.send({ embeds: [just], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -83,7 +83,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
      if(i.customId == "wr100" || i.customId == "winrate100"){
       await i.update({ embeds: [winrate], components: [wr100] });
      }
-     if(i.customId == "helpj" || i.customId == "help"){
+     else if(i.customId == "helpj" || i.customId == "help"){
       await i.update({ embeds: [just], components: [row] });
      }
     });

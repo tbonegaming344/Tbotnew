@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`dead`, `deadbeard`, `beard`, `cd1`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/88/CaptainDeadbeard.png/revision/latest?cb=20170830110033")
 			.setTitle("Captain Deadbeard | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Mustache Pirate Zombie  -**")

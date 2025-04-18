@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `budgetykm`,
   aliases: [`ykmbudget`, `budgethg`, `hgbudget`, `hgbudgetykm`,],
   category: `Huge-Gigantacus/SuperBrainz`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT budgetykm FROM hgdecks`);
-    let embed = new EmbedBuilder()
+    const [result] = await db.query(`SELECT budgetykm FROM hgdecks`);
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].budgetykm}`)
       .setDescription(`${result[3].budgetykm}`)
       .setFooter({ text: `${result[2].budgetykm}` })

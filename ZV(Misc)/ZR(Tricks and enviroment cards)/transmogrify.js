@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mog`, `transmog`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let tm = new EmbedBuilder()
+		const tm = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107673651257557002/TransmogrifyCardImage.webp")
 		.setTitle("Transmogrify | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Superpower Trick -**")

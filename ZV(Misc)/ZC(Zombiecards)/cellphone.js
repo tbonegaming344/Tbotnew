@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cellphone`, `call`, `youliketocallmeonyourcellphone`, `youusedtocallmeonmycellphone`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/39/CellPhoneZombieCardImage.png/revision/latest/scale-to-width-down/250?cb=20170301204444")
 			.setTitle("Cell Phone Zombie | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Professional Zombie  -**")

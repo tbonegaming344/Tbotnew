@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 										.setEmoji('<:trapperter:1087174711806533672> ')
             );
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/96/TrapperZombieCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226144220")
 			.setTitle("Trapper Zombie | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Pet Mustache Zombie   -**")
@@ -36,7 +36,7 @@ module.exports = {
 								 })
 		.setColor("Random")			
 	
-		let ter = new EmbedBuilder()
+		const ter = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ec/Trapper%27s_Failed_Activation.png/revision/latest/scale-to-width-down/250?cb=20170404192407")
 			.setTitle("Trapper Territory | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Environment  -**")

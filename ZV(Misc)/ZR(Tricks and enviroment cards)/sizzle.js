@@ -3,7 +3,7 @@ module.exports = {
 	name: `sizzle`,
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let sizz = new EmbedBuilder()
+		const sizz = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/eb/HD_Sizzle.PNG/revision/latest?cb=20160702001107")
 		.setTitle("Sizzle | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Trick -**")

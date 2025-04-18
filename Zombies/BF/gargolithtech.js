@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `gargolithtech`,
 	aliases: [`techedgargolith`,`gt`, `gtech`, `gartolithtech`, `techgargolith`],
 	category: `Brain Freeze(BF)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT gargolithtech FROM bfdecks`)
-			let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT gargolithtech FROM bfdecks`)
+			const embed = new EmbedBuilder()
 	.setTitle(`${result[5].gargolithtech}`)	
 			.setDescription(`${result[3].gargolithtech}`)
 	.setFooter({text: `${result[2].gargolithtech}`})

@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 							.setEmoji('<:hotlava:1091074880251891893>')
 							);
-		let lg = new EmbedBuilder()
+		const lg = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/57/HD_Lava_Guava.png/revision/latest?cb=20220312093015")
 		.setTitle("Lava Guava | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Fruit Trick -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: `"I try to stay cool, I really do. But Zombies! Man, they make me blow my top!"`
 							 })
-		let hl = new EmbedBuilder()
+		const hl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8a/Hot_Lava_Environment.png/revision/latest/scale-to-width-down/148?cb=20170625202848")
 		.setTitle("Hot Lava | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Environment -**")

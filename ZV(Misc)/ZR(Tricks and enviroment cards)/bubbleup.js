@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bubble`, `bu`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let bu = new EmbedBuilder()
+		const bu = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b2/BubbleUpCardImage.png/revision/latest/scale-to-width-down/250?cb=20180206062206")
 		.setTitle("Bubble Up | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Superpower Trick -**")

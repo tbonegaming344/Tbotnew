@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`morning`, `glory`, `mg2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let mg = new EmbedBuilder()
+		const mg = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d3/HD_Morning_Glory%282%29.png/revision/latest?cb=20161021055433")
 	.setTitle("Morning Glory | <:Solar:1062502678384607262>")
 	.setDescription("**\\- Flower Plant -**")

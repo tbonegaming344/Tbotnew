@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Success)
 										.setEmoji('<:seed:1094704185074794578>')
             );
-		let ab = new EmbedBuilder()
+		const ab = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/75/AtomicBombegrenate.png/revision/latest/scale-to-width-down/250?cb=20180217024029")
 		.setTitle("Atomic Bombegranate | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Fruit Plant -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Remember: Never ever EVER split a fruit. Oh, hold on, actually fruits are OK, just never split an atom."
 							 })
-		let seed = new EmbedBuilder()
+		const seed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/5/58/HD_Seedling.png/revision/latest?cb=20170421135619")
 		.setTitle("Seedling | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Seed Plant -**")

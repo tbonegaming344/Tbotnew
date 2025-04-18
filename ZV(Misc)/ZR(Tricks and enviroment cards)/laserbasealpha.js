@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lba`, `laserbase`, `laser`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/13/LaserBaseAlphaCardImage.png/revision/latest?cb=20170924021228")
 			.setTitle("Laser Base Alpha | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Science Environment  -**")

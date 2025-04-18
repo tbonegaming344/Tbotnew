@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`prickly`, `pp2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pp = new EmbedBuilder()
+		const pp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/74/HD_Prickly_Pear.png/revision/latest?cb=20161004040503")
 		.setTitle("Prickly Pear | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Cactus Fruit Plant -**")

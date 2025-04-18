@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js")
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `freezeheal`,
 	aliases: [`freal`, `heeze`, `healfreeze`],
 		category: `Rose(RO)`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT freezeheal from rodecks`);
-		let fr = new EmbedBuilder()
+		const [result] = await db.query(`SELECT freezeheal from rodecks`);
+		const fr = new EmbedBuilder()
 		.setTitle(`${result[5].freezeheal}`)
 		.setDescription(`${result[3].freezeheal}`)
 		.setFooter({text: `${result[2].freezeheal}`})

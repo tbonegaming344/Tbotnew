@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`whip`, `vine`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let whip = new EmbedBuilder()
+		const whip = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e7/HD_Whipvine.PNG/revision/latest?cb=20161002092657")
 		.setTitle("Whipvine | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Root Plant -**")

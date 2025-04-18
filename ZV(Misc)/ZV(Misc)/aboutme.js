@@ -5,8 +5,8 @@ module.exports = {
 	aliases: [`about`, `tbotinfo`, `botinfo`, `infotbot`, `info`, `tbot`, `uptime`, ``],
 	category: `Miscellaneous`,
 	run: async(client, message, args) => {
-		let Ccommands = Array.from(client.commands.values());
-        let commands = Ccommands.filter((command) => {
+		const Ccommands = Array.from(client.commands.values());
+        const commands = Ccommands.filter((command) => {
           if (
             command.category != "Miscellaneous" &&
             command.category != "DeckBuilders" &&
@@ -41,15 +41,15 @@ module.exports = {
 				.setURL("https://www.buymeacoffee.com/tbotpvzh")
 				.setEmoji("☕")
             );
-		let totalSeconds = (client.uptime / 1000);
-let days = Math.floor(totalSeconds / 86400);
+		const totalSeconds = (client.uptime / 1000);
+const days = Math.floor(totalSeconds / 86400);
 totalSeconds %= 86400;
-let hours = Math.floor(totalSeconds / 3600);
+const hours = Math.floor(totalSeconds / 3600);
 totalSeconds %= 3600;
-let minutes = Math.floor(totalSeconds / 60);
-let seconds = Math.floor(totalSeconds % 60);
-		let uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-		let about = new EmbedBuilder()
+const minutes = Math.floor(totalSeconds / 60);
+const seconds = Math.floor(totalSeconds % 60);
+		const uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
+		const about = new EmbedBuilder()
 		.setTitle("About Tbot")
 		.setDescription('**Tbot** is a bot based around the plants vs zombies heroes card game having a lot of features and useful commands for pvzh players \n as tcc quotes "a bot for everything pvzh related"')
 			.addFields({name: "Help command", 

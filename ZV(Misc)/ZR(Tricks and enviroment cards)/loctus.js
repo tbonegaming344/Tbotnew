@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`locust`, `ls`, `swarm`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f1/LocustSwarmCardImage.png/revision/latest/scale-to-width-down/250?cb=20170301150816")
 		.setTitle("Locust Swarm | <:Beastly:1062500894744264714>")
 		.setDescription("- **Pet Trick** -")	

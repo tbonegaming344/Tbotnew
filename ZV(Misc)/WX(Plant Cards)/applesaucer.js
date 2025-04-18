@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`apple`, `saucer`, `as2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let as = new EmbedBuilder()
+		const as = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4a/Apple_Saucer_HD.png/revision/latest/scale-to-width-down/250?cb=20170227033131")
 		.setTitle("Apple-Saucer | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Fruit Plant -**")

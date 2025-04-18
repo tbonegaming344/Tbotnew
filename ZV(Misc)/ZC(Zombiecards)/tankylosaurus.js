@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tanky`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f3/Ankylosaurus_Rider_cardface.png/revision/latest/scale-to-width-down/250?cb=20170701124301")
 			.setTitle("Tankylosaurus | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- History Pet Zombie  -**")

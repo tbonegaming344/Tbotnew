@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`starch`, `lord`, `simplord`, `sl`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-	 let sl = new EmbedBuilder()
+	 const sl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bb/Starch-Lord_HD.png/revision/latest?cb=20170613051039")
 		.setTitle("Starch Lord | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Plant -**")

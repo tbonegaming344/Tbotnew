@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `shamcontrolbc`,
   aliases: [
@@ -14,8 +14,8 @@ module.exports = {
   ],
   category: `Beta-Carrotina/Citron`,
   run: async (client, message, args) => {
-    let [result] = await db.query("SELECT shamcontrol FROM bcdecks");
-    let embed = new EmbedBuilder()
+    const [result] = await db.query("SELECT shamcontrol FROM bcdecks");
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].shamcontrol}`)
       .setDescription(`${result[3].shamcontrol}`)
       .setFooter({ text: `${result[2].shamcontrol}` })

@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
   MessageFlags
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `snap`,
   aliases: [`decksmadebysnap`, `snapdecks`, `snaphelp`, `helpsnap`],
@@ -31,14 +31,14 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["shitknight"];
+    const decks = ["shitknight"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select shitknight from wkdecks`);
-    let user = await client.users.fetch("214018049374683137");
-    let snap = new EmbedBuilder()
+    const [result] = await db.query(`select shitknight from wkdecks`);
+    const user = await client.users.fetch("214018049374683137");
+    const snap = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
         `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -48,8 +48,8 @@ module.exports = {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-    let sknight = new EmbedBuilder()
+      .setColor("#d9dd45");
+    const sknight = new EmbedBuilder()
     .setTitle(`${result[5].shitknight}`)	
     .setDescription(`${result[3].shitknight}`)
 .setFooter({text: `${result[2].shitknight}`})
@@ -67,7 +67,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       value:  `${result[1].shitknight}`,
       inline: true
   })
-  .setColor("Random")			
+  .setColor("#d9dd45")			
   .setImage(`${result[4].shitknight}`)
     const m = await message.channel.send({ embeds: [snap], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -76,7 +76,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       if (i.customId == "shit" || i.customId == "shitknight") {
         await i.update({ embeds: [sknight], components: [shit] });
       }
-      if (i.customId == "help" || i.customId == "helpsnap") {
+      else if (i.customId == "help" || i.customId == "helpsnap") {
         await i.update({ embeds: [snap], components: [row] });
       }
     });

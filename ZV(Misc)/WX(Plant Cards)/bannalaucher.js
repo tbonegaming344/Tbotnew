@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 					.setEmoji('<:bbomb:1091067039818461224>')
             );
-		let bl = new EmbedBuilder()
+		const bl = new EmbedBuilder()
 		.setThumbnail("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/d5fa8d6d-871b-469c-9c1a-2422c6c23196/dbm0p56-3a32e815-f522-4ccc-b215-310785f40628.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2Q1ZmE4ZDZkLTg3MWItNDY5Yy05YzFhLTI0MjJjNmMyMzE5NlwvZGJtMHA1Ni0zYTMyZTgxNS1mNTIyLTRjY2MtYjIxNS0zMTA3ODVmNDA2MjgucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.yYEhbZJKXgCvPjzoykD4692L__Q-RcyLleM_FkSkSjc")
 		.setTitle("Banana Launcher | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Fruit Plant -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "He only knows one word. But it's a good one."
 							 })
-		let bb = new EmbedBuilder()
+		const bb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a4/BananaLTarget.png/revision/latest/scale-to-width-down/334?cb=20221031054544")
 		.setTitle("Banana Bomb | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Fruit Trick -**")

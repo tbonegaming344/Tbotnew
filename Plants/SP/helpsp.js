@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
@@ -140,7 +140,7 @@ Note: Spudow has ${spudowDecks.controlDecks.length} decks in Tbot`
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
     );
-    let [result] = await db.query(`SELECT * from spdecks`);
+    const [result] = await db.query(`SELECT * from spdecks`);
 
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()

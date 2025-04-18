@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`shelf`, `shelfshrooms`, `sm2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sm = new EmbedBuilder()
+		const sm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/7e/ShelfMushroomHD.png/revision/latest/scale-to-width-down/250?cb=20180217213710")
 		.setTitle("Shelf Mushroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Berry Plant -**")

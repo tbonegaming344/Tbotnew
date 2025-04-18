@@ -12,7 +12,7 @@ module.exports = {
 			.setEmoji('<:MagicBeanstalk:1104902066104696872>')
 			.setStyle(ButtonStyle.Success)
 			);
-		let swb = new EmbedBuilder()
+		const swb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4a/SowMagicBeansCardImage.png/revision/latest/scale-to-width-down/250?cb=20180217015402")
 		.setTitle("Sow Magic Beans | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Bean Trick -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Totally worth the cow."
 							 })
-		let mgb = new EmbedBuilder()
+		const mgb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1f/MagicBeanstalk.png/revision/latest/scale-to-width-down/250?cb=20180212114409")
 		.setTitle("Magic Beanstalk | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Bean Plant -**")

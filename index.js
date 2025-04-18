@@ -14,20 +14,20 @@ intents: [
     GatewayIntentBits.MessageContent
 ] 
 })
-let db = mysql.createPool({
+const db = mysql.createPool({
     host: host,
     user: user,
     password: password,
     database: database
   }).promise();
   module.exports = db;
-  let prefix = "?";
+  const prefix = "?";
 client.commands = new Collection();
 client.aliases = new Collection();
 const fs = require('fs');
 
 fs.readdirSync('./Plants').forEach(folder => {
-    let commands = fs
+    const commands = fs
         .readdirSync(`./Plants/${folder}`)
         .filter(file => file.endsWith('.js'));
 
@@ -37,7 +37,7 @@ fs.readdirSync('./Plants').forEach(folder => {
     });
 })
 fs.readdirSync('./Zombies').forEach(folder => {
-    let commands = fs
+    const commands = fs
         .readdirSync(`./Zombies/${folder}`)
         .filter(file => file.endsWith('.js'));
 
@@ -47,7 +47,7 @@ fs.readdirSync('./Zombies').forEach(folder => {
     });
 })
 fs.readdirSync('./ZV(Misc)').forEach(folder => {
-    let commands = fs
+    const commands = fs
         .readdirSync(`./ZV(Misc)/${folder}`)
         .filter(file => file.endsWith('.js'));
 
@@ -67,8 +67,8 @@ client.on(Events.MessageCreate, async message => {
     if (message.content.toLowerCase().startsWith(prefix)) {
 						if(message.author.bot) return;
 			const channel = client.channels.cache.get("1050107020008771604")
-        let args = message.content.slice(prefix.length).trim().split(/ +/g);
-        let commandName = args.join("").toLowerCase()
+        const args = message.content.slice(prefix.length).trim().split(/ +/g);
+        const commandName = args.join("").toLowerCase()
         const command =
             client.commands.get(commandName) ||
             client.commands.find((a) => a.aliases?.includes(commandName));
@@ -99,7 +99,6 @@ client.on(Events.MessageCreate, async message => {
 client.on(Events.Debug, (stdout) => {
     if (stdout.startsWith("Hit a 429")) {
         console.log("Rate limit reached. Retrying after some time...");
-        // Implement a delay or retry mechanism, like setTimeout or exponential backoff
     }
 })
 client.login(token);

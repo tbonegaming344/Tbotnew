@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`seed`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let seed = new EmbedBuilder()
+		const seed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/5/58/HD_Seedling.png/revision/latest?cb=20170421135619")
 		.setTitle("Seedling | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Seed Plant -**")

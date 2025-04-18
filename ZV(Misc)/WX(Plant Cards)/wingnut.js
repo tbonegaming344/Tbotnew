@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`wing`, `wn2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let wing = new EmbedBuilder()
+		const wing = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d8/Wing-Nut_HD.png/revision/latest?cb=20170227030617")
 		.setTitle("Wing-Nut | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Pea Nut Plant -**")

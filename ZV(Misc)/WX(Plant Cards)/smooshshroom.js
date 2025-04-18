@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`smoosh`, `ss8`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/ae/SmooshShroomHD.png/revision/latest/scale-to-width-down/250?cb=20170831060015")
 	.setTitle("Smoosh-Shroom | <:Smarty:1062502890448638022>")
 	.setDescription("**\\- Mushroom Plant -**")

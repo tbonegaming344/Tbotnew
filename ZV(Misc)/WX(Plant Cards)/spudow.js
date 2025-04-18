@@ -18,7 +18,7 @@ function createHelpEmbed(title, description, thumbnail, footer) {
   }
   return embed;
 }
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `spudow`,
   aliases: [`sp`, `spud`, `sd`],
@@ -98,7 +98,7 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    let sp = new EmbedBuilder()
+    const sp = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/4/49/HD_Tater_Toss.png/revision/latest?cb=20190624184934&path-prefix=protagonist"
       )
@@ -155,7 +155,7 @@ module.exports = {
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
   Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
     );
-    let [result] = await db.query(`SELECT * from spdecks`);
+    const [result] = await db.query(`SELECT * from spdecks`);
     /**
      * This function creates an embed for a deck
      * @param result - The result from the database

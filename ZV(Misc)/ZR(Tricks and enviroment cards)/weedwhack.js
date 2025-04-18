@@ -4,7 +4,7 @@ module.exports= {
 	aliases: [`weed1`, `whack`, `ww`, `weed`, `whackweed`],
 	category: `Tricks Phase`,
 	run: async(client,message, args)=> {
-		let ww = new EmbedBuilder()
+		const ww = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/44/WeedWhackCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225222647")
 		.setTitle("Weed Whack | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Root Superpower Trick -**")

@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `noplayingallowed`,
 	aliases: [`ebnoplayingallowed`, `npa`],
 	category: `Electric Boogaloo(EB)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT noplayingallowed FROM ebdecks`)
-		let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT noplayingallowed FROM ebdecks`)
+		const embed = new EmbedBuilder()
 	.setTitle(`${result[5].noplayingallowed}`)
 	.setDescription(`${result[3].noplayingallowed}`)
 	.setFooter({text: `${result[2].noplayingallowed}`})

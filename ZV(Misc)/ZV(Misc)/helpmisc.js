@@ -4,19 +4,17 @@ module.exports = {
 	aliases: [`misccommands`, `commandsmisc`, `mischelp`, `misc`, `miscellaneous`, `miscellaneoushelp`, `helpmiscellaneous`],
 	category: `Miscellaneous`, 
 			run: async(client, message, args) => {
-				let Ccommands = Array.from(client.commands.values())
-		let commands = Ccommands.filter((command) => {
+				const Ccommands = Array.from(client.commands.values())
+		const commands = Ccommands.filter((command) => {
 			 if(command.category === "Miscellaneous"){
 				return command.name;
 			 }
 		})
-let toBuildString = "";
-for (let i = 0; i < commands.length; i++) {
-	let command = commands[i];
- //   console.log(commands[i])
+const toBuildString = "";
+for (const command of commands) {
 	toBuildString += `\n<@1043528908148052089> **${command.name}**`;
 }
-				let embed = new EmbedBuilder() 
+				const embed = new EmbedBuilder() 
 				.setTitle("Help Miscellaneous Commands")
 				.setDescription(`My Miscellaneous commands are ${toBuildString}
 Note: There are ${commands.length} total miscellaneous commands in Tbot`)

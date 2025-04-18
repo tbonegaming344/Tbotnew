@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Danger)
 										.setEmoji('<:Grape_Responsibility:1104781603428896849>')
             );
-		let gp = new EmbedBuilder()
+		const gp = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e2/Grape_Power_cardface.png/revision/latest?cb=20170701134111")
 		.setTitle("Grape Power | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Berry Trick -**")

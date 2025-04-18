@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `terrifytricksterazzi`,
   aliases: [`terrifytrick`, `terrifyster`, `trickazzi`, `terrifytrickster`, `tricksterazzi`],
   category: `Rustbolt(RB)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`select terrifytricksterazzi from rbdecks`);
-    let terrifytricksterazzi = new EmbedBuilder()
+    const [result] = await db.query(`select terrifytricksterazzi from rbdecks`);
+    const terrifytricksterazzi = new EmbedBuilder()
       .setTitle(`${result[5].terrifytricksterazzi}`)
       .setDescription(`${result[3].terrifytricksterazzi}`)
       .setFooter({ text: `${result[2].terrifytricksterazzi}` })

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lightspeed`, `lightseed`, `ls1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ls = new EmbedBuilder()
+		const ls = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/5e/Lightspeed_Seed_card.png/revision/latest?cb=20171015225909")
 		.setTitle("Lightspeed Seed | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Seed Superpower Trick -**")

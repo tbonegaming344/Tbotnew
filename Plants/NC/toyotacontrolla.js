@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `toyotacontrolla`,
     aliases: [`controlcap`, `toyotacap`, `nccontrol`, `controlnc`, `toyota`],
 	category: `Night Cap(NC)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT toyotacontrolla from ncdecks`);
-	let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT toyotacontrolla from ncdecks`);
+	const embed = new EmbedBuilder()
 	.setTitle(`${result[5].toyotacontrolla}`)
 	.setDescription(`${result[3].toyotacontrolla}`)
 	.setFooter({text: `${result[2].toyotacontrolla}`})

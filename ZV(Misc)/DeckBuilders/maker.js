@@ -7,7 +7,7 @@ const {
     StringSelectMenuOptionBuilder,
     MessageFlags
   } = require("discord.js");
-  let db = require("../../index.js")
+  const db = require("../../index.js")
   module.exports = {
     name: `maker`,
     aliases: [
@@ -40,22 +40,22 @@ const {
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      let decks = ["mechascope"];
-      let toBuildString = "";
-      for (const deck of decks) {
-        toBuildString += `\n<@1043528908148052089> **${deck}**`;
-      }
-      let user = await client.users.fetch("854693227318870037");
-        let [result] = await db.query(`select otkmecha from imdecks im`)
-        let maker = new EmbedBuilder()
+      const decks = ["mechascope"];
+       let toBuildString = "";
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+    }
+      const user = await client.users.fetch("854693227318870037");
+        const [result] = await db.query(`select otkmecha from imdecks im`)
+        const maker = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
         .setDescription(
           `To view the Decks Made By ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`
         )
         .setThumbnail(user.displayAvatarURL())
-        .setColor("Random");
-        let mechascope = new EmbedBuilder()
+        .setColor("#00FFFF");
+        const mechascope = new EmbedBuilder()
         .setTitle(`${result[5].otkmecha}`)
         .setDescription(`${result[3].otkmecha}`)
         .setFooter({text: `${result[2].otkmecha}`})
@@ -72,7 +72,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
                     value: `${result[1].otkmecha}`,
                     inline: true
                 })
-            .setColor("Random")
+            .setColor("#00FFFF")
             .setImage(`${result[4].otkmecha}`);
         const m = await message.channel.send({ embeds: [maker], components: [row] });
         const iFilter = (i) => i.user.id === message.author.id;
@@ -81,7 +81,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
            if(i.customId == "ms" || i.customId == "mechascope") {
             await i.update({embeds: [mechascope], components: [ms]})
           }
-          if(i.customId == "helpm" || i.customId == "help") {
+          else if(i.customId == "helpm" || i.customId == "help") {
             await i.update({embeds: [maker], components: [row]})
           }
         }); 

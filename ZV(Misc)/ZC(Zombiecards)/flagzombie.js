@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`flag`, `fz2`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1087499597330530444/94-948838_flag-zombie-plants-vs-zombies-removebg-preview.png")
 			.setTitle("Flag Zombie | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Professional Zombie -**")

@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `gravestache`,
   aliases: [`mustachegraves`, `stachegraves`, `mustgraves`, `gravestaches`],
   category: `Huge-Gigantacus/SuperBrainz`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT gravestache FROM hgdecks`);
-    let gs = new EmbedBuilder()
+    const [result] = await db.query(`SELECT gravestache FROM hgdecks`);
+    const gs = new EmbedBuilder()
       .setTitle(`${result[5].gravestache}`)
       .setDescription(`${result[3].gravestache}`)
       .addFields({

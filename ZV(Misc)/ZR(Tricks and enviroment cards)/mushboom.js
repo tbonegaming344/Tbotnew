@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`boom`, `ncsig`, `mb1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let mb= new EmbedBuilder()
+		const mb= new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/31/MushBoomCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225214330")
 		.setTitle("Mush-Boom | <:Kabloom:1062502137826910268><:Smarty:1062502890448638022>")
 		.setDescription("**\\- Mushroom Superpower Trick -**")

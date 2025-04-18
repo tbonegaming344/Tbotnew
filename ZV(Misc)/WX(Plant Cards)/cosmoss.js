@@ -3,7 +3,7 @@ module.exports = {
 	name: `cosmoss`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cos = new EmbedBuilder()
+		const cos = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107113340502806629/CosmossTrue.webp")
 		.setTitle("Cosmoss | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Moss Plant -**")

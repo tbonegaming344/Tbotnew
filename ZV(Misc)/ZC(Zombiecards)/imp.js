@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`regularimp`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/03/VectorUmp.png/revision/latest/scale-to-width-down/2399?cb=20180113093831")
 			.setTitle("Imp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Imp Zombie   -**")

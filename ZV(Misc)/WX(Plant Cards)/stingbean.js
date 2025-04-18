@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sting`, `sb1`, `gatlingfodde`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sting = new EmbedBuilder()
+		const sting = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/43/HD_Sting_Bean.png/revision/latest?cb=20160528083741")
 		.setTitle("Sting Bean | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Bean Pea Plant -**")

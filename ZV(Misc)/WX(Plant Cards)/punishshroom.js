@@ -4,7 +4,7 @@ module.exports= {
 	aliases: [`punish`, `ps4`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ps = new EmbedBuilder()
+		const ps = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1c/HD_Punish-Shroom.png/revision/latest?cb=20160626030135")
 		.setTitle("Punish-Shroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

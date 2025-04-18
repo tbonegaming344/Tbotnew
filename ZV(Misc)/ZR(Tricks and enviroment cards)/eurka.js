@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mustachesuper`, `pbsig`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/64/EurekaCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226165247")
 			.setTitle("Eureka | <:Brainy:1062500939908530246><:Crazy:1062502046474973224>")
 			.setDescription("**\\- Mustache Science Superpower Trick  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`primalpotato`, `ppm`, `primalmine`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ppm = new EmbedBuilder()
+		const ppm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/42/Primal_Potato_Mine%28PVZH%29.png/revision/latest?cb=20190820055525")
 	.setTitle("Primal Potato Mine | <:Guardian:1062501130501885973>")
 	.setDescription("**\\- Root Plant -**")

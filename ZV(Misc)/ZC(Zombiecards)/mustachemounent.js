@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`monument`, `mm`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/44/HD-MustacheMonument.png/revision/latest/scale-to-width-down/250?cb=20180306223652")
 			.setTitle("Mustache Monument | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Mustache History Zombie  -**")

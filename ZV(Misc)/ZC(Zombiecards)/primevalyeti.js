@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`py`, `chungusyeti`, `primeval`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/ce/HD_Primal_Yeti_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210313205655")
 			.setTitle("Primeval Yeti | <:Hearty:1062501636557242429>")
 			.setDescription("**\\-  Pet Monster Zombie  -**")

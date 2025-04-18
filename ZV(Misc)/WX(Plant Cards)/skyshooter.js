@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sky`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sky = new EmbedBuilder()
+		const sky = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4e/SkyShooterHD.png/revision/latest/scale-to-width-down/250?cb=20170831054502")
 		.setTitle("Skyshooter | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

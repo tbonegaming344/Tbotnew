@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cg2`, `cursed`, `gargolith`, `cursedgarg`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/57/Cursed_GargolithH.png/revision/latest?cb=20180218041752")
 			.setTitle("Cursed Gargolith | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Gargantuar Monster Zombie   -**")

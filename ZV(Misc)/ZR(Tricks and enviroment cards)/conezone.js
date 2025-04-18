@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cz4`, `bucketbay`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/46/Cone_Zone_HD.png/revision/latest?cb=20170612144325")
 			.setTitle("Cone Zone | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Environment   -**")

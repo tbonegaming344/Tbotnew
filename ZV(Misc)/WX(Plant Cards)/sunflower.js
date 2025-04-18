@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`regularsunflower`, `regularsun`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sun = new EmbedBuilder()
+		const sun = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/p__/images/b/b3/HD_Sunflower.png/revision/latest?cb=20201121031511&path-prefix=protagonist")
 		.setTitle("Sunflower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

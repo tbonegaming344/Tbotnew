@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mm3`, `mash`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/62/HD_Monster_Mash.png/revision/latest?cb=20160607185328")
 			.setTitle("Monster Mash | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Dancing Monster Trick -**")

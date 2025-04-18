@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`beary`, `hb1`, `hibernating`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let hb = new EmbedBuilder()
+		const hb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/36/HD_Hibernating_Beary.PNG/revision/latest?cb=20160705042211")
 		.setTitle("Hibernating Beary | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Berry Animal Plant -**")

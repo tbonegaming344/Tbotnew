@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`highdiver`, `diver`, `zhd`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://o.remove.bg/downloads/da380936-46d7-4992-8002-5fa8c3947272/HighdiverPvZTwitter-removebg-preview.png")
 			.setTitle("Zombie High Diver | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Mustache Sports Zombie  -**")

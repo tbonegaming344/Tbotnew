@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`genetic1`, `amplification`, `ga`, `bcsig`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ga = new EmbedBuilder()
+		const ga = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/10/Genetic_Amplification_card.png/revision/latest/scale-to-width-down/250?cb=20170414224507")
 		.setTitle("Genetic Amplification | <:Guardian:1062501130501885973><:Smarty:1062502890448638022>")
 		.setDescription("**\\- Root Superpower Trick -**")

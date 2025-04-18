@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`astro3`, `vera`, `av1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let av= new EmbedBuilder()
+		const av= new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4f/Astrovera_HD.png/revision/latest?cb=20170423042934")
 		.setTitle("Astro Vera | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Cactus Plant -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`drone`, `droneengineer`, `zde`, `engineer`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b2/HD_Zombot_Drone_Engineer_by_Flag_Zombie.png/revision/latest?cb=20210110220602")
 			.setTitle("Zombot Drone Engineer | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Mustache Science Zombie  -**")

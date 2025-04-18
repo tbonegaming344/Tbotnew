@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:goatremovebgpreview:1107737288332550204>')
             );
-		let ro = new EmbedBuilder()
+		const ro = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107735927482228817/GoatifyCardSprite.webp")
 		.setTitle("Goatify | <:Smarty:1062502890448638022><:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Superpower Trick -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "Rose turns Zombies into goats because... GOATS!"
 							 })
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a0/GoatCardImage.png/revision/latest?cb=20180923071125")
 			.setTitle("Goat | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Zombie -**")

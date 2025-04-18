@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pal`, `pp9`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pl = new EmbedBuilder()
+		const pl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/04/PearPalPair.png/revision/latest/scale-to-width-down/250?cb=20180218135748")
 		.setTitle("Pear Pal | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Fruit Plant -**")

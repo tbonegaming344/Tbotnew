@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `seacret`,
   aliases: [
@@ -17,8 +17,8 @@ module.exports = {
   ],
   category: `Electric Boogaloo(EB)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT seacret FROM ebdecks`);
-    let sc = new EmbedBuilder()
+    const [result] = await db.query(`SELECT seacret FROM ebdecks`);
+    const sc = new EmbedBuilder()
       .setTitle(`${result[5].seacret}`)
       .setDescription(`${result[3].seacret}`)
       .setColor("Purple")

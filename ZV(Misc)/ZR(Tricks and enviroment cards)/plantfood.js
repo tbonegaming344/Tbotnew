@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`food`, `pf1`, `pfood`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let pf = new EmbedBuilder()
+		const pf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/fc/Pvz2plantfood.png/revision/latest?cb=20130821151547")
 		.setTitle("Plant Food | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Trick -**")

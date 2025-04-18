@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`wizardgargantuar`, `wizard`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6a/HDWG.png/revision/latest/scale-to-width-down/250?cb=20170107071428")
 			.setTitle("Wizard Gargantuar | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Mustache Gargantuar Zombie   -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`small`, `sn1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sm = new EmbedBuilder()
+		const sm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6a/HD_Small-Nut.png/revision/latest?cb=20160630003856")
 		.setTitle("Small-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

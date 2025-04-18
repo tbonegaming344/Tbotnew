@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -109,7 +109,7 @@ module.exports = {
     const chemo2 = new CreateButtons("cancerknight3", "hl3");
     const hl3 = new CreateButtons("chemotherapy2", "sk2");
     const sk2 = new CreateButtons("highlander3", "allhelp");
-    let wk = new EmbedBuilder()
+    const wk = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/poohadventures/images/f/ff/WallHD.webp/revision/latest?cb=20210927051854"
       )

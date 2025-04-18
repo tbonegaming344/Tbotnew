@@ -4,10 +4,21 @@ const {
   ButtonStyle,
   EmbedBuilder,
   MessageFlags,
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#000000");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `thequestionmark`,
   aliases: [
@@ -25,531 +36,250 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("splimps")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("cboy")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const cboy = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpall")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mred4")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const mred4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cyroboy")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("nut")
-      .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const nut = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred4")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("syard3")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const syard3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("nuttin")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("spl")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const spl = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("schoolyard3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("allhelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );  
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("splimps2")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("cboy2")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const cboy2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpladder")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mred")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const mred = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cyroboy2")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("syard")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const syard = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("spl2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const spl2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("schoolyard")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpladder")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    ); 
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view tqm's decks")
-    .addOptions( 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Deck")
-      .setValue("ladder")
-      .setDescription("Decks that are generally only good for ranked games")
-      .setEmoji("<:ladder:1271503994857979964>"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Meme Deck")
-      .setDescription("Decks that are built off a weird/fun combo")
-      .setValue("meme"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Aggro Decks")
-      .setValue("aggro")
-      .setDescription("attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Combo Decks")
-      .setValue("combo")
-      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Decks")
-      .setValue("midrange")
-      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("All Decks")
-      .setValue("all")
-      .setDescription("An option to view all of the decks made by tqm")
-    )
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view tqm's decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that are generally only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Deck")
+          .setDescription("Decks that are built off a weird/fun combo")
+          .setValue("meme"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Decks")
+          .setValue("aggro")
+          .setDescription(
+            "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("An option to view all of the decks made by tqm")
+      );
     const row = new ActionRowBuilder().addComponents(select);
-    const comborow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("nuttin2")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("cboy3")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
+    const theQuestionMarkDecks = {
+      ladderDecks: ["cryoboy", "midred", "schoolyard", "splimps"],
+      memeDecks: ["nuttin"],
+      aggroDecks: ["schoolyard", "splimps"],
+      comboDecks: ["cryoboy", "midred", "nuttin"],
+      midrangeDecks: ["cryoboy", "midred"],
+      allDecks: ["cryoboy", "midred", "nuttin", "schoolyard", "splimps"],
+    };
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildLadderString = buildDeckString(
+      theQuestionMarkDecks.ladderDecks
     );
-    const cboy3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpcombo")
-       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mred2")
-     .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
+    const toBuildAggroString = buildDeckString(theQuestionMarkDecks.aggroDecks);
+    const toBuildComboString = buildDeckString(theQuestionMarkDecks.comboDecks);
+    const toBuildMidrangeString = buildDeckString(
+      theQuestionMarkDecks.midrangeDecks
     );
-    const mred2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cyroboy3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("nut2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const nut2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("combohelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    ); 
-    let combodecks = ["cryoboy", "midred", "nuttin"]
-    let toBuildComboString = "";
-    for (let i = 0; i < combodecks.length; i++) {
-      let deck = combodecks[i];
-      toBuildComboString += `\n<@1043528908148052089> **${deck}**`;
+    const toBuildString = buildDeckString(theQuestionMarkDecks.allDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const midrangrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("cboy4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const cboy4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpmidrange")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mred3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const mred3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cyroboy4")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("midrangehelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let midrangedecks = ["cryoboy", "midred"]; 
-    let toBuildMidrangeString = "";
-    for (let i = 0; i < midrangedecks.length; i++) {
-      let deck = midrangedecks[i];
-      toBuildMidrangeString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    const aggrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("splimps3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("syard2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const syard2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpaggro")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("spl3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const spl3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("schoolyard2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("aggrohelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let aggrodecks = ["schoolyard", "splimps"]; 
-    let toBuildAggroString = "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      let deck = aggrodecks[i];
-      toBuildAggroString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let ladderdecks = ["cryoboy", "midred", "schoolyard", "splimps", ]
-    let toBuildLadderString = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      let deck = ladderdecks[i];
-      toBuildLadderString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let decks = ["cryoboy", "midred", "nuttin", "schoolyard", "splimps"];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
-      toBuildString += `\n<@1043528908148052089> **${deck}**`;
-    }
-    let user = await client.users.fetch("906888157272875048");
-    let tqm = new EmbedBuilder()
-    .setTitle(`${user.displayName} Decks`)
-    .setDescription(
+    const alldecksrow = new CreateButtons("splimps", "cboy");
+    const cboy = new CreateButtons("helpall", "mred");
+    const mred = new CreateButtons("cyroboy", "nut");
+    const nut = new CreateButtons("midred", "syard");
+    const syard = new CreateButtons("nuttin", "spl");
+    const spl = new CreateButtons("schoolyard", "allhelp");
+    const ladderrow = new CreateButtons("splimps2", "cboy2");
+    const cboy2 = new CreateButtons("helpladder", "mred2");
+    const mred2 = new CreateButtons("cyroboy2", "syard2");
+    const syard2 = new CreateButtons("midred2", "spl2");
+    const spl2 = new CreateButtons("schoolyard2", "ladderhelp");
+    const comborow = new CreateButtons("nuttin2", "cboy3");
+    const cboy3 = new CreateButtons("helpcombo", "mred3");
+    const mred3 = new CreateButtons("cyroboy3", "nut2");
+    const nut2 = new CreateButtons("midred3", "combohelp");
+    const midrangrow = new CreateButtons("midred4", "cboy4");
+    const cboy4 = new CreateButtons("helpmidrange", "mred4");
+    const mred4 = new CreateButtons("cyroboy4", "midrangehelp");
+    const aggrorow = new CreateButtons("splimps3", "syard3");
+    const syard3 = new CreateButtons("helpaggro", "spl3");
+    const spl3 = new CreateButtons("schoolyard3", "aggrohelp");
+    const user = await client.users.fetch("906888157272875048");
+    const tqm = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
-    )
-    .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let alldecksEmbed= new EmbedBuilder()
-    .setTitle(`${user.displayName} Decks`)
-    .setDescription(
-      `My commands for decks made by ${user.displayName} are ${toBuildString}`
-    )
-    .setFooter({
-      text: `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
-    })
-    .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let ladderEmbed = new EmbedBuilder()
-      .setTitle(`${user.displayName} Ladder Decks`)
-      .setDescription(
-        `My ladder decks made by ${user.displayName} are ${toBuildLadderString}`
-      )
-      .setFooter({
-        text: `To view the ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: ${user.displayName} has ${ladderdecks.length} ladder decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let comboEmbed = new EmbedBuilder()
-      .setTitle(`${user.displayName} Combo Decks`)
-      .setDescription(
-        `My combo decks made by ${user.displayName} are ${toBuildComboString}`
-      )
-      .setFooter({
-        text: `To view the combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all combo decks!
-Note: ${user.displayName} has ${combodecks.length} combo decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let aggroEmbed = new EmbedBuilder()
-      .setTitle(`${user.displayName} Aggro Decks`)
-      .setDescription(
-        `My Aggro decks made by ${user.displayName} are ${toBuildAggroString}`
-      )
-      .setFooter({
-        text: `To view the aggri Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all aggro decks!
-Note: ${user.displayName} has ${aggrodecks.length} aggro decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let midrangeEmbed = new EmbedBuilder()
-      .setTitle(`${user.displayName} Midrange Decks`)
-      .setDescription(
-        `My Midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`
-      )
-      .setFooter({
-        text: `To view the midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: ${user.displayName} has ${midrangedecks.length} midrange decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-    let [result] = await db.query(`select cyroboy, midred, nutting, schoolyard, splimps from hgdecks hg 
+Note: ${user.displayName} has ${theQuestionMarkDecks.allDecks.length} total decks in Tbot`,
+      user.displayAvatarURL()
+    );
+    const alldecksEmbed = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `My commands for decks made by ${user.displayName} are ${toBuildString}`,
+      user.displayAvatarURL(),
+      `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${theQuestionMarkDecks.allDecks.length} total decks in Tbot`
+    );
+    const ladderEmbed = new CreateHelpEmbed(
+      `${user.displayName} Ladder Decks`,
+      `My ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
+      user.displayAvatarURL(),
+      `To view the ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${theQuestionMarkDecks.ladderDecks.length} ladder decks in Tbot`
+    );
+    const aggroEmbed = new CreateHelpEmbed(
+      `${user.displayName} Aggro Decks`,
+      `My aggro decks made by ${user.displayName} are ${toBuildAggroString}`,
+      user.displayAvatarURL(),
+      `To view the aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all aggro decks!
+Note: ${user.displayName} has ${theQuestionMarkDecks.aggroDecks.length} aggro decks in Tbot`
+    );
+    const comboEmbed = new CreateHelpEmbed(
+      `${user.displayName} Combo Decks`,
+      `My combo decks made by ${user.displayName} are ${toBuildComboString}`,
+      user.displayAvatarURL(),
+      `To view the combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${theQuestionMarkDecks.comboDecks.length} combo decks in Tbot`
+    );
+    const midrangeEmbed = new CreateHelpEmbed(
+      `${user.displayName} Midrange Decks`,
+      `My midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
+      user.displayAvatarURL(),
+      `To view the midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all midrange decks!
+Note: ${user.displayName} has ${theQuestionMarkDecks.midrangeDecks.length} midrange decks in Tbot`
+    );
+    const [result] =
+      await db.query(`select cyroboy, midred, nutting, schoolyard, splimps from hgdecks hg 
       inner join ifdecks fi on (hg.deckinfo = fi.deckinfo)
       inner join czdecks cz on (hg.deckinfo = cz.deckinfo)
       inner join ntdecks nt on (hg.deckinfo = nt.deckinfo)
       inner join spdecks sp on (hg.deckinfo = sp.deckinfo)`);
-
-    const cyroboy = new EmbedBuilder()
-    .setTitle(`${result[5].cyroboy}`)
-    .setDescription(`${result[3].cyroboy}`)
-    .setFooter({text: `${result[2].cyroboy}`})
-    .setColor("Random")
-    .addFields({
-        name: 'Deck Type',
-        value: `${result[6].cyroboy}`,
-        inline: true
-    },{
-        name: 'Archtype',
-        value: `${result[0].cyroboy}`,
-        inline: true
-    },{
-        name: 'Deck Cost',
-        value: `${result[1].cyroboy}`,
-        inline: true
-    })
-    .setImage(`${result[4].cyroboy}`)
-    let nuttin = new EmbedBuilder()
-    .setTitle(`${result[5].nutting}`)
-    .setDescription(`${result[3].nutting}`)
-    .setFooter({text: `${result[2].nutting}`})
-        .setColor("Random")
-        .setImage(`${result[4].nutting}`)
-            .addFields({
-                name: "Deck Type",
-                value: `${result[6].nutting}`,
-                inline: true
-            },{
-                name: "Archetype",
-                value: `${result[0].nutting}`,
-                inline: true
-            },{
-                name: "Deck Cost", 
-                value: `${result[1].nutting}`,
-                inline: true
-            })
-            let midred = new EmbedBuilder()
-	.setTitle(`${result[5].midred}`)
-	.setDescription(`${result[3].midred}`)
-	.setFooter({text: `${result[2].midred}`})
-			.addFields({
-			name: "Deck Type",
-			value: `${result[6].midred}`,
-			inline: true
-			},
-			{
-			name: "Archetype",
-			value: `${result[0].midred}`,
-			inline: true
-			},
-			{
-				name: "Deck Cost", 
-				value: `${result[1].midred}`,
-				inline: true
-			})
-		.setColor("Random")
-		.setImage(`${result[4].midred}`)
-    let schoolyard = new EmbedBuilder()
-    .setTitle(`${result[5].schoolyard}`)
-    .setDescription(`${result[3].schoolyard}`)
-    .setFooter({ text: `${result[2].schoolyard}` })
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].schoolyard}`,
-      inline: true,
-    },{
-      name: "Archetype",
-      value: `${result[0].schoolyard}`,
-      inline: true
-    },{ 
-      name: "Deck Cost", 
-      value: `${result[1].schoolyard}`,
-      inline: true
-    })
-    .setColor("Random")
-    .setImage(`${result[4].schoolyard}`);
-    let splimps = new EmbedBuilder()
-	.setTitle(`${result[5].splimps}`)
-	.setDescription(`${result[3].splimps}`)
-	.setFooter({text: `${result[2].splimps}`})
-			.addFields({
-				name: "Deck Type",
-				value: `${result[6].splimps}`,
-				inline: true
-			},{
-				name: "Archetype",
-				value: `${result[0].splimps}`,
-				inline: true
-			},{
-				name: "Deck Cost", 
-				value: `${result[1].splimps}`,
-				inline: true
-			})
-		.setColor("Random")
-		.setImage(`${result[4].splimps}`)
+    function CreateDeckEmbed(result, deckName) {
+      const embed = new EmbedBuilder()
+        .setTitle(`${result[5][deckName]}`)
+        .setDescription(`${result[3][deckName]}`)
+        .setFooter({ text: `${result[2][deckName]}` })
+        .addFields(
+          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+        )
+        .setColor("#000000");
+      const imageUrl = result[4][deckName];
+      if (imageUrl) {
+        embed.setImage(imageUrl);
+      }
+      return embed;
+    }
+    const cyroboy = new CreateDeckEmbed(result, "cyroboy");
+    const nuttin = new CreateDeckEmbed(result, "nutting");
+    const midred = new CreateDeckEmbed(result, "midred");
+    const schoolyard = new CreateDeckEmbed(result, "schoolyard");
+    const splimps = new CreateDeckEmbed(result, "splimps");
     const m = await message.channel.send({ embeds: [tqm], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
+    async function handleSelectMenu(i) {
+      const value = i.values[0];
+      if (value == "aggro") {
+        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
+      } else if (value == "combo") {
+        await i.update({ embeds: [comboEmbed], components: [comborow] });
+      } else if (value == "meme") {
+        await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
+      } else if (value == "midrange") {
+        await i.update({ embeds: [midrangeEmbed], components: [midrangrow] });
+      } else if (value == "ladder") {
+        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+      } else if (value == "all") {
+        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
+      }
+    }
+    async function handleButtonInteraction(i) {
+      const buttonActions = {
+        helpladder: { embed: ladderEmbed, component: ladderrow },
+        ladderhelp: { embed: ladderEmbed, component: ladderrow },
+        helpaggro: { embed: aggroEmbed, component: aggrorow },
+        aggrohelp: { embed: aggroEmbed, component: aggrorow },
+        helpcombo: { embed: comboEmbed, component: comborow },
+        combohelp: { embed: comboEmbed, component: comborow },
+        helpmidrange: { embed: midrangeEmbed, component: midrangrow },
+        midrangehelp: { embed: midrangeEmbed, component: midrangrow },
+        allhelp: { embed: alldecksEmbed, component: alldecksrow },
+        helpall: { embed: alldecksEmbed, component: alldecksrow },
+        cboy: { embed: cyroboy, component: cboy },
+        cyroboy: { embed: cyroboy, component: cboy },
+        cboy2: { embed: cyroboy, component: cboy2 },
+        cyroboy2: { embed: cyroboy, component: cboy2 },
+        cboy3: { embed: cyroboy, component: cboy3 },
+        cyroboy3: { embed: cyroboy, component: cboy3 },
+        cboy4: { embed: cyroboy, component: cboy4 },
+        cyroboy4: { embed: cyroboy, component: cboy4 },
+        spl: { embed: splimps, component: spl },
+        splimps: { embed: splimps, component: spl },
+        spl2: { embed: splimps, component: spl2 },
+        splimps2: { embed: splimps, component: spl2 },
+        spl3: { embed: splimps, component: spl3 },
+        splimps3: { embed: splimps, component: spl3 },
+        nut: { embed: nuttin, component: nut },
+        nuttin: { embed: nuttin, component: nut },
+        nut2: { embed: nuttin, component: nut2 },
+        nuttin2: { embed: nuttin, component: nut2 },
+        mred: { embed: midred, component: mred },
+        midred: { embed: midred, component: mred },
+        mred2: { embed: midred, component: mred2 },
+        midred2: { embed: midred, component: mred2 },
+        mred3: { embed: midred, component: mred3 },
+        midred3: { embed: midred, component: mred3 },
+        mred4: { embed: midred, component: mred4 },
+        midred4: { embed: midred, component: mred4 },
+        syard: { embed: schoolyard, component: syard },
+        schoolyard: { embed: schoolyard, component: syard },
+        syard2: { embed: schoolyard, component: syard2 },
+        schoolyard2: { embed: schoolyard, component: syard2 },
+        syard3: { embed: schoolyard, component: syard3 },
+        schoolyard3: { embed: schoolyard, component: syard3 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button interaction.",
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if(i.customId == "select"){
-        const value = i.values[0];
-        if(value == "aggro"){
-          await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-        }
-        if(value == "combo"){
-          await i.update({embeds: [comboEmbed], components: [comborow]})
-        }
-        if(value == "meme"){
-          await i.reply({embeds: [nuttin], flags: MessageFlags.Ephemeral})
-        }
-        if(value == "midrange"){
-          await i.update({embeds: [midrangeEmbed], components: [midrangrow]})
-        }
-        if(value == "ladder"){
-          await i.update({embeds: [ladderEmbed],components: [ladderrow]})
-        }
-        if(value == "all"){
-          await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-        }
-      }
-      if (i.customId == "cboy" || i.customId == "cyroboy") {
-        await i.update({ embeds: [cyroboy], components: [cboy] });
-      }
-      if (i.customId == "cboy2" || i.customId == "cyroboy2") {
-        await i.update({ embeds: [cyroboy], components: [cboy2] });
-      }
-      if (i.customId == "cboy3" || i.customId == "cyroboy3") {
-        await i.update({ embeds: [cyroboy], components: [cboy3] });
-      }
-      if (i.customId == "cboy4" || i.customId == "cyroboy4") {
-        await i.update({ embeds: [cyroboy], components: [cboy4] });
-      }
-      if(i.customId == "helpladder" || i.customId == "ladderhelp") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      }
-      if(i.customId == "helpcombo" || i.customId == "combohelp"){
-        await i.update({embeds: [comboEmbed], components: [comborow]})
-      }
-      if( i.customId == "allhelp" || i.customId == "helpall") {
-        await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-      }
-      if(i.customId == "spl" || i.customId == "splimps"){
-        await i.update({embeds: [splimps], components: [spl]})
-      }
-      if(i.customId == "spl2" || i.customId == "splimps2"){
-        await i.update({embeds: [splimps], components: [spl2]})
-      }
-      if(i.customId == "spl3" || i.customId == "splimps3"){
-        await i.update({embeds: [splimps], components: [spl3]})
-      }
-      if(i.customId == "nut" || i.customId == "nuttin"){
-        await i.update({embeds: [nuttin], components: [nut]})
-      }
-      if(i.customId == "nut2" || i.customId == "nuttin2"){
-        await i.update({embeds: [nuttin], components: [nut2]})
-      }
-      if(i.customId == "mred" || i.customId == "midred"){
-        await i.update({embeds: [midred], components: [mred]})
-      }
-      if(i.customId == "mred2" || i.customId == "midred2"){
-        await i.update({embeds: [midred], components: [mred2]})
-      }
-      if(i.customId == "mred3" || i.customId == "midred3"){
-        await i.update({embeds: [midred], components: [mred3]})
-      }
-      if(i.customId == "mred4" || i.customId == "midred4"){
-        await i.update({embeds: [midred], components: [mred4]})
-      }
-      if(i.customId == "syard" || i.customId == "schoolyard"){
-        await i.update({embeds: [schoolyard], components: [syard]})
-      }
-      if(i.customId == "syard2" || i.customId == "schoolyard2"){
-        await i.update({embeds: [schoolyard], components: [syard2]})
-      }
-      if(i.customId == "syard3" || i.customId == "schoolyard3"){
-        await i.update({embeds: [schoolyard], components: [syard3]})
-      }
-      if(i.customId == "midrangehelp" || i.customId == "helpmidrange"){
-        await i.update({embeds: [midrangeEmbed], components: [midrangrow]})
-      }
-      if(i.customId == "aggrohelp" || i.customId == "helpaggro"){
-        await i.update({embeds: [aggroEmbed], components: [aggrorow]})
+      if (i.customId == "select") {
+        await handleSelectMenu(i);
+      } else {
+        await handleButtonInteraction(i);
       }
     });
   },

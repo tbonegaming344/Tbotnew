@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tough`, `tb1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let tb = new EmbedBuilder()
+		const tb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/54/HD_Tough_Beets.png/revision/latest?cb=20160429141931")
 		.setTitle("Tough Beets | <:Guardian:1062501130501885973>")
 		.setDescription("** - Root Plant - **")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`dn`, `naut`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f7/Disco-NautH.png/revision/latest?cb=20180616132117")
 			.setTitle("Disco-Naut | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Zombie  -**")

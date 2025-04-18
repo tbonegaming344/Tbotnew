@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`laser`,`lb3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let lb = new EmbedBuilder()
+		const lb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/f/fd/HD_Laser_Bean%28PvZH%29.png/revision/latest?cb=20211221073709")
 		.setTitle("Laser Bean | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Bean Plant -**")

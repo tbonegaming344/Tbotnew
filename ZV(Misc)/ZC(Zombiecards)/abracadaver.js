@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`abra`, `dab`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setTitle("Abracadaver | <:Crazy:1062502046474973224>")	
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9d/AbracadaverHD.png/revision/latest/scale-to-width-down/250?cb=20170118122203")
 			.setDescription("**\\- Pet Mustache Zombie  -**")

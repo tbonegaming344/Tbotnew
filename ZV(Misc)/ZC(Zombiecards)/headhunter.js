@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`lefiizz`, `headhunter`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
       .setThumbnail("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/11c1d4dc-5483-433e-a5e6-d51a36c6ca1d/dfkvj2c-0bda216b-47e5-41e4-8a0d-70cdeaf6fbcb.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzExYzFkNGRjLTU0ODMtNDMzZS1hNWU2LWQ1MWEzNmM2Y2ExZFwvZGZrdmoyYy0wYmRhMjE2Yi00N2U1LTQxZTQtOGEwZC03MGNkZWFmNmZiY2IucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.TYJRQ7xb6C0dQYx4vu8tnGSOlJuqU4pKHcyZ_cTnQFw")
 			.setTitle("Bobblehead | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Mustache Zombie  -**")

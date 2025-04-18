@@ -22,7 +22,7 @@ module.exports = {
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Don't let the Dog Walker anywhere near it."
+								 value: "Don't const the Dog Walker anywhere near it."
 							 })
 		message.channel.send({embeds: [pp]})
 	}

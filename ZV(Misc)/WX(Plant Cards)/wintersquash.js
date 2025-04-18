@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`winter1`, `ws1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ws = new EmbedBuilder()
+		const ws = new EmbedBuilder()
 		.setThumbnail("https://pbs.twimg.com/media/CzaRsidWIAA9MeK.png")
 		.setTitle("Winter Squash | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Squash Plant -**")

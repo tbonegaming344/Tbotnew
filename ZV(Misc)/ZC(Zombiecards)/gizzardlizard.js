@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gizzard`, `lizard`, `giz`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/3b/Gizzard_Lizard_HD-3.png/revision/latest/scale-to-width-down/250?cb=20180429054232")
 			.setTitle("Gizzard Lizard | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Pet Monster Zombie  -**")

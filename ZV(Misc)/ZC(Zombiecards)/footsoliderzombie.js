@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`souljaboi`, `footsoldier`, `foot`, `soldier`, `fsz`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/villains/images/c/ce/PvZH_Foot_Soldier_Zombie_HD.png/revision/latest?cb=20200908170408")
 			.setTitle("Foot Soldier Zombie | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Professional Zombie  -**")

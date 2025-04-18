@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cat`, `lady`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2d/CatLadyCardImage.png/revision/latest/scale-to-width-down/250?cb=20170228171957")
 			.setTitle("Cat Lady | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Zombie  -**")

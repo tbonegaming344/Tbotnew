@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
   name: `lasersnap`,
   aliases: [ `hollowpurple`, `snaplaser`, `laserrings`, `czhollowpurple`, `lazerrings`, `lazerings`, `laserings` ],
   category: `Chompzilla(CZ)`,
   run: async(client, message, args) => {
-    let [result] = await db.query(`SELECT lasersnap FROM czdecks`); 
-     let lasersnap = new EmbedBuilder()
+    const [result] = await db.query(`SELECT lasersnap FROM czdecks`); 
+     const lasersnap = new EmbedBuilder()
     .setTitle(`${result[5].lasersnap}`)
     .setDescription(`${result[3].lasersnap}`)
     .setFooter({text: `${result[2].lasersnap}`})

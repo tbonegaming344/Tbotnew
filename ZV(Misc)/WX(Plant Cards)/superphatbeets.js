@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`superphat`, `phatbeets`, `spb`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let spb = new EmbedBuilder()
+		const spb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9c/HD_Super_Phat_Beets.png/revision/latest/scale-to-width-down/250?cb=20160323025515")
 		.setTitle("Super-Phat Beets | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Root Plant -**")

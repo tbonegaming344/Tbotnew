@@ -1,11 +1,11 @@
 const {EmbedBuilder} = require("discord.js")
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
     name: `gargstar22`, 
     category: `Electric Boogaloo(EB)`,
     run: async(client, message, args)=> {
-        let [result] = await db.query("select gargstar22 from ebdecks")
-        let gstar22 = new EmbedBuilder()
+        const [result] = await db.query("select gargstar22 from ebdecks")
+        const gstar22 = new EmbedBuilder()
         .setTitle(`${result[5].gargstar22}`)
         .setDescription(`${result[3].gargstar22}`)
         .setFooter({ text: `${result[2].gargstar22}` })

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`trica`, `tri`, `tric`],
 	category: `Plant Cards`,
 	run: async(client,message, args)=> {
-		let tric = new EmbedBuilder()
+		const tric = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e0/Carrot_cutie.png/revision/latest/scale-to-width-down/250?cb=20170819182039")
 		.setTitle("Tricarrotops | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Animal Plant -**")

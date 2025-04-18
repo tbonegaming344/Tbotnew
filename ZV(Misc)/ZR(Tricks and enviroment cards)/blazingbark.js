@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`blazing`, `bark`, `bb1`, `ccsig`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let bb= new EmbedBuilder()
+		const bb= new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f6/BlazingBarkCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227183409")
 		.setTitle("Blazing Bark | <:Kabloom:1062502137826910268><:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Tree Superpower Trick -**")

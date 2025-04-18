@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary )
 										.setEmoji('<:lunchbox:1089227004450181240>')
             );
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
       .setThumbnail("https://media.discordapp.net/attachments/1152624944262414436/1335225554110124133/ZombieYetiCardImage.webp?ex=679f6533&is=679e13b3&hm=0d79c5af8f4f0a36c3c2dd97a16912b5aa975588a6be619338fad79698269bf9&=&format=webp")
 			.setTitle("Zombie Yeti | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Pet Monster Zombie  -**")
@@ -33,7 +33,7 @@ module.exports = {
                  })
 		.setColor("Random")			
 	
-		let lunch = new EmbedBuilder()
+		const lunch = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/Yeti%27s_Lunchbox_PvZH.png/revision/latest/scale-to-width-down/250?cb=20170830134119")
 			.setTitle("Yeti Lunchbox | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gourmet Pet Trick  -**")

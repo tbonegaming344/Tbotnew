@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`poison2`, `ivy`, `pi`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pi = new EmbedBuilder()
+		const pi = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/02/PoisonIvy.png/revision/latest/scale-to-width-down/250?cb=20170901023545")
 		.setTitle("Poison Ivy | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Leafy Berry Plant -**")

@@ -69,7 +69,7 @@ module.exports = {
         )
         .setEmoji("🎥")
     );
-    let deck = new EmbedBuilder()
+    const deck = new EmbedBuilder()
       .setTitle("Deck Additions for tbot")
       .addFields(
         {

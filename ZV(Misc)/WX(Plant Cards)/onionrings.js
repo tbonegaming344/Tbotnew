@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`onion`, `ring`, `or`, `orings`, `rings`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let or = new EmbedBuilder()
+		const or = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/88/OnionRingsCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226142700")
 		.setTitle("Onion Rings | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Root Plant -**")

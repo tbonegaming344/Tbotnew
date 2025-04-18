@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require('../../index.js')
+const db = require('../../index.js')
 module.exports = {
 	name: `budgetzm`,
 	aliases: [`zmbudget`, `bzm`, `zmb`, `budgetzmech`, `budgetmech`, `flaggro`],
 	category: `Zmech(ZM)`,
 		run: async(client, message, args) => {
-			let [result] = await db.query(`SELECT budgetzm FROM zmdecks`);
-			let budgetzm = new EmbedBuilder()
+			const [result] = await db.query(`SELECT budgetzm FROM zmdecks`);
+			const budgetzm = new EmbedBuilder()
 	.setTitle(`${result[5].budgetzm}`)
 	.setDescription(`${result[3].budgetzm}`)
 	.setFooter({text: `${result[2].budgetzm}`})

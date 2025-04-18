@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`repeat`, `moss`, `rm`, `rmoss`, `re-peatmoss`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let rm = new EmbedBuilder()
+		const rm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/68/Re-PeatMoss.png/revision/latest/scale-to-width-down/250?cb=20170902104228")
 		.setTitle("Repeat Moss | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Moss Plant -**")

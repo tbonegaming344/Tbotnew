@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`overstuffed`, `stuffedzombie`, `bigchungus`, `caseoh`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e2/Fat-Obi.png/revision/latest/scale-to-width-down/250?cb=20220116164347")
 			.setTitle("Overstuffed Zombie | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gourmet Mustache Zombie  -**")

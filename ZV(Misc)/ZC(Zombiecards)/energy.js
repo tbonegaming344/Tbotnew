@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`energydrink`, `energy`, `drinkzombie`, `drink`, `edz`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://pbs.twimg.com/media/C2aG6pFXUAA7MF1.png:large")
 			.setTitle("Energy Drink Zombie | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gourmet Sports Zombie-**")

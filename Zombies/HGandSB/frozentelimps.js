@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `frozentelimps`,
 	aliases: [`teleimpsonice`, `softcore`, `softcorebigfeetfetish`, `frozenteleimps`, `freezetelimps`],
 	category: `Huge-Gigantacus/SuperBrainz`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT frozentelimps FROM hgdecks`);
-		let fti = new EmbedBuilder()
+		const [result] = await db.query(`SELECT frozentelimps FROM hgdecks`);
+		const fti = new EmbedBuilder()
 		.setTitle(`${result[5].frozentelimps}`)
 		.setDescription(`${result[3].frozentelimps}`)
 	.setColor("#000000")

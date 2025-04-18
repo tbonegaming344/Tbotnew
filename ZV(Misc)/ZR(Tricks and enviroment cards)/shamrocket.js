@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sham`, `shamerocket`, `shame`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let sham = new EmbedBuilder()
+		const sham = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/24/HD-Shamrocket.png/revision/latest?cb=20170223121851")
 		.setTitle("Shamrocket | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Leafy Pinecone Trick -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases:[`guac`, `croc`, `crocodile`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let guac = new EmbedBuilder()
+		const guac = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d1/HD_Guacodile%28PvZH%29.png/revision/latest?cb=20160508062551")
 		.setTitle("Guacodile | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Fruit Animal Plant -**")

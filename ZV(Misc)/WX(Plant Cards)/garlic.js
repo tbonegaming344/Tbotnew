@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`vimpdestroyer`, `vimptech`, `vimpiredestroyer`, `vimpiretech`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let garlic = new EmbedBuilder()
+		const garlic = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/cc/Garlic.png/revision/latest/scale-to-width-down/250?cb=20201226145126")
 		.setTitle("Garlic | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Plant -**")

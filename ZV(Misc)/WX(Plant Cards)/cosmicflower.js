@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cf`, `cosmicsunflower`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cf = new EmbedBuilder()
+		const cf = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107401936715661342/CosmicFlowerCardImage.webp")
 		.setTitle("Cosmic Flower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tt2`, `territory`, `trapper`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ec/Trapper%27s_Failed_Activation.png/revision/latest/scale-to-width-down/250?cb=20170404192407")
 			.setTitle("Trapper Territory | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gourmet Environment  -**")

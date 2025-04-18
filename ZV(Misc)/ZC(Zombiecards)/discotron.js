@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`discotron`, `dt`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/20/DiscoTron3000.png/revision/latest/scale-to-width-down/250?cb=20170906160815")
 			.setTitle("Disco-Tron 3000 | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Science Zombie   -**")

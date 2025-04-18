@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bep`, `blackeyed`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let bep = new EmbedBuilder()
+		const bep = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2d/HD_Black-Eyed_Pea.png/revision/latest?cb=20160630003911")
 		.setTitle("Black-Eyed Pea | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Bean Pea Plant -**")

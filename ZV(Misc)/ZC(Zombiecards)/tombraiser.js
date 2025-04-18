@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tomb`, `raiser`, `tr2`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://o.remove.bg/downloads/2dffee45-4319-4e56-a714-82515acebebb/ddi5c59-4ca1eed6-d9e0-465d-9ecc-3bc3ec47907c-removebg-preview.png")
 			.setTitle("Tomb Raiser | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- History Zombie   -**")

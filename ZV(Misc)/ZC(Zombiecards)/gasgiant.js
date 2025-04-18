@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gg2`, `gas`, `giant`, `fart`, `fartgarg`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/65/GasGiant.png/revision/latest/scale-to-width-down/250?cb=20180330173833")
 			.setTitle("Gas Giant | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Gargantuar Monster Zombie  -**")

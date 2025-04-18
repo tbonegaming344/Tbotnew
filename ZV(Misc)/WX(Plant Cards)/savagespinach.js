@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`savage`, `spinach`, `ss6`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/38/SavageSpinachHD.png/revision/latest/scale-to-width-down/250?cb=20180209112308")
 		.setTitle("Savage Spinach | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Plant -**")

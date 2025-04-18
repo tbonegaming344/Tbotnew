@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tts`, `shine`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let tts = new EmbedBuilder()
+		const tts = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/21/TimetoShineCardImage.png/revision/latest?cb=20180216050612")
 		.setTitle("Time To Shine | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Superpower Trick -**")

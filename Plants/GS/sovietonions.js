@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
     name: `starrings`,
     aliases: [`tso`, `thesovietonion`, `sovietonion`, `tsonion`, `starring`, `pstarfruitlul`, `ppentagrama`, `pentagrama`],
     category: `Green Shadow(GS)`,
     run: async(client, message, args)=> {
-        let [result] = await db.query(`SELECT sovietonion from gsdecks`);
-        let tsunion = new EmbedBuilder()
+        const [result] = await db.query(`SELECT sovietonion from gsdecks`);
+        const tsunion = new EmbedBuilder()
         .setTitle(`${result[5].sovietonion}`)
         .setDescription(`${result[3].sovietonion}`)
         .setFooter({text: `${result[2].sovietonion}`})

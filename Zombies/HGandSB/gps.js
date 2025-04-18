@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `gravepiratestache`,
 	aliases: [`gps`, `hgaggro`, `aggrohg`],
 	category: `Huge-Gigantacus/SuperBrainz`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT gps FROM hgdecks`);
-		let gravepiratestache= new EmbedBuilder()
+		const [result] = await db.query(`SELECT gps FROM hgdecks`);
+		const gravepiratestache= new EmbedBuilder()
 		.setTitle(`${result[5].gps}`)
 		.setDescription(`${result[3].gps}`)
 		.setColor("#000000")

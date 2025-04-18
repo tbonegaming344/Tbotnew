@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`roto`, `baga`, `happyshroom1`, `skytree`, `happycard`, `happshroomcard`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let roto = new EmbedBuilder()
+		const roto = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f2/Rotobaga_PvZH_hd_i_think.png/revision/latest/scale-to-width-down/250?cb=20210828214738")
 		.setTitle("Rotobaga | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Root Plant -**")

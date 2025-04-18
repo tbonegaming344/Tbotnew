@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`grow`, `gs2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-	 let gs = new EmbedBuilder()
+	 const gs = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/09a1333c-54d3-4c0c-8f29-3a6a0619d29e/scale-to-width/755")
 		.setTitle("Grow-Shroom | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Mushroom Plant -**")

@@ -1,12 +1,12 @@
 const {EmbedBuilder, Embed} = require("discord.js")
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports ={
     name: `radiotherapy`, 
     aliases: [`gourdcontrol`, `techdow`, `radio`],
     category: `Spudow(SP)`,
     run: async(client, message, args)=> {
-        let [result] = await db.query("select radiotherapy from spdecks")
-        let radio = new EmbedBuilder()
+        const [result] = await db.query("select radiotherapy from spdecks")
+        const radio = new EmbedBuilder()
         .setTitle(`${result[5].radiotherapy}`)
         .setDescription(`${result[3].radiotherapy}`)
         .setFooter({text: `${result[2].radiotherapy}`})

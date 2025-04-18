@@ -12,7 +12,7 @@ module.exports = {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:SunnierShroom_HD:1107382878540660736>')
             );
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107378071859908738/SunShroomPvZH.webp?width=527&height=567")
 		.setTitle("Sun-Shroom | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Mushroom Plant -**")

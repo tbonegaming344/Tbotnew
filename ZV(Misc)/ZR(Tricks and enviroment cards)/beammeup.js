@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bmu`, `scotty`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()	.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/63/BeamMeUpCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225221935")
+			const embed = new EmbedBuilder()	.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/63/BeamMeUpCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225221935")
 			.setTitle("Beam Me Up | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Trick  -**")
 			.addFields({name: "Stats", 

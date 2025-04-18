@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`peel`, `shield`, `ctsig`, `ps1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let peel = new EmbedBuilder()
+		const peel = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107726555477704754/PeelShieldCardImage.webp")
 		.setTitle("Peel Shield | <:Guardian:1062501130501885973><:Smarty:1062502890448638022>")
 		.setDescription("**\\- Fruit Superpower Trick -**")

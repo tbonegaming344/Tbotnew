@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`hearti`, `choke`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ch = new EmbedBuilder()
+		const ch = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bd/Heartichoke_HD.png/revision/latest?cb=20170423042924")
 		.setTitle("Heartichoke | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Leafy Flower Plant -**")

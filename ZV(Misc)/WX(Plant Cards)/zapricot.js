@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`zap`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let zap = new EmbedBuilder()
+		const zap = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/45/HD_Zapricot.png/revision/latest?cb=20160429141945")
 		.setTitle("Zapricot | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Fruit Plant -**")

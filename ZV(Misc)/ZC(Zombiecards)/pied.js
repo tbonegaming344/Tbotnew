@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pied`, `piper`, `Pidepiper`, `Piper`, `Pide`, `rats`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ed/PiedPiperCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225135002")
 			.setTitle("Pied Piper | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Dancing Pet Zombie  -**")

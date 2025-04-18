@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
   MessageFlags, 
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `lgtyqz`,
   aliases: [
@@ -38,19 +38,18 @@ module.exports = {
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = [
+    const decks = [
       "noplayingallowed",
     ]
-    let toBuildString = ""
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
+     let toBuildString = "";
+    for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] =
+    const [result] =
       await db.query(`select 
 noplayingallowed from ebdecks`);
-    let user = await client.users.fetch("321772369125572608");
-    let lgtqyz = new EmbedBuilder()
+    const user = await client.users.fetch("321772369125572608");
+    const lgtqyz = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)
     .setDescription(
       `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -60,8 +59,8 @@ noplayingallowed from ebdecks`);
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     })
     .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let noplayingallowed= new EmbedBuilder()
+    .setColor("#C4A484");
+    const noplayingallowed= new EmbedBuilder()
     .setTitle(`${result[5].noplayingallowed}`)
 	.setDescription(`${result[3].noplayingallowed}`)
 	.setFooter({text: `${result[2].noplayingallowed}`})
@@ -78,7 +77,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
 					value: `${result[1].noplayingallowed}`,
 					inline: true
 				})
-		.setColor("Random")
+		.setColor("#C4A484")
 		.setImage(`${result[4].noplayingallowed}`)
     const m = await message.channel.send({
       embeds: [lgtqyz],
@@ -92,13 +91,13 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
             embeds: [noplayingallowed],
             components: [npa],
           });
-          if(i.customId == "helplg" || i.customId == "help") {
+        }
+          else if(i.customId == "helplg" || i.customId == "help") {
             await i.update({
               embeds: [lgtqyz],
               components: [row],
             });
           }
-        }
     });
   },
 };

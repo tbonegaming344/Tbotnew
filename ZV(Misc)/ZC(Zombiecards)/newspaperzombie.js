@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`news`, `newspaper`, `nz`],
 	category: `Zombie Cards`, 
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1344290261970194522/NewspaperZombie.webp?ex=67c05f5e&is=67bf0dde&hm=08af1b6accff49116e1fdb0014f921207a65d6e1564215e61e5bbdffec870911&=&format=webp&width=542&height=614")
 			.setTitle("Newspaper Zombie | <:Crazy:1062502046474973224>")
 			.setDescription("**\\-  Professional Zombie  -**")

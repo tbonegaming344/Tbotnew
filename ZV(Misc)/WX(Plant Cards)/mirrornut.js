@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`mirror`, `mn1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let mn = new EmbedBuilder()
+		const mn = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/86/HD_Mirror-Nut.png/revision/latest/scale-to-width-down/250?cb=20220407000626")
 		.setTitle("Mirror-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

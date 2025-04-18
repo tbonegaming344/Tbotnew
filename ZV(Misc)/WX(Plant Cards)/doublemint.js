@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`dobuled`, `mint`, `dm1`, `doublemint`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let dm = new EmbedBuilder()
+		const dm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/28/DoubledMint.png/revision/latest/scale-to-width-down/250?cb=20170902104215")
 		.setTitle("Doubled Mint | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Plant -**")

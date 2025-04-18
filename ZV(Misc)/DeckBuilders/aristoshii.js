@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
   MessageFlags
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `aristoshii`,
   aliases: [
@@ -85,7 +85,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`
       if (i.customId == "ib" || i.customId == "icebox") {
         await i.update({ embeds: [iceBox], components: [ib] });
       }
-      if (i.customId == "helpar" || i.customId == "help") {
+      else if (i.customId == "helpar" || i.customId == "help") {
         await i.update({ embeds: [aris], components: [row] });
       }
     });

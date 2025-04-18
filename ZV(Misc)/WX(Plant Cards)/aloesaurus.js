@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`aloe`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let aloe = new EmbedBuilder()
+		const aloe = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/fe/Aloesaurus.png/revision/latest/scale-to-width-down/250?cb=20170824144955")
 		.setTitle("Aloesaurus | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Cactus Animal Plant -**")

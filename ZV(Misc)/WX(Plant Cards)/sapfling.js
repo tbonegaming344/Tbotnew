@@ -12,7 +12,7 @@ module.exports= {
                     .setStyle(ButtonStyle.Primary)
 										.setEmoji('<:Sappy_Place:1106931786136694904>')
             );
-		let sf = new EmbedBuilder()
+		const sf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/7e/SapFlingCardImage.png/revision/latest?cb=20180217032517")
 		.setTitle("Sap-Fling | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Pinecone Tree Plant -**")

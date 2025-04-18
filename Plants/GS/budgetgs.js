@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js")
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `budgetmopshadow`,
 	aliases: [`budgetgs`,`gsbudget`, `budgetgreenshadow`, `greenshadowbudget`, `budgetmopgs`, `gsbudgetmop`, `bgsmop`, `mopshadow`],
 	category: `Green Shadow(GS)`, 
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT budgetgs from gsdecks`);
-				let budgetgs = new EmbedBuilder()
+		const [result] = await db.query(`SELECT budgetgs from gsdecks`);
+				const budgetgs = new EmbedBuilder()
 	.setTitle(`${result[5].budgetgs}`)
 	.setDescription(`${result[3].budgetgs}`)
 	.setFooter({text:`${result[2].budgetgs}`})

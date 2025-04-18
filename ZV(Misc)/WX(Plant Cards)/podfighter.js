@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pfighter`, `pod2`, `pf2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pf = new EmbedBuilder()
+		const pf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/55/PodFighterCardImage.png/revision/latest/scale-to-width-down/250?cb=20171013043546")
 		.setTitle("Pod Fighter | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")

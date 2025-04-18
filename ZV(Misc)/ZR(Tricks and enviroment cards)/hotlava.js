@@ -4,7 +4,7 @@ module.exports = {
 	aliases:[`hot2`, `lava1`, `hl`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let hl = new EmbedBuilder()
+		const hl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8a/Hot_Lava_Environment.png/revision/latest/scale-to-width-down/148?cb=20170625202848")
 		.setTitle("Hot Lava | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Environment -**")

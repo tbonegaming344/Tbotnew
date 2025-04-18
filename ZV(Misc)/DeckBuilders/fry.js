@@ -3,12 +3,22 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags, 
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  MessageFlags,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
-
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("Blue");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `fryemup`,
   aliases: [
@@ -24,230 +34,88 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const select  = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Fry's Decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Ladder Decks")
-        .setValue("ladder")
-        .setDescription('Decks that mostly only good for ranked games')
-        .setEmoji("<:ladder:1271503994857979964>"), 
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Deck")
-        .setValue("meme")
-        .setDescription('Plant Decks that are built off a weird/fun combo'), 
+    const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Fry's Decklists")
+      .addOptions(
         new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Deck")
-        .setValue("combo")
-        .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
+          .setLabel("Ladder Decks")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setValue("midrange")
-        .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-        new StringSelectMenuOptionBuilder()  
-        .setLabel("Tempo Decks")
-        .setValue("tempo")
-        .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.') , 
+          .setLabel("Meme Deck")
+          .setValue("meme")
+          .setDescription("Plant Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
-        .setLabel("All Decks")
-        .setValue("all")
-        .setDescription('All of Fryemup Decks')
+          .setLabel("Combo Deck")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Decks")
+          .setValue("tempo")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("All of Fryemup Decks")
       );
     const row = new ActionRowBuilder().addComponents(select);
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("valkster")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("frymidrose")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const frymidrose = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("ladderhelp")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("raiserpackage")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const raiserpackage = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("fmr")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("valk")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const valk = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("rpackage")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpladder")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    let ladderdecks = [
-      "frymidrose",
-      "raiserpackage",
-      "valkster",
-    ]
-    let toBuildLaderString = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      toBuildLaderString+= `\n<@1043528908148052089> **${ladderdecks[i]}**`;
+    const fryEmUpDecks = {
+      ladderDecks: ["frymidrose", "raiserpackage", "valkster"],
+      memeDeck: ["conjureleap"],
+      comboDeck: ["valkster"],
+      midrangeDecks: ["frymidrose", "valkster"],
+      tempoDecks: ["conjureleap", "raiserpackage"],
+      allDecks: ["frymidrose", "raiserpackage", "valkster", "conjureleap"],
+    };
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    const temporow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("rpackage2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("conjureleap")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const conjureleap = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("tempohelp")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("raiserpackage2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const raiserpackage2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cleap")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helptempo")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    let tempodecks = [
-      "conjureleap",
-      "raiserpackage",
-    ]
-    let toBuildTempoString = "";
-    for (let i = 0; i < tempodecks.length; i++) {
-      toBuildTempoString += `\n<@1043528908148052089> **${tempodecks[i]}**`;
+    const toBuildLadderString = buildDeckString(fryEmUpDecks.ladderDecks);
+    const toBuildTempoString = buildDeckString(fryEmUpDecks.tempoDecks);
+    const toBuildMid = buildDeckString(fryEmUpDecks.midrangeDecks);
+    const toBuildString = buildDeckString(fryEmUpDecks.allDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    let combodecks = [
-      "valkster",
-    ]
-    let memedecks = [
-      "conjureleap",
-    ]
-    const midrangerow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("valkster2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("fmr2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const fmr2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpmid")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("valk2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    const valk2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("frymidrose2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpmidrange")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    );
-    let midrangedecks = [
-      "frymidrose",
-      "valkster",
-    ]
-    let toBuildMid = "";
-    for (let i = 0; i < midrangedecks.length; i++) {
-      toBuildMid += `\n<@1043528908148052089> **${midrangedecks[i]}**`;
-    }
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("valkster3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("conjureleap2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    )
-    const conjureleap2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("allhelp")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("fmr3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    )
-    const fmr3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cleap2")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("raiserpackage3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    )
-    const raiserpackage3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("frymidrose3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("valk3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    )
-    const valk3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("rpackage3")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpall")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary),
-    )
-    let decks = [
-      "conjureleap",
-      "frymidrose",
-      "raiserpackage",
-      "valkster",
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
-    }
-    let [result] =
-      await db.query(`select conjureleap, frymidrose, 
+    const ladderrow = new CreateButtons("valkster", "fmr");
+    const fmr = new CreateButtons("ladderhelp", "rp");
+    const rp = new CreateButtons("frymidrose", "valk");
+    const valk = new CreateButtons("raiserpackage", "helpladder");
+    const temporow = new CreateButtons("raiserpackage2", "cleap");
+    const cleap = new CreateButtons("tempohelp", "rp2");
+    const rp2 = new CreateButtons("conjureleap", "helptempo");
+    const midrangerow = new CreateButtons("valkster2", "fmr2");
+    const fmr2 = new CreateButtons("helpmid", "valk2");
+    const valk2 = new CreateButtons("frymidrose2", "helpmidrange");
+    const alldecksrow = new CreateButtons("valkster3", "cleap2");
+    const cleap2 = new CreateButtons("allhelp", "fmr3");
+    const fmr3 = new CreateButtons("conjureleap2", "rp3");
+    const rp3 = new CreateButtons("frymidrose3", "valk3");
+    const valk3 = new CreateButtons("raiserpackage3", "helpall");
+    const [result] = await db.query(`select conjureleap, frymidrose, 
 raiserpackage, valkster
 from hgdecks hg
 inner join rodecks ro 
@@ -256,207 +124,132 @@ inner join bfdecks bf
 on (hg.deckinfo = bf.deckinfo)
 inner join pbdecks pb
 on (hg.deckinfo = pb.deckinfo)`);
-    let user = await client.users.fetch("291752823891427329");
-    let fry = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-${user.displayName} has ${decks.length} total decks in Tbot`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let midrangefry = new EmbedBuilder()
-      .setTitle(`${user.displayName} Midrange Decks`)
-      .setDescription(
-        `My Midrange decks made by ${user.displayName} are ${toBuildMid}`
-      )
-      .setFooter({
-        text: `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-${user.displayName} has ${midrangedecks.length} Midrange decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let tempofry = new EmbedBuilder()
-      .setTitle(`${user.displayName} Tempo Decks`)
-      .setDescription(
-        `My Tempo decks made by ${user.displayName} are ${toBuildTempoString}`
-      )
-      .setFooter({
-        text: `To view the Tempo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-${user.displayName} has ${tempodecks.length} Tempo decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let ladderfry = new EmbedBuilder()
-      .setTitle(`${user.displayName} Ladder Decks`)
-      .setDescription(
-        `My Ladder decks made by ${user.displayName} are ${toBuildLaderString}`
-      )
-      .setFooter({
-        text: `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-${user.displayName} has ${ladderdecks.length} Ladder decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let allfry = new EmbedBuilder()
-      .setTitle(`All ${user.displayName}Decks`)
-      .setDescription(
-        `My All decks made by ${user.displayName} are ${toBuildString}`
-      )
-      .setFooter({
-        text: `To view the All Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-${user.displayName} has ${decks.length} total decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-    let cleap = new EmbedBuilder()
-    .setTitle(`${result[5].conjureleap}`)	
-    .setDescription(`${result[3].conjureleap}`)
-.setFooter({text: `${result[2].conjureleap}`})
-    .addFields({
-      name: "Deck Type",
-      value: `${result[6].conjureleap}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].conjureleap}`,
-      inline: true
-    },{
-      name: "Deck Cost", 
-      value: `${result[1].conjureleap}`,
-      inline: true
-    })
-  .setColor("Random")			
-  .setImage(`${result[4].conjureleap}`)
-    let frymid = new EmbedBuilder()
-    .setTitle(`${result[5].frymidrose}`)
-    .setDescription(`${result[3].frymidrose}`)
-    .setFooter({text: `${result[2].frymidrose}`})
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].frymidrose}`,
-          inline: true
-        },{
-          name: "Archetype",
-          value: `${result[0].frymidrose}`,
-          inline: true
-        },{
-          name: "Deck Cost", 
-          value: `${result[1].frymidrose}`,
-          inline: true
-        })
-      .setColor("Random")
-  .setImage(`${result[4].frymidrose}`)
-    let rpack = new EmbedBuilder()
-    .setTitle(`${result[5].raiserpackage}`)	
-    .setDescription(`${result[3].raiserpackage}`)
-.setFooter({text: `${result[2].raiserpackage}`})
-    .addFields({
-      name: "Deck Type", 
-      value: `${result[6].raiserpackage}`,
-      inline: true
-    },{
-      name: "Archetype",
-      value: `${result[0].raiserpackage}`,
-      inline: true
-    },{
-      name: "Deck Cost", 
-      value:`${result[1].raiserpackage}`,
-      inline: true
-    })
-  .setColor("Random")			
-  .setImage(`${result[4].raiserpackage}`)
-    let valkster = new EmbedBuilder()
-    .setTitle(`${result[5].valkster}`)
-	.setDescription(`${result[3].valkster}`)
-	.setFooter({text: `${result[2].valkster}`})
-			.addFields({
-				name: "Deck Type",
-				value: `${result[6].valkster}`,
-				inline: true
-			},{
-				name: "Archetype",
-				value: `${result[0].valkster}`,
-				inline: true
-			},{
-				name: "Deck Cost", 
-				value: `${result[1].valkster}`,
-				inline: true
-			})
-		.setColor("Random")
-		.setImage(`${result[4].valkster}`)
-    const t = await message.channel.send({ embeds: [fry], components: [row] });
+    const user = await client.users.fetch("291752823891427329");
+    const fry = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `To view the Decks Made By ${user.displayName} please select an option from the select menu below
+Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} total decks in Tbot`,
+      user.displayAvatarURL()
+    );
+    const midrangefry = new CreateHelpEmbed(
+      `${user.displayName} Midrange Decks`,
+      `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
+      user.displayAvatarURL(),
+      `To view the Midrange decks made by ${user.displayName} please click on the buttons below or use commands listed above
+Note: ${user.displayName} has ${fryEmUpDecks.midrangeDecks.length} Midrange decks in Tbot`
+    );
+    const tempofry = new CreateHelpEmbed(
+      `${user.displayName} Tempo Decks`,
+      `My Tempo decks made by ${user.displayName} are ${toBuildTempoString}`,
+      user.displayAvatarURL(),
+      `To view the Tempo decks made by ${user.displayName} please click on the buttons below or use commands listed above
+Note: ${user.displayName} has ${fryEmUpDecks.tempoDecks.length} Tempo decks in Tbot`
+    );
+    const ladderfry = new CreateHelpEmbed(
+      `${user.displayName} Ladder Decks`,
+      `My Ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
+      user.displayAvatarURL(),
+      `To view the Ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
+Note: ${user.displayName} has ${fryEmUpDecks.ladderDecks.length} Ladder decks in Tbot`
+    );
+    const allfry = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `My All decks made by ${user.displayName} are ${toBuildString}`,
+      user.displayAvatarURL(),
+      `To view all the decks made by ${user.displayName} please click on the buttons below or use commands listed above
+Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
+    );
+    function CreateDeckEmbed(result, deckName) {
+      const embed = new EmbedBuilder()
+        .setTitle(`${result[5][deckName]}`)
+        .setDescription(`${result[3][deckName]}`)
+        .setFooter({ text: `${result[2][deckName]}` })
+        .addFields(
+          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+        )
+        .setColor("Blue");
+      const imageUrl = result[4][deckName];
+      if (imageUrl) {
+        embed.setImage(imageUrl);
+      }
+      return embed;
+    }
+    const conjureleap = new CreateDeckEmbed(result, "conjureleap");
+    const frymidrose = new CreateDeckEmbed(result, "frymidrose");
+    const raiserpackage = new CreateDeckEmbed(result, "raiserpackage");
+    const valkster = new CreateDeckEmbed(result, "valkster");
+    const m = await message.channel.send({ embeds: [fry], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
-    const collector = t.createMessageComponentCollector({ filter: iFilter });
-    collector.on("collect", async (i) => {
-     if(i.customId == "select"){
+    async function handleSelectMenu(i) {
       const value = i.values[0];
-      if(value == "combo"){
-        await i.reply({embeds: [valkster], flags: MessageFlags.Ephemeral})
-      }
-      if(value == "meme"){
-        await i.reply({embeds: [cleap], flags: MessageFlags.Ephemeral})
-      }
-      if(value == "midrange"){
+      if (value == "combo") {
+        await i.reply({ embeds: [valkster], flags: MessageFlags.Ephemeral });
+      } else if (value == "meme") {
+        await i.reply({ embeds: [conjureleap], flags: MessageFlags.Ephemeral });
+      } else if (value == "midrange") {
         await i.update({ embeds: [midrangefry], components: [midrangerow] });
-      }
-      if(value == "tempo"){
+      } else if (value == "tempo") {
         await i.update({ embeds: [tempofry], components: [temporow] });
-      }
-      if(value == "ladder"){
+      } else if (value == "ladder") {
         await i.update({ embeds: [ladderfry], components: [ladderrow] });
-      }
-      if(value == "all"){
+      } else if (value == "all") {
         await i.update({ embeds: [allfry], components: [alldecksrow] });
       }
-     }
-      if (i.customId == "ladderhelp" || i.customId == "helpladder") {
-        await i.update({ embeds: [ladderfry], components: [ladderrow] });
+    }
+    async function handleButtonInteraction(i) {
+      const buttonActions = {
+        ladderhelp: { embed: ladderfry, component: ladderrow },
+        helpladder: { embed: ladderfry, component: ladderrow },
+        helpmid: { embed: midrangefry, component: midrangerow },
+        helpmidrange: { embed: midrangefry, component: midrangerow },
+        helptempo: { embed: tempofry, component: temporow },
+        tempohelp: { embed: tempofry, component: temporow },
+        helpall: { embed: allfry, component: alldecksrow },
+        allhelp: { embed: allfry, component: alldecksrow },
+        cleap: { embed: conjureleap, component: cleap },
+        conjureleap: { embed: conjureleap, component: cleap },
+        cleap2: { embed: conjureleap, component: cleap2 },
+        conjureleap2: { embed: conjureleap, component: cleap2 },
+        fmr: { embed: frymidrose, component: fmr },
+        frymidrose: { embed: frymidrose, component: fmr },
+        fmr2: { embed: frymidrose, component: fmr2 },
+        frymidrose2: { embed: frymidrose, component: fmr2 },
+        fmr3: { embed: frymidrose, component: fmr3 },
+        frymidrose3: { embed: frymidrose, component: fmr3 },
+        rp: { embed: raiserpackage, component: rp },
+        raiserpackage: { embed: raiserpackage, component: rp },
+        rp2: { embed: raiserpackage, component: rp2 },
+        raiserpackage2: { embed: raiserpackage, component: rp2 },
+        rp3: { embed: raiserpackage, component: rp3 },
+        raiserpackage3: { embed: raiserpackage, component: rp3 },
+        valk: { embed: valkster, component: valk },
+        valkster: { embed: valkster, component: valk },
+        valk2: { embed: valkster, component: valk2 },
+        valkster2: { embed: valkster, component: valk2 },
+        valk3: { embed: valkster, component: valk3 },
+        valkster3: { embed: valkster, component: valk3 },
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
+      } else {
+        await i.reply({
+          content: "Invalid button interaction",
+          flags: MessageFlags.Ephemeral,
+        });
       }
-      if(i.customId == "fmr" || i.customId == "frymidrose"){
-        await i.update({ embeds: [frymid], components: [frymidrose] });
-      }
-      if(i.customId == "rpackage" || i.customId == "raiserpackage"){
-        await i.update({ embeds: [rpack], components: [raiserpackage] });
-      }
-      if(i.customId == "valk" || i.customId == "valkster"){
-        await i.update({ embeds: [valkster], components: [valk] });
-      }
-      if (i.customId == "tempohelp" || i.customId == "helptempo") {
-        await i.update({ embeds: [tempofry], components: [temporow] });
-      }
-      if(i.customId == "cleap" || i.customId == "conjureleap"){
-        await i.update({ embeds: [cleap], components: [conjureleap] });
-      }
-      if(i.customId == "rpackage2" || i.customId == "raiserpackage2"){
-        await i.update({ embeds: [rpack], components: [raiserpackage2] });
-      }
-      if(i.customId == "rpackage3" || i.customId == "raiserpackage3"){
-        await i.update({ embeds: [rpack], components: [raiserpackage3] });
-      }
-      if(i.customId == "valk2" || i.customId == "valkster2"){
-        await i.update({ embeds: [valkster], components: [valk2] });
-      }
-      if (i.customId == "helpmid" || i.customId == "helpmidrange") {
-        await i.update({ embeds: [midrangefry], components: [midrangerow] });
-      }
-      if(i.customId == "fmr2" || i.customId == "frymidrose2"){
-        await i.update({ embeds: [frymid], components: [fmr2] });
-      }
-      if(i.customId == "fmr3" || i.customId == "frymidrose3"){
-        await i.update({ embeds: [frymid], components: [fmr3] });
-      }
-      if(i.customId == "valk3" || i.customId == "valkster3"){
-        await i.update({ embeds: [valkster], components: [valk3] });
-      }
-      if(i.customId == "valk4" || i.customId == "valkster4"){
-        await i.update({ embeds: [valkster], components: [valk4] });
-      }
-      if(i.customId == "helpall" || i.customId == "allhelp"){
-        await i.update({embeds: [allfry], components: [alldecksrow]})
-      }
-      if(i.customId == "cleap2" || i.customId == "conjureleap2"){
-        await i.update({embeds: [cleap], components: [conjureleap2]})
+    }
+    const collector = m.createMessageComponentCollector({ filter: iFilter });
+    collector.on("collect", async (i) => {
+      if (i.customId == "select") {
+        await handleSelectMenu(i);
+      } else {
+        await handleButtonInteraction(i);
       }
     });
   },

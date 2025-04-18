@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`browncoat`, `regular`, `regularzombie`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
       .setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/5b/ZombieH.png/revision/latest/scale-to-width-down/225?cb=20161231011028")
 			.setTitle("Zombie | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Professional Zombie  -**")

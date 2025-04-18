@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `goingnuts3`,
   aliases: [
@@ -16,8 +16,8 @@ module.exports = {
   ],
   category: `Beta-Carrotina/Citron`,
   run: async (client, message, args) => {
-    let [result] = await db.query("SELECT going3nuts FROM ctdecks");
-    let gn3 = new EmbedBuilder()
+    const [result] = await db.query("SELECT going3nuts FROM ctdecks");
+    const gn3 = new EmbedBuilder()
       .setTitle(`${result[5].going3nuts}`)
       .setDescription(`${result[3].going3nuts}`)
       .setColor("White")

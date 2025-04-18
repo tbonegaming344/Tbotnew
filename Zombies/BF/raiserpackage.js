@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `raiserpackage`,
 	aliases: [`packageraiser`, `raiserpackagebf`, `raiserpack`, `rpack`],
 	category: `Brain Freeze(BF)`,
 		run: async(client, message, args) => {
-			let [result] = await db.query(`SELECT raiserpackage FROM bfdecks`)
-				let embed = new EmbedBuilder()
+			const [result] = await db.query(`SELECT raiserpackage FROM bfdecks`)
+				const embed = new EmbedBuilder()
 	.setTitle(`${result[5].raiserpackage}`)	
 			.setDescription(`${result[3].raiserpackage}`)
 	.setFooter({text: `${result[2].raiserpackage}`})

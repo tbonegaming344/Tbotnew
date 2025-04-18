@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`regularmine`, `potato1`, `mine`, `pm1`],
 	category: `Plant Cards`,
 	run: async(client,message, args) => {
-		let mine = new EmbedBuilder()
+		const mine = new EmbedBuilder()
 		.setThumbnail("https://images-ext-2.discordapp.net/external/XRbcdJFlzhU3ymB6TUZxtLCkS7jE7_1tFmzJIcWdQAQ/https/o.remove.bg/downloads/15bd2a0e-c476-4f3d-886b-955f70f1e0f9/101-1014323_zombies-2-generator-site-_new_-plants-vs-pvz-2-potato-mine-removebg-preview.png")
 		.setTitle("Potato Mine | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Plant -**")

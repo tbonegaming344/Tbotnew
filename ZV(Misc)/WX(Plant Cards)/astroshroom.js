@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`astro1`, `as1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let as = new EmbedBuilder()
+		const as = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/94/Astro-shroom_HD.png/revision/latest?cb=20170225005845")
 		.setTitle("Astro-Shroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

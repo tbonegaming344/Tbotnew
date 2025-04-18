@@ -3,7 +3,7 @@ module.exports = {
 	name: `chomper`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cho = new EmbedBuilder()
+		const cho = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/p__/images/c/c5/HD_Chomper.png/revision/latest?cb=20201123212500&path-prefix=protagonist")
 		.setTitle("Chomper | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flytrap Plant -**")

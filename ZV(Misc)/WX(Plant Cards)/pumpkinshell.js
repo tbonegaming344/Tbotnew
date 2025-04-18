@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pumpkin1`, `shell`, `ps2`],
 	category: `Plant Cards`,
 	run: async(client,message,args)=> {
-		let ps = new EmbedBuilder()
+		const ps = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/98/HDPumpkinShell.png/revision/latest/scale-to-width-down/250?cb=20180423080705")
 		.setTitle("Pumpkin Shell | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Squash Plant -**")

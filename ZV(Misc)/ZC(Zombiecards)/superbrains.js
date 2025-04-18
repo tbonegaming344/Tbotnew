@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -67,7 +67,7 @@ module.exports = {
       midrangeDecks: ["budgetsb"], 
       allDecks: ['budgetsb', "telimpssb"]
     }
-    let embed = new EmbedBuilder()
+    const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
       )
@@ -91,13 +91,13 @@ module.exports = {
         }
       )
       .setColor("#FFC0CB");
-      let helpsb = new CreateHelpEmbed(
+      const helpsb = new CreateHelpEmbed(
         "Super Brainz Decks", 
         `To view the SuperBrainz decks please select an option from the select menu below!
   Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz in Tbot`, 
   "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
        )
-      let [result] = await db.query(`SELECT * FROM sbdecks`);
+      const [result] = await db.query(`SELECT * FROM sbdecks`);
       function CreateDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
@@ -115,8 +115,8 @@ module.exports = {
         }
         return embed;
       }
-      let budgetsb= new CreateDeckEmbed(result, "budgetsb")
-      let telimps = new CreateDeckEmbed(result, "telimpssb")
+      const budgetsb= new CreateDeckEmbed(result, "budgetsb")
+      const telimps = new CreateDeckEmbed(result, "telimpssb")
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

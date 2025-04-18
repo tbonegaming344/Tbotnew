@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sus`, `amongus`, `amogus`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://o.remove.bg/downloads/e6f6a4c2-f219-492e-9a48-96717547c231/114-1147742_plants-vs-zombies-heroes-zombiditos-removebg-preview.png")
 			.setTitle("Imposter | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Mustache Imp Zombie -**")

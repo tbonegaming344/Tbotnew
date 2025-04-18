@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`psf`, `primalsun`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let psf = new EmbedBuilder()
+		const psf = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/89/PrimalSunflowerHD.png/revision/latest/scale-to-width-down/250?cb=20170804165257")
 		.setTitle("Primal Sunflower | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Plant -**")

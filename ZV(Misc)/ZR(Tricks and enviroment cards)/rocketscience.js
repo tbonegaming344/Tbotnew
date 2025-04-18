@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`rocketsci`, `rocket`],
 	category: `Tricks Phase`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/cc/RocketScienceCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227185504")
 			.setTitle("Rocket Science | <:Brainy:1062500939908530246>")
 			.setDescription("**\\-  Science Barrel Trick  -**")

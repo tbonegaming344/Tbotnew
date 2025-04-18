@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`blast`, `bb3`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let bb = new EmbedBuilder()
+		const bb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f0/BerryBlastCardImage.png/revision/latest?cb=20180207012728")
 		.setTitle("Berry Blast | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Trick -**")

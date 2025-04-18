@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`corg`, `dog1`, `cd2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cd = new EmbedBuilder()
+		const cd = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8b/HDCornDog-Better.png/revision/latest?cb=20201120101328")
 		.setTitle("Corn Dog | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Corn Animal Plant -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sergeant`, `strongberry`, `ss5`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let ss = new EmbedBuilder()
+		const ss = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f5/HD_Sergeant_Strongberry.png/revision/latest?cb=20200225001932")
 		.setTitle("Sergeant Strongberry | <:Kabloom:1062502137826910268>")
 		.setDescription("** - Berry Plant -**")

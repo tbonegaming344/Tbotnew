@@ -1,12 +1,12 @@
 const {EmbedBuilder}= require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports ={
 	name: `binaryflagwar`,
 	aliases: [`warbinaryflag`, `bfwar`],
 	category: `Zmech(ZM)`,
 	run: async(client, message, args)=> {
-		let [result] = await db.query(`SELECT binaryflagwar FROM zmdecks`);
-		let bfw = new EmbedBuilder()
+		const [result] = await db.query(`SELECT binaryflagwar FROM zmdecks`);
+		const bfw = new EmbedBuilder()
 		.setTitle(`${result[5].binaryflagwar}`)
 		.setDescription(`${result[3].binaryflagwar}`)
 		.setColor("Purple")

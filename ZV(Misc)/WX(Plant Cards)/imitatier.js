@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`imi`, `tater2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let imi = new EmbedBuilder()
+		const imi = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/3b/Imitater-HD_PvZH.png/revision/latest/scale-to-width-down/250?cb=20180104205540")
 		.setTitle("Imitater | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Root Mime Plant -**")

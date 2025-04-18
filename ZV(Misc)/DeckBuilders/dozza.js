@@ -7,7 +7,18 @@ const {
   StringSelectMenuBuilder, 
   StringSelectMenuOptionBuilder
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
+function CreateHelpEmbed(title, description, thumbnail, footer) {
+  const embed = new EmbedBuilder()
+    .setTitle(title)
+    .setDescription(description)
+    .setThumbnail(thumbnail)
+    .setColor("#5a5547");
+  if (footer) {
+    embed.setFooter({ text: `${footer}` });
+  }
+  return embed;
+}
 module.exports = {
   name: `dozza`,
   aliases: [`decksmadebydozza`, `helpdozza`, `dozzahelp`, `dozzadecks`],
@@ -44,439 +55,197 @@ module.exports = {
           .setDescription('View all of dozza\'s decks')
       );
     const row = new ActionRowBuilder().addComponents(select);
-    const ladderrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("trickmech")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mr")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const mr = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("ladderhelp")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("tmech")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const tmech = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpladder")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let ladderdecks = [
-      "midred",
-      "trickmech"
-    ]
-    let toBuildLadder = "";
-    for (let i = 0; i < ladderdecks.length; i++) {
-      toBuildLadder += `\n<@1043528908148052089> **${ladderdecks[i]}**`;
+    const dozzaDecks = {
+      ladderDecks: ["midred", "trickmech"],
+      memeDecks: ["dozzamech", "highlander"],
+      aggroDecks: ["dozzamech", "trickmech"],
+      comboDecks: ["midred"],
+      midrangeDecks: ["highlander", "midred"],
+      allDecks: ["dozzamech", "highlander", "midred"],
     }
-    let combodecks =[
-      "midred"
-    ]
-    let midrange = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midred3")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-       .setCustomId("hland")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let hlander = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("midhelp")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-      .setCustomId("mr3")
-     .setEmoji("<:arrowright:1271446796207525898>")
-      .setStyle(ButtonStyle.Primary)
-    );
-    let mr3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hlander")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpmid")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let midrangedecks = [
-      'highlander',
-      "midred",
-    ]
-    let toBuildMid = "";
-    for (let i = 0; i < midrangedecks.length; i++) {
-      toBuildMid += `\n<@1043528908148052089> **${midrangedecks[i]}**`;
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
     }
-    let meme = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hland2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("dm")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let dm = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("memehelp")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("hland2")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let hland2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("dmech")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpmeme")
-       .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    let memedecks = [
-      "dozzamech",
-      "highlander",
-    ]
-    let toBuildMeme = "";
-    for (let i = 0; i < memedecks.length; i++) {
-      toBuildMeme += `\n<@1043528908148052089> **${memedecks[i]}**`;
+    const toBuildLadder = buildDeckString(dozzaDecks.ladderDecks);
+    const toBuildMeme = buildDeckString(dozzaDecks.memeDecks);
+    const toBuildAggro = buildDeckString(dozzaDecks.aggroDecks);
+    const toBuildMid = buildDeckString(dozzaDecks.midrangeDecks);
+    const toBuildString = buildDeckString(dozzaDecks.allDecks);
+    function CreateButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
     }
-    const aggrorow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("trickmech2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("dm2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const dm2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("aggrohelp")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("tmech2")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const tmech2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("dozzamech2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("helpaggro")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let aggrodecks = [
-      "dozzamech",
-      "trickmech"
-    ]
-    let toBuildAggro = "";
-    for (let i = 0; i < aggrodecks.length; i++) {
-      toBuildAggro += `\n<@1043528908148052089> **${aggrodecks[i]}**`;
-    }
-    const alldecksrow = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("pcontrol2")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("dm3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const dm3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("allhelp")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("hland3")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const hland3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("dozzamech")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("mr4")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    const mr4 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("hlander3")
-  .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("allhelp")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    )
-    let decks = [
-      "dozzamech",
-      "highlander",
-      "midred",
-    ];
-    let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      toBuildString += `\n<@1043528908148052089> **${decks[i]}**`;
-    }
-    let [result] = await db.query(`select dozzamech, highlander, 
+    const ladderrow = new CreateButtons("trickmech", "mr");
+    const mr = new CreateButtons("ladderhelp", "tmech");
+    const tmech = new CreateButtons("midred", "helpladder");
+    const midrange = new CreateButtons("midred2", "hland");
+    const hland = new CreateButtons("midhelp", "mr2");
+    const mr2 = new CreateButtons("highlander", "helpmid");
+    const meme = new CreateButtons("highlander2", "dm");
+    const dm = new CreateButtons("memehelp", "hland2");
+    const hland2 = new CreateButtons("dozzamech", "helpmeme");
+    const aggrorow = new CreateButtons("trickmech2", "dm2");
+    const dm2 = new CreateButtons("aggrohelp", "tmech2");
+    const tmech2 = new CreateButtons("dozzamech2", "helpaggro");
+    const alldecksrow = new CreateButtons("midred3", "dm3");
+    const dm3 = new CreateButtons("allhelp", "hland3");
+    const hland3 = new CreateButtons("dozzamech", "mr3");
+    const mr3 = new CreateButtons("highlander3", "allhelp");
+    const [result] = await db.query(`select dozzamech, highlander, 
 midred, trickmech
 from zmdecks zm 
 inner join wkdecks wk 
 on (zm.deckinfo = wk.deckinfo) 
 inner join czdecks cz 
 on (zm.deckinfo = cz.deckinfo)`);
-let user = await client.users.fetch("1143937777763889324");
-    let dozza = new EmbedBuilder()
-      .setTitle(`${user.displayName} Decks`)
-      .setDescription(
-        `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: Dozza has ${decks.length} total decks in Tbot`
-      )
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-  let ladderdozza = new EmbedBuilder()
-    .setTitle(`${user.displayName} Ladder Decks`)
-    .setDescription(
-      `My Ladder decks made by ${user.displayName} are ${toBuildLadder}`
+const user = await client.users.fetch("1143937777763889324");
+    const dozza = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
+Note: Dozza has ${dozzaDecks.allDecks.length} total decks in Tbot`,
+        user.displayAvatarURL()
+    );
+  const ladderdozza = new CreateHelpEmbed(
+    `${user.displayName} Ladder Decks`,
+    `My ladder decks made by ${user.displayName} are ${toBuildLadder}`,
+    user.displayAvatarURL(), 
+    `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${dozzaDecks.ladderDecks.length} Ladder decks in Tbot`
+  )
+    const alldozza = new CreateHelpEmbed(
+      `${user.displayName} Decks`,
+      `My decks made by ${user.displayName} are ${toBuildString}`,
+      user.displayAvatarURL(),
+      `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${dozzaDecks.allDecks.length} total decks in Tbot`
     )
-    .setFooter({
-      text: `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${ladderdecks.length} Ladder decks in Tbot`
-    })
-    .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let alldozza = new EmbedBuilder()
-    .setTitle(`${user.displayName} All Decks`)
-    .setDescription(
-      `My Decks made by ${user.displayName} are ${toBuildString}`
-    )
-    .setFooter({
-      text: `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
-    })
-    .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-      let middozza = new EmbedBuilder()
-      .setTitle(`${user.displayName} Midrange Decks`)
-      .setDescription(
-        `My Midrange decks made by ${user.displayName} are ${toBuildMid}`
+      const middozza = new CreateHelpEmbed(
+        `${user.displayName} Midrange Decks`,
+        `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
+        user.displayAvatarURL(),
+        `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${dozzaDecks.midrangeDecks.length} Midrange decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${midrangedecks.length} Midrange decks in Tbot`,
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let memedozza = new EmbedBuilder()
-      .setTitle(`${user.displayName} Meme Decks`)
-      .setDescription(
-        `My Meme decks made by ${user.displayName} are ${toBuildMeme}`
+      const memedozza = new CreateHelpEmbed(
+        `${user.displayName} Meme Decks`,
+        `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
+        user.displayAvatarURL(),
+        `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${dozzaDecks.memeDecks.length} Meme decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${memedecks.length} Meme decks in Tbot`
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-      let aggrodozza = new EmbedBuilder()
-      .setTitle(`${user.displayName} Aggro Decks`)
-      .setDescription(
-        `My Aggro decks made by ${user.displayName} are ${toBuildAggro}`
+      const aggrodozza = new CreateHelpEmbed(
+        `${user.displayName} Aggro Decks`,
+        `My Aggro decks made by ${user.displayName} are ${toBuildAggro}`,
+        user.displayAvatarURL(),
+        `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbot`
       )
-      .setFooter({
-        text: `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${aggrodecks.length} Aggro decks in Tbot`
-      })
-      .setThumbnail(user.displayAvatarURL())
-      .setColor("Random");
-    let dmech = new EmbedBuilder()
-    .setTitle(`${result[5].dozzamech}`)
-    .setDescription(`${result[3].dozzamech}`)
-    .setFooter({text: `${result[2].dozzamech}`})
-        .addFields({
-          name: "Deck Type", 
-          value: `${result[6].dozzamech}`,
-          inline: true
-        },{
-          name: "Archetype",
-          value: `${result[0].dozzamech}`,
-          inline: true
-        },{
-          name: "Deck Cost", 
-          value: `${result[1].dozzamech}`,
-          inline: true
-        })
-      .setColor("Random")
-      .setImage(`${result[4].dozzamech}`)
-    let hland = new EmbedBuilder()
-    .setTitle(`${result[5].highlander}`)
-		.setDescription(`${result[3].highlander}`)
-		.setColor("Random")
-		.setFooter({text: `${result[2].highlander}`})
-		.addFields({
-			name: "Deck Type",
-			value: `${result[6].highlander}`,
-			inline: true
-		},{
-			name: "Archetype",
-			value: `${result[0].highlander}`,
-			inline: true
-		},{
-			name: "Deck Cost", 
-			value: `${result[1].highlander}`,
-			inline: true
-		})
-		.setImage(`${result[4].highlander}`)
-    let mred = new EmbedBuilder()
-    .setTitle(`${result[5].midred}`)
-    .setDescription(`${result[3].midred}`)
-    .setFooter({text: `${result[2].midred}`})
-        .addFields({
-        name: "Deck Type",
-        value: `${result[6].midred}`,
-        inline: true
-        },
-        {
-        name: "Archetype",
-        value: `${result[0].midred}`,
-        inline: true
-        },
-        {
-          name: "Deck Cost", 
-          value: `${result[1].midred}`,
-          inline: true
-        })
-      .setColor("Random")
-      .setImage(`${result[4].midred}`)
-      let trickmech= new EmbedBuilder()
-      .setTitle(`${result[5].trickmech}`)
-      .setDescription(`${result[3].trickmech}`)
-      .setFooter({ text: `${result[2].trickmech}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].trickmech}`,
-        inline: true
-      },{
-        name: "Archetype",
-        value: `${result[0].trickmech}`,
-        inline: true
-      },{ 
-        name: "Deck Cost", 
-        value: `${result[1].trickmech}`,
-        inline: true
-      })
-      .setColor("Random")
-      .setImage(`${result[4].trickmech}`);
+      function CreateDeckEmbed(result, deckName) {
+        const embed = new EmbedBuilder()
+          .setTitle(`${result[5][deckName]}`)
+          .setDescription(`${result[3][deckName]}`)
+          .setFooter({ text: `${result[2][deckName]}` })
+          .addFields(
+            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+          )
+          .setColor("#5a5547");
+        const imageUrl = result[4][deckName];
+        if (imageUrl) {
+          embed.setImage(imageUrl);
+        }
+        return embed;
+      }
+    const dozzamech = new CreateDeckEmbed(result, "dozzamech");
+    const highlander = new CreateDeckEmbed(result, "highlander");
+    const midred = new CreateDeckEmbed(result, "midred");
+    const trickmech = new CreateDeckEmbed(result, "trickmech");
     const m = await message.channel.send({
       embeds: [dozza],
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
-    collector.on("collect", async (i) => {
-    if(i.customId == "select"){
+    async function handleSelectMenu(i){
       const value = i.values[0]
       if(value == "ladder"){
         await i.update({embeds: [ladderdozza], components: [ladderrow]});
       }
-      if(value == "combo"){
+      else if(value == "combo"){
         await i.reply({embeds: [mred], flags: MessageFlags.Ephemeral})
       }
-      if(value == "midrange"){
+      else if(value == "midrange"){
         await i.update({embeds: [middozza], components: [midrange]});
       }
-      if(value == "meme"){
+      else if(value == "meme"){
         await i.update({embeds: [memedozza], components: [meme]});
       }
-      if(value == "aggro"){
+      else if(value == "aggro"){
         await i.update({embeds: [aggrodozza], components: [aggrorow]});
       }
-      if(value == "all"){
+      else if(value == "all"){
         await i.update({embeds: [alldozza], components: [alldecksrow]})
       }
     }
-    if(i.customId === "mr" || i.customId === "midred") {
-      await i.update({embeds: [mred], components: [mr]});
+    async function handleButtonInteraction(i){
+      const buttonActions = {
+        helpladder: {embed: ladderdozza, component: ladderrow},
+        ladderhelp: {embed: ladderdozza, component: ladderrow},
+        aggrohelp: {embed: aggrodozza, component: aggrorow},
+        helpaggro: {embed: aggrodozza, component: aggrorow},
+        memehelp: {embed: memedozza, component: meme},
+        helpmeme: {embed: memedozza, component: meme},
+        midhelp: {embed: middozza, component: midrange},
+        helpmid: {embed: middozza, component: midrange},
+        allhelp: {embed: alldozza, component: alldecksrow},
+        helpall: {embed: alldozza, component: alldecksrow},
+        mr: {embed: midred, component: mr},
+        midred: {embed: midred, component: mr},
+        mr2: {embed: midred, component: mr2},
+        midred2: {embed: midred, component: mr2},
+        mr3: {embed: midred, component: mr3},
+        midred3: {embed: midred, component: mr3},
+        hland: {embed: highlander, component: hland},
+        highlander: {embed: highlander, component: hland},
+        hland2: {embed: highlander, component: hland2},
+        higlander2: {embed: highlander, component: hland2},
+        hland3: {embed: highlander, component: hland3},
+        highlander3: {embed: highlander, component: hland3},
+        dm: {embed: dozzamech, component: dm},
+        dozzamech: {embed: dozzamech, component: dm},
+        dm2: {embed: dozzamech, component: dm2},
+        dozzamech2: {embed: dozzamech, component: dm2},
+        dm3: {embed: dozzamech, component: dm3},
+        dozzamech3: {embed: dozzamech, component: dm3},
+        tmech: {embed: trickmech, component: tmech},
+        trickmech: {embed: trickmech, component: tmech},
+        tmech2: {embed: trickmech, component: tmech2},
+        trickmech2: {embed: trickmech, component: tmech2},
+      };
+      const action = buttonActions[i.customId];
+      if (action) {
+        await i.update({ embeds: [action.embed], components: [action.component] });
+      } else {
+        await i.reply({ content: "Unknown Button Action", flags: MessageFlags.Ephemeral });
+      }
     }
-    if(i.customId === "helpladder" || i.customId == "ladderhelp") {
-      await i.update({embeds: [ladderdozza], components: [ladderrow]});
+    const collector = m.createMessageComponentCollector({ filter: iFilter });
+    collector.on("collect", async (i) => {
+    if(i.customId == "select"){
+      await handleSelectMenu(i)
     }
-    if(i.customId == "mr2" || i.customId == "midred2") {
-      await i.update({embeds: [mred], components: [mr2]});
-    }
-    // Midrange Decks
-    if(i.customId == "mr3" || i.customId == "midred3") {
-      await i.update({embeds: [mred], components: [mr3]});
-    }
-    if(i.customId == "mr4" || i.customId == "midred4") {
-      await i.update({embeds: [mred], components: [mr4]});
-    }
-    if(i.customId == "hland" || i.customId == "hlander") {
-      await i.update({embeds: [hland], components: [hlander]});
-    }
-    if(i.customId === "helpmid" || i.customId == "midhelp") {
-      await i.update({embeds: [middozza], components: [midrange]});
-    }
-    // Meme Decks
-    if(i.customId == "hland2" || i.customId == "hlander2") {
-      await i.update({embeds: [hland], components: [hland2]});
-    }
-    if(i.customId == "hland3" || i.customId == "hlander3") {
-      await i.update({embeds: [hland], components: [hland3]});
-    }
-    if(i.customId == "dm" || i.customId == "dmech") {
-      await i.update({embeds: [dmech], components: [dm]});
-    }
-    if(i.customId == "dm2" || i.customId == "dmech2") {
-      await i.update({embeds: [dmech], components: [dm2]});
-    }
-    if(i.customId == "dm3" || i.customId == "dozzamech3") {
-      await i.update({embeds: [dmech], components: [dm3]});
-    }
-    if(i.customId == "memehelp" || i.customId == "helpmeme") {
-      await i.update({embeds: [memedozza], components: [meme]});
-    }
-    if(i.customId == "aggrohelp" || i.customId == "helpaggro"){
-      await i.update({embeds: [aggrodozza], components: [aggrorow]})
-    }
-    if(i.customId == "tmech" || i.customId == "trickmech"){
-      await i.update({embeds: [trickmech], components: [tmech]})
-    }
-    if(i.customId == "tmech2" || i.customId == "trickmech2"){
-      await i.update({embeds: [trickmech], components: [tmech2]})
-    }
-    if(i.customId == "helpall" || i.customId == "allhelp"){
-      await i.update({embeds: [alldozza], components: [alldecksrow]})
+    else {
+      await handleButtonInteraction(i)
     }
     });
   },

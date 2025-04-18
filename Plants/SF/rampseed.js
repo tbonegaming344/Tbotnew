@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `ramp2seedling`,
 	aliases: [`seedlingramp`, `rampseedling`, `ramptoseedling`, `r2s`, `rts`],
 	category: `Solar Flare(SF)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT ramp2seedling from sfdecks`); 
-			let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT ramp2seedling from sfdecks`); 
+			const embed = new EmbedBuilder()
 	.setTitle(`${result[5].ramp2seedling}`)
 	.setDescription(`${result[3].ramp2seedling}`)
 	.setFooter({text: `${result[2].ramp2seedling}`})

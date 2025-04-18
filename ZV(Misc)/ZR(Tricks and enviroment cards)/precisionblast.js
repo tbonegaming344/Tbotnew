@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`precision`, `gssig`, `pb1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let pb = new EmbedBuilder()
+		const pb = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107705569256689675/PrecisionBlastCardIcon.webp")
 		.setTitle("Precision Blast | <:MegaGrow:1062501412992458802><:Smarty:1062502890448638022>")
 		.setDescription("**\\- Pea Superpower Trick -**")

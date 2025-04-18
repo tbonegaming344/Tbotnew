@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`tcz`, `trash`, `trashcan`, `trash-canzombie`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/84/PvZH_Trash_Can_Zombie_HD.png/revision/latest?cb=20161012010357")
 			.setTitle("Trash Can Zombie | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Professional Barrel Zombie -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`water`, `balloons`, `balloon`, `wb3`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let wb = new EmbedBuilder()
+		const wb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9e/HD_Water_Balloons.png/revision/latest?cb=20160606171525")
 		.setTitle("Water Balloons | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Trick -**")

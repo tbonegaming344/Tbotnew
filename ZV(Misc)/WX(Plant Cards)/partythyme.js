@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`party`, `thyme`, `pt1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pt = new EmbedBuilder()
+		const pt = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/df/PartyThyme.png/revision/latest/scale-to-width-down/250?cb=20190310190101")
 		.setTitle("Party Thyme | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Plant -**")

@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -110,7 +110,7 @@ module.exports = {
     const fheal = new CreateButtons("budgetro2", "fmr2");
     const fmr2 = new CreateButtons("freezeheal", "hmr2");
     const hmr2 = new CreateButtons("frymidrose2", "allhelp");
-    let ro = new EmbedBuilder()
+    const ro = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/vsbattles/images/1/1f/RosePVZ.png/revision/latest?cb=20181016204100"
       )

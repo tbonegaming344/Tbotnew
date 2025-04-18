@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`copter`, `commando`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d9/CopterCommandoCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227185815")
 			.setTitle("Copter Commando | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Imp Zombie  -**")

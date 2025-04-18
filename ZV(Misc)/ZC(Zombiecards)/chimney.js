@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`chimney`, `sweep`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b3/GrowthIndustry%21.png/revision/latest/scale-to-width-down/250?cb=20180701063258")
 			.setTitle("Chimney Sweep | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Professional Zombie  -**")

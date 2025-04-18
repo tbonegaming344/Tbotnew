@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `mechascope`,
 	aliases: [`otkmecha`, `otkmechasaur`, `mechascope`],
 	category: `Immorticia(IM)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT otkmecha FROM imdecks`)
-			let mechascope = new EmbedBuilder()
+		const [result] = await db.query(`SELECT otkmecha FROM imdecks`)
+			const mechascope = new EmbedBuilder()
 	.setTitle(`${result[5].otkmecha}`)
 	.setDescription(`${result[3].otkmecha}`)
 	.setFooter({text: `${result[2].otkmecha}`})

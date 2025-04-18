@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`brainna`, `braindamage`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let br = new EmbedBuilder()
+		const br = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/90/HD-Brainana.png/revision/latest?cb=20160530173509")
 	.setTitle("Brainana | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Fruit Plant -**")

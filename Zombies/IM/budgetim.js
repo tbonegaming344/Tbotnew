@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `budgetim`,
 	aliases: [`imbudget`, `budgetimmortica`, `bim`, `imb`, `budgetscience`],
 	category: `Immorticia(IM)`,
 	run: async(client, message, args) => {
-		let [result] = await db.query(`SELECT budgetim FROM imdecks`)
-				let embed = new EmbedBuilder()
+		const [result] = await db.query(`SELECT budgetim FROM imdecks`)
+				const embed = new EmbedBuilder()
 	.setTitle(`${result[5].budgetim}`)	
 			.setDescription(`${result[3].budgetim}`)
 	.setFooter({text:`${result[2].budgetim}`})

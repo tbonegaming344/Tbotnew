@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ldz`, `line`, `linedancing`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4b/HD_Line_Dancing_Zombie_by_Flag_Zombie.png/revision/latest/scale-to-width-down/250?cb=20210119165903")
 			.setTitle("Line Dancing Zombie | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Dancing Zombie  -**")

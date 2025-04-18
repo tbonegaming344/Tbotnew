@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `uncrackamech`,
   aliases: [
@@ -15,8 +15,8 @@ module.exports = {
   ],
   category: `Zmech(ZM)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT feastmech FROM zmdecks`);
-    let uncrackamech= new EmbedBuilder()
+    const [result] = await db.query(`SELECT feastmech FROM zmdecks`);
+    const uncrackamech= new EmbedBuilder()
       .setTitle(`${result[5].feastmech}`)
       .setDescription(`${result[3].feastmech}`)
       .setColor("Purple")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`flytraplanet`, `vfp`, `vf2`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let vfp = new EmbedBuilder()
+		const vfp = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107455473965342820/FlytraplandCardImage.webp?width=384&height=384")
 		.setTitle("Venus Flytraplanet | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flytrap Environment -**")

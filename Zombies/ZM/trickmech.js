@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `trickmech`,
   aliases: [`trickzmech`, `trm`],
   category: `Zmech(ZM)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT trickmech FROM zmdecks`);
-    let maelstrom = new EmbedBuilder()
+    const [result] = await db.query(`SELECT trickmech FROM zmdecks`);
+    const maelstrom = new EmbedBuilder()
       .setTitle(`${result[5].trickmech}`)
       .setDescription(`${result[3].trickmech}`)
       .setFooter({ text: `${result[2].trickmech}` })

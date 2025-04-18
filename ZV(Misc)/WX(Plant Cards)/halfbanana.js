@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`half`, `hb2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let hb = new EmbedBuilder()
+		const hb = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/30/Half-Banana_card_face.png/revision/latest?cb=20171015065628")
 		.setTitle("Half-Banana | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Fruit Plant -**")

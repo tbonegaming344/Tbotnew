@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`fire1`, `fighter`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ed/Firefighter_HD.png/revision/latest?cb=20161012004558")
 			.setTitle("Firefighter | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Professional Zombie  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`galacta`, `gaca`, `gc`],
 	category: `Plant Cards`,
 	run: async(client,message,args)=> {
-		let gaca = new EmbedBuilder()
+		const gaca = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b8/Galacta-Cactus_HD.png/revision/latest?cb=20170702052305")
 		.setTitle("Galacta-Cactus | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Cactus Flower Plant -**")

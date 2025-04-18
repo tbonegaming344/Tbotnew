@@ -4,7 +4,7 @@ const {
   ButtonStyle,
   EmbedBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `knabbs`,
   aliases: [`knabbshelp`, `helpknabbs`, `knabbsdecks`, `decksmadebyknabbs`],
@@ -30,15 +30,14 @@ module.exports = {
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-    let decks = ["funnyflare"];
-    let toBuildString = ""
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
+    const decks = ["funnyflare"];
+     let toBuildString = "";
+    for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select funnyflare from sfdecks sf`);
-    let user = await client.users.fetch("729709542623150123");
-    let knabbs = new EmbedBuilder()
+    const [result] = await db.query(`select funnyflare from sfdecks sf`);
+    const user = await client.users.fetch("729709542623150123");
+    const knabbs = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)
     .setDescription(
       `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -47,7 +46,9 @@ module.exports = {
       text: `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     })
-    let fflare = new EmbedBuilder()
+    .setThumbnail(user.displayAvatarURL())
+    .setColor("#88E788")
+    const fflare = new EmbedBuilder()
     .setTitle(`${result[5].funnyflare}`)	
     .setDescription(`${result[3].funnyflare}`)
     .setFooter({text:`${result[2].funnyflare}`})
@@ -65,7 +66,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       value: `${result[1].funnyflare}`,
       inline: true
     })
-  .setColor("Random")
+  .setColor("#88E788")
   .setImage(`${result[4].funnyflare}`)
     const m = await message.channel.send({
       embeds: [knabbs],
@@ -77,7 +78,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       if (i.customId == "ff" || i.customId == "funnyflare") {
         await i.update({ embeds: [fflare], components: [ff] });
     }
-    if (i.customId == "helpk" || i.customId == "help") {
+    else if (i.customId == "helpk" || i.customId == "help") {
         await i.update({ embeds: [knabbs], components: [row] });
     }
 });

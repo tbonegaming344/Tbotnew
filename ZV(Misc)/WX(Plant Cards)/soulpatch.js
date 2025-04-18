@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`soul`, `patch`, `sp1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let soul = new EmbedBuilder()
+		const soul = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/54/HD_Soul_Patch.png/revision/latest?cb=20161004033306")
 		.setTitle("Soul Patch | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Flower Root Plant -**")

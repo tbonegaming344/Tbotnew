@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`potted`, `powerhosue`, `pp7`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pp = new EmbedBuilder()
+		const pp = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1113173306963677234/potted.webp")
 		.setTitle("Potted Powerhouse | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Plant -**")

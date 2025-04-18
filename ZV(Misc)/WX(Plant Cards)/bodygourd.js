@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`body`, `gourd`, `bg1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let body = new EmbedBuilder()
+		const body = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/75/BodyGourdPvZH.png/revision/latest/scale-to-width-down/250?cb=20170830133641")
 		.setTitle("Body Gourd | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Squash Plant -**")

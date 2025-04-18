@@ -5,7 +5,7 @@ module.exports = {
     name: `dinogloves`, 
     category: `Grass Knuckles(GK)`,
     run: async (client, message, args) => {
-        let [result] = await db.query(`SELECT dinogloves from gkdecks`);
+        const [result] = await db.query(`SELECT dinogloves from gkdecks`);
         const dinogloves= new EmbedBuilder()
           .setTitle(`${result[5].dinogloves}`)
           .setDescription(`${result[3].dinogloves}`)

@@ -16,55 +16,15 @@ module.exports = {
   ],
   category: `Miscellaneous`,
   run: async (client, message, args) => {
-    if(message.guild.id == "285818469960646657"){
+    if(message.guild && message.guild.id == "285818469960646657"){
       return message.author.send("This command is disabled in this server please use it in another server");
     }
     else{
-    const row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setLabel("Budget")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/tYMKzWxFsU")
-      .setEmoji("<:budgetserver:1273842713971785748>"),
-        new ButtonBuilder()
-        .setLabel("Gimmick")
-        .setStyle(ButtonStyle.Link)
-        .setURL("https://discord.gg/ksC87rT6Yv")
-        .setEmoji("<:gimmick:1273840288942522485>"),
-        new ButtonBuilder()
-        .setLabel("Jupiter(Creeperblade)")
-        .setURL("https://discord.gg/HKUcA9nD4N")
-        .setStyle(ButtonStyle.Link)
-        .setEmoji("<:creeper:1314665027814559815>")
-    );
-    const row2 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setLabel("Martin Den")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/NeStx9Fe9R")
-      .setEmoji("<:martinsden:1273835896348737600>"),
-      new ButtonBuilder()
-      .setLabel("PvzHeroes Revived")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/Wgf927Pbr6")
-      .setEmoji("<:pvzheroesrevived:1273835442512461886>"),
-      new ButtonBuilder()
-        .setLabel("Pvzhtwjiz")
-        .setStyle(ButtonStyle.Link)
-        .setURL("https://discord.gg/7c9ybscBMN")
-        .setEmoji("<:pvzthwjiz:1263193211082379295>"),
-    );
-    const row3 = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-      .setLabel("Quicksand")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/ZqfqF7Wb3Z")
-      .setEmoji("<:quicksand:1273834699072081920>"),
-    );
     message.channel.send({
       content:
-        "PVZH players are you looking for tourneys! Below you can click on the buttons to join servers for pvzh tournaments!",
-      components: [row, row2, row3],
+        `PVZH players are you looking for tourneys! Below you can click on the buttons to join servers for pvzh tournaments!
+If you are looking for servers currently hosting touranments that **you can signup to** please check out the currently accepting signups section of the [TQM Spreadsheet](https://docs.google.com/spreadsheets/d/1UQ5SvmCsAq8SpOz8Dk46UM8Wpd40uxZXXXbgZWmmNjI/edit?usp=sharing)
+otherwise you can join the servers listed in [tbone's spreadsheet](https://docs.google.com/spreadsheets/d/1H6nPs_oFqnfHVPNX3bM2R0zGoZ8j6iv70slk0UqSwFk/edit?usp=sharing) and wait for one to start!`
     });
   }
   },

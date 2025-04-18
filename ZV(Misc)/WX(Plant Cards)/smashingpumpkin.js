@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`smashing2`,`pumpkun2`, `sp7`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sm = new EmbedBuilder()
+		const sm = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/9/90/HD_Smashing_Pumpkin.png/revision/latest?cb=20200508150708")
 		.setTitle("Smashing Pumpkin | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Squash Plant -**")

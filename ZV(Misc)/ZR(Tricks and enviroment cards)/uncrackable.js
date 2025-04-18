@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`uncrack`, `wksig`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ws = new EmbedBuilder()
+		const ws = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d0/UncrackableCardSprite.png/revision/latest/scale-to-width-down/250?cb=20170225114416")
 		.setTitle("Uncrackable | <:Guardian:1062501130501885973><:Solar:1062502678384607262>")
 		.setDescription("**\\- Nut Superpower Trick -**")

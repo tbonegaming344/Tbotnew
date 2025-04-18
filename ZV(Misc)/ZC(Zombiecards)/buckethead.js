@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bucketboi`, `bh3`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b5/PvZH_Buckethead_HD.png/revision/latest?cb=20161012010004")
 			.setTitle("Buckethead | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Professional Zombie  -**")

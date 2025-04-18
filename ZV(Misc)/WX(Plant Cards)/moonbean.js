@@ -12,7 +12,7 @@ module.exports = {
 			.setEmoji('<:MagicBeanstalk:1104902066104696872>')
 			.setStyle(ButtonStyle.Success)
 			);
-		let mb = new EmbedBuilder()
+		const mb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/95/Moon_Bean_HD.png/revision/latest?cb=20170225005923")
 		.setTitle("Moonbean | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Bean Plant -**")
@@ -32,7 +32,7 @@ module.exports = {
 								 name: "Flavor Text",
 								 value: "She and Sunflower are besties. It's just too bad their schedules make it hard for them to get together."
 							 })
-		let mgb = new EmbedBuilder()
+		const mgb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/1f/MagicBeanstalk.png/revision/latest/scale-to-width-down/250?cb=20180212114409")
 		.setTitle("Magic Beanstalk | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Leafy Bean Plant -**")

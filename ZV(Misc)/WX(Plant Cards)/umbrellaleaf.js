@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`umbrella`, `leaf`, `ul`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let ul = new EmbedBuilder()
+		const ul = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1113170830080344235/umbrella.webp")
 		.setTitle("Umbrella Leaf | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Leafy Flower Plant -**")

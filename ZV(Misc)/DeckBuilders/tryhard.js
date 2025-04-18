@@ -7,7 +7,7 @@ const {
   StringSelectMenuBuilder,
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -120,34 +120,34 @@ module.exports = {
     const agr = new CreateButtons("helpall", "sb3");
     const sb3 = new CreateButtons("agraves", "ykm3");
     const ykm3 = new CreateButtons("sunbandits3", "allhelp");
-    let [result] = await db.query(`select agraves, sunbandits, ykm 
+    const [result] = await db.query(`select agraves, sunbandits, ykm 
 from ntdecks nt
 inner join rbdecks rb 
 on (nt.deckinfo = rb.deckinfo)
 inner join hgdecks hg
 on (nt.deckinfo = hg.deckinfo)`);
-    let user = await client.users.fetch("265754905828917259");
-    let tryhard = new CreateHelpEmbed(
+    const user = await client.users.fetch("265754905828917259");
+    const tryhard = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot`,
       user.displayAvatarURL()
     );
-    let memehard = new CreateHelpEmbed(
+    const memehard = new CreateHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme Decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${pvzTryHardDecks.memeDecks.length} Meme decks in tbot`
     );
-    let combohard = new CreateHelpEmbed(
+    const combohard = new CreateHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo Decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${pvzTryHardDecks.comboDecks.length} Combo decks in tbot`
     );
-    let allhard = new CreateHelpEmbed(
+    const allhard = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `My All Decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
@@ -171,9 +171,9 @@ Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in 
       }
       return embed;
     }
-    let agraves = new CreateDeckEmbed(result, "agraves");
-    let sunbandits = new CreateDeckEmbed(result, "sunbandits");
-    let youngkenmartin = new CreateDeckEmbed(result, "ykm");
+    const agraves = new CreateDeckEmbed(result, "agraves");
+    const sunbandits = new CreateDeckEmbed(result, "sunbandits");
+    const youngkenmartin = new CreateDeckEmbed(result, "ykm");
     const m = await message.channel.send({
       embeds: [tryhard],
       components: [row],

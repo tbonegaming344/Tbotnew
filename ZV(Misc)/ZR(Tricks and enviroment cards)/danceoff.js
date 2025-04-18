@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`do`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bb/Dance_OffH.png/revision/latest?cb=20161228000144")
 			.setTitle("Dance Off | <:Crazy:1062502046474973224>")
 			.setDescription("**\\- Dancing Superpower Trick  -**")

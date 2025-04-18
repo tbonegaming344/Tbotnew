@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`wh`, `wannabe`, `wannabegarg`, `worstlegendary`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c0/WannabeHeroCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225222608")
 		.setTitle("Wannabe Hero | <:Hearty:1062501636557242429>")
 		.setDescription("- **Gargantuar Zombie** -")

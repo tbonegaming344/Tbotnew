@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`meteor`, `ms1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ms = new EmbedBuilder()
+		const ms = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107661008320872608/MeteorStrikeCardSprite.webp")
 		.setTitle("Meteor Strike | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Superpower Trick -**")

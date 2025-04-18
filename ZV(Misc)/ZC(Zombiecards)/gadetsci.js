@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`gadget`, `gadetsci`, `scientist`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6b/GadgetScientistCardImage.png/revision/latest/scale-to-width-down/250?cb=20170302181404")
 			.setTitle("Gadget Scientist | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Science Zombie  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`kite`, `kf`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/36/KiteFlyerCardImage.png/revision/latest/scale-to-width-down/250?cb=20170301171553")
 			.setTitle("Kite Flyer | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- History Science Zombie  -**")

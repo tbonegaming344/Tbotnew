@@ -7,7 +7,18 @@ const {
     StringSelectMenuOptionBuilder, 
     MessageFlags
   } = require("discord.js");
-  let db = require("../../index.js");
+  const db = require("../../index.js");
+  function CreateHelpEmbed(title, description, thumbnail, footer) {
+    const embed = new EmbedBuilder()
+      .setTitle(title)
+      .setDescription(description)
+      .setThumbnail(thumbnail)
+      .setColor("Green");
+    if (footer) {
+      embed.setFooter({ text: `${footer}` });
+    }
+    return embed;
+  }
   module.exports = {
     name: `natz`,
     aliases: [
@@ -58,163 +69,117 @@ const {
         .setDescription("An option to view all decks")
         .setValue("all")
       )
-      const row = new ActionRowBuilder()
-        .addComponents(select);
-      const alldecksrow = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("toyotacontrolla")
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("carr")
-         .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-      const carr = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("helpnatz")
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("lt")
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-      const lt = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("carroot")
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("tc")
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-      const tc = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("ladytuna")
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("help")
-         .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-      let decks = ["carroot", "ladytuna", "toyotacontrolla"];
-      let toBuildString = "";
-      for (let i = 0; i < decks.length; i++) {
-        let deck = decks[i];
-        toBuildString += `\n<@1043528908148052089> **${deck}**`;
+      const row = new ActionRowBuilder().addComponents(select);
+      const natzdecks = {
+        competitiveDecks: ["toyotacontrolla"],
+        ladderDecks: ["carroot"],
+        memeDecks: ["ladytuna"],
+        comboDecks: ["carroot"],
+        controlDecks: ["toyotacontrolla"],
+        midrangeDecks: ["ladytuna"],
+        tempoDecks: ["carroot"],
+        allDecks: ["carroot", "ladytuna", "toyotacontrolla"],
       }
-      let user = await client.users.fetch("608656205589512195");
-        let [result] = await db.query(`select carroot, ladytuna, toyotacontrolla from ntdecks nt inner join ncdecks nc on nt.deckinfo = nc.deckinfo 
+      function buildDeckString(decks) {
+        return decks
+          .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+          .join("");
+      }
+      const toBuildString = buildDeckString(natzdecks.allDecks);
+      function CreateButtons(leftButtonId, rightButtonId) {
+        return new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setCustomId(leftButtonId)
+            .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+            .setStyle(ButtonStyle.Primary),
+          new ButtonBuilder()
+            .setCustomId(rightButtonId)
+            .setEmoji("<:arrowright:1271446796207525898>")
+            .setStyle(ButtonStyle.Primary)
+        );
+      }
+      const alldecksrow = new CreateButtons("toyotacontrolla", "carr");
+      const carr = new CreateButtons("helpnatz", "lt");
+      const lt = new CreateButtons("carroot", "tc");
+      const tc = new CreateButtons("ladytuna", "help");
+      const user = await client.users.fetch("608656205589512195");
+        const [result] = await db.query(`select carroot, ladytuna, toyotacontrolla from ntdecks nt inner join ncdecks nc on nt.deckinfo = nc.deckinfo 
           inner join bcdecks bc on nt.deckinfo = bc.deckinfo`);
-        let natz = new EmbedBuilder()
-        .setTitle(`${user.displayName} Decks`)
-        .setDescription(
+        const natz = new CreateHelpEmbed(
+          `${user.displayName} Decks`,
           `To view decks made by ${user.displayName} please select an option from the select menu below
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`
+Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
+          user.displayAvatarURL()
         )
-        .setThumbnail(user.displayAvatarURL())
-        .setColor("Random");
-        let alldecksEmbed = new EmbedBuilder()
-        .setTitle(`All Decks Made By ${user.displayName}`)
-        .setDescription(`My commands for decks made by ${user.displayName} are ${toBuildString}`)
-        .setFooter({
-          text: `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
-        })
-        .setThumbnail(user.displayAvatarURL())
-        .setColor("Random");
-        let carroot = new EmbedBuilder()
-        .setTitle(`${result[5].carroot}`)
-        .setDescription(`${result[3].carroot}`)
-        .setFooter({ text: `${result[2].carroot}` })
-        .addFields({
-            name: "Deck Type",
-            value: `${result[6].carroot}`,
-            inline: true
-        }, {
-            name: "Archetype",
-            value: `${result[0].carroot}`,
-            inline: true
-        }, {
-            name: "Deck Cost",
-            value: `${result[1].carroot}`,
-            inline: true
-        })
-        .setColor("Random")
-        .setImage(`${result[4].carroot}`);
-        let toyotacontrolla = new EmbedBuilder()
-        .setTitle(`${result[5].toyotacontrolla}`)
-        .setDescription(`${result[3].toyotacontrolla}`)
-        .setFooter({text: `${result[2].toyotacontrolla}`})
-                .addFields({
-                    name: "Deck Type",
-                    value: `${result[6].toyotacontrolla}`,
-                    inline: true
-                },
-                {
-                    name: "Archetype",
-                    value: `${result[0].toyotacontrolla}`,
-                    inline: true
-                },
-                {
-                    name: "Deck Cost", 
-                    value:`${result[1].toyotacontrolla}`,
-                    inline: true
-                })
-            .setColor("Random")		
-            .setImage(`${result[4].toyotacontrolla}`)
-            let ladytuna = new EmbedBuilder()
-            .setTitle(`${result[5].ladytuna}`)
-            .setDescription(`${result[3].ladytuna}`)
-            .setFooter({text: `${result[2].ladytuna}`})
-                .setColor("Random")
-                .setImage(`${result[4].ladytuna}`)
-                    .addFields({
-                        name: "Deck Type",
-                        value: `${result[6].ladytuna}`,
-                        inline: true
-                    },{
-                        name: "Archetype",
-                        value: `${result[0].ladytuna}`,
-                        inline: true
-                    },{
-                        name: "Deck Cost", 
-                        value: `${result[1].ladytuna}`,
-                        inline: true
-                    })
+        const alldecksEmbed = new CreateHelpEmbed(
+          `${user.displayName} Decks`,
+          `My commands for decks made by ${user.displayName} are ${toBuildString}`,
+          user.displayAvatarURL(),
+          `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
+        )
+        function CreateDeckEmbed(result, deckName) {
+          const embed = new EmbedBuilder()
+            .setTitle(`${result[5][deckName]}`)
+            .setDescription(`${result[3][deckName]}`)
+            .setFooter({ text: `${result[2][deckName]}` })
+            .addFields(
+              { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
+              { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
+              { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
+            )
+            .setColor("Green");
+          const imageUrl = result[4][deckName];
+          if (imageUrl) {
+            embed.setImage(imageUrl);
+          }
+          return embed;
+        }
+        const carroot = new CreateDeckEmbed(result, "carroot")
+        const toyotacontrolla = new CreateDeckEmbed(result, "toyotacontrolla")
+        const ladytuna = new CreateDeckEmbed(result, "ladytuna")
         const m = await message.channel.send({ embeds: [natz], components: [row] });
         const iFilter = (i) => i.user.id === message.author.id;
+        async function handleSelectMenu(i) {
+          const value = i.values[0]
+          if(value == "all"){
+            await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
+          }
+          else if(value == "comp" || value == "control"){
+            await i.reply({embeds: [toyotacontrolla], flags: MessageFlags.Ephemeral})
+          }
+          else if(value == "meme" || value == "midrange"){
+            await i.reply({embeds: [ladytuna], flags: MessageFlags.Ephemeral})
+          }
+          else if(value == "ladder" || value == "combo" || value == "tempo"){
+            await i.reply({embeds: [carroot], flags: MessageFlags.Ephemeral})
+          }
+        }
+        async function handleButtonInteraction(i){
+          const buttonActions = {
+            helpnatz: {embed: natz, components: alldecksrow},
+            help: {embed: natz, components: alldecksrow},    
+            carr: {embed: carroot, components: carr},
+            carroot: {embed: carroot, components: carr},
+            lt: {embed: ladytuna, components: lt},
+            ladytuna: {embed: ladytuna, components: lt},
+            tc: {embed: toyotacontrolla, components: tc},
+            toyotacontrolla: {embed: toyotacontrolla, components: tc},        
+          };
+        const action = buttonActions[i.customId];
+        if (action) {
+          await i.update({ embeds: [action.embed], components: [action.components] });
+        } else {
+          await i.reply({ content: "Invalid button action.", flags: MessageFlags.Ephemeral });
+        }
+      }
         const collector = m.createMessageComponentCollector({ filter: iFilter });
         collector.on("collect", async (i) => {
-            if (i.customId == "tc" || i.customId == "toyotacontrolla") {
-                await i.update({ embeds: [toyotacontrolla], components: [tc] });
-            }
-            if (i.customId == "helpnatz" || i.customId == "help") {
-                await i.update({ embeds: [natz], components: [alldecksrow] });
-            }
-            if(i.customId == "lt" || i.customId == "ladytuna"){
-              await i.update({embeds: [ladytuna], components: [lt]})
-            }
-            if(i.customId == "carr" || i.customId == "carroot"){
-              await i.update({embeds: [carroot], components: [carr]})
-            }
             if(i.customId == "select"){
-              const value = i.values[0]
-              if(value == "all"){
-                await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-              }
-              if(value == "comp" || value == "control"){
-                await i.reply({embeds: [toyotacontrolla], flags: MessageFlags.Ephemeral})
-              }
-              if(value == "meme" || value == "midrange"){
-                await i.reply({embeds: [ladytuna], flags: MessageFlags.Ephemeral})
-              }
-              if(value == "ladder" || value == "combo" || value == "tempo"){
-                await i.reply({embeds: [carroot], flags: MessageFlags.Ephemeral})
-              }
+             await handleSelectMenu(i)
+            }
+            else{
+              await handleButtonInteraction(i)
             }
         }); 
     }

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`espressoespresso`, `fiesta`, `ef1`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let ef = new EmbedBuilder()
+		const ef = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8d/EspressoFiestaCardImage.png/revision/latest?cb=20180216042710")
 		.setTitle("Espresso Fiesta | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Bean Trick -**")

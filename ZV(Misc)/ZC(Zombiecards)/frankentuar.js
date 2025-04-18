@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`frank`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/13/Frankentuar2.png/revision/latest/scale-to-width-down/250?cb=20170218012918")
 			.setTitle("Frankentuar | <:Crazy:1062502046474973224>")
 					.setDescription("**\\- Gargantuar Monster Zombie -**")

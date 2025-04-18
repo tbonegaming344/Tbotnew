@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`parasol`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f6/Parasol_Zombie_Cardface.png/revision/latest?cb=20170701060011")
 			.setTitle("Parasol Zombie | <:Brainy:1062500939908530246>")
 			.setDescription("**\\- Party Zombie -**")

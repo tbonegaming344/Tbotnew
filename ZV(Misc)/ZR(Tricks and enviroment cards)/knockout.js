@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`flick`, `ko`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b8/FlickaPlantCardImage.png/revision/latest/scale-to-width-down/250?cb=20170227193643")
 			.setTitle("Knockout | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Trick  -**")

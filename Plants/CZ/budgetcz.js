@@ -1,12 +1,12 @@
 const {EmbedBuilder} = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `budgetmopzilla`,
 	aliases: [`czbudget`, `bcz`, `budgetcz`, `budgetzilla`, `budgetmopcz`, `czbudgetmop`, `bmz`, `budgetchompzilla`, `chompzillabudget`, `mopzilla`],
 	category: `Chompzilla(CZ)`,
 		run: async(client, message, args) => {
-			let [result]= await db.query(`SELECT budgetcz from czdecks`)
-					let embed = new EmbedBuilder()
+			const [result]= await db.query(`SELECT budgetcz from czdecks`)
+					const embed = new EmbedBuilder()
 	.setTitle(`${result[5].budgetcz}`)
 	.setDescription(`${result[3].budgetcz}`)
 	.setFooter({text: `${result[2].budgetcz}`})

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ez`, `exca`, `excavator`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 				.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bf/Excavator_ZombieH.png/revision/latest?cb=20180210095259")
 			.setTitle("Excavator Zombie | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Professional Mustache Zombie -**")

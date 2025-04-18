@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`pineclones`, `pclones`, `pclone`, `clones2`, `clone2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let pc = new EmbedBuilder()
+		const pc = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8c/PinecloneHD.png/revision/latest/scale-to-width-down/250?cb=20180204225416")
 		.setTitle("Pineclone | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Pinecone Plant -**")

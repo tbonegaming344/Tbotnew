@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
   MessageFlags,
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `oafish`,
   aliases: [`oafishdecks`, `oafishhelp`],
@@ -31,16 +31,15 @@ module.exports = {
        .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["mechacontrol"];
+    const decks = ["mechacontrol"];
     let toBuildString = "";
-    for (let i = 0; i < decks.length; i++) {
-      let deck = decks[i];
+    for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select mechacontrol
+    const [result] = await db.query(`select mechacontrol
 from rbdecks rb`);
-    let user = await client.users.fetch("727772762776797248");
-    let oa = new EmbedBuilder()
+    const user = await client.users.fetch("727772762776797248");
+    const oa = new EmbedBuilder()
     .setTitle(`${user.displayName} Decks`)
     .setDescription(
       `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -50,12 +49,12 @@ from rbdecks rb`);
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
     })
     .setThumbnail(user.displayAvatarURL())
-    .setColor("Random");
-    let mechacontrol = new EmbedBuilder()
+    .setColor("#b90003");
+    const mechacontrol = new EmbedBuilder()
     .setTitle(`${result[5].mechacontrol}`)
 		.setDescription(`${result[3].mechacontrol}`)
 		.setFooter({text: `${result[2].mechacontrol}`})
-		.setColor("Random")
+		.setColor("#b90003")
 		.addFields({
 			name: "Deck Type",
 			value: `${result[6].mechacontrol}`,

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`rock`, `wall2`, `rw2`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://media.contentapi.ea.com/content/dam/eacom/en-us/migrated-images/2016/10/powers-rockwall.png.adapt.crop16x9.png")
 			.setTitle("Rock Wall | <:Hearty:1062501636557242429>")
 			.setDescription("**\\- Superpower Trick  -**")

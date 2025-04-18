@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`buff`, `bs2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let bs = new EmbedBuilder()
+		const bs = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/b1/HD_Buff-Shroom.png/revision/latest?cb=20160502034843")
 		.setTitle("Buff-Shroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

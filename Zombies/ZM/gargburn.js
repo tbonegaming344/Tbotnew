@@ -1,12 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `gargburn`,
   aliases: [`burngargs`, `gargburnzm`, `gburn`, `gargmech`, `gmech`],
   category: `Zmech(ZM)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT gargburn FROM zmdecks`);
-    let embed = new EmbedBuilder()
+    const [result] = await db.query(`SELECT gargburn FROM zmdecks`);
+    const embed = new EmbedBuilder()
       .setTitle(`${result[5].gargburn}`)
       .setDescription(`${result[3].gargburn}`)
       .setFooter({ text: `${result[2].gargburn}` })

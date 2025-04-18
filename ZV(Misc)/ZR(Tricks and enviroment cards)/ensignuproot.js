@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ensign`, `uproot`, `tractor`, `eu`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let eu = new EmbedBuilder()
+		const eu = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c1/Tractor_Beam_Technician_HD.png/revision/latest?cb=201703050436432")
 		.setTitle("Ensign Uproot | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Root Superpower Plant -**")

@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `budgetif`,
   aliases: [
@@ -19,8 +19,8 @@ module.exports = {
   ],
   category: `Impfinity(IF)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT budgetif FROM ifdecks`);
-    let budgetif = new EmbedBuilder()
+    const [result] = await db.query(`SELECT budgetif FROM ifdecks`);
+    const budgetif = new EmbedBuilder()
       .setTitle(`${result[5].budgetif}`)
       .setDescription(`${result[3].budgetif}`)
       .setFooter({ text: `${result[2].budgetif}` })

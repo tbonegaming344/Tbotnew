@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`blowgun`, `invisible`, `camouflage`, `nothing`, `bi`, `johncena`, `youcantseeme`],
 	category: `Zombie Cards`,
 		run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 	.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/85/Blowgun_ImpH.png/revision/latest/scale-to-width-down/225?cb=20171210111331")
 			.setTitle("Blowgun Imp | <:Sneaky:1062502187781075094>")
 			.setDescription("**\\- Dancing Imp Zombie   -**")

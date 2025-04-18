@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`sour`, `grapes1`, `sg1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let sg = new EmbedBuilder()
+		const sg = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/d/de/HD_Sour_Grapes.png/revision/latest?cb=20170427080626")
 		.setTitle("Sour Grapes | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Berry Plant -**")

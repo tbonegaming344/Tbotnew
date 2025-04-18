@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`veggie`, `vegetation`, `mutation`, `vm`, `vegmut`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
-		let vm = new EmbedBuilder()
+		const vm = new EmbedBuilder()
 		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1104070650936709221/InspireCardImage.webp")
 		.setTitle("Vegetation Mutation | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Trick -**")

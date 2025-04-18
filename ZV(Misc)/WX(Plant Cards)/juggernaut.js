@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`jugger`, `jn`, `Jugger-Nut`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let jugger = new EmbedBuilder()
+		const jugger = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/53/JuggerNutCardImage.png/revision/latest?cb=20180206041950")
 		.setTitle("Jugger-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")

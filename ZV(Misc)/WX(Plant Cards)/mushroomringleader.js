@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`ringleader`, `leader`, `mr`, `mrl`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let mrl = new EmbedBuilder()
+		const mrl = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/3/33/HD_Mushroom_Ringleader.png/revision/latest?cb=20160521045849")
 		.setTitle("Mushroom Ringleader | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

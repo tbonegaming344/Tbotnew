@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cheese`, `cutter`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
-			let embed = new EmbedBuilder()
+			const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/ab/CheeseCutter.png/revision/latest?cb=20180209041700")
 			.setTitle("Cheese Cutter | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gourmet Mustache Zombie  -**")

@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`peel`, `bpeel`, `bp1`, `banpeel`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-		let bp = new EmbedBuilder()
+		const bp = new EmbedBuilder()
 		.setTitle("Banana Peel | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Fruit Trick -**")
 		.setColor("Random")

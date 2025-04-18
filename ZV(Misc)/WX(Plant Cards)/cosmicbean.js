@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cb2`, `cbean`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cb = new EmbedBuilder()
+		const cb = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/26/CosmicBeanCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226140040")
 		.setTitle("Cosmic Bean | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Bean Plant -**")

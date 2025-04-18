@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`Vitaminz`, `Vitamin`, `vitamin`, `vz`],
 	category: `Tricks Phase`,
 	run: async(client, message, args) => {
-		let embed = new EmbedBuilder()
+		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/82/VitaminZCardImage.png/revision/latest/scale-to-width-down/250?cb=20170225161700")
 			.setTitle("Vitamin Z | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gourmet Trick  -**")

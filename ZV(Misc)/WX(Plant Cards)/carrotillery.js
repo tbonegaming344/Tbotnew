@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`carrot2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let c = new EmbedBuilder()
+		const c = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ec/Carrotillery_vectorized.png/revision/latest/scale-to-width-down/250?cb=20180120102128")
 		.setTitle("Carrotillery | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Root Plant -**")

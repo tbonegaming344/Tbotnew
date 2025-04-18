@@ -5,7 +5,7 @@ const {
   EmbedBuilder,
   MessageFlags
 } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `febreze`,
   aliases: [
@@ -38,14 +38,14 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
-    let decks = ["horts"];
+    const decks = ["horts"];
     let toBuildString = "";
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    let [result] = await db.query(`select horts from smdecks sm`);
-    let user = await client.users.fetch("525852515128967179");
-    let feb = new EmbedBuilder()
+    const [result] = await db.query(`select horts from smdecks sm`);
+    const user = await client.users.fetch("525852515128967179");
+    const feb = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
         `My commands for decks made by ${user.displayName}  are ${toBuildString}`
@@ -54,9 +54,9 @@ module.exports = {
         text: `To view Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
-      .setColor("Random")
+      .setColor("#c8c697")
       .setThumbnail(user.displayAvatarURL());
-    let horts = new EmbedBuilder()
+    const horts = new EmbedBuilder()
     .setTitle(`${result[5].horts}`)
     .setDescription(`${result[3].horts}`)
     .setFooter({text: `${result[2].horts}`})
@@ -73,22 +73,16 @@ ${user.displayName} has ${decks.length} total decks in Tbot`,
           value: `${result[1].horts}`,
           inline: true
         })
-      .setColor("Random")
+      .setColor("#c8c697")
       .setImage(`${result[4].horts}`)
     const m = await message.channel.send({ embeds: [feb], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "ho") {
+      if (i.customId == "ho" || i.customId == "horts") {
         await i.update({ embeds: [horts], components: [ho] });
       }
-      if (i.customId == "horts") {
-        await i.update({ embeds: [horts], components: [ho] });
-      }
-      if (i.customId == "helpfeb") {
-        await i.update({ embeds: [feb], components: [row] });
-      }
-      if (i.customId == "help") {
+      else if (i.customId == "helpfeb" || i.customId == "help") {
         await i.update({ embeds: [feb], components: [row] });
       }
     });

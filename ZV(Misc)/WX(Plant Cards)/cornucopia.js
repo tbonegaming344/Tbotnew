@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cornucopium`, `copium`], 
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let cop = new EmbedBuilder()
+		const cop = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/85/CornucopiaCardImage.png/revision/latest/scale-to-width-down/250?cb=20170301181311")
 		.setTitle("Cornucopia | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Corn Fruit Plant -**")

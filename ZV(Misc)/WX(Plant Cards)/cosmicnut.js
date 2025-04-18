@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`cnut`, `cn`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let cn = new EmbedBuilder()
+		const cn = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/64/CosmicNutCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226140231")
 		.setTitle("Cosmic Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Nut Plant -**")
@@ -22,7 +22,7 @@ module.exports = {
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "A staunch believer in numerology, he'll go on at length about the significance of the number 3 if you let him."
+								 value: "A staunch believer in numerology, he'll go on at length about the significance of the number 3 if you const him."
 							 })
 		message.channel.send({embeds: [cn]})
 	}

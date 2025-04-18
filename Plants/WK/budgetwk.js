@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `budgetwkmidheal`,
   aliases: [
@@ -17,8 +17,8 @@ module.exports = {
   ],
   category: `Wall Knight(WK)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT budgetwkmidheal from wkdecks`);
-    let budgetwk = new EmbedBuilder()
+    const [result] = await db.query(`SELECT budgetwkmidheal from wkdecks`);
+    const budgetwk = new EmbedBuilder()
       .setTitle(`${result[5].budgetwkmidheal}`)
       .setDescription(`${result[3].budgetwkmidheal}`)
       .setFooter({ text: `${result[2].budgetwkmidheal}` })

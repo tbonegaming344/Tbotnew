@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`iceagebaby`, `snow`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let snow = new EmbedBuilder()
+		const snow = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/7f/SnowdropHD.png/revision/latest/scale-to-width-down/250?cb=20170426234746")
 		.setTitle("Snowdrop | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flower Plant -**")

@@ -1,5 +1,5 @@
 const { EmbedBuilder } = require("discord.js");
-let db = require("../../index.js");
+const db = require("../../index.js");
 module.exports = {
   name: `moprbius`,
   aliases: [
@@ -20,8 +20,8 @@ module.exports = {
   ],
   category: `Chompzilla(CZ)`,
   run: async (client, message, args) => {
-    let [result] = await db.query(`SELECT mopribus from czdecks`);
-    let mop = new EmbedBuilder()
+    const [result] = await db.query(`SELECT mopribus from czdecks`);
+    const mop = new EmbedBuilder()
       .setTitle(`${result[5].mopribus}`)
       .setDescription(`${result[3].mopribus}`)
       .setColor("Yellow")

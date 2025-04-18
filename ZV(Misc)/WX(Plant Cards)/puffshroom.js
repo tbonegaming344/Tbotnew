@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`puff`, `ps3`, `puff-shroom`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
-		let puff = new EmbedBuilder()
+		const puff = new EmbedBuilder()
 .setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1090716028352352327/puff-removebg-preview.png?width=249&height=261")
 		.setTitle("Puff-Shroom | <:Kabloom:1062502137826910268>")
 		.setDescription("**\\- Mushroom Plant -**")

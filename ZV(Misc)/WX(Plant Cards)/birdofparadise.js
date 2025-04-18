@@ -4,7 +4,7 @@ module.exports = {
 	aliases: [`bird`, `birb`, `paradise`, `bop`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
-		let bop = new EmbedBuilder()
+		const bop = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e6/Cheesebirder_in_paradise.png/revision/latest/scale-to-width-down/250?cb=20170816201939")
 		.setTitle("Bird of Paradise | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Flower Animal Plant -**")

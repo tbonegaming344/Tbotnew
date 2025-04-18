@@ -433,7 +433,7 @@ module.exports = {
         "icebox",
         "lockthebathroom",
         "kaleidoscope",
-        "pablosyeeyzs",
+        "pablosyeezys",
         "nohokaistars",
         "seacret",
         "spacestars",
@@ -540,7 +540,7 @@ module.exports = {
         "igmablobchum",
         "mechascope",
         "otkswabbie",
-        "pablosyeeyzs",
+        "pablosyeezys",
         "rampticia",
         "spacestars",
         "sunbandits",
@@ -598,7 +598,7 @@ module.exports = {
         "igmablobchum",
         "ladytuna",
         "lunchtime",
-        "pablosyeeyzs",
+        "pablosyeezys",
         "petmop",
         "nohokaistars",
         "spacestars",
@@ -669,7 +669,7 @@ module.exports = {
         "nohokaistars",
         "noplayingallowed",
         "otkswabbie",
-        "pablosyeeyzs",
+        "pablosyeezys",
         "pbfeast",
         "petmop",
         "professorpackage",
@@ -973,7 +973,7 @@ module.exports = {
     const npa = new CreateButtons("nohokaistars", "otksw");
     const otksw = new CreateButtons("noplayingallowed", "pyeeyz");
     const pyeeyz = new CreateButtons("otkswabbie", "pbfeast");
-    const pfeast = new CreateButtons("pablosyeeyzs", "pmop");
+    const pfeast = new CreateButtons("pablosyeezys", "pmop");
     const pmop = new CreateButtons("pbfeast", "propackage");
     const propackage = new CreateButtons("petmop", "rpackage");
     const rpackage = new CreateButtons("professorpackage", "rticia");
@@ -1016,7 +1016,7 @@ module.exports = {
     const ltbr2 = new CreateButtons("icebox2", "kscope2");
     const kscope2 = new CreateButtons("lockthebathroom2", "pyeeyz2");
     const pyeeyz2 = new CreateButtons("kaleidoscope2", "nhks2");
-    const nhks2 = new CreateButtons("pablosyeeyzs2", "sea2");
+    const nhks2 = new CreateButtons("pablosyeezys2", "sea2");
     const sea2 = new CreateButtons("nohokaistars2", "stars2");
     const stars2 = new CreateButtons("seacret2", "timps2");
     const timps2 = new CreateButtons("spacestars2", "tstache2");
@@ -1121,7 +1121,7 @@ module.exports = {
     const mscope3 = new CreateButtons("igmablobchum3", "otksw3");
     const otksw3 = new CreateButtons("mechascope3", "pyeeyz3");
     const pyeeyz3 = new CreateButtons("otkswabbie3", "rticia3");
-    const rticia3 = new CreateButtons("pablosyeeyzs3", "stars3");
+    const rticia3 = new CreateButtons("pablosyeezys3", "stars3");
     const stars3 = new CreateButtons("rampticia3", "sbandits3");
     const sbandits3 = new CreateButtons("spacestars3", "slord3");
     const slord3 = new CreateButtons("sunbandits3", "timps3");
@@ -1177,7 +1177,7 @@ module.exports = {
     const lt3 = new CreateButtons("igmablobchum4", "ltime3");
     const ltime3 = new CreateButtons("ladytuna3", "pyeeyz4");
     const pyeeyz4 = new CreateButtons("lunchtime3", "pmop3");
-    const pmop3 = new CreateButtons("pablosyeeyzs4", "nhks3");
+    const pmop3 = new CreateButtons(" pablosyeezys4", "nhks3");
     const nhks3 = new CreateButtons("petmop3", "stars4");
     const stars4 = new CreateButtons("nohokaistars3", "slord4");
     const slord4 = new CreateButtons("spacestars4", "tstache4");

@@ -8,6 +8,14 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
+/**
+ * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * @param {string} title - The title of the embed
+ * @param {string} description - The description of the embed
+ * @param {string} thumbnail - The thumbnail of the embed
+ * @param {string} footer - The footer of the embed
+ * @returns {EmbedBuilder} - The embed object
+ */
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -66,6 +74,12 @@ module.exports = {
       tempoDecks: ["terrifytricksterazzi"],
       allDecks: ["dinogloves", "terrifytricksterazzi"],
     };
+    /**
+     * The CreateButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
     function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -105,6 +119,12 @@ Note: Wild has ${wildDecks.memeDecks.length} meme decks in Tbot`
     const [result] =
       await db.query(`select dinogloves, terrifytricksterazzi from gkdecks gk 
 inner join rbdecks rb on (gk.deckinfo = rb.deckinfo)`);
+     /**
+     * The CreateDeckEmbed function creates an embed for a specific deck
+     * @param {string} deckName - The name of the deck
+     * @param {*} result - The result from the database query
+     * @returns The embed for the deck
+     */
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -129,7 +149,11 @@ inner join rbdecks rb on (gk.deckinfo = rb.deckinfo)`);
     );
     const m = await message.channel.send({ embeds: [wild], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
-    async function HandleSelectMenu(i) {
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i - The interaction object
+     */
+    async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
@@ -142,6 +166,10 @@ inner join rbdecks rb on (gk.deckinfo = rb.deckinfo)`);
         });
       }
     }
+    /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
     async function handleButtonInteraction(i) {
       if (i.customId == "dgloves" || i.customId == "dinogloves") {
         await i.update({ embeds: [dinogloves], components: [dgloves] });
@@ -157,7 +185,7 @@ inner join rbdecks rb on (gk.deckinfo = rb.deckinfo)`);
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "select") {
-        await HandleSelectMenu(i);
+        await handleSelectMenu(i);
       } else {
         await handleButtonInteraction(i);
       }

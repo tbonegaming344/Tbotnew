@@ -8,6 +8,14 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
+/**
+ * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * @param {string} title - The title of the embed
+ * @param {string} description - The description of the embed
+ * @param {string} thumbnail - The thumbnail of the embed
+ * @param {string} footer - The footer of the embed
+ * @returns {EmbedBuilder} - The embed object
+ */
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -97,6 +105,11 @@ module.exports = {
       allDecks: ["budgetnc", "cyburn", "toyotacontrolla", "translattail"],
     };
 
+     /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
     function buildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -105,6 +118,12 @@ module.exports = {
     const toBuildCompString = buildDeckString(nightcapDecks.competitiveDecks);
     const toBuildComboString = buildDeckString(nightcapDecks.memeDecks);
     const toBuildString = buildDeckString(nightcapDecks.allDecks);
+    /**
+     * The CreateButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
     function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -181,6 +200,12 @@ module.exports = {
   Note: Night Cap has ${nightcapDecks.comboDecks.length} Combo decks in Tbot`
     );
     const [result] = await db.query(`SELECT * from ncdecks`);
+     /**
+     * The CreateDeckEmbed function creates an embed for a specific deck
+     * @param {string} deckName - The name of the deck
+     * @param {*} result - The result from the database query
+     * @returns The embed for the deck
+     */
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -205,7 +230,11 @@ module.exports = {
     const translattail = new CreateDeckEmbed(result, "translattail");
     const m = await message.channel.send({ embeds: [nc], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
-    async function HandleSelectMenu(i) {
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i 
+     */
+    async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "budget" || value == "aggro") {
         await i.reply({ embeds: [budgetnc], flags: MessageFlags.Ephemeral });
@@ -229,6 +258,10 @@ module.exports = {
         await i.reply({ embeds: [cyburn], flags: MessageFlags.Ephemeral });
       }
     }
+    /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
@@ -271,7 +304,7 @@ module.exports = {
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "select") {
-        await HandleSelectMenu(i);
+        await handleSelectMenu(i);
       } else {
         await handleButtonInteraction(i);
       }

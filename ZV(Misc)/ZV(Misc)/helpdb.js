@@ -696,10 +696,10 @@ module.exports = {
         "zmoss",
       ],
     };
-    /**
-     *
-     * @param {Array} decks an array of deck names
-     * @returns {string} a string of all the deck names combined for the embed
+     /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
      */
     function buildDeckString(decks) {
       return decks
@@ -727,9 +727,10 @@ module.exports = {
     const toBuildMidrangeZString = buildDeckString(zombieDecks.midrangeDecks);
     const toBuildTempoZString = buildDeckString(zombieDecks.tempoDecks);
     /**
-     *
-     * @param {string} leftButtonId the id of the left button to move back to the previous deck
-     * @param {*} rightButtonId the id of the right button to move to the next deck
+     * The CreateButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
@@ -1424,6 +1425,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
 		on (bc.deckinfo = wk.deckinfo)
 		inner join zmdecks zm
 		on (bc.deckinfo = zm.deckinfo)`);
+    /**
+     * The CreatePlantDeckEmbed function creates an embed for a plant deck.
+     * @param {*} result - The result object containing deck information. 
+     * @param {string} deckName - The name of the deck to create an embed for. 
+     * @returns {EmbedBuilder} - The created embed for the plant deck.
+     */
     function CreatePlantDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -1491,6 +1498,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const chemotherapy = new CreatePlantDeckEmbed(result, "chemotherapy");
     const highlander = new CreatePlantDeckEmbed(result, "highlander");
     const shitknight = new CreatePlantDeckEmbed(result, "shitknight");
+    /**
+     * The CreateZombieDeckEmbed function creates an embed for a zombie deck.
+     * @param {*} result - The result object containing deck information. 
+     * @param {string} deckName - The name of the deck to create an embed for. 
+     * @returns {EmbedBuilder} - The created embed for the zombie deck.
+     */
     function CreateZombieDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -1594,7 +1607,11 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const trickmech = new CreateZombieDeckEmbed(result, "trickmech");
     const zmoss = new CreateZombieDeckEmbed(result, "zmoss");
     const iFilter = (i) => i.user.id === message.author.id;
-    async function HandleSelectMenu(i) {
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i - The interaction object
+     */
+    async function handleSelectMenu(i) {
       const selectMenuActions = {
         budgetpdecks: { embed: budgetpdecksEmbed, component: budgetprow },
         comppdecks: { embed: comppdecksEmbed, component: compprow },
@@ -1630,7 +1647,11 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         });
       }
     }
-    async function HandleButtonInteraction(i) {
+    /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
+    async function handleButtonInteraction(i) {
       const buttonActions = {
         helppbudget: { embed: budgetpdecksEmbed, component: budgetprow },
         budgetphelp: { embed: budgetpdecksEmbed, component: budgetprow },
@@ -2553,9 +2574,9 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "starter") {
-        await HandleSelectMenu(i);
+        await handleSelectMenu(i);
       } else {
-        await HandleButtonInteraction(i);
+        await handleButtonInteraction(i);
       }
     });
   },

@@ -102,7 +102,13 @@ module.exports = {
       "starrings",
     ],
   };
-  function CreateButtons(leftButtonId, rightButtonId) {
+  /**
+     * The CreateButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
+    function CreateButtons(leftButtonId, rightButtonId) {
     return new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(leftButtonId)
@@ -213,7 +219,13 @@ module.exports = {
   Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks in Tbot`
       );
       const [result] = await db.query(`SELECT * from gsdecks`);
-      function CreateDeckEmbed(result, deckName) {
+       /**
+     * The CreateDeckEmbed function creates an embed for a specific deck
+     * @param {string} deckName - The name of the deck
+     * @param {*} result - The result from the database query
+     * @returns The embed for the deck
+     */
+    function CreateDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -237,7 +249,11 @@ module.exports = {
       const starrings = new CreateDeckEmbed(result, "sovietonion")
       const pbeans = new CreateDeckEmbed(result, "pbeans")
     const Filter = (i) => i.user.id === message.author.id;
-    async function HandleSelectMenu(i) {
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i 
+     */
+    async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "budget") {
         await i.reply({ embeds: [budgetgs], flags: MessageFlags.Ephemeral });
@@ -259,7 +275,11 @@ module.exports = {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
-    async function HandleButtonInteraction(i) {
+    /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
+    async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: {embed: embed, component: row},
         helpall: {embed: allEmbed, component: alldecksrow},
@@ -312,9 +332,9 @@ module.exports = {
     const collect = m.createMessageComponentCollector({ filter: Filter });
     collect.on("collect", async (i) => {
      if (i.customId === "select") {
-        await HandleSelectMenu(i);
+        await handleSelectMenu(i);
       } else {
-        await HandleButtonInteraction(i);
+        await handleButtonInteraction(i);
       }
     });
   },

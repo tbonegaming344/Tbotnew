@@ -8,6 +8,14 @@ const {
   StringSelectMenuOptionBuilder
 } = require("discord.js");
 const db = require("../../index.js");
+/**
+ * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * @param {string} title - The title of the embed
+ * @param {string} description - The description of the embed
+ * @param {string} thumbnail - The thumbnail of the embed
+ * @param {string} footer - The footer of the embed
+ * @returns {EmbedBuilder} - The embed object
+ */
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -98,7 +106,13 @@ module.exports = {
   "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
        )
       const [result] = await db.query(`SELECT * FROM sbdecks`);
-      function CreateDeckEmbed(result, deckName) {
+       /**
+     * The CreateDeckEmbed function creates an embed for a specific deck
+     * @param {string} deckName - The name of the deck
+     * @param {*} result - The result from the database query
+     * @returns The embed for the deck
+     */
+    function CreateDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)

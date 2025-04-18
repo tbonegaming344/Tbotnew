@@ -8,7 +8,15 @@ const {
     MessageFlags
   } = require("discord.js");
   const db = require("../../index.js");
-  function CreateHelpEmbed(title, description, thumbnail, footer) {
+  /**
+ * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * @param {string} title - The title of the embed
+ * @param {string} description - The description of the embed
+ * @param {string} thumbnail - The thumbnail of the embed
+ * @param {string} footer - The footer of the embed
+ * @returns {EmbedBuilder} - The embed object
+ */
+function CreateHelpEmbed(title, description, thumbnail, footer) {
     const embed = new EmbedBuilder()
       .setTitle(title)
       .setDescription(description)
@@ -72,7 +80,12 @@ const {
         midrangeDecks: ["healburn", "starrings"], 
         allDecks: ["abeans", "healburn", "starrings"],
       }
-      function buildDeckString(decks) {
+       /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
+    function buildDeckString(decks) {
         return decks
           .map((deck) => `\n<@1043528908148052089> **${deck}**`)
           .join("");
@@ -81,7 +94,13 @@ const {
       const toBuildMemeString = buildDeckString(pillowyDecks.memeDecks);
       const toBuildComboString = buildDeckString(pillowyDecks.comboDecks);
       const toBuildMidrangeString = buildDeckString(pillowyDecks.midrangeDecks);
-      function CreateButtons(leftButtonId, rightButtonId) {
+      /**
+     * The CreateButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
+    function CreateButtons(leftButtonId, rightButtonId) {
         return new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId(leftButtonId)
@@ -143,7 +162,13 @@ Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrang
             `To view the decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all decks!
 Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`
           )
-          function CreateDeckEmbed(result, deckName) {
+           /**
+     * The CreateDeckEmbed function creates an embed for a specific deck
+     * @param {string} deckName - The name of the deck
+     * @param {*} result - The result from the database query
+     * @returns The embed for the deck
+     */
+    function CreateDeckEmbed(result, deckName) {
             const embed = new EmbedBuilder()
               .setTitle(`${result[5][deckName]}`)
               .setDescription(`${result[3][deckName]}`)
@@ -183,7 +208,11 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
               await i.update({embeds: [allDecksEmbed], components: [allDecksRow]})
             }
           }
-          async function handleButtonInteraction(i) {
+          /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
+    async function handleButtonInteraction(i) {
             if(i.customId == "helpmeme" || i.customId == "memehelp"){
               await i.update({embeds: [memeEmbed], components: [memeRow]})
             }

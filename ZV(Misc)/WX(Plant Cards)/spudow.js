@@ -93,6 +93,11 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
+     /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
     function buildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -209,6 +214,10 @@ module.exports = {
     const popsicle = createDeckEmbed(result, "popsicle");
     const m = await message.channel.send({ embeds: [sp], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i 
+     */
     async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value === "budget" || value === "midrange") {
@@ -229,6 +238,10 @@ module.exports = {
       }
     }
 
+    /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },

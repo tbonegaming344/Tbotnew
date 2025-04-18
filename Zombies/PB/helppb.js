@@ -8,6 +8,14 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
+/**
+ * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * @param {string} title - The title of the embed
+ * @param {string} description - The description of the embed
+ * @param {string} thumbnail - The thumbnail of the embed
+ * @param {string} footer - The footer of the embed
+ * @returns {EmbedBuilder} - The embed object
+ */
 function CreateHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
@@ -129,6 +137,11 @@ module.exports = {
         "youngeggmartin",
       ],
     };
+     /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
     function buildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -150,6 +163,12 @@ module.exports = {
     const toBuildMidrangeString = buildDeckString(
       professorBrainstormDecks.midrangeDecks
     );
+    /**
+     * The CreateButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
     function CreateButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
@@ -241,6 +260,12 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
     );
     const [result] = await db.query(`select * from pbdecks`);
+     /**
+     * The CreateDeckEmbed function creates an embed for a specific deck
+     * @param {string} deckName - The name of the deck
+     * @param {*} result - The result from the database query
+     * @returns The embed for the deck
+     */
     function CreateDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
@@ -271,7 +296,11 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
-    async function HandleSelectMenu(i) {
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i - The interaction object
+     */
+    async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
@@ -296,7 +325,11 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         await i.reply({ embeds: [budgetpb], flags: MessageFlags.Ephemeral });
       }
     }
-    async function HandleButtonInteraction(i) {
+    /**
+     * the handleButtonInteraction function handles the button interactions for the decks
+     * @param {*} i - The interaction object
+     */
+    async function handleButtonInteraction(i) {
       const buttonActions = {
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
@@ -373,9 +406,9 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId == "select") {
-        await HandleSelectMenu(i);
+        await handleSelectMenu(i);
       } else {
-        await HandleButtonInteraction(i);
+        await handleButtonInteraction(i);
       }
     });
   },

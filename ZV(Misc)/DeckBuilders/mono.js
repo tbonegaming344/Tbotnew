@@ -184,7 +184,7 @@ on (wk.deckinfo = im.deckinfo)`);
 Note: ${user.displayName} has ${monoDecks.allDecks.length} total decks in Tbot`,
         user.displayAvatarURL()
     )
-    const alldecksEmbed = new CreateButtons(
+    const alldecksEmbed = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `My commands for all decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),

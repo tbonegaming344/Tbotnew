@@ -164,13 +164,13 @@ module.exports = {
     const comborow = new CreateButtons("rampticia3", "sav3");
     const sav3 = new CreateButtons("combohelp", "bas3");
     const bas3 = new CreateButtons("savage3", "bim2");
-    const bim2 = new CreateButtons("bastet3", "ms3");
-    const ms3 = new CreateButtons("budgetim2", "rim3");
-    const rim3 = new CreateButtons("mechascope3", "helpcombo");
-    const controlrow = new CreateButtons("mechascope4", "bim3");
+    const bim2 = new CreateButtons("bastet3", "ms2");
+    const ms2 = new CreateButtons("budgetim2", "rim3");
+    const rim3 = new CreateButtons("mechascope2", "helpcombo");
+    const controlrow = new CreateButtons("mechascope3", "bim3");
     const bim3 = new CreateButtons("controlhelp", "kscope2");
-    const kscope2 = new CreateButtons("budgetim3", "ms4");
-    const ms4 = new CreateButtons("kaleidoscope3", "helpcontrol");
+    const kscope2 = new CreateButtons("budgetim3", "ms3");
+    const ms3 = new CreateButtons("kaleidoscope3", "helpcontrol");
     const midrangerow = new CreateButtons("budgetim4", "sav4");
     const sav4 = new CreateButtons("midrangehelp", "bas4");
     const bas4 = new CreateButtons("savage4", "bim4");
@@ -345,8 +345,6 @@ module.exports = {
         imhelp: { embed: helpim, component: row },
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
-        ladderhelp: {embed: ladderEmbed, component: ladderrow},
-        helpladder: {embed: ladderEmbed, component: ladderrow},
         memehelp: {embed: memeEmbed, component: memerow},
         helpmeme: {embed: memeEmbed, component: memerow},
         combohelp: {embed: comboEmbed, component: comborow},
@@ -395,8 +393,6 @@ module.exports = {
         mechascope2: {embed: mechascope, component: ms2},
         ms3: {embed: mechascope, component: ms3},
         mechascope3: {embed: mechascope, component: ms3},
-        ms4: {embed: mechascope, component: ms4},
-        mechascope4: {embed: mechascope, component: ms4},
       }
       const action = buttonActions[i.customId]
       if (action) {

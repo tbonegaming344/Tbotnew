@@ -70,7 +70,7 @@ const {
                   .setColor("Random")
                   .setTitle("Help | " + category)
 
-              const toBuildString = "";
+              let toBuildString = "";
               for (const command of commands) {
                   toBuildString += `**${command.name}** \n`;
               }

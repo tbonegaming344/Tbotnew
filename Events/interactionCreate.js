@@ -1036,9 +1036,9 @@ module.exports = {
                   value.includes(".jpg") ||
                   value.includes(".jpeg") ||
                   value.includes(".webp")) &&
-                  !value.includes("budget") // Exclude specific names
+                  !value.includes("budget")
               ) {
-                deck.push(value); // Add the image link to the deck array
+                deck.push(value); 
               }
             }
             const embed = new EmbedBuilder()
@@ -1091,9 +1091,9 @@ module.exports = {
                           value.includes(".jpg") ||
                           value.includes(".jpeg") ||
                           value.includes(".webp")) &&
-                          !value.includes("budget") // Exclude names containing "budget"
+                          !value.includes("budget") 
                       ) {
-                        deck.push(value); // Add the image link to the deck array
+                        deck.push(value);
                       }
                     }
           const embed = new EmbedBuilder()
@@ -1143,9 +1143,9 @@ module.exports = {
                           value.includes(".jpg") ||
                           value.includes(".jpeg") ||
                           value.includes(".webp")) &&
-                          !value.includes("budget") // Exclude names containing "budget"
+                          !value.includes("budget") 
                       ) {
-                        deck.push(value); // Add the image link to the deck array
+                        deck.push(value); 
                       }
                     }
           const embed = new EmbedBuilder()
@@ -1186,18 +1186,18 @@ module.exports = {
       const deck = [];
       for (const key in result[0]) {
         const value = result[0][key]
-        console.log("Checking value:", value); // Debugging log
+        console.log("Checking value:", value); 
         if (
           (value.includes(".png") ||
             value.includes(".jpg") ||
             value.includes(".jpeg") ||
             value.includes(".webp")) &&
-          !value.includes("budget") // Exclude names containing "budget"
+          !value.includes("budget")
         ) {
-          deck.push(value); // Add the image link to the deck array
+          deck.push(value); 
         }
       }
-      console.log("Filtered Deck Array:", deck); // Debugging log
+      console.log("Filtered Deck Array:", deck); 
     
       if (deck.length === 0) {
         throw new Error("No valid decks found.");

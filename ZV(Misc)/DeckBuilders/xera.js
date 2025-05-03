@@ -95,6 +95,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "reversecatster",
         "startron",
         "uncrackamech",
         "watersports",
@@ -108,6 +109,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "reversecatster",
         "startron",
         "uncrackamech",
         "watersports",
@@ -134,6 +136,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "reversecatster",
         "startron",
         "toyotacontrolla",
         "uncrackamech",
@@ -185,8 +188,9 @@ module.exports = {
     const ff = new CreateButtons("frozentelimps", "hburn");
     const hburn = new CreateButtons("funnyflare", "hi");
     const hi = new CreateButtons("healburn", "lrings");
-    const lrings = new CreateButtons("himps", "star");
-    const star = new CreateButtons("laserrings", "um");
+    const lrings = new CreateButtons("himps", "rcatster");
+    const rcatster = new CreateButtons("laserrings", "star");
+    const star = new CreateButtons("reversecatster", "um");
     const um = new CreateButtons("startron", "ws");
     const ws = new CreateButtons("uncrackamech", "memehelp");
     const comborow = new CreateButtons("watersports2", "sav2");
@@ -196,8 +200,9 @@ module.exports = {
     const gps2 = new CreateButtons("funnyflare2", "hburn2");
     const hburn2 = new CreateButtons("gravepiratestache2", "hi2");
     const hi2 = new CreateButtons("healburn2", "lrings2");
-    const lrings2 = new CreateButtons("himps2", "star2");
-    const star2 = new CreateButtons("laserrings2", "um2");
+    const lrings2 = new CreateButtons("himps2", "rcatster2");
+    const rcatster2 = new CreateButtons("laserrings2", "star2");
+    const star2 = new CreateButtons("reversecatster2", "um2");
     const um2 = new CreateButtons("startron2", "ws2");
     const ws2 = new CreateButtons("uncrackamech2", "combohelp");
     const controlrow = new CreateButtons("uncrackmech3", "ftimps3");
@@ -222,17 +227,19 @@ module.exports = {
     const gps3 = new CreateButtons("gomorrah3", "hburn4");
     const hburn4 = new CreateButtons("gravepiratestache3", "hi4");
     const hi4 = new CreateButtons("healburn4", "lrings4");
-    const lrings4 = new CreateButtons("himps4", "star4");
-    const star4 = new CreateButtons("laserrings4", "tc2");
+    const lrings4 = new CreateButtons("himps4", "rcatster3");
+    const rcatster3 = new CreateButtons("laserrings4", "star4");
+    const star4 = new CreateButtons("reversecatster3", "tc2");
     const tc2 = new CreateButtons("startron4", "um4");
     const um4 = new CreateButtons("toyotacontrolla2", "ws4");
     const ws4 = new CreateButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, 
-      himps, lasersnap, startron, toyotacontrolla, feastmech, brady, watersports 
+      himps, lasersnap, reversecatster, startron, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
+            inner join pbdecks pb on (im.deckinfo = pb.deckinfo)
             inner join ctdecks ct on (im.deckinfo = ct.deckinfo)
             inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
@@ -317,6 +324,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const gomorrah = new CreateDeckEmbed(result, "gomorrah");
     const himps = new CreateDeckEmbed(result, "himps");
     const laserrings = new CreateDeckEmbed(result, "lasersnap");
+    const reversecatster = new CreateDeckEmbed(result, "reversecatster");
     const startron = new CreateDeckEmbed(result, "startron");
     const toyotacontrolla = new CreateDeckEmbed(result, "toyotacontrolla");
     const healburn = new CreateDeckEmbed(result, "healburn");
@@ -468,9 +476,13 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
           healburn3: { embed: healburn, component: hburn3 },
           hburn4: { embed: healburn, component: hburn4 },
           healburn4: { embed: healburn, component: hburn4 },
-
+          rcatster: { embed: reversecatster, component: rcatster },
+          reversecatster: { embed: reversecatster, component: rcatster },
+          rcatster2: { embed: reversecatster, component: rcatster2 },
+          reversecatster2: { embed: reversecatster, component: rcatster2 },
+          rcatster3: { embed: reversecatster, component: rcatster3 },
+          reversecatster3: { embed: reversecatster, component: rcatster3 },
         };
-      
         const action = buttonActions[i.customId];
         if (action) {
           await i.update({ embeds: [action.embed], components: [action.component] });

@@ -103,11 +103,12 @@ module.exports = {
       budgetDecks: ["budgetpb"],
       competitiveDecks: ["trickstache"],
       ladderDecks: ["professorpackage", "valkster"],
-      memeDecks: ["bonusducks", "congabait", "pbfeast", "youngeggmartin"],
+      memeDecks: ["bonusducks", "congabait", "pbfeast", "reversecatster", "youngeggmartin"],
       aggroDecks: ["budgetpb"],
       comboDecks: [
         "bonusducks",
         "congabait",
+        "reversecatster",
         "trickstache",
         "valkster",
         "youngeggmartin",
@@ -121,6 +122,7 @@ module.exports = {
         "congabait",
         "pbfeast",
         "professorpackage",
+        "reversecatster",
         "trickstache",
         "valkster",
         "youngeggmartin",
@@ -175,8 +177,9 @@ module.exports = {
     const bpb = new CreateButtons("bonusducks", "cb");
     const cb = new CreateButtons("budgetpb", "pbf");
     const pbf = new CreateButtons("congabait", "pa");
-    const pa = new CreateButtons("pbfeast", "ts");
-    const ts = new CreateButtons("package", "valk");
+    const pa = new CreateButtons("pbfeast", "rcatster");
+    const rcatster = new CreateButtons("professorpackage", "ts");
+    const ts = new CreateButtons("reversecatster", "valk");
     const valk = new CreateButtons("trickstache", "yem");
     const yem = new CreateButtons("valkster", "allhelp");
     const ladderrow = new CreateButtons("valkster2", "pa2");
@@ -185,12 +188,14 @@ module.exports = {
     const memerow = new CreateButtons("youngeggmartin2", "bd2");
     const bd2 = new CreateButtons("helpmeme", "cb2");
     const cb2 = new CreateButtons("bonusducks2", "pbf2");
-    const pbf2 = new CreateButtons("congabait2", "yem2");
-    const yem2 = new CreateButtons("pbfeast2", "memehelp");
+    const pbf2 = new CreateButtons("congabait2", "rcatster2");
+    const rcatster2 = new CreateButtons("pbfeast2", "yem2");
+    const yem2 = new CreateButtons("reversecatster2", "memehelp");
     const comborow = new CreateButtons("youngeggmartin3", "bd3");
     const bd3 = new CreateButtons("helpcombo", "cb3");
-    const cb3 = new CreateButtons("bonusducks3", "ts2");
-    const ts2 = new CreateButtons("congabait3", "valk3");
+    const cb3 = new CreateButtons("bonusducks3", "rcatster3");
+    const rcatster3 = new CreateButtons("congabait3", "ts2");
+    const ts2 = new CreateButtons("reversecatster3", "valk3");
     const valk3 = new CreateButtons("trickstache2", "yem3");
     const yem3 = new CreateButtons("valkster3", "combohelp");
     const controlrow = new CreateButtons("pbfeast3", "bd4");
@@ -301,6 +306,7 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     const congabait = new CreateDeckEmbed(result, "congabait");
     const pbfeast = new CreateDeckEmbed(result, "pbfeast");
     const professorpackage = new CreateDeckEmbed(result, "professorpackage");
+    const reversecatster = new CreateDeckEmbed(result, "reversecatster");
     const trickstache = new CreateDeckEmbed(result, "trickstache");
     const valkster = new CreateDeckEmbed(result, "valkster");
     const youngeggmartin = new CreateDeckEmbed(result, "youngeggmartin");
@@ -352,7 +358,9 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         helpmeme: {embed: memeEmbed, component: memerow},
         memehelp: {embed: memeEmbed, component: memerow},
         helpcombo: {embed: comboEmbed, component: comborow},
+        combohelp: {embed: comboEmbed, component: comborow},
         helpcontrol: {embed: controlEmbed, component: controlrow},
+        controlhelp:  {embed: controlEmbed, component: controlrow},
         helpmid: {embed: midrangeEmbed, component: midrangerow},
         midhelp: {embed: midrangeEmbed, component: midrangerow},
         bd: {embed: bonusducks, component: bd},
@@ -383,6 +391,12 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         pbfeast2: {embed: pbfeast, component: pbf2},
         pbf3: {embed: pbfeast, component: pbf3},
         pbfeast3: {embed: pbfeast, component: pbf3},
+        rcatster: {embed: reversecatster, component: rcatster},
+        reversecatster: {embed: reversecatster, component: rcatster},
+        rcatster2: {embed: reversecatster, component: rcatster2},
+        reversecatster2: {embed: reversecatster, component: rcatster2},
+        rcatster3: {embed: reversecatster, component: rcatster3},
+        reversecatster3: {embed: reversecatster, component: rcatster3},
         ts: {embed: trickstache, component: ts},
         trickstache: {embed: trickstache, component: ts},
         ts2: {embed: trickstache, component: ts2},

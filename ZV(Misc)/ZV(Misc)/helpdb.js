@@ -487,6 +487,7 @@ module.exports = {
         "petmop",
         "otkswabbie",
         "rampticia",
+        "reversecatster",
         "sunbandits",
         "sunlord",
         "terrifytricksterazzi",
@@ -542,6 +543,7 @@ module.exports = {
         "otkswabbie",
         "pablosyeezys",
         "rampticia",
+        "reversecatster",
         "spacestars",
         "sunbandits",
         "sunlord",
@@ -675,6 +677,7 @@ module.exports = {
         "professorpackage",
         "raiserpackage",
         "rampticia",
+        "reversecatster",
         "schoolyard",
         "seacret",
         "spacestars",
@@ -977,8 +980,9 @@ module.exports = {
     const pmop = new CreateButtons("pbfeast", "propackage");
     const propackage = new CreateButtons("petmop", "rpackage");
     const rpackage = new CreateButtons("professorpackage", "rticia");
-    const rticia = new CreateButtons("raiserpackage", "syard");
-    const syard = new CreateButtons("rampticia", "sea");
+    const rticia = new CreateButtons("raiserpackage", "rcatster");
+    const rcatster = new CreateButtons("rampticia", "syard");
+    const syard = new CreateButtons("reversecatster", "sea");
     const sea = new CreateButtons("schoolyard", "stars");
     const stars = new CreateButtons("seacret", "spl");
     const spl = new CreateButtons("spacestars", "sbandits");
@@ -1067,8 +1071,9 @@ module.exports = {
     const pfeast2 = new CreateButtons("noplayingallowed2", "pmop2");
     const pmop2 = new CreateButtons("pbfeast2", "otksw2");
     const otksw2 = new CreateButtons("petmop2", "rticia2");
-    const rticia2 = new CreateButtons("otkswabbie2", "sbandits2");
-    const sbandits2 = new CreateButtons("rampticia2", "slord2");
+    const rticia2 = new CreateButtons("otkswabbie2", "rcatster2");
+    const rcatster2 = new CreateButtons("rampticia2", "sbandits2");
+    const sbandits2 = new CreateButtons("reversecatster2", "slord2");
     const slord2 = new CreateButtons("sunbandits2", "terrifyster2");
     const terrifyster2 = new CreateButtons("sunlord2", "umech2");
     const umech2 = new CreateButtons("terrifytricksterazzi2", "wsports2");
@@ -1121,8 +1126,9 @@ module.exports = {
     const mscope3 = new CreateButtons("igmablobchum3", "otksw3");
     const otksw3 = new CreateButtons("mechascope3", "pyeeyz3");
     const pyeeyz3 = new CreateButtons("otkswabbie3", "rticia3");
-    const rticia3 = new CreateButtons("pablosyeezys3", "stars3");
-    const stars3 = new CreateButtons("rampticia3", "sbandits3");
+    const rticia3 = new CreateButtons("pablosyeezys3", "rcatster3");
+    const rcatster3 = new CreateButtons("rampticia3", "stars3");
+    const stars3 = new CreateButtons("reversecatster3", "sbandits3");
     const sbandits3 = new CreateButtons("spacestars3", "slord3");
     const slord3 = new CreateButtons("sunbandits3", "timps3");
     const timps3 = new CreateButtons("sunlord3", "timpssb3");
@@ -1604,6 +1610,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const dozzamech = new CreateZombieDeckEmbed(result, "dozzamech");
     const uncrackamech = new CreateZombieDeckEmbed(result, "feastmech");
     const gargburn = new CreateZombieDeckEmbed(result, "gargburn");
+    const reversecatster = new CreateZombieDeckEmbed(result, "reversecatster");
     const trickmech = new CreateZombieDeckEmbed(result, "trickmech");
     const zmoss = new CreateZombieDeckEmbed(result, "zmoss");
     const iFilter = (i) => i.user.id === message.author.id;
@@ -2563,6 +2570,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         logbait2: { embed: logbait, component: lbait2 },
         lbait3: { embed: logbait, component: lbait3 },
         logbait3: { embed: logbait, component: lbait3 },
+        rcatster: { embed: reversecatster, component: rcatster },
+        reversecatster: { embed: reversecatster, component: rcatster },
+        rcatster2: { embed: reversecatster, component: rcatster2 },
+        reversecatster2: { embed: reversecatster, component: rcatster2 },
+        rcatster3: { embed: reversecatster, component: rcatster3 },
+        reversecatster3: { embed: reversecatster, component: rcatster3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -279,6 +279,7 @@ module.exports = {
         "popsicle",
         "psychosolstice",
         "ramp2seedling",
+        "recycling",
         "reflourished",
         "savagemayflower",
         "shitknight",
@@ -354,6 +355,7 @@ module.exports = {
         "mopribus",
         "psychosolstice",
         "ramp2seedling",
+        "recycling",
         "starrings",
         "startron",
       ],
@@ -406,6 +408,7 @@ module.exports = {
         "nuttin",
         "radiotherapy",
         "ramp2seedling",
+        "recycling",
         "reflourished",
         "savagemayflower",
         "shamcontrolbc",
@@ -793,8 +796,9 @@ module.exports = {
     const psol = new CreateButtons("popsicle", "nut");
     const nut = new CreateButtons("psychosolstice", "radio");
     const radio = new CreateButtons("nuttin", "r2s");
-    const r2s = new CreateButtons("radiotherapy", "rfl");
-    const rfl = new CreateButtons("ramp2seedling", "smf");
+    const r2s = new CreateButtons("radiotherapy", "recy");
+    const recy = new CreateButtons("ramp2seedling", "rfl");
+    const rfl = new CreateButtons("recycling", "smf");
     const smf = new CreateButtons("reflourished", "shambc");
     const shambc = new CreateButtons("savagemayflower", "sknight");
     const sknight = new CreateButtons("shamcontrolbc", "srings");
@@ -851,8 +855,9 @@ module.exports = {
     const plmop2 = new CreateButtons("nuttin2", "pop2");
     const pop2 = new CreateButtons("plantmop2", "psol2");
     const psol2 = new CreateButtons("popsicle2", "r2s2");
-    const r2s2 = new CreateButtons("psychosolstice2", "rfl2");
-    const rfl2 = new CreateButtons("ramp2seedling2", "smf2");
+    const r2s2 = new CreateButtons("psychosolstice2", "recy2");
+    const recy2 = new CreateButtons("ramp2seedling2", "rfl2");
+    const rfl2 = new CreateButtons("recycling2", "smf2");
     const smf2 = new CreateButtons("reflourished2", "sknight2");
     const sknight2 = new CreateButtons("savagemayflower2", "srings2");
     const srings2 = new CreateButtons("shitknight2", "stron2");
@@ -923,8 +928,9 @@ module.exports = {
     const mred4 = new CreateButtons("lasersnap4", "mopr4");
     const mopr4 = new CreateButtons("midred4", "psol4");
     const psol4 = new CreateButtons("mopribus4", "r2s4");
-    const r2s4 = new CreateButtons("psychosolstice4", "srings4");
-    const srings4 = new CreateButtons("ramp2seedling4", "stron4");
+    const r2s4 = new CreateButtons("psychosolstice4", "recy3");
+    const recy3 = new CreateButtons("ramp2seedling4", "srings4");
+    const srings4 = new CreateButtons("recyling3", "stron4");
     const stron4 = new CreateButtons("starrings4", "midrangephelp");
     const tempoprow = new CreateButtons("translattail4", "wr1003");
     const wr1003 = new CreateButtons("tempophelp", "carr4");
@@ -1499,6 +1505,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const frymidrose = new CreatePlantDeckEmbed(result, "frymidrose");
     const healmidrose = new CreatePlantDeckEmbed(result, "hmr");
     const budgetsf = new CreatePlantDeckEmbed(result, "budgetswarmsf");
+    const recycling = new CreatePlantDeckEmbed(result, "recycling");
     const funnyflare = new CreatePlantDeckEmbed(result, "funnyflare");
     const healburn = new CreatePlantDeckEmbed(result, "healburn");
     const figlottery = new CreatePlantDeckEmbed(result, "healmidflare");
@@ -2593,6 +2600,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         dinocounter3: { embed: dinocounter, component: dcounter3 },
         dcounter4: { embed: dinocounter, component: dcounter4 },
         dinocounter4: { embed: dinocounter, component: dcounter4 },
+        recy: { embed: recycling, component: recy },
+        recycling: { embed: recycling, component: recy },
+        recy2: { embed: recycling, component: recy2 },
+        recycling2: { embed: recycling, component: recy2 },
+        recy3: { embed: recycling, component: recy3 },
+        recycling3: { embed: recycling, component: recy3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

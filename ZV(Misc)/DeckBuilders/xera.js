@@ -95,6 +95,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "recycling",
         "reversecatster",
         "startron",
         "uncrackamech",
@@ -122,6 +123,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "recycling",
         "startron",
         "watersports",
       ],
@@ -136,6 +138,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "recycling",
         "reversecatster",
         "startron",
         "toyotacontrolla",
@@ -188,8 +191,9 @@ module.exports = {
     const ff = new CreateButtons("frozentelimps", "hburn");
     const hburn = new CreateButtons("funnyflare", "hi");
     const hi = new CreateButtons("healburn", "lrings");
-    const lrings = new CreateButtons("himps", "rcatster");
-    const rcatster = new CreateButtons("laserrings", "star");
+    const lrings = new CreateButtons("himps", "recy");
+    const recy = new CreateButtons("laserrings", "rcatster");
+    const rcatster = new CreateButtons("recycling", "star");
     const star = new CreateButtons("reversecatster", "um");
     const um = new CreateButtons("startron", "ws");
     const ws = new CreateButtons("uncrackamech", "memehelp");
@@ -215,8 +219,9 @@ module.exports = {
     const go2 = new CreateButtons("funnyflare3", "hburn3");
     const hburn3 = new CreateButtons("gomorrah2", "hi3");
     const hi3 = new CreateButtons("healburn3", "lrings3");
-    const lrings3 = new CreateButtons("himps3", "star3");
-    const star3 = new CreateButtons("laserrings3", "ws3");
+    const lrings3 = new CreateButtons("himps3", "recy2");
+    const recy2 = new CreateButtons("laserrings3", "star3");
+    const star3 = new CreateButtons("recycling2", "ws3");
     const ws3 = new CreateButtons("startron3", "midhelp");
     const alldecksrow = new CreateButtons("watersports4", "sav4");
     const sav4 = new CreateButtons("helpall", "br2");
@@ -227,18 +232,20 @@ module.exports = {
     const gps3 = new CreateButtons("gomorrah3", "hburn4");
     const hburn4 = new CreateButtons("gravepiratestache3", "hi4");
     const hi4 = new CreateButtons("healburn4", "lrings4");
-    const lrings4 = new CreateButtons("himps4", "rcatster3");
-    const rcatster3 = new CreateButtons("laserrings4", "star4");
+    const lrings4 = new CreateButtons("himps4", "recy3");
+    const recy3 = new CreateButtons("laserrings4", "rcatster3");
+    const rcatster3 = new CreateButtons("recycling3", "star4");
     const star4 = new CreateButtons("reversecatster3", "tc2");
     const tc2 = new CreateButtons("startron4", "um4");
     const um4 = new CreateButtons("toyotacontrolla2", "ws4");
     const ws4 = new CreateButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, 
-      himps, lasersnap, reversecatster, startron, toyotacontrolla, feastmech, brady, watersports 
+      himps, lasersnap, recycling, reversecatster, startron, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
+            inner join spdecks sp on (im.deckinfo = sp.deckinfo)
             inner join pbdecks pb on (im.deckinfo = pb.deckinfo)
             inner join ctdecks ct on (im.deckinfo = ct.deckinfo)
             inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
@@ -329,6 +336,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const toyotacontrolla = new CreateDeckEmbed(result, "toyotacontrolla");
     const healburn = new CreateDeckEmbed(result, "healburn");
     const frozentelimps = new CreateDeckEmbed(result, "frozentelimps");
+    const recycling = new CreateDeckEmbed(result, "recycling");
     const uncrackamech = new CreateDeckEmbed(result, "feastmech");
     const watersports = new CreateDeckEmbed(result, "watersports");
     const gravepiratestache = new CreateDeckEmbed(result, "gps");
@@ -482,6 +490,12 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
           reversecatster2: { embed: reversecatster, component: rcatster2 },
           rcatster3: { embed: reversecatster, component: rcatster3 },
           reversecatster3: { embed: reversecatster, component: rcatster3 },
+          recy: { embed: recycling, component: recy },
+        recycling: { embed: recycling, component: recy },
+        recy2: { embed: recycling, component: recy2 },
+        recycling2: { embed: recycling, component: recy2 },
+        recy3: { embed: recycling, component: recy3 },
+        recycling3: { embed: recycling, component: recy3 },
         };
         const action = buttonActions[i.customId];
         if (action) {

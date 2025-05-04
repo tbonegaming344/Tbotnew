@@ -75,7 +75,7 @@ module.exports = {
           )
           .setValue("control"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
+          .setLabel("Midrange Decks")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           )
@@ -91,13 +91,27 @@ module.exports = {
     const spudowDecks = {
       budgetDecks: ["budgetsp"],
       competitiveDecks: ["radiotherapy"],
-      memeDecks: ["nutting", "popsicle"],
+      memeDecks: ["nutting", "popsicle", "recycling"],
       comboDecks: ["nutting"],
       controlDecks: ["radiotherapy", "popsicle"],
-      midrangeDecks: ["budgetsp"],
-      allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy"],
+      midrangeDecks: ["budgetsp", "recycling"],
+      allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy", "recycling"]
     };
+    /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
 
+    const toBuildString = buildDeckString(spudowDecks.allDecks);
+    const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
+    const toBuildControlString = buildDeckString(spudowDecks.controlDecks);
+    const toBuildMidrangeString = buildDeckString(spudowDecks.midrangeDecks);
     /**
      * The CreateButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -116,28 +130,35 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-
-    const toBuildString = buildDeckString(spudowDecks.allDecks);
-    const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
-    const toBuildControlString = buildDeckString(spudowDecks.controlDecks);
+    const memerow = CreateButtons("recycling", "nut2");
+    const nut2 = CreateButtons("helpmeme", "pop2");
+    const pop2 = CreateButtons("nuttin2", "recy");
+    const recy = CreateButtons("popsicle2", "memehelp");
+    const controlrow = CreateButtons("radiotherapy2", "pop");
+    const pop = CreateButtons("helpcontrol", "radio2");
+    const radio2 = CreateButtons("popsicle", "controlhelp"); 
+    const midrangerow = CreateButtons("recycling2", "bsp");
+    const bsp = CreateButtons("helpmidrange", "recy2");
+    const recy2 = CreateButtons("budgetsp", "midrangehelp");
+    const alldecksrow = CreateButtons("recycling3", "bsp2");
+    const bsp2 = CreateButtons("helpall", "nut");
+    const nut = CreateButtons("budgetsp2", "pop3");
+    const pop3 = CreateButtons("nuttin", "radio");
+    const radio = CreateButtons("popsicle3", "recy3");
+    const recy3 = CreateButtons("radiotherapy", "helpall");
     const embed = CreateHelpEmbed(
       "Spudow Decks",
       `To view the Spudow decks please select an option using the select menu below!
 Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719"
     );
-
+    const memeEmbed = CreateHelpEmbed(
+      "Spudow Meme Decks",
+      `My meme decks for Spudow are ${toBuildMemeString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
+      `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
+Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
+    );
     const allEmbed = CreateHelpEmbed(
       "All Spudow Decks",
       `My decks for Spudow are ${toBuildString}`,
@@ -152,12 +173,12 @@ Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.controlDecks.length} decks in Tbot`
     );
-    const memeEmbed = CreateHelpEmbed(
-      "Spudow Meme Decks",
-      `My meme decks for Spudow are ${toBuildMemeString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
+    const midrangeEmbed = CreateHelpEmbed(
+      "Spudow Midrange Decks",
+      `My midrange decks for Spudow are ${toBuildMidrangeString}`,
+      "https://static.wikia.nocookie.net/plantsvzninjastars/images/0/0f/Spudow.png/revision/latest?cb=20230921000000",
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
-Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
+Note: Spudow has ${spudowDecks.midrangeDecks.length} decks in Tbot`
     );
     const [result] = await db.query(`SELECT * from spdecks`);
 
@@ -184,19 +205,9 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const controlrow = CreateButtons("radiotherapy2", "pop");
-    const pop = CreateButtons("helpcontrol", "radio2");
-    const radio2 = CreateButtons("popsicle", "controlhelp");
-    const memerow = CreateButtons("popsicle3", "nut2");
-    const nut2 = CreateButtons("helpmeme", "pop3");
-    const pop3 = CreateButtons("nuttin2", "memehelp");
-    const alldecksrow = CreateButtons("radiotherapy", "bsp");
-    const bsp = CreateButtons("helpall", "nut");
-    const nut = CreateButtons("budgetsp", "pop2");
-    const pop2 = CreateButtons("nuttin", "radio");
-    const radio = CreateButtons("popsicle2", "allhelp");
     const budgetsp = CreateDeckEmbed(result, "budgetburstsp");
     const radiotherapy = CreateDeckEmbed(result, "radiotherapy");
+    const recycling = CreateDeckEmbed(result, "recycling");
     const nuttin = CreateDeckEmbed(result, "nutting");
     const popsicle = CreateDeckEmbed(result, "popsicle");
 
@@ -213,7 +224,7 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value === "budget" || value === "midrange") {
+      if (value === "budget") {
         await i.reply({ embeds: [budgetsp], flags: MessageFlags.Ephemeral });
       } else if (value === "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
@@ -228,6 +239,9 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
         await i.update({ embeds: [controlEmbed], components: [controlrow] });
       } else if (value === "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
+      }
+      else if(value === "midrange"){
+        await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
       }
     }
 
@@ -245,6 +259,8 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
         helpcontrol: { embed: controlEmbed, component: controlrow },
         bsp: { embed: budgetsp, component: bsp },
         budgetsp: { embed: budgetsp, component: bsp },
+        bsp2: { embed: budgetsp, component: bsp2 },
+        budgetsp2: { embed: budgetsp, component: bsp2 },
         nut: { embed: nuttin, component: nut },
         nuttin: { embed: nuttin, component: nut },
         nut2: { embed: nuttin, component: nut2 },
@@ -259,6 +275,12 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
         popsicle2: { embed: popsicle, component: pop2 },
         pop3: { embed: popsicle, component: pop3 },
         popsicle3: { embed: popsicle, component: pop3 },
+        recy: {embed: recycling, component: recy},
+        recycling: {embed: recycling, component: recy},
+        recy2: {embed: recycling, component: recy2},
+        recycling2: {embed: recycling, component: recy2},
+        recy3: {embed: recycling, component: recy3},
+        recycling3: {embed: recycling, component: recy3},
       };
       const action = buttonActions[i.customId];
       if (action) {
@@ -273,7 +295,6 @@ Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
         });
       }
     }
-
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId === "select") {

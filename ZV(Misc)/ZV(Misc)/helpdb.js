@@ -255,6 +255,7 @@ module.exports = {
       ],
       ladderDecks: [
         "carroot",
+        "dinocounter",
         "frymidrose",
         "going3nuts",
         "midred",
@@ -301,6 +302,7 @@ module.exports = {
         "budgetcz",
         "carroot",
         "cyburn",
+        "dinocounter",
         "freezeheal",
         "funnyflare",
         "going3nuts",
@@ -338,6 +340,7 @@ module.exports = {
         "budgetsp",
         "budgetwk",
         "cyburn",
+        "dinocounter",
         "figlottery",
         "frymidrose",
         "funnyflare",
@@ -377,6 +380,7 @@ module.exports = {
         "carroot",
         "chemotherapy",
         "cyburn",
+        "dinocounter",
         "dinogloves",
         "figlottery",
         "freezeheal",
@@ -699,7 +703,7 @@ module.exports = {
         "zmoss",
       ],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -731,7 +735,7 @@ module.exports = {
     const toBuildTempoZString = buildDeckString(zombieDecks.tempoDecks);
     /**
      * The CreateButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -764,8 +768,9 @@ module.exports = {
     const carr = new CreateButtons("cancerknight", "chemo");
     const chemo = new CreateButtons("carroot", "cburn");
     const cburn = new CreateButtons("chemotherapy", "dgloves");
-    const dgloves = new CreateButtons("cyburn", "flottery");
-    const flottery = new CreateButtons("dinogloves", "fheal");
+    const dgloves = new CreateButtons("cyburn", "dcounter");
+    const dcounter = new CreateButtons("dinogloves", "flottery");
+    const flottery = new CreateButtons("dinocounter", "fheal");
     const fheal = new CreateButtons("figlottery", "fmr");
     const fmr = new CreateButtons("freezeheal", "fflare");
     const fflare = new CreateButtons("frymidrose", "g3n");
@@ -823,8 +828,9 @@ module.exports = {
     const tc2 = new CreateButtons("shamcontrolbc2", "wtron2");
     const wtron2 = new CreateButtons("toyotacontrolla2", "helppcomp");
     const ladderprow = new CreateButtons("pbeans2", "carr2");
-    const carr2 = new CreateButtons("helppladder", "fmr2");
-    const fmr2 = new CreateButtons("carroot2", "g3n2");
+    const carr2 = new CreateButtons("helppladder", "dcounter2");
+    const dcounter2 = new CreateButtons("carroot2", "fmr2");
+    const fmr2 = new CreateButtons("dinocounter2", "g3n2");
     const g3n2 = new CreateButtons("frymidrose2", "mred2");
     const mred2 = new CreateButtons("going3nuts2", "pb2");
     const pb2 = new CreateButtons("midred2", "ladderphelp");
@@ -866,8 +872,9 @@ module.exports = {
     const bcc4 = new CreateButtons("helppcombo", "bcz3");
     const bcz3 = new CreateButtons("budgetcc4", "carr3");
     const carr3 = new CreateButtons("budgetcz3", "cburn3");
-    const cburn3 = new CreateButtons("carroot3", "fheal3");
-    const fheal3 = new CreateButtons("cyburn3", "fflare3");
+    const cburn3 = new CreateButtons("carroot3", "dcounter3");
+    const dcounter3 = new CreateButtons("cyburn3", "fheal3");
+    const fheal3 = new CreateButtons("dinocounter3", "fflare3");
     const fflare3 = new CreateButtons("freezeheal3", "g3n3");
     const g3n3 = new CreateButtons("funnyflare3", "hburn3");
     const hburn3 = new CreateButtons("going3nuts3", "hotk3");
@@ -902,8 +909,9 @@ module.exports = {
     const bro3 = new CreateButtons("budgetgs3", "bsp3");
     const bsp3 = new CreateButtons("budgetro3", "bwk3");
     const bwk3 = new CreateButtons("budgetro3", "cburn4");
-    const cburn4 = new CreateButtons("budgetwk3", "flottery3");
-    const flottery3 = new CreateButtons("cyburn4", "fmr3");
+    const cburn4 = new CreateButtons("budgetwk3", "dcounter4");
+    const dcounter4 = new CreateButtons("cyburn4", "flottery3");
+    const flottery3 = new CreateButtons("dinocounter4", "fmr3");
     const fmr3 = new CreateButtons("figlottery3", "fflare4");
     const fflare4 = new CreateButtons("frymidrose3", "g3n4");
     const g3n4 = new CreateButtons("funnyflare4", "hburn4");
@@ -1433,8 +1441,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
 		on (bc.deckinfo = zm.deckinfo)`);
     /**
      * The CreatePlantDeckEmbed function creates an embed for a plant deck.
-     * @param {*} result - The result object containing deck information. 
-     * @param {string} deckName - The name of the deck to create an embed for. 
+     * @param {*} result - The result object containing deck information.
+     * @param {string} deckName - The name of the deck to create an embed for.
      * @returns {EmbedBuilder} - The created embed for the plant deck.
      */
     function CreatePlantDeckEmbed(result, deckName) {
@@ -1464,6 +1472,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const lifecouldbedream = new CreatePlantDeckEmbed(result, "lcbd");
     const logbait = new CreatePlantDeckEmbed(result, "logbait");
     const mspotk = new CreatePlantDeckEmbed(result, "mspotk");
+    const dinocounter = new CreatePlantDeckEmbed(result, "dinocounter");
     const plantmop = new CreatePlantDeckEmbed(result, "plantmop");
     const reflourished = new CreatePlantDeckEmbed(result, "reflourished");
     const healcontrol = new CreatePlantDeckEmbed(result, "apotk");
@@ -1506,8 +1515,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const shitknight = new CreatePlantDeckEmbed(result, "shitknight");
     /**
      * The CreateZombieDeckEmbed function creates an embed for a zombie deck.
-     * @param {*} result - The result object containing deck information. 
-     * @param {string} deckName - The name of the deck to create an embed for. 
+     * @param {*} result - The result object containing deck information.
+     * @param {string} deckName - The name of the deck to create an embed for.
      * @returns {EmbedBuilder} - The created embed for the zombie deck.
      */
     function CreateZombieDeckEmbed(result, deckName) {
@@ -2576,12 +2585,24 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         reversecatster2: { embed: reversecatster, component: rcatster2 },
         rcatster3: { embed: reversecatster, component: rcatster3 },
         reversecatster3: { embed: reversecatster, component: rcatster3 },
+        dcounter: { embed: dinocounter, component: dcounter },
+        dinocounter: { embed: dinocounter, component: dcounter },
+        dcounter2: { embed: dinocounter, component: dcounter2 },
+        dinocounter2: { embed: dinocounter, component: dcounter2 },
+        dcounter3: { embed: dinocounter, component: dcounter3 },
+        dinocounter3: { embed: dinocounter, component: dcounter3 },
       };
       const action = buttonActions[i.customId];
       if (action) {
-        await i.update({ embeds: [action.embed], components: [action.component] });
+        await i.update({
+          embeds: [action.embed],
+          components: [action.component],
+        });
       } else {
-        await i.reply({ content: "Invalid button action", flags: MessageFlags.Ephemeral });
+        await i.reply({
+          content: "Invalid button action",
+          flags: MessageFlags.Ephemeral,
+        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

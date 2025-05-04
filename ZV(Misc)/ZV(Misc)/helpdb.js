@@ -2591,6 +2591,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         dinocounter2: { embed: dinocounter, component: dcounter2 },
         dcounter3: { embed: dinocounter, component: dcounter3 },
         dinocounter3: { embed: dinocounter, component: dcounter3 },
+        dcounter4: { embed: dinocounter, component: dcounter4 },
+        dinocounter4: { embed: dinocounter, component: dcounter4 },
       };
       const action = buttonActions[i.customId];
       if (action) {

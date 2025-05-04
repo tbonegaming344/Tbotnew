@@ -19,7 +19,7 @@ module.exports = {
         return command.name;
       }
     });
-    const toBuildString = "";
+    let toBuildString = "";
     for (const command of commands) {
       toBuildString += `\n<@1043528908148052089> **${command.name}**`;
     }

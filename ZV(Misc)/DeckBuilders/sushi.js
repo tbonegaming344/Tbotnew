@@ -278,8 +278,6 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         helpcombo: {embed: combosushi, component: comborow},
         helpcontrol: {embed: controlsushi, component: controlrow},
         controlhelp: {embed: controlsushi, component: controlrow},
-        helpmidrange: {embed: midrangesushi, component: midrangerow},
-        midrangehelp: {embed: midrangesushi, component: midrangerow},
         sb: {embed: sband, component: sb},
         sunbandits: {embed: sband, component: sb},
         sb2: {embed: sband, component: sb2},

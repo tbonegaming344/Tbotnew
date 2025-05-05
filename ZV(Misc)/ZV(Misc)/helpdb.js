@@ -511,6 +511,7 @@ module.exports = {
         "budgeteb",
         "budgetif",
         "budgetnt",
+        "budgetpb",
         "budgetsm",
         "budgetzm",
         "dozzamech",
@@ -530,7 +531,6 @@ module.exports = {
         "bonusducks",
         "budgetim",
         "budgetnt",
-        "budgetpb",
         "budgetsm",
         "budgetykm",
         "budgetzm",
@@ -1101,8 +1101,9 @@ module.exports = {
     const bbf3 = new CreateButtons("agraves3", "beb3");
     const beb3 = new CreateButtons("budgetbf3", "bif3");
     const bif3 = new CreateButtons("budgeteb3", "bnt3");
-    const bnt3 = new CreateButtons("budgetif3", "bsm3");
-    const bsm3 = new CreateButtons("budgetnt3", "bzm3");
+    const bnt3 = new CreateButtons("budgetif3", "bpb3");
+    const bpb3 = new CreateButtons("budgetnt3", "bsm3");
+    const bsm3 = new CreateButtons("budgetpb3", "bzm3");
     const bzm3 = new CreateButtons("budgetsm3", "dmech3");
     const dmech3 = new CreateButtons("budgetzm3", "gps3");
     const gps3 = new CreateButtons("dozzamech3", "mbolt3");
@@ -1120,9 +1121,8 @@ module.exports = {
     const bbolt3 = new CreateButtons("binaryflagwar3", "bducks3");
     const bducks3 = new CreateButtons("boltbolt3", "bim3");
     const bim3 = new CreateButtons("bonusducks3", "bnt4");
-    const bnt4 = new CreateButtons("budgetim3", "bpb3");
-    const bpb3 = new CreateButtons("budgetnt4", "bsm4");
-    const bsm4 = new CreateButtons("budgetpb3", "bykm3");
+    const bnt4 = new CreateButtons("budgetim3", "bsm4");
+    const bsm4 = new CreateButtons("budgetnt4", "bykm3");
     const bykm3 = new CreateButtons("budgetsm4", "bzm4");
     const bzm4 = new CreateButtons("budgetykm3", "bust3");
     const bust3 = new CreateButtons("budgetykm3", "cog3");

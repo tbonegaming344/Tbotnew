@@ -39,7 +39,7 @@ module.exports = {
       [
         "# Decks",
         "Tbot has plenty of decks stored in its database for viewing and playing with.",
-        "To see decks with a **specific hero** do <@1043528908148052089> insertherohere and then click on the decks button.",
+        "To see decks with a **specific hero** do <@1043528908148052089> [insertherohere] and then click on the decks button.",
         "To see **every deck** in the tbot database please use the <@1043528908148052089> helpdb command.",
 		"If you would like to see your deck or a specific deck added to the database please use the <@1043528908148052089> adddeck command.",
       ].join("\n")
@@ -48,8 +48,8 @@ module.exports = {
     const aboutText4 = new TextDisplayBuilder().setContent(
       [
         "# Invite Tbot",
-        "If you would like to invite Tbot to your server please click on the tbot invite button",
-        "# Tbot Should not be used or invited to personal servers, Tbot is a bot that can also be used in direct messages.",
+        "If you would like to invite Tbot to your server please click on the tbot invite button, however",
+        "# Tbot should not be used or invited to personal servers, Tbot is a bot that can also be used in direct messages(DMS).",
       ].join("\n")
     );
     const tbotInvite = new ButtonBuilder()

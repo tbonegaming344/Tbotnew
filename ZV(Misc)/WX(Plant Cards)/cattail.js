@@ -5,7 +5,7 @@ module.exports = {
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
 		const cat = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/2/23/HD_Cattail_%28PvZH%29.png/revision/latest?cb=20211126172453")
+		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/23/HD_Cattail_%28PvZH%29.png/revision/latest?cb=20160606102303")
 		.setTitle("Cattail | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Animal Plant -**")
 		.setColor("Random")

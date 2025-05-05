@@ -1,93 +1,91 @@
-const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder} = 
-require('discord.js');
+const {
+  ButtonBuilder,
+  ButtonStyle,
+  ContainerBuilder,
+  SectionBuilder,
+  TextDisplayBuilder,
+  MessageFlags,
+  ThumbnailBuilder,
+} = require("discord.js");
 module.exports = {
-	name: `aboutme`,
-	aliases: [`about`, `tbotinfo`, `botinfo`, `infotbot`, `info`, `tbot`, `uptime`, ``],
-	category: `Miscellaneous`,
-	run: async(client, message, args) => {
-		const Ccommands = Array.from(client.commands.values());
-        const commands = Ccommands.filter((command) => {
-          if (
-            command.category != "Miscellaneous" &&
-            command.category != "DeckBuilders" &&
-            command.category != "Zombie Cards" &&
-            command.category != "Tricks Phase" &&
-            command.category != "Plant Cards" &&
-            !command.name.includes("help")
-          ) {
-            return command.name;
-          }
-        });
-		const row = new ActionRowBuilder()
-            .addComponents(
-                new ButtonBuilder()
-                    .setLabel('Invite me today')
-                    .setStyle(ButtonStyle.Link)
-					.setURL('https://discord.com/api/oauth2/authorize?client_id=1043528908148052089&permissions=378944&scope=bot')
-					.setEmoji('🔗'),
-					new ButtonBuilder()
-							.setLabel('Discord server')
-							.setStyle(ButtonStyle.Link)
-						.setURL('https://discord.gg/2NSwt96vmS')
-						.setEmoji("<:thor_swab:1334902821249617991>"),
-							new ButtonBuilder()
-							.setLabel("Youtube")
-							.setStyle(ButtonStyle.Link)
-							.setURL("https://www.youtube.com/channel/UCAwx5Vthm14ghG8UCqSXGog")
-							.setEmoji("<:youtube:1116005333467402300>"),
-							new ButtonBuilder()
-				.setLabel("Donate")
-				.setStyle(ButtonStyle.Link)
-				.setURL("https://www.buymeacoffee.com/tbotpvzh")
-				.setEmoji("☕")
-            );
-		let totalSeconds = (client.uptime / 1000);
-const days = Math.floor(totalSeconds / 86400);
-totalSeconds %= 86400;
-const hours = Math.floor(totalSeconds / 3600);
-totalSeconds %= 3600;
-const minutes = Math.floor(totalSeconds / 60);
-const seconds = Math.floor(totalSeconds % 60);
-		const uptime = `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
-		const about = new EmbedBuilder()
-		.setTitle("About Tbot")
-		.setDescription('**Tbot** is a bot based around the plants vs zombies heroes card game having a lot of features and useful commands for pvzh players \n as tcc quotes "a bot for everything pvzh related"')
-			.addFields({name: "Help command", 
-								 value: `do <@1043528908148052089> help to find all the commands for the bot.
-If you are looking for a spefic hero or category you can pick out the hero or command category`},
-								 {
-									name: "Decks",
-									value: `Tbot has plenty of decks stored in its database for viewing and playing with.
-To see decks with a specific hero do <@1043528908148052089> helpherointials
-To see every deck please use the <@1043528908148052089> helpdb command.
-If you would like to suggest your owh deck to tbot use the <@1043528908148052089> adddeck.`
-								 },
-								 {
-									 name: "Developer",
-									 value: `Bot developed by <@625172218120372225>. 
-									 Feel free to message <@625172218120372225> with questions or to suggest any new commands or features that aren't decks.
-									 You can report bugs or issues by dming Tbone or by using the bugreport command!`
-								 },
-								 {
-									 name: "Developers socials",
-									 value: `Join <@625172218120372225> discord linked below to get updated on when new commands and features are added to the bot.
-You can also subscribe to his Youtube channel below where tbone uploads gaming and other videos.`
-								 },
-								 {
-									 name: "Uptime",
-									 value: `Bot has been on for ${uptime}`
-								 },
-								 {
-									 name: "# of commands and servers",
-									 value: `Tbot has ${client.commands.size} commands and ${commands.length} decks and is in ${client.guilds.cache.size} servers`
-								 },
-								{
-									name: "Donate",
-									value: `If you want to support the bot and its development you can donate to the bot by clicking the donate button below(not required just a way for people to support truly up to you). 
-Your support is greatly appriecated either way whether you dontate or not!`
-								})
-			.setThumbnail(client.user.displayAvatarURL())
-		.setColor("Random")
-		 await message.channel.send({embeds: [ about ], components: [row] } )
-	}
-}
+  name: `aboutme`,
+  aliases: [`about`, `tbotinfo`, `botinfo`, `infotbot`, `info`, `tbot`, ``],
+  category: `Miscellaneous`,
+  run: async (client, message, args) => {
+    const container = new ContainerBuilder();
+    const aboutText1 = new TextDisplayBuilder().setContent(
+      [
+        "# About Tbot",
+        "**Tbot** is a bot based around the plants vs zombies heroes card game having a lot of features and useful commands for pvzh players.",
+        'As tcc quotes "a bot for everything pvzh related',
+      ].join("\n")
+    );
+    const tbotImage = new ThumbnailBuilder().setURL(
+      client.user.displayAvatarURL()
+    );
+    const aboutSection1 = new SectionBuilder()
+      .addTextDisplayComponents(aboutText1)
+      .setThumbnailAccessory(tbotImage);
+    container.addSectionComponents(aboutSection1);
+    const aboutText2 = new TextDisplayBuilder().setContent(
+      [
+        "# Help command",
+        "Use <@1043528908148052089> help to find all the commands for the bot.",
+        "If you are looking for a specific hero or category you can pick out the hero or command category",
+      ].join("\n")
+    );
+    container.addTextDisplayComponents(aboutText2);
+    const aboutText3 = new TextDisplayBuilder().setContent(
+      [
+        "# Decks",
+        "Tbot has plenty of decks stored in its database for viewing and playing with.",
+        "To see decks with a **specific hero** do <@1043528908148052089> insertherohere and then click on the decks button.",
+        "To see **every deck** in the tbot database please use the <@1043528908148052089> helpdb command.",
+		"If you would like to see your deck or a specific deck added to the database please use the <@1043528908148052089> adddeck command.",
+      ].join("\n")
+    );
+    container.addTextDisplayComponents(aboutText3);
+    const aboutText4 = new TextDisplayBuilder().setContent(
+      [
+        "# Invite Tbot",
+        "If you would like to invite Tbot to your server please click on the tbot invite button",
+        "# Tbot Should not be used or invited to personal servers, Tbot is a bot that can also be used in direct messages.",
+      ].join("\n")
+    );
+    const tbotInvite = new ButtonBuilder()
+      .setLabel("Tbot Invite")
+      .setStyle(ButtonStyle.Link)
+      .setURL(
+        "https://discord.com/api/oauth2/authorize?client_id=1043528908148052089&permissions=378944&scope=bot"
+      )
+      .setEmoji("🔗");
+	  const aboutSection4= new SectionBuilder().addTextDisplayComponents(aboutText4).setButtonAccessory(tbotInvite);
+    container.addSectionComponents(aboutSection4);
+    const developerText = new TextDisplayBuilder().setContent(
+      [
+        "# Developer",
+        "Bot developed by <@625172218120372225>.",
+        "Feel free to message <@625172218120372225> with questions or to suggest any new commands or features that aren't decks.",
+        "You can report bugs or issues by dming Tbone or by using the bugreport command!",
+      ].join("\n")
+    );
+    container.addTextDisplayComponents(developerText);
+    const discordText = new TextDisplayBuilder().setContent(
+      [
+        "# Tbot Discord",
+        "Join the Tbot discord to get updated on when new commands and features are added to the bot or just to hang out with the Tbot community.",
+      ].join("\n")
+    );
+    const discordInvite = new ButtonBuilder()
+      .setLabel("Tbot Discord")
+      .setStyle(ButtonStyle.Link)
+      .setURL("https://discord.gg/2NSwt96vmS")
+      .setEmoji("<:thanosswabbie:1296923069817819137>");
+	  const discordSection = new SectionBuilder().addTextDisplayComponents(discordText).setButtonAccessory(discordInvite);
+    container.addSectionComponents(discordSection);
+    await message.channel.send({
+      components: [container],
+      flags: MessageFlags.IsComponentsV2,
+    });
+  },
+};

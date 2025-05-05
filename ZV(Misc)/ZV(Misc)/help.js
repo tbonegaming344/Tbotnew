@@ -28,7 +28,7 @@ const {
               'Please select a category from the select menu given below to view the commands. \n prefix is <@1043528908148052089>'
           )
           .setImage("https://media.discordapp.net/attachments/1044626284346605588/1257720785129312306/all_characters.jpg?ex=66856f42&is=66841dc2&hm=121286e871f2f84b7db1cc561a509a729596e8105b623225d85f3d36cd9b5b43&=&format=webp&width=707&height=614")
-
+          .setFooter({text: `Total Commands: ${commands.length} commands`})
       const cat = Object.keys(categories).map(category => {
           if (!category) category = `Default`;
           return {

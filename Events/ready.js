@@ -10,6 +10,8 @@ module.exports = {
     console.log(`${client.user.username} is online`);
     const Ccommands = Array.from(client.commands.values());
     const commands = Ccommands.filter((command) => {
+      if (!(command?.name && command?.category)) return false;
+      // Filter commands based on category and name
       if (
         command.category != "Miscellaneous" &&
         command.category != "DeckBuilders" &&
@@ -18,10 +20,11 @@ module.exports = {
         command.category != "Plant Cards" &&
         !command.name.includes("help")
       ) {
-        return command.name;
+        return command;
       }
+    
+      return false;
     });
-  
     const tourneys = [
       "Floral Federation",
       "PVZHTWJIZ",

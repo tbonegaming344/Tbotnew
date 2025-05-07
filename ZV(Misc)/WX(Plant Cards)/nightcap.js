@@ -116,7 +116,7 @@ module.exports = {
         .join("");
     }
     const toBuildCompString = buildDeckString(nightcapDecks.competitiveDecks);
-    const toBuildComboString = buildDeckString(nightcapDecks.memeDecks);
+    const toBuildComboString = buildDeckString(nightcapDecks.comboDecks);
     const toBuildString = buildDeckString(nightcapDecks.allDecks);
     /**
      * The CreateButtons function creates a row of buttons for the embed

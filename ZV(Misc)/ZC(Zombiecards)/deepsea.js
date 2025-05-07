@@ -9,7 +9,7 @@ module.exports = {
 			.setTitle("Deep Sea Gargantuar | <:Beastly:1062500894744264714>")
 			.setDescription("**\\- Gargantuar Monster Zombie  -**")
 			.addFields({name: "Stats", 
-									value: "7 <:Strength:1062501774612779039>, 8 <:Health:1062515540712751184>, 6 <:Brainz:1062503146745774183>"},
+									value: "6 <:Strength:1062501774612779039>, 6 <:Health:1062515540712751184>, 6 <:Brainz:1062503146745774183>"},
 								 {
 									name: "Traits",  
 									value: "__Amphibious__, __Hunt__" 

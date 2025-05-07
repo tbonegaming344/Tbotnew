@@ -37,7 +37,7 @@ module.exports = {
       .setPlaceholder("Select an option below to view dozza's decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setValue("ladder")
           .setEmoji("<:ladder:1271503994857979964>")
           .setDescription('Decks that mostly only good for ranked games'), 
@@ -46,15 +46,11 @@ module.exports = {
           .setValue("meme")
           .setDescription('Decks that are built off a weird/fun combo'), 
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
+          .setLabel("Aggro Decks")
           .setValue("aggro")
           .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
-          .setValue("combo")
-          .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setValue("midrange")
           .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
           new StringSelectMenuOptionBuilder()
@@ -64,12 +60,11 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const dozzaDecks = {
-      ladderDecks: ["midred", "trickmech"],
+      ladderDecks: ["trickmech"],
       memeDecks: ["dozzamech", "highlander"],
       aggroDecks: ["dozzamech", "trickmech"],
-      comboDecks: ["midred"],
-      midrangeDecks: ["highlander", "midred"],
-      allDecks: ["dozzamech", "highlander", "midred"],
+      midrangeDecks: ["highlander"],
+      allDecks: ["dozzamech", "highlander", "trickmech"],
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -81,10 +76,8 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildLadder = buildDeckString(dozzaDecks.ladderDecks);
     const toBuildMeme = buildDeckString(dozzaDecks.memeDecks);
     const toBuildAggro = buildDeckString(dozzaDecks.aggroDecks);
-    const toBuildMid = buildDeckString(dozzaDecks.midrangeDecks);
     const toBuildString = buildDeckString(dozzaDecks.allDecks);
     /**
      * The CreateButtons function creates a row of buttons for the embed
@@ -104,29 +97,20 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("trickmech", "mr");
-    const mr = new CreateButtons("ladderhelp", "tmech");
-    const tmech = new CreateButtons("midred", "helpladder");
-    const midrange = new CreateButtons("midred2", "hland");
-    const hland = new CreateButtons("midhelp", "mr2");
-    const mr2 = new CreateButtons("highlander", "helpmid");
     const meme = new CreateButtons("highlander2", "dm");
     const dm = new CreateButtons("memehelp", "hland2");
     const hland2 = new CreateButtons("dozzamech", "helpmeme");
-    const aggrorow = new CreateButtons("trickmech2", "dm2");
-    const dm2 = new CreateButtons("aggrohelp", "tmech2");
-    const tmech2 = new CreateButtons("dozzamech2", "helpaggro");
-    const alldecksrow = new CreateButtons("midred3", "dm3");
+    const aggrorow = new CreateButtons("trickmech", "dm2");
+    const dm2 = new CreateButtons("aggrohelp", "tmech");
+    const tmech= new CreateButtons("dozzamech2", "helpaggro");
+    const alldecksrow = new CreateButtons("trickmech2", "dm3");
     const dm3 = new CreateButtons("allhelp", "hland3");
-    const hland3 = new CreateButtons("dozzamech", "mr3");
-    const mr3 = new CreateButtons("highlander3", "allhelp");
-    const [result] = await db.query(`select dozzamech, highlander, 
-midred, trickmech
+    const hland3 = new CreateButtons("dozzamech", "tmech2");
+    const tmech2 = new CreateButtons("highlander3", "allhelp");
+    const [result] = await db.query(`select dozzamech, highlander, trickmech
 from zmdecks zm 
 inner join wkdecks wk 
-on (zm.deckinfo = wk.deckinfo) 
-inner join czdecks cz 
-on (zm.deckinfo = cz.deckinfo)`);
+on (zm.deckinfo = wk.deckinfo)`);
 const user = await client.users.fetch("1143937777763889324");
     const dozza = new CreateHelpEmbed(
       `${user.displayName} Decks`,
@@ -194,7 +178,6 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
       }
     const dozzamech = new CreateDeckEmbed(result, "dozzamech");
     const highlander = new CreateDeckEmbed(result, "highlander");
-    const midred = new CreateDeckEmbed(result, "midred");
     const trickmech = new CreateDeckEmbed(result, "trickmech");
     const m = await message.channel.send({
       embeds: [dozza],
@@ -204,10 +187,7 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
     async function handleSelectMenu(i){
       const value = i.values[0]
       if(value == "ladder"){
-        await i.update({embeds: [ladderdozza], components: [ladderrow]});
-      }
-      else if(value == "combo"){
-        await i.reply({embeds: [mred], flags: MessageFlags.Ephemeral})
+        await i.reply({embeds: [trickmech], flags: MessageFlags.Ephemeral})
       }
       else if(value == "midrange"){
         await i.update({embeds: [middozza], components: [midrange]});
@@ -234,12 +214,6 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
         helpmid: {embed: middozza, component: midrange},
         allhelp: {embed: alldozza, component: alldecksrow},
         helpall: {embed: alldozza, component: alldecksrow},
-        mr: {embed: midred, component: mr},
-        midred: {embed: midred, component: mr},
-        mr2: {embed: midred, component: mr2},
-        midred2: {embed: midred, component: mr2},
-        mr3: {embed: midred, component: mr3},
-        midred3: {embed: midred, component: mr3},
         hland: {embed: highlander, component: hland},
         highlander: {embed: highlander, component: hland},
         hland2: {embed: highlander, component: hland2},

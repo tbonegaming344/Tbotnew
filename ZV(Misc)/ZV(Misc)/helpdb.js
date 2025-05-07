@@ -257,7 +257,6 @@ module.exports = {
         "dinocounter",
         "frymidrose",
         "going3nuts",
-        "midred",
         "pawntrickstab",
         "pbeans",
       ],
@@ -310,8 +309,7 @@ module.exports = {
         "healburn",
         "healthotk",
         "lasersnap",
-        "midred",
-        "mopribus",
+         "mopribus",
         "mspotk",
         "nuttin",
         "plantmop",
@@ -351,7 +349,6 @@ module.exports = {
         "healthotk",
         "highlander",
         "lasersnap",
-        "midred",
         "mopribus",
         "psychosolstice",
         "ramp2seedling",
@@ -397,7 +394,6 @@ module.exports = {
         "lasersnap",
         "lifecouldbedream",
         "logbait",
-        "midred",
         "mopribus",
         "mspotk",
         "pawntrickstab",
@@ -785,9 +781,8 @@ module.exports = {
     const hland = new CreateButtons("healthotk", "lsnap");
     const lsnap = new CreateButtons("highlander", "lcbd");
     const lcbd = new CreateButtons("lasersnap", "lbait");
-    const lbait = new CreateButtons("lifecouldbedream", "mred");
-    const mred = new CreateButtons("logbait", "mopr");
-    const mopr = new CreateButtons("midred", "msp");
+    const lbait = new CreateButtons("lifecouldbedream", "mopr");
+    const mopr = new CreateButtons("logbait", "msp");
     const msp = new CreateButtons("mopribus", "pts");
     const pts = new CreateButtons("mspotk", "pb");
     const pb = new CreateButtons("pawntrickstab", "plmop");
@@ -883,9 +878,8 @@ module.exports = {
     const g3n3 = new CreateButtons("funnyflare3", "hburn3");
     const hburn3 = new CreateButtons("going3nuts3", "hotk3");
     const hotk3 = new CreateButtons("healburn3", "lsnap3");
-    const lsnap3 = new CreateButtons("healthotk3", "mred3");
-    const mred3 = new CreateButtons("lasersnap3", "mopr3");
-    const mopr3 = new CreateButtons("midred3", "msp3");
+    const lsnap3 = new CreateButtons("healthotk3", "mopr3");
+    const mopr3 = new CreateButtons("lasersnap3", "msp3");
     const msp3 = new CreateButtons("mopribus3", "nut3");
     const nut3 = new CreateButtons("mspotk3", "plmop3");
     const plmop3 = new CreateButtons("nuttin3", "psol3");
@@ -923,9 +917,8 @@ module.exports = {
     const hmr3 = new CreateButtons("healburn4", "hotk4");
     const hotk4 = new CreateButtons("healmidrose3", "hland3");
     const hland3 = new CreateButtons("healthotk4", "lsnap4");
-    const lsnap4 = new CreateButtons("highlander3", "mred4");
-    const mred4 = new CreateButtons("lasersnap4", "mopr4");
-    const mopr4 = new CreateButtons("midred4", "psol4");
+    const lsnap4 = new CreateButtons("highlander3", "mopr4");
+    const mopr4 = new CreateButtons("lasersnap4", "psol4");
     const psol4 = new CreateButtons("mopribus4", "r2s4");
     const r2s4 = new CreateButtons("psychosolstice4", "recy3");
     const recy3 = new CreateButtons("ramp2seedling4", "srings4");
@@ -1483,7 +1476,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const healcontrol = new CreatePlantDeckEmbed(result, "apotk");
     const budgetcz = new CreatePlantDeckEmbed(result, "budgetcz");
     const lasersnap = new CreatePlantDeckEmbed(result, "lasersnap");
-    const midred = new CreatePlantDeckEmbed(result, "midred");
     const mopribus = new CreatePlantDeckEmbed(result, "mopribus");
     const budgetgk = new CreatePlantDeckEmbed(result, "budgetgk");
     const dinogloves = new CreatePlantDeckEmbed(result, "dinogloves");
@@ -1877,14 +1869,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         lifecouldbedream2: { embed: lifecouldbedream, component: lcbd2 },
         lcbd3: { embed: lifecouldbedream, component: lcbd3 },
         lifecouldbedream3: { embed: lifecouldbedream, component: lcbd3 },
-        mred: { embed: midred, component: mred },
-        midred: { embed: midred, component: mred },
-        mred2: { embed: midred, component: mred2 },
-        midred2: { embed: midred, component: mred2 },
-        mred3: { embed: midred, component: mred3 },
-        midred3: { embed: midred, component: mred3 },
-        mred4: { embed: midred, component: mred4 },
-        midred4: { embed: midred, component: mred4 },
         mopr: { embed: mopribus, component: mopr },
         mopribus: { embed: mopribus, component: mopr },
         mopr2: { embed: mopribus, component: mopr2 },

@@ -59,11 +59,6 @@ module.exports = {
           .setEmoji("<:compemote:1325461143136764060>")
           .setDescription("Some of the best decks in the game"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>")
-          .setValue("ladder"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
@@ -96,15 +91,13 @@ module.exports = {
       budgetDecks: ["budgetmopzilla"],
       compDecks: ["healcontrol"],
       memeDecks: ["lasersnap", "moprbius"],
-      ladderDecks: ["midred"],
-      comboDecks: ["budgetmopzilla", "lasersnap", "midred", "moprbius"],
+      comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
       controlDecks: ["healcontrol"],
-      midrangeDecks: ["budgetmopzilla", "lasersnap", "midred", "moprbius"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
       allDecks: [
         "budgetmopzilla",
         "healcontrol",
         "lasersnap",
-        "midred",
         "moprbius",
       ],
     };
@@ -147,20 +140,17 @@ module.exports = {
     const mop = new CreateButtons("lasersnap", "memehelp");
     const comborow = new CreateButtons("mopribus2", "bmz");
     const bmz = new CreateButtons("helpcombo", "lsnap2");
-    const lsnap2 = new CreateButtons("budgetmopzilla", "mred");
-    const mred = new CreateButtons("lasersnap2", "mop2");
-    const mop2 = new CreateButtons("midred2", "combohelp");
+    const lsnap2 = new CreateButtons("budgetmopzilla", "mop2");
+    const mop2 = new CreateButtons("lasersnap2", "combohelp");
     const midrangerow = new CreateButtons("mopribus3", "bmz2");
     const bmz2 = new CreateButtons("helpmid", "lsnap3");
-    const lsnap3 = new CreateButtons("budgetmopzilla2", "mred2");
-    const mred2 = new CreateButtons("lasersnap3", "mop3");
-    const mop3 = new CreateButtons("midred3", "midhelp");
+    const lsnap3 = new CreateButtons("budgetmopzilla2", "mop3");
+    const mop3 = new CreateButtons("lasersnap3", "midhelp");
     const alldecksrow = new CreateButtons("mopribus4", "bmz3");
     const bmz3 = new CreateButtons("helpall", "healcon");
     const healcon = new CreateButtons("budgetmopzilla3", "lsnap4");
-    const lsnap4 = new CreateButtons("healcontrol", "mred3");
-    const mred3 = new CreateButtons("lasersnap4", "mop4");
-    const mop4 = new CreateButtons("midred4", "allhelp");
+    const lsnap4 = new CreateButtons("healcontrol", "mop4");
+    const mop4 = new CreateButtons("lasersnap4", "allhelp");
     const embed = new CreateHelpEmbed(
       "Chompzilla Decks",
       `To view the Chompzilla decks please select an option from the select menu below!
@@ -222,7 +212,6 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
     const healcontrol = new CreateDeckEmbed(result, "apotk");
     const budgetcz = new CreateDeckEmbed(result, "budgetcz");
     const lasersnap = new CreateDeckEmbed(result, "lasersnap");
-    const midred = new CreateDeckEmbed(result, "midred");
     const mopribus = new CreateDeckEmbed(result, "mopribus");
     const m = await message.channel.send({
       embeds: [embed],
@@ -241,8 +230,6 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         await i.reply({ embeds: [healcontrol], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (value == "ladder") {
-        await i.reply({ embeds: [midred], flags: MessageFlags.Ephemeral });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
@@ -281,12 +268,6 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         lasersnap3: { embed: lasersnap, component: lsnap3 },
         lsnap4: { embed: lasersnap, component: lsnap4 },
         lasersnap4: { embed: lasersnap, component: lsnap4 },
-        mred: { embed: midred, component: mred },
-        midred: { embed: midred, component: mred },
-        mred2: { embed: midred, component: mred2 },
-        midred2: { embed: midred, component: mred2 },
-        mred3: { embed: midred, component: mred3 },
-        midred3: { embed: midred, component: mred3 },
         mop: { embed: mopribus, component: mop },
         mopribus: { embed: mopribus, component: mop },
         mop2: { embed: mopribus, component: mop2 },

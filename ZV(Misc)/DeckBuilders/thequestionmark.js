@@ -70,7 +70,7 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -82,12 +82,12 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const theQuestionMarkDecks = {
-      ladderDecks: ["cryoboy", "midred", "schoolyard", "splimps"],
+      ladderDecks: ["cryoboy", "schoolyard", "splimps"],
       memeDecks: ["nuttin"],
       aggroDecks: ["schoolyard", "splimps"],
-      comboDecks: ["cryoboy", "midred", "nuttin"],
-      midrangeDecks: ["cryoboy", "midred"],
-      allDecks: ["cryoboy", "midred", "nuttin", "schoolyard", "splimps"],
+      comboDecks: ["cryoboy", "nuttin"],
+      midrangeDecks: ["cryoboy"],
+      allDecks: ["cryoboy", "nuttin", "schoolyard", "splimps"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -104,9 +104,6 @@ module.exports = {
     );
     const toBuildAggroString = buildDeckString(theQuestionMarkDecks.aggroDecks);
     const toBuildComboString = buildDeckString(theQuestionMarkDecks.comboDecks);
-    const toBuildMidrangeString = buildDeckString(
-      theQuestionMarkDecks.midrangeDecks
-    );
     const toBuildString = buildDeckString(theQuestionMarkDecks.allDecks);
     /**
      * The CreateButtons function creates a row of buttons for the embed
@@ -127,23 +124,17 @@ module.exports = {
       );
     }
     const alldecksrow = new CreateButtons("splimps", "cboy");
-    const cboy = new CreateButtons("helpall", "mred");
-    const mred = new CreateButtons("cyroboy", "nut");
-    const nut = new CreateButtons("midred", "syard");
+    const cboy = new CreateButtons("helpall", "nut");
+    const nut = new CreateButtons("cyroboy", "syard");
     const syard = new CreateButtons("nuttin", "spl");
     const spl = new CreateButtons("schoolyard", "allhelp");
     const ladderrow = new CreateButtons("splimps2", "cboy2");
-    const cboy2 = new CreateButtons("helpladder", "mred2");
-    const mred2 = new CreateButtons("cyroboy2", "syard2");
-    const syard2 = new CreateButtons("midred2", "spl2");
+    const cboy2 = new CreateButtons("helpladder", "syard2");
+    const syard2 = new CreateButtons("cyroboy2", "spl2");
     const spl2 = new CreateButtons("schoolyard2", "ladderhelp");
     const comborow = new CreateButtons("nuttin2", "cboy3");
-    const cboy3 = new CreateButtons("helpcombo", "mred3");
-    const mred3 = new CreateButtons("cyroboy3", "nut2");
-    const nut2 = new CreateButtons("midred3", "combohelp");
-    const midrangrow = new CreateButtons("midred4", "cboy4");
-    const cboy4 = new CreateButtons("helpmidrange", "mred4");
-    const mred4 = new CreateButtons("cyroboy4", "midrangehelp");
+    const cboy3 = new CreateButtons("helpcombo", "nut2");
+    const nut2 = new CreateButtons("cyroboy3", "combohelp");
     const aggrorow = new CreateButtons("splimps3", "syard3");
     const syard3 = new CreateButtons("helpaggro", "spl3");
     const spl3 = new CreateButtons("schoolyard3", "aggrohelp");
@@ -182,17 +173,9 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.aggroDecks.length} aggro de
       `To view the combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${theQuestionMarkDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
-      `${user.displayName} Midrange Decks`,
-      `My midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
-      user.displayAvatarURL(),
-      `To view the midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: ${user.displayName} has ${theQuestionMarkDecks.midrangeDecks.length} midrange decks in Tbot`
-    );
     const [result] =
-      await db.query(`select cyroboy, midred, nutting, schoolyard, splimps from hgdecks hg 
+      await db.query(`select cyroboy, nutting, schoolyard, splimps from hgdecks hg 
       inner join ifdecks fi on (hg.deckinfo = fi.deckinfo)
-      inner join czdecks cz on (hg.deckinfo = cz.deckinfo)
       inner join ntdecks nt on (hg.deckinfo = nt.deckinfo)
       inner join spdecks sp on (hg.deckinfo = sp.deckinfo)`);
      /**
@@ -220,7 +203,6 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.midrangeDecks.length} midra
     }
     const cyroboy = new CreateDeckEmbed(result, "cyroboy");
     const nuttin = new CreateDeckEmbed(result, "nutting");
-    const midred = new CreateDeckEmbed(result, "midred");
     const schoolyard = new CreateDeckEmbed(result, "schoolyard");
     const splimps = new CreateDeckEmbed(result, "splimps");
     const m = await message.channel.send({ embeds: [tqm], components: [row] });
@@ -238,7 +220,7 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.midrangeDecks.length} midra
       } else if (value == "meme") {
         await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
       } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangrow] });
+        await i.reply({embeds: [cyroboy], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "all") {
@@ -267,8 +249,6 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.midrangeDecks.length} midra
         cyroboy2: { embed: cyroboy, component: cboy2 },
         cboy3: { embed: cyroboy, component: cboy3 },
         cyroboy3: { embed: cyroboy, component: cboy3 },
-        cboy4: { embed: cyroboy, component: cboy4 },
-        cyroboy4: { embed: cyroboy, component: cboy4 },
         spl: { embed: splimps, component: spl },
         splimps: { embed: splimps, component: spl },
         spl2: { embed: splimps, component: spl2 },
@@ -279,14 +259,6 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.midrangeDecks.length} midra
         nuttin: { embed: nuttin, component: nut },
         nut2: { embed: nuttin, component: nut2 },
         nuttin2: { embed: nuttin, component: nut2 },
-        mred: { embed: midred, component: mred },
-        midred: { embed: midred, component: mred },
-        mred2: { embed: midred, component: mred2 },
-        midred2: { embed: midred, component: mred2 },
-        mred3: { embed: midred, component: mred3 },
-        midred3: { embed: midred, component: mred3 },
-        mred4: { embed: midred, component: mred4 },
-        midred4: { embed: midred, component: mred4 },
         syard: { embed: schoolyard, component: syard },
         schoolyard: { embed: schoolyard, component: syard },
         syard2: { embed: schoolyard, component: syard2 },

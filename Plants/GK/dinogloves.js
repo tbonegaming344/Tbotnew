@@ -1,6 +1,5 @@
 const db = require("../../index.js")
 const {EmbedBuilder} = require("discord.js")
-const { category } = require("./pawntrickstab")
 module.exports = {
     name: `dinogloves`, 
     category: `Grass Knuckles(GK)`,

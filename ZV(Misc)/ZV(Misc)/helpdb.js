@@ -247,7 +247,6 @@ module.exports = {
         "healcontrol",
         "healmidrose",
         "logbait",
-        "pawntrickstab",
         "radiotherapy",
         "shamcontrolbc",
         "toyotacontrolla",
@@ -259,6 +258,7 @@ module.exports = {
         "frymidrose",
         "going3nuts",
         "midred",
+        "pawntrickstab",
         "pbeans",
       ],
       memeDecks: [
@@ -825,9 +825,8 @@ module.exports = {
     const flottery2 = new CreateButtons("cyburn2", "healcon2");
     const healcon2 = new CreateButtons("figlottery2", "hmr2");
     const hmr2 = new CreateButtons("healcontrol2", "lbait2");
-    const lbait2 = new CreateButtons("healmidrose2", "pts2");
-    const pts2 = new CreateButtons("logbait2", "radio2");
-    const radio2 = new CreateButtons("pawntrickstab2", "shambc2");
+    const lbait2 = new CreateButtons("healmidrose2", "radio2");
+    const radio2 = new CreateButtons("logbait2", "shambc2");
     const shambc2 = new CreateButtons("radiotherapy2", "tc2");
     const tc2 = new CreateButtons("shamcontrolbc2", "wtron2");
     const wtron2 = new CreateButtons("toyotacontrolla2", "helppcomp");
@@ -835,9 +834,9 @@ module.exports = {
     const carr2 = new CreateButtons("helppladder", "dcounter2");
     const dcounter2 = new CreateButtons("carroot2", "fmr2");
     const fmr2 = new CreateButtons("dinocounter2", "g3n2");
-    const g3n2 = new CreateButtons("frymidrose2", "mred2");
-    const mred2 = new CreateButtons("going3nuts2", "pb2");
-    const pb2 = new CreateButtons("midred2", "ladderphelp");
+    const g3n2 = new CreateButtons("frymidrose2", "pts2");
+    const pts2 = new CreateButtons("going3nuts2", "pb2");
+    const pb2 = new CreateButtons("pawntrickstab2", "ladderphelp");
     const memeprow = new CreateButtons("translattail2", "wr1002");
     const wr1002 = new CreateButtons("memephelp", "cank2");
     const cank2 = new CreateButtons("winrate1002", "dgloves2");

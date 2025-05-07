@@ -54,10 +54,10 @@ module.exports = {
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Deck")
           .setValue("meme")
@@ -89,7 +89,7 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const grassKnucklesDecks = {
       budgetDecks: ["budgetgk"],
-      competitiveDecks: ["pawntrickstab"],
+      ladderDecks: ["pawntrickstab"],
       memeDecks: ["dinogloves", "healthotk"],
       aggroDecks: ["dinogloves"],
       comboDecks: ["healthotk"],
@@ -212,7 +212,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "comp" || value == "control") {
+      } else if (value == "ladder" || value == "control") {
         await i.reply({
           embeds: [pawntrickstab],
           flags: MessageFlags.Ephemeral,

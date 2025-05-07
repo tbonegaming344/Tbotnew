@@ -42,11 +42,6 @@ module.exports = {
       .setPlaceholder("Please select an option below to view ShortBow's Decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>")
-          .setValue("comp"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Decks")
           .setDescription("Decks that are generally only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>")
@@ -88,8 +83,7 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
-      competitiveDecks: ["pawntrickstab"],
-      ladderDecks: ["gomorrah", "gravepiratestache", "raiserpackage"],
+      ladderDecks: ["gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage"],
       aggroDecks: ["gravepiratestache"],
       comboDecks: ["gravepiratestache"],
       controlDecks: ["pawntrickstab"],
@@ -139,8 +133,9 @@ module.exports = {
     const rpack = new CreateButtons("pawntrickstab", "allhelp");
     const ladderrow = new CreateButtons("raiserpackage2", "go2");
     const go2 = new CreateButtons("helpladder", "gps2");
-    const gps2 = new CreateButtons("gomorrah2", "rpack2");
-    const rpack2 = new CreateButtons("gravepiratestache2", "ladderhelp");
+    const gps2 = new CreateButtons("gomorrah2", "pts2");
+    const pts2 = new CreateButtons("gravepiratestache2", "rpack2");
+    const rpack2 = new CreateButtons("pawntrickstab2", "ladderhelp");
     const [result] =
       await db.query(`select gomorrah, gps, pawntrickstab, raiserpackage from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
@@ -205,7 +200,7 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "comp" || value == "control") {
+      if (value == "control") {
         await i.reply({
           embeds: [pawntrickstab],
           flags: MessageFlags.Ephemeral,
@@ -252,6 +247,8 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
         raiserpackage2: { embed: raiserpackage, component: rpack2 },
         pts: { embed: pawntrickstab, component: pts },
         pawntrickstab: { embed: pawntrickstab, component: pts },
+        pts2: { embed: pawntrickstab, component: pts2 },
+        pawntrickstab2: { embed: pawntrickstab, component: pts2 },
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -75,9 +75,9 @@ module.exports = {
         ///247 IQ
         "Passing turn 6 against a smarty hero",
         //Alan
-        "Just bought a Rose body pillow",
         "Still winning games with Trica",
         "Smash is the zombie heal hero",
+        "Pea Patch will save the Mega-Grow class",
         //Aristoshii
         "Fronting Cowboy with ppm",
         "Did you know that Squirrel Herder can remove Planet of the Grapes?",
@@ -92,12 +92,13 @@ module.exports = {
         "Testing my English",
         //Axol 
         "Running out of statuses", 
+        "Warning: may break more often than dry bread",
+        "Back in my day, quarterly bonus was named pirate's booty",
         "Bullying bronze ranks (stars are stars buddy)",
         "I would have used a status but Broth stole it",
         "Hello everybody my name is Magnifier, and today I am going to be playing Five nights against Impfinity",
         //Badorni
         "Currently underrating starchlord",
-        "Enjoying some alone time with mommy SF",
         "busy testing secret cc list",
         "creating secret cz list (better than secret cc)",
         "playing apotatosaurus with 3nut in black hole so it survives your own doom shroom",
@@ -125,6 +126,8 @@ module.exports = {
         "Did you know that if you swipe right of the last card in your hand during the attack phase your upcoming card will be shown?",
         //Bowling Bulb Enjoyer
         "it's the first turn of the game what could possibly go wrong",
+        "I miss the old black eyed pea",
+        "tricking new players into playing plants so I have faster match making on zombies",
         //CGP23
         "complaining about losing to rng",
         "Giving bad deckbuilding advice",
@@ -147,6 +150,7 @@ module.exports = {
         "Pay $5 a week for exclusive images from Fry's OnlyFans!",
         //Hayri
         "I should front a space cowboy with a primal potato mine",
+        "too busy using nibble on potato mines", 
         //HeadSlug
         "Casually getting ra and mug from bmr",
         "Playing pvzh with RTX on",
@@ -207,7 +211,6 @@ module.exports = {
         "“Eating the 3rd best taco of all time”",
         "Did you know that untrickable zombies/plants can be affected by your own tricks?",
         "“Breaking the integer limit with Double Mint”",
-
         //Knabbs
         "Playing a MUG combo into Blockbuster",
         "Battling against Daniel226",
@@ -291,6 +294,8 @@ module.exports = {
         "Casually throwing the game",
         `Stream Sniping ${randomStreamers}`,
         "Fixins bugs by adding new ones",
+        //Make me a coffee
+        "Ramping to seedling.",
         //Misez
         "hello everybody my name is Tbot",
         //mono
@@ -346,9 +351,13 @@ module.exports = {
         //Ocean Man
         "Grapes of wrath should cost more than 6",
         "Name is not short for Terry bone",
+        "Losing on purpose to lower my mmr and make climbing ladder easier",
         "Patting the PopCap janitor on the head for a good job",
         "Do zombies dream of undead sheep?",
         "Playing the same 4 decks then wondering why I keep losing tourneys",
+        "The pea patch drama is crazy rn",
+        "I think I miss sunstrike",
+        "Resisting the urge to nibble the galacta cactus on purpose",
         //One Big Fluke
         "Going for bmr on turn 1",
         "Don't let db sheep fool you. OTK swabbie is the true best deck in the game",
@@ -359,6 +368,7 @@ module.exports = {
         "Using cosmic bean because I saw Vietnamese players running it",
         //voof 
         "Uploading our 11th revision of Trick-Mech",
+        "I'll be back. (-up dancer)",
         //Vortex Dragon 
         "Time to add some 5 liners to tbot",
         "x40 lily pad hackers",
@@ -368,8 +378,9 @@ module.exports = {
         "Adding japanese characters to my deck name for +20% draw luck", 
         "Enjoying 1/3 Trica (clueless)", 
         "Attempting rank 1-50 Sow the Seeds speedrun", 
-        "Being clueless about lane placement"
-
+        "Being clueless about lane placement", 
+        "Nibble on Potato Mines doesn't softlock if there is no zombie in front of them.", 
+        "Studying PvZH source code in order to figure out why nibble softlocks the game."
       ];
       const status =
         customStatus[Math.floor(Math.random() * customStatus.length)];

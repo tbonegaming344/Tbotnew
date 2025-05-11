@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -131,12 +131,12 @@ module.exports = {
     const toBuildMemeString = buildDeckString(electricBoogalooDecks.memeDecks);
     const toBuildString = buildDeckString(electricBoogalooDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -149,21 +149,21 @@ module.exports = {
       );
     }
 
-    const alldecksrow = new CreateButtons("seacret", "beb");
-    const beb = new CreateButtons("helpall", "gstar22");
-    const gstar22 = new CreateButtons("budgeteb", "hgargs");
-    const hgargs = new CreateButtons("gargstar22", "npa");
-    const npa = new CreateButtons("huntgargs", "sea");
-    const sea = new CreateButtons("noplayingallowed", "allhelp");
-    const memerow = new CreateButtons("noplayingallowed2", "hgargs2");
-    const hgargs2 = new CreateButtons("helpmeme", "npa2");
-    const npa2 = new CreateButtons("huntgargs2", "memehelp");
-    const aggrorow = new CreateButtons("seacret2", "beb2");
-    const beb2 = new CreateButtons("helpaggro", "sea2");
-    const sea2 = new CreateButtons("budgeteb2", "aggrohelp");
-    const controlrow = new CreateButtons("noplayingallowed3", "hgargs3");
-    const hgargs3 = new CreateButtons("helpcontrol", "npa3");
-    const npa3 = new CreateButtons("huntgargs3", "controlhelp");
+    const alldecksrow = createButtons("seacret", "beb");
+    const beb = createButtons("helpall", "gstar22");
+    const gstar22 = createButtons("budgeteb", "hgargs");
+    const hgargs = createButtons("gargstar22", "npa");
+    const npa = createButtons("huntgargs", "sea");
+    const sea = createButtons("noplayingallowed", "allhelp");
+    const memerow = createButtons("noplayingallowed2", "hgargs2");
+    const hgargs2 = createButtons("helpmeme", "npa2");
+    const npa2 = createButtons("huntgargs2", "memehelp");
+    const aggrorow = createButtons("seacret2", "beb2");
+    const beb2 = createButtons("helpaggro", "sea2");
+    const sea2 = createButtons("budgeteb2", "aggrohelp");
+    const controlrow = createButtons("noplayingallowed3", "hgargs3");
+    const hgargs3 = createButtons("helpcontrol", "npa3");
+    const npa3 = createButtons("huntgargs3", "controlhelp");
     const embed = new EmbedBuilder()
       .setThumbnail("https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png")
       .setTitle(
@@ -187,13 +187,13 @@ module.exports = {
         }
       );
     const [result] = await db.query("select * from ebdecks");
-    const helpeb = new CreateHelpEmbed(
+    const helpeb = createHelpEmbed(
       "Electric Boogaloo Decks",
       `To view the Electric Boogaloo decks please select an option from the select menu below!
    Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks in Tbot`,
       "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png"
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Electric Boogaloo Decks",
       `My Decks for Electric Boogaloo(EB) are ${toBuildString}`
     )
@@ -205,21 +205,21 @@ module.exports = {
    Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks in Tbot`,
       })
       .setColor("Random");
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Electric Boogaloo Meme Decks",
       `My Meme Decks for Electric Boogaloo(EB) are ${toBuildMemeString}`,
       "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
       `To view the Meme Electric Boogaloo decks please use the commands listed above or navigate through all of the Meme decks using the buttons below!
    Note: Electric Boogaloo has ${electricBoogalooDecks.memeDecks.length} Meme decks in Tbot`
     );
-    const aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = createHelpEmbed(
       "Electric Boogaloo Aggro Decks",
       `My Aggro Decks for Electric Boogaloo(EB) are ${toBuildAggroString}`,
       "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
       `To view the Aggro Electric Boogaloo decks please use the commands listed above or navigate through all of the Aggro decks using the buttons below!
    Note: Electric Boogaloo has ${electricBoogalooDecks.aggroDecks.length} Aggro decks in Tbot`
     );
-    const controlEmbed = new CreateHelpEmbed(
+    const controlEmbed = createHelpEmbed(
       "Electric Boogaloo Control Decks",
       `My Control Decks for Electric Boogaloo(EB) are ${toBuildControlString}`,
       "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
@@ -227,12 +227,12 @@ module.exports = {
    Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -250,11 +250,11 @@ module.exports = {
       return embed;
     }
     //Deck Embeds
-    const budgetburn = new CreateDeckEmbed(result, "budgetburn");
-    const gargstar22 = new CreateDeckEmbed(result, "gargstar22");
-    const huntgargs = new CreateDeckEmbed(result, "huntgargs");
-    const noplayingallowed = new CreateDeckEmbed(result, "noplayingallowed");
-    const seacret = new CreateDeckEmbed(result, "seacret");
+    const budgetburn = createDeckEmbed(result, "budgetburn");
+    const gargstar22 = createDeckEmbed(result, "gargstar22");
+    const huntgargs = createDeckEmbed(result, "huntgargs");
+    const noplayingallowed = createDeckEmbed(result, "noplayingallowed");
+    const seacret = createDeckEmbed(result, "seacret");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

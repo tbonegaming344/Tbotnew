@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -105,12 +105,12 @@ module.exports = {
       ],
     };
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -122,29 +122,29 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("ramp2seedling", "ff");
-    const ff = new CreateButtons("helpmeme", "hburn");
-    const hburn = new CreateButtons("funnyflare", "psol");
-    const psol = new CreateButtons("healburn", "r2s");
-    const r2s = new CreateButtons("psychosolstice", "memehelp");
-    const comborow = new CreateButtons("ramp2seedling2", "ff2");
-    const ff2 = new CreateButtons("helpcombo", "hburn2");
-    const hburn2 = new CreateButtons("funnyflare2", "psol2");
-    const psol2 = new CreateButtons("healburn2", "r2s2");
-    const r2s2 = new CreateButtons("psychosolstice2", "combohelp");
-    const midrangerow = new CreateButtons("ramp2seedling3", "flottery");
-    const flottery = new CreateButtons("helpmid", "ff3");
-    const ff3 = new CreateButtons("figlottery", "hburn3");
-    const hburn3 = new CreateButtons("funnyflare3", "psol3");
-    const psol3 = new CreateButtons("healburn3", "r2s3");
-    const r2s3 = new CreateButtons("psychosolstice3", "midhelp");
-    const alldecksrow = new CreateButtons("ramp2seedling4", "bsf");
-    const bsf = new CreateButtons("helpall", "flottery2");
-    const flottery2 = new CreateButtons("budgetsf", "ff4");
-    const ff4 = new CreateButtons("figlottery2", "hburn4");
-    const hburn4 = new CreateButtons("funnyflare3", "psol4");
-    const psol4 = new CreateButtons("psol4", "r2s4");
-    const r2s4 = new CreateButtons("psychosolstice4", "allhelp");
+    const memerow = createButtons("ramp2seedling", "ff");
+    const ff = createButtons("helpmeme", "hburn");
+    const hburn = createButtons("funnyflare", "psol");
+    const psol = createButtons("healburn", "r2s");
+    const r2s = createButtons("psychosolstice", "memehelp");
+    const comborow = createButtons("ramp2seedling2", "ff2");
+    const ff2 = createButtons("helpcombo", "hburn2");
+    const hburn2 = createButtons("funnyflare2", "psol2");
+    const psol2 = createButtons("healburn2", "r2s2");
+    const r2s2 = createButtons("psychosolstice2", "combohelp");
+    const midrangerow = createButtons("ramp2seedling3", "flottery");
+    const flottery = createButtons("helpmid", "ff3");
+    const ff3 = createButtons("figlottery", "hburn3");
+    const hburn3 = createButtons("funnyflare3", "psol3");
+    const psol3 = createButtons("healburn3", "r2s3");
+    const r2s3 = createButtons("psychosolstice3", "midhelp");
+    const alldecksrow = createButtons("ramp2seedling4", "bsf");
+    const bsf = createButtons("helpall", "flottery2");
+    const flottery2 = createButtons("budgetsf", "ff4");
+    const ff4 = createButtons("figlottery2", "hburn4");
+    const hburn4 = createButtons("funnyflare3", "psol4");
+    const psol4 = createButtons("psol4", "r2s4");
+    const r2s4 = createButtons("psychosolstice4", "allhelp");
     function BuildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -181,34 +181,34 @@ module.exports = {
           value: "When she's on fire, she's on FIRE. And so are the Zombies.",
         }
       );
-    const embed = new CreateHelpEmbed(
+    const embed = createHelpEmbed(
       "Solar Flare Decks",
       `To view the Solar Flare decks please select an option from the select menu below!
   Note: Solar Flare has ${solarFlareDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist"
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Solar Flare Meme Decks",
       `My meme decks for Solar Flare(SF) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the meme Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
   Note: Solar Flare has ${solarFlareDecks.memeDecks.length} meme decks in Tbot`
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Solar Flare Decks",
       `My decks for Solar Flare(SF) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all decks!
   Note: Solar Flare has ${solarFlareDecks.allDecks.length} decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Solar Flare Combo Decks",
       `My combo decks for Solar Flare(SF) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the combo Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Solar Flare has ${solarFlareDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Solar Flare Midrange Decks",
       `My midrange decks for Solar Flare(SF) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
@@ -217,12 +217,12 @@ module.exports = {
     );
     const [result] = await db.query(`SELECT * from sfdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -239,12 +239,12 @@ module.exports = {
       }
       return embed;
     }
-    const budgetsf = new CreateDeckEmbed(result, "budgetswarmsf");
-    const funnyflare = new CreateDeckEmbed(result, "funnyflare");
-    const healburn = new CreateDeckEmbed(result, "healburn");
-    const figlottery = new CreateDeckEmbed(result, "healmidflare");
-    const psychosolstice = new CreateDeckEmbed(result, "psychosolstice");
-    const ramp2seedling = new CreateDeckEmbed(result, "ramp2seedling");
+    const budgetsf = createDeckEmbed(result, "budgetswarmsf");
+    const funnyflare = createDeckEmbed(result, "funnyflare");
+    const healburn = createDeckEmbed(result, "healburn");
+    const figlottery = createDeckEmbed(result, "healmidflare");
+    const psychosolstice = createDeckEmbed(result, "psychosolstice");
+    const ramp2seedling = createDeckEmbed(result, "ramp2seedling");
     const m = await message.channel.send({ embeds: [sf], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

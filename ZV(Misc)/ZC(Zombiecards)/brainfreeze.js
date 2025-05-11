@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -157,12 +157,12 @@ module.exports = {
   );
   const toBuildTempoString = buildDeckString(brainFreezeDecks.tempoDecks);
   /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
     return new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(leftButtonId)
@@ -174,44 +174,44 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
   }
-  const alldecksrow = new CreateButtons("watersports", "bhammer");
-  const bhammer = new CreateButtons("helpall", "bfmg");
-  const bfmg = new CreateButtons("banhammer", "bbf");
-  const bbf = new CreateButtons("bfmidgargs", "bfpc");
-  const bfpc = new CreateButtons("budgetbf", "gt");
-  const gt = new CreateButtons("bfplankcontrol", "hi");
-  const hi = new CreateButtons("gargolithtech", "lt");
-  const lt = new CreateButtons("himps", "ltbr");
-  const ltbr = new CreateButtons("lunchtime", "pm");
-  const pm = new CreateButtons("lockthebathroom", "rp");
-  const rp = new CreateButtons("petmop", "ws");
-  const ws = new CreateButtons("raiserpackage", "allhelp");
-  const ladderrow = new CreateButtons("watersports", "bfmg2");
-  const bfmg2 = new CreateButtons("helpladder", "bfpc2");
-  const bfpc2 = new CreateButtons("bfmidgargs2", "rp2");
-  const rp2 = new CreateButtons("bfplancontrol2", "ladderhelp");
-  const memerow = new CreateButtons("watersports2", "bhammer2");
-  const bhammer2 = new CreateButtons("helpmeme", "gt2");
-  const gt2 = new CreateButtons("banhammer2", "hi2");
-  const hi2 = new CreateButtons("gargolithtech2", "lt2");
-  const lt2 = new CreateButtons("himps2", "pm2");
-  const pm2 = new CreateButtons("lunchtime2", "ws2");
-  const ws2 = new CreateButtons("petmop2", "memehelp");
-  const comborow = new CreateButtons("watersports3", "bhammer3");
-  const bhammer3 = new CreateButtons("helpcombo", "hi3");
-  const hi3 = new CreateButtons("banhammer3", "ws3");
-  const ws3 = new CreateButtons("himps3", "combohelp");
-  const midrangerow = new CreateButtons("watersports4", "bhammer4");
-  const bhammer4= new CreateButtons("helpmid", "bfmg3");
-  const bfmg3 = new CreateButtons("banhammer4", "gt3");
-  const gt3 = new CreateButtons("bfmidgargs3", "hi4");
-  const hi4 = new CreateButtons("gargolithtech3", "lt3");
-  const lt3 = new CreateButtons("himps4", "pm3");
-  const pm3 = new CreateButtons("lunchtime3", "ws4");
-  const ws4 = new CreateButtons("petmop3", "midhelp");
-  const temporow = new CreateButtons("raiserpackage3", "ltbr2");
-  const ltbr2 = new CreateButtons("helptempo", "rp3");
-  const rp3 = new CreateButtons("lockthebathroom2", "tempohelp");
+  const alldecksrow = createButtons("watersports", "bhammer");
+  const bhammer = createButtons("helpall", "bfmg");
+  const bfmg = createButtons("banhammer", "bbf");
+  const bbf = createButtons("bfmidgargs", "bfpc");
+  const bfpc = createButtons("budgetbf", "gt");
+  const gt = createButtons("bfplankcontrol", "hi");
+  const hi = createButtons("gargolithtech", "lt");
+  const lt = createButtons("himps", "ltbr");
+  const ltbr = createButtons("lunchtime", "pm");
+  const pm = createButtons("lockthebathroom", "rp");
+  const rp = createButtons("petmop", "ws");
+  const ws = createButtons("raiserpackage", "allhelp");
+  const ladderrow = createButtons("watersports", "bfmg2");
+  const bfmg2 = createButtons("helpladder", "bfpc2");
+  const bfpc2 = createButtons("bfmidgargs2", "rp2");
+  const rp2 = createButtons("bfplancontrol2", "ladderhelp");
+  const memerow = createButtons("watersports2", "bhammer2");
+  const bhammer2 = createButtons("helpmeme", "gt2");
+  const gt2 = createButtons("banhammer2", "hi2");
+  const hi2 = createButtons("gargolithtech2", "lt2");
+  const lt2 = createButtons("himps2", "pm2");
+  const pm2 = createButtons("lunchtime2", "ws2");
+  const ws2 = createButtons("petmop2", "memehelp");
+  const comborow = createButtons("watersports3", "bhammer3");
+  const bhammer3 = createButtons("helpcombo", "hi3");
+  const hi3 = createButtons("banhammer3", "ws3");
+  const ws3 = createButtons("himps3", "combohelp");
+  const midrangerow = createButtons("watersports4", "bhammer4");
+  const bhammer4= createButtons("helpmid", "bfmg3");
+  const bfmg3 = createButtons("banhammer4", "gt3");
+  const gt3 = createButtons("bfmidgargs3", "hi4");
+  const hi4 = createButtons("gargolithtech3", "lt3");
+  const lt3 = createButtons("himps4", "pm3");
+  const pm3 = createButtons("lunchtime3", "ws4");
+  const ws4 = createButtons("petmop3", "midhelp");
+  const temporow = createButtons("raiserpackage3", "ltbr2");
+  const ltbr2 = createButtons("helptempo", "rp3");
+  const rp3 = createButtons("lockthebathroom2", "tempohelp");
     const [result] = await db.query(`select * from bfdecks`);
     const embed = new EmbedBuilder()
       .setThumbnail(
@@ -238,48 +238,48 @@ module.exports = {
         }
       )
       .setColor("#000000");
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Brainfreeze Decks",
       `My commands for Brain Freeze(BF) are ${toBuildString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze decks please use the commands listed above or click on the buttons below!
      Note: Brainfreeze has ${brainFreezeDecks.allDecks.length} total decks in Tbot`
     );
-    const helpbf = new CreateHelpEmbed(
+    const helpbf = createHelpEmbed(
       "Brainfreeze Decks",
       `To view the Brain Freeze decks please select an option from the select menu below!
      Note: Brainfreeze has ${brainFreezeDecks.allDecks.length} total decks in Tbot`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png"
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Brainfreeze Ladder Decks",
       `My Ladder decks for Brain Freeze(BF) are ${toBuildLadderString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze Ladder decks please use the commands listed above or click on the buttons below to navigate through all Ladder Decks!
      Note: Brainfreeze has ${brainFreezeDecks.ladderDecks.length} Ladder decks in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Brainfreeze Meme Decks",
       `My Meme decks for Brain Freeze(BF) are ${toBuildMemeString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze Meme decks please use the commands listed above or click on the buttons below to navigate through all Meme Decks!
      Note: Brainfreeze has ${brainFreezeDecks.memeDecks.length} Meme decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Brainfreeze Combo Decks",
       `My Combo decks for Brain Freeze(BF) are ${toBuildComboString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze Combo decks please use the commands listed above or click on the buttons below to navigate through all Combo Decks!
      Note: Brainfreeze has ${brainFreezeDecks.comboDecks.length} Combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Brainfreeze Midrange Decks",
       `My Midrange decks for Brain Freeze(BF) are ${toBuildMidrangeString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze Midrange decks please use the commands listed above or click on the buttons below to navigate through all Midrange Decks!
      Note: Brainfreeze has ${brainFreezeDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
-    const tempoEmbed = new CreateHelpEmbed(
+    const tempoEmbed = createHelpEmbed(
       "Brainfreeze Tempo Decks",
       `My Tempo decks for Brain Freeze(BF) are ${toBuildTempoString}`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
@@ -287,12 +287,12 @@ module.exports = {
      Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -309,17 +309,17 @@ module.exports = {
       }
       return embed;
     }
-    const bfmidgargs = new CreateDeckEmbed(result, "bfmidgargs");
-    const bfplankcontrol = new CreateDeckEmbed(result, "bfplankcontrol");
-    const budgetbf = new CreateDeckEmbed(result, "budgetbf");
-    const gargolithtech = new CreateDeckEmbed(result, "gargolithtech");
-    const himps = new CreateDeckEmbed(result, "himps");
-    const lockthebathroom = new CreateDeckEmbed(result, "lockin");
-    const lunchtime = new CreateDeckEmbed(result, "midpets");
-    const petmop = new CreateDeckEmbed(result, "petmop");
-    const banhammer= new CreateDeckEmbed(result, "racism");
-    const raiserpackage = new CreateDeckEmbed(result, "raiserpackage");
-    const watersports = new CreateDeckEmbed(result, "watersports");
+    const bfmidgargs = createDeckEmbed(result, "bfmidgargs");
+    const bfplankcontrol = createDeckEmbed(result, "bfplankcontrol");
+    const budgetbf = createDeckEmbed(result, "budgetbf");
+    const gargolithtech = createDeckEmbed(result, "gargolithtech");
+    const himps = createDeckEmbed(result, "himps");
+    const lockthebathroom = createDeckEmbed(result, "lockin");
+    const lunchtime = createDeckEmbed(result, "midpets");
+    const petmop = createDeckEmbed(result, "petmop");
+    const banhammer= createDeckEmbed(result, "racism");
+    const raiserpackage = createDeckEmbed(result, "raiserpackage");
+    const watersports = createDeckEmbed(result, "watersports");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

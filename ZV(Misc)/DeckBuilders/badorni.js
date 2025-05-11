@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -93,12 +93,12 @@ module.exports = {
     const toBuildCombo = buildDeckString(badorniDecks.comboDecks);
     const toBuildMid = buildDeckString(badorniDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -110,23 +110,23 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const combo = new CreateButtons("psychosolstice2", "aa");
-    const aa = new CreateButtons("combo", "freeze");
-    const freeze = new CreateButtons("antiagor", "ftimps");
-    const ftimps = new CreateButtons("freezeheal", "mopr");
-    const mopr = new CreateButtons("frozentelimps", "pmop2");
-    const pmop2 = new CreateButtons("moprbius", "psy2");
-    const psy2 = new CreateButtons("plantmop2", "helpcombo");
-    const meme = new CreateButtons("psychosolstice", "aa2");
-    const aa2 = new CreateButtons("meme", "freeze2");
-    const freeze2 = new CreateButtons("antiagor2", "fti2");
-    const fti2 = new CreateButtons("freezeheal2", "mopr2");
-    const mopr2 = new CreateButtons("ftimps2", "pmop");
-    const pmop = new CreateButtons("mopribus2", "psy");
-    const psy = new CreateButtons("plantmop", "meme2");
-    const midrange = new CreateButtons("psychosolstice3", "mopr3");
-    const mopr3 = new CreateButtons("midrange", "psy3");
-    const psy3 = new CreateButtons("mopribus3", "mid");
+    const combo = createButtons("psychosolstice2", "aa");
+    const aa = createButtons("combo", "freeze");
+    const freeze = createButtons("antiagor", "ftimps");
+    const ftimps = createButtons("freezeheal", "mopr");
+    const mopr = createButtons("frozentelimps", "pmop2");
+    const pmop2 = createButtons("moprbius", "psy2");
+    const psy2 = createButtons("plantmop2", "helpcombo");
+    const meme = createButtons("psychosolstice", "aa2");
+    const aa2 = createButtons("meme", "freeze2");
+    const freeze2 = createButtons("antiagor2", "fti2");
+    const fti2 = createButtons("freezeheal2", "mopr2");
+    const mopr2 = createButtons("ftimps2", "pmop");
+    const pmop = createButtons("mopribus2", "psy");
+    const psy = createButtons("plantmop", "meme2");
+    const midrange = createButtons("psychosolstice3", "mopr3");
+    const mopr3 = createButtons("midrange", "psy3");
+    const psy3 = createButtons("mopribus3", "mid");
     const [result] =
       await db.query(`select antiagor,
 	freezeheal, frozentelimps, mopribus, plantmop,
@@ -144,28 +144,28 @@ module.exports = {
   inner join ctdecks ct 
   on (nt.deckinfo = ct.deckinfo)`);
     const user = await client.users.fetch("749149322561716294");
-    const bad = new CreateHelpEmbed(
+    const bad = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 To view all decks made by Badorni select the meme or combo decks option
 Note: ${user.displayName} has ${badorniDecks.memeDecks.length} decks in Tbot`,
         user.displayAvatarURL(),
     )
-      const combobad = new CreateHelpEmbed(
+      const combobad = createHelpEmbed(
         `${user.displayName} Combo Decks`,
         `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
         user.displayAvatarURL(),
         `To view the Combo Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${badorniDecks.comboDecks.length} combo decks in Tbot`
       )
-      const memebad = new CreateHelpEmbed(
+      const memebad = createHelpEmbed(
         `${user.displayName} Meme Decks`,
         `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
         user.displayAvatarURL(),
         `To view the Meme Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbot`
       )
-      const midbad = new CreateHelpEmbed(
+      const midbad = createHelpEmbed(
         `${user.displayName} Midrange Decks`,
         `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
         user.displayAvatarURL(),
@@ -173,12 +173,12 @@ Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbo
 Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange decks in Tbot`
       )
        /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -195,12 +195,12 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         }
         return embed;
       }
-    const coloboy = new CreateDeckEmbed(result, "antiagor");
-    const freal = new CreateDeckEmbed(result, "freezeheal");
-    const fti = new CreateDeckEmbed(result, "frozentelimps");
-    const mop = new CreateDeckEmbed(result, "mopribus");
-    const plantmop = new CreateDeckEmbed(result, "plantmop");
-    const pysol = new CreateDeckEmbed(result, "psychosolstice");
+    const coloboy = createDeckEmbed(result, "antiagor");
+    const freal = createDeckEmbed(result, "freezeheal");
+    const fti = createDeckEmbed(result, "frozentelimps");
+    const mop = createDeckEmbed(result, "mopribus");
+    const plantmop = createDeckEmbed(result, "plantmop");
+    const pysol = createDeckEmbed(result, "psychosolstice");
     const m = await message.channel.send({ embeds: [bad], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

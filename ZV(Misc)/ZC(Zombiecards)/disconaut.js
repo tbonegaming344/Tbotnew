@@ -1,7 +1,7 @@
 const {EmbedBuilder} = require("discord.js")
 module.exports = {
 	name: `disconaut`,
-	aliases: [`dn`, `naut`],
+	aliases: [`dn`, `naut`, `disco-naut`],
 	category: `Zombie Cards`,
 	run: async(client, message, args) => {
 			const embed = new EmbedBuilder()

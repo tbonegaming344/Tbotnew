@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -33,6 +33,8 @@ module.exports = {
     `smhelp`,
     `smcommands`,
     `commandssm`,
+    `smdeck`,
+    `smashdb`,
     `helpsmash`,
     `smashcommands`,
     `smashhelp`,
@@ -132,12 +134,12 @@ module.exports = {
     const toBuildComboString = buildDeckString(smashDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(smashDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -149,40 +151,40 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("whalepharaoh", "bsm");
-    const bsm = new CreateButtons("helpall", "hor");
-    const hor = new CreateButtons("budgetsm", "py");
-    const py = new CreateButtons("horts", "wp");
-    const wp = new CreateButtons("pablosyeezys", "allhelp");
-    const comborow = new CreateButtons("whalepharoh2", "bsm2");
-    const bsm2 = new CreateButtons("combohelp", "hor2");
-    const hor2 = new CreateButtons("budgetsm2", "py2");
-    const py2 = new CreateButtons("horts2", "wp2");
-    const wp2 = new CreateButtons("pablosyeezys2", "helpcombo");
-    const midrangerow = new CreateButtons("pablosyeezys3", "hor3");
-    const hor3 = new CreateButtons("midrangehelp", "py3");
-    const py3 = new CreateButtons("horts3", "helpmidrange");
-    const helpsm = new CreateHelpEmbed(
+    const alldecksrow = createButtons("whalepharaoh", "bsm");
+    const bsm = createButtons("helpall", "hor");
+    const hor = createButtons("budgetsm", "py");
+    const py = createButtons("horts", "wp");
+    const wp = createButtons("pablosyeezys", "allhelp");
+    const comborow = createButtons("whalepharoh2", "bsm2");
+    const bsm2 = createButtons("combohelp", "hor2");
+    const hor2 = createButtons("budgetsm2", "py2");
+    const py2 = createButtons("horts2", "wp2");
+    const wp2 = createButtons("pablosyeezys2", "helpcombo");
+    const midrangerow = createButtons("pablosyeezys3", "hor3");
+    const hor3 = createButtons("midrangehelp", "py3");
+    const py3 = createButtons("horts3", "helpmidrange");
+    const helpsm = createHelpEmbed(
       "Smash Decks",
       `To view the Smash decks please select an option from the select menu below!
 Note: Smash has ${smashDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543"
     );
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       "Smash Decks",
       `My commands for Smash(SM) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543",
       `To view the Smash decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Smash has ${smashDecks.allDecks.length} total decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Smash Combo Decks",
       `My combo decks for Smash(SM) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543",
       `To view the Smash combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Smash Midrange Decks",
       `My midrange decks for Smash(SM) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543",
@@ -191,12 +193,12 @@ Note: Smash has ${smashDecks.midrangeDecks.length} midrange decks in Tbot`
     );
     const [result] = await db.query(`SELECT * FROM smdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -213,10 +215,10 @@ Note: Smash has ${smashDecks.midrangeDecks.length} midrange decks in Tbot`
       }
       return embed;
     }
-    const budgetsm = new CreateDeckEmbed(result, "budgetsm");
-    const horts = new CreateDeckEmbed(result, "horts");
-    const pablosyeezys = new CreateDeckEmbed(result, "pablosyeezys");
-    const whalepharaoh = new CreateDeckEmbed(result, "whalepharaoh");
+    const budgetsm = createDeckEmbed(result, "budgetsm");
+    const horts = createDeckEmbed(result, "horts");
+    const pablosyeezys = createDeckEmbed(result, "pablosyeezys");
+    const whalepharaoh = createDeckEmbed(result, "whalepharaoh");
     const m = await message.channel.send({
       embeds: [helpsm],
       components: [row],

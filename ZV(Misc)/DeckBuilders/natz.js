@@ -9,14 +9,14 @@ const {
   } = require("discord.js");
   const db = require("../../index.js");
   /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
     const embed = new EmbedBuilder()
       .setTitle(title)
       .setDescription(description)
@@ -100,12 +100,12 @@ function CreateHelpEmbed(title, description, thumbnail, footer) {
       }
       const toBuildString = buildDeckString(natzdecks.allDecks);
       /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
         return new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId(leftButtonId)
@@ -117,20 +117,20 @@ function CreateHelpEmbed(title, description, thumbnail, footer) {
             .setStyle(ButtonStyle.Primary)
         );
       }
-      const alldecksrow = new CreateButtons("toyotacontrolla", "carr");
-      const carr = new CreateButtons("helpnatz", "lt");
-      const lt = new CreateButtons("carroot", "tc");
-      const tc = new CreateButtons("ladytuna", "help");
+      const alldecksrow = createButtons("toyotacontrolla", "carr");
+      const carr = createButtons("helpnatz", "lt");
+      const lt = createButtons("carroot", "tc");
+      const tc = createButtons("ladytuna", "help");
       const user = await client.users.fetch("608656205589512195");
         const [result] = await db.query(`select carroot, ladytuna, toyotacontrolla from ntdecks nt inner join ncdecks nc on nt.deckinfo = nc.deckinfo 
           inner join bcdecks bc on nt.deckinfo = bc.deckinfo`);
-        const natz = new CreateHelpEmbed(
+        const natz = createHelpEmbed(
           `${user.displayName} Decks`,
           `To view decks made by ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
           user.displayAvatarURL()
         )
-        const alldecksEmbed = new CreateHelpEmbed(
+        const alldecksEmbed = createHelpEmbed(
           `${user.displayName} Decks`,
           `My commands for decks made by ${user.displayName} are ${toBuildString}`,
           user.displayAvatarURL(),
@@ -138,12 +138,12 @@ Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
 Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
         )
          /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
           const embed = new EmbedBuilder()
             .setTitle(`${result[5][deckName]}`)
             .setDescription(`${result[3][deckName]}`)
@@ -160,9 +160,9 @@ Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
           }
           return embed;
         }
-        const carroot = new CreateDeckEmbed(result, "carroot")
-        const toyotacontrolla = new CreateDeckEmbed(result, "toyotacontrolla")
-        const ladytuna = new CreateDeckEmbed(result, "ladytuna")
+        const carroot = createDeckEmbed(result, "carroot")
+        const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla")
+        const ladytuna = createDeckEmbed(result, "ladytuna")
         const m = await message.channel.send({ embeds: [natz], components: [row] });
         const iFilter = (i) => i.user.id === message.author.id;
         /**

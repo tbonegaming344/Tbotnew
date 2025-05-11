@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -80,12 +80,12 @@ module.exports = {
     const toBuildAggro = buildDeckString(dozzaDecks.aggroDecks);
     const toBuildString = buildDeckString(dozzaDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -97,49 +97,49 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const meme = new CreateButtons("highlander", "dm");
-    const dm = new CreateButtons("memehelp", "hland");
-    const hland = new CreateButtons("dozzamech", "helpmeme");
-    const aggrorow = new CreateButtons("trickmech", "dm2");
-    const dm2 = new CreateButtons("aggrohelp", "tmech");
-    const tmech= new CreateButtons("dozzamech2", "helpaggro");
-    const alldecksrow = new CreateButtons("trickmech2", "dm3");
-    const dm3 = new CreateButtons("allhelp", "hland2");
-    const hland2 = new CreateButtons("dozzamech", "tmech2");
-    const tmech2 = new CreateButtons("highlander2", "allhelp");
+    const meme = createButtons("highlander", "dm");
+    const dm = createButtons("memehelp", "hland");
+    const hland = createButtons("dozzamech", "helpmeme");
+    const aggrorow = createButtons("trickmech", "dm2");
+    const dm2 = createButtons("aggrohelp", "tmech");
+    const tmech= createButtons("dozzamech2", "helpaggro");
+    const alldecksrow = createButtons("trickmech2", "dm3");
+    const dm3 = createButtons("allhelp", "hland2");
+    const hland2 = createButtons("dozzamech", "tmech2");
+    const tmech2 = createButtons("highlander2", "allhelp");
     const [result] = await db.query(`select dozzamech, highlander, trickmech
 from zmdecks zm 
 inner join wkdecks wk 
 on (zm.deckinfo = wk.deckinfo)`);
 const user = await client.users.fetch("1143937777763889324");
-    const dozza = new CreateHelpEmbed(
+    const dozza = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: Dozza has ${dozzaDecks.allDecks.length} total decks in Tbot`,
         user.displayAvatarURL()
     );
-    const alldozza = new CreateHelpEmbed(
+    const alldozza = createHelpEmbed(
       `${user.displayName} Decks`,
       `My decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
       `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${dozzaDecks.allDecks.length} total decks in Tbot`
     )
-      const middozza = new CreateHelpEmbed(
+      const middozza = createHelpEmbed(
         `${user.displayName} Midrange Decks`,
         `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
         user.displayAvatarURL(),
         `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${dozzaDecks.midrangeDecks.length} Midrange decks in Tbot`
       )
-      const memedozza = new CreateHelpEmbed(
+      const memedozza = createHelpEmbed(
         `${user.displayName} Meme Decks`,
         `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
         user.displayAvatarURL(),
         `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${dozzaDecks.memeDecks.length} Meme decks in Tbot`
       )
-      const aggrodozza = new CreateHelpEmbed(
+      const aggrodozza = createHelpEmbed(
         `${user.displayName} Aggro Decks`,
         `My Aggro decks made by ${user.displayName} are ${toBuildAggro}`,
         user.displayAvatarURL(),
@@ -147,12 +147,12 @@ Note: ${user.displayName} has ${dozzaDecks.memeDecks.length} Meme decks in Tbot`
 Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbot`
       )
        /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -169,9 +169,9 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
         }
         return embed;
       }
-    const dozzamech = new CreateDeckEmbed(result, "dozzamech");
-    const highlander = new CreateDeckEmbed(result, "highlander");
-    const trickmech = new CreateDeckEmbed(result, "trickmech");
+    const dozzamech = createDeckEmbed(result, "dozzamech");
+    const highlander = createDeckEmbed(result, "highlander");
+    const trickmech = createDeckEmbed(result, "trickmech");
     const m = await message.channel.send({
       embeds: [dozza],
       components: [row],

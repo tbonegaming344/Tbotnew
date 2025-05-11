@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -85,12 +85,12 @@ module.exports = {
       kingFishCommanderDecks.midrangeDecks
     );
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -102,42 +102,42 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("sunlord", "lt");
-    const lt = new CreateButtons("helpmeme", "pm");
-    const pm = new CreateButtons("lunchtime", "smf");
-    const smf = new CreateButtons("petmop", "sl");
-    const sl = new CreateButtons("petmop", "memehelp");
-    const midrangerow = new CreateButtons("sunlord2", "lt2");
-    const lt2 = new CreateButtons("helpmidrange", "pm2");
-    const pm2 = new CreateButtons("lunchtime2", "sl2");
-    const sl2 = new CreateButtons("petmop2", "midrangehelp");
-    const comborow = new CreateButtons("sunlord3", "lt3");
-    const lt3 = new CreateButtons("helpcombo", "pm3");
-    const pm3 = new CreateButtons("lunchtime3", "sl3");
-    const sl3 = new CreateButtons("petmop3", "combohelp");
+    const memerow = createButtons("sunlord", "lt");
+    const lt = createButtons("helpmeme", "pm");
+    const pm = createButtons("lunchtime", "smf");
+    const smf = createButtons("petmop", "sl");
+    const sl = createButtons("petmop", "memehelp");
+    const midrangerow = createButtons("sunlord2", "lt2");
+    const lt2 = createButtons("helpmidrange", "pm2");
+    const pm2 = createButtons("lunchtime2", "sl2");
+    const sl2 = createButtons("petmop2", "midrangehelp");
+    const comborow = createButtons("sunlord3", "lt3");
+    const lt3 = createButtons("helpcombo", "pm3");
+    const pm3 = createButtons("lunchtime3", "sl3");
+    const sl3 = createButtons("petmop3", "combohelp");
     const user = await client.users.fetch("1160392548423061516");
-    const kfish = new CreateHelpEmbed(
+    const kfish = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below! 
       Select meme to view all the decks made by ${user.displayName} or select combo to view all the combo decks made by ${user.displayName}
 Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const memekfish = new CreateHelpEmbed(
+    const memekfish = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} Meme decks in Tbot`
     );
-    const combookfish = new CreateHelpEmbed(
+    const combookfish = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${kingFishCommanderDecks.comboDecks.length} Combo decks in Tbot`
     );
-    const midrangekfish = new CreateHelpEmbed(
+    const midrangekfish = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My Midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
       user.displayAvatarURL(),
@@ -152,12 +152,12 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
     inner join ntdecks nt
     on (gs.deckinfo = nt.deckinfo)`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -174,10 +174,10 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
       }
       return embed;
     }
-    const lunchtime = new CreateDeckEmbed(result, "midpets");
-    const savagemayflower = new CreateDeckEmbed(result, "savagemayflower");
-    const pmop = new CreateDeckEmbed(result, "petmop");
-    const sunlord = new CreateDeckEmbed(result, "wimps");
+    const lunchtime = createDeckEmbed(result, "midpets");
+    const savagemayflower = createDeckEmbed(result, "savagemayflower");
+    const pmop = createDeckEmbed(result, "petmop");
+    const sunlord = createDeckEmbed(result, "wimps");
     const m = await message.channel.send({
       embeds: [kfish],
       components: [row],

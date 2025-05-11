@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -110,12 +110,12 @@ module.exports = {
       const toBuildMidrangeString = buildDeckString(creeperBladeDecks.midrangeDecks);
       const toBuildString = buildDeckString(creeperBladeDecks.allDecks);
       /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
         return new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId(leftButtonId)
@@ -127,17 +127,17 @@ module.exports = {
             .setStyle(ButtonStyle.Primary)
         );
       }
-    const comprow = new CreateButtons("pablosyeezys", "ab");
-    const ab = new CreateButtons("helpcomp", "py");
-    const py = new CreateButtons("abeans", "comphelp");
-    const midrangerow = new CreateButtons("pablosyeezys2", "gtech");
-    const gtech= new CreateButtons("helpmidrange", "py2");
-    const py2 = new CreateButtons("gargolithtech", "midrangehelp");
-    const alldecksrow = new CreateButtons("professorpackage", "ab2");
-    const ab2 = new CreateButtons("helpall", "gtech2");
-    const gtech2 = new CreateButtons("abeans2", "py3");
-    const py3 = new CreateButtons("gargolithtech2", "propack");
-    const propack = new CreateButtons("pablosyeezys3", "allhelp");
+    const comprow = createButtons("pablosyeezys", "ab");
+    const ab = createButtons("helpcomp", "py");
+    const py = createButtons("abeans", "comphelp");
+    const midrangerow = createButtons("pablosyeezys2", "gtech");
+    const gtech= createButtons("helpmidrange", "py2");
+    const py2 = createButtons("gargolithtech", "midrangehelp");
+    const alldecksrow = createButtons("professorpackage", "ab2");
+    const ab2 = createButtons("helpall", "gtech2");
+    const gtech2 = createButtons("abeans2", "py3");
+    const py3 = createButtons("gargolithtech2", "propack");
+    const propack = createButtons("pablosyeezys3", "allhelp");
     const [result] = await db.query(`select abeans,
 		gargolithtech, pablosyeezys, professorpackage
 		from gsdecks gs 
@@ -148,27 +148,27 @@ module.exports = {
     inner join pbdecks pb 
     on (gs.deckinfo = pb.deckinfo)`);
     const user = await client.users.fetch("738926530000060416");
-    const creep = new CreateHelpEmbed(
+    const creep = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     )
-    const comp = new CreateHelpEmbed(
+    const comp = createHelpEmbed(
       `${user.displayName} Competitive Decks`,
       `My Competitive decks made by ${user.displayName} are ${toBuildComp}`,
       user.displayAvatarURL(),
       `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${creeperBladeDecks.competitiveDecks.length} Competitive decks in Tbot`
     )
-const midrangeEmbed =  new CreateHelpEmbed(
+const midrangeEmbed =  createHelpEmbed(
   `${user.displayName} Midrange Decks`,
   `My Midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
   user.displayAvatarURL(),
   `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${creeperBladeDecks.midrangeDecks.length} Midrange decks in Tbot`
 )
-const alldecksEmbed = new CreateHelpEmbed(
+const alldecksEmbed = createHelpEmbed(
   `${user.displayName} Decks`,
   `My All decks made by ${user.displayName} are ${toBuildString}`,
   user.displayAvatarURL(),
@@ -176,12 +176,12 @@ const alldecksEmbed = new CreateHelpEmbed(
 Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in Tbot`
 )
  /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
   const embed = new EmbedBuilder()
     .setTitle(`${result[5][deckName]}`)
     .setDescription(`${result[3][deckName]}`)
@@ -198,10 +198,10 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
   }
   return embed;
 }
-    const abeans = new CreateDeckEmbed(result, "abeans");
-    const gargolithtech= new CreateDeckEmbed(result, "gargolithtech");
-    const pyeez = new CreateDeckEmbed(result, "pablosyeezys");
-    const professorpackage = new CreateDeckEmbed(result, "professorpackage");
+    const abeans = createDeckEmbed(result, "abeans");
+    const gargolithtech= createDeckEmbed(result, "gargolithtech");
+    const pyeez = createDeckEmbed(result, "pablosyeezys");
+    const professorpackage = createDeckEmbed(result, "professorpackage");
     const m = await message.channel.send({
       embeds: [creep],
       components: [row] 

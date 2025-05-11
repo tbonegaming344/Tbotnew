@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -112,12 +112,12 @@ module.exports = {
     const toBuildMeme = buildDeckString(pvzTryHardDecks.memeDecks);
     const toBuildString = buildDeckString(pvzTryHardDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -129,16 +129,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const comborow = new CreateButtons("youngkenmartin", "sb");
-    const sb = new CreateButtons("helpcombo", "ykm");
-    const ykm = new CreateButtons("sunbandits", "combohelp");
-    const memerow = new CreateButtons("youngkenmartin2", "sb2");
-    const sb2 = new CreateButtons("helpmeme", "ykm2");
-    const ykm2 = new CreateButtons("sunbandits2", "memehelp");
-    const alldecksrow = new CreateButtons("youngkenmartin3", "agr");
-    const agr = new CreateButtons("helpall", "sb3");
-    const sb3 = new CreateButtons("agraves", "ykm3");
-    const ykm3 = new CreateButtons("sunbandits3", "allhelp");
+    const comborow = createButtons("youngkenmartin", "sb");
+    const sb = createButtons("helpcombo", "ykm");
+    const ykm = createButtons("sunbandits", "combohelp");
+    const memerow = createButtons("youngkenmartin2", "sb2");
+    const sb2 = createButtons("helpmeme", "ykm2");
+    const ykm2 = createButtons("sunbandits2", "memehelp");
+    const alldecksrow = createButtons("youngkenmartin3", "agr");
+    const agr = createButtons("helpall", "sb3");
+    const sb3 = createButtons("agraves", "ykm3");
+    const ykm3 = createButtons("sunbandits3", "allhelp");
     const [result] = await db.query(`select agraves, sunbandits, ykm 
 from ntdecks nt
 inner join rbdecks rb 
@@ -146,27 +146,27 @@ on (nt.deckinfo = rb.deckinfo)
 inner join hgdecks hg
 on (nt.deckinfo = hg.deckinfo)`);
     const user = await client.users.fetch("265754905828917259");
-    const tryhard = new CreateHelpEmbed(
+    const tryhard = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot`,
       user.displayAvatarURL()
     );
-    const memehard = new CreateHelpEmbed(
+    const memehard = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme Decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${pvzTryHardDecks.memeDecks.length} Meme decks in tbot`
     );
-    const combohard = new CreateHelpEmbed(
+    const combohard = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo Decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${pvzTryHardDecks.comboDecks.length} Combo decks in tbot`
     );
-    const allhard = new CreateHelpEmbed(
+    const allhard = createHelpEmbed(
       `${user.displayName} Decks`,
       `My All Decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
@@ -174,12 +174,12 @@ Note: ${user.displayName} has ${pvzTryHardDecks.comboDecks.length} Combo decks i
 Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -196,9 +196,9 @@ Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in 
       }
       return embed;
     }
-    const agraves = new CreateDeckEmbed(result, "agraves");
-    const sunbandits = new CreateDeckEmbed(result, "sunbandits");
-    const youngkenmartin = new CreateDeckEmbed(result, "ykm");
+    const agraves = createDeckEmbed(result, "agraves");
+    const sunbandits = createDeckEmbed(result, "sunbandits");
+    const youngkenmartin = createDeckEmbed(result, "ykm");
     const m = await message.channel.send({
       embeds: [tryhard],
       components: [row],

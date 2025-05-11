@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -113,12 +113,12 @@ module.exports = {
   );
   const toBuildString = buildDeckString(chompzillaDecks.allDecks);
   /**
-   * The CreateButtons function creates a row of buttons for the embed
+   * The createButtons function creates a row of buttons for the embed
    * @param {string} leftButtonId - The ID of the left button to control the left button 
    * @param {string} rightButtonId - The ID of the right button to control the right button
    * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
    */
-  function CreateButtons(leftButtonId, rightButtonId) {
+  function createButtons(leftButtonId, rightButtonId) {
     return new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(leftButtonId)
@@ -130,22 +130,22 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
   }
-  const memerow = new CreateButtons("mopribus", "lsnap");
-  const lsnap = new CreateButtons("helpmeme", "mop");
-  const mop = new CreateButtons("lasersnap", "memehelp");
-  const comborow = new CreateButtons("mopribus2", "bmz");
-  const bmz = new CreateButtons("helpcombo", "lsnap2");
-  const lsnap2 = new CreateButtons("budgetmopzilla", "mop2");
-  const mop2 = new CreateButtons("lasersnap2", "combohelp");
-  const midrangerow = new CreateButtons("mopribus3", "bmz2");
-  const bmz2 = new CreateButtons("helpmid", "lsnap3");
-  const lsnap3 = new CreateButtons("budgetmopzilla2", "mop3");
-  const mop3 = new CreateButtons("lasersnap3", "midhelp");
-  const alldecksrow = new CreateButtons("mopribus4", "bmz3");
-  const bmz3 = new CreateButtons("helpall", "healcon");
-  const healcon = new CreateButtons("budgetmopzilla3", "lsnap4");
-  const lsnap4 = new CreateButtons("healcontrol", "mop4");
-  const mop4 = new CreateButtons("lasersnap4", "allhelp");
+  const memerow = createButtons("mopribus", "lsnap");
+  const lsnap = createButtons("helpmeme", "mop");
+  const mop = createButtons("lasersnap", "memehelp");
+  const comborow = createButtons("mopribus2", "bmz");
+  const bmz = createButtons("helpcombo", "lsnap2");
+  const lsnap2 = createButtons("budgetmopzilla", "mop2");
+  const mop2 = createButtons("lasersnap2", "combohelp");
+  const midrangerow = createButtons("mopribus3", "bmz2");
+  const bmz2 = createButtons("helpmid", "lsnap3");
+  const lsnap3 = createButtons("budgetmopzilla2", "mop3");
+  const mop3 = createButtons("lasersnap3", "midhelp");
+  const alldecksrow = createButtons("mopribus4", "bmz3");
+  const bmz3 = createButtons("helpall", "healcon");
+  const healcon = createButtons("budgetmopzilla3", "lsnap4");
+  const lsnap4 = createButtons("healcontrol", "mop4");
+  const mop4 = createButtons("lasersnap4", "allhelp");
     const cz = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
@@ -172,34 +172,34 @@ module.exports = {
             "She flosses after every meal and still, Zombie Breath is a real problem.",
         }
       );
-      const embed = new CreateHelpEmbed(
+      const embed = createHelpEmbed(
         "Chompzilla Decks",
         `To view the Chompzilla decks please select an option from the select menu below!
   Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
       );
-      const memeEmbed = new CreateHelpEmbed(
+      const memeEmbed = createHelpEmbed(
         "Chompzilla Meme Decks",
         `My Meme decks for Chompzilla(CZ) are ${toBuildMemeString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
         `To view the Meme Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Meme decks!
   Note: Chompzilla has ${chompzillaDecks.memeDecks.length} Meme decks in Tbot`
       );
-      const allEmbed = new CreateHelpEmbed(
+      const allEmbed = createHelpEmbed(
         "Chompzilla Decks",
         `My decks for Chompzilla(CZ) are ${toBuildString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
         `To view the Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all decks!
   Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
       );
-      const comboEmbed = new CreateHelpEmbed(
+      const comboEmbed = createHelpEmbed(
         "Chompzilla Combo Decks",
         `My Combo decks for Chompzilla(CZ) are ${toBuildComboString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
         `To view the Combo Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Combo decks!
   Note: Chompzilla has ${chompzillaDecks.comboDecks.length} Combo decks in Tbot`
       );
-      const midrangeEmbed = new CreateHelpEmbed(
+      const midrangeEmbed = createHelpEmbed(
         "Chompzilla Midrange Decks",
         `My Midrange decks for Chompzilla(CZ) are ${toBuildMidrangeString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
@@ -208,12 +208,12 @@ module.exports = {
       );
     const [result] = await db.query(`SELECT * from czdecks`);
     /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -230,10 +230,10 @@ module.exports = {
       }
       return embed;
     }
-    const healcontrol = new CreateDeckEmbed(result, "apotk");
-    const budgetcz = new CreateDeckEmbed(result, "budgetcz");
-    const lasersnap = new CreateDeckEmbed(result, "lasersnap");
-    const mopribus = new CreateDeckEmbed(result, "mopribus");
+    const healcontrol = createDeckEmbed(result, "apotk");
+    const budgetcz = createDeckEmbed(result, "budgetcz");
+    const lasersnap = createDeckEmbed(result, "lasersnap");
+    const mopribus = createDeckEmbed(result, "mopribus");
     const m = await message.channel.send({ embeds: [cz], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

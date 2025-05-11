@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -32,6 +32,7 @@ module.exports = {
   aliases: [
     `imhelp`,
     `imcommands`,
+    `helpit`,
     `commandsim`,
     `helpimmort`,
     `immorticiadeck`,
@@ -134,12 +135,12 @@ module.exports = {
       immorticiaDecks.midrangeDecks
     );
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -151,66 +152,66 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("rampticia", "sav");
-    const sav = new CreateButtons("helpall", "bas");
-    const bas = new CreateButtons("savage", "bim");
-    const bim = new CreateButtons("bastet", "kscope");
-    const kscope = new CreateButtons("budgetim", "ms");
-    const ms = new CreateButtons("kaleidoscope", "rim");
-    const rim = new CreateButtons("otkmecha", "allhelp");
-    const memerow = new CreateButtons("rampticia2", "sav2");
-    const sav2 = new CreateButtons("memehelp", "bas2");
-    const bas2 = new CreateButtons("savage2", "rim2");
-    const rim2 = new CreateButtons("bastet2", "helpmeme");
-    const comborow = new CreateButtons("rampticia3", "sav3");
-    const sav3 = new CreateButtons("combohelp", "bas3");
-    const bas3 = new CreateButtons("savage3", "bim2");
-    const bim2 = new CreateButtons("bastet3", "ms2");
-    const ms2 = new CreateButtons("budgetim2", "rim3");
-    const rim3 = new CreateButtons("mechascope2", "helpcombo");
-    const controlrow = new CreateButtons("mechascope3", "bim3");
-    const bim3 = new CreateButtons("controlhelp", "kscope2");
-    const kscope2 = new CreateButtons("budgetim3", "ms3");
-    const ms3 = new CreateButtons("kaleidoscope3", "helpcontrol");
-    const midrangerow = new CreateButtons("budgetim4", "sav4");
-    const sav4 = new CreateButtons("midrangehelp", "bas4");
-    const bas4 = new CreateButtons("savage4", "bim4");
-    const bim4 = new CreateButtons("bastet4", "helpmidrange");
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksrow = createButtons("rampticia", "sav");
+    const sav = createButtons("helpall", "bas");
+    const bas = createButtons("savage", "bim");
+    const bim = createButtons("bastet", "kscope");
+    const kscope = createButtons("budgetim", "ms");
+    const ms = createButtons("kaleidoscope", "rim");
+    const rim = createButtons("otkmecha", "allhelp");
+    const memerow = createButtons("rampticia2", "sav2");
+    const sav2 = createButtons("memehelp", "bas2");
+    const bas2 = createButtons("savage2", "rim2");
+    const rim2 = createButtons("bastet2", "helpmeme");
+    const comborow = createButtons("rampticia3", "sav3");
+    const sav3 = createButtons("combohelp", "bas3");
+    const bas3 = createButtons("savage3", "bim2");
+    const bim2 = createButtons("bastet3", "ms2");
+    const ms2 = createButtons("budgetim2", "rim3");
+    const rim3 = createButtons("mechascope2", "helpcombo");
+    const controlrow = createButtons("mechascope3", "bim3");
+    const bim3 = createButtons("controlhelp", "kscope2");
+    const kscope2 = createButtons("budgetim3", "ms3");
+    const ms3 = createButtons("kaleidoscope3", "helpcontrol");
+    const midrangerow = createButtons("budgetim4", "sav4");
+    const sav4 = createButtons("midrangehelp", "bas4");
+    const bas4 = createButtons("savage4", "bim4");
+    const bim4 = createButtons("bastet4", "helpmidrange");
+    const alldecksEmbed = createHelpEmbed(
       "Immorticia Decks",
       `My commands for Immorticia(IM) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the Immorticia decks please use the commands listed above or click on the buttons below to navigate through all Immorticia decks!
 Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`
     );
-    const embed = new CreateHelpEmbed(
+    const embed = createHelpEmbed(
       "Immorticia Decks",
       `To view the Immorticia decks please select an option from the select menu below!
 Note: Immorticia has ${immorticiaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Immorticia Meme Decks",
       `My meme decks for Immorticia(IM) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the meme Immorticia decks please use the commands listed above or click on the buttons below to navigate through all meme Immorticia decks!
 Note: Immorticia has ${immorticiaDecks.memeDecks.length} meme decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Immorticia Combo Decks",
       `My combo decks for Immorticia(IM) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the combo Immorticia decks please use the commands listed above or click on the buttons below to navigate through all combo Immorticia decks!
 Note: Immorticia has ${immorticiaDecks.comboDecks.length} combo decks in Tbot`
     );
-    const controlEmbed = new CreateHelpEmbed(
+    const controlEmbed = createHelpEmbed(
       "Immorticia Control Decks",
       `My control decks for Immorticia(IM) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
       `To view the control Immorticia decks please use the commands listed above or click on the buttons below to navigate through all control Immorticia decks!
 Note: Immorticia has ${immorticiaDecks.controlDecks.length} control decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Immorticia Midrange Decks",
       `My midrange decks for Immorticia(IM) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408",
@@ -219,12 +220,12 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
     );
     const [result] = await db.query(`SELECT * FROM imdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -241,12 +242,12 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
       }
       return embed;
     }
-    const savage22 = new CreateDeckEmbed(result, "savage22");
-    const bastet = new CreateDeckEmbed(result, "bastet");
-    const budgetim = new CreateDeckEmbed(result, "budgetim");
-    const mechascope = new CreateDeckEmbed(result, "otkmecha");
-    const kaleidoscope = new CreateDeckEmbed(result, "otktrickster");
-    const rampticia = new CreateDeckEmbed(result, "rampticia");
+    const savage22 = createDeckEmbed(result, "savage22");
+    const bastet = createDeckEmbed(result, "bastet");
+    const budgetim = createDeckEmbed(result, "budgetim");
+    const mechascope = createDeckEmbed(result, "otkmecha");
+    const kaleidoscope = createDeckEmbed(result, "otktrickster");
+    const rampticia = createDeckEmbed(result, "rampticia");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

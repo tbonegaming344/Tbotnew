@@ -8,7 +8,7 @@ const {
   StringSelectMenuOptionBuilder
 } = require("discord.js");
 const db = require("../../index.js");
-function CreateHelpEmbed(title, description, thumbnail, footer){
+function createHelpEmbed(title, description, thumbnail, footer){
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -96,12 +96,12 @@ module.exports = {
     const aggroString = buildDeckString(impfinityDecks.aggroDecks);
     const midrangeString = buildDeckString(impfinityDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -113,48 +113,48 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("splimps", "bif")
-    const bif = new CreateButtons("helpall", "nhks")
-    const nhks = new CreateButtons("budgetif", "stars")
-    const stars = new CreateButtons("nohokaistars", "spl")
-    const spl = new CreateButtons("spacestars", "allhelp")
-    const competitiveRow = new CreateButtons("spacestars2", "nhks2")
-    const nhks2 = new CreateButtons("helpcomp", "stars2")
-    const stars2 = new CreateButtons("nohokaistars2", "comphelp")
-    const aggroRow = new CreateButtons("splimps2", "bif2")
-    const bif2 = new CreateButtons("helpaggro", "spl2")
-    const spl2 = new CreateButtons("budgetif2", "aggrohelp")
-    const midrangeRow = new CreateButtons("spacestars3", "nhks3")
-    const nhks3 = new CreateButtons("helpmidrange", "stars3")
-    const stars3 = new CreateButtons("nohokaistars3", "midrangehelp")
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksrow = createButtons("splimps", "bif")
+    const bif = createButtons("helpall", "nhks")
+    const nhks = createButtons("budgetif", "stars")
+    const stars = createButtons("nohokaistars", "spl")
+    const spl = createButtons("spacestars", "allhelp")
+    const competitiveRow = createButtons("spacestars2", "nhks2")
+    const nhks2 = createButtons("helpcomp", "stars2")
+    const stars2 = createButtons("nohokaistars2", "comphelp")
+    const aggroRow = createButtons("splimps2", "bif2")
+    const bif2 = createButtons("helpaggro", "spl2")
+    const spl2 = createButtons("budgetif2", "aggrohelp")
+    const midrangeRow = createButtons("spacestars3", "nhks3")
+    const nhks3 = createButtons("helpmidrange", "stars3")
+    const stars3 = createButtons("nohokaistars3", "midrangehelp")
+    const alldecksEmbed = createHelpEmbed(
       "Impfinity(IF) Decks",
       `My commands for Impfinity(IF) are ${toBuildString}`, 
       "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
       `To view the Impfinity decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Impfinity has ${impfinityDecks.allDecks.length} total decks in Tbot`
     )
-      const embed = new CreateHelpEmbed(
+      const embed = createHelpEmbed(
         "Impfinity(IF) Decks",
         `To view the Impfinity decks please select an option from the select menu below!
 Note: Impfinity has ${impfinityDecks.allDecks.length} total decks in Tbot`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520"
       );
-      const competitiveEmbed = new CreateHelpEmbed(
+      const competitiveEmbed = createHelpEmbed(
         "Impfinity Competitive Decks",
         `My competitive decks for Impfinity(IF) are ${competitiveString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
         `To view the Impfinity competitive decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Impfinity has ${impfinityDecks.competitiveDecks.length} competitive decks in Tbot`
       );
-      const aggroEmbed = new CreateHelpEmbed(
+      const aggroEmbed = createHelpEmbed(
         "Impfinity Aggro Decks",
         `My aggro decks for Impfinity(IF) are ${aggroString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
         `To view the Impfinity aggro decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Impfinity has ${impfinityDecks.aggroDecks.length} aggro decks in Tbot`
       );
-      const midrangeEmbed = new CreateHelpEmbed(
+      const midrangeEmbed = createHelpEmbed(
         "Impfinity Midrange Decks",
         `My midrange decks for Impfinity(IF) are ${midrangeString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
@@ -163,12 +163,12 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
       );
     const [result] = await db.query(`SELECT * FROM ifdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -185,10 +185,10 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
       }
       return embed;
     }
-    const budgetif = new CreateDeckEmbed(result, "budgetif");
-    const nohokaistars = new CreateDeckEmbed(result, "nohokaistars");
-    const spacestars = new CreateDeckEmbed(result, "spacestars");
-    const splimps = new CreateDeckEmbed(result, "splimps");
+    const budgetif = createDeckEmbed(result, "budgetif");
+    const nohokaistars = createDeckEmbed(result, "nohokaistars");
+    const spacestars = createDeckEmbed(result, "spacestars");
+    const splimps = createDeckEmbed(result, "splimps");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

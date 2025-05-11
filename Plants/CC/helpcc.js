@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -34,6 +34,8 @@ module.exports = {
     `commandscc`,
     `cchelp`,
     `helpcaptin`,
+    `ccdeck`,
+    `captaincombustibledecks`,
     `helpcombustible`,
     `helpcaptincombustible`,
     `ccdecks`,
@@ -125,12 +127,12 @@ module.exports = {
     );
     const toBuildString = buildDeckString(captainCombustibleDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -142,54 +144,54 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("mspotk", "lcbd");
-    const lcbd = new CreateButtons("helpmeme", "msp");
-    const msp = new CreateButtons("lifecouldbedream", "pm");
-    const pm = new CreateButtons("mspotk", "rfl");
-    const rfl = new CreateButtons("plantmop", "memehelp");
-    const aggrorow = new CreateButtons("logbait", "bpm");
-    const bpm = new CreateButtons("helpaggro", "lbait");
-    const lbait = new CreateButtons("budgetplantmop", "aggrohelp");
-    const comborow = new CreateButtons("reflourished2", "bpm2");
-    const bpm2 = new CreateButtons("helpcombo", "msp2");
-    const msp2 = new CreateButtons("budgetplantmop2", "pm2");
-    const pm2 = new CreateButtons("mspotk2", "rfl2");
-    const rfl2 = new CreateButtons("plantmop2", "combohelp");
-    const alldecksrow = new CreateButtons("reflourished3", "bpm3");
-    const bpm3 = new CreateButtons("helpall", "lcbd2");
-    const lcbd2 = new CreateButtons("budgetplantmop3", "lbait2");
-    const lbait2 = new CreateButtons("lifecouldbedream2", "msp3");
-    const msp3 = new CreateButtons("logbait2", "pm3");
-    const pm3 = new CreateButtons("mspotk3", "rfl3");
-    const rfl3 = new CreateButtons("plantmop3", "allhelp");
-    const embed = new CreateHelpEmbed(
+    const memerow = createButtons("mspotk", "lcbd");
+    const lcbd = createButtons("helpmeme", "msp");
+    const msp = createButtons("lifecouldbedream", "pm");
+    const pm = createButtons("mspotk", "rfl");
+    const rfl = createButtons("plantmop", "memehelp");
+    const aggrorow = createButtons("logbait", "bpm");
+    const bpm = createButtons("helpaggro", "lbait");
+    const lbait = createButtons("budgetplantmop", "aggrohelp");
+    const comborow = createButtons("reflourished2", "bpm2");
+    const bpm2 = createButtons("helpcombo", "msp2");
+    const msp2 = createButtons("budgetplantmop2", "pm2");
+    const pm2 = createButtons("mspotk2", "rfl2");
+    const rfl2 = createButtons("plantmop2", "combohelp");
+    const alldecksrow = createButtons("reflourished3", "bpm3");
+    const bpm3 = createButtons("helpall", "lcbd2");
+    const lcbd2 = createButtons("budgetplantmop3", "lbait2");
+    const lbait2 = createButtons("lifecouldbedream2", "msp3");
+    const msp3 = createButtons("logbait2", "pm3");
+    const pm3 = createButtons("mspotk3", "rfl3");
+    const rfl3 = createButtons("plantmop3", "allhelp");
+    const embed = createHelpEmbed(
       "Captain Combustible Decks",
       `To view the Captain Combustible decks please select an option from the select menu below!
 Note: Captain Combustible has ${captainCombustibleDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212"
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Captain Combustible Decks",
       `My Decks for Captain Combustible(CC) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212",
       `To view the Decks for Captain Combustible decks please use the commands listed above or click on the buttons below!
 Note: Captain Combustible has ${captainCombustibleDecks.allDecks.length} total Decks in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Captain Combustible Meme Decks",
       `My Meme Decks for Captain Combustible(CC) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212",
       `To view the Meme Decks for Captain Combustible decks please use the commands listed above or click on the buttons below!
 Note: Captain Combustible has ${captainCombustibleDecks.memeDecks.length} Meme Decks in Tbot`
     );
-    const aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = createHelpEmbed(
       "Captain Combustible Aggro Decks",
       `My Aggro Decks for Captain Combustible(CC) are ${toBuildAggroString}`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212",
       `To view the Aggro Decks for Captain Combustible decks please use the commands listed above or click on the buttons below!
 Note: Captain Combustible has ${captainCombustibleDecks.aggroDecks.length} Aggro Decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Captain Combustible Combo Decks",
       `My Combo Decks for Captain Combustible(CC) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212",
@@ -199,12 +201,12 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
     const [result] = await db.query(`SELECT * from ccdecks`);
 
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -221,12 +223,12 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
       }
       return embed;
     }
-    const budetplantmop = new CreateDeckEmbed(result, "budgetcc");
-    const lcbdream = new CreateDeckEmbed(result, "lcbd");
-    const logbait = new CreateDeckEmbed(result, "logbait");
-    const mspotk = new CreateDeckEmbed(result, "mspotk");
-    const plantmop = new CreateDeckEmbed(result, "plantmop");
-    const reflourished = new CreateDeckEmbed(result, "reflourished");
+    const budetplantmop = createDeckEmbed(result, "budgetcc");
+    const lcbdream = createDeckEmbed(result, "lcbd");
+    const logbait = createDeckEmbed(result, "logbait");
+    const mspotk = createDeckEmbed(result, "mspotk");
+    const plantmop = createDeckEmbed(result, "plantmop");
+    const reflourished = createDeckEmbed(result, "reflourished");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -88,12 +88,12 @@ module.exports = {
       bowlingBulbEnjoyerDecks.midrangeDecks
     );
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -105,17 +105,17 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("going3nuts", "bfmg");
-    const bfmg = new CreateButtons("ladderhelp", "bfw");
-    const bfw = new CreateButtons("bfmidgargs", "g3n");
-    const g3n = new CreateButtons("binaryflagwar", "ladderhelp");
-    const comborow = new CreateButtons("going3nuts2", "bfw2");
-    const bfw2 = new CreateButtons("helpcombo", "g3n2");
-    const g3n2 = new CreateButtons("binaryflagwar2", "combohelp");
-    const midrangerow = new CreateButtons("going3nuts3", "bfmg2");
-    const bfmg2 = new CreateButtons("helpmid", "bfw3");
-    const bfw3 = new CreateButtons("bfmidgargs2", "g3n3");
-    const g3n3 = new CreateButtons("binaryflagwar3", "midhelp");
+    const ladderrow = createButtons("going3nuts", "bfmg");
+    const bfmg = createButtons("ladderhelp", "bfw");
+    const bfw = createButtons("bfmidgargs", "g3n");
+    const g3n = createButtons("binaryflagwar", "ladderhelp");
+    const comborow = createButtons("going3nuts2", "bfw2");
+    const bfw2 = createButtons("helpcombo", "g3n2");
+    const g3n2 = createButtons("binaryflagwar2", "combohelp");
+    const midrangerow = createButtons("going3nuts3", "bfmg2");
+    const bfmg2 = createButtons("helpmid", "bfw3");
+    const bfw3 = createButtons("bfmidgargs2", "g3n3");
+    const g3n3 = createButtons("binaryflagwar3", "midhelp");
     const [result] = await db.query(`select bfmidgargs, binaryflagwar, going3nuts 
 		from zmdecks zm
 		inner join ctdecks ct
@@ -123,28 +123,28 @@ module.exports = {
     inner join bfdecks bf
 		on (zm.deckinfo = bf.deckinfo)`);
     const user = await client.users.fetch("1051916947253629030");
-    const bowlingbulbenjoyer = new CreateHelpEmbed(
+    const bowlingbulbenjoyer = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks made by ${user.displayName} please select an option from the select menu below!
 Select either ladder or midrange decks to view all of ${user.displayName} decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My Ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
       user.displayAvatarURL(),
       `To view the Ladder Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Ladder decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} Ladder decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo decks made by ${user.displayName} are ${toBuildComboString}`,
       user.displayAvatarURL(),
       `To view the Combo Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Combo decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.comboDecks.length} Combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My Midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
       user.displayAvatarURL(),
@@ -152,12 +152,12 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.comboDecks.length} Combo
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -174,9 +174,9 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
       }
       return embed;
     }
-    const bfmidgargs = new CreateDeckEmbed(result, "bfmidgargs");
-    const binaryflagwar = new CreateDeckEmbed(result, "binaryflagwar");
-    const going3nuts = new CreateDeckEmbed(result, "going3nuts");
+    const bfmidgargs = createDeckEmbed(result, "bfmidgargs");
+    const binaryflagwar = createDeckEmbed(result, "binaryflagwar");
+    const going3nuts = createDeckEmbed(result, "going3nuts");
     const m = await message.channel.send({
       embeds: [bowlingbulbenjoyer],
       components: [row],

@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const  db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -99,12 +99,12 @@ module.exports = {
     const toBuildString = buildDeckString(wallKnightDecks.allDecks);
     const toBuildMidrangeString = buildDeckString(wallKnightDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -116,50 +116,50 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("shitknight", "cknight");
-    const cknight = new CreateButtons("helpmeme", "hl");
-    const hl = new CreateButtons("cancerknight", "sk");
-    const sk = new CreateButtons("highlander", "memehelp");
-    const controlrow = new CreateButtons("chemotherapy", "cknight2");
-    const cknight2 = new CreateButtons("controlhelp", "chemo");
-    const chemo = new CreateButtons("cancerknight", "helpcontrol");
-    const midrangerow = new CreateButtons("highlander2", "bwk");
-    const bwk = new CreateButtons("helpmidrange", "hl2");
-    const hl2 = new CreateButtons("budgetwk", "midrangehelp");
-    const alldecksrow = new CreateButtons("shitknight2", "bwk2");
-    const bwk2 = new CreateButtons("helpall", "cknight3");
-    const cknight3 = new CreateButtons("budgetwk2", "chemo2");
-    const chemo2 = new CreateButtons("cancerknight3", "hl3");
-    const hl3 = new CreateButtons("chemotherapy2", "sk2");
-    const sk2 = new CreateButtons("highlander3", "allhelp");
-    const embed = new CreateHelpEmbed(
+    const memerow = createButtons("shitknight", "cknight");
+    const cknight = createButtons("helpmeme", "hl");
+    const hl = createButtons("cancerknight", "sk");
+    const sk = createButtons("highlander", "memehelp");
+    const controlrow = createButtons("chemotherapy", "cknight2");
+    const cknight2 = createButtons("controlhelp", "chemo");
+    const chemo = createButtons("cancerknight", "helpcontrol");
+    const midrangerow = createButtons("highlander2", "bwk");
+    const bwk = createButtons("helpmidrange", "hl2");
+    const hl2 = createButtons("budgetwk", "midrangehelp");
+    const alldecksrow = createButtons("shitknight2", "bwk2");
+    const bwk2 = createButtons("helpall", "cknight3");
+    const cknight3 = createButtons("budgetwk2", "chemo2");
+    const chemo2 = createButtons("cancerknight3", "hl3");
+    const hl3 = createButtons("chemotherapy2", "sk2");
+    const sk2 = createButtons("highlander3", "allhelp");
+    const embed = createHelpEmbed(
       "WallKnight Decks",
       `To view the WallKnight decks please select an option from the select menu below!
 Note: WallKnight has ${wallKnightDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945"
     )
-      const allEmbed = new CreateHelpEmbed(
+      const allEmbed = createHelpEmbed(
       "WallKnight Decks",
       `My decks for Wall Knight(WK) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
       `To view the Wall-Knight decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: WallKnight has ${wallKnightDecks.allDecks.length} decks in Tbot`
       )
-      const memeEmbed = new CreateHelpEmbed(
+      const memeEmbed = createHelpEmbed(
       "WallKnight Meme Decks",
       `My meme decks for Wall Knight(WK) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
       `To view the Wall-Knight meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: WallKnight has ${wallKnightDecks.memeDecks.length} meme decks in Tbot`
       )
-      const controlEmbed = new CreateHelpEmbed(
+      const controlEmbed = createHelpEmbed(
       "WallKnight Control Decks",
       `My control decks for Wall Knight(WK) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
       `To view the Wall-Knight control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
 Note: WallKnight has ${wallKnightDecks.controlDecks.length} control decks in Tbot`
       )
-      const midrangeEmbed = new CreateHelpEmbed(
+      const midrangeEmbed = createHelpEmbed(
       "WallKnight Midrange Decks",
       `My midrange decks for Wall Knight(WK) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
@@ -168,12 +168,12 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
       )
     const [result] = await db.query(`SELECT * from wkdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -190,11 +190,11 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
       }
       return embed;
     }
-    const budgetwk = new CreateDeckEmbed(result, "budgetwkmidheal");
-    const chemotherapy = new CreateDeckEmbed(result, "chemotherapy");
-    const cancerknight = new CreateDeckEmbed(result, "cancerknight");
-    const highlander = new CreateDeckEmbed(result, "highlander");
-    const shitknight = new CreateDeckEmbed(result, "shitknight");
+    const budgetwk = createDeckEmbed(result, "budgetwkmidheal");
+    const chemotherapy = createDeckEmbed(result, "chemotherapy");
+    const cancerknight = createDeckEmbed(result, "cancerknight");
+    const highlander = createDeckEmbed(result, "highlander");
+    const shitknight = createDeckEmbed(result, "shitknight");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

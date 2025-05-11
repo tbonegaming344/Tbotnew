@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -155,12 +155,12 @@ module.exports = {
       professorBrainstormDecks.midrangeDecks
     );
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -172,39 +172,39 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("youngeggmartin", "bd");
-    const bd = new CreateButtons("helpall", "bpb");
-    const bpb = new CreateButtons("bonusducks", "cb");
-    const cb = new CreateButtons("budgetpb", "pbf");
-    const pbf = new CreateButtons("congabait", "pa");
-    const pa = new CreateButtons("pbfeast", "rcatster");
-    const rcatster = new CreateButtons("professorpackage", "ts");
-    const ts = new CreateButtons("reversecatster", "valk");
-    const valk = new CreateButtons("trickstache", "yem");
-    const yem = new CreateButtons("valkster", "allhelp");
-    const ladderrow = new CreateButtons("valkster2", "pa2");
-    const pa2 = new CreateButtons("helpladder", "valk2");
-    const valk2 = new CreateButtons("package2", "ladderhelp");
-    const memerow = new CreateButtons("youngeggmartin2", "bd2");
-    const bd2 = new CreateButtons("helpmeme", "cb2");
-    const cb2 = new CreateButtons("bonusducks2", "pbf2");
-    const pbf2 = new CreateButtons("congabait2", "rcatster2");
-    const rcatster2 = new CreateButtons("pbfeast2", "yem2");
-    const yem2 = new CreateButtons("reversecatster2", "memehelp");
-    const comborow = new CreateButtons("youngeggmartin3", "bd3");
-    const bd3 = new CreateButtons("helpcombo", "cb3");
-    const cb3 = new CreateButtons("bonusducks3", "rcatster3");
-    const rcatster3 = new CreateButtons("congabait3", "ts2");
-    const ts2 = new CreateButtons("reversecatster3", "valk3");
-    const valk3 = new CreateButtons("trickstache2", "yem3");
-    const yem3 = new CreateButtons("valkster3", "combohelp");
-    const controlrow = new CreateButtons("pbfeast3", "bd4");
-    const bd4 = new CreateButtons("helpcontrol", "pbf3");
-    const pbf3 = new CreateButtons("bonusducks4", "controlhelp");
-    const midrangerow = new CreateButtons("valkster4", "cb4");
-    const cb4 = new CreateButtons("helpmid", "ts3");
-    const ts3 = new CreateButtons("congabait4", "valk4");
-    const valk4 = new CreateButtons("trickstache3", "midhelp");
+    const alldecksrow = createButtons("youngeggmartin", "bd");
+    const bd = createButtons("helpall", "bpb");
+    const bpb = createButtons("bonusducks", "cb");
+    const cb = createButtons("budgetpb", "pbf");
+    const pbf = createButtons("congabait", "pa");
+    const pa = createButtons("pbfeast", "rcatster");
+    const rcatster = createButtons("professorpackage", "ts");
+    const ts = createButtons("reversecatster", "valk");
+    const valk = createButtons("trickstache", "yem");
+    const yem = createButtons("valkster", "allhelp");
+    const ladderrow = createButtons("valkster2", "pa2");
+    const pa2 = createButtons("helpladder", "valk2");
+    const valk2 = createButtons("package2", "ladderhelp");
+    const memerow = createButtons("youngeggmartin2", "bd2");
+    const bd2 = createButtons("helpmeme", "cb2");
+    const cb2 = createButtons("bonusducks2", "pbf2");
+    const pbf2 = createButtons("congabait2", "rcatster2");
+    const rcatster2 = createButtons("pbfeast2", "yem2");
+    const yem2 = createButtons("reversecatster2", "memehelp");
+    const comborow = createButtons("youngeggmartin3", "bd3");
+    const bd3 = createButtons("helpcombo", "cb3");
+    const cb3 = createButtons("bonusducks3", "rcatster3");
+    const rcatster3 = createButtons("congabait3", "ts2");
+    const ts2 = createButtons("reversecatster3", "valk3");
+    const valk3 = createButtons("trickstache2", "yem3");
+    const yem3 = createButtons("valkster3", "combohelp");
+    const controlrow = createButtons("pbfeast3", "bd4");
+    const bd4 = createButtons("helpcontrol", "pbf3");
+    const pbf3 = createButtons("bonusducks4", "controlhelp");
+    const midrangerow = createButtons("valkster4", "cb4");
+    const cb4 = createButtons("helpmid", "ts3");
+    const ts3 = createButtons("congabait4", "valk4");
+    const valk4 = createButtons("trickstache3", "midhelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022"
@@ -229,49 +229,49 @@ module.exports = {
         }
       )
       .setColor("#FFC0CB");
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       "Professor Brainstorm Decks",
       `My commands for Professor Brainstorm(PB) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Professor Brainstorm Ladder Decks",
       `My ladder commands for Professor Brainstorm(PB) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.ladderDecks.length} ladder decks in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Professor Brainstorm Meme Decks",
       `My meme commands for Professor Brainstorm(PB) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.memeDecks.length} meme decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Professor Brainstorm Combo Decks",
       `My combo commands for Professor Brainstorm(PB) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.comboDecks.length} combo decks in Tbot`
     );
-    const controlEmbed = new CreateHelpEmbed(
+    const controlEmbed = createHelpEmbed(
       "Professor Brainstorm Control Decks",
       `My control commands for Professor Brainstorm(PB) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} control decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Professor Brainstorm Midrange Decks",
       `My midrange commands for Professor Brainstorm(PB) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.midrangeDecks.length} midrange decks in Tbot`
     );
-    const helppb = new CreateHelpEmbed(
+    const helppb = createHelpEmbed(
       "Professor Brainstorm Decks",
       `To view the Professor Brainstrom decks please select an option from the select menu below!
 Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`,
@@ -279,12 +279,12 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     );
     const [result] = await db.query(`select * from pbdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -301,15 +301,15 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       }
       return embed;
     }
-    const bonusducks = new CreateDeckEmbed(result, "bonusducks");
-    const budgetpb = new CreateDeckEmbed(result, "budgetpb");
-    const congabait = new CreateDeckEmbed(result, "congabait");
-    const pbfeast = new CreateDeckEmbed(result, "pbfeast");
-    const professorpackage = new CreateDeckEmbed(result, "professorpackage");
-    const reversecatster = new CreateDeckEmbed(result, "reversecatster");
-    const trickstache = new CreateDeckEmbed(result, "trickstache");
-    const valkster = new CreateDeckEmbed(result, "valkster");
-    const youngeggmartin = new CreateDeckEmbed(result, "youngeggmartin");
+    const bonusducks = createDeckEmbed(result, "bonusducks");
+    const budgetpb = createDeckEmbed(result, "budgetpb");
+    const congabait = createDeckEmbed(result, "congabait");
+    const pbfeast = createDeckEmbed(result, "pbfeast");
+    const professorpackage = createDeckEmbed(result, "professorpackage");
+    const reversecatster = createDeckEmbed(result, "reversecatster");
+    const trickstache = createDeckEmbed(result, "trickstache");
+    const valkster = createDeckEmbed(result, "valkster");
+    const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

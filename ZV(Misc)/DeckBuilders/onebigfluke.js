@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -80,12 +80,12 @@ module.exports = {
     const toBuildCombo = buildDeckString(oneBigFlukeDecks.comboDecks);
     const toBuildMidrange = buildDeckString(oneBigFlukeDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -97,18 +97,18 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("ramp2seedling", "bhammer");
-    const bhammer = new CreateButtons("helpmeme", "cbait");
-    const cbait = new CreateButtons("banhammer", "r2s");
-    const r2s = new CreateButtons("congabait", "memehelp");
-    const comborow = new CreateButtons("ramp2seedling2", "bhammer2");
-    const bhammer2 = new CreateButtons("helpcombo", "cbait2");
-    const cbait2 = new CreateButtons("banhammer2", "r2s2");
-    const r2s2 = new CreateButtons("congabait2", "memehelp");
-    const midrangerow = new CreateButtons("ramp2seedling3", "bhammer3");
-    const bhammer3 = new CreateButtons("helpmeme", "cbait3");
-    const cbait3 = new CreateButtons("banhammer3", "r2s3");
-    const r2s3 = new CreateButtons("congabait3", "memehelp");
+    const memerow = createButtons("ramp2seedling", "bhammer");
+    const bhammer = createButtons("helpmeme", "cbait");
+    const cbait = createButtons("banhammer", "r2s");
+    const r2s = createButtons("congabait", "memehelp");
+    const comborow = createButtons("ramp2seedling2", "bhammer2");
+    const bhammer2 = createButtons("helpcombo", "cbait2");
+    const cbait2 = createButtons("banhammer2", "r2s2");
+    const r2s2 = createButtons("congabait2", "memehelp");
+    const midrangerow = createButtons("ramp2seedling3", "bhammer3");
+    const bhammer3 = createButtons("helpmeme", "cbait3");
+    const cbait3 = createButtons("banhammer3", "r2s3");
+    const r2s3 = createButtons("congabait3", "memehelp");
     const [result] = await db.query(`select congabait, racism,
 ramp2seedling
 from pbdecks pb 
@@ -119,27 +119,27 @@ on (pb.deckinfo = bf.deckinfo)
 inner join sfdecks sf
 on (pb.deckinfo = sf.deckinfo)`);
     const user = await client.users.fetch("756689141416198215");
-    const fluke = new CreateHelpEmbed(
+    const fluke = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${oneBigFlukeDecks.memeDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const memefluke = new CreateHelpEmbed(
+    const memefluke = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${oneBigFlukeDecks.memeDecks.length} meme decks in Tbot`
     );
-    const combofluke = new CreateHelpEmbed(
+    const combofluke = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My combo decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${oneBigFlukeDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangefluke = new CreateHelpEmbed(
+    const midrangefluke = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
       user.displayAvatarURL(),
@@ -147,12 +147,12 @@ Note: ${user.displayName} has ${oneBigFlukeDecks.comboDecks.length} combo decks 
 Note: ${user.displayName} has ${oneBigFlukeDecks.midrangeDecks.length} midrange decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -169,9 +169,9 @@ Note: ${user.displayName} has ${oneBigFlukeDecks.midrangeDecks.length} midrange 
       }
       return embed;
     }
-    const congabait = new CreateDeckEmbed(result, "congabait");
-    const ramp2seedling = new CreateDeckEmbed(result, "ramp2seedling");
-    const banhammer = new CreateDeckEmbed(result, "racism");
+    const congabait = createDeckEmbed(result, "congabait");
+    const ramp2seedling = createDeckEmbed(result, "ramp2seedling");
+    const banhammer = createDeckEmbed(result, "racism");
     const m = await message.channel.send({
       embeds: [fluke],
       components: [row],

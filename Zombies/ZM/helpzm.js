@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -145,12 +145,12 @@ module.exports = {
     const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(zmechDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -162,78 +162,78 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("zmoss", "bfw");
-    const bfw = new CreateButtons("helpall", "br");
-    const br = new CreateButtons("binaryflagwar", "bzm");
-    const bzm = new CreateButtons("brady", "dm");
-    const dm = new CreateButtons("budgetzm", "gb");
-    const gb = new CreateButtons("dozzamech", "tm");
-    const tm = new CreateButtons("gargburn", "um");
-    const um = new CreateButtons("trickmech", "zm");
-    const zm = new CreateButtons("uncrackamech", "allhelp");
-    const ladderrow = new CreateButtons("trickmech2", "bfw2");
-    const bfw2 = new CreateButtons("ladderhelp", "br2");
-    const br2 = new CreateButtons("binaryflagwar2", "tm2");
-    const tm2 = new CreateButtons("brady2", "helpladder");
-    const memerow = new CreateButtons("zmoss2", "dm2");
-    const dm2 = new CreateButtons("memehelp", "um2");
-    const um2 = new CreateButtons("dozzamech2", "zm2");
-    const zm2 = new CreateButtons("uncrackamech2", "helpmeme");
-    const aggrorow = new CreateButtons("trickmech2", "bzm2");
-    const bzm2 = new CreateButtons("aggrohelp", "dm3");
-    const dm3 = new CreateButtons("budgetzm2", "tm3");
-    const tm3 = new CreateButtons("dozzamech3", "helpaggro");
-    const comborow = new CreateButtons("zmoss3", "bfw3");
-    const bfw3 = new CreateButtons("combohelp", "bzm3");
-    const bzm3 = new CreateButtons("binaryflagwar3", "gb2");
-    const gb2 = new CreateButtons("budgetzm3", "um3");
-    const um3 = new CreateButtons("gargburn2", "zm3");
-    const zm3 = new CreateButtons("uncrackamech3", "helpcombo");
-    const midrangerow = new CreateButtons("gargburn3", "bfw4");
-    const bfw4 = new CreateButtons("midrangehelp", "gb3");
-    const gb3 = new CreateButtons("binaryflagwar4", "helpmidrange");
-    const embed = new CreateHelpEmbed(
+    const alldecksrow = createButtons("zmoss", "bfw");
+    const bfw = createButtons("helpall", "br");
+    const br = createButtons("binaryflagwar", "bzm");
+    const bzm = createButtons("brady", "dm");
+    const dm = createButtons("budgetzm", "gb");
+    const gb = createButtons("dozzamech", "tm");
+    const tm = createButtons("gargburn", "um");
+    const um = createButtons("trickmech", "zm");
+    const zm = createButtons("uncrackamech", "allhelp");
+    const ladderrow = createButtons("trickmech2", "bfw2");
+    const bfw2 = createButtons("ladderhelp", "br2");
+    const br2 = createButtons("binaryflagwar2", "tm2");
+    const tm2 = createButtons("brady2", "helpladder");
+    const memerow = createButtons("zmoss2", "dm2");
+    const dm2 = createButtons("memehelp", "um2");
+    const um2 = createButtons("dozzamech2", "zm2");
+    const zm2 = createButtons("uncrackamech2", "helpmeme");
+    const aggrorow = createButtons("trickmech2", "bzm2");
+    const bzm2 = createButtons("aggrohelp", "dm3");
+    const dm3 = createButtons("budgetzm2", "tm3");
+    const tm3 = createButtons("dozzamech3", "helpaggro");
+    const comborow = createButtons("zmoss3", "bfw3");
+    const bfw3 = createButtons("combohelp", "bzm3");
+    const bzm3 = createButtons("binaryflagwar3", "gb2");
+    const gb2 = createButtons("budgetzm3", "um3");
+    const um3 = createButtons("gargburn2", "zm3");
+    const zm3 = createButtons("uncrackamech3", "helpcombo");
+    const midrangerow = createButtons("gargburn3", "bfw4");
+    const bfw4 = createButtons("midrangehelp", "gb3");
+    const gb3 = createButtons("binaryflagwar4", "helpmidrange");
+    const embed = createHelpEmbed(
       "Zmech Decks",
       `To view the Zmech decks please select an option from the select menu below!
 Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8"
     );
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       "Zmech Decks",
       `My commands for Zmech(ZM) are ${toBuildString}`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
       `To view the Zmech decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Zmech Ladder Decks",
       `My ladder decks for Zmech(ZM) are ${toBuildLadderString}`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
       `To view the Zmech ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
 Note: Zmech has ${zmechDecks.ladderDecks.length} ladder decks in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Zmech Meme Decks",
       `My meme decks for Zmech(ZM) are ${toBuildMemeString}`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
       `To view the Zmech meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: Zmech has ${zmechDecks.memeDecks.length} meme decks in Tbot`
     );
-    const aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = createHelpEmbed(
       "Zmech Aggro Decks",
       `My aggro decks for Zmech(ZM) are ${toBuildAggroString}`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
       `To view the Zmech aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
 Note: Zmech has ${zmechDecks.aggroDecks.length} aggro decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Zmech Combo Decks",
       `My combo decks for Zmech(ZM) are ${toBuildComboString}`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
       `To view the Zmech combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Zmech has ${zmechDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Zmech Midrange Decks",
       `My midrange decks for Zmech(ZM) are ${toBuildMidrangeString}`,
       "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
@@ -242,12 +242,12 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
     );
     const [result] = await db.query(`SELECT * FROM zmdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -264,14 +264,14 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
       }
       return embed;
     }
-    const binaryflagwar = new CreateDeckEmbed(result, "binaryflagwar");
-    const brady = new CreateDeckEmbed(result, "brady");
-    const budgetzm = new CreateDeckEmbed(result, "budgetzm");
-    const dozzamech = new CreateDeckEmbed(result, "dozzamech");
-    const uncrackamech = new CreateDeckEmbed(result, "feastmech");
-    const gargburn = new CreateDeckEmbed(result, "gargburn");
-    const trickmech = new CreateDeckEmbed(result, "trickmech");
-    const zmoss = new CreateDeckEmbed(result, "zmoss");
+    const binaryflagwar = createDeckEmbed(result, "binaryflagwar");
+    const brady = createDeckEmbed(result, "brady");
+    const budgetzm = createDeckEmbed(result, "budgetzm");
+    const dozzamech = createDeckEmbed(result, "dozzamech");
+    const uncrackamech = createDeckEmbed(result, "feastmech");
+    const gargburn = createDeckEmbed(result, "gargburn");
+    const trickmech = createDeckEmbed(result, "trickmech");
+    const zmoss = createDeckEmbed(result, "zmoss");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

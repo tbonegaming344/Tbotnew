@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -106,12 +106,12 @@ module.exports = {
     const toBuildComboString = buildDeckString(theQuestionMarkDecks.comboDecks);
     const toBuildString = buildDeckString(theQuestionMarkDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -123,50 +123,50 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("splimps", "cboy");
-    const cboy = new CreateButtons("helpall", "nut");
-    const nut = new CreateButtons("cyroboy", "syard");
-    const syard = new CreateButtons("nuttin", "spl");
-    const spl = new CreateButtons("schoolyard", "allhelp");
-    const ladderrow = new CreateButtons("splimps2", "cboy2");
-    const cboy2 = new CreateButtons("helpladder", "syard2");
-    const syard2 = new CreateButtons("cyroboy2", "spl2");
-    const spl2 = new CreateButtons("schoolyard2", "ladderhelp");
-    const comborow = new CreateButtons("nuttin2", "cboy3");
-    const cboy3 = new CreateButtons("helpcombo", "nut2");
-    const nut2 = new CreateButtons("cyroboy3", "combohelp");
-    const aggrorow = new CreateButtons("splimps3", "syard3");
-    const syard3 = new CreateButtons("helpaggro", "spl3");
-    const spl3 = new CreateButtons("schoolyard3", "aggrohelp");
+    const alldecksrow = createButtons("splimps", "cboy");
+    const cboy = createButtons("helpall", "nut");
+    const nut = createButtons("cyroboy", "syard");
+    const syard = createButtons("nuttin", "spl");
+    const spl = createButtons("schoolyard", "allhelp");
+    const ladderrow = createButtons("splimps2", "cboy2");
+    const cboy2 = createButtons("helpladder", "syard2");
+    const syard2 = createButtons("cyroboy2", "spl2");
+    const spl2 = createButtons("schoolyard2", "ladderhelp");
+    const comborow = createButtons("nuttin2", "cboy3");
+    const cboy3 = createButtons("helpcombo", "nut2");
+    const nut2 = createButtons("cyroboy3", "combohelp");
+    const aggrorow = createButtons("splimps3", "syard3");
+    const syard3 = createButtons("helpaggro", "spl3");
+    const spl3 = createButtons("schoolyard3", "aggrohelp");
     const user = await client.users.fetch("906888157272875048");
-    const tqm = new CreateHelpEmbed(
+    const tqm = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${theQuestionMarkDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       `${user.displayName} Decks`,
       `My commands for decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
       `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${theQuestionMarkDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
       user.displayAvatarURL(),
       `To view the ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${theQuestionMarkDecks.ladderDecks.length} ladder decks in Tbot`
     );
-    const aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = createHelpEmbed(
       `${user.displayName} Aggro Decks`,
       `My aggro decks made by ${user.displayName} are ${toBuildAggroString}`,
       user.displayAvatarURL(),
       `To view the aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all aggro decks!
 Note: ${user.displayName} has ${theQuestionMarkDecks.aggroDecks.length} aggro decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My combo decks made by ${user.displayName} are ${toBuildComboString}`,
       user.displayAvatarURL(),
@@ -179,12 +179,12 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.comboDecks.length} combo de
       inner join ntdecks nt on (hg.deckinfo = nt.deckinfo)
       inner join spdecks sp on (hg.deckinfo = sp.deckinfo)`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -201,10 +201,10 @@ Note: ${user.displayName} has ${theQuestionMarkDecks.comboDecks.length} combo de
       }
       return embed;
     }
-    const cyroboy = new CreateDeckEmbed(result, "cyroboy");
-    const nuttin = new CreateDeckEmbed(result, "nutting");
-    const schoolyard = new CreateDeckEmbed(result, "schoolyard");
-    const splimps = new CreateDeckEmbed(result, "splimps");
+    const cyroboy = createDeckEmbed(result, "cyroboy");
+    const nuttin = createDeckEmbed(result, "nutting");
+    const schoolyard = createDeckEmbed(result, "schoolyard");
+    const splimps = createDeckEmbed(result, "splimps");
     const m = await message.channel.send({ embeds: [tqm], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

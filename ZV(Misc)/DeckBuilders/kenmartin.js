@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -81,12 +81,12 @@ module.exports = {
     const toBuildCombo = buildDeckString(kenMartinDecks.comboDecks);
     const toBuildMidrange = buildDeckString(kenMartinDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -98,16 +98,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const comborow = new CreateButtons("youngkenmartin", "bb");
-    const bb = new CreateButtons("helpcombo", "yem");
-    const yem = new CreateButtons("boltbolt", "ykm");
-    const ykm= new CreateButtons("youngeggmartin", "combohelp");
-    const memerow = new CreateButtons("youngkenmartin2", "yem2");
-    const yem2 = new CreateButtons("helpmeme", "ykm2");
-    const ykm2 = new CreateButtons("youngeggmartin2", "memehelp");
-    const midrangerow = new CreateButtons("youngkenmartin3", "bb2");
-    const bb2 = new CreateButtons("helpmidrange", "ykm3");
-    const ykm3 = new CreateButtons("boltbolt3", "midrangehelp");
+    const comborow = createButtons("youngkenmartin", "bb");
+    const bb = createButtons("helpcombo", "yem");
+    const yem = createButtons("boltbolt", "ykm");
+    const ykm= createButtons("youngeggmartin", "combohelp");
+    const memerow = createButtons("youngkenmartin2", "yem2");
+    const yem2 = createButtons("helpmeme", "ykm2");
+    const ykm2 = createButtons("youngeggmartin2", "memehelp");
+    const midrangerow = createButtons("youngkenmartin3", "bb2");
+    const bb2 = createButtons("helpmidrange", "ykm3");
+    const ykm3 = createButtons("boltbolt3", "midrangehelp");
     const [result] =
       await db.query(`select boltbolt,
 youngeggmartin, ykm 
@@ -116,28 +116,28 @@ inner join pbdecks pb
 on (rb.deckinfo = pb.deckinfo)
 inner join hgdecks hg
 on (rb.deckinfo = hg.deckinfo)`);
-    const ken = new CreateHelpEmbed(
+    const ken = createHelpEmbed(
       "Ken Martin Decks",
       `To view the Decks Made By Ken Martin please select an option from the select menu below!
 Select combo to view all decks made by Ken Martin
 Note: Ken Martin has ${kenMartinDecks.ladderDecks.length} total decks in Tbot`,
         "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
     )
-      const comboken = new CreateHelpEmbed(
+      const comboken = createHelpEmbed(
         "Combo Decks Made By Ken Martin",
         `My combo decks made by Ken Martin are ${toBuildCombo}`,
         "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604", 
         `To view the Combo Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
 Note: Ken Martin has ${kenMartinDecks.comboDecks.length} combo decks in Tbot`
       )
-      const midrangeken = new CreateHelpEmbed(
+      const midrangeken = createHelpEmbed(
         "Midrange Decks Made By Ken Martin",
         `My midrange decks made by Ken Martin are ${toBuildMidrange}`,
         "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604",
         `To view the Midrange Decks Made By Ken Martin please use the commands listed above or click on the buttons below!
 Note: Ken Martin has ${kenMartinDecks.midrangeDecks.length} midrange decks in Tbot`
       )
-      const memeken = new CreateHelpEmbed(
+      const memeken = createHelpEmbed(
         "Meme Decks Made By Ken Martin",
         `My meme decks made by Ken Martin are ${toBuildMeme}`,
         "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604",
@@ -145,12 +145,12 @@ Note: Ken Martin has ${kenMartinDecks.midrangeDecks.length} midrange decks in Tb
 Note: Ken Martin has ${kenMartinDecks.memeDecks.length} meme decks in Tbot`
       )
        /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -167,9 +167,9 @@ Note: Ken Martin has ${kenMartinDecks.memeDecks.length} meme decks in Tbot`
         }
         return embed;
       }
-    const boltbolt = new CreateDeckEmbed(result, "boltbolt");
-    const youngeggmartin = new CreateDeckEmbed(result, "youngeggmartin");
-    const youngkenmartin = new CreateDeckEmbed(result, "ykm");
+    const boltbolt = createDeckEmbed(result, "boltbolt");
+    const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
+    const youngkenmartin = createDeckEmbed(result, "ykm");
     const m = await message.channel.send({ embeds: [ken], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

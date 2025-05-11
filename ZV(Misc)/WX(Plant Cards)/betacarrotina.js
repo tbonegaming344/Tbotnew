@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -106,12 +106,12 @@ module.exports = {
     const toBuildLadderString = buildDeckString(betaCarrotinaDecks.ladderDecks);
     const toBuildComboString = buildDeckString(betaCarrotinaDecks.comboDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -123,16 +123,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("dinocounter", "car");
-    const car = new CreateButtons("helpladder", "dcounter");
-    const dcounter = new CreateButtons("carroot", "ladderhelp");
-    const comborow = new CreateButtons("dinocounter2", "car2");
-    const car2 = new CreateButtons("helpcombo", "dcounter2");
-    const dcounter2 = new CreateButtons("carroot2", "combohelp");
-    const alldecksrow = new CreateButtons("shamcontrol", "car3");
-    const car3 = new CreateButtons("helpall", "dcounter3");
-    const dcounter3 = new CreateButtons("carroot3", "scontrol");
-    const scontrol = new CreateButtons("dinocounter3", "allhelp");
+    const ladderrow = createButtons("dinocounter", "car");
+    const car = createButtons("helpladder", "dcounter");
+    const dcounter = createButtons("carroot", "ladderhelp");
+    const comborow = createButtons("dinocounter2", "car2");
+    const car2 = createButtons("helpcombo", "dcounter2");
+    const dcounter2 = createButtons("carroot2", "combohelp");
+    const alldecksrow = createButtons("shamcontrol", "car3");
+    const car3 = createButtons("helpall", "dcounter3");
+    const dcounter3 = createButtons("carroot3", "scontrol");
+    const scontrol = createButtons("dinocounter3", "allhelp");
     const bc = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist"
@@ -167,27 +167,27 @@ It gets +2<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>, __Amp
         }
       );
     const [result] = await db.query("SELECT * FROM bcdecks");
-    const embed = new CreateHelpEmbed(
+    const embed = createHelpEmbed(
       "Beta Carrotina Commands",
       `To view the Beta Carrotina decks please select an option from the select menu below
 Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist"
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Beta Carrotina Ladder Decks",
       `My ladder decks for Beta Carrotina are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist",
       `To view the ladder Beta Carrotina decks please use the commands listed above or click the buttons below to navigate through all ladder decks. 
 Note: Beta Carrotina has ${betaCarrotinaDecks.ladderDecks.length} total ladder decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Beta Carrotina Combo Decks",
       `My combo decks for Beta Carrotina are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist",
       `To view the combo Beta Carrotina decks please use the commands listed above or click the buttons below to navigate through all combo decks.
 Note: Beta Carrotina has ${betaCarrotinaDecks.comboDecks.length} total combo decks in Tbot`
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Beta Carrotina Decks",
       `My decks for Beta Carrotina are ${toBuildString}`,
       "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist",
@@ -195,12 +195,12 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.comboDecks.length} total combo dec
 Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total all decks in Tbot`
     );
     /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -217,9 +217,9 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total all decks i
       }
       return embed;
     }
-    const carroot = new CreateDeckEmbed(result, "carroot");
-    const dinocounter = new CreateDeckEmbed(result, "dinocounter");
-    const shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
+    const carroot = createDeckEmbed(result, "carroot");
+    const dinocounter = createDeckEmbed(result, "dinocounter");
+    const shamcontrol = createDeckEmbed(result, "shamcontrol");
     const m = await message.channel.send({ embeds: [bc], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

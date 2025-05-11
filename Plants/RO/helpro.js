@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -35,6 +35,7 @@ module.exports = {
     `commandsro`,
     `rosedeck`,
     `helprose`,
+    `rosedb`,
     `rodecks`,
     `rosehelp`,
     `rosedecks`,
@@ -102,12 +103,12 @@ module.exports = {
     const toBuildMidrangeString = BuildDeckString(roseDecks.midrangeDecks);
     const toBuildString = BuildDeckString(roseDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -119,29 +120,29 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const midrangerow = new CreateButtons("healmidrose", "bro");
-    const bro = new CreateButtons("helpmid", "fmr");
-    const fmr = new CreateButtons("budgetro", "hmr");
-    const hmr = new CreateButtons("frymidrose", "midhelp");
-    const alldecksrow = new CreateButtons("healmidrose2", "bro2");
-    const bro2 = new CreateButtons("helpall", "fheal");
-    const fheal = new CreateButtons("budgetro2", "fmr2");
-    const fmr2 = new CreateButtons("freezeheal", "hmr2");
-    const hmr2 = new CreateButtons("frymidrose2", "allhelp");
-    const embed = new CreateHelpEmbed(
+    const midrangerow = createButtons("healmidrose", "bro");
+    const bro = createButtons("helpmid", "fmr");
+    const fmr = createButtons("budgetro", "hmr");
+    const hmr = createButtons("frymidrose", "midhelp");
+    const alldecksrow = createButtons("healmidrose2", "bro2");
+    const bro2 = createButtons("helpall", "fheal");
+    const fheal = createButtons("budgetro2", "fmr2");
+    const fmr2 = createButtons("freezeheal", "hmr2");
+    const hmr2 = createButtons("frymidrose2", "allhelp");
+    const embed = createHelpEmbed(
       "Rose Decks",
       `To view the Rose decks please select an option from the select menu below!
 Note: Rose has ${roseDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/2/2f/RoseBYL.png/revision/latest?cb=20200707025517"
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Rose Decks",
       `My decks for Rose(RO) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/pvzcc/images/2/2f/RoseBYL.png/revision/latest?cb=20200707025517",
       `To view the Rose decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Rose has ${roseDecks.allDecks.length} decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Rose Midrange Decks",
       `My Midrange decks for Rose(RO) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/pvzcc/images/2/2f/RoseBYL.png/revision/latest?cb=20200707025517",
@@ -150,12 +151,12 @@ Note: Rose has ${roseDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
     const [result] = await db.query(`SELECT * from rodecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -172,10 +173,10 @@ Note: Rose has ${roseDecks.midrangeDecks.length} Midrange decks in Tbot`
       }
       return embed;
     }
-    const budgetrose = new CreateDeckEmbed(result, "budgetro");
-    const freezeheal = new CreateDeckEmbed(result, "freezeheal");
-    const frymidrose = new CreateDeckEmbed(result, "frymidrose");
-    const healmidrose = new CreateDeckEmbed(result, "hmr");
+    const budgetrose = createDeckEmbed(result, "budgetro");
+    const freezeheal = createDeckEmbed(result, "freezeheal");
+    const frymidrose = createDeckEmbed(result, "frymidrose");
+    const healmidrose = createDeckEmbed(result, "hmr");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

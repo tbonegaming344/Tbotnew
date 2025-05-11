@@ -1,6 +1,7 @@
 const {EmbedBuilder}= require("discord.js")
 module.exports = {
 	name: `tricorn`,
+	aliases: [`trinut`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
 		const tr = new EmbedBuilder()

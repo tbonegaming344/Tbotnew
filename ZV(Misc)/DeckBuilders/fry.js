@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -102,12 +102,12 @@ module.exports = {
     const toBuildMid = buildDeckString(fryEmUpDecks.midrangeDecks);
     const toBuildString = buildDeckString(fryEmUpDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -119,21 +119,21 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("valkster", "fmr");
-    const fmr = new CreateButtons("ladderhelp", "rp");
-    const rp = new CreateButtons("frymidrose", "valk");
-    const valk = new CreateButtons("raiserpackage", "helpladder");
-    const temporow = new CreateButtons("raiserpackage2", "cleap");
-    const cleap = new CreateButtons("tempohelp", "rp2");
-    const rp2 = new CreateButtons("conjureleap", "helptempo");
-    const midrangerow = new CreateButtons("valkster2", "fmr2");
-    const fmr2 = new CreateButtons("helpmid", "valk2");
-    const valk2 = new CreateButtons("frymidrose2", "helpmidrange");
-    const alldecksrow = new CreateButtons("valkster3", "cleap2");
-    const cleap2 = new CreateButtons("allhelp", "fmr3");
-    const fmr3 = new CreateButtons("conjureleap2", "rp3");
-    const rp3 = new CreateButtons("frymidrose3", "valk3");
-    const valk3 = new CreateButtons("raiserpackage3", "helpall");
+    const ladderrow = createButtons("valkster", "fmr");
+    const fmr = createButtons("ladderhelp", "rp");
+    const rp = createButtons("frymidrose", "valk");
+    const valk = createButtons("raiserpackage", "helpladder");
+    const temporow = createButtons("raiserpackage2", "cleap");
+    const cleap = createButtons("tempohelp", "rp2");
+    const rp2 = createButtons("conjureleap", "helptempo");
+    const midrangerow = createButtons("valkster2", "fmr2");
+    const fmr2 = createButtons("helpmid", "valk2");
+    const valk2 = createButtons("frymidrose2", "helpmidrange");
+    const alldecksrow = createButtons("valkster3", "cleap2");
+    const cleap2 = createButtons("allhelp", "fmr3");
+    const fmr3 = createButtons("conjureleap2", "rp3");
+    const rp3 = createButtons("frymidrose3", "valk3");
+    const valk3 = createButtons("raiserpackage3", "helpall");
     const [result] = await db.query(`select conjureleap, frymidrose, 
 raiserpackage, valkster
 from hgdecks hg
@@ -144,34 +144,34 @@ on (hg.deckinfo = bf.deckinfo)
 inner join pbdecks pb
 on (hg.deckinfo = pb.deckinfo)`);
     const user = await client.users.fetch("291752823891427329");
-    const fry = new CreateHelpEmbed(
+    const fry = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const midrangefry = new CreateHelpEmbed(
+    const midrangefry = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
       user.displayAvatarURL(),
       `To view the Midrange decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${fryEmUpDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
-    const tempofry = new CreateHelpEmbed(
+    const tempofry = createHelpEmbed(
       `${user.displayName} Tempo Decks`,
       `My Tempo decks made by ${user.displayName} are ${toBuildTempoString}`,
       user.displayAvatarURL(),
       `To view the Tempo decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${fryEmUpDecks.tempoDecks.length} Tempo decks in Tbot`
     );
-    const ladderfry = new CreateHelpEmbed(
+    const ladderfry = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My Ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
       user.displayAvatarURL(),
       `To view the Ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${fryEmUpDecks.ladderDecks.length} Ladder decks in Tbot`
     );
-    const allfry = new CreateHelpEmbed(
+    const allfry = createHelpEmbed(
       `${user.displayName} Decks`,
       `My All decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
@@ -179,12 +179,12 @@ Note: ${user.displayName} has ${fryEmUpDecks.ladderDecks.length} Ladder decks in
 Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -201,10 +201,10 @@ Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const conjureleap = new CreateDeckEmbed(result, "conjureleap");
-    const frymidrose = new CreateDeckEmbed(result, "frymidrose");
-    const raiserpackage = new CreateDeckEmbed(result, "raiserpackage");
-    const valkster = new CreateDeckEmbed(result, "valkster");
+    const conjureleap = createDeckEmbed(result, "conjureleap");
+    const frymidrose = createDeckEmbed(result, "frymidrose");
+    const raiserpackage = createDeckEmbed(result, "raiserpackage");
+    const valkster = createDeckEmbed(result, "valkster");
     const m = await message.channel.send({ embeds: [fry], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

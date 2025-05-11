@@ -13,6 +13,8 @@ module.exports = {
     `sfbudget`,
     `budgetsolarflare`,
     `solarflarebudget`,
+    `budgetflare`,
+    `burstflare`,
     `budgetswarmflare`,
   ],
   category: `Solar Flare(SF)`,

@@ -9,14 +9,14 @@ const {
   } = require("discord.js");
   const db = require("../../index.js");
   /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
     const embed = new EmbedBuilder()
       .setTitle(title)
       .setDescription(description)
@@ -95,12 +95,12 @@ function CreateHelpEmbed(title, description, thumbnail, footer) {
       const toBuildComboString = buildDeckString(pillowyDecks.comboDecks);
       const toBuildMidrangeString = buildDeckString(pillowyDecks.midrangeDecks);
       /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
         return new ActionRowBuilder().addComponents(
           new ButtonBuilder()
             .setCustomId(leftButtonId)
@@ -112,50 +112,50 @@ function CreateHelpEmbed(title, description, thumbnail, footer) {
             .setStyle(ButtonStyle.Primary)
         );
       }
-      const memeRow = new CreateButtons("starrings", "hburn");
-      const hburn = new CreateButtons("helpmeme", "srings");
-      const srings = new CreateButtons("healburn", "memehelp");
-      const comboRow = new CreateButtons("starrings2", "hburn2");
-      const hburn2 = new CreateButtons("helpcombo", "srings2");
-      const srings2 = new CreateButtons("healburn2", "combohelp");
-      const midrangeRow = new CreateButtons("starrings3", "hburn3");
-      const hburn3 = new CreateButtons("helpmidrange", "srings3");
-      const srings3 = new CreateButtons("healburn3", "midrangehelp");
-      const allDecksRow = new CreateButtons("starrings4", "ab");
-      const ab = new CreateButtons("helpall", "hburn4");
-      const hburn4 = new CreateButtons("abeans", "srings4");
-      const srings4 = new CreateButtons("healburn4", "allhelp");
+      const memeRow = createButtons("starrings", "hburn");
+      const hburn = createButtons("helpmeme", "srings");
+      const srings = createButtons("healburn", "memehelp");
+      const comboRow = createButtons("starrings2", "hburn2");
+      const hburn2 = createButtons("helpcombo", "srings2");
+      const srings2 = createButtons("healburn2", "combohelp");
+      const midrangeRow = createButtons("starrings3", "hburn3");
+      const hburn3 = createButtons("helpmidrange", "srings3");
+      const srings3 = createButtons("healburn3", "midrangehelp");
+      const allDecksRow = createButtons("starrings4", "ab");
+      const ab = createButtons("helpall", "hburn4");
+      const hburn4 = createButtons("abeans", "srings4");
+      const srings4 = createButtons("healburn4", "allhelp");
           const [result] = await db.query(`SELECT abeans, healburn, sovietonion FROM gsdecks gs
             inner join sfdecks sf on (gs.deckinfo = sf.deckinfo)`)
           const user = await client.users.fetch("1157720864679272549");
-          const pillowy = new CreateHelpEmbed(
+          const pillowy = createHelpEmbed(
             `${user.displayName} Decks`,
             `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`,
             user.displayAvatarURL()
           )
-          const memeEmbed = new CreateHelpEmbed(
+          const memeEmbed = createHelpEmbed(
             `${user.displayName} Meme Decks`,
             `My meme decks created by ${user.displayName} are ${toBuildMemeString}`,
             user.displayAvatarURL(), 
             `To view the meme decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: ${user.displayName} has ${pillowyDecks.memeDecks.length} total meme decks in Tbot`
           )
-          const comboEmbed = new CreateHelpEmbed(
+          const comboEmbed = createHelpEmbed(
             `${user.displayName} Combo Decks`,
             `My combo decks created by ${user.displayName} are ${toBuildComboString}`,
             user.displayAvatarURL(),
             `To view the combo decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: ${user.displayName} has ${pillowyDecks.comboDecks.length} total combo decks in Tbot`
           )
-          const midrangeEmbed = new CreateHelpEmbed(
+          const midrangeEmbed = createHelpEmbed(
             `${user.displayName} Midrange Decks`,
             `My midrange decks created by ${user.displayName} are ${toBuildMidrangeString}`,
             user.displayAvatarURL(),
             `To view the midrange decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrange decks in Tbot`
           )
-          const allDecksEmbed = new CreateHelpEmbed(
+          const allDecksEmbed = createHelpEmbed(
             `${user.displayName} Decks`,
             `My decks created by ${user.displayName} are ${toBuildString}`,
             user.displayAvatarURL(),
@@ -163,12 +163,12 @@ Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrang
 Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`
           )
            /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
             const embed = new EmbedBuilder()
               .setTitle(`${result[5][deckName]}`)
               .setDescription(`${result[3][deckName]}`)
@@ -185,9 +185,9 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
             }
             return embed;
           }
-            const abeans = new CreateDeckEmbed(result, "abeans")
-            const healburn = new CreateDeckEmbed(result, "healburn")
-            const starrings = new CreateDeckEmbed(result, "sovietonion")
+            const abeans = createDeckEmbed(result, "abeans")
+            const healburn = createDeckEmbed(result, "healburn")
+            const starrings = createDeckEmbed(result, "sovietonion")
           const m = await message.channel.send({ embeds: [pillowy], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
           async function handleSelectMenu(i){

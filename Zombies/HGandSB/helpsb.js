@@ -7,14 +7,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -82,7 +82,7 @@ module.exports = {
       midrangeDecks: ["budgetsb"],
       allDecks: ["budgetsb", "telimpssb"],
     };
-    const helpsb = new CreateHelpEmbed(
+    const helpsb = createHelpEmbed(
       "Super Brainz Decks",
       `To view the SuperBrainz decks please select an option from the select menu below!
 Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz in Tbot`,
@@ -90,12 +90,12 @@ Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz
     );
     const [result] = await db.query(`SELECT * FROM sbdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -112,8 +112,8 @@ Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz
       }
       return embed;
     }
-    const budgetsb = new CreateDeckEmbed(result, "budgetsb");
-    const telimps = new CreateDeckEmbed(result, "telimpssb");
+    const budgetsb = createDeckEmbed(result, "budgetsb");
+    const telimps = createDeckEmbed(result, "telimpssb");
     const m = await message.channel.send({
       embeds: [helpsb],
       components: [row],

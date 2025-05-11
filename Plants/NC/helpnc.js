@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -126,12 +126,12 @@ module.exports = {
     const toBuildComboString = buildDeckString(nightcapDecks.comboDecks);
     const toBuildString = buildDeckString(nightcapDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -143,38 +143,38 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const compRow = new CreateButtons("toyotacontrolla", "cburn");
-    const cburn = new CreateButtons("helpcomp", "tc");
-    const tc = new CreateButtons("cyburn", "comphelp");
-    const comboRow = new CreateButtons("translattail", "cburn2");
-    const cburn2 = new CreateButtons("helpcombo", "tl");
-    const tl = new CreateButtons("cyburn2", "combohelp");
-    const alldecksrow = new CreateButtons("translattail2", "bnc");
-    const bnc = new CreateButtons("helpall", "cburn3");
-    const cburn3 = new CreateButtons("budgetnc", "tc2");
-    const tc2 = new CreateButtons("cyburn3", "tl2");
-    const tl2 = new CreateButtons("toyotacontrolla2", "allhelp");
-    const embed = new CreateHelpEmbed(
+    const compRow = createButtons("toyotacontrolla", "cburn");
+    const cburn = createButtons("helpcomp", "tc");
+    const tc = createButtons("cyburn", "comphelp");
+    const comboRow = createButtons("translattail", "cburn2");
+    const cburn2 = createButtons("helpcombo", "tl");
+    const tl = createButtons("cyburn2", "combohelp");
+    const alldecksrow = createButtons("translattail2", "bnc");
+    const bnc = createButtons("helpall", "cburn3");
+    const cburn3 = createButtons("budgetnc", "tc2");
+    const tc2 = createButtons("cyburn3", "tl2");
+    const tl2 = createButtons("toyotacontrolla2", "allhelp");
+    const embed = createHelpEmbed(
       "Night Cap(NC) Decks",
       `To view the Night Cap decks please select an option from the select menu below!
 Note: Night Cap has ${nightcapDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044"
     );
-    const compEmbed = new CreateHelpEmbed(
+    const compEmbed = createHelpEmbed(
       "Night Cap Competitive Decks",
       `My Competitive Decks for Night Cap(NC) are ${toBuildCompString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
       `To view the Competitive Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Competitive decks!
 Note: Night Cap has ${nightcapDecks.competitiveDecks.length} Competitive decks in Tbot`
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "Night Cap Decks",
       `My Decks for Night Cap(NC) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
       `To view the Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Night Cap decks!
 Note: Night Cap has ${nightcapDecks.allDecks.length} decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Night Cap Combo Decks",
       `My Combo Decks for Night Cap(NC) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
@@ -183,12 +183,12 @@ Note: Night Cap has ${nightcapDecks.comboDecks.length} Combo decks in Tbot`
     );
     const [result] = await db.query(`SELECT * from ncdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -206,10 +206,10 @@ Note: Night Cap has ${nightcapDecks.comboDecks.length} Combo decks in Tbot`
       return embed;
     }
     //budgetnc
-    const budgetnc = new CreateDeckEmbed(result, "budgetnc");
-    const cyburn = new CreateDeckEmbed(result, "cyburn");
-    const toyotacontrolla = new CreateDeckEmbed(result, "toyotacontrolla");
-    const translattail = new CreateDeckEmbed(result, "translattail");
+    const budgetnc = createDeckEmbed(result, "budgetnc");
+    const cyburn = createDeckEmbed(result, "cyburn");
+    const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
+    const translattail = createDeckEmbed(result, "translattail");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

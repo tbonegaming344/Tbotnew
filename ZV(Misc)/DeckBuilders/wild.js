@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -75,12 +75,12 @@ module.exports = {
       allDecks: ["dinogloves", "terrifytricksterazzi"],
     };
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -92,9 +92,9 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("terrifytricksterazzi", "dgloves");
-    const dgloves = new CreateButtons("helpmeme", "tster");
-    const tster = new CreateButtons("dinogloves", "memehelp");
+    const memerow = createButtons("terrifytricksterazzi", "dgloves");
+    const dgloves = createButtons("helpmeme", "tster");
+    const tster = createButtons("dinogloves", "memehelp");
 
     function BuildDeckString(decks) {
       return decks
@@ -103,13 +103,13 @@ module.exports = {
     }
     const toBuildMemeString = BuildDeckString(wildDecks.memeDecks);
     const user = await client.users.fetch("701053825628241951");
-    const wild = new CreateHelpEmbed(
+    const wild = createHelpEmbed(
       "Wild Decks",
       `To view the decks made by Wild please select an option from the select menu below! select meme decks to view all decks made by Wild
 Note: Wild has ${wildDecks.allDecks.length} decks in Tbot`,
       user.displayAvatarURL()
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Wild's Meme Decks",
       `My meme decks created by Wild are ${toBuildMemeString}`,
       user.displayAvatarURL(),
@@ -120,12 +120,12 @@ Note: Wild has ${wildDecks.memeDecks.length} meme decks in Tbot`
       await db.query(`select dinogloves, terrifytricksterazzi from gkdecks gk 
 inner join rbdecks rb on (gk.deckinfo = rb.deckinfo)`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -142,8 +142,8 @@ inner join rbdecks rb on (gk.deckinfo = rb.deckinfo)`);
       }
       return embed;
     }
-    const dinogloves = new CreateDeckEmbed(result, "dinogloves");
-    const terrifytricksterazzi = new CreateDeckEmbed(
+    const dinogloves = createDeckEmbed(result, "dinogloves");
+    const terrifytricksterazzi = createDeckEmbed(
       result,
       "terrifytricksterazzi"
     );

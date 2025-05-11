@@ -1,7 +1,7 @@
 const {EmbedBuilder}= require("discord.js")
 module.exports = {
 	name: `taco`,
-	aliases: [`2ndbesttacoofalltime`, `2ndbest`, `secondbest`, `secondbesttaco`, `besttaco`, `tacoofalltime`, `secondbesttacoofalltime`, `2btoat`, `sbtoat`],
+	aliases: [`2ndbesttacoofalltime`, `2ndbest`, `secondbest`, `secondbesttaco`, `besttaco`, `tacoofalltime`, `secondbesttacoofalltime`, `2btoat`, `sbtoat`, ` 2nd-besttaco`],
 	category: `Tricks Phase`,
 	run: async(client, message,args)=> {
 		const taco = new EmbedBuilder()

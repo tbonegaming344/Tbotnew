@@ -1,7 +1,7 @@
 const {EmbedBuilder}= require("discord.js")
 module.exports = {
 	name: `crosspollination`,
-	aliases: [`strike1`, `ss13`, `sunstrike`, `xpollination`, `xpoll`, `crosspoll`],
+	aliases: [`strike1`, `ss13`, `sunstrike`, `xpollination`, `xpoll`, `crosspoll`, `cross-pollination`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
 		const ss = new EmbedBuilder()

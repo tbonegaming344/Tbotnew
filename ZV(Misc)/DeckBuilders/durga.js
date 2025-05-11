@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -85,12 +85,12 @@ module.exports = {
       allDecks: ["bastet", "bfplankcontrol", "pbeans"],
     };
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -102,13 +102,13 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("pbeans", "bfpc");
-    const bfpc = new CreateButtons("helpladder", "pb");
-    const pb = new CreateButtons("bfplankcontrol", "ladderhelp");
-    const alldecksrow = new CreateButtons("pbeans2", "bas");
-    const bas = new CreateButtons("helpall", "bfpc2");
-    const bfpc2 = new CreateButtons("bastet", "pb2");
-    const pb2 = new CreateButtons("bfplankcontrol2", "allhelp");
+    const ladderrow = createButtons("pbeans", "bfpc");
+    const bfpc = createButtons("helpladder", "pb");
+    const pb = createButtons("bfplankcontrol", "ladderhelp");
+    const alldecksrow = createButtons("pbeans2", "bas");
+    const bas = createButtons("helpall", "bfpc2");
+    const bfpc2 = createButtons("bastet", "pb2");
+    const pb2 = createButtons("bfplankcontrol2", "allhelp");
     function BuildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -120,20 +120,20 @@ module.exports = {
     const [result] = await db.query(`select bastet, bfplankcontrol, pbeans from 
           imdecks im inner join bfdecks bf on (im.deckinfo = bf.deckinfo)
           inner join gsdecks gs on (im.deckinfo = gs.deckinfo)`);
-    const durga = new CreateHelpEmbed(
+    const durga = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${durgaDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My ladder decks made by Durga are to ${ladderString}`,
       user.displayAvatarURL(),
       `To view the ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: Durga has ${durgaDecks.ladderDecks.length} ladder decks in Tbot`
     );
-    const allDecksEmbed = new CreateHelpEmbed(
+    const allDecksEmbed = createHelpEmbed(
       `${user.displayName} Decks`,
       `My decks made by Durga are to ${toBuildString}`,
       user.displayAvatarURL(),
@@ -141,12 +141,12 @@ Note: Durga has ${durgaDecks.ladderDecks.length} ladder decks in Tbot`
 Note: Durga has ${durgaDecks.allDecks.length} decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -163,9 +163,9 @@ Note: Durga has ${durgaDecks.allDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const bastet = new CreateDeckEmbed(result, "bastet");
-    const bfplankcontrol = new CreateDeckEmbed(result, "bfplankcontrol");
-    const pbeans = new CreateDeckEmbed(result, "pbeans");
+    const bastet = createDeckEmbed(result, "bastet");
+    const bfplankcontrol = createDeckEmbed(result, "bfplankcontrol");
+    const pbeans = createDeckEmbed(result, "pbeans");
     const m = await message.channel.send({
       embeds: [durga],
       components: [row],

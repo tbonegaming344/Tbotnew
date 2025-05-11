@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -84,12 +84,12 @@ module.exports = {
     const toBuildTempo = buildDeckString(borisDecks.tempoDecks);
     const toBuildMeme = buildDeckString(borisDecks.memeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -101,40 +101,40 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const tempo = new CreateButtons("lockthebathroom", "lcbd");
-    const lcbd = new CreateButtons("helptempo", "ltbr");
-    const ltbr = new CreateButtons("lifecouldbedream", "tempohelp");
-    const alldecksrow = new CreateButtons("mspotk", "lcbd2");
-    const lcbd2 = new CreateButtons("helpall", "ltbr2");
-    const ltbr2 = new CreateButtons("lifecouldbedream2", "msp");
-    const msp = new CreateButtons("lockthebathroom2", "allhelp");
-    const memerow = new CreateButtons("mspotk2", "lcbd3");
-    const lcbd3 = new CreateButtons("helpmeme", "msp2");
-    const msp2 = new CreateButtons("lifecouldbedream3", "memehelp");
+    const tempo = createButtons("lockthebathroom", "lcbd");
+    const lcbd = createButtons("helptempo", "ltbr");
+    const ltbr = createButtons("lifecouldbedream", "tempohelp");
+    const alldecksrow = createButtons("mspotk", "lcbd2");
+    const lcbd2 = createButtons("helpall", "ltbr2");
+    const ltbr2 = createButtons("lifecouldbedream2", "msp");
+    const msp = createButtons("lockthebathroom2", "allhelp");
+    const memerow = createButtons("mspotk2", "lcbd3");
+    const lcbd3 = createButtons("helpmeme", "msp2");
+    const msp2 = createButtons("lifecouldbedream3", "memehelp");
     const [result] = await db.query(`SELECT lockin, lcbd, mspotk FROM bfdecks bf
       inner join ccdecks cc on (bf.deckinfo = cc.deckinfo)`);
     const user = await client.users.fetch("705167235429433435");
-    const boris = new CreateHelpEmbed(
+    const boris = createHelpEmbed(
       `${user.displayName} Decks`,
       `To find out more about the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const tempbor = new CreateHelpEmbed(
+    const tempbor = createHelpEmbed(
       `${user.displayName} Tempo Decks`,
       `My tempo decks made by ${user.displayName} are ${toBuildTempo}`,
       user.displayAvatarURL(),
       `To view the tempo Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${borisDecks.tempoDecks.length} tempo decks in Tbot`
     );
-    const memebor = new CreateHelpEmbed(
+    const memebor = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the meme Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${borisDecks.memeDecks.length} meme decks in Tbot`
     );
-    const allbor = new CreateHelpEmbed(
+    const allbor = createHelpEmbed(
       `${user.displayName} All Decks`,
       `My decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
@@ -142,12 +142,12 @@ Note: ${user.displayName} has ${borisDecks.memeDecks.length} meme decks in Tbot`
 Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -164,9 +164,9 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
       }
       return embed;
     }
-    const lockin = new CreateDeckEmbed(result, "lockin");
-    const lcbdream = new CreateDeckEmbed(result, "lcbd");
-    const mspotk = new CreateDeckEmbed(result, "mspotk");
+    const lockin = createDeckEmbed(result, "lockin");
+    const lcbdream = createDeckEmbed(result, "lcbd");
+    const mspotk = createDeckEmbed(result, "mspotk");
     const m = await message.channel.send({
       embeds: [boris],
       components: [row],

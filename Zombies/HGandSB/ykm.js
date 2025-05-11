@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
   name: `ykm`,
-  aliases: [`youngkenmartin`, `ykmhg`, `hgykm`, `ykmartin`, `ykmv2`],
+  aliases: [`youngkenmartin`, `ykmhg`, `hgykm`, `ykmartin`, `ykmv2`, `ykm2`],
   category: `Huge-Gigantacus/SuperBrainz`,
   run: async (client, message, args) => {
     const [result] = await db.query(`SELECT ykm FROM hgdecks`);

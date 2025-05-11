@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -158,12 +158,12 @@ module.exports = {
       hugeGigantacusDecks.midrangeDecks
     );
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -175,82 +175,82 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("youngkenmartin", "bgus");
-    const bgus = new CreateButtons("helpall", "cl");
-    const cl = new CreateButtons("budgetgus", "cboy");
-    const cboy = new CreateButtons("conjureleap", "ft");
-    const ft = new CreateButtons("cryoboy", "gps");
-    const gps = new CreateButtons("frozentelimps", "gs");
-    const gs = new CreateButtons("gravepiratestache", "otks");
-    const otks = new CreateButtons("gravestache", "ti");
-    const ti = new CreateButtons("otkswabbie", "ykm");
-    const ykm = new CreateButtons("telimps", "allhelp");
-    const ladderrow = new CreateButtons("gravestache2", "cboy2");
-    const cboy2 = new CreateButtons("helpladder", "gps2");
-    const gps2 = new CreateButtons("cryoboy2", "gs2");
-    const gs2 = new CreateButtons("gravepiratestache2", "ladderhelp");
-    const memerow = new CreateButtons("youngkenmartin2", "cl2");
-    const cl2 = new CreateButtons("helpmeme", "ft2");
-    const ft2 = new CreateButtons("conjureleap2", "otks2");
-    const otks2 = new CreateButtons("frozentelimps2", "ykm2");
-    const ykm2 = new CreateButtons("otkswabbie2", "memehelp");
-    const comborow = new CreateButtons("youngkenmartin3", "bgus2");
-    const bgus2 = new CreateButtons("helpcombo", "cboy3");
-    const cboy3 = new CreateButtons("budgetgus2", "ft3");
-    const ft3 = new CreateButtons("cryoboy3", "gps3");
-    const gps3 = new CreateButtons("frozentelimps3", "gs3");
-    const gs3 = new CreateButtons("gravepiratestache3", "otks3");
-    const otks3 = new CreateButtons("gravestache3", "ti2");
-    const ti2 = new CreateButtons("otkswabbie3", "ykm3");
-    const ykm3 = new CreateButtons("telimps2", "combohelp");
-    const controlrow = new CreateButtons("telimps3", "ft4");
-    const ft4 = new CreateButtons("helpcontrol", "ti3");
-    const ti3 = new CreateButtons("frozentelimps4", "controlhelp");
-    const midrangerow = new CreateButtons("youngkenmartin3", "cboy4");
-    const cboy4 = new CreateButtons("helpmidrange", "ykm4");
-    const ykm4 = new CreateButtons("cryoboy4", "midrangehelp");
-    const allEmbed = new CreateHelpEmbed(
+    const alldecksrow = createButtons("youngkenmartin", "bgus");
+    const bgus = createButtons("helpall", "cl");
+    const cl = createButtons("budgetgus", "cboy");
+    const cboy = createButtons("conjureleap", "ft");
+    const ft = createButtons("cryoboy", "gps");
+    const gps = createButtons("frozentelimps", "gs");
+    const gs = createButtons("gravepiratestache", "otks");
+    const otks = createButtons("gravestache", "ti");
+    const ti = createButtons("otkswabbie", "ykm");
+    const ykm = createButtons("telimps", "allhelp");
+    const ladderrow = createButtons("gravestache2", "cboy2");
+    const cboy2 = createButtons("helpladder", "gps2");
+    const gps2 = createButtons("cryoboy2", "gs2");
+    const gs2 = createButtons("gravepiratestache2", "ladderhelp");
+    const memerow = createButtons("youngkenmartin2", "cl2");
+    const cl2 = createButtons("helpmeme", "ft2");
+    const ft2 = createButtons("conjureleap2", "otks2");
+    const otks2 = createButtons("frozentelimps2", "ykm2");
+    const ykm2 = createButtons("otkswabbie2", "memehelp");
+    const comborow = createButtons("youngkenmartin3", "bgus2");
+    const bgus2 = createButtons("helpcombo", "cboy3");
+    const cboy3 = createButtons("budgetgus2", "ft3");
+    const ft3 = createButtons("cryoboy3", "gps3");
+    const gps3 = createButtons("frozentelimps3", "gs3");
+    const gs3 = createButtons("gravepiratestache3", "otks3");
+    const otks3 = createButtons("gravestache3", "ti2");
+    const ti2 = createButtons("otkswabbie3", "ykm3");
+    const ykm3 = createButtons("telimps2", "combohelp");
+    const controlrow = createButtons("telimps3", "ft4");
+    const ft4 = createButtons("helpcontrol", "ti3");
+    const ti3 = createButtons("frozentelimps4", "controlhelp");
+    const midrangerow = createButtons("youngkenmartin3", "cboy4");
+    const cboy4 = createButtons("helpmidrange", "ykm4");
+    const ykm4 = createButtons("cryoboy4", "midrangehelp");
+    const allEmbed = createHelpEmbed(
       "Huge Gigantacus Decks",
       `My commands for Huge-Gigantacus(HG) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`
     );
-    const embed = new CreateHelpEmbed(
+    const embed = createHelpEmbed(
       "Huge Gigantacus Decks",
       `To view the Huge Gigantacus decks please select an option from the select menu below!
 Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Huge Gigantacus Ladder Decks",
       `My ladder decks for Huge-Gigantacus(HG) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the ladder Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
 Note: there are ${hugeGigantacusDecks.ladderDecks.length} ladder decks for Huge Gigantacus in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Huge Gigantacus Meme Decks",
       `My meme decks for Huge-Gigantacus(HG) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the meme Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: there are ${hugeGigantacusDecks.memeDecks.length} meme decks for Huge Gigantacus in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Huge Gigantacus Combo Decks",
       `My combo decks for Huge-Gigantacus(HG) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the combo Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: there are ${hugeGigantacusDecks.comboDecks.length} combo decks for Huge Gigantacus in Tbot`
     );
-    const controlEmbed = new CreateHelpEmbed(
+    const controlEmbed = createHelpEmbed(
       "Huge Gigantacus Control Decks",
       `My control decks for Huge-Gigantacus(HG) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the control Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all control decks!
 Note: there are ${hugeGigantacusDecks.controlDecks.length} control decks for Huge Gigantacus in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Huge Gigantacus Midrange Decks",
       `My midrange decks for Huge-Gigantacus(HG) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
@@ -259,12 +259,12 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
     );
     const [result] = await db.query(`SELECT * FROM hgdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -281,15 +281,15 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
       }
       return embed;
     }
-    const budgetykm = new CreateDeckEmbed(result, "budgetykm");
-    const conjureleap = new CreateDeckEmbed(result, "conjureleap");
-    const cryoboy = new CreateDeckEmbed(result, "cyroboy");
-    const frozentelimps = new CreateDeckEmbed(result, "frozentelimps");
-    const gravepiratestache = new CreateDeckEmbed(result, "gps");
-    const gravestache = new CreateDeckEmbed(result, "gravestache");
-    const otkswabbie = new CreateDeckEmbed(result, "otkswabbie");
-    const telimps = new CreateDeckEmbed(result, "telimps");
-    const youngkenmartin = new CreateDeckEmbed(result, "ykm");
+    const budgetykm = createDeckEmbed(result, "budgetykm");
+    const conjureleap = createDeckEmbed(result, "conjureleap");
+    const cryoboy = createDeckEmbed(result, "cyroboy");
+    const frozentelimps = createDeckEmbed(result, "frozentelimps");
+    const gravepiratestache = createDeckEmbed(result, "gps");
+    const gravestache = createDeckEmbed(result, "gravestache");
+    const otkswabbie = createDeckEmbed(result, "otkswabbie");
+    const telimps = createDeckEmbed(result, "telimps");
+    const youngkenmartin = createDeckEmbed(result, "ykm");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],

@@ -11,6 +11,7 @@ module.exports = {
     `budgetmidrandgewk`,
     `budgetmidrangewallknight`,
     `wkbudgethealmid`,
+    `bomid`,
     `wkbudgetmidheal`,
     `budgetwk`,
     `budgetmidknight`,

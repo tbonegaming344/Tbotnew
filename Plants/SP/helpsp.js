@@ -10,14 +10,14 @@ const {
 const db = require("../../index.js");
 
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -113,12 +113,12 @@ module.exports = {
     const toBuildControlString = buildDeckString(spudowDecks.controlDecks);
     const toBuildMidrangeString = buildDeckString(spudowDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -130,50 +130,50 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = CreateButtons("recycling", "nut2");
-    const nut2 = CreateButtons("helpmeme", "pop2");
-    const pop2 = CreateButtons("nuttin2", "recy");
-    const recy = CreateButtons("popsicle2", "memehelp");
-    const controlrow = CreateButtons("radiotherapy2", "pop");
-    const pop = CreateButtons("helpcontrol", "radio2");
-    const radio2 = CreateButtons("popsicle", "controlhelp"); 
-    const midrangerow = CreateButtons("recycling2", "bsp");
-    const bsp = CreateButtons("helpmidrange", "recy2");
-    const recy2 = CreateButtons("budgetsp", "midrangehelp");
-    const alldecksrow = CreateButtons("recycling3", "bsp2");
-    const bsp2 = CreateButtons("helpall", "nut");
-    const nut = CreateButtons("budgetsp2", "pop3");
-    const pop3 = CreateButtons("nuttin", "radio");
-    const radio = CreateButtons("popsicle3", "recy3");
-    const recy3 = CreateButtons("radiotherapy", "helpall");
-    const embed = CreateHelpEmbed(
+    const memerow = createButtons("recycling", "nut2");
+    const nut2 = createButtons("helpmeme", "pop2");
+    const pop2 = createButtons("nuttin2", "recy");
+    const recy = createButtons("popsicle2", "memehelp");
+    const controlrow = createButtons("radiotherapy2", "pop");
+    const pop = createButtons("helpcontrol", "radio2");
+    const radio2 = createButtons("popsicle", "controlhelp"); 
+    const midrangerow = createButtons("recycling2", "bsp");
+    const bsp = createButtons("helpmidrange", "recy2");
+    const recy2 = createButtons("budgetsp", "midrangehelp");
+    const alldecksrow = createButtons("recycling3", "bsp2");
+    const bsp2 = createButtons("helpall", "nut");
+    const nut = createButtons("budgetsp2", "pop3");
+    const pop3 = createButtons("nuttin", "radio");
+    const radio = createButtons("popsicle3", "recy3");
+    const recy3 = createButtons("radiotherapy", "helpall");
+    const embed = createHelpEmbed(
       "Spudow Decks",
       `To view the Spudow decks please select an option using the select menu below!
 Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719"
     );
-    const memeEmbed = CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Spudow Meme Decks",
       `My meme decks for Spudow are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.memeDecks.length} decks in Tbot`
     );
-    const allEmbed = CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "All Spudow Decks",
       `My decks for Spudow are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`
     );
-    const controlEmbed = CreateHelpEmbed(
+    const controlEmbed = createHelpEmbed(
       "Spudow Control Decks",
       `My control decks for Spudow are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
       `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
 Note: Spudow has ${spudowDecks.controlDecks.length} decks in Tbot`
     );
-    const midrangeEmbed = CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Spudow Midrange Decks",
       `My midrange decks for Spudow are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/plantsvzninjastars/images/0/0f/Spudow.png/revision/latest?cb=20230921000000",
@@ -183,12 +183,12 @@ Note: Spudow has ${spudowDecks.midrangeDecks.length} decks in Tbot`
     const [result] = await db.query(`SELECT * from spdecks`);
 
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -205,11 +205,11 @@ Note: Spudow has ${spudowDecks.midrangeDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const budgetsp = CreateDeckEmbed(result, "budgetburstsp");
-    const radiotherapy = CreateDeckEmbed(result, "radiotherapy");
-    const recycling = CreateDeckEmbed(result, "recycling");
-    const nuttin = CreateDeckEmbed(result, "nutting");
-    const popsicle = CreateDeckEmbed(result, "popsicle");
+    const budgetsp = createDeckEmbed(result, "budgetburstsp");
+    const radiotherapy = createDeckEmbed(result, "radiotherapy");
+    const recycling = createDeckEmbed(result, "recycling");
+    const nuttin = createDeckEmbed(result, "nutting");
+    const popsicle = createDeckEmbed(result, "popsicle");
 
     const m = await message.channel.send({
       embeds: [embed],

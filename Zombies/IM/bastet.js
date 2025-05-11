@@ -2,7 +2,7 @@ const {EmbedBuilder} = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
 	name:  `bastet`,
-	aliases: [`catster`, `trickcatche`],
+	aliases: [`catster`, `trickcatche`, `otkcatlady`],
 	category: `Immorticia(IM)`,
 		run: async(client, message, args) => {
 			const [result] = await db.query(`SELECT bastet FROM imdecks`)

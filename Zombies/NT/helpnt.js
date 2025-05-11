@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -128,12 +128,12 @@ module.exports = {
     const toBuildComboString = buildDeckString(neptunaDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(neptunaDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -145,82 +145,82 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("sunlord", "ag");
-    const ag = new CreateButtons("helpall", "anti");
-    const anti = new CreateButtons("agraves", "bnt");
-    const bnt = new CreateButtons("antiagor", "fl");
-    const fl = new CreateButtons("budgetnt", "go");
-    const go = new CreateButtons("floss", "ib");
-    const ib = new CreateButtons("gomorrah", "lt");
-    const lt = new CreateButtons("icebox", "sy");
-    const sy = new CreateButtons("ladytuna", "sl");
-    const sl = new CreateButtons("schoolyard", "allhelp");
-    const ladderrow = new CreateButtons("schoolyard2", "ag2");
-    const ag2 = new CreateButtons("helpladder", "go2");
-    const go2 = new CreateButtons("agraves2", "sy2");
-    const sy2 = new CreateButtons("gomorrah2", "ladderhelp");
-    const memerow = new CreateButtons("sunlord2", "anti2");
-    const anti2 = new CreateButtons("helpmeme", "fl2");
-    const fl2 = new CreateButtons("antiagor2", "lt2");
-    const lt2 = new CreateButtons("floss2", "sl2");
-    const sl2 = new CreateButtons("ladytuna2", "memehelp");
-    const aggrorow = new CreateButtons("schoolyard3", "ag3");
-    const ag3 = new CreateButtons("helpaggro", "bnt2");
-    const bnt2 = new CreateButtons("agraves3", "sy3");
-    const sy3 = new CreateButtons("budgetnt2", "aggrohelp");
-    const comborow = new CreateButtons("sunlord3", "anti3");
-    const anti3 = new CreateButtons("helpcombo", "bnt3");
-    const bnt3 = new CreateButtons("antiagor3", "fl3");
-    const fl3 = new CreateButtons("budgetnt3", "sl3");
-    const sl3 = new CreateButtons("floss3", "combohelp");
-    const midrangerow = new CreateButtons("sunlord4", "go3");
-    const go3 = new CreateButtons("helpmid", "ib2");
-    const ib2 = new CreateButtons("gomorrah3", "lt3");
-    const lt3 = new CreateButtons("icebox2", "sl4");
-    const sl4 = new CreateButtons("ladytuna3", "midhelp");
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksrow = createButtons("sunlord", "ag");
+    const ag = createButtons("helpall", "anti");
+    const anti = createButtons("agraves", "bnt");
+    const bnt = createButtons("antiagor", "fl");
+    const fl = createButtons("budgetnt", "go");
+    const go = createButtons("floss", "ib");
+    const ib = createButtons("gomorrah", "lt");
+    const lt = createButtons("icebox", "sy");
+    const sy = createButtons("ladytuna", "sl");
+    const sl = createButtons("schoolyard", "allhelp");
+    const ladderrow = createButtons("schoolyard2", "ag2");
+    const ag2 = createButtons("helpladder", "go2");
+    const go2 = createButtons("agraves2", "sy2");
+    const sy2 = createButtons("gomorrah2", "ladderhelp");
+    const memerow = createButtons("sunlord2", "anti2");
+    const anti2 = createButtons("helpmeme", "fl2");
+    const fl2 = createButtons("antiagor2", "lt2");
+    const lt2 = createButtons("floss2", "sl2");
+    const sl2 = createButtons("ladytuna2", "memehelp");
+    const aggrorow = createButtons("schoolyard3", "ag3");
+    const ag3 = createButtons("helpaggro", "bnt2");
+    const bnt2 = createButtons("agraves3", "sy3");
+    const sy3 = createButtons("budgetnt2", "aggrohelp");
+    const comborow = createButtons("sunlord3", "anti3");
+    const anti3 = createButtons("helpcombo", "bnt3");
+    const bnt3 = createButtons("antiagor3", "fl3");
+    const fl3 = createButtons("budgetnt3", "sl3");
+    const sl3 = createButtons("floss3", "combohelp");
+    const midrangerow = createButtons("sunlord4", "go3");
+    const go3 = createButtons("helpmid", "ib2");
+    const ib2 = createButtons("gomorrah3", "lt3");
+    const lt3 = createButtons("icebox2", "sl4");
+    const sl4 = createButtons("ladytuna3", "midhelp");
+    const alldecksEmbed = createHelpEmbed(
       "Neptuna Decks",
       `My commands for Neptuna(NT) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
       `To view the Neptuna decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Neptuna Ladder Decks",
       `My commands for Neptuna(NT) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
       `To view the Neptuna ladder decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has a total of ${neptunaDecks.ladderDecks.length} ladder decks in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Neptuna Meme Decks",
       `My commands for Neptuna(NT) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
       `To view the Neptuna meme decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has a total of ${neptunaDecks.memeDecks.length} meme decks in Tbot`
     );
-    const aggroEmbed = new CreateHelpEmbed(
+    const aggroEmbed = createHelpEmbed(
       "Neptuna Aggro Decks",
       `My commands for Neptuna(NT) are ${toBuildAggroString}`,
       "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
       `To view the Neptuna aggro decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has a total of ${neptunaDecks.aggroDecks.length} aggro decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Neptuna Combo Decks",
       `My commands for Neptuna(NT) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
       `To view the Neptuna combo decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has a total of ${neptunaDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Neptuna Midrange Decks",
       `My commands for Neptuna(NT) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
       `To view the Neptuna midrange decks please use the commands listed above or click on the buttons below!
 Note: Neptuna has a total of ${neptunaDecks.midrangeDecks.length} midrange decks in Tbot`
     );
-    const nthelp = new CreateHelpEmbed(
+    const nthelp = createHelpEmbed(
       "Neptuna Decks",
       `To view the Neptuna decks please select an option from the select menu below!
 Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
@@ -228,12 +228,12 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
     );
     const [result] = await db.query(`select * from ntdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -250,15 +250,15 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
       }
       return embed;
     }
-    const agraves = new CreateDeckEmbed(result, "agraves");
-    const antiagor = new CreateDeckEmbed(result, "antiagor");
-    const budgetnt = new CreateDeckEmbed(result, "budgetnt");
-    const floss = new CreateDeckEmbed(result, "floss");
-    const gomorrah = new CreateDeckEmbed(result, "gomorrah");
-    const icebox = new CreateDeckEmbed(result, "icebox");
-    const ladytuna = new CreateDeckEmbed(result, "ladytuna");
-    const schoolyard = new CreateDeckEmbed(result, "schoolyard");
-    const sunlord = new CreateDeckEmbed(result, "wimps");
+    const agraves = createDeckEmbed(result, "agraves");
+    const antiagor = createDeckEmbed(result, "antiagor");
+    const budgetnt = createDeckEmbed(result, "budgetnt");
+    const floss = createDeckEmbed(result, "floss");
+    const gomorrah = createDeckEmbed(result, "gomorrah");
+    const icebox = createDeckEmbed(result, "icebox");
+    const ladytuna = createDeckEmbed(result, "ladytuna");
+    const schoolyard = createDeckEmbed(result, "schoolyard");
+    const sunlord = createDeckEmbed(result, "wimps");
     const m = await message.channel.send({
       embeds: [nthelp],
       components: [row],

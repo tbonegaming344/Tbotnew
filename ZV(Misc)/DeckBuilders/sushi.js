@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -111,12 +111,12 @@ module.exports = {
     const toBuildControl = buildDeckString(sushiDecks.controlDecks);
     const toBuildString = buildDeckString(sushiDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -128,28 +128,28 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("trickmech", "propack");
-    const propack =  new CreateButtons("helpladder", "tisb");
-    const tisb =  new CreateButtons("professorpackage", "tmech");
-    const tmech =  new CreateButtons("telimpssb", "ladderhelp");
-    const comborow = new CreateButtons("telimpssb2", "sb");
-    const sb = new CreateButtons("combohelp", "ti");
-    const ti = new CreateButtons("sunbandits", "tisb2");
-    const tisb2 = new CreateButtons("telimps", "helpcombo")
-    const competitiverow =  new CreateButtons("telimps2", "hmrose");
-    const hmrose =  new CreateButtons("helpcomp", "ti2");
-    const ti2 =  new CreateButtons("healmidrose2", "comphelp");
-    const controlrow =  new CreateButtons("telimpssb3", "sb2");
-    const sb2 = new CreateButtons("helpcontrol", "ti3")
-    const ti3 =  new CreateButtons("sunbandits2", "tisb3");
-    const tisb3 =  new CreateButtons("telimps3", "controlhelp");
-    const alldecksrow = new CreateButtons("trickmech2", "hmrose2");
-    const hmrose2 = new CreateButtons("helpall", "propack2");
-    const propack2 = new CreateButtons("healmidrose2", "sb3");
-    const sb3 = new CreateButtons("professorpackage2", "ti4");
-    const ti4 = new CreateButtons("sunbandits3", "tisb4");
-    const tisb4 = new CreateButtons("telimps4", "tmech2");
-    const tmech2 =  new CreateButtons("telimpssb4", "allhelp");
+    const ladderrow = createButtons("trickmech", "propack");
+    const propack =  createButtons("helpladder", "tisb");
+    const tisb =  createButtons("professorpackage", "tmech");
+    const tmech =  createButtons("telimpssb", "ladderhelp");
+    const comborow = createButtons("telimpssb2", "sb");
+    const sb = createButtons("combohelp", "ti");
+    const ti = createButtons("sunbandits", "tisb2");
+    const tisb2 = createButtons("telimps", "helpcombo")
+    const competitiverow =  createButtons("telimps2", "hmrose");
+    const hmrose =  createButtons("helpcomp", "ti2");
+    const ti2 =  createButtons("healmidrose2", "comphelp");
+    const controlrow =  createButtons("telimpssb3", "sb2");
+    const sb2 = createButtons("helpcontrol", "ti3")
+    const ti3 =  createButtons("sunbandits2", "tisb3");
+    const tisb3 =  createButtons("telimps3", "controlhelp");
+    const alldecksrow = createButtons("trickmech2", "hmrose2");
+    const hmrose2 = createButtons("helpall", "propack2");
+    const propack2 = createButtons("healmidrose2", "sb3");
+    const sb3 = createButtons("professorpackage2", "ti4");
+    const ti4 = createButtons("sunbandits3", "tisb4");
+    const tisb4 = createButtons("telimps4", "tmech2");
+    const tmech2 =  createButtons("telimpssb4", "allhelp");
     const [result] =
       await db.query(`select hmr, professorpackage, sunbandits, telimps, telimpssb,trickmech
 from rodecks ro
@@ -164,41 +164,41 @@ on (ro.deckinfo = sb.deckinfo)
 inner join zmdecks zm
 on (ro.deckinfo = zm.deckinfo)`);
     const user = await client.users.fetch("198942472565555200");
-    const sushi = new CreateHelpEmbed(
+    const sushi = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     )
-      const alldecksEmbed = new CreateHelpEmbed(
+      const alldecksEmbed = createHelpEmbed(
         `${user.displayName} Decks`,
         `My commands for decks made by ${user.displayName} are ${toBuildString}`,
         user.displayAvatarURL(), 
         `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`
       )
-      const combosushi = new CreateHelpEmbed(
+      const combosushi = createHelpEmbed(
         `${user.displayName} Combo Decks`,
         `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
         user.displayAvatarURL(), 
         `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${sushiDecks.comboDecks.length} Combo decks in Tbot`
       )
-      const controlsushi = new CreateHelpEmbed(
+      const controlsushi = createHelpEmbed(
         `${user.displayName} Control Decks`,
         `My Control decks made by ${user.displayName} are ${toBuildControl}`,
         user.displayAvatarURL(), 
         `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${sushiDecks.controlDecks.length} Control decks in Tbot`
       )
-      const competitivesushi = new CreateHelpEmbed(
+      const competitivesushi = createHelpEmbed(
         `${user.displayName} Competitive Decks`,
         `My Competitive decks made by ${user.displayName} are ${toBuildCompetitive}`,
         user.displayAvatarURL(), 
         `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${sushiDecks.competitiveDecks.length} Competitive decks in Tbot`
       )
-      const laddersushi = new CreateHelpEmbed(
+      const laddersushi = createHelpEmbed(
         `${user.displayName} Ladder Decks`, 
          `My Ladder decks made by ${user.displayName} are ${toBuildLadder}`, 
          user.displayAvatarURL(), 
@@ -207,12 +207,12 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
       )
     
        /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -229,12 +229,12 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         }
         return embed;
       }
-    const hmr = new CreateDeckEmbed(result, "hmr");
-    const professorpackage= new CreateDeckEmbed(result, "professorpackage");
-    const sband = new CreateDeckEmbed(result, "sunbandits");
-    const timps = new CreateDeckEmbed(result, "telimps");
-    const trickmech = new CreateDeckEmbed(result, "trickmech");
-    const timpsb = new CreateDeckEmbed(result, "telimpssb")
+    const hmr = createDeckEmbed(result, "hmr");
+    const professorpackage= createDeckEmbed(result, "professorpackage");
+    const sband = createDeckEmbed(result, "sunbandits");
+    const timps = createDeckEmbed(result, "telimps");
+    const trickmech = createDeckEmbed(result, "trickmech");
+    const timpsb = createDeckEmbed(result, "telimpssb")
     const m = await message.channel.send({
       embeds: [sushi],
       components: [row],

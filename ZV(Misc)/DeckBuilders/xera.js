@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -164,12 +164,12 @@ module.exports = {
     const toBuildControlString = buildDeckString(xeraDecks.controlDecks);
     const toBuildMidString = buildDeckString(xeraDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -181,64 +181,64 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = new CreateButtons("gravepiratestache", "br");
-    const br = new CreateButtons("helpladder", "go");
-    const go = new CreateButtons("brady", "gps");
-    const gps = new CreateButtons("gomorrah", "ladderhelp");
-    const memerow = new CreateButtons("watersports", "sav");
-    const sav = new CreateButtons("helpmeme", "ftimps");
-    const ftimps = new CreateButtons("savage", "ff");
-    const ff = new CreateButtons("frozentelimps", "hburn");
-    const hburn = new CreateButtons("funnyflare", "hi");
-    const hi = new CreateButtons("healburn", "lrings");
-    const lrings = new CreateButtons("himps", "recy");
-    const recy = new CreateButtons("laserrings", "rcatster");
-    const rcatster = new CreateButtons("recycling", "star");
-    const star = new CreateButtons("reversecatster", "um");
-    const um = new CreateButtons("startron", "ws");
-    const ws = new CreateButtons("uncrackamech", "memehelp");
-    const comborow = new CreateButtons("watersports2", "sav2");
-    const sav2 = new CreateButtons("helpcombo", "ftimps2");
-    const ftimps2 = new CreateButtons("savage2", "ff2");
-    const ff2 = new CreateButtons("frozentelimps2", "gps2");
-    const gps2 = new CreateButtons("funnyflare2", "hburn2");
-    const hburn2 = new CreateButtons("gravepiratestache2", "hi2");
-    const hi2 = new CreateButtons("healburn2", "lrings2");
-    const lrings2 = new CreateButtons("himps2", "rcatster2");
-    const rcatster2 = new CreateButtons("laserrings2", "star2");
-    const star2 = new CreateButtons("reversecatster2", "um2");
-    const um2 = new CreateButtons("startron2", "ws2");
-    const ws2 = new CreateButtons("uncrackamech2", "combohelp");
-    const controlrow = new CreateButtons("uncrackmech3", "ftimps3");
-    const ftimps3 = new CreateButtons("helpcontrol", "tc");
-    const tc = new CreateButtons("frozentelimps3", "um3");
-    const um3 = new CreateButtons("toyotacontrolla", "controlhelp");
-    const midrangerow = new CreateButtons("watersports3", "sav3");
-    const sav3 = new CreateButtons("helpmid", "ff3");
-    const ff3 = new CreateButtons("savage3", "go2");
-    const go2 = new CreateButtons("funnyflare3", "hburn3");
-    const hburn3 = new CreateButtons("gomorrah2", "hi3");
-    const hi3 = new CreateButtons("healburn3", "lrings3");
-    const lrings3 = new CreateButtons("himps3", "recy2");
-    const recy2 = new CreateButtons("laserrings3", "star3");
-    const star3 = new CreateButtons("recycling2", "ws3");
-    const ws3 = new CreateButtons("startron3", "midhelp");
-    const alldecksrow = new CreateButtons("watersports4", "sav4");
-    const sav4 = new CreateButtons("helpall", "br2");
-    const br2 = new CreateButtons("savage4", "ftimps4");
-    const ftimps4 = new CreateButtons("brady2", "ff4");
-    const ff4 = new CreateButtons("frozentelimps4", "go3");
-    const go3 = new CreateButtons("funnyflare4", "gps3");
-    const gps3 = new CreateButtons("gomorrah3", "hburn4");
-    const hburn4 = new CreateButtons("gravepiratestache3", "hi4");
-    const hi4 = new CreateButtons("healburn4", "lrings4");
-    const lrings4 = new CreateButtons("himps4", "recy3");
-    const recy3 = new CreateButtons("laserrings4", "rcatster3");
-    const rcatster3 = new CreateButtons("recycling3", "star4");
-    const star4 = new CreateButtons("reversecatster3", "tc2");
-    const tc2 = new CreateButtons("startron4", "um4");
-    const um4 = new CreateButtons("toyotacontrolla2", "ws4");
-    const ws4 = new CreateButtons("uncrackamech4", "allhelp");
+    const ladderrow = createButtons("gravepiratestache", "br");
+    const br = createButtons("helpladder", "go");
+    const go = createButtons("brady", "gps");
+    const gps = createButtons("gomorrah", "ladderhelp");
+    const memerow = createButtons("watersports", "sav");
+    const sav = createButtons("helpmeme", "ftimps");
+    const ftimps = createButtons("savage", "ff");
+    const ff = createButtons("frozentelimps", "hburn");
+    const hburn = createButtons("funnyflare", "hi");
+    const hi = createButtons("healburn", "lrings");
+    const lrings = createButtons("himps", "recy");
+    const recy = createButtons("laserrings", "rcatster");
+    const rcatster = createButtons("recycling", "star");
+    const star = createButtons("reversecatster", "um");
+    const um = createButtons("startron", "ws");
+    const ws = createButtons("uncrackamech", "memehelp");
+    const comborow = createButtons("watersports2", "sav2");
+    const sav2 = createButtons("helpcombo", "ftimps2");
+    const ftimps2 = createButtons("savage2", "ff2");
+    const ff2 = createButtons("frozentelimps2", "gps2");
+    const gps2 = createButtons("funnyflare2", "hburn2");
+    const hburn2 = createButtons("gravepiratestache2", "hi2");
+    const hi2 = createButtons("healburn2", "lrings2");
+    const lrings2 = createButtons("himps2", "rcatster2");
+    const rcatster2 = createButtons("laserrings2", "star2");
+    const star2 = createButtons("reversecatster2", "um2");
+    const um2 = createButtons("startron2", "ws2");
+    const ws2 = createButtons("uncrackamech2", "combohelp");
+    const controlrow = createButtons("uncrackmech3", "ftimps3");
+    const ftimps3 = createButtons("helpcontrol", "tc");
+    const tc = createButtons("frozentelimps3", "um3");
+    const um3 = createButtons("toyotacontrolla", "controlhelp");
+    const midrangerow = createButtons("watersports3", "sav3");
+    const sav3 = createButtons("helpmid", "ff3");
+    const ff3 = createButtons("savage3", "go2");
+    const go2 = createButtons("funnyflare3", "hburn3");
+    const hburn3 = createButtons("gomorrah2", "hi3");
+    const hi3 = createButtons("healburn3", "lrings3");
+    const lrings3 = createButtons("himps3", "recy2");
+    const recy2 = createButtons("laserrings3", "star3");
+    const star3 = createButtons("recycling2", "ws3");
+    const ws3 = createButtons("startron3", "midhelp");
+    const alldecksrow = createButtons("watersports4", "sav4");
+    const sav4 = createButtons("helpall", "br2");
+    const br2 = createButtons("savage4", "ftimps4");
+    const ftimps4 = createButtons("brady2", "ff4");
+    const ff4 = createButtons("frozentelimps4", "go3");
+    const go3 = createButtons("funnyflare4", "gps3");
+    const gps3 = createButtons("gomorrah3", "hburn4");
+    const hburn4 = createButtons("gravepiratestache3", "hi4");
+    const hi4 = createButtons("healburn4", "lrings4");
+    const lrings4 = createButtons("himps4", "recy3");
+    const recy3 = createButtons("laserrings4", "rcatster3");
+    const rcatster3 = createButtons("recycling3", "star4");
+    const star4 = createButtons("reversecatster3", "tc2");
+    const tc2 = createButtons("startron4", "um4");
+    const um4 = createButtons("toyotacontrolla2", "ws4");
+    const ws4 = createButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, 
       himps, lasersnap, recycling, reversecatster, startron, toyotacontrolla, feastmech, brady, watersports 
@@ -254,48 +254,48 @@ module.exports = {
             inner join ntdecks nt on (im.deckinfo = nt.deckinfo)
             inner join zmdecks zm on (im.deckinfo = zm.deckinfo)`);
     const user = await client.users.fetch("742719800395956244");
-    const xera = new CreateHelpEmbed(
+    const xera = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${xeraDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const allxera = new CreateHelpEmbed(
+    const allxera = createHelpEmbed(
       `All Decks Made By ${user.displayName}`,
       `My commands for decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
       `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderxera = new CreateHelpEmbed(
+    const ladderxera = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My Ladder Decks made by ${user.displayName} are ${toBuildLadderString}`,
       user.displayAvatarURL(),
       `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.ladderDecks.length} Ladder decks in tbot`
     );
-    const memexera = new CreateHelpEmbed(
+    const memexera = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My Meme Decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.memeDecks.length} Meme decks in tbot`
     );
-    const comboxera = new CreateHelpEmbed(
+    const comboxera = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My Combo Decks made by ${user.displayName} are ${toBuildComboString}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.comboDecks.length} Combo decks in tbot`
     );
-    const controlxera = new CreateHelpEmbed(
+    const controlxera = createHelpEmbed(
       `${user.displayName} Control Decks`,
       `My Control Decks made by ${user.displayName} are ${toBuildControlString}`,
       user.displayAvatarURL(),
       `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.controlDecks.length} Control decks in tbot`
     );
-    const midrangexera = new CreateHelpEmbed(
+    const midrangexera = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My Midrange Decks made by ${user.displayName} are ${toBuildMidString}`,
       user.displayAvatarURL(),
@@ -303,12 +303,12 @@ Note: ${user.displayName} has ${xeraDecks.controlDecks.length} Control decks in 
 Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks in tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -325,21 +325,21 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
       }
       return embed;
     }
-    const savage22 = new CreateDeckEmbed(result, "savage22");
-    const brady = new CreateDeckEmbed(result, "brady");
-    const funnyflare = new CreateDeckEmbed(result, "funnyflare");
-    const gomorrah = new CreateDeckEmbed(result, "gomorrah");
-    const himps = new CreateDeckEmbed(result, "himps");
-    const laserrings = new CreateDeckEmbed(result, "lasersnap");
-    const reversecatster = new CreateDeckEmbed(result, "reversecatster");
-    const startron = new CreateDeckEmbed(result, "startron");
-    const toyotacontrolla = new CreateDeckEmbed(result, "toyotacontrolla");
-    const healburn = new CreateDeckEmbed(result, "healburn");
-    const frozentelimps = new CreateDeckEmbed(result, "frozentelimps");
-    const recycling = new CreateDeckEmbed(result, "recycling");
-    const uncrackamech = new CreateDeckEmbed(result, "feastmech");
-    const watersports = new CreateDeckEmbed(result, "watersports");
-    const gravepiratestache = new CreateDeckEmbed(result, "gps");
+    const savage22 = createDeckEmbed(result, "savage22");
+    const brady = createDeckEmbed(result, "brady");
+    const funnyflare = createDeckEmbed(result, "funnyflare");
+    const gomorrah = createDeckEmbed(result, "gomorrah");
+    const himps = createDeckEmbed(result, "himps");
+    const laserrings = createDeckEmbed(result, "lasersnap");
+    const reversecatster = createDeckEmbed(result, "reversecatster");
+    const startron = createDeckEmbed(result, "startron");
+    const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
+    const healburn = createDeckEmbed(result, "healburn");
+    const frozentelimps = createDeckEmbed(result, "frozentelimps");
+    const recycling = createDeckEmbed(result, "recycling");
+    const uncrackamech = createDeckEmbed(result, "feastmech");
+    const watersports = createDeckEmbed(result, "watersports");
+    const gravepiratestache = createDeckEmbed(result, "gps");
     const m = await message.channel.send({ embeds: [xera], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

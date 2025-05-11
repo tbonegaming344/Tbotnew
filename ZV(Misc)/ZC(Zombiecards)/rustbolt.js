@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -153,12 +153,12 @@ module.exports = {
     const toBuildMidrangeString = buildDeckString(rustboltDecks.midrangeDecks);
     const toBuildTempoString = buildDeckString(rustboltDecks.tempoDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -170,48 +170,48 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("uncrackabolt", "bol");
-    const bol = new CreateButtons("helpall", "brb");
-    const brb = new CreateButtons("boltbolt", "bust");
-    const bust = new CreateButtons("budgetrb", "cog");
-    const cog = new CreateButtons("bustbolt", "igb");
-    const igb = new CreateButtons("coggerazzi", "marx");
-    const marx = new CreateButtons("igmablobchum", "mc");
-    const mc = new CreateButtons("marxbolt", "sb");
-    const sb = new CreateButtons("mechacontrol", "tster");
-    const tster = new CreateButtons("sunbandits", "uncrack");
-    const uncrack = new CreateButtons("terrifytricksterazzi", "allhelp");
-    const comprow = new CreateButtons("uncrackabolt2", "bust2");
-    const bust2 = new CreateButtons("comphelp", "uncrack2");
-    const uncrack2 = new CreateButtons("bustbolt2", "helpcomp");
-    const ladderrow = new CreateButtons("mechacontrol2", "bol2");
-    const bol2 = new CreateButtons("ladderhelp", "marx2");
-    const marx2 = new CreateButtons("boltbolt2", "mc2");
-    const mc2 = new CreateButtons("marxbolt2", "helpladder");
-    const memerow = new CreateButtons("terrifytricksterazzi2", "cog2");
-    const cog2 = new CreateButtons("memehelp", "igb2");
-    const igb2 = new CreateButtons("coggerazzi2", "sb2");
-    const sb2 = new CreateButtons("igmablobchum2", "tster2");
-    const tster2 = new CreateButtons("sunbandits2", "helpmeme");
-    const comborow = new CreateButtons("terrifytricksterazzi3", "bol3");
-    const bol3 = new CreateButtons("combohelp", "bust3");
-    const bust3 = new CreateButtons("boltbolt3", "cog3");
-    const cog3 = new CreateButtons("bustbolt3", "igb3");
-    const igb3 = new CreateButtons("coggerazzi3", "sb3");
-    const sb3 = new CreateButtons("igmablobchum3", "tster3");
-    const tster3 = new CreateButtons("sunbandits3", "helpcombo");
-    const controlrow = new CreateButtons("uncrackabolt3", "bust4");
-    const bust4 = new CreateButtons("controlhelp", "mc3");
-    const mc3 = new CreateButtons("bustbolt4", "sb4");
-    const sb4 = new CreateButtons("mechacontrol3", "uncrack3");
-    const uncrack3 = new CreateButtons("sunbandits4", "helpcontrol");
-    const midrangerow = new CreateButtons("igmablobchum4", "bol4");
-    const bol4 = new CreateButtons("midrangehelp", "brb2");
-    const brb2 = new CreateButtons("boltbolt4", "igb4");
-    const igb4 = new CreateButtons("budgetrb2", "helpmidrange");
-    const temporow = new CreateButtons("terrifytricksterazzi4", "cog4");
-    const cog4 = new CreateButtons("tempohelp", "tster4");
-    const tster4 = new CreateButtons("coggerazzi4", "helptempo");
+    const alldecksrow = createButtons("uncrackabolt", "bol");
+    const bol = createButtons("helpall", "brb");
+    const brb = createButtons("boltbolt", "bust");
+    const bust = createButtons("budgetrb", "cog");
+    const cog = createButtons("bustbolt", "igb");
+    const igb = createButtons("coggerazzi", "marx");
+    const marx = createButtons("igmablobchum", "mc");
+    const mc = createButtons("marxbolt", "sb");
+    const sb = createButtons("mechacontrol", "tster");
+    const tster = createButtons("sunbandits", "uncrack");
+    const uncrack = createButtons("terrifytricksterazzi", "allhelp");
+    const comprow = createButtons("uncrackabolt2", "bust2");
+    const bust2 = createButtons("comphelp", "uncrack2");
+    const uncrack2 = createButtons("bustbolt2", "helpcomp");
+    const ladderrow = createButtons("mechacontrol2", "bol2");
+    const bol2 = createButtons("ladderhelp", "marx2");
+    const marx2 = createButtons("boltbolt2", "mc2");
+    const mc2 = createButtons("marxbolt2", "helpladder");
+    const memerow = createButtons("terrifytricksterazzi2", "cog2");
+    const cog2 = createButtons("memehelp", "igb2");
+    const igb2 = createButtons("coggerazzi2", "sb2");
+    const sb2 = createButtons("igmablobchum2", "tster2");
+    const tster2 = createButtons("sunbandits2", "helpmeme");
+    const comborow = createButtons("terrifytricksterazzi3", "bol3");
+    const bol3 = createButtons("combohelp", "bust3");
+    const bust3 = createButtons("boltbolt3", "cog3");
+    const cog3 = createButtons("bustbolt3", "igb3");
+    const igb3 = createButtons("coggerazzi3", "sb3");
+    const sb3 = createButtons("igmablobchum3", "tster3");
+    const tster3 = createButtons("sunbandits3", "helpcombo");
+    const controlrow = createButtons("uncrackabolt3", "bust4");
+    const bust4 = createButtons("controlhelp", "mc3");
+    const mc3 = createButtons("bustbolt4", "sb4");
+    const sb4 = createButtons("mechacontrol3", "uncrack3");
+    const uncrack3 = createButtons("sunbandits4", "helpcontrol");
+    const midrangerow = createButtons("igmablobchum4", "bol4");
+    const bol4 = createButtons("midrangehelp", "brb2");
+    const brb2 = createButtons("boltbolt4", "igb4");
+    const igb4 = createButtons("budgetrb2", "helpmidrange");
+    const temporow = createButtons("terrifytricksterazzi4", "cog4");
+    const cog4 = createButtons("tempohelp", "tster4");
+    const tster4 = createButtons("coggerazzi4", "helptempo");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
@@ -236,62 +236,62 @@ module.exports = {
         }
       )
       .setColor("#FFC0CB");
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       "Rustbolt Decks",
       `My commands for Rustbolt(RB) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt decks please use the commands listed above or click on the buttons below to navigate through all decks!
   Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`
     );
-    const helprb = new CreateHelpEmbed(
+    const helprb = createHelpEmbed(
       "Rustbolt Decks",
       `To view the RustBolt decks please select an option from the select menu below!
   Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
     );
-    const compEmbed = new CreateHelpEmbed(
+    const compEmbed = createHelpEmbed(
       "Rustbolt Competitive Decks",
       `My commands for Rustbolt(RB) are ${toBuildCompString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt competitive decks please use the commands listed above or click on the buttons below to navigate through all competitive decks!
   Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive decks in Tbot`
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       "Rustbolt Ladder Decks",
       `My commands for Rustbolt(RB) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
   Note: Rustbolt has ${rustboltDecks.ladderDecks.length} total ladder decks in Tbot`
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Rustbolt Meme Decks",
       `My commands for Rustbolt(RB) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
   Note: Rustbolt has ${rustboltDecks.memeDecks.length} total meme decks in Tbot`
     );
-    const comboEmbed = new CreateHelpEmbed(
+    const comboEmbed = createHelpEmbed(
       "Rustbolt Combo Decks",
       `My commands for Rustbolt(RB) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Rustbolt has ${rustboltDecks.comboDecks.length} total combo decks in Tbot`
     );
-    const controlEmbed = new CreateHelpEmbed(
+    const controlEmbed = createHelpEmbed(
       "Rustbolt Control Decks",
       `My commands for Rustbolt(RB) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
   Note: Rustbolt has ${rustboltDecks.controlDecks.length} total control decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Rustbolt Midrange Decks",
       `My commands for Rustbolt(RB) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
       `To view the RustBolt midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
   Note: Rustbolt has ${rustboltDecks.midrangeDecks.length} total midrange decks in Tbot`
     );
-    const tempoEmbed = new CreateHelpEmbed(
+    const tempoEmbed = createHelpEmbed(
       "Rustbolt Tempo Decks",
       `My commands for Rustbolt(RB) are ${toBuildTempoString}`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
@@ -300,12 +300,12 @@ module.exports = {
     );
     const [result] = await db.query(`select * from rbdecks`);
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -322,19 +322,19 @@ module.exports = {
       }
       return embed;
     }
-    const boltbolt = new CreateDeckEmbed(result, "boltbolt");
-    const budgetrb = new CreateDeckEmbed(result, "budgetrb");
-    const bustbolt = new CreateDeckEmbed(result, "bustbolt");
-    const igmablobchum = new CreateDeckEmbed(result, "igmablobchum");
-    const marxbolt = new CreateDeckEmbed(result, "marxbolt");
-    const mechacontrol = new CreateDeckEmbed(result, "mechacontrol");
-    const coggerazzi = new CreateDeckEmbed(result, "poggerrazzi");
-    const sunbandits = new CreateDeckEmbed(result, "sunbandits");
-    const terrifytricksterazzi = new CreateDeckEmbed(
+    const boltbolt = createDeckEmbed(result, "boltbolt");
+    const budgetrb = createDeckEmbed(result, "budgetrb");
+    const bustbolt = createDeckEmbed(result, "bustbolt");
+    const igmablobchum = createDeckEmbed(result, "igmablobchum");
+    const marxbolt = createDeckEmbed(result, "marxbolt");
+    const mechacontrol = createDeckEmbed(result, "mechacontrol");
+    const coggerazzi = createDeckEmbed(result, "poggerrazzi");
+    const sunbandits = createDeckEmbed(result, "sunbandits");
+    const terrifytricksterazzi = createDeckEmbed(
       result,
       "terrifytricksterazzi"
     );
-    const uncrackabolt = new CreateDeckEmbed(result, "uncrackabolt");
+    const uncrackabolt = createDeckEmbed(result, "uncrackabolt");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],

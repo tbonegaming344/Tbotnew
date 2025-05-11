@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
   name: `cyburn`,
-  aliases: [`nccyburn`, `cyburnnc`, `cycleburn`, `cyclecap`, `cburn`, `waterboarding`, `cyboil`],
+  aliases: [`nccyburn`, `cyburnnc`, `cycleburn`, `cyclecap`, `cburn`, `waterboarding`, `cyboil`, `waterboard`],
   category: `Night Cap(NC)`,
   run: async (client, message, args) => {
     const [result] = await db.query(`SELECT cyburn from ncdecks`);

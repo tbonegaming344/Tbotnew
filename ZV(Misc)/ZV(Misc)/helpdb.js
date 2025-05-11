@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- *
+ * the createPlantHelpEmbed function creates an embed for the plant deck sections of the helpdb command
  * @param {string} title the title of the embed
  * @param {string} description the description of the embed
  * @param {string} image an image on the embed
  * @param {string} footer the text on the bottom of the embed
  * @returns {EmbedBuilder} the embed object
  */
-function CreatePlantHelpEmbed(title, description, image, footer) {
+function createPlantHelpEmbed(title, description, image, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -38,7 +38,7 @@ function CreatePlantHelpEmbed(title, description, image, footer) {
  * @param {string} footer the text on the bottom of the embed
  * @returns {EmbedBuilder} the embed object
  */
-function CreateZombieHelpEmbed(title, description, image, footer) {
+function createZombieHelpEmbed(title, description, image, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -73,6 +73,9 @@ module.exports = {
     `ladderdecks`,
     `aggro`,
     `aggrodecks`,
+    `memeplantdecks`,
+    `helpladder`,
+    `lima-pleurodon`,
     `allzombiedecks`,
     `allplantsdecks`,
     `meme`,
@@ -92,6 +95,7 @@ module.exports = {
     `competitiveplantdecks`,
     `budget`,
     `budgetdecks`,
+    `helpmeme`,
     `ladderplantdecks`,
     `competitivezombiedecks`,
     `competitiveplants`,
@@ -733,12 +737,12 @@ module.exports = {
     const toBuildMidrangeZString = buildDeckString(zombieDecks.midrangeDecks);
     const toBuildTempoZString = buildDeckString(zombieDecks.tempoDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -750,461 +754,461 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const allprow = new CreateButtons("watertron", "wr100");
-    const wr100 = new CreateButtons("helpallp", "ab");
-    const ab = new CreateButtons("winrate100", "bct");
-    const bct = new CreateButtons("abeans", "bcc");
-    const bcc = new CreateButtons("budgetct", "bcz");
-    const bcz = new CreateButtons("budgetcc", "bgk");
-    const bgk = new CreateButtons("budgetcz", "bgs");
-    const bgs = new CreateButtons("budgetgk", "bnc");
-    const bnc = new CreateButtons("budgetgs", "bro");
-    const bro = new CreateButtons("budgetnc", "bsf");
-    const bsf = new CreateButtons("budgetro", "bsp");
-    const bsp = new CreateButtons("budgetsf", "bwk");
-    const bwk = new CreateButtons("budgetsp", "cank");
-    const cank = new CreateButtons("budgetwk", "carr");
-    const carr = new CreateButtons("cancerknight", "chemo");
-    const chemo = new CreateButtons("carroot", "cburn");
-    const cburn = new CreateButtons("chemotherapy", "dgloves");
-    const dgloves = new CreateButtons("cyburn", "dcounter");
-    const dcounter = new CreateButtons("dinogloves", "flottery");
-    const flottery = new CreateButtons("dinocounter", "fheal");
-    const fheal = new CreateButtons("figlottery", "fmr");
-    const fmr = new CreateButtons("freezeheal", "fflare");
-    const fflare = new CreateButtons("frymidrose", "g3n");
-    const g3n = new CreateButtons("funnyflare", "hburn");
-    const hburn = new CreateButtons("going3nuts", "healcon");
-    const healcon = new CreateButtons("healburn", "hmr");
-    const hmr = new CreateButtons("healcontrol", "hotk");
-    const hotk = new CreateButtons("healmidrose", "hland");
-    const hland = new CreateButtons("healthotk", "lsnap");
-    const lsnap = new CreateButtons("highlander", "lcbd");
-    const lcbd = new CreateButtons("lasersnap", "lbait");
-    const lbait = new CreateButtons("lifecouldbedream", "mopr");
-    const mopr = new CreateButtons("logbait", "msp");
-    const msp = new CreateButtons("mopribus", "pts");
-    const pts = new CreateButtons("mspotk", "pb");
-    const pb = new CreateButtons("pawntrickstab", "plmop");
-    const plmop = new CreateButtons("pbeans", "pop");
-    const pop = new CreateButtons("plantmop", "psol");
-    const psol = new CreateButtons("popsicle", "nut");
-    const nut = new CreateButtons("psychosolstice", "radio");
-    const radio = new CreateButtons("nuttin", "r2s");
-    const r2s = new CreateButtons("radiotherapy", "recy");
-    const recy = new CreateButtons("ramp2seedling", "rfl");
-    const rfl = new CreateButtons("recycling", "smf");
-    const smf = new CreateButtons("reflourished", "shambc");
-    const shambc = new CreateButtons("savagemayflower", "sknight");
-    const sknight = new CreateButtons("shamcontrolbc", "srings");
-    const srings = new CreateButtons("shitknight", "stron");
-    const stron = new CreateButtons("starrings", "tc");
-    const tc = new CreateButtons("startron", "tlattail");
-    const tlattail = new CreateButtons("toyotacontrolla", "wtron");
-    const wtron = new CreateButtons("translattail", "allphelp");
-    const budgetprow = new CreateButtons("budgetwk2", "bcc2");
-    const bcc2 = new CreateButtons("budgetphelp", "bct2");
-    const bct2 = new CreateButtons("budgetcc2", "bcz2");
-    const bcz2 = new CreateButtons("budgetct2", "bgk2");
-    const bgk2 = new CreateButtons("budgetcz2", "bgs2");
-    const bgs2 = new CreateButtons("budgetgk2", "bnc2");
-    const bnc2 = new CreateButtons("budgetgs2", "bro2");
-    const bro2 = new CreateButtons("budgetnc2", "bsf2");
-    const bsf2 = new CreateButtons("budgetro2", "bsp2");
-    const bsp2 = new CreateButtons("budgetsf2", "bwk2");
-    const bwk2 = new CreateButtons("budgetsp2", "helppbudget");
-    const compprow = new CreateButtons("watertron2", "ab2");
-    const ab2 = new CreateButtons("compphelp", "chemo2");
-    const chemo2 = new CreateButtons("abeans2", "cburn2");
-    const cburn2 = new CreateButtons("chemotherapy2", "flottery2");
-    const flottery2 = new CreateButtons("cyburn2", "healcon2");
-    const healcon2 = new CreateButtons("figlottery2", "hmr2");
-    const hmr2 = new CreateButtons("healcontrol2", "lbait2");
-    const lbait2 = new CreateButtons("healmidrose2", "radio2");
-    const radio2 = new CreateButtons("logbait2", "shambc2");
-    const shambc2 = new CreateButtons("radiotherapy2", "tc2");
-    const tc2 = new CreateButtons("shamcontrolbc2", "wtron2");
-    const wtron2 = new CreateButtons("toyotacontrolla2", "helppcomp");
-    const ladderprow = new CreateButtons("pbeans2", "carr2");
-    const carr2 = new CreateButtons("helppladder", "dcounter2");
-    const dcounter2 = new CreateButtons("carroot2", "fmr2");
-    const fmr2 = new CreateButtons("dinocounter2", "g3n2");
-    const g3n2 = new CreateButtons("frymidrose2", "pts2");
-    const pts2 = new CreateButtons("going3nuts2", "pb2");
-    const pb2 = new CreateButtons("pawntrickstab2", "ladderphelp");
-    const memeprow = new CreateButtons("translattail2", "wr1002");
-    const wr1002 = new CreateButtons("memephelp", "cank2");
-    const cank2 = new CreateButtons("winrate1002", "dgloves2");
-    const dgloves2 = new CreateButtons("cancerknight2", "fheal2");
-    const fheal2 = new CreateButtons("dinogloves2", "fflare2");
-    const fflare2 = new CreateButtons("freezeheal2", "hburn2");
-    const hburn2 = new CreateButtons("funnyflare2", "hotk2");
-    const hotk2 = new CreateButtons("healburn2", "hland2");
-    const hland2 = new CreateButtons("healthotk2", "lsnap2");
-    const lsnap2 = new CreateButtons("highlander2", "lcbd2");
-    const lcbd2 = new CreateButtons("lasersnap2", "mopr2");
-    const mopr2 = new CreateButtons("lifecouldbedream2", "msp2");
-    const msp2 = new CreateButtons("mopribus2", "nut2");
-    const nut2 = new CreateButtons("mspotk2", "plmop2");
-    const plmop2 = new CreateButtons("nuttin2", "pop2");
-    const pop2 = new CreateButtons("plantmop2", "psol2");
-    const psol2 = new CreateButtons("popsicle2", "r2s2");
-    const r2s2 = new CreateButtons("psychosolstice2", "recy2");
-    const recy2 = new CreateButtons("ramp2seedling2", "rfl2");
-    const rfl2 = new CreateButtons("recycling2", "smf2");
-    const smf2 = new CreateButtons("reflourished2", "sknight2");
-    const sknight2 = new CreateButtons("savagemayflower2", "srings2");
-    const srings2 = new CreateButtons("shitknight2", "stron2");
-    const stron2 = new CreateButtons("starrings2", "tlattail2");
-    const tlattail2 = new CreateButtons("startron2", "helppmeme");
-    const aggroprow = new CreateButtons("watertron3", "ab3");
-    const ab3 = new CreateButtons("helppaggro", "bcc3");
-    const bcc3 = new CreateButtons("abeans3", "bct3");
-    const bct3 = new CreateButtons("budgetcc3", "bnc3");
-    const bnc3 = new CreateButtons("budgetct3", "bsf3");
-    const bsf3 = new CreateButtons("budgetct3", "dgloves3");
-    const dgloves3 = new CreateButtons("budgetsf3", "lbait3");
-    const lbait3 = new CreateButtons("dinogloves3", "pb3");
-    const pb3 = new CreateButtons("logbait3", "wtron3");
-    const wtron3 = new CreateButtons("pbeans3", "aggrophelp");
-    const comboprow = new CreateButtons("translattail3", "bcc4");
-    const bcc4 = new CreateButtons("helppcombo", "bcz3");
-    const bcz3 = new CreateButtons("budgetcc4", "carr3");
-    const carr3 = new CreateButtons("budgetcz3", "cburn3");
-    const cburn3 = new CreateButtons("carroot3", "dcounter3");
-    const dcounter3 = new CreateButtons("cyburn3", "fheal3");
-    const fheal3 = new CreateButtons("dinocounter3", "fflare3");
-    const fflare3 = new CreateButtons("freezeheal3", "g3n3");
-    const g3n3 = new CreateButtons("funnyflare3", "hburn3");
-    const hburn3 = new CreateButtons("going3nuts3", "hotk3");
-    const hotk3 = new CreateButtons("healburn3", "lsnap3");
-    const lsnap3 = new CreateButtons("healthotk3", "mopr3");
-    const mopr3 = new CreateButtons("lasersnap3", "msp3");
-    const msp3 = new CreateButtons("mopribus3", "nut3");
-    const nut3 = new CreateButtons("mspotk3", "plmop3");
-    const plmop3 = new CreateButtons("nuttin3", "psol3");
-    const psol3 = new CreateButtons("plantmop3", "r2s3");
-    const r2s3 = new CreateButtons("psychosolstice3", "rfl3");
-    const rfl3 = new CreateButtons("ramp2seedling3", "smf3");
-    const smf3 = new CreateButtons("reflourished3", "srings3");
-    const srings3 = new CreateButtons("savagemayflower3", "stron3");
-    const stron3 = new CreateButtons("starrings3", "tlattail3");
-    const tlattail3 = new CreateButtons("startron3", "helppcombo");
-    const controlprow = new CreateButtons("toyotacontrolla3", "cank3");
-    const cank3 = new CreateButtons("helppcontrol", "chemo3");
-    const chemo3 = new CreateButtons("cancerknight3", "healcon3");
-    const healcon3 = new CreateButtons("chemotherapy3", "pts3");
-    const pts3 = new CreateButtons("healcontrol3", "pop3");
-    const pop3 = new CreateButtons("pawntrickstab3", "radio3");
-    const radio3 = new CreateButtons("popsicle3", "shambc3");
-    const shambc3 = new CreateButtons("radiotherapy3", "sknight3");
-    const sknight3 = new CreateButtons("shamcontrolbc3", "tc3");
-    const tc3 = new CreateButtons("shitknight3", "controlphelp");
-    const midrangeprow = new CreateButtons("startron4", "bcz4");
-    const bcz4 = new CreateButtons("helppmidrange", "bgk3");
-    const bgk3 = new CreateButtons("budgetcz4", "bgs3");
-    const bgs3 = new CreateButtons("budgetgk3", "bro3");
-    const bro3 = new CreateButtons("budgetgs3", "bsp3");
-    const bsp3 = new CreateButtons("budgetro3", "bwk3");
-    const bwk3 = new CreateButtons("budgetro3", "cburn4");
-    const cburn4 = new CreateButtons("budgetwk3", "dcounter4");
-    const dcounter4 = new CreateButtons("cyburn4", "flottery3");
-    const flottery3 = new CreateButtons("dinocounter4", "fmr3");
-    const fmr3 = new CreateButtons("figlottery3", "fflare4");
-    const fflare4 = new CreateButtons("frymidrose3", "g3n4");
-    const g3n4 = new CreateButtons("funnyflare4", "hburn4");
-    const hburn4 = new CreateButtons("going3nuts4", "hmr3");
-    const hmr3 = new CreateButtons("healburn4", "hotk4");
-    const hotk4 = new CreateButtons("healmidrose3", "hland3");
-    const hland3 = new CreateButtons("healthotk4", "lsnap4");
-    const lsnap4 = new CreateButtons("highlander3", "mopr4");
-    const mopr4 = new CreateButtons("lasersnap4", "psol4");
-    const psol4 = new CreateButtons("mopribus4", "r2s4");
-    const r2s4 = new CreateButtons("psychosolstice4", "recy3");
-    const recy3 = new CreateButtons("ramp2seedling4", "srings4");
-    const srings4 = new CreateButtons("recyling3", "stron4");
-    const stron4 = new CreateButtons("starrings4", "midrangephelp");
-    const tempoprow = new CreateButtons("translattail4", "wr1003");
-    const wr1003 = new CreateButtons("tempophelp", "carr4");
-    const carr4 = new CreateButtons("winrate1003", "lcbd3");
-    const lcbd3 = new CreateButtons("carroot4", "tlattail4");
-    const tlattail4 = new CreateButtons("lifecouldbedream3", "helpptempo");
-    const allzrow = new CreateButtons("zmoss", "sav");
-    const sav = new CreateButtons("allzhelp", "agr");
-    const agr = new CreateButtons("savage", "agor");
-    const agor = new CreateButtons("agraves", "bhammer");
-    const bhammer = new CreateButtons("antiagor", "bfmg");
-    const bfmg = new CreateButtons("banhammer", "bfpc");
-    const bfpc = new CreateButtons("bfmidgargs", "bas");
-    const bas = new CreateButtons("bfplankcontrol", "bfw");
-    const bfw = new CreateButtons("bastet", "bbolt");
-    const bbolt = new CreateButtons("binaryflagwar", "bducks");
-    const bducks = new CreateButtons("boltbolt", "brad");
-    const brad = new CreateButtons("bonusducks", "bbf");
-    const bbf = new CreateButtons("brady", "beb");
-    const beb = new CreateButtons("budgetbf", "bif");
-    const bif = new CreateButtons("budgeteb", "bim");
-    const bim = new CreateButtons("budgetif", "bnt");
-    const bnt = new CreateButtons("budgetim", "bpb");
-    const bpb = new CreateButtons("budgetnt", "brb");
-    const brb = new CreateButtons("budgetpb", "bsb");
-    const bsb = new CreateButtons("budgetrb", "bsm");
-    const bsm = new CreateButtons("budgetsb", "bykm");
-    const bykm = new CreateButtons("budgetsm", "bzm");
-    const bzm = new CreateButtons("budgetykm", "bust");
-    const bust = new CreateButtons("budgetzm", "cog");
-    const cog = new CreateButtons("bustbolt", "cbait");
-    const cbait = new CreateButtons("coggerazzi", "cleap");
-    const cleap = new CreateButtons("congabait", "cboy");
-    const cboy = new CreateButtons("conjureleap", "dmech");
-    const dmech = new CreateButtons("cryoboy", "flo");
-    const flo = new CreateButtons("dozzamech", "ftimps");
-    const ftimps = new CreateButtons("floss", "gburn");
-    const gburn = new CreateButtons("frozentelimps", "gtech");
-    const gtech = new CreateButtons("gargburn", "gstar22");
-    const gstar22 = new CreateButtons("gargolithtech", "gom");
-    const gom = new CreateButtons("gargstar22", "gps");
-    const gps = new CreateButtons("gomorrah", "gstache");
-    const gstache = new CreateButtons("gravepiratestache", "hter");
-    const hter = new CreateButtons("gravestache", "hor");
-    const hor = new CreateButtons("himpter", "hgargs");
-    const hgargs = new CreateButtons("horts", "ibox");
-    const ibox = new CreateButtons("huntgargs", "igbc");
-    const igbc = new CreateButtons("icebox", "kscope");
-    const kscope = new CreateButtons("igmablobchum", "lt");
-    const lt = new CreateButtons("kaleidoscope", "ltbr");
-    const ltbr = new CreateButtons("ladytuna", "ltime");
-    const ltime = new CreateButtons("lockthebathroom", "mbolt");
-    const mbolt = new CreateButtons("lunchtime", "mcon");
-    const mcon = new CreateButtons("marxbolt", "mscope");
-    const mscope = new CreateButtons("mechacontrol", "nhks");
-    const nhks = new CreateButtons("mechascope", "npa");
-    const npa = new CreateButtons("nohokaistars", "otksw");
-    const otksw = new CreateButtons("noplayingallowed", "pyeeyz");
-    const pyeeyz = new CreateButtons("otkswabbie", "pbfeast");
-    const pfeast = new CreateButtons("pablosyeezys", "pmop");
-    const pmop = new CreateButtons("pbfeast", "propackage");
-    const propackage = new CreateButtons("petmop", "rpackage");
-    const rpackage = new CreateButtons("professorpackage", "rticia");
-    const rticia = new CreateButtons("raiserpackage", "rcatster");
-    const rcatster = new CreateButtons("rampticia", "syard");
-    const syard = new CreateButtons("reversecatster", "sea");
-    const sea = new CreateButtons("schoolyard", "stars");
-    const stars = new CreateButtons("seacret", "spl");
-    const spl = new CreateButtons("spacestars", "sbandits");
-    const sbandits = new CreateButtons("splimps", "slord");
-    const slord = new CreateButtons("sunbandits", "timps");
-    const timps = new CreateButtons("sunlord", "timpssb");
-    const timpssb = new CreateButtons("telimps", "terrifyster");
-    const terrifyster = new CreateButtons("telimpssb", "tstache");
-    const tstache = new CreateButtons("terrifytricksterazzi", "tmech");
-    const tmech = new CreateButtons("trickstache", "ubolt");
-    const ubolt = new CreateButtons("trickmech", "umech");
-    const umech = new CreateButtons("uncrackabolt", "vster");
-    const vster = new CreateButtons("uncrackamech", "wsports");
-    const wsports = new CreateButtons("valkster", "wph");
-    const wph = new CreateButtons("watersports", "yemartin");
-    const yemartin = new CreateButtons("whalepharaoh", "ykmartin");
-    const ykmartin = new CreateButtons("youngeggmartin", "zm");
-    const zm = new CreateButtons("youngkenmartin", "helpzall");
-    const budgetzrow = new CreateButtons("budgetzm2", "bbf2");
-    const bbf2 = new CreateButtons("helpbudgetz", "beb2");
-    const beb2 = new CreateButtons("budgetbf2", "bif2");
-    const bif2 = new CreateButtons("budgeteb2", "bim2");
-    const bim2 = new CreateButtons("budgetif2", "bnt2");
-    const bnt2 = new CreateButtons("budgetim2", "bpb2");
-    const bpb2 = new CreateButtons("budgetnt2", "brb2");
-    const brb2 = new CreateButtons("budgetpb2", "bsb2");
-    const bsb2 = new CreateButtons("budgetrb2", "bsm2");
-    const bsm2 = new CreateButtons("budgetsb2", "bykm2");
-    const bykm2 = new CreateButtons("budgetsm2", "bzm2");
-    const bzm2 = new CreateButtons("budgetykm2", "helpzbudget");
-    const compzrow = new CreateButtons("uncrackabolt2", "bust2");
-    const bust2 = new CreateButtons("helpzcomp", "gburn2");
-    const gburn2 = new CreateButtons("bustbolt2", "ibox2");
-    const ibox2 = new CreateButtons("gargburn2", "ltbr2");
-    const ltbr2 = new CreateButtons("icebox2", "kscope2");
-    const kscope2 = new CreateButtons("lockthebathroom2", "pyeeyz2");
-    const pyeeyz2 = new CreateButtons("kaleidoscope2", "nhks2");
-    const nhks2 = new CreateButtons("pablosyeezys2", "sea2");
-    const sea2 = new CreateButtons("nohokaistars2", "stars2");
-    const stars2 = new CreateButtons("seacret2", "timps2");
-    const timps2 = new CreateButtons("spacestars2", "tstache2");
-    const tstache2 = new CreateButtons("telimps2", "ubolt2");
-    const ubolt2 = new CreateButtons("trickstache2", "compzhelp");
-    const ladderzrow = new CreateButtons("valkster2", "agr2");
-    const agr2 = new CreateButtons("helpzladder", "bfmg2");
-    const bfmg2 = new CreateButtons("agraves2", "bfpc2");
-    const bfpc2 = new CreateButtons("bfmidgargs2", "bfw2");
-    const bfw2 = new CreateButtons("bfplankcontrol2", "bbolt2");
-    const bbolt2 = new CreateButtons("binaryflagwar2", "brad2");
-    const brad2 = new CreateButtons("boltbolt2", "cboy2");
-    const cboy2 = new CreateButtons("brady2", "gstar222");
-    const gstar222 = new CreateButtons("cryoboy2", "gom2");
-    const gom2 = new CreateButtons("gargstar222", "gps2");
-    const gps2 = new CreateButtons("gomorrah2", "gstache2");
-    const gstache2 = new CreateButtons("gravepiratestache2", "hor2");
-    const hor2 = new CreateButtons("gravestache2", "mbolt2");
-    const mbolt2 = new CreateButtons("horts2", "mcon2");
-    const mcon2 = new CreateButtons("marxbolt2", "mscope2");
-    const mscope2 = new CreateButtons("mechacontrol2", "propackage2");
-    const propackage2 = new CreateButtons("mechascope2", "rpackage2");
-    const rpackage2 = new CreateButtons("professorpackage2", "syard2");
-    const syard2 = new CreateButtons("raiserpackage2", "spl2");
-    const spl2 = new CreateButtons("schoolyard2", "timpssb2");
-    const timpssb2 = new CreateButtons("splimps2", "tmech2");
-    const tmech2 = new CreateButtons("telimpssb2", "vster2");
-    const vster2 = new CreateButtons("trickmech2", "ladderzhelp");
-    const memezrow = new CreateButtons("zmoss2", "sav2");
-    const sav2 = new CreateButtons("helpzmeme", "agor2");
-    const agor2 = new CreateButtons("savage2", "bhammer2");
-    const bhammer2 = new CreateButtons("antiagor2", "bas2");
-    const bas2 = new CreateButtons("banhammer2", "bducks2");
-    const bducks2 = new CreateButtons("bastet2", "cog2");
-    const cog2 = new CreateButtons("bonusducks2", "cbait2");
-    const cbait2 = new CreateButtons("coggerazzi2", "cleap2");
-    const cleap2 = new CreateButtons("congabait2", "dmech2");
-    const dmech2 = new CreateButtons("conjureleap2", "flo2");
-    const flo2 = new CreateButtons("dozzamech2", "ftimps2");
-    const ftimps2 = new CreateButtons("floss2", "gtech2");
-    const gtech2 = new CreateButtons("frozentelimps2", "hter2");
-    const hter2 = new CreateButtons("gargolithtech2", "hgargs2");
-    const hgargs2 = new CreateButtons("himpter2", "igbc2");
-    const igbc2 = new CreateButtons("huntgargs2", "lt2");
-    const lt2 = new CreateButtons("igmablobchum2", "ltime2");
-    const ltime2 = new CreateButtons("ladytuna2", "npa2");
-    const npa2 = new CreateButtons("lunchtime2", "pfeast2");
-    const pfeast2 = new CreateButtons("noplayingallowed2", "pmop2");
-    const pmop2 = new CreateButtons("pbfeast2", "otksw2");
-    const otksw2 = new CreateButtons("petmop2", "rticia2");
-    const rticia2 = new CreateButtons("otkswabbie2", "rcatster2");
-    const rcatster2 = new CreateButtons("rampticia2", "sbandits2");
-    const sbandits2 = new CreateButtons("reversecatster2", "slord2");
-    const slord2 = new CreateButtons("sunbandits2", "terrifyster2");
-    const terrifyster2 = new CreateButtons("sunlord2", "umech2");
-    const umech2 = new CreateButtons("terrifytricksterazzi2", "wsports2");
-    const wsports2 = new CreateButtons("uncrackamech2", "wph2");
-    const wph2 = new CreateButtons("watersports2", "yemartin2");
-    const yemartin2 = new CreateButtons("whalepharaoh2", "ykmartin2");
-    const ykmartin2 = new CreateButtons("youngeggmartin2", "zm2");
-    const zm2 = new CreateButtons("youngkenmartin2", "memezhelp");
-    const aggrozrow = new CreateButtons("trickmech3", "agr3");
-    const agr3 = new CreateButtons("helpzaggro", "bbf3");
-    const bbf3 = new CreateButtons("agraves3", "beb3");
-    const beb3 = new CreateButtons("budgetbf3", "bif3");
-    const bif3 = new CreateButtons("budgeteb3", "bnt3");
-    const bnt3 = new CreateButtons("budgetif3", "bpb3");
-    const bpb3 = new CreateButtons("budgetnt3", "bsm3");
-    const bsm3 = new CreateButtons("budgetpb3", "bzm3");
-    const bzm3 = new CreateButtons("budgetsm3", "dmech3");
-    const dmech3 = new CreateButtons("budgetzm3", "gps3");
-    const gps3 = new CreateButtons("dozzamech3", "mbolt3");
-    const mbolt3 = new CreateButtons("gravepiratestache3", "syard3");
-    const syard3 = new CreateButtons("marxbolt3", "sea3");
-    const sea3 = new CreateButtons("schoolyard3", "spl3");
-    const spl3 = new CreateButtons("seacret3", "tmech3");
-    const tmech3 = new CreateButtons("splimps3", "aggrozhelp");
-    const combozrow = new CreateButtons("zmoss3", "sav3");
-    const sav3 = new CreateButtons("helpzcombo", "agor3");
-    const agor3 = new CreateButtons("savage3", "bhammer3");
-    const bhammer3 = new CreateButtons("antiagor3", "bas3");
-    const bas3 = new CreateButtons("banhammer3", "bfw3");
-    const bfw3 = new CreateButtons("bastet3", "bbolt3");
-    const bbolt3 = new CreateButtons("binaryflagwar3", "bducks3");
-    const bducks3 = new CreateButtons("boltbolt3", "bim3");
-    const bim3 = new CreateButtons("bonusducks3", "bnt4");
-    const bnt4 = new CreateButtons("budgetim3", "bsm4");
-    const bsm4 = new CreateButtons("budgetnt4", "bykm3");
-    const bykm3 = new CreateButtons("budgetsm4", "bzm4");
-    const bzm4 = new CreateButtons("budgetykm3", "bust3");
-    const bust3 = new CreateButtons("budgetykm3", "cog3");
-    const cog3 = new CreateButtons("bustbolt3", "cbait3");
-    const cbait3 = new CreateButtons("coggerazzi3", "cboy3");
-    const cboy3 = new CreateButtons("congabait3", "flo3");
-    const flo3 = new CreateButtons("cryoboy3", "ftimps3");
-    const ftimps3 = new CreateButtons("floss3", "gps4");
-    const gps4 = new CreateButtons("frozentelimps3", "gburn3");
-    const gburn3 = new CreateButtons("gravepiratestache4", "gstache3");
-    const gstache3 = new CreateButtons("gargburn3", "hter3");
-    const hter3 = new CreateButtons("gravestache3", "hor3");
-    const hor3 = new CreateButtons("himpter3", "igbc3");
-    const igbc3 = new CreateButtons("horts3", "mscope3");
-    const mscope3 = new CreateButtons("igmablobchum3", "otksw3");
-    const otksw3 = new CreateButtons("mechascope3", "pyeeyz3");
-    const pyeeyz3 = new CreateButtons("otkswabbie3", "rticia3");
-    const rticia3 = new CreateButtons("pablosyeezys3", "rcatster3");
-    const rcatster3 = new CreateButtons("rampticia3", "stars3");
-    const stars3 = new CreateButtons("reversecatster3", "sbandits3");
-    const sbandits3 = new CreateButtons("spacestars3", "slord3");
-    const slord3 = new CreateButtons("sunbandits3", "timps3");
-    const timps3 = new CreateButtons("sunlord3", "timpssb3");
-    const timpssb3 = new CreateButtons("telimps3", "terrifyster3");
-    const terrifyster3 = new CreateButtons("telimpssb3", "tstache3");
-    const tstache3 = new CreateButtons("terrifytricksterazzi3", "umech3");
-    const umech3 = new CreateButtons("trickstache3", "vster3");
-    const vster3 = new CreateButtons("uncrackamech3", "wsports3");
-    const wsports3 = new CreateButtons("valkster3", "wph3");
-    const wph3 = new CreateButtons("watersports3", "yemartin3");
-    const yemartin3 = new CreateButtons("whalepharaoh3", "ykmartin3");
-    const ykmartin3 = new CreateButtons("youngeggmartin3", "zm3");
-    const zm3 = new CreateButtons("youngkenmartin3", "combozhelp");
-    const controlzrow = new CreateButtons("whalepharaoh3", "bfpc3");
-    const bfpc3 = new CreateButtons("helpzcontrol", "bducks4");
-    const bducks4 = new CreateButtons("bfplankcontrol3", "bim4");
-    const bim4 = new CreateButtons("bonusducks4", "bust4");
-    const bust4 = new CreateButtons("budgetim4", "ftimps4");
-    const ftimps4 = new CreateButtons("bustbolt4", "hgargs3");
-    const hgargs3 = new CreateButtons("frozentelimps4", "kscope3");
-    const kscope3 = new CreateButtons("frozentelimps4", "mcon3");
-    const mcon3 = new CreateButtons("kaleidoscope3", "mscope4");
-    const mscope4 = new CreateButtons("mechacontrol3", "npa3");
-    const npa3 = new CreateButtons("mechascope4", "pfeast3");
-    const pfeast3 = new CreateButtons("noplayingallowed3", "sbandits4");
-    const sbandits4 = new CreateButtons("pbfeast3", "timps4");
-    const timps4 = new CreateButtons("sunbandits4", "timpssb4");
-    const timpssb4 = new CreateButtons("telimps4", "ubolt3");
-    const ubolt3 = new CreateButtons("telimpssb4", "umech4");
-    const umech4 = new CreateButtons("uncrackabolt3", "wph4");
-    const wph4 = new CreateButtons("uncrackamech4", "controlzhelp");
-    const midrangezrow = new CreateButtons("youngkenmartin4", "sav4");
-    const sav4 = new CreateButtons("helpzmid", "bhammer4");
-    const bhammer4 = new CreateButtons("savage4", "bas4");
-    const bas4 = new CreateButtons("banhammer4", "bfmg3");
-    const bfmg3 = new CreateButtons("bastet4", "bfw4");
-    const bfw4 = new CreateButtons("bfmidgargs3", "brb3");
-    const brb3 = new CreateButtons("binaryflagwar4", "bsb3");
-    const bsb3 = new CreateButtons("budgetrb3", "bbolt4");
-    const bbolt4 = new CreateButtons("budgetsb3", "bykm4");
-    const bykm4 = new CreateButtons("boltbolt4", "cbait4");
-    const cbait4 = new CreateButtons("budgetykm4", "cboy4");
-    const cboy4 = new CreateButtons("congabait4", "gburn4");
-    const gburn4 = new CreateButtons("cryoboy4", "gtech3");
-    const gtech3 = new CreateButtons("gargburn4", "gstar223");
-    const gstar223 = new CreateButtons("gargolithtech3", "gom3");
-    const gom3 = new CreateButtons("gargstar223", "hter4");
-    const hter4 = new CreateButtons("gomorrah3", "hor4");
-    const hor4 = new CreateButtons("himpter4", "ibox3");
-    const ibox3 = new CreateButtons("horts4", "igbc4");
-    const igbc4 = new CreateButtons("icebox3", "lt3");
-    const lt3 = new CreateButtons("igmablobchum4", "ltime3");
-    const ltime3 = new CreateButtons("ladytuna3", "pyeeyz4");
-    const pyeeyz4 = new CreateButtons("lunchtime3", "pmop3");
-    const pmop3 = new CreateButtons("pablosyeezys4", "nhks3");
-    const nhks3 = new CreateButtons("petmop3", "stars4");
-    const stars4 = new CreateButtons("nohokaistars3", "slord4");
-    const slord4 = new CreateButtons("spacestars4", "tstache4");
-    const tstache4 = new CreateButtons("sunlord4", "vster4");
-    const vster4 = new CreateButtons("trickstache4", "wsports4");
-    const wsports4 = new CreateButtons("valkster4", "ykmartin4");
-    const ykmartin4 = new CreateButtons("watersports4", "midzhelp");
-    const tempozrow = new CreateButtons("terrifytricksterazzi4", "brad3");
-    const brad3 = new CreateButtons("helpztempo", "cog4");
-    const cog4 = new CreateButtons("brady3", "cleap3");
-    const cleap3 = new CreateButtons("coggerazzi4", "ltbr3");
-    const ltbr3 = new CreateButtons("conjureleap3", "propackage3");
-    const propackage3 = new CreateButtons("lockthebathroom3", "rpackage3");
-    const rpackage3 = new CreateButtons("professorpackage3", "terrifyster4");
-    const terrifyster4 = new CreateButtons("raiserpackage3", "tempozhelp");
+    const allprow = createButtons("watertron", "wr100");
+    const wr100 = createButtons("helpallp", "ab");
+    const ab = createButtons("winrate100", "bct");
+    const bct = createButtons("abeans", "bcc");
+    const bcc = createButtons("budgetct", "bcz");
+    const bcz = createButtons("budgetcc", "bgk");
+    const bgk = createButtons("budgetcz", "bgs");
+    const bgs = createButtons("budgetgk", "bnc");
+    const bnc = createButtons("budgetgs", "bro");
+    const bro = createButtons("budgetnc", "bsf");
+    const bsf = createButtons("budgetro", "bsp");
+    const bsp = createButtons("budgetsf", "bwk");
+    const bwk = createButtons("budgetsp", "cank");
+    const cank = createButtons("budgetwk", "carr");
+    const carr = createButtons("cancerknight", "chemo");
+    const chemo = createButtons("carroot", "cburn");
+    const cburn = createButtons("chemotherapy", "dgloves");
+    const dgloves = createButtons("cyburn", "dcounter");
+    const dcounter = createButtons("dinogloves", "flottery");
+    const flottery = createButtons("dinocounter", "fheal");
+    const fheal = createButtons("figlottery", "fmr");
+    const fmr = createButtons("freezeheal", "fflare");
+    const fflare = createButtons("frymidrose", "g3n");
+    const g3n = createButtons("funnyflare", "hburn");
+    const hburn = createButtons("going3nuts", "healcon");
+    const healcon = createButtons("healburn", "hmr");
+    const hmr = createButtons("healcontrol", "hotk");
+    const hotk = createButtons("healmidrose", "hland");
+    const hland = createButtons("healthotk", "lsnap");
+    const lsnap = createButtons("highlander", "lcbd");
+    const lcbd = createButtons("lasersnap", "lbait");
+    const lbait = createButtons("lifecouldbedream", "mopr");
+    const mopr = createButtons("logbait", "msp");
+    const msp = createButtons("mopribus", "pts");
+    const pts = createButtons("mspotk", "pb");
+    const pb = createButtons("pawntrickstab", "plmop");
+    const plmop = createButtons("pbeans", "pop");
+    const pop = createButtons("plantmop", "psol");
+    const psol = createButtons("popsicle", "nut");
+    const nut = createButtons("psychosolstice", "radio");
+    const radio = createButtons("nuttin", "r2s");
+    const r2s = createButtons("radiotherapy", "recy");
+    const recy = createButtons("ramp2seedling", "rfl");
+    const rfl = createButtons("recycling", "smf");
+    const smf = createButtons("reflourished", "shambc");
+    const shambc = createButtons("savagemayflower", "sknight");
+    const sknight = createButtons("shamcontrolbc", "srings");
+    const srings = createButtons("shitknight", "stron");
+    const stron = createButtons("starrings", "tc");
+    const tc = createButtons("startron", "tlattail");
+    const tlattail = createButtons("toyotacontrolla", "wtron");
+    const wtron = createButtons("translattail", "allphelp");
+    const budgetprow = createButtons("budgetwk2", "bcc2");
+    const bcc2 = createButtons("budgetphelp", "bct2");
+    const bct2 = createButtons("budgetcc2", "bcz2");
+    const bcz2 = createButtons("budgetct2", "bgk2");
+    const bgk2 = createButtons("budgetcz2", "bgs2");
+    const bgs2 = createButtons("budgetgk2", "bnc2");
+    const bnc2 = createButtons("budgetgs2", "bro2");
+    const bro2 = createButtons("budgetnc2", "bsf2");
+    const bsf2 = createButtons("budgetro2", "bsp2");
+    const bsp2 = createButtons("budgetsf2", "bwk2");
+    const bwk2 = createButtons("budgetsp2", "helppbudget");
+    const compprow = createButtons("watertron2", "ab2");
+    const ab2 = createButtons("compphelp", "chemo2");
+    const chemo2 = createButtons("abeans2", "cburn2");
+    const cburn2 = createButtons("chemotherapy2", "flottery2");
+    const flottery2 = createButtons("cyburn2", "healcon2");
+    const healcon2 = createButtons("figlottery2", "hmr2");
+    const hmr2 = createButtons("healcontrol2", "lbait2");
+    const lbait2 = createButtons("healmidrose2", "radio2");
+    const radio2 = createButtons("logbait2", "shambc2");
+    const shambc2 = createButtons("radiotherapy2", "tc2");
+    const tc2 = createButtons("shamcontrolbc2", "wtron2");
+    const wtron2 = createButtons("toyotacontrolla2", "helppcomp");
+    const ladderprow = createButtons("pbeans2", "carr2");
+    const carr2 = createButtons("helppladder", "dcounter2");
+    const dcounter2 = createButtons("carroot2", "fmr2");
+    const fmr2 = createButtons("dinocounter2", "g3n2");
+    const g3n2 = createButtons("frymidrose2", "pts2");
+    const pts2 = createButtons("going3nuts2", "pb2");
+    const pb2 = createButtons("pawntrickstab2", "ladderphelp");
+    const memeprow = createButtons("translattail2", "wr1002");
+    const wr1002 = createButtons("memephelp", "cank2");
+    const cank2 = createButtons("winrate1002", "dgloves2");
+    const dgloves2 = createButtons("cancerknight2", "fheal2");
+    const fheal2 = createButtons("dinogloves2", "fflare2");
+    const fflare2 = createButtons("freezeheal2", "hburn2");
+    const hburn2 = createButtons("funnyflare2", "hotk2");
+    const hotk2 = createButtons("healburn2", "hland2");
+    const hland2 = createButtons("healthotk2", "lsnap2");
+    const lsnap2 = createButtons("highlander2", "lcbd2");
+    const lcbd2 = createButtons("lasersnap2", "mopr2");
+    const mopr2 = createButtons("lifecouldbedream2", "msp2");
+    const msp2 = createButtons("mopribus2", "nut2");
+    const nut2 = createButtons("mspotk2", "plmop2");
+    const plmop2 = createButtons("nuttin2", "pop2");
+    const pop2 = createButtons("plantmop2", "psol2");
+    const psol2 = createButtons("popsicle2", "r2s2");
+    const r2s2 = createButtons("psychosolstice2", "recy2");
+    const recy2 = createButtons("ramp2seedling2", "rfl2");
+    const rfl2 = createButtons("recycling2", "smf2");
+    const smf2 = createButtons("reflourished2", "sknight2");
+    const sknight2 = createButtons("savagemayflower2", "srings2");
+    const srings2 = createButtons("shitknight2", "stron2");
+    const stron2 = createButtons("starrings2", "tlattail2");
+    const tlattail2 = createButtons("startron2", "helppmeme");
+    const aggroprow = createButtons("watertron3", "ab3");
+    const ab3 = createButtons("helppaggro", "bcc3");
+    const bcc3 = createButtons("abeans3", "bct3");
+    const bct3 = createButtons("budgetcc3", "bnc3");
+    const bnc3 = createButtons("budgetct3", "bsf3");
+    const bsf3 = createButtons("budgetct3", "dgloves3");
+    const dgloves3 = createButtons("budgetsf3", "lbait3");
+    const lbait3 = createButtons("dinogloves3", "pb3");
+    const pb3 = createButtons("logbait3", "wtron3");
+    const wtron3 = createButtons("pbeans3", "aggrophelp");
+    const comboprow = createButtons("translattail3", "bcc4");
+    const bcc4 = createButtons("helppcombo", "bcz3");
+    const bcz3 = createButtons("budgetcc4", "carr3");
+    const carr3 = createButtons("budgetcz3", "cburn3");
+    const cburn3 = createButtons("carroot3", "dcounter3");
+    const dcounter3 = createButtons("cyburn3", "fheal3");
+    const fheal3 = createButtons("dinocounter3", "fflare3");
+    const fflare3 = createButtons("freezeheal3", "g3n3");
+    const g3n3 = createButtons("funnyflare3", "hburn3");
+    const hburn3 = createButtons("going3nuts3", "hotk3");
+    const hotk3 = createButtons("healburn3", "lsnap3");
+    const lsnap3 = createButtons("healthotk3", "mopr3");
+    const mopr3 = createButtons("lasersnap3", "msp3");
+    const msp3 = createButtons("mopribus3", "nut3");
+    const nut3 = createButtons("mspotk3", "plmop3");
+    const plmop3 = createButtons("nuttin3", "psol3");
+    const psol3 = createButtons("plantmop3", "r2s3");
+    const r2s3 = createButtons("psychosolstice3", "rfl3");
+    const rfl3 = createButtons("ramp2seedling3", "smf3");
+    const smf3 = createButtons("reflourished3", "srings3");
+    const srings3 = createButtons("savagemayflower3", "stron3");
+    const stron3 = createButtons("starrings3", "tlattail3");
+    const tlattail3 = createButtons("startron3", "helppcombo");
+    const controlprow = createButtons("toyotacontrolla3", "cank3");
+    const cank3 = createButtons("helppcontrol", "chemo3");
+    const chemo3 = createButtons("cancerknight3", "healcon3");
+    const healcon3 = createButtons("chemotherapy3", "pts3");
+    const pts3 = createButtons("healcontrol3", "pop3");
+    const pop3 = createButtons("pawntrickstab3", "radio3");
+    const radio3 = createButtons("popsicle3", "shambc3");
+    const shambc3 = createButtons("radiotherapy3", "sknight3");
+    const sknight3 = createButtons("shamcontrolbc3", "tc3");
+    const tc3 = createButtons("shitknight3", "controlphelp");
+    const midrangeprow = createButtons("startron4", "bcz4");
+    const bcz4 = createButtons("helppmidrange", "bgk3");
+    const bgk3 = createButtons("budgetcz4", "bgs3");
+    const bgs3 = createButtons("budgetgk3", "bro3");
+    const bro3 = createButtons("budgetgs3", "bsp3");
+    const bsp3 = createButtons("budgetro3", "bwk3");
+    const bwk3 = createButtons("budgetro3", "cburn4");
+    const cburn4 = createButtons("budgetwk3", "dcounter4");
+    const dcounter4 = createButtons("cyburn4", "flottery3");
+    const flottery3 = createButtons("dinocounter4", "fmr3");
+    const fmr3 = createButtons("figlottery3", "fflare4");
+    const fflare4 = createButtons("frymidrose3", "g3n4");
+    const g3n4 = createButtons("funnyflare4", "hburn4");
+    const hburn4 = createButtons("going3nuts4", "hmr3");
+    const hmr3 = createButtons("healburn4", "hotk4");
+    const hotk4 = createButtons("healmidrose3", "hland3");
+    const hland3 = createButtons("healthotk4", "lsnap4");
+    const lsnap4 = createButtons("highlander3", "mopr4");
+    const mopr4 = createButtons("lasersnap4", "psol4");
+    const psol4 = createButtons("mopribus4", "r2s4");
+    const r2s4 = createButtons("psychosolstice4", "recy3");
+    const recy3 = createButtons("ramp2seedling4", "srings4");
+    const srings4 = createButtons("recyling3", "stron4");
+    const stron4 = createButtons("starrings4", "midrangephelp");
+    const tempoprow = createButtons("translattail4", "wr1003");
+    const wr1003 = createButtons("tempophelp", "carr4");
+    const carr4 = createButtons("winrate1003", "lcbd3");
+    const lcbd3 = createButtons("carroot4", "tlattail4");
+    const tlattail4 = createButtons("lifecouldbedream3", "helpptempo");
+    const allzrow = createButtons("zmoss", "sav");
+    const sav = createButtons("allzhelp", "agr");
+    const agr = createButtons("savage", "agor");
+    const agor = createButtons("agraves", "bhammer");
+    const bhammer = createButtons("antiagor", "bfmg");
+    const bfmg = createButtons("banhammer", "bfpc");
+    const bfpc = createButtons("bfmidgargs", "bas");
+    const bas = createButtons("bfplankcontrol", "bfw");
+    const bfw = createButtons("bastet", "bbolt");
+    const bbolt = createButtons("binaryflagwar", "bducks");
+    const bducks = createButtons("boltbolt", "brad");
+    const brad = createButtons("bonusducks", "bbf");
+    const bbf = createButtons("brady", "beb");
+    const beb = createButtons("budgetbf", "bif");
+    const bif = createButtons("budgeteb", "bim");
+    const bim = createButtons("budgetif", "bnt");
+    const bnt = createButtons("budgetim", "bpb");
+    const bpb = createButtons("budgetnt", "brb");
+    const brb = createButtons("budgetpb", "bsb");
+    const bsb = createButtons("budgetrb", "bsm");
+    const bsm = createButtons("budgetsb", "bykm");
+    const bykm = createButtons("budgetsm", "bzm");
+    const bzm = createButtons("budgetykm", "bust");
+    const bust = createButtons("budgetzm", "cog");
+    const cog = createButtons("bustbolt", "cbait");
+    const cbait = createButtons("coggerazzi", "cleap");
+    const cleap = createButtons("congabait", "cboy");
+    const cboy = createButtons("conjureleap", "dmech");
+    const dmech = createButtons("cryoboy", "flo");
+    const flo = createButtons("dozzamech", "ftimps");
+    const ftimps = createButtons("floss", "gburn");
+    const gburn = createButtons("frozentelimps", "gtech");
+    const gtech = createButtons("gargburn", "gstar22");
+    const gstar22 = createButtons("gargolithtech", "gom");
+    const gom = createButtons("gargstar22", "gps");
+    const gps = createButtons("gomorrah", "gstache");
+    const gstache = createButtons("gravepiratestache", "hter");
+    const hter = createButtons("gravestache", "hor");
+    const hor = createButtons("himpter", "hgargs");
+    const hgargs = createButtons("horts", "ibox");
+    const ibox = createButtons("huntgargs", "igbc");
+    const igbc = createButtons("icebox", "kscope");
+    const kscope = createButtons("igmablobchum", "lt");
+    const lt = createButtons("kaleidoscope", "ltbr");
+    const ltbr = createButtons("ladytuna", "ltime");
+    const ltime = createButtons("lockthebathroom", "mbolt");
+    const mbolt = createButtons("lunchtime", "mcon");
+    const mcon = createButtons("marxbolt", "mscope");
+    const mscope = createButtons("mechacontrol", "nhks");
+    const nhks = createButtons("mechascope", "npa");
+    const npa = createButtons("nohokaistars", "otksw");
+    const otksw = createButtons("noplayingallowed", "pyeeyz");
+    const pyeeyz = createButtons("otkswabbie", "pbfeast");
+    const pfeast = createButtons("pablosyeezys", "pmop");
+    const pmop = createButtons("pbfeast", "propackage");
+    const propackage = createButtons("petmop", "rpackage");
+    const rpackage = createButtons("professorpackage", "rticia");
+    const rticia = createButtons("raiserpackage", "rcatster");
+    const rcatster = createButtons("rampticia", "syard");
+    const syard = createButtons("reversecatster", "sea");
+    const sea = createButtons("schoolyard", "stars");
+    const stars = createButtons("seacret", "spl");
+    const spl = createButtons("spacestars", "sbandits");
+    const sbandits = createButtons("splimps", "slord");
+    const slord = createButtons("sunbandits", "timps");
+    const timps = createButtons("sunlord", "timpssb");
+    const timpssb = createButtons("telimps", "terrifyster");
+    const terrifyster = createButtons("telimpssb", "tstache");
+    const tstache = createButtons("terrifytricksterazzi", "tmech");
+    const tmech = createButtons("trickstache", "ubolt");
+    const ubolt = createButtons("trickmech", "umech");
+    const umech = createButtons("uncrackabolt", "vster");
+    const vster = createButtons("uncrackamech", "wsports");
+    const wsports = createButtons("valkster", "wph");
+    const wph = createButtons("watersports", "yemartin");
+    const yemartin = createButtons("whalepharaoh", "ykmartin");
+    const ykmartin = createButtons("youngeggmartin", "zm");
+    const zm = createButtons("youngkenmartin", "helpzall");
+    const budgetzrow = createButtons("budgetzm2", "bbf2");
+    const bbf2 = createButtons("helpbudgetz", "beb2");
+    const beb2 = createButtons("budgetbf2", "bif2");
+    const bif2 = createButtons("budgeteb2", "bim2");
+    const bim2 = createButtons("budgetif2", "bnt2");
+    const bnt2 = createButtons("budgetim2", "bpb2");
+    const bpb2 = createButtons("budgetnt2", "brb2");
+    const brb2 = createButtons("budgetpb2", "bsb2");
+    const bsb2 = createButtons("budgetrb2", "bsm2");
+    const bsm2 = createButtons("budgetsb2", "bykm2");
+    const bykm2 = createButtons("budgetsm2", "bzm2");
+    const bzm2 = createButtons("budgetykm2", "helpzbudget");
+    const compzrow = createButtons("uncrackabolt2", "bust2");
+    const bust2 = createButtons("helpzcomp", "gburn2");
+    const gburn2 = createButtons("bustbolt2", "ibox2");
+    const ibox2 = createButtons("gargburn2", "ltbr2");
+    const ltbr2 = createButtons("icebox2", "kscope2");
+    const kscope2 = createButtons("lockthebathroom2", "pyeeyz2");
+    const pyeeyz2 = createButtons("kaleidoscope2", "nhks2");
+    const nhks2 = createButtons("pablosyeezys2", "sea2");
+    const sea2 = createButtons("nohokaistars2", "stars2");
+    const stars2 = createButtons("seacret2", "timps2");
+    const timps2 = createButtons("spacestars2", "tstache2");
+    const tstache2 = createButtons("telimps2", "ubolt2");
+    const ubolt2 = createButtons("trickstache2", "compzhelp");
+    const ladderzrow = createButtons("valkster2", "agr2");
+    const agr2 = createButtons("helpzladder", "bfmg2");
+    const bfmg2 = createButtons("agraves2", "bfpc2");
+    const bfpc2 = createButtons("bfmidgargs2", "bfw2");
+    const bfw2 = createButtons("bfplankcontrol2", "bbolt2");
+    const bbolt2 = createButtons("binaryflagwar2", "brad2");
+    const brad2 = createButtons("boltbolt2", "cboy2");
+    const cboy2 = createButtons("brady2", "gstar222");
+    const gstar222 = createButtons("cryoboy2", "gom2");
+    const gom2 = createButtons("gargstar222", "gps2");
+    const gps2 = createButtons("gomorrah2", "gstache2");
+    const gstache2 = createButtons("gravepiratestache2", "hor2");
+    const hor2 = createButtons("gravestache2", "mbolt2");
+    const mbolt2 = createButtons("horts2", "mcon2");
+    const mcon2 = createButtons("marxbolt2", "mscope2");
+    const mscope2 = createButtons("mechacontrol2", "propackage2");
+    const propackage2 = createButtons("mechascope2", "rpackage2");
+    const rpackage2 = createButtons("professorpackage2", "syard2");
+    const syard2 = createButtons("raiserpackage2", "spl2");
+    const spl2 = createButtons("schoolyard2", "timpssb2");
+    const timpssb2 = createButtons("splimps2", "tmech2");
+    const tmech2 = createButtons("telimpssb2", "vster2");
+    const vster2 = createButtons("trickmech2", "ladderzhelp");
+    const memezrow = createButtons("zmoss2", "sav2");
+    const sav2 = createButtons("helpzmeme", "agor2");
+    const agor2 = createButtons("savage2", "bhammer2");
+    const bhammer2 = createButtons("antiagor2", "bas2");
+    const bas2 = createButtons("banhammer2", "bducks2");
+    const bducks2 = createButtons("bastet2", "cog2");
+    const cog2 = createButtons("bonusducks2", "cbait2");
+    const cbait2 = createButtons("coggerazzi2", "cleap2");
+    const cleap2 = createButtons("congabait2", "dmech2");
+    const dmech2 = createButtons("conjureleap2", "flo2");
+    const flo2 = createButtons("dozzamech2", "ftimps2");
+    const ftimps2 = createButtons("floss2", "gtech2");
+    const gtech2 = createButtons("frozentelimps2", "hter2");
+    const hter2 = createButtons("gargolithtech2", "hgargs2");
+    const hgargs2 = createButtons("himpter2", "igbc2");
+    const igbc2 = createButtons("huntgargs2", "lt2");
+    const lt2 = createButtons("igmablobchum2", "ltime2");
+    const ltime2 = createButtons("ladytuna2", "npa2");
+    const npa2 = createButtons("lunchtime2", "pfeast2");
+    const pfeast2 = createButtons("noplayingallowed2", "pmop2");
+    const pmop2 = createButtons("pbfeast2", "otksw2");
+    const otksw2 = createButtons("petmop2", "rticia2");
+    const rticia2 = createButtons("otkswabbie2", "rcatster2");
+    const rcatster2 = createButtons("rampticia2", "sbandits2");
+    const sbandits2 = createButtons("reversecatster2", "slord2");
+    const slord2 = createButtons("sunbandits2", "terrifyster2");
+    const terrifyster2 = createButtons("sunlord2", "umech2");
+    const umech2 = createButtons("terrifytricksterazzi2", "wsports2");
+    const wsports2 = createButtons("uncrackamech2", "wph2");
+    const wph2 = createButtons("watersports2", "yemartin2");
+    const yemartin2 = createButtons("whalepharaoh2", "ykmartin2");
+    const ykmartin2 = createButtons("youngeggmartin2", "zm2");
+    const zm2 = createButtons("youngkenmartin2", "memezhelp");
+    const aggrozrow = createButtons("trickmech3", "agr3");
+    const agr3 = createButtons("helpzaggro", "bbf3");
+    const bbf3 = createButtons("agraves3", "beb3");
+    const beb3 = createButtons("budgetbf3", "bif3");
+    const bif3 = createButtons("budgeteb3", "bnt3");
+    const bnt3 = createButtons("budgetif3", "bpb3");
+    const bpb3 = createButtons("budgetnt3", "bsm3");
+    const bsm3 = createButtons("budgetpb3", "bzm3");
+    const bzm3 = createButtons("budgetsm3", "dmech3");
+    const dmech3 = createButtons("budgetzm3", "gps3");
+    const gps3 = createButtons("dozzamech3", "mbolt3");
+    const mbolt3 = createButtons("gravepiratestache3", "syard3");
+    const syard3 = createButtons("marxbolt3", "sea3");
+    const sea3 = createButtons("schoolyard3", "spl3");
+    const spl3 = createButtons("seacret3", "tmech3");
+    const tmech3 = createButtons("splimps3", "aggrozhelp");
+    const combozrow = createButtons("zmoss3", "sav3");
+    const sav3 = createButtons("helpzcombo", "agor3");
+    const agor3 = createButtons("savage3", "bhammer3");
+    const bhammer3 = createButtons("antiagor3", "bas3");
+    const bas3 = createButtons("banhammer3", "bfw3");
+    const bfw3 = createButtons("bastet3", "bbolt3");
+    const bbolt3 = createButtons("binaryflagwar3", "bducks3");
+    const bducks3 = createButtons("boltbolt3", "bim3");
+    const bim3 = createButtons("bonusducks3", "bnt4");
+    const bnt4 = createButtons("budgetim3", "bsm4");
+    const bsm4 = createButtons("budgetnt4", "bykm3");
+    const bykm3 = createButtons("budgetsm4", "bzm4");
+    const bzm4 = createButtons("budgetykm3", "bust3");
+    const bust3 = createButtons("budgetykm3", "cog3");
+    const cog3 = createButtons("bustbolt3", "cbait3");
+    const cbait3 = createButtons("coggerazzi3", "cboy3");
+    const cboy3 = createButtons("congabait3", "flo3");
+    const flo3 = createButtons("cryoboy3", "ftimps3");
+    const ftimps3 = createButtons("floss3", "gps4");
+    const gps4 = createButtons("frozentelimps3", "gburn3");
+    const gburn3 = createButtons("gravepiratestache4", "gstache3");
+    const gstache3 = createButtons("gargburn3", "hter3");
+    const hter3 = createButtons("gravestache3", "hor3");
+    const hor3 = createButtons("himpter3", "igbc3");
+    const igbc3 = createButtons("horts3", "mscope3");
+    const mscope3 = createButtons("igmablobchum3", "otksw3");
+    const otksw3 = createButtons("mechascope3", "pyeeyz3");
+    const pyeeyz3 = createButtons("otkswabbie3", "rticia3");
+    const rticia3 = createButtons("pablosyeezys3", "rcatster3");
+    const rcatster3 = createButtons("rampticia3", "stars3");
+    const stars3 = createButtons("reversecatster3", "sbandits3");
+    const sbandits3 = createButtons("spacestars3", "slord3");
+    const slord3 = createButtons("sunbandits3", "timps3");
+    const timps3 = createButtons("sunlord3", "timpssb3");
+    const timpssb3 = createButtons("telimps3", "terrifyster3");
+    const terrifyster3 = createButtons("telimpssb3", "tstache3");
+    const tstache3 = createButtons("terrifytricksterazzi3", "umech3");
+    const umech3 = createButtons("trickstache3", "vster3");
+    const vster3 = createButtons("uncrackamech3", "wsports3");
+    const wsports3 = createButtons("valkster3", "wph3");
+    const wph3 = createButtons("watersports3", "yemartin3");
+    const yemartin3 = createButtons("whalepharaoh3", "ykmartin3");
+    const ykmartin3 = createButtons("youngeggmartin3", "zm3");
+    const zm3 = createButtons("youngkenmartin3", "combozhelp");
+    const controlzrow = createButtons("whalepharaoh3", "bfpc3");
+    const bfpc3 = createButtons("helpzcontrol", "bducks4");
+    const bducks4 = createButtons("bfplankcontrol3", "bim4");
+    const bim4 = createButtons("bonusducks4", "bust4");
+    const bust4 = createButtons("budgetim4", "ftimps4");
+    const ftimps4 = createButtons("bustbolt4", "hgargs3");
+    const hgargs3 = createButtons("frozentelimps4", "kscope3");
+    const kscope3 = createButtons("frozentelimps4", "mcon3");
+    const mcon3 = createButtons("kaleidoscope3", "mscope4");
+    const mscope4 = createButtons("mechacontrol3", "npa3");
+    const npa3 = createButtons("mechascope4", "pfeast3");
+    const pfeast3 = createButtons("noplayingallowed3", "sbandits4");
+    const sbandits4 = createButtons("pbfeast3", "timps4");
+    const timps4 = createButtons("sunbandits4", "timpssb4");
+    const timpssb4 = createButtons("telimps4", "ubolt3");
+    const ubolt3 = createButtons("telimpssb4", "umech4");
+    const umech4 = createButtons("uncrackabolt3", "wph4");
+    const wph4 = createButtons("uncrackamech4", "controlzhelp");
+    const midrangezrow = createButtons("youngkenmartin4", "sav4");
+    const sav4 = createButtons("helpzmid", "bhammer4");
+    const bhammer4 = createButtons("savage4", "bas4");
+    const bas4 = createButtons("banhammer4", "bfmg3");
+    const bfmg3 = createButtons("bastet4", "bfw4");
+    const bfw4 = createButtons("bfmidgargs3", "brb3");
+    const brb3 = createButtons("binaryflagwar4", "bsb3");
+    const bsb3 = createButtons("budgetrb3", "bbolt4");
+    const bbolt4 = createButtons("budgetsb3", "bykm4");
+    const bykm4 = createButtons("boltbolt4", "cbait4");
+    const cbait4 = createButtons("budgetykm4", "cboy4");
+    const cboy4 = createButtons("congabait4", "gburn4");
+    const gburn4 = createButtons("cryoboy4", "gtech3");
+    const gtech3 = createButtons("gargburn4", "gstar223");
+    const gstar223 = createButtons("gargolithtech3", "gom3");
+    const gom3 = createButtons("gargstar223", "hter4");
+    const hter4 = createButtons("gomorrah3", "hor4");
+    const hor4 = createButtons("himpter4", "ibox3");
+    const ibox3 = createButtons("horts4", "igbc4");
+    const igbc4 = createButtons("icebox3", "lt3");
+    const lt3 = createButtons("igmablobchum4", "ltime3");
+    const ltime3 = createButtons("ladytuna3", "pyeeyz4");
+    const pyeeyz4 = createButtons("lunchtime3", "pmop3");
+    const pmop3 = createButtons("pablosyeezys4", "nhks3");
+    const nhks3 = createButtons("petmop3", "stars4");
+    const stars4 = createButtons("nohokaistars3", "slord4");
+    const slord4 = createButtons("spacestars4", "tstache4");
+    const tstache4 = createButtons("sunlord4", "vster4");
+    const vster4 = createButtons("trickstache4", "wsports4");
+    const wsports4 = createButtons("valkster4", "ykmartin4");
+    const ykmartin4 = createButtons("watersports4", "midzhelp");
+    const tempozrow = createButtons("terrifytricksterazzi4", "brad3");
+    const brad3 = createButtons("helpztempo", "cog4");
+    const cog4 = createButtons("brady3", "cleap3");
+    const cleap3 = createButtons("coggerazzi4", "ltbr3");
+    const ltbr3 = createButtons("conjureleap3", "propackage3");
+    const propackage3 = createButtons("lockthebathroom3", "rpackage3");
+    const rpackage3 = createButtons("professorpackage3", "terrifyster4");
+    const terrifyster4 = createButtons("raiserpackage3", "tempozhelp");
     const Ccommands = Array.from(client.commands.values());
     const commands = Ccommands.filter((command) => {
       if (
@@ -1250,140 +1254,140 @@ Note: the decks are in alphabetical order not by hero and there are ${commands.l
         "https://media.discordapp.net/attachments/1044626284346605588/1356022131225268255/allheroes.jpg?ex=67eb0d85&is=67e9bc05&hm=6b685aabe10a85ef7c80cf09bced40bf6b671fda726522be203c7d2372203344&=&format=webp&width=1872&height=758"
       )
       .setFooter({ text: "Credit to Iceiboi for deck type explainations" });
-    const allpdecksEmbed = new CreatePlantHelpEmbed(
+    const allpdecksEmbed = createPlantHelpEmbed(
       "All Plant Decks",
       `My plant decks are ${toBuildPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the plant decks or ping tbot with one of the decknames above to see a specific plant deck
 Note: there are ${plantDecks.allDecks.length} plant decks in the database`
     );
-    const budgetpdecksEmbed = new CreatePlantHelpEmbed(
+    const budgetpdecksEmbed = createPlantHelpEmbed(
       "Budget Plant Decks",
       `My budget plant decks are ${toBuildBudgetPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the budget plant decks or ping tbot with one of the decknames above to see a specific budget plant deck
 Note: there are ${plantDecks.budgetDecks.length} budget plant decks in the database`
     );
-    const comppdecksEmbed = new CreatePlantHelpEmbed(
+    const comppdecksEmbed = createPlantHelpEmbed(
       "Competitive Plant Decks",
       `My competitive plant decks are ${toBuildCompPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the competitive plant decks or ping tbot with one of the decknames above to see a specific competitive plant deck
 Note: there are ${plantDecks.competitiveDecks.length} competitive plant decks in the database`
     );
-    const ladderpdecksEmbed = new CreatePlantHelpEmbed(
+    const ladderpdecksEmbed = createPlantHelpEmbed(
       "Ladder Plant Decks",
       `My ladder plant decks are ${toBuildLadderPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the ladder plant decks or ping tbot with one of the decknames above to see a specific ladder plant deck
 Note: there are ${plantDecks.ladderDecks.length} ladder plant decks in the database`
     );
-    const memepdecksEmbed = new CreatePlantHelpEmbed(
+    const memepdecksEmbed = createPlantHelpEmbed(
       "Meme Plant Decks",
       `My meme plant decks are ${toBuildMemePString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the meme plant decks or ping tbot with one of the decknames above to see a specific meme plant deck
 Note: there are ${plantDecks.memeDecks.length} meme plant decks in the database`
     );
-    const aggropdecksEmbed = new CreatePlantHelpEmbed(
+    const aggropdecksEmbed = createPlantHelpEmbed(
       "Aggro Plant Decks",
       `My aggro plant decks are ${toBuildAggroPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the aggro plant decks or ping tbot with one of the decknames above to see a specific aggro plant deck
 Note: there are ${plantDecks.aggroDecks.length} aggro plant decks in the database`
     );
-    const combopdecksEmbed = new CreatePlantHelpEmbed(
+    const combopdecksEmbed =createPlantHelpEmbed(
       "Combo Plant Decks",
       `My combo plant decks are ${toBuildComboPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the combo plant decks or ping tbot with one of the decknames above to see a specific combo plant deck
 Note: there are ${plantDecks.comboDecks.length} combo plant decks in the database`
     );
-    const controlpdecksEmbed = new CreatePlantHelpEmbed(
+    const controlpdecksEmbed = createPlantHelpEmbed(
       "Control Plant Decks",
       `My control plant decks are ${toBuildControlPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the control plant decks or use the commands above to see a specific control plant deck
 Note: there are ${plantDecks.controlDecks.length} control plant decks in the database`
     );
-    const midrangepdecksEmbed = new CreatePlantHelpEmbed(
+    const midrangepdecksEmbed =createPlantHelpEmbed(
       "Midrange Plant Decks",
       `My midrange plant decks are ${toBuildMidrangePString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the midrange plant decks or use the commands above to see a specific midrange plant deck
 Note: there are ${plantDecks.midrangeDecks.length} midrange plant decks in the database`
     );
-    const tempopdecksEmbed = new CreatePlantHelpEmbed(
+    const tempopdecksEmbed = createPlantHelpEmbed(
       "Tempo Plant Decks",
       `My tempo plant decks are ${toBuildTempoPString}`,
       "https://media.discordapp.net/attachments/1152624944262414436/1356024336313614448/allplants.webp?ex=67eb0f93&is=67e9be13&hm=9fc04fef1acefae03b1cc550c7ec882da5adf4096a1d246edfc90c2b2a3c7af4&=&format=webp",
       `Click the buttons below to navigate through all the tempo plant decks or use the commands above to see a specific tempo plant deck
 Note: there are ${plantDecks.tempoDecks.length} tempo plant decks in the database`
     );
-    const allzdecksEmbed = new CreateZombieHelpEmbed(
+    const allzdecksEmbed = createZombieHelpEmbed(
       "All Zombie Decks",
       `My zombie decks are ${toBuildZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the zombie decks or use the commands above to see a specific zombie deck(PS: ping Tbot with deckname to see specific decks!)
 Note: there are ${zombieDecks.allDecks.length} zombie decks in the database`
     );
-    const budgetzdecksEmbed = new CreateZombieHelpEmbed(
+    const budgetzdecksEmbed = createZombieHelpEmbed(
       "Budget Zombie Decks",
       `My budget zombie decks are ${toBuildBudgetZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the budget zombie decks or use the commands above to see a specific budget zombie deck
 Note: there are ${zombieDecks.budgetDecks.length} budget zombie decks in the database`
     );
-    const compzdecksEmbed = new CreateZombieHelpEmbed(
+    const compzdecksEmbed =  createZombieHelpEmbed(
       "Competitive Zombie Decks",
       `My competitive zombie decks are ${toBuildCompZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the competitive zombie decks or use the commands above to see a specific competitive zombie deck
 Note: there are ${zombieDecks.competitiveDecks.length} competitive zombie decks in the database`
     );
-    const ladderzdecksEmbed = new CreateZombieHelpEmbed(
+    const ladderzdecksEmbed = createZombieHelpEmbed(
       "Ladder Zombie Decks",
       `My ladder zombie decks are ${toBuildLadderZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the ladder zombie decks or use the commands above to see a specific ladder zombie deck
 Note: there are ${zombieDecks.ladderDecks.length} ladder zombie decks in the database`
     );
-    const memezdecksEmbed = new CreateZombieHelpEmbed(
+    const memezdecksEmbed = createZombieHelpEmbed(
       "Meme Zombie Decks",
       `My meme zombie decks are ${toBuildMemeZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the meme zombie decks or use the commands above to see a specific meme zombie deck
 Note: there are ${zombieDecks.memeDecks.length} meme zombie decks in the database`
     );
-    const aggrozdecksEmbed = new CreateZombieHelpEmbed(
+    const aggrozdecksEmbed = createZombieHelpEmbed(
       "Aggro Zombie Decks",
       `My aggro zombie decks are ${toBuildAggroZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the aggro zombie decks or use the commands above to see a specific aggro zombie deck
 Note: there are ${zombieDecks.aggroDecks.length} aggro zombie decks in the database`
     );
-    const combozdecksEmbed = new CreateZombieHelpEmbed(
+    const combozdecksEmbed = createZombieHelpEmbed(
       "Combo Zombie Decks",
       `My combo zombie decks are ${toBuildComboZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the combo zombie decks or use the commands above to see a specific combo zombie deck
 Note: there are ${zombieDecks.comboDecks.length} combo zombie decks in the database`
     );
-    const controlzdecksEmbed = new CreateZombieHelpEmbed(
+    const controlzdecksEmbed = createZombieHelpEmbed(
       "Control Zombie Decks",
       `My control zombie decks are ${toBuildControlZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the control zombie decks or use the commands above to see a specific control zombie deck
 Note: there are ${zombieDecks.controlDecks.length} control zombie decks in the database`
     );
-    const midrangezdecksEmbed = new CreateZombieHelpEmbed(
+    const midrangezdecksEmbed = createZombieHelpEmbed(
       "Midrange Zombie Decks",
       `My midrange zombie decks are ${toBuildMidrangeZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
       `Click the buttons below to navigate through all the midrange zombie decks or use the commands above to see a specific midrange zombie deck
 Note: there are ${zombieDecks.midrangeDecks.length} midrange zombie decks in the database`
     );
-    const tempozdecksEmbed = new CreateZombieHelpEmbed(
+    const tempozdecksEmbed = createZombieHelpEmbed(
       "Tempo Zombie Decks",
       `My tempo zombie decks are ${toBuildTempoZString}`,
       "https://media.discordapp.net/attachments/1044626284346605588/1358181176644337664/zombieheroes.jpg?ex=67f2e84a&is=67f196ca&hm=1998b9baa5733c6b6e3ce7366675a4789b8e8fe1b6ed33b47ffa5a21ac0da800&=&format=webp",
@@ -1443,7 +1447,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
      * @param {string} deckName - The name of the deck to create an embed for.
      * @returns {EmbedBuilder} - The created embed for the plant deck.
      */
-    function CreatePlantDeckEmbed(result, deckName) {
+   function createPlantDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -1460,64 +1464,64 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
       }
       return embed;
     }
-    const carroot = new CreatePlantDeckEmbed(result, "carroot");
-    const shamcontrolbc = new CreatePlantDeckEmbed(result, "shamcontrol");
-    const budgetct = new CreatePlantDeckEmbed(result, "budgetct");
-    const going3nuts = new CreatePlantDeckEmbed(result, "going3nuts");
-    const startron = new CreatePlantDeckEmbed(result, "startron");
-    const watertron = new CreatePlantDeckEmbed(result, "watertron");
-    const budgetcc = new CreatePlantDeckEmbed(result, "budgetcc");
-    const lifecouldbedream = new CreatePlantDeckEmbed(result, "lcbd");
-    const logbait = new CreatePlantDeckEmbed(result, "logbait");
-    const mspotk = new CreatePlantDeckEmbed(result, "mspotk");
-    const dinocounter = new CreatePlantDeckEmbed(result, "dinocounter");
-    const plantmop = new CreatePlantDeckEmbed(result, "plantmop");
-    const reflourished = new CreatePlantDeckEmbed(result, "reflourished");
-    const healcontrol = new CreatePlantDeckEmbed(result, "apotk");
-    const budgetcz = new CreatePlantDeckEmbed(result, "budgetcz");
-    const lasersnap = new CreatePlantDeckEmbed(result, "lasersnap");
-    const mopribus = new CreatePlantDeckEmbed(result, "mopribus");
-    const budgetgk = new CreatePlantDeckEmbed(result, "budgetgk");
-    const dinogloves = new CreatePlantDeckEmbed(result, "dinogloves");
-    const healthotk = new CreatePlantDeckEmbed(result, "healthotk");
-    const pawntrickstab = new CreatePlantDeckEmbed(result, "pawntrickstab");
-    const winrate100 = new CreatePlantDeckEmbed(result, "wr100");
-    const abeans = new CreatePlantDeckEmbed(result, "abeans");
-    const budgetgs = new CreatePlantDeckEmbed(result, "budgetgs");
-    const pbeans = new CreatePlantDeckEmbed(result, "pbeans");
-    const savagemayflower = new CreatePlantDeckEmbed(result, "savagemayflower");
-    const starrings = new CreatePlantDeckEmbed(result, "sovietonion");
-    const budgetnc = new CreatePlantDeckEmbed(result, "budgetnc");
-    const cyburn = new CreatePlantDeckEmbed(result, "cyburn");
-    const toyotacontrolla = new CreatePlantDeckEmbed(result, "toyotacontrolla");
-    const translattail = new CreatePlantDeckEmbed(result, "translattail");
-    const budgetro = new CreatePlantDeckEmbed(result, "budgetro");
-    const freezeheal = new CreatePlantDeckEmbed(result, "freezeheal");
-    const frymidrose = new CreatePlantDeckEmbed(result, "frymidrose");
-    const healmidrose = new CreatePlantDeckEmbed(result, "hmr");
-    const budgetsf = new CreatePlantDeckEmbed(result, "budgetswarmsf");
-    const recycling = new CreatePlantDeckEmbed(result, "recycling");
-    const funnyflare = new CreatePlantDeckEmbed(result, "funnyflare");
-    const healburn = new CreatePlantDeckEmbed(result, "healburn");
-    const figlottery = new CreatePlantDeckEmbed(result, "healmidflare");
-    const psychosolstice = new CreatePlantDeckEmbed(result, "psychosolstice");
-    const ramp2seedling = new CreatePlantDeckEmbed(result, "ramp2seedling");
-    const budgetsp = new CreatePlantDeckEmbed(result, "budgetburstsp");
-    const nuttin = new CreatePlantDeckEmbed(result, "nutting");
-    const radiotherapy = new CreatePlantDeckEmbed(result, "radiotherapy");
-    const popsicle = new CreatePlantDeckEmbed(result, "popsicle");
-    const budgetwk = new CreatePlantDeckEmbed(result, "budgetwkmidheal");
-    const cancerknight = new CreatePlantDeckEmbed(result, "cancerknight");
-    const chemotherapy = new CreatePlantDeckEmbed(result, "chemotherapy");
-    const highlander = new CreatePlantDeckEmbed(result, "highlander");
-    const shitknight = new CreatePlantDeckEmbed(result, "shitknight");
+    const carroot = createPlantDeckEmbed(result, "carroot");
+    const shamcontrolbc = createPlantDeckEmbed(result, "shamcontrol");
+    const budgetct = createPlantDeckEmbed(result, "budgetct");
+    const going3nuts = createPlantDeckEmbed(result, "going3nuts");
+    const startron = createPlantDeckEmbed(result, "startron");
+    const watertron = createPlantDeckEmbed(result, "watertron");
+    const budgetcc = createPlantDeckEmbed(result, "budgetcc");
+    const lifecouldbedream = createPlantDeckEmbed(result, "lcbd");
+    const logbait = createPlantDeckEmbed(result, "logbait");
+    const mspotk = createPlantDeckEmbed(result, "mspotk");
+    const dinocounter = createPlantDeckEmbed(result, "dinocounter");
+    const plantmop = createPlantDeckEmbed(result, "plantmop");
+    const reflourished = createPlantDeckEmbed(result, "reflourished");
+    const healcontrol = createPlantDeckEmbed(result, "apotk");
+    const budgetcz = createPlantDeckEmbed(result, "budgetcz");
+    const lasersnap = createPlantDeckEmbed(result, "lasersnap");
+    const mopribus = createPlantDeckEmbed(result, "mopribus");
+    const budgetgk = createPlantDeckEmbed(result, "budgetgk");
+    const dinogloves = createPlantDeckEmbed(result, "dinogloves");
+    const healthotk = createPlantDeckEmbed(result, "healthotk");
+    const pawntrickstab = createPlantDeckEmbed(result, "pawntrickstab");
+    const winrate100 = createPlantDeckEmbed(result, "wr100");
+    const abeans = createPlantDeckEmbed(result, "abeans");
+    const budgetgs = createPlantDeckEmbed(result, "budgetgs");
+    const pbeans = createPlantDeckEmbed(result, "pbeans");
+    const savagemayflower = createPlantDeckEmbed(result, "savagemayflower");
+    const starrings = createPlantDeckEmbed(result, "sovietonion");
+    const budgetnc = createPlantDeckEmbed(result, "budgetnc");
+    const cyburn = createPlantDeckEmbed(result, "cyburn");
+    const toyotacontrolla = createPlantDeckEmbed(result, "toyotacontrolla");
+    const translattail = createPlantDeckEmbed(result, "translattail");
+    const budgetro = createPlantDeckEmbed(result, "budgetro");
+    const freezeheal = createPlantDeckEmbed(result, "freezeheal");
+    const frymidrose = createPlantDeckEmbed(result, "frymidrose");
+    const healmidrose = createPlantDeckEmbed(result, "hmr");
+    const budgetsf = createPlantDeckEmbed(result, "budgetswarmsf");
+    const recycling = createPlantDeckEmbed(result, "recycling");
+    const funnyflare = createPlantDeckEmbed(result, "funnyflare");
+    const healburn = createPlantDeckEmbed(result, "healburn");
+    const figlottery = createPlantDeckEmbed(result, "healmidflare");
+    const psychosolstice = createPlantDeckEmbed(result, "psychosolstice");
+    const ramp2seedling = createPlantDeckEmbed(result, "ramp2seedling");
+    const budgetsp = createPlantDeckEmbed(result, "budgetburstsp");
+    const nuttin = createPlantDeckEmbed(result, "nutting");
+    const radiotherapy = createPlantDeckEmbed(result, "radiotherapy");
+    const popsicle = createPlantDeckEmbed(result, "popsicle");
+    const budgetwk = createPlantDeckEmbed(result, "budgetwkmidheal");
+    const cancerknight = createPlantDeckEmbed(result, "cancerknight");
+    const chemotherapy = createPlantDeckEmbed(result, "chemotherapy");
+    const highlander = createPlantDeckEmbed(result, "highlander");
+    const shitknight = createPlantDeckEmbed(result, "shitknight");
     /**
      * The CreateZombieDeckEmbed function creates an embed for a zombie deck.
      * @param {*} result - The result object containing deck information.
      * @param {string} deckName - The name of the deck to create an embed for.
      * @returns {EmbedBuilder} - The created embed for the zombie deck.
      */
-    function CreateZombieDeckEmbed(result, deckName) {
+    function createZombieDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -1534,92 +1538,92 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
       }
       return embed;
     }
-    const bfmidgargs = new CreateZombieDeckEmbed(result, "bfmidgargs");
-    const bfplankcontrol = new CreateZombieDeckEmbed(result, "bfplankcontrol");
-    const budgetbf = new CreateZombieDeckEmbed(result, "budgetbf");
-    const gargolithtech = new CreateZombieDeckEmbed(result, "gargolithtech");
-    const himps = new CreateZombieDeckEmbed(result, "himps");
-    const lockthebathroom = new CreateZombieDeckEmbed(result, "lockin");
-    const lunchtime = new CreateZombieDeckEmbed(result, "midpets");
-    const petmop = new CreateZombieDeckEmbed(result, "petmop");
-    const banhammer = new CreateZombieDeckEmbed(result, "racism");
-    const raiserpackage = new CreateZombieDeckEmbed(result, "raiserpackage");
-    const watersports = new CreateZombieDeckEmbed(result, "watersports");
-    const budgeteb = new CreateZombieDeckEmbed(result, "budgetburn");
-    const gargstar22 = new CreateZombieDeckEmbed(result, "gargstar22");
-    const huntgargs = new CreateZombieDeckEmbed(result, "huntgargs");
-    const noplayingallowed = new CreateZombieDeckEmbed(
+    const bfmidgargs = createZombieDeckEmbed(result, "bfmidgargs");
+    const bfplankcontrol = createZombieDeckEmbed(result, "bfplankcontrol");
+    const budgetbf = createZombieDeckEmbed(result, "budgetbf");
+    const gargolithtech = createZombieDeckEmbed(result, "gargolithtech");
+    const himps = createZombieDeckEmbed(result, "himps");
+    const lockthebathroom = createZombieDeckEmbed(result, "lockin");
+    const lunchtime = createZombieDeckEmbed(result, "midpets");
+    const petmop = createZombieDeckEmbed(result, "petmop");
+    const banhammer = createZombieDeckEmbed(result, "racism");
+    const raiserpackage = createZombieDeckEmbed(result, "raiserpackage");
+    const watersports = createZombieDeckEmbed(result, "watersports");
+    const budgeteb = createZombieDeckEmbed(result, "budgetburn");
+    const gargstar22 = createZombieDeckEmbed(result, "gargstar22");
+    const huntgargs = createZombieDeckEmbed(result, "huntgargs");
+    const noplayingallowed = createZombieDeckEmbed(
       result,
       "noplayingallowed"
     );
-    const seacret = new CreateZombieDeckEmbed(result, "seacret");
-    const budgetsb = new CreateZombieDeckEmbed(result, "budgetsb");
-    const telimpssb = new CreateZombieDeckEmbed(result, "telimpssb");
-    const budgetykm = new CreateZombieDeckEmbed(result, "budgetykm");
-    const conjureleap = new CreateZombieDeckEmbed(result, "conjureleap");
-    const cryoboy = new CreateZombieDeckEmbed(result, "cyroboy");
-    const frozentelimps = new CreateZombieDeckEmbed(result, "frozentelimps");
-    const gravepiratestache = new CreateZombieDeckEmbed(result, "gps");
-    const gravestache = new CreateZombieDeckEmbed(result, "gravestache");
-    const otkswabbie = new CreateZombieDeckEmbed(result, "otkswabbie");
-    const telimps = new CreateZombieDeckEmbed(result, "telimps");
-    const youngkenmartin = new CreateZombieDeckEmbed(result, "ykm");
-    const budgetif = new CreateZombieDeckEmbed(result, "budgetif");
-    const nohokaistars = new CreateZombieDeckEmbed(result, "nohokaistars");
-    const spacestars = new CreateZombieDeckEmbed(result, "spacestars");
-    const splimps = new CreateZombieDeckEmbed(result, "splimps");
-    const savage22 = new CreateZombieDeckEmbed(result, "savage22");
-    const bastet = new CreateZombieDeckEmbed(result, "bastet");
-    const budgetim = new CreateZombieDeckEmbed(result, "budgetim");
-    const mechascope = new CreateZombieDeckEmbed(result, "otkmecha");
-    const kaleidoscope = new CreateZombieDeckEmbed(result, "otktrickster");
-    const rampticia = new CreateZombieDeckEmbed(result, "rampticia");
-    const agraves = new CreateZombieDeckEmbed(result, "agraves");
-    const antiagor = new CreateZombieDeckEmbed(result, "antiagor");
-    const budgetnt = new CreateZombieDeckEmbed(result, "budgetnt");
-    const floss = new CreateZombieDeckEmbed(result, "floss");
-    const gomorrah = new CreateZombieDeckEmbed(result, "gomorrah");
-    const icebox = new CreateZombieDeckEmbed(result, "icebox");
-    const ladytuna = new CreateZombieDeckEmbed(result, "ladytuna");
-    const schoolyard = new CreateZombieDeckEmbed(result, "schoolyard");
-    const sunlord = new CreateZombieDeckEmbed(result, "wimps");
-    const bonusducks = new CreateZombieDeckEmbed(result, "bonusducks");
-    const budgetpb = new CreateZombieDeckEmbed(result, "budgetpb");
-    const congabait = new CreateZombieDeckEmbed(result, "congabait");
-    const pbfeast = new CreateZombieDeckEmbed(result, "pbfeast");
-    const professorpackage = new CreateZombieDeckEmbed(
+    const seacret = createZombieDeckEmbed(result, "seacret");
+    const budgetsb = createZombieDeckEmbed(result, "budgetsb");
+    const telimpssb = createZombieDeckEmbed(result, "telimpssb");
+    const budgetykm = createZombieDeckEmbed(result, "budgetykm");
+    const conjureleap = createZombieDeckEmbed(result, "conjureleap");
+    const cryoboy = createZombieDeckEmbed(result, "cyroboy");
+    const frozentelimps = createZombieDeckEmbed(result, "frozentelimps");
+    const gravepiratestache = createZombieDeckEmbed(result, "gps");
+    const gravestache = createZombieDeckEmbed(result, "gravestache");
+    const otkswabbie = createZombieDeckEmbed(result, "otkswabbie");
+    const telimps = createZombieDeckEmbed(result, "telimps");
+    const youngkenmartin = createZombieDeckEmbed(result, "ykm");
+    const budgetif = createZombieDeckEmbed(result, "budgetif");
+    const nohokaistars = createZombieDeckEmbed(result, "nohokaistars");
+    const spacestars = createZombieDeckEmbed(result, "spacestars");
+    const splimps = createZombieDeckEmbed(result, "splimps");
+    const savage22 = createZombieDeckEmbed(result, "savage22");
+    const bastet = createZombieDeckEmbed(result, "bastet");
+    const budgetim = createZombieDeckEmbed(result, "budgetim");
+    const mechascope = createZombieDeckEmbed(result, "otkmecha");
+    const kaleidoscope = createZombieDeckEmbed(result, "otktrickster");
+    const rampticia = createZombieDeckEmbed(result, "rampticia");
+    const agraves = createZombieDeckEmbed(result, "agraves");
+    const antiagor = createZombieDeckEmbed(result, "antiagor");
+    const budgetnt = createZombieDeckEmbed(result, "budgetnt");
+    const floss = createZombieDeckEmbed(result, "floss");
+    const gomorrah = createZombieDeckEmbed(result, "gomorrah");
+    const icebox = createZombieDeckEmbed(result, "icebox");
+    const ladytuna = createZombieDeckEmbed(result, "ladytuna");
+    const schoolyard = createZombieDeckEmbed(result, "schoolyard");
+    const sunlord = createZombieDeckEmbed(result, "wimps");
+    const bonusducks = createZombieDeckEmbed(result, "bonusducks");
+    const budgetpb = createZombieDeckEmbed(result, "budgetpb");
+    const congabait = createZombieDeckEmbed(result, "congabait");
+    const pbfeast = createZombieDeckEmbed(result, "pbfeast");
+    const professorpackage = createZombieDeckEmbed(
       result,
       "professorpackage"
     );
-    const trickstache = new CreateZombieDeckEmbed(result, "trickstache");
-    const valkster = new CreateZombieDeckEmbed(result, "valkster");
-    const youngeggmartin = new CreateZombieDeckEmbed(result, "youngeggmartin");
-    const boltbolt = new CreateZombieDeckEmbed(result, "boltbolt");
-    const budgetrb = new CreateZombieDeckEmbed(result, "budgetrb");
-    const bustbolt = new CreateZombieDeckEmbed(result, "bustbolt");
-    const igmablobchum = new CreateZombieDeckEmbed(result, "igmablobchum");
-    const marxbolt = new CreateZombieDeckEmbed(result, "marxbolt");
-    const mechacontrol = new CreateZombieDeckEmbed(result, "mechacontrol");
-    const coggerazzi = new CreateZombieDeckEmbed(result, "poggerrazzi");
-    const sunbandits = new CreateZombieDeckEmbed(result, "sunbandits");
-    const terrifytricksterazzi = new CreateZombieDeckEmbed(
+    const trickstache = createZombieDeckEmbed(result, "trickstache");
+    const valkster = createZombieDeckEmbed(result, "valkster");
+    const youngeggmartin = createZombieDeckEmbed(result, "youngeggmartin");
+    const boltbolt = createZombieDeckEmbed(result, "boltbolt");
+    const budgetrb = createZombieDeckEmbed(result, "budgetrb");
+    const bustbolt = createZombieDeckEmbed(result, "bustbolt");
+    const igmablobchum = createZombieDeckEmbed(result, "igmablobchum");
+    const marxbolt = createZombieDeckEmbed(result, "marxbolt");
+    const mechacontrol = createZombieDeckEmbed(result, "mechacontrol");
+    const coggerazzi = createZombieDeckEmbed(result, "poggerrazzi");
+    const sunbandits = createZombieDeckEmbed(result, "sunbandits");
+    const terrifytricksterazzi = createZombieDeckEmbed(
       result,
       "terrifytricksterazzi"
     );
-    const uncrackabolt = new CreateZombieDeckEmbed(result, "uncrackabolt");
-    const budgetsm = new CreateZombieDeckEmbed(result, "budgetsm");
-    const horts = new CreateZombieDeckEmbed(result, "horts");
-    const pablosyeezys = new CreateZombieDeckEmbed(result, "pablosyeezys");
-    const whalepharaoh = new CreateZombieDeckEmbed(result, "whalepharaoh");
-    const binaryflagwar = new CreateZombieDeckEmbed(result, "binaryflagwar");
-    const brady = new CreateZombieDeckEmbed(result, "brady");
-    const budgetzm = new CreateZombieDeckEmbed(result, "budgetzm");
-    const dozzamech = new CreateZombieDeckEmbed(result, "dozzamech");
-    const uncrackamech = new CreateZombieDeckEmbed(result, "feastmech");
-    const gargburn = new CreateZombieDeckEmbed(result, "gargburn");
-    const reversecatster = new CreateZombieDeckEmbed(result, "reversecatster");
-    const trickmech = new CreateZombieDeckEmbed(result, "trickmech");
-    const zmoss = new CreateZombieDeckEmbed(result, "zmoss");
+    const uncrackabolt = createZombieDeckEmbed(result, "uncrackabolt");
+    const budgetsm = createZombieDeckEmbed(result, "budgetsm");
+    const horts = createZombieDeckEmbed(result, "horts");
+    const pablosyeezys = createZombieDeckEmbed(result, "pablosyeezys");
+    const whalepharaoh = createZombieDeckEmbed(result, "whalepharaoh");
+    const binaryflagwar = createZombieDeckEmbed(result, "binaryflagwar");
+    const brady = createZombieDeckEmbed(result, "brady");
+    const budgetzm = createZombieDeckEmbed(result, "budgetzm");
+    const dozzamech = createZombieDeckEmbed(result, "dozzamech");
+    const uncrackamech = createZombieDeckEmbed(result, "feastmech");
+    const gargburn = createZombieDeckEmbed(result, "gargburn");
+    const reversecatster = createZombieDeckEmbed(result, "reversecatster");
+    const trickmech = createZombieDeckEmbed(result, "trickmech");
+    const zmoss = createZombieDeckEmbed(result, "zmoss");
     const iFilter = (i) => i.user.id === message.author.id;
     /**
      * The handleSelectMenu function handles the select menu interactions for the user

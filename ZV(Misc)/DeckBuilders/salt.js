@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -186,12 +186,12 @@ module.exports = {
     const toBuildControl = buildDeckString(snortingSaltDecks.controlDecks);
     const toBuildMid = buildDeckString(snortingSaltDecks.midrangeDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -203,71 +203,71 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const competitiverow = new CreateButtons("watertron", "ab");
-    const ab = new CreateButtons("helpcomp", "bust");
-    const bust = new CreateButtons("abeans", "chemo");
-    const chemo = new CreateButtons("bustbolt", "cburn");
-    const cburn = new CreateButtons("chemo", "flottery");
-    const flottery = new CreateButtons("cyburn", "gb");
-    const gb = new CreateButtons("figlottery", "healcon");
-    const healcon = new CreateButtons("gargburn", "lbait");
-    const lbait = new CreateButtons("healcontrol", "radio");
-    const radio = new CreateButtons("logbait", "sea");
-    const sea = new CreateButtons("radiotherapy", "sham");
-    const sham = new CreateButtons("seacret", "stars");
-    const stars = new CreateButtons("shamcontrol", "uncrack");
-    const uncrack = new CreateButtons("spacestars", "wt");
-    const wt = new CreateButtons("uncrackabolt", "helpcomp");
-    const ladderrow = new CreateButtons("schoolyard", "gstache");
-    const gstache = new CreateButtons("ladderhelp", "syard");
-    const syard = new CreateButtons("gravestache", "ladderhelp");
-    const aggrorow = new CreateButtons("watertron2", "ab2");
-    const ab2 = new CreateButtons("aggrohelp", "lbait2");
-    const lbait2 = new CreateButtons("abeans2", "syard2");
-    const syard2 = new CreateButtons("logbait2", "sea2");
-    const sea2 = new CreateButtons("schoolyard2", "wt2");
-    const wt2 = new CreateButtons("seacret2", "helpaggro");
-    const comborow = new CreateButtons("spacestars2", "bykm");
-    const bykm = new CreateButtons("combohelp", "bust2");
-    const bust2 = new CreateButtons("budgetykm", "cburn2");
-    const cburn2 = new CreateButtons("bustbolt2", "gb2");
-    const gb2 = new CreateButtons("cyburn2", "gstache2");
-    const gstache2 = new CreateButtons("gargburn2", "sea3");
-    const sea3 = new CreateButtons("gravestache2", "stars2");
-    const stars2 = new CreateButtons("seacret3", "helpcombo");
-    const midrangerow = new CreateButtons("spacestars3", "bykm2");
-    const bykm2 = new CreateButtons("midhelp", "cburn3");
-    const cburn3 = new CreateButtons("budgetykm2", "flottery2");
-    const flottery2 = new CreateButtons("cyburn3", "gb3");
-    const gb3 = new CreateButtons("figlottery2", "stars3");
-    const stars3 = new CreateButtons("gargburn3", "helpmid");
-    const controlrow = new CreateButtons("uncrackabolt2", "bust3");
-    const bust3 = new CreateButtons("helpcontrol", "chemo2");
-    const chemo2 = new CreateButtons("bustbolt3", "healcon2");
-    const healcon2 = new CreateButtons("chemotherapy2", "npa2");
-    const npa2 = new CreateButtons("healcontrol2", "radio2");
-    const radio2 = new CreateButtons("noplayingallowed2", "sham2");
-    const sham2 = new CreateButtons("radiotherapy2", "uncrack2");
-    const uncrack2 = new CreateButtons("shamcontrol2", "controlhelp");
-    const alldecksrow = new CreateButtons("watertron3", "ab3");
-    const ab3 = new CreateButtons("allhelp", "bust4");
-    const bust4 = new CreateButtons("abeans3", "bykm3");
-    const bykm3 = new CreateButtons("bustbolt4", "chemo3");
-    const chemo3 = new CreateButtons("budgetykm3", "cburn4");
-    const cburn4 = new CreateButtons("chemotherapy3", "flottery3");
-    const flottery3 = new CreateButtons("cyburn4", "gb4");
-    const gb4 = new CreateButtons("figlottery3", "gstache3");
-    const gstache3 = new CreateButtons("gargburn4", "healcon3");
-    const healcon3 = new CreateButtons("gravestache3", "lbait3");
-    const lbait3 = new CreateButtons("healcontrol3", "npa3");
-    const npa3 = new CreateButtons("logbait3", "radio3");
-    const radio3 = new CreateButtons("noplayingallowed3", "syard3");
-    const syard3 = new CreateButtons("radiotherapy3", "sea4");
-    const sea4 = new CreateButtons("schoolyard3", "sham3");
-    const sham3 = new CreateButtons("seacret4", "stars4");
-    const stars4 = new CreateButtons("shamcontrol3", "uncrack3");
-    const uncrack3 = new CreateButtons("spacestars4", "wt3");
-    const wt3 = new CreateButtons("uncrackabolt3", "helpall");
+    const competitiverow = createButtons("watertron", "ab");
+    const ab = createButtons("helpcomp", "bust");
+    const bust = createButtons("abeans", "chemo");
+    const chemo = createButtons("bustbolt", "cburn");
+    const cburn = createButtons("chemo", "flottery");
+    const flottery = createButtons("cyburn", "gb");
+    const gb = createButtons("figlottery", "healcon");
+    const healcon = createButtons("gargburn", "lbait");
+    const lbait = createButtons("healcontrol", "radio");
+    const radio = createButtons("logbait", "sea");
+    const sea = createButtons("radiotherapy", "sham");
+    const sham = createButtons("seacret", "stars");
+    const stars = createButtons("shamcontrol", "uncrack");
+    const uncrack = createButtons("spacestars", "wt");
+    const wt = createButtons("uncrackabolt", "helpcomp");
+    const ladderrow = createButtons("schoolyard", "gstache");
+    const gstache = createButtons("ladderhelp", "syard");
+    const syard = createButtons("gravestache", "ladderhelp");
+    const aggrorow = createButtons("watertron2", "ab2");
+    const ab2 = createButtons("aggrohelp", "lbait2");
+    const lbait2 = createButtons("abeans2", "syard2");
+    const syard2 = createButtons("logbait2", "sea2");
+    const sea2 = createButtons("schoolyard2", "wt2");
+    const wt2 = createButtons("seacret2", "helpaggro");
+    const comborow = createButtons("spacestars2", "bykm");
+    const bykm = createButtons("combohelp", "bust2");
+    const bust2 = createButtons("budgetykm", "cburn2");
+    const cburn2 = createButtons("bustbolt2", "gb2");
+    const gb2 = createButtons("cyburn2", "gstache2");
+    const gstache2 = createButtons("gargburn2", "sea3");
+    const sea3 = createButtons("gravestache2", "stars2");
+    const stars2 = createButtons("seacret3", "helpcombo");
+    const midrangerow = createButtons("spacestars3", "bykm2");
+    const bykm2 = createButtons("midhelp", "cburn3");
+    const cburn3 = createButtons("budgetykm2", "flottery2");
+    const flottery2 = createButtons("cyburn3", "gb3");
+    const gb3 = createButtons("figlottery2", "stars3");
+    const stars3 = createButtons("gargburn3", "helpmid");
+    const controlrow = createButtons("uncrackabolt2", "bust3");
+    const bust3 = createButtons("helpcontrol", "chemo2");
+    const chemo2 = createButtons("bustbolt3", "healcon2");
+    const healcon2 = createButtons("chemotherapy2", "npa2");
+    const npa2 = createButtons("healcontrol2", "radio2");
+    const radio2 = createButtons("noplayingallowed2", "sham2");
+    const sham2 = createButtons("radiotherapy2", "uncrack2");
+    const uncrack2 = createButtons("shamcontrol2", "controlhelp");
+    const alldecksrow = createButtons("watertron3", "ab3");
+    const ab3 = createButtons("allhelp", "bust4");
+    const bust4 = createButtons("abeans3", "bykm3");
+    const bykm3 = createButtons("bustbolt4", "chemo3");
+    const chemo3 = createButtons("budgetykm3", "cburn4");
+    const cburn4 = createButtons("chemotherapy3", "flottery3");
+    const flottery3 = createButtons("cyburn4", "gb4");
+    const gb4 = createButtons("figlottery3", "gstache3");
+    const gstache3 = createButtons("gargburn4", "healcon3");
+    const healcon3 = createButtons("gravestache3", "lbait3");
+    const lbait3 = createButtons("healcontrol3", "npa3");
+    const npa3 = createButtons("logbait3", "radio3");
+    const radio3 = createButtons("noplayingallowed3", "syard3");
+    const syard3 = createButtons("radiotherapy3", "sea4");
+    const sea4 = createButtons("schoolyard3", "sham3");
+    const sham3 = createButtons("seacret4", "stars4");
+    const stars4 = createButtons("shamcontrol3", "uncrack3");
+    const uncrack3 = createButtons("spacestars4", "wt3");
+    const wt3 = createButtons("uncrackabolt3", "helpall");
     const [result] = await db.query(`select abeans, apotk,
 budgetykm, bustbolt, chemotherapy,
 cyburn, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
@@ -304,62 +304,62 @@ on (gs.deckinfo = ct.deckinfo)
 inner join sfdecks sf
 on (gs.deckinfo = sf.deckinfo)`);
     const user = await client.users.fetch("599750713509281792");
-    const salt = new CreateHelpEmbed(
+    const salt = createHelpEmbed(
       `${user.username} Decks`,
       `To view the Decks Made By ${user.username} please select an option from the select menu below
 Note: ${user.username} has ${snortingSaltDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const combosalt = new CreateHelpEmbed(
+    const combosalt = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My commands for combo decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midsalt = new CreateHelpEmbed(
+    const midsalt = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My commands for midrange decks made by ${user.displayName} are ${toBuildMid}`,
       user.displayAvatarURL(),
       `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.midrangeDecks.length} midrange decks in Tbot`
     );
-    const compsalt = new CreateHelpEmbed(
+    const compsalt = createHelpEmbed(
       `${user.displayName} Competitive Decks`,
       `My commands for competitive decks made by ${user.displayName} are ${toBuildCompetitive}`,
       user.displayAvatarURL(),
       `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.competitiveDecks.length} competitive decks in Tbot`
     );
-    const aggrosalt = new CreateHelpEmbed(
+    const aggrosalt = createHelpEmbed(
       `${user.displayName} Aggro Decks`,
       `My commands for aggro decks made by ${user.displayName} are ${toBuildAggro}`,
       user.displayAvatarURL(),
       `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.aggroDecks.length} aggro decks in Tbot`
     );
-    const memesalt = new CreateHelpEmbed(
+    const memesalt = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My commands for meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.memeDecks.length} meme decks in Tbot`
     );
-    const controlsalt = new CreateHelpEmbed(
+    const controlsalt = createHelpEmbed(
       `${user.displayName} Control Decks`,
       `My commands for control decks made by ${user.displayName} are ${toBuildControl}`,
       user.displayAvatarURL(),
       `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.controlDecks.length} control decks in Tbot`
     );
-    const laddersalt = new CreateHelpEmbed(
+    const laddersalt = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My commands for ladder decks made by ${user.displayName} are ${toBuildLadder}`,
       user.displayAvatarURL(),
       `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.ladderDecks.length} ladder decks in Tbot`
     );
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       `${user.displayName} Decks`,
       `My commands for all decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
@@ -367,12 +367,12 @@ Note: ${user.displayName} has ${snortingSaltDecks.ladderDecks.length} ladder dec
 Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -389,24 +389,24 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
       }
       return embed;
     }
-    const abeans = new CreateDeckEmbed(result, "abeans");
-    const healcontrol = new CreateDeckEmbed(result, "apotk");
-    const logbait = new CreateDeckEmbed(result, "logbait");
-    const budgetykm = new CreateDeckEmbed(result, "budgetykm");
-    const bustbolt = new CreateDeckEmbed(result, "bustbolt");
-    const chemotherapy = new CreateDeckEmbed(result, "chemotherapy");
-    const cyburn = new CreateDeckEmbed(result, "cyburn");
-    const figlottery = new CreateDeckEmbed(result, "healmidflare");
-    const gargburn = new CreateDeckEmbed(result, "gargburn");
-    const gravestache = new CreateDeckEmbed(result, "gravestache");
-    const noplayingallowed = new CreateDeckEmbed(result, "noplayingallowed");
-    const radiotherapy = new CreateDeckEmbed(result, "radiotherapy");
-    const seacret = new CreateDeckEmbed(result, "seacret");
-    const schoolyard = new CreateDeckEmbed(result, "schoolyard");
-    const shamcontrol = new CreateDeckEmbed(result, "shamcontrol");
-    const spacestars = new CreateDeckEmbed(result, "spacestars");
-    const uncrackabolt = new CreateDeckEmbed(result, "uncrackabolt");
-    const watertron = new CreateDeckEmbed(result, "watertron");
+    const abeans = createDeckEmbed(result, "abeans");
+    const healcontrol = createDeckEmbed(result, "apotk");
+    const logbait = createDeckEmbed(result, "logbait");
+    const budgetykm = createDeckEmbed(result, "budgetykm");
+    const bustbolt = createDeckEmbed(result, "bustbolt");
+    const chemotherapy = createDeckEmbed(result, "chemotherapy");
+    const cyburn = createDeckEmbed(result, "cyburn");
+    const figlottery = createDeckEmbed(result, "healmidflare");
+    const gargburn = createDeckEmbed(result, "gargburn");
+    const gravestache = createDeckEmbed(result, "gravestache");
+    const noplayingallowed = createDeckEmbed(result, "noplayingallowed");
+    const radiotherapy = createDeckEmbed(result, "radiotherapy");
+    const seacret = createDeckEmbed(result, "seacret");
+    const schoolyard = createDeckEmbed(result, "schoolyard");
+    const shamcontrol = createDeckEmbed(result, "shamcontrol");
+    const spacestars = createDeckEmbed(result, "spacestars");
+    const uncrackabolt = createDeckEmbed(result, "uncrackabolt");
+    const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [salt], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

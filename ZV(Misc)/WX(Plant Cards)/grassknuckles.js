@@ -8,14 +8,14 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -93,12 +93,12 @@ module.exports = {
       allDecks: ["budgetgk", "dinogloves", "healthotk", "pawntrickstab"],
     };
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -110,17 +110,17 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("healthotk", "dgloves");
-    const dgloves = new CreateButtons("helpmeme", "hotk");
-    const hotk = new CreateButtons("dinogloves", "memehelp");
-    const midrangerow = new CreateButtons("healthotk2", "bgk");
-    const bgk = new CreateButtons("helpmidrange", "hotk2");
-    const hotk2 = new CreateButtons("budgetgk", "midrangehelp");
-    const alldecksrow = new CreateButtons("pawntrickstab", "bgk2");
-    const bgk2 = new CreateButtons("helpall", "dgloves2");
-    const dgloves2 = new CreateButtons("budgetgk2", "hotk3");
-    const hotk3 = new CreateButtons("dinogloves2", "pts");
-    const pts = new CreateButtons("healthotk3", "allhelp");
+    const memerow = createButtons("healthotk", "dgloves");
+    const dgloves = createButtons("helpmeme", "hotk");
+    const hotk = createButtons("dinogloves", "memehelp");
+    const midrangerow = createButtons("healthotk2", "bgk");
+    const bgk = createButtons("helpmidrange", "hotk2");
+    const hotk2 = createButtons("budgetgk", "midrangehelp");
+    const alldecksrow = createButtons("pawntrickstab", "bgk2");
+    const bgk2 = createButtons("helpall", "dgloves2");
+    const dgloves2 = createButtons("budgetgk2", "hotk3");
+    const hotk3 = createButtons("dinogloves2", "pts");
+    const pts = createButtons("healthotk3", "allhelp");
     function BuildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -158,27 +158,27 @@ module.exports = {
         }
       );
     //Help GK Embed
-    const embed = new CreateHelpEmbed(
+    const embed = createHelpEmbed(
       "Grass Knuckles Decks",
       `To view the Grass Knuckles decks please select an option from the select menu below!
 Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist"
     );
-    const memeEmbed = new CreateHelpEmbed(
+    const memeEmbed = createHelpEmbed(
       "Grass Knuckles Meme Decks",
       `My meme decks for Grass Knuckles(GK) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist",
       `To view the Grass Knuckles please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: Grass Knuckles has ${grassKnucklesDecks.memeDecks.length} meme decks in Tbot`
     );
-    const midrangeEmbed = new CreateHelpEmbed(
+    const midrangeEmbed = createHelpEmbed(
       "Grass Knuckles Midrange Decks",
       `My midrange decks for Grass Knuckles(GK) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist",
       `To view the Grass Knuckles decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: Grass Knuckles has ${grassKnucklesDecks.midrangeDecks.length} midrange decks in Tbot`
     );
-    const allEmbed = new CreateHelpEmbed(
+    const allEmbed = createHelpEmbed(
       "All Grass Knuckles Decks",
       `My decks for Grass Knuckles(GK) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist",
@@ -188,12 +188,12 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
     const [result] = await db.query(`SELECT * FROM gkdecks`);
 
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -210,10 +210,10 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const budgetgk = new CreateDeckEmbed(result, "budgetgk");
-    const dinogloves = new CreateDeckEmbed(result, "dinogloves");
-    const healthotk = new CreateDeckEmbed(result, "healthotk");
-    const pawntrickstab = new CreateDeckEmbed(result, "pawntrickstab");
+    const budgetgk = createDeckEmbed(result, "budgetgk");
+    const dinogloves = createDeckEmbed(result, "dinogloves");
+    const healthotk = createDeckEmbed(result, "healthotk");
+    const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const m = await message.channel.send({ embeds: [gk], components: [cmd] });
     const iFilter = (i) => i.user.id == message.author.id;
     /**

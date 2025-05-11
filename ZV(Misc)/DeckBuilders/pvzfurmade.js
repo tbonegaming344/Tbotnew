@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -89,12 +89,12 @@ module.exports = {
     }
     const toBuildComb = buildDeckString(pvzFurMadeDecks.comboDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -106,21 +106,21 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const combo = new CreateButtons("pablosyeezys", "bd");
-    const bd = new CreateButtons("helpcombo", "py");
-    const py = new CreateButtons("bonusducks", "combohelp");
+    const combo = createButtons("pablosyeezys", "bd");
+    const bd = createButtons("helpcombo", "py");
+    const py = createButtons("bonusducks", "combohelp");
 	const [result] = await db.query(`SELECT bonusducks, pablosyeezys
 from pbdecks pb 
 inner join smdecks sm 
 on (pb.deckinfo = sm.deckinfo)`);
     const user = await client.users.fetch("1068350961900326983");
-    const fur = new CreateHelpEmbed(
+    const fur = createHelpEmbed(
       `${user.displayName} Decks`,
        `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${combodecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     )
-      const combofur = new CreateHelpEmbed(
+      const combofur = createHelpEmbed(
         `${user.displayName} Combo Decks`,
         `My Combo decks made by ${user.displayName} are ${toBuildComb}`, 
         user.displayAvatarURL(), 
@@ -128,12 +128,12 @@ Note: ${user.displayName} has ${combodecks.length} total decks in Tbot`,
 Note: ${user.displayName} has ${pvzFurMadeDecks.comboDecks.length} Combo decks in Tbot`
       )
        /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -150,8 +150,8 @@ Note: ${user.displayName} has ${pvzFurMadeDecks.comboDecks.length} Combo decks i
         }
         return embed;
       }
-    const bonusducks = new CreateDeckEmbed(result, "bonusducks");
-    const pablosyeeyzs = new CreateDeckEmbed(result, "pablosyeezys")
+    const bonusducks = createDeckEmbed(result, "bonusducks");
+    const pablosyeeyzs = createDeckEmbed(result, "pablosyeezys")
     const m = await message.channel.send({ embeds: [fur], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleSelectMenu(i){

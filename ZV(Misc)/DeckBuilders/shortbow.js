@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -109,12 +109,12 @@ module.exports = {
     const toBuildLadderString = buildDeckString(shortbowDecks.ladderDecks);
     const toBuildString = buildDeckString(shortbowDecks.allDecks);
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -126,36 +126,36 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = new CreateButtons("raiserpackage", "go");
-    const go = new CreateButtons("helpall", "gps");
-    const gps = new CreateButtons("gomorrah", "pts");
-    const pts = new CreateButtons("gravepiratestache", "rpack");
-    const rpack = new CreateButtons("pawntrickstab", "allhelp");
-    const ladderrow = new CreateButtons("raiserpackage2", "go2");
-    const go2 = new CreateButtons("helpladder", "gps2");
-    const gps2 = new CreateButtons("gomorrah2", "pts2");
-    const pts2 = new CreateButtons("gravepiratestache2", "rpack2");
-    const rpack2 = new CreateButtons("pawntrickstab2", "ladderhelp");
+    const alldecksrow = createButtons("raiserpackage", "go");
+    const go = createButtons("helpall", "gps");
+    const gps = createButtons("gomorrah", "pts");
+    const pts = createButtons("gravepiratestache", "rpack");
+    const rpack = createButtons("pawntrickstab", "allhelp");
+    const ladderrow = createButtons("raiserpackage2", "go2");
+    const go2 = createButtons("helpladder", "gps2");
+    const gps2 = createButtons("gomorrah2", "pts2");
+    const pts2 = createButtons("gravepiratestache2", "rpack2");
+    const rpack2 = createButtons("pawntrickstab2", "ladderhelp");
     const [result] =
       await db.query(`select gomorrah, gps, pawntrickstab, raiserpackage from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
         inner join bfdecks bf on nt.deckinfo = bf.deckinfo`);
     const user = await client.users.fetch("824024125491380303");
-    const shortbow = new CreateHelpEmbed(
+    const shortbow = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${shortbowDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       `${user.displayName} Decks`,
       `My commands for decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
       `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${shortbowDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderEmbed = new CreateHelpEmbed(
+    const ladderEmbed = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My ladder decks made by ${user.displayName} are ${toBuildLadderString}`,
       user.displayAvatarURL(),
@@ -163,12 +163,12 @@ Note: ${user.displayName} has ${shortbowDecks.allDecks.length} total decks in Tb
 Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks in Tbot`
     );
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -185,10 +185,10 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
       }
       return embed;
     }
-    const gomorrah = new CreateDeckEmbed(result, "gomorrah");
-    const gravepiratestache = new CreateDeckEmbed(result, "gps");
-    const raiserpackage = new CreateDeckEmbed(result, "raiserpackage");
-    const pawntrickstab = new CreateDeckEmbed(result, "pawntrickstab");
+    const gomorrah = createDeckEmbed(result, "gomorrah");
+    const gravepiratestache = createDeckEmbed(result, "gps");
+    const raiserpackage = createDeckEmbed(result, "raiserpackage");
+    const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const m = await message.channel.send({
       embeds: [shortbow],
       components: [row],

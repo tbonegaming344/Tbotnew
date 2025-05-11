@@ -2,7 +2,7 @@ const { EmbedBuilder } = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
   name: `telimps`,
-  aliases: [`teleimps`, `teleportimps`, `ti`, `hgtelimps`, `telimpshg`, `hgteleimps`, `teleimpshg`, `telimp`],
+  aliases: [`teleimps`, `teleportimps`, `ti`, `hgtelimps`, `telimpshg`, `hgteleimps`, `teleimpshg`, `telimp`, `alttelimps`],
   category: `Huge-Gigantacus/SuperBrainz`,
   run: async (client, message, args) => {
     const [result] = await db.query(`SELECT telimps FROM hgdecks`);

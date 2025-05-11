@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -112,12 +112,12 @@ module.exports = {
   const toBuildMidrangeString = buildDeckString(citronDecks.midrangeDecks);
   const toBuildString = buildDeckString(citronDecks.allDecks);
   /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
     return new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(leftButtonId)
@@ -129,20 +129,20 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
     );
   }
-  const aggrorow = new CreateButtons("wetron", "bct");
-  const bct = new CreateButtons("helpaggro", "wt");
-  const wt = new CreateButtons("budgetct", "aggrohelp");
-  const comborow = new CreateButtons("startron", "g3n");
-  const g3n = new CreateButtons("helpcombo", "star");
-  const star = new CreateButtons("going3nuts", "combohelp");
-  const midrangerow = new CreateButtons("startron2", "g3n2");
-  const g3n2 = new CreateButtons("helpmid", "star2");
-  const star2 = new CreateButtons("going3nuts2", "midhelp");
-  const alldecksrow = new CreateButtons("watertron", "bct2");
-  const bct2 = new CreateButtons("helpall", "g3n3");
-  const g3n3 = new CreateButtons("budgetct", "star3");
-  const star3 = new CreateButtons("going3nuts3", "wt2");
-  const wt2 = new CreateButtons("startron3", "helpall");
+  const aggrorow = createButtons("wetron", "bct");
+  const bct = createButtons("helpaggro", "wt");
+  const wt = createButtons("budgetct", "aggrohelp");
+  const comborow = createButtons("startron", "g3n");
+  const g3n = createButtons("helpcombo", "star");
+  const star = createButtons("going3nuts", "combohelp");
+  const midrangerow = createButtons("startron2", "g3n2");
+  const g3n2 = createButtons("helpmid", "star2");
+  const star2 = createButtons("going3nuts2", "midhelp");
+  const alldecksrow = createButtons("watertron", "bct2");
+  const bct2 = createButtons("helpall", "g3n3");
+  const g3n3 = createButtons("budgetct", "star3");
+  const star3 = createButtons("going3nuts3", "wt2");
+  const wt2 = createButtons("startron3", "helpall");
     const ct = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
@@ -169,34 +169,34 @@ module.exports = {
             "Wanted to be a poet, but couldn't find anything that rhymed with orange.",
         }
       );
-      const embed = new CreateHelpEmbed(
+      const embed = createHelpEmbed(
         "Citron Decks",
         `To view the Citron decks Please select an option from the select menu below!
   Note: Citron has ${citronDecks.allDecks.length} total decks in Tbot`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
       );
-      const allEmbed = new CreateHelpEmbed(
+      const allEmbed = createHelpEmbed(
         "Citron Decks",
         `My decks for Citron(CT) are ${toBuildString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
         `To view the Citron decks please use the commands listed above or click on the buttons below to navigate through all Citron decks!
   Note: Citron has ${citronDecks.allDecks.length} total decks in Tbot`
       );
-      const aggroEmbed = new CreateHelpEmbed(
+      const aggroEmbed = createHelpEmbed(
         "Citron Aggro Decks",
         `My aggro decks for Citron(CT) are ${toBuildAggroString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
         `To view the aggro Citron decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
   Note: Citron has ${citronDecks.aggroDecks.length} aggro decks in Tbot`
       );
-      const comboEmbed = new CreateHelpEmbed(
+      const comboEmbed = createHelpEmbed(
         "Citron Combo Decks",
         `My Combo decks for Citron(CT) are ${toBuildComboString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
         `To view the combo Citron decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Citron has ${citronDecks.comboDecks.length} combo decks in Tbot`
       );
-      const midrangeEmbed = new CreateHelpEmbed(
+      const midrangeEmbed = createHelpEmbed(
         "Citron Midrange Decks",
         `My midrange decks for Citron(CT) are ${toBuildMidrangeString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
@@ -205,12 +205,12 @@ module.exports = {
       );
     const [result] = await db.query("SELECT * FROM ctdecks");
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -227,10 +227,10 @@ module.exports = {
       }
       return embed;
     }
-    const budgetct = new CreateDeckEmbed(result, "budgetct");
-    const going3nuts = new CreateDeckEmbed(result, "going3nuts");
-    const startron = new CreateDeckEmbed(result, "startron");
-    const watertron = new CreateDeckEmbed(result, "watertron");
+    const budgetct = createDeckEmbed(result, "budgetct");
+    const going3nuts = createDeckEmbed(result, "going3nuts");
+    const startron = createDeckEmbed(result, "startron");
+    const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [ct], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**

@@ -2,6 +2,7 @@ const {EmbedBuilder} = require("discord.js")
 const db = require("../../index.js")
 module.exports = {
     name: `gargstar22`, 
+    aliases: [`gargstar`],
     category: `Electric Boogaloo(EB)`,
     run: async(client, message, args)=> {
         const [result] = await db.query("select gargstar22 from ebdecks")

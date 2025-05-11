@@ -8,7 +8,7 @@ const {
   StringSelectMenuOptionBuilder
 } = require("discord.js");
 const db = require("../../index.js");
-function CreateHelpEmbed(title, description, thumbnail, footer){
+function createHelpEmbed(title, description, thumbnail, footer){
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -103,12 +103,12 @@ module.exports = {
     ],
   };
   /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
     return new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId(leftButtonId)
@@ -131,26 +131,26 @@ module.exports = {
   const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
   const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
   const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
-  const memerow = CreateButtons("starrings", "wr100");
-  const wr100 = CreateButtons("helpmeme", "smf");
-  const smf = CreateButtons("winrate100", "srings");
-  const srings = CreateButtons("savagemayflower", "memehelp");
-  const comborow = CreateButtons("starrings2", "smf2");
-  const smf2 = CreateButtons("helpcombo", "srings2");
-  const srings2 = CreateButtons("savagemayflower2", "combohelp");
-  const midrangerow = CreateButtons("starrings3", "bms");
-  const bms = CreateButtons("helpmidrange", "srings3");
-  const srings3 = CreateButtons("budgetmopshadow", "midrangehelp");
-  const aggrorow = CreateButtons("pbeans", "ab2");
-  const ab2 = CreateButtons("aggrohelp", "pb");
-  const pb = CreateButtons("abeans2", "helpaggro");
-  const alldecksrow = CreateButtons("starrings4", "wr1002");
-  const wr1002 = CreateButtons("helpall", "ab");
-  const ab = CreateButtons("winrate1002", "bms2");
-  const bms2 = CreateButtons("ab", "pb2");
-  const pb2 = CreateButtons("budgetmopshadow2", "smf3");
-  const smf3 = CreateButtons("pbeans2", "srings4");
-  const srings4 = CreateButtons("savagemayflower3", "allhelp");
+  const memerow = createButtons("starrings", "wr100");
+  const wr100 = createButtons("helpmeme", "smf");
+  const smf = createButtons("winrate100", "srings");
+  const srings = createButtons("savagemayflower", "memehelp");
+  const comborow = createButtons("starrings2", "smf2");
+  const smf2 = createButtons("helpcombo", "srings2");
+  const srings2 = createButtons("savagemayflower2", "combohelp");
+  const midrangerow = createButtons("starrings3", "bms");
+  const bms = createButtons("helpmidrange", "srings3");
+  const srings3 = createButtons("budgetmopshadow", "midrangehelp");
+  const aggrorow = createButtons("pbeans", "ab2");
+  const ab2 = createButtons("aggrohelp", "pb");
+  const pb = createButtons("abeans2", "helpaggro");
+  const alldecksrow = createButtons("starrings4", "wr1002");
+  const wr1002 = createButtons("helpall", "ab");
+  const ab = createButtons("winrate1002", "bms2");
+  const bms2 = createButtons("ab", "pb2");
+  const pb2 = createButtons("budgetmopshadow2", "smf3");
+  const smf3 = createButtons("pbeans2", "srings4");
+  const srings4 = createButtons("savagemayflower3", "allhelp");
     const gs = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/pvzcc/images/2/26/GreenShadowBYL.png/revision/latest?cb=20200704033327"
@@ -177,41 +177,41 @@ module.exports = {
             "Little known fact: When she takes off the cape and mask, she goes by the name Penelopea.",
         }
       );
-      const embed = new CreateHelpEmbed(
+      const embed = createHelpEmbed(
         "Green Shadow Decks",
         `To view the Green Shadow decks please select an option using the select menu below
   Note: Green Shadow has ${greenShadowDecks.allDecks.length} decks in Tbot`,
         "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png"
       );
-      const allEmbed = new CreateHelpEmbed(
+      const allEmbed = createHelpEmbed(
         "Green Shadow Decks",
         `My decks for Green Shadow(GS) are ${toBuildString}`,
         "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
         `To view the Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all decks!
   Note: Green Shadow has ${greenShadowDecks.allDecks.length} decks in Tbot`
       );
-      const memeEmbed = new CreateHelpEmbed(
+      const memeEmbed = createHelpEmbed(
         "Green Shadow Meme Decks",
         `My meme decks for Green Shadow(GS) are ${toBuildMemeString}`,
         "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
         `To view the meme Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
   Note: Green Shadow has ${greenShadowDecks.memeDecks.length} meme decks in Tbot`
       );
-      const aggroEmbed = new CreateHelpEmbed(
+      const aggroEmbed = createHelpEmbed(
         "Green Shadow Aggro Decks",
         `My aggro decks for Green Shadow(GS) are ${toBuildAggroString}`,
         "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
         `To view the aggro Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
   Note: Green Shadow has ${greenShadowDecks.aggroDecks.length} aggro decks in Tbot`
       );
-      const comboEmbed = new CreateHelpEmbed(
+      const comboEmbed = createHelpEmbed(
         "Green Shadow Combo Decks",
         `My combo decks for Green Shadow(GS) are ${toBuildComboString}`,
         "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
         `To view the combo Green Shadow decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Green Shadow has ${greenShadowDecks.comboDecks.length} combo decks in Tbot`
       );
-      const midrangeEmbed = new CreateHelpEmbed(
+      const midrangeEmbed = createHelpEmbed(
         "Green Shadow Midrange Decks",
         `My midrange decks for Green Shadow(GS) are ${toBuildMidrangeString}`,
         "https://cdn.discordapp.com/attachments/1044626284346605588/1090602694206574692/IMG_1903.png",
@@ -220,12 +220,12 @@ module.exports = {
       );
       const [result] = await db.query(`SELECT * from gsdecks`);
        /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
         const embed = new EmbedBuilder()
           .setTitle(`${result[5][deckName]}`)
           .setDescription(`${result[3][deckName]}`)
@@ -242,12 +242,12 @@ module.exports = {
         }
         return embed;
       }
-      const winrate100 = new CreateDeckEmbed(result, "wr100")
-      const abeans = new CreateDeckEmbed(result, "abeans")
-      const budgetgs = new CreateDeckEmbed(result, "budgetgs")
-      const savagemayflower = new CreateDeckEmbed(result, "savagemayflower")
-      const starrings = new CreateDeckEmbed(result, "sovietonion")
-      const pbeans = new CreateDeckEmbed(result, "pbeans")
+      const winrate100 = createDeckEmbed(result, "wr100")
+      const abeans = createDeckEmbed(result, "abeans")
+      const budgetgs = createDeckEmbed(result, "budgetgs")
+      const savagemayflower = createDeckEmbed(result, "savagemayflower")
+      const starrings = createDeckEmbed(result, "sovietonion")
+      const pbeans = createDeckEmbed(result, "pbeans")
     const Filter = (i) => i.user.id === message.author.id;
     /**
      * The handleSelectMenu function handles the select menu interactions for the user

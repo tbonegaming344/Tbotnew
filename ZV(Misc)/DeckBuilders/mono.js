@@ -9,14 +9,14 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 /**
- * The CreateHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
+ * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
  * @param {string} description - The description of the embed
  * @param {string} thumbnail - The thumbnail of the embed
  * @param {string} footer - The footer of the embed
  * @returns {EmbedBuilder} - The embed object
  */
-function CreateHelpEmbed(title, description, thumbnail, footer) {
+function createHelpEmbed(title, description, thumbnail, footer) {
   const embed = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
@@ -122,12 +122,12 @@ module.exports = {
     const toBuildString = buildDeckString(monoDecks.allDecks);
 
     /**
-     * The CreateButtons function creates a row of buttons for the embed
+     * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
-    function CreateButtons(leftButtonId, rightButtonId) {
+    function createButtons(leftButtonId, rightButtonId) {
       return new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId(leftButtonId)
@@ -139,30 +139,30 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = new CreateButtons("rampticia", "ck");
-    const ck = new CreateButtons("helpmeme", "cog");
-    const cog = new CreateButtons("cancerknight", "pbf");
-    const pbf = new CreateButtons("coggerazzi", "rticia");
-    const rticia = new CreateButtons("pbfeast", "memehelp");
-    const controlrow = new CreateButtons("pbfeast2", "ck2");
-    const ck2 = new CreateButtons("helpcontrol", "kscope");
-    const kscope = new CreateButtons("cancerknight2", "pbf2");
-    const pbf2 = new CreateButtons("kaliedoscope", "controlhelp");
-    const comborow = new CreateButtons("seacret", "cog2");
-    const cog2 = new CreateButtons("helpcombo", "rticia2");
-    const rticia2 = new CreateButtons("coggerazzi2", "sea");
-    const sea = new CreateButtons("rampticia2", "combohelp");
-    const competitiverow = new CreateButtons("seacret2", "kscop2");
-    const kscope2 = new CreateButtons("helpcompetitive", "nhks");
-    const nhks = new CreateButtons("kaleidoscope2", "sea2");
-    const sea2 = new CreateButtons("nohokaistars", "competitivehelp");
-    const alldecksrow = new CreateButtons("seacret3", "ck3");
-    const ck3 = new CreateButtons("helpall", "cog3");
-    const cog3 = new CreateButtons("cancerknight3", "kscope3");
-    const kscope3 = new CreateButtons("coggerazzi3", "pbf3");
-    const pbf3 = new CreateButtons("kaleidoscope3", "rticia3");
-    const rticia3 = new CreateButtons("pbfeast3", "sea3");
-    const sea3 = new CreateButtons("rampticia3", "allhelp");
+    const memerow = createButtons("rampticia", "ck");
+    const ck = createButtons("helpmeme", "cog");
+    const cog = createButtons("cancerknight", "pbf");
+    const pbf = createButtons("coggerazzi", "rticia");
+    const rticia = createButtons("pbfeast", "memehelp");
+    const controlrow = createButtons("pbfeast2", "ck2");
+    const ck2 = createButtons("helpcontrol", "kscope");
+    const kscope = createButtons("cancerknight2", "pbf2");
+    const pbf2 = createButtons("kaliedoscope", "controlhelp");
+    const comborow = createButtons("seacret", "cog2");
+    const cog2 = createButtons("helpcombo", "rticia2");
+    const rticia2 = createButtons("coggerazzi2", "sea");
+    const sea = createButtons("rampticia2", "combohelp");
+    const competitiverow = createButtons("seacret2", "kscop2");
+    const kscope2 = createButtons("helpcompetitive", "nhks");
+    const nhks = createButtons("kaleidoscope2", "sea2");
+    const sea2 = createButtons("nohokaistars", "competitivehelp");
+    const alldecksrow = createButtons("seacret3", "ck3");
+    const ck3 = createButtons("helpall", "cog3");
+    const cog3 = createButtons("cancerknight3", "kscope3");
+    const kscope3 = createButtons("coggerazzi3", "pbf3");
+    const pbf3 = createButtons("kaleidoscope3", "rticia3");
+    const rticia3 = createButtons("pbfeast3", "sea3");
+    const sea3 = createButtons("rampticia3", "allhelp");
     const [result] =
       await db.query(`select cancerknight, otktrickster, nohokaistars, seacret,
 pbfeast, poggerrazzi, rampticia
@@ -178,41 +178,41 @@ on (wk.deckinfo = rb.deckinfo)
 inner join imdecks im 
 on (wk.deckinfo = im.deckinfo)`);
     const user = await client.users.fetch("444700385744257034");
-    const mono = new CreateHelpEmbed(
+    const mono = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${monoDecks.allDecks.length} total decks in Tbot`,
         user.displayAvatarURL()
     )
-    const alldecksEmbed = new CreateHelpEmbed(
+    const alldecksEmbed = createHelpEmbed(
       `${user.displayName} Decks`,
       `My commands for all decks made by ${user.displayName} are ${toBuildString}`,
       user.displayAvatarURL(),
       `To view the decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${monoDecks.allDecks.length} decks in Tbot`
     )
-    const mememono = new CreateHelpEmbed(
+    const mememono = createHelpEmbed(
       `${user.displayName} Meme Decks`,
       `My meme decks made by ${user.displayName} are ${toBuildMeme}`,
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${monoDecks.memeDecks.length} meme decks in Tbot`
     )
-    const controlmono = new CreateHelpEmbed(
+    const controlmono = createHelpEmbed(
       `${user.displayName} Control Decks`,
       `My control decks made by ${user.displayName} are ${toBuildControl}`,
       user.displayAvatarURL(),
       `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${monoDecks.controlDecks.length} control decks in Tbot`
     )
-    const combomono = new CreateHelpEmbed(
+    const combomono = createHelpEmbed(
       `${user.displayName} Combo Decks`,
       `My combo decks made by ${user.displayName} are ${toBuildCombo}`,
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${monoDecks.comboDecks.length} combo decks in Tbot`
     )
-    const competitivemono = new CreateHelpEmbed(
+    const competitivemono = createHelpEmbed(
       `${user.displayName} Competitive Decks`,
       `My competitive decks made by ${user.displayName} are ${toBuildCompetitive}`,
       user.displayAvatarURL(),
@@ -220,12 +220,12 @@ Note: ${user.displayName} has ${monoDecks.comboDecks.length} combo decks in Tbot
 Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive decks in Tbot`
     )
      /**
-     * The CreateDeckEmbed function creates an embed for a specific deck
+     * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
      * @returns The embed for the deck
      */
-    function CreateDeckEmbed(result, deckName) {
+    function createDeckEmbed(result, deckName) {
       const embed = new EmbedBuilder()
         .setTitle(`${result[5][deckName]}`)
         .setDescription(`${result[3][deckName]}`)
@@ -242,13 +242,13 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
       }
       return embed;
     }
-    const cknight = new CreateDeckEmbed(result, "cancerknight");
-    const coggerazzi = new CreateDeckEmbed(result, "poggerrazzi");
-    const kaleidoscope = new CreateDeckEmbed(result, "otktrickster");
-    const nohonkaistars = new CreateDeckEmbed(result, "nohokaistars");
-    const seacret = new CreateDeckEmbed(result, "seacret");
-    const pbfeast = new CreateDeckEmbed(result, "pbfeast");
-    const rampticia = new CreateDeckEmbed(result, "rampticia");
+    const cknight = createDeckEmbed(result, "cancerknight");
+    const coggerazzi = createDeckEmbed(result, "poggerrazzi");
+    const kaleidoscope = createDeckEmbed(result, "otktrickster");
+    const nohonkaistars = createDeckEmbed(result, "nohokaistars");
+    const seacret = createDeckEmbed(result, "seacret");
+    const pbfeast = createDeckEmbed(result, "pbfeast");
+    const rampticia = createDeckEmbed(result, "rampticia");
     const m = await message.channel.send({ embeds: [mono], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleSelectMenu(i){

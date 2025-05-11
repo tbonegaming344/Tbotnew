@@ -17,7 +17,7 @@ module.exports = {
       [
         "# About Tbot",
         "**Tbot** is a bot based around the plants vs zombies heroes card game having a lot of features and useful commands for pvzh players.",
-        'As tcc quotes "a bot for everything pvzh related',
+        'As tcc quotes "a bot for everything pvzh related"',
       ].join("\n")
     );
     const tbotImage = new ThumbnailBuilder().setURL(
@@ -49,7 +49,7 @@ module.exports = {
       [
         "# Invite Tbot",
         "If you would like to invite Tbot to your server please click on the tbot invite button, however",
-        "# Tbot should not be used or invited to personal servers, Tbot is a bot that can also be used in direct messages(DMS).",
+        "Tbot should not be used or invited to personal servers, Tbot is a bot that can also be used in direct messages(DMS).",
       ].join("\n")
     );
     const tbotInvite = new ButtonBuilder()

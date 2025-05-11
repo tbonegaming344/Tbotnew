@@ -97,16 +97,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const meme = new CreateButtons("highlander2", "dm");
-    const dm = new CreateButtons("memehelp", "hland2");
-    const hland2 = new CreateButtons("dozzamech", "helpmeme");
+    const meme = new CreateButtons("highlander", "dm");
+    const dm = new CreateButtons("memehelp", "hland");
+    const hland = new CreateButtons("dozzamech", "helpmeme");
     const aggrorow = new CreateButtons("trickmech", "dm2");
     const dm2 = new CreateButtons("aggrohelp", "tmech");
     const tmech= new CreateButtons("dozzamech2", "helpaggro");
     const alldecksrow = new CreateButtons("trickmech2", "dm3");
-    const dm3 = new CreateButtons("allhelp", "hland3");
-    const hland3 = new CreateButtons("dozzamech", "tmech2");
-    const tmech2 = new CreateButtons("highlander3", "allhelp");
+    const dm3 = new CreateButtons("allhelp", "hland2");
+    const hland2 = new CreateButtons("dozzamech", "tmech2");
+    const tmech2 = new CreateButtons("highlander2", "allhelp");
     const [result] = await db.query(`select dozzamech, highlander, trickmech
 from zmdecks zm 
 inner join wkdecks wk 
@@ -118,13 +118,6 @@ const user = await client.users.fetch("1143937777763889324");
 Note: Dozza has ${dozzaDecks.allDecks.length} total decks in Tbot`,
         user.displayAvatarURL()
     );
-  const ladderdozza = new CreateHelpEmbed(
-    `${user.displayName} Ladder Decks`,
-    `My ladder decks made by ${user.displayName} are ${toBuildLadder}`,
-    user.displayAvatarURL(), 
-    `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${dozzaDecks.ladderDecks.length} Ladder decks in Tbot`
-  )
     const alldozza = new CreateHelpEmbed(
       `${user.displayName} Decks`,
       `My decks made by ${user.displayName} are ${toBuildString}`,
@@ -204,8 +197,6 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
     }
     async function handleButtonInteraction(i){
       const buttonActions = {
-        helpladder: {embed: ladderdozza, component: ladderrow},
-        ladderhelp: {embed: ladderdozza, component: ladderrow},
         aggrohelp: {embed: aggrodozza, component: aggrorow},
         helpaggro: {embed: aggrodozza, component: aggrorow},
         memehelp: {embed: memedozza, component: meme},
@@ -218,8 +209,6 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
         highlander: {embed: highlander, component: hland},
         hland2: {embed: highlander, component: hland2},
         higlander2: {embed: highlander, component: hland2},
-        hland3: {embed: highlander, component: hland3},
-        highlander3: {embed: highlander, component: hland3},
         dm: {embed: dozzamech, component: dm},
         dozzamech: {embed: dozzamech, component: dm},
         dm2: {embed: dozzamech, component: dm2},

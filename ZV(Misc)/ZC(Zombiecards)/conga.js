@@ -7,7 +7,7 @@ module.exports = {
 		const embed = new EmbedBuilder()
 			.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/67/CongaZombieCardImage.png/revision/latest/scale-to-width-down/250?cb=20170228171015")
 			.setTitle("Conga Zombie | <:Crazy:1062502046474973224>")
-			.setDescription("**\\- Dancing Gourmet Zombie  -**")
+			.setDescription("**\\- Dancing Barrel Zombie  -**")
 			.addFields({name: "Stats", 
 									value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 2 <:Brainz:1062503146745774183>"},
 								 {

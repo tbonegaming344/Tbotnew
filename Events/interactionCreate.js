@@ -17,7 +17,7 @@ const discord = new ActionRowBuilder().addComponents(
     .setLabel("Discord server")
     .setStyle(ButtonStyle.Link)
     .setURL("https://discord.gg/2NSwt96vmS")
-    .setEmoji("<:thor_swab:1334902821249617991>")
+    .setEmoji("<:batman:1373302805326200842>")
 );
 module.exports = {
   name: "interactionCreate",
@@ -983,8 +983,8 @@ module.exports = {
         };
         const tableName = heroDeckTables[heroInput];
         if (heroInput == "na") {
-          try{
-          const [result] = await db.query(`select * from bcdecks bc
+          try {
+            const [result] = await db.query(`select * from bcdecks bc
             inner join bfdecks bf
             on (bc.deckinfo = bf.deckinfo)
             inner join ccdecks cc 
@@ -1030,15 +1030,15 @@ module.exports = {
             where bc.deckinfo = "image link:"`);
             const deck = [];
             for (const key in result[0]) {
-              const value = result[0][key]
+              const value = result[0][key];
               if (
                 (value.includes(".png") ||
                   value.includes(".jpg") ||
                   value.includes(".jpeg") ||
                   value.includes(".webp")) &&
-                  !value.includes("budget")
+                !value.includes("budget")
               ) {
-                deck.push(value); 
+                deck.push(value);
               }
             }
             const embed = new EmbedBuilder()
@@ -1046,7 +1046,7 @@ module.exports = {
               .setDescription("Here is your random deck")
               .setColor("Random")
               .setImage(deck[Math.floor(Math.random() * deck.length)]);
-      
+
             return await interaction.followUp({
               embeds: [embed],
               flags: MessageFlags.Ephemeral,
@@ -1058,10 +1058,9 @@ module.exports = {
               flags: MessageFlags.Ephemeral,
             });
           }
-        }
-          else if (heroInput == "plants") {
-            try{
-          const [result] = await db.query(`select * from bcdecks bc
+        } else if (heroInput == "plants") {
+          try {
+            const [result] = await db.query(`select * from bcdecks bc
                     inner join ccdecks cc 
                     on (bc.deckinfo = cc.deckinfo)
                     inner join ctdecks ct 
@@ -1083,24 +1082,24 @@ module.exports = {
                     inner join wkdecks wk 
                     on (bc.deckinfo = wk.deckinfo)
                     where bc.deckinfo = "image link:"`);
-                    const deck = [];
-                    for (const key in result[0]) {
-                      const value = result[0][key]
-                      if (
-                        (value.includes(".png") ||
-                          value.includes(".jpg") ||
-                          value.includes(".jpeg") ||
-                          value.includes(".webp")) &&
-                          !value.includes("budget") 
-                      ) {
-                        deck.push(value);
-                      }
-                    }
-          const embed = new EmbedBuilder()
-            .setTitle("Random Plant Deck")
-            .setDescription(`Here is your random plant Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
+            const deck = [];
+            for (const key in result[0]) {
+              const value = result[0][key];
+              if (
+                (value.includes(".png") ||
+                  value.includes(".jpg") ||
+                  value.includes(".jpeg") ||
+                  value.includes(".webp")) &&
+                !value.includes("budget")
+              ) {
+                deck.push(value);
+              }
+            }
+            const embed = new EmbedBuilder()
+              .setTitle("Random Plant Deck")
+              .setDescription(`Here is your random plant Deck`)
+              .setColor("Random")
+              .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
             return await interaction.followUp({
               embeds: [embed],
@@ -1114,8 +1113,8 @@ module.exports = {
             });
           }
         } else if (heroInput == "zombies") {
-          try{
-          const [result] = await db.query(`select * from bfdecks bf
+          try {
+            const [result] = await db.query(`select * from bfdecks bf
                     inner join ebdecks eb 
                     on (bf.deckinfo = eb.deckinfo)
                     inner join hgdecks hg
@@ -1135,24 +1134,24 @@ module.exports = {
                     inner join smdecks sm 
                     on (bf.deckinfo = sm.deckinfo)
                     where bf.deckinfo = "image link:"`);
-                    const deck = [];
-                    for (const key in result[0]) {
-                      const value = result[0][key]
-                      if (
-                        (value.includes(".png") ||
-                          value.includes(".jpg") ||
-                          value.includes(".jpeg") ||
-                          value.includes(".webp")) &&
-                          !value.includes("budget") 
-                      ) {
-                        deck.push(value); 
-                      }
-                    }
-          const embed = new EmbedBuilder()
-            .setTitle("Random Zombie Deck")
-            .setDescription(`Here is your random Zombie Deck`)
-            .setColor("Random")
-            .setImage(deck[Math.floor(Math.random() * deck.length)]);
+            const deck = [];
+            for (const key in result[0]) {
+              const value = result[0][key];
+              if (
+                (value.includes(".png") ||
+                  value.includes(".jpg") ||
+                  value.includes(".jpeg") ||
+                  value.includes(".webp")) &&
+                !value.includes("budget")
+              ) {
+                deck.push(value);
+              }
+            }
+            const embed = new EmbedBuilder()
+              .setTitle("Random Zombie Deck")
+              .setDescription(`Here is your random Zombie Deck`)
+              .setColor("Random")
+              .setImage(deck[Math.floor(Math.random() * deck.length)]);
 
             return await interaction.followUp({
               embeds: [embed],
@@ -1165,74 +1164,79 @@ module.exports = {
               flags: MessageFlags.Ephemeral,
             });
           }
-        } 
-        else if (!tableName) {
+        } else if (!tableName) {
           return interaction.followUp({
             content: "Invalid hero name. Please try again.",
             flags: MessageFlags.Ephemeral,
           });
         }
-       
-  try {
-    /**
-     * The getRandomDeck function gets a random deck for the user to play
-     * @param {*} tableName - The name of the table
-     * @returns - The users deck
-     */
-    async function getRandomDeck(tableName) {
-      const [result] = await db.query(
-        `SELECT * FROM ${tableName} WHERE deckinfo = 'image link:'`
-      );
-      const deck = [];
-      for (const key in result[0]) {
-        const value = result[0][key]
-        console.log("Checking value:", value); 
-        if (
-          (value.includes(".png") ||
-            value.includes(".jpg") ||
-            value.includes(".jpeg") ||
-            value.includes(".webp")) &&
-          !value.includes("budget")
-        ) {
-          deck.push(value); 
+
+        try {
+          /**
+           * The getRandomDeck function gets a random deck for the user to play
+           * @param {*} tableName - The name of the table
+           * @returns - The users deck
+           */
+          async function getRandomDeck(tableName) {
+            const [result] = await db.query(
+              `SELECT * FROM ${tableName} WHERE deckinfo = 'image link:'`
+            );
+            const deck = [];
+            for (const key in result[0]) {
+              const value = result[0][key];
+              console.log("Checking value:", value);
+              if (
+                (value.includes(".png") ||
+                  value.includes(".jpg") ||
+                  value.includes(".jpeg") ||
+                  value.includes(".webp")) &&
+                !value.includes("budget")
+              ) {
+                deck.push(value);
+              }
+            }
+            console.log("Filtered Deck Array:", deck);
+
+            if (deck.length === 0) {
+              throw new Error("No valid decks found.");
+            }
+
+            return deck;
+          }
+
+          try {
+            const randomDeck = await getRandomDeck(tableName);
+            console.log(randomDeck);
+            const embed = new EmbedBuilder()
+              .setTitle(
+                `Random ${
+                  heroInput.charAt(0).toUpperCase() + heroInput.slice(1)
+                } Deck`
+              )
+              .setDescription(`Here is your random ${heroInput} deck`)
+              .setColor("Random")
+              .setImage(
+                randomDeck[Math.floor(Math.random() * randomDeck.length)]
+              );
+            await interaction.followUp({
+              embeds: [embed],
+              flags: MessageFlags.Ephemeral,
+            });
+          } catch (err) {
+            console.error(err);
+            await interaction.followUp({
+              content: "No valid decks found. Please try again later.",
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+        } catch (err) {
+          console.error(err);
+          await interaction.followUp({
+            content: "Oops, something went wrong. Please try again later.",
+            flags: MessageFlags.Ephemeral,
+          });
         }
       }
-      console.log("Filtered Deck Array:", deck); 
-    
-      if (deck.length === 0) {
-        throw new Error("No valid decks found.");
-      }
-    
-      return deck;
-    }
-    
-    try {
-      const randomDeck = await getRandomDeck(tableName);
-      console.log(randomDeck);
-      const embed = new EmbedBuilder()
-        .setTitle(`Random ${heroInput.charAt(0).toUpperCase() + heroInput.slice(1)} Deck`)
-        .setDescription(`Here is your random ${heroInput} deck`)
-        .setColor("Random")
-        .setImage(randomDeck[Math.floor(Math.random() * randomDeck.length)]);
-      await interaction.followUp({
-        embeds: [embed],
-        flags: MessageFlags.Ephemeral,
-      });
-    } catch (err) {
-      console.error(err);
-      await interaction.followUp({
-        content: "No valid decks found. Please try again later.",
-        flags: MessageFlags.Ephemeral,
-      });
-    }
-  } catch (err) {
-    console.error(err);
-    await interaction.followUp({
-      content: "Oops, something went wrong. Please try again later.",
-      flags: MessageFlags.Ephemeral,
-    });
-  }
-}
       //wheel modal
       else if (interaction.customId === "wheel-modal") {
         await interaction.deferUpdate();

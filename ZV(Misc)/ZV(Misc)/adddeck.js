@@ -92,7 +92,7 @@ module.exports = {
       "# Other",
       "If you get an error while attemping to submit your suggestion, please contact <@625172218120372225> with an image of what was typed in the fourm",
       "Please note that the deck will be reviewed and judged by judges and the communtity in the Tbot server before being added.", 
-      "### Please read Guidelines posted above before sumbitting a deck to Tbot"
+      "### Please read Guidelines posted above before submitting a deck to Tbot"
     ].join("\n"));
     container.addTextDisplayComponents(addDeckText3);
     container.setAccentColor(0x00FF00);

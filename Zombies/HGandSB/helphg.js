@@ -108,7 +108,7 @@ module.exports = {
       budgetDecks: ["budgethg"],
       competitiveDecks: ["telimps"],
       ladderDecks: ["cryoboy", "gravepiratestache", "gravestache"],
-      memeDecks: ["conjureleap", "frozentelimps", "otkswabbie", "ykm"],
+      memeDecks: ["conjureleap", "frozentelimps", "ykm"],
       aggroDecks: ["gravepiratestache"],
       comboDecks: [
         "budgetykm",
@@ -116,7 +116,6 @@ module.exports = {
         "frozentelimps",
         "gravepiratestache",
         "gravestache",
-        "otkswabbie",
         "telimps",
         "ykm",
       ],
@@ -130,7 +129,6 @@ module.exports = {
         "frozentelimps",
         "gravepiratestache",
         "gravestache",
-        "otkswabbie",
         "telimps",
         "ykm",
       ],
@@ -181,9 +179,8 @@ module.exports = {
     const cboy = createButtons("conjureleap", "ft");
     const ft = createButtons("cryoboy", "gps");
     const gps = createButtons("frozentelimps", "gs");
-    const gs = createButtons("gravepiratestache", "otks");
-    const otks = createButtons("gravestache", "ti");
-    const ti = createButtons("otkswabbie", "ykm");
+    const gs = createButtons("gravepiratestache", "ti");
+    const ti = createButtons("gravestache", "ykm");
     const ykm = createButtons("telimps", "allhelp");
     const ladderrow = createButtons("gravestache2", "cboy2");
     const cboy2 = createButtons("helpladder", "gps2");
@@ -191,17 +188,15 @@ module.exports = {
     const gs2 = createButtons("gravepiratestache2", "ladderhelp");
     const memerow = createButtons("youngkenmartin2", "cl2");
     const cl2 = createButtons("helpmeme", "ft2");
-    const ft2 = createButtons("conjureleap2", "otks2");
-    const otks2 = createButtons("frozentelimps2", "ykm2");
-    const ykm2 = createButtons("otkswabbie2", "memehelp");
+    const ft2 = createButtons("conjureleap2", "ykm2");
+    const ykm2 = createButtons("frozentelimps2", "memehelp");
     const comborow = createButtons("youngkenmartin3", "bgus2");
     const bgus2 = createButtons("helpcombo", "cboy3");
     const cboy3 = createButtons("budgetgus2", "ft3");
     const ft3 = createButtons("cryoboy3", "gps3");
     const gps3 = createButtons("frozentelimps3", "gs3");
-    const gs3 = createButtons("gravepiratestache3", "otks3");
-    const otks3 = createButtons("gravestache3", "ti2");
-    const ti2 = createButtons("otkswabbie3", "ykm3");
+    const gs3 = createButtons("gravepiratestache3", "ti2");
+    const ti2 = createButtons("gravestache3", "ykm3");
     const ykm3 = createButtons("telimps2", "combohelp");
     const controlrow = createButtons("telimps3", "ft4");
     const ft4 = createButtons("helpcontrol", "ti3");
@@ -287,7 +282,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const gravepiratestache = createDeckEmbed(result, "gps");
     const gravestache = createDeckEmbed(result, "gravestache");
-    const otkswabbie = createDeckEmbed(result, "otkswabbie");
     const telimps = createDeckEmbed(result, "telimps");
     const youngkenmartin = createDeckEmbed(result, "ykm");
     const m = await message.channel.send({
@@ -380,12 +374,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         gravepiratestache2: {embed: gravepiratestache, component: gps2},
         gps3: {embed: gravepiratestache, component: gps3},
         gravepiratestache3: {embed: gravepiratestache, component: gps3},
-        otks: {embed: otkswabbie, component: otks},
-        otkswabbie: {embed: otkswabbie, component: otks},
-        otks2: {embed: otkswabbie, component: otks2},
-        otkswabbie2: {embed: otkswabbie, component: otks2},
-        otks3: {embed: otkswabbie, component: otks3},
-        otkswabbie3: {embed: otkswabbie, component: otks3},
         ti: {embed: telimps, component: ti},
         telimps: {embed: telimps, component: ti},
         ti2: {embed: telimps, component: ti2},

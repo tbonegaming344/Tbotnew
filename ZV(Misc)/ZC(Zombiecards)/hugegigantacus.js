@@ -110,7 +110,7 @@ module.exports = {
       budgetDecks: ["budgethg"],
       competitiveDecks: ["telimps"],
       ladderDecks: ["cryoboy", "gravepiratestache", "gravestache"],
-      memeDecks: ["conjureleap", "frozentelimps", "otkswabbie", "ykm"],
+      memeDecks: ["conjureleap", "frozentelimps", "ykm"],
       aggroDecks: ["gravepiratestache"],
       comboDecks: [
         "budgetykm",
@@ -118,7 +118,6 @@ module.exports = {
         "frozentelimps",
         "gravepiratestache",
         "gravestache",
-        "otkswabbie",
         "telimps",
         "ykm",
       ],
@@ -132,12 +131,11 @@ module.exports = {
         "frozentelimps",
         "gravepiratestache",
         "gravestache",
-        "otkswabbie",
         "telimps",
         "ykm",
       ],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -161,7 +159,7 @@ module.exports = {
     );
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -183,9 +181,8 @@ module.exports = {
     const cboy = createButtons("conjureleap", "ft");
     const ft = createButtons("cryoboy", "gps");
     const gps = createButtons("frozentelimps", "gs");
-    const gs = createButtons("gravepiratestache", "otks");
-    const otks = createButtons("gravestache", "ti");
-    const ti = createButtons("otkswabbie", "ykm");
+    const gs = createButtons("gravepiratestache", "ti");
+    const ti = createButtons("gravestache", "ykm");
     const ykm = createButtons("telimps", "allhelp");
     const ladderrow = createButtons("gravestache2", "cboy2");
     const cboy2 = createButtons("helpladder", "gps2");
@@ -193,17 +190,15 @@ module.exports = {
     const gs2 = createButtons("gravepiratestache2", "ladderhelp");
     const memerow = createButtons("youngkenmartin2", "cl2");
     const cl2 = createButtons("helpmeme", "ft2");
-    const ft2 = createButtons("conjureleap2", "otks2");
-    const otks2 = createButtons("frozentelimps2", "ykm2");
-    const ykm2 = createButtons("otkswabbie2", "memehelp");
+    const ft2 = createButtons("conjureleap2", "ykm2");
+    const ykm2 = createButtons("frozentelimps2", "memehelp");
     const comborow = createButtons("youngkenmartin3", "bgus2");
     const bgus2 = createButtons("helpcombo", "cboy3");
     const cboy3 = createButtons("budgetgus2", "ft3");
     const ft3 = createButtons("cryoboy3", "gps3");
     const gps3 = createButtons("frozentelimps3", "gs3");
-    const gs3 = createButtons("gravepiratestache3", "otks3");
-    const otks3 = createButtons("gravestache3", "ti2");
-    const ti2 = createButtons("otkswabbie3", "ykm3");
+    const gs3 = createButtons("gravepiratestache3", "ti2");
+    const ti2 = createButtons("gravestache3", "ykm3");
     const ykm3 = createButtons("telimps2", "combohelp");
     const controlrow = createButtons("telimps3", "ft4");
     const ft4 = createButtons("helpcontrol", "ti3");
@@ -265,12 +260,12 @@ module.exports = {
       `My commands for Huge-Gigantacus(HG) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all decks!
-  Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`
+Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`
     );
     const helphgEmbed = createHelpEmbed(
       "Huge Gigantacus Decks",
       `To view the Huge Gigantacus decks please select an option from the select menu below!
-  Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`,
+Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
     );
     const ladderEmbed = createHelpEmbed(
@@ -278,38 +273,38 @@ module.exports = {
       `My ladder decks for Huge-Gigantacus(HG) are ${toBuildLadderString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the ladder Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-  Note: there are ${hugeGigantacusDecks.ladderDecks.length} ladder decks for Huge Gigantacus in Tbot`
+Note: there are ${hugeGigantacusDecks.ladderDecks.length} ladder decks for Huge Gigantacus in Tbot`
     );
     const memeEmbed = createHelpEmbed(
       "Huge Gigantacus Meme Decks",
       `My meme decks for Huge-Gigantacus(HG) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the meme Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-  Note: there are ${hugeGigantacusDecks.memeDecks.length} meme decks for Huge Gigantacus in Tbot`
+Note: there are ${hugeGigantacusDecks.memeDecks.length} meme decks for Huge Gigantacus in Tbot`
     );
     const comboEmbed = createHelpEmbed(
       "Huge Gigantacus Combo Decks",
       `My combo decks for Huge-Gigantacus(HG) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the combo Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-  Note: there are ${hugeGigantacusDecks.comboDecks.length} combo decks for Huge Gigantacus in Tbot`
+Note: there are ${hugeGigantacusDecks.comboDecks.length} combo decks for Huge Gigantacus in Tbot`
     );
     const controlEmbed = createHelpEmbed(
       "Huge Gigantacus Control Decks",
       `My control decks for Huge-Gigantacus(HG) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the control Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-  Note: there are ${hugeGigantacusDecks.controlDecks.length} control decks for Huge Gigantacus in Tbot`
+Note: there are ${hugeGigantacusDecks.controlDecks.length} control decks for Huge Gigantacus in Tbot`
     );
     const midrangeEmbed = createHelpEmbed(
       "Huge Gigantacus Midrange Decks",
       `My midrange decks for Huge-Gigantacus(HG) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the midrange Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-  Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for Huge Gigantacus in Tbot`
+Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for Huge Gigantacus in Tbot`
     );
     const [result] = await db.query(`SELECT * FROM hgdecks`);
-     /**
+    /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
@@ -338,7 +333,6 @@ module.exports = {
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const gravepiratestache = createDeckEmbed(result, "gps");
     const gravestache = createDeckEmbed(result, "gravestache");
-    const otkswabbie = createDeckEmbed(result, "otkswabbie");
     const telimps = createDeckEmbed(result, "telimps");
     const youngkenmartin = createDeckEmbed(result, "ykm");
     const m = await message.channel.send({
@@ -432,12 +426,6 @@ module.exports = {
         gravepiratestache2: { embed: gravepiratestache, component: gps2 },
         gps3: { embed: gravepiratestache, component: gps3 },
         gravepiratestache3: { embed: gravepiratestache, component: gps3 },
-        otks: { embed: otkswabbie, component: otks },
-        otkswabbie: { embed: otkswabbie, component: otks },
-        otks2: { embed: otkswabbie, component: otks2 },
-        otkswabbie2: { embed: otkswabbie, component: otks2 },
-        otks3: { embed: otkswabbie, component: otks3 },
-        otkswabbie3: { embed: otkswabbie, component: otks3 },
         ti: { embed: telimps, component: ti },
         telimps: { embed: telimps, component: ti },
         ti2: { embed: telimps, component: ti2 },

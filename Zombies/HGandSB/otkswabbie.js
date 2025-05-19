@@ -5,7 +5,7 @@ module.exports = {
 	aliases: [`swabbieotk`, `otkswabbiebf`, `otks`],
 	category: `Huge-Gigantacus/SuperBrainz`,
 	run: async(client, message, args) =>	{
-		const [result] = await db.query(`SELECT otkswabbie FROM hgdecks`)
+		const [result] = await db.query(`SELECT otkswabbie FROM sbdecks`)
 			const embed = new EmbedBuilder()
 	.setTitle(`${result[5].otkswabbie}`)
 	.setDescription(`${result[3].otkswabbie}`)

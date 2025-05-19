@@ -127,8 +127,8 @@ module.exports = {
     const hgargs3 = createButtons("helpcontrol", "wp4");
     const [result] = await db.query(`select huntgargs, seacret, otkswabbie,
 whalepharaoh from ebdecks eb 
-inner join hgdecks hg
-on (eb.deckinfo = hg.deckinfo) 
+inner join sbdecks sb
+on (eb.deckinfo = sb.deckinfo) 
 inner join smdecks sm
 on (eb.deckinfo = sm.deckinfo)`);
     const tbone = createHelpEmbed(

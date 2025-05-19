@@ -8,6 +8,7 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
+const helpnt = require("../../Zombies/NT/helpnt.js");
 /**
  * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
@@ -88,92 +89,92 @@ module.exports = {
     );
   const row = new ActionRowBuilder().addComponents(select);
   const neptunaDecks = {
-    budgetDecks: ["budgetnt"],
-    competitiveDecks: ["icebox"],
-    ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
-    memeDecks: ["antiagor",  "floss", "sunlord"],
-    aggroDecks: ["agraves", "budgetnt", "schoolyard"],
-    comboDecks: ["antiagor", "budgetnt", "floss", "sunlord"],
-    midrangeDecks: ["gomorrah", "icebox", "ladytuna", "sunlord"],
-    allDecks: [
-      "agraves",
-      "antiagor",
-      "budgetnt",
-      "floss",
-      "gomorrah",
-      "icebox",
-      "ladytuna",
-      "schoolyard",
-      "sunlord",
-    ],
-  };
-   /**
+      budgetDecks: ["budgetnt"],
+      competitiveDecks: ["slugged"],
+      ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
+      memeDecks: ["antiagor", "floss", "sunlord"],
+      aggroDecks: ["agraves", "budgetnt", "schoolyard"],
+      comboDecks: ["antiagor","budgetnt", "floss", "sunlord"],
+      midrangeDecks: ["gomorrah", "ladytuna", "slugged", "sunlord"],
+      allDecks: [
+        "agraves",
+        "antiagor",
+        "budgetnt",
+        "floss",
+        "gomorrah",
+        "ladytuna",
+        "schoolyard",
+        "slugged",
+        "sunlord",
+      ],
+    };
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
      */
     function buildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
-  const toBuildString = buildDeckString(neptunaDecks.allDecks);
-  const toBuildLadderString = buildDeckString(neptunaDecks.ladderDecks);
-  const toBuildMemeString = buildDeckString(neptunaDecks.memeDecks);
-  const toBuildAggroString = buildDeckString(neptunaDecks.aggroDecks);
-  const toBuildComboString = buildDeckString(neptunaDecks.comboDecks);
-  const toBuildMidrangeString = buildDeckString(neptunaDecks.midrangeDecks);
-  /**
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildString = buildDeckString(neptunaDecks.allDecks);
+    const toBuildLadderString = buildDeckString(neptunaDecks.ladderDecks);
+    const toBuildMemeString = buildDeckString(neptunaDecks.memeDecks);
+    const toBuildAggroString = buildDeckString(neptunaDecks.aggroDecks);
+    const toBuildComboString = buildDeckString(neptunaDecks.comboDecks);
+    const toBuildMidrangeString = buildDeckString(neptunaDecks.midrangeDecks);
+    /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
-  const alldecksrow = createButtons("sunlord", "ag");
-  const ag = createButtons("helpall", "anti");
-  const anti = createButtons("agraves", "bnt");
-  const bnt = createButtons("antiagor", "fl");
-  const fl = createButtons("budgetnt", "go");
-  const go = createButtons("floss", "ib");
-  const ib = createButtons("gomorrah", "lt");
-  const lt = createButtons("icebox", "sy");
-  const sy = createButtons("ladytuna", "sl");
-  const sl = createButtons("schoolyard", "allhelp");
-  const ladderrow = createButtons("schoolyard2", "ag2");
-  const ag2 = createButtons("helpladder", "go2");
-  const go2 = createButtons("agraves2", "sy2");
-  const sy2 = createButtons("gomorrah2", "ladderhelp");
-  const memerow = createButtons("sunlord2", "anti2");
-  const anti2 = createButtons("helpmeme", "fl2");
-  const fl2 = createButtons("antiagor2", "lt2");
-  const lt2 = createButtons("floss2", "sl2");
-  const sl2 = createButtons("ladytuna2", "memehelp");
-  const aggrorow = createButtons("schoolyard3", "ag3");
-  const ag3 = createButtons("helpaggro", "bnt2");
-  const bnt2 = createButtons("agraves3", "sy3");
-  const sy3 = createButtons("budgetnt2", "aggrohelp");
-  const comborow = createButtons("sunlord3", "anti3");
-  const anti3 = createButtons("helpcombo", "bnt3");
-  const bnt3 = createButtons("antiagor3", "fl3");
-  const fl3 = createButtons("budgetnt3", "sl3");
-  const sl3 = createButtons("floss3", "combohelp");
-  const midrangerow = createButtons("sunlord4", "go3");
-  const go3 = createButtons("helpmid", "ib2");
-  const ib2 = createButtons("gomorrah3", "lt3");
-  const lt3 = createButtons("icebox2", "sl4");
-  const sl4 = createButtons("ladytuna3", "midhelp");
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const alldecksrow = createButtons("sunlord", "ag");
+    const ag = createButtons("helpall", "anti");
+    const anti = createButtons("agraves", "bnt");
+    const bnt = createButtons("antiagor", "fl");
+    const fl = createButtons("budgetnt", "go");
+    const go = createButtons("floss", "lt");
+    const lt = createButtons("gomorrah", "sy");
+    const sy = createButtons("ladytuna", "slug");
+    const slug = createButtons("schoolyard", "sl");
+    const sl = createButtons("slugged", "allhelp");
+    const ladderrow = createButtons("schoolyard2", "ag2");
+    const ag2 = createButtons("helpladder", "go2");
+    const go2 = createButtons("agraves2", "sy2");
+    const sy2 = createButtons("gomorrah2", "ladderhelp");
+    const memerow = createButtons("sunlord2", "anti2");
+    const anti2 = createButtons("helpmeme", "fl2");
+    const fl2 = createButtons("antiagor2", "lt2");
+    const lt2 = createButtons("floss2", "sl2");
+    const sl2 = createButtons("ladytuna2", "memehelp");
+    const aggrorow = createButtons("schoolyard3", "ag3");
+    const ag3 = createButtons("helpaggro", "bnt2");
+    const bnt2 = createButtons("agraves3", "sy3");
+    const sy3 = createButtons("budgetnt2", "aggrohelp");
+    const comborow = createButtons("sunlord3", "anti3");
+    const anti3 = createButtons("helpcombo", "bnt3");
+    const bnt3 = createButtons("antiagor3", "fl3");
+    const fl3 = createButtons("budgetnt3", "sl3");
+    const sl3 = createButtons("floss3", "combohelp");
+    const midrangerow = createButtons("sunlord4", "go3");
+    const go3 = createButtons("helpmid", "lt3");
+    const lt3 = createButtons("gomorrah3", "slug2");
+    const slug2 = createButtons("ladytuna3", "sl4");
+    const sl4 = createButtons("slugged2", "midhelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
@@ -275,7 +276,7 @@ module.exports = {
     const budgetnt = createDeckEmbed(result, "budgetnt");
     const floss = createDeckEmbed(result, "floss");
     const gomorrah = createDeckEmbed(result, "gomorrah");
-    const icebox = createDeckEmbed(result, "icebox");
+    const slugged = createDeckEmbed(result, "icebox");
     const ladytuna = createDeckEmbed(result, "ladytuna");
     const schoolyard = createDeckEmbed(result, "schoolyard");
     const sunlord = createDeckEmbed(result, "wimps");
@@ -293,7 +294,7 @@ module.exports = {
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "comp") {
-        await i.reply({ embeds: [icebox], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [slugged], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -314,7 +315,7 @@ module.exports = {
      */
     async function handleButtonInteraction(i) {
       const buttonActions = {
-        helpnt: { embed: nthelp, component: row },
+        helpnt: {embed: nthelp, component: row},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
         ladderhelp: {embed: ladderEmbed, component: ladderrow},
@@ -357,10 +358,6 @@ module.exports = {
         gomorrah2: {embed: gomorrah, component: go2},
         go3: {embed: gomorrah, component: go3},
         gomorrah3: {embed: gomorrah, component: go3},
-        ib: {embed: icebox, component: ib},
-        icebox: {embed: icebox, component: ib},
-        ib2: {embed: icebox, component: ib2},
-        icebox2: {embed: icebox, component: ib2},
         lt: {embed: ladytuna, component: lt},
         ladytuna: {embed: ladytuna, component: lt},
         lt2: {embed: ladytuna, component: lt2},
@@ -381,6 +378,10 @@ module.exports = {
         sunlord3: {embed: sunlord, component: sl3},
         sl4: {embed: sunlord, component: sl4},
         sunlord4: {embed: sunlord, component: sl4},
+        slug: {embed: slugged, component: slug},
+        slugged: {embed: slugged, component: slug},
+        slug2: {embed: slugged, component: slug2},
+        slugged2: {embed: slugged, component: slug2},
       }
       const action = buttonActions[i.customId];
       if (action) {

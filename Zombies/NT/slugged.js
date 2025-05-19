@@ -1,8 +1,8 @@
 const {EmbedBuilder} = require("discord.js");
 const db = require("../../index.js")
 module.exports = {
-    name: `icebox`,
-    aliases: [`boxofice`, `boxice`, `icemid`, `midice`, `midbox`, `boxmid`],
+    name: `slugged`,
+    aliases: [`midtuna`],
     category: `Neptuna(NT)`,
     run: async(client, message, args)=> {
         const [result] = await db.query(`select icebox from ntdecks`)

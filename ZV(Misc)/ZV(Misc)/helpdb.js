@@ -75,7 +75,6 @@ module.exports = {
     `aggrodecks`,
     `memeplantdecks`,
     `helpladder`,
-    `lima-pleurodon`,
     `allzombiedecks`,
     `allplantsdecks`,
     `meme`,
@@ -437,12 +436,12 @@ module.exports = {
       competitiveDecks: [
         "bustbolt",
         "gargburn",
-        "icebox",
         "lockthebathroom",
         "kaleidoscope",
         "pablosyeezys",
         "nohokaistars",
         "seacret",
+        "slugged",
         "spacestars",
         "telimps",
         "trickstache",
@@ -603,13 +602,13 @@ module.exports = {
         "gomorrah",
         "himpter",
         "horts",
-        "icebox",
         "igmablobchum",
         "ladytuna",
         "lunchtime",
         "pablosyeezys",
         "petmop",
         "nohokaistars",
+        "slugged",
         "spacestars",
         "sunlord",
         "trickstache",
@@ -666,7 +665,6 @@ module.exports = {
         "himpter",
         "horts",
         "huntgargs",
-        "icebox",
         "igmablobchum",
         "kaleidoscope",
         "ladytuna",
@@ -687,6 +685,7 @@ module.exports = {
         "reversecatster",
         "schoolyard",
         "seacret",
+        "slugged",
         "spacestars",
         "splimps",
         "sunbandits",
@@ -972,9 +971,8 @@ module.exports = {
     const gstache = createButtons("gravepiratestache", "hter");
     const hter = createButtons("gravestache", "hor");
     const hor = createButtons("himpter", "hgargs");
-    const hgargs = createButtons("horts", "ibox");
-    const ibox = createButtons("huntgargs", "igbc");
-    const igbc = createButtons("icebox", "kscope");
+    const hgargs = createButtons("horts", "igbc");
+    const igbc = createButtons("huntgargs", "kscope");
     const kscope = createButtons("igmablobchum", "lt");
     const lt = createButtons("kaleidoscope", "ltbr");
     const ltbr = createButtons("ladytuna", "ltime");
@@ -993,8 +991,9 @@ module.exports = {
     const rticia = createButtons("raiserpackage", "rcatster");
     const rcatster = createButtons("rampticia", "syard");
     const syard = createButtons("reversecatster", "sea");
-    const sea = createButtons("schoolyard", "stars");
-    const stars = createButtons("seacret", "spl");
+    const sea = createButtons("schoolyard", "slug");
+    const slug = createButtons("seacret", "stars");
+    const stars = createButtons("slugged", "spl");
     const spl = createButtons("spacestars", "sbandits");
     const sbandits = createButtons("splimps", "slord");
     const slord = createButtons("sunbandits", "timps");
@@ -1025,14 +1024,14 @@ module.exports = {
     const bzm2 = createButtons("budgetykm2", "helpzbudget");
     const compzrow = createButtons("uncrackabolt2", "bust2");
     const bust2 = createButtons("helpzcomp", "gburn2");
-    const gburn2 = createButtons("bustbolt2", "ibox2");
-    const ibox2 = createButtons("gargburn2", "ltbr2");
-    const ltbr2 = createButtons("icebox2", "kscope2");
+    const gburn2 = createButtons("bustbolt2", "ltbr2");
+    const ltbr2 = createButtons("gargburn2", "kscope2");
     const kscope2 = createButtons("lockthebathroom2", "pyeeyz2");
     const pyeeyz2 = createButtons("kaleidoscope2", "nhks2");
     const nhks2 = createButtons("pablosyeezys2", "sea2");
-    const sea2 = createButtons("nohokaistars2", "stars2");
-    const stars2 = createButtons("seacret2", "timps2");
+    const sea2 = createButtons("nohokaistars2", "slug2");
+    const slug2 = createButtons("seacret2", "stars2");
+    const stars2 = createButtons("slugged2", "timps2");
     const timps2 = createButtons("spacestars2", "tstache2");
     const tstache2 = createButtons("telimps2", "ubolt2");
     const ubolt2 = createButtons("trickstache2", "compzhelp");
@@ -1187,15 +1186,15 @@ module.exports = {
     const gstar223 = createButtons("gargolithtech3", "gom3");
     const gom3 = createButtons("gargstar223", "hter4");
     const hter4 = createButtons("gomorrah3", "hor4");
-    const hor4 = createButtons("himpter4", "ibox3");
-    const ibox3 = createButtons("horts4", "igbc4");
-    const igbc4 = createButtons("icebox3", "lt3");
+    const hor4 = createButtons("himpter4", "igbc4");
+    const igbc4 = createButtons("horts4", "lt3");
     const lt3 = createButtons("igmablobchum4", "ltime3");
     const ltime3 = createButtons("ladytuna3", "pyeeyz4");
     const pyeeyz4 = createButtons("lunchtime3", "pmop3");
     const pmop3 = createButtons("pablosyeezys4", "nhks3");
-    const nhks3 = createButtons("petmop3", "stars4");
-    const stars4 = createButtons("nohokaistars3", "slord4");
+    const nhks3 = createButtons("petmop3", "slug3");
+    const slug3 = createButtons("nohokaistars3", "stars4");
+    const stars4 = createButtons("slugged3", "slord4");
     const slord4 = createButtons("spacestars4", "tstache4");
     const tstache4 = createButtons("sunlord4", "vster4");
     const vster4 = createButtons("trickstache4", "wsports4");
@@ -1583,7 +1582,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetnt = createZombieDeckEmbed(result, "budgetnt");
     const floss = createZombieDeckEmbed(result, "floss");
     const gomorrah = createZombieDeckEmbed(result, "gomorrah");
-    const icebox = createZombieDeckEmbed(result, "icebox");
+    const slugged = createZombieDeckEmbed(result, "icebox");
     const ladytuna = createZombieDeckEmbed(result, "ladytuna");
     const schoolyard = createZombieDeckEmbed(result, "schoolyard");
     const sunlord = createZombieDeckEmbed(result, "wimps");
@@ -2221,12 +2220,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         horts3: { embed: horts, component: hor3 },
         hor4: { embed: horts, component: hor4 },
         horts4: { embed: horts, component: hor4 },
-        ibox: { embed: icebox, component: ibox },
-        icebox: { embed: icebox, component: ibox },
-        ibox2: { embed: icebox, component: ibox2 },
-        icebox2: { embed: icebox, component: ibox2 },
-        ibox3: { embed: icebox, component: ibox3 },
-        icebox3: { embed: icebox, component: ibox3 },
+        slug: { embed: slugged, component: slug },
+        slugged: { embed: slugged, component: slug },
+        slug2: { embed: slugged, component: slug2 },
+        slugged2: { embed: slugged, component: slug2 },
+        slug3: { embed: slugged, component: slug3 },
+        slugged3: { embed: slugged, component: slug3 },
         igbc: { embed: igmablobchum, component: igbc },
         igmablobchum: { embed: igmablobchum, component: igbc },
         igbc2: { embed: igmablobchum, component: igbc2 },

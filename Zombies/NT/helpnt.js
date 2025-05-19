@@ -93,21 +93,21 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const neptunaDecks = {
       budgetDecks: ["budgetnt"],
-      competitiveDecks: ["icebox"],
+      competitiveDecks: ["slugged"],
       ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
       memeDecks: ["antiagor", "floss", "sunlord"],
       aggroDecks: ["agraves", "budgetnt", "schoolyard"],
       comboDecks: ["antiagor","budgetnt", "floss", "sunlord"],
-      midrangeDecks: ["gomorrah", "icebox", "ladytuna", "sunlord"],
+      midrangeDecks: ["gomorrah", "ladytuna", "slugged", "sunlord"],
       allDecks: [
         "agraves",
         "antiagor",
         "budgetnt",
         "floss",
         "gomorrah",
-        "icebox",
         "ladytuna",
         "schoolyard",
+        "slugged",
         "sunlord",
       ],
     };
@@ -150,11 +150,11 @@ module.exports = {
     const anti = createButtons("agraves", "bnt");
     const bnt = createButtons("antiagor", "fl");
     const fl = createButtons("budgetnt", "go");
-    const go = createButtons("floss", "ib");
-    const ib = createButtons("gomorrah", "lt");
-    const lt = createButtons("icebox", "sy");
-    const sy = createButtons("ladytuna", "sl");
-    const sl = createButtons("schoolyard", "allhelp");
+    const go = createButtons("floss", "lt");
+    const lt = createButtons("gomorrah", "sy");
+    const sy = createButtons("ladytuna", "slug");
+    const slug = createButtons("schoolyard", "sl");
+    const sl = createButtons("slugged", "allhelp");
     const ladderrow = createButtons("schoolyard2", "ag2");
     const ag2 = createButtons("helpladder", "go2");
     const go2 = createButtons("agraves2", "sy2");
@@ -174,10 +174,10 @@ module.exports = {
     const fl3 = createButtons("budgetnt3", "sl3");
     const sl3 = createButtons("floss3", "combohelp");
     const midrangerow = createButtons("sunlord4", "go3");
-    const go3 = createButtons("helpmid", "ib2");
-    const ib2 = createButtons("gomorrah3", "lt3");
-    const lt3 = createButtons("icebox2", "sl4");
-    const sl4 = createButtons("ladytuna3", "midhelp");
+    const go3 = createButtons("helpmid", "lt3");
+    const lt3 = createButtons("gomorrah3", "slug2");
+    const slug2 = createButtons("ladytuna3", "sl4");
+    const sl4 = createButtons("slugged2", "midhelp");
     const alldecksEmbed = createHelpEmbed(
       "Neptuna Decks",
       `My commands for Neptuna(NT) are ${toBuildString}`,
@@ -255,7 +255,7 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
     const budgetnt = createDeckEmbed(result, "budgetnt");
     const floss = createDeckEmbed(result, "floss");
     const gomorrah = createDeckEmbed(result, "gomorrah");
-    const icebox = createDeckEmbed(result, "icebox");
+    const slugged = createDeckEmbed(result, "icebox");
     const ladytuna = createDeckEmbed(result, "ladytuna");
     const schoolyard = createDeckEmbed(result, "schoolyard");
     const sunlord = createDeckEmbed(result, "wimps");
@@ -273,7 +273,7 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "comp") {
-        await i.reply({ embeds: [icebox], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [slugged], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -336,10 +336,6 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         gomorrah2: {embed: gomorrah, component: go2},
         go3: {embed: gomorrah, component: go3},
         gomorrah3: {embed: gomorrah, component: go3},
-        ib: {embed: icebox, component: ib},
-        icebox: {embed: icebox, component: ib},
-        ib2: {embed: icebox, component: ib2},
-        icebox2: {embed: icebox, component: ib2},
         lt: {embed: ladytuna, component: lt},
         ladytuna: {embed: ladytuna, component: lt},
         lt2: {embed: ladytuna, component: lt2},
@@ -360,6 +356,10 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         sunlord3: {embed: sunlord, component: sl3},
         sl4: {embed: sunlord, component: sl4},
         sunlord4: {embed: sunlord, component: sl4},
+        slug: {embed: slugged, component: slug},
+        slugged: {embed: slugged, component: slug},
+        slug2: {embed: slugged, component: slug2},
+        slugged2: {embed: slugged, component: slug2},
       }
       const action = buttonActions[i.customId];
       if (action) {

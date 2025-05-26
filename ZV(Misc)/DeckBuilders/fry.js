@@ -52,10 +52,6 @@ module.exports = {
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setValue("meme")
-          .setDescription("Plant Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription(
@@ -68,7 +64,7 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Decks")
+          .setLabel("Tempo Deck")
           .setValue("tempo")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
@@ -81,11 +77,10 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const fryEmUpDecks = {
       ladderDecks: ["frymidrose", "raiserpackage", "valkster"],
-      memeDeck: ["conjureleap"],
       comboDeck: ["valkster"],
       midrangeDecks: ["frymidrose", "valkster"],
-      tempoDecks: ["conjureleap", "raiserpackage"],
-      allDecks: ["frymidrose", "raiserpackage", "valkster", "conjureleap"],
+      tempoDecks: ["raiserpackage"],
+      allDecks: ["frymidrose", "raiserpackage", "valkster"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -98,7 +93,6 @@ module.exports = {
         .join("");
     }
     const toBuildLadderString = buildDeckString(fryEmUpDecks.ladderDecks);
-    const toBuildTempoString = buildDeckString(fryEmUpDecks.tempoDecks);
     const toBuildMid = buildDeckString(fryEmUpDecks.midrangeDecks);
     const toBuildString = buildDeckString(fryEmUpDecks.allDecks);
     /**
@@ -123,26 +117,20 @@ module.exports = {
     const fmr = createButtons("ladderhelp", "rp");
     const rp = createButtons("frymidrose", "valk");
     const valk = createButtons("raiserpackage", "helpladder");
-    const temporow = createButtons("raiserpackage2", "cleap");
-    const cleap = createButtons("tempohelp", "rp2");
-    const rp2 = createButtons("conjureleap", "helptempo");
     const midrangerow = createButtons("valkster2", "fmr2");
     const fmr2 = createButtons("helpmid", "valk2");
     const valk2 = createButtons("frymidrose2", "helpmidrange");
-    const alldecksrow = createButtons("valkster3", "cleap2");
-    const cleap2 = createButtons("allhelp", "fmr3");
-    const fmr3 = createButtons("conjureleap2", "rp3");
-    const rp3 = createButtons("frymidrose3", "valk3");
-    const valk3 = createButtons("raiserpackage3", "helpall");
-    const [result] = await db.query(`select conjureleap, frymidrose, 
+    const alldecksrow = createButtons("valkster3", "fmr3");
+    const fmr3 = createButtons("allhelp", "rp2");
+    const rp2 = createButtons("frymidrose3", "valk3");
+    const valk3 = createButtons("raiserpackage2", "helpall");
+    const [result] = await db.query(`select frymidrose, 
 raiserpackage, valkster
-from hgdecks hg
-inner join rodecks ro 
-on (hg.deckinfo = ro.deckinfo)
+from rodecks ro 
 inner join bfdecks bf
-on (hg.deckinfo = bf.deckinfo)
+on (ro.deckinfo = bf.deckinfo)
 inner join pbdecks pb
-on (hg.deckinfo = pb.deckinfo)`);
+on (ro.deckinfo = pb.deckinfo)`);
     const user = await client.users.fetch("291752823891427329");
     const fry = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -156,13 +144,6 @@ Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} total decks in Tbo
       user.displayAvatarURL(),
       `To view the Midrange decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${fryEmUpDecks.midrangeDecks.length} Midrange decks in Tbot`
-    );
-    const tempofry = createHelpEmbed(
-      `${user.displayName} Tempo Decks`,
-      `My Tempo decks made by ${user.displayName} are ${toBuildTempoString}`,
-      user.displayAvatarURL(),
-      `To view the Tempo decks made by ${user.displayName} please click on the buttons below or use commands listed above
-Note: ${user.displayName} has ${fryEmUpDecks.tempoDecks.length} Tempo decks in Tbot`
     );
     const ladderfry = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
@@ -201,7 +182,6 @@ Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
       }
       return embed;
     }
-    const conjureleap = createDeckEmbed(result, "conjureleap");
     const frymidrose = createDeckEmbed(result, "frymidrose");
     const raiserpackage = createDeckEmbed(result, "raiserpackage");
     const valkster = createDeckEmbed(result, "valkster");
@@ -215,12 +195,10 @@ Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
       const value = i.values[0];
       if (value == "combo") {
         await i.reply({ embeds: [valkster], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
-        await i.reply({ embeds: [conjureleap], flags: MessageFlags.Ephemeral });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangefry], components: [midrangerow] });
       } else if (value == "tempo") {
-        await i.update({ embeds: [tempofry], components: [temporow] });
+        await i.reply({embeds: [raiserpackage], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderfry], components: [ladderrow] });
       } else if (value == "all") {
@@ -241,10 +219,6 @@ Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
         tempohelp: { embed: tempofry, component: temporow },
         helpall: { embed: allfry, component: alldecksrow },
         allhelp: { embed: allfry, component: alldecksrow },
-        cleap: { embed: conjureleap, component: cleap },
-        conjureleap: { embed: conjureleap, component: cleap },
-        cleap2: { embed: conjureleap, component: cleap2 },
-        conjureleap2: { embed: conjureleap, component: cleap2 },
         fmr: { embed: frymidrose, component: fmr },
         frymidrose: { embed: frymidrose, component: fmr },
         fmr2: { embed: frymidrose, component: fmr2 },
@@ -255,8 +229,6 @@ Note: ${user.displayName} has ${fryEmUpDecks.allDecks.length} decks in Tbot`
         raiserpackage: { embed: raiserpackage, component: rp },
         rp2: { embed: raiserpackage, component: rp2 },
         raiserpackage2: { embed: raiserpackage, component: rp2 },
-        rp3: { embed: raiserpackage, component: rp3 },
-        raiserpackage3: { embed: raiserpackage, component: rp3 },
         valk: { embed: valkster, component: valk },
         valkster: { embed: valkster, component: valk },
         valk2: { embed: valkster, component: valk2 },

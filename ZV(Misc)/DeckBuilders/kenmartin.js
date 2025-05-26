@@ -42,11 +42,11 @@ module.exports = {
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Ken Martin Decks")
       .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription('Decks that mostly only good for ranked games')
-					.setEmoji("<:ladder:1271503994857979964>"), 
+       new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
@@ -62,7 +62,7 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const kenMartinDecks = {
-      ladderDecks: ["boltbolt"],
+      compDecks: ["boltbolt"],
       memeDecks: ["youngeggmartin", "ykm"],
       comboDecks: ["boltbolt", "youngeggmartin", "ykm"],
       midrangeDecks: ["boltbolt", "ykm"],
@@ -107,7 +107,7 @@ module.exports = {
     const ykm2 = createButtons("youngeggmartin2", "memehelp");
     const midrangerow = createButtons("youngkenmartin3", "bb2");
     const bb2 = createButtons("helpmidrange", "ykm3");
-    const ykm3 = createButtons("boltbolt3", "midrangehelp");
+    const ykm3 = createButtons("boltbolt2", "midrangehelp");
     const [result] =
       await db.query(`select boltbolt,
 youngeggmartin, ykm 
@@ -178,7 +178,7 @@ Note: Ken Martin has ${kenMartinDecks.memeDecks.length} meme decks in Tbot`
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if(value == "ladder"){
+      if(value == "comp"){
         await i.reply({ embeds: [bbolt], flags: MessageFlags.Ephemeral });
       }
       else if(value == "meme"){

@@ -55,7 +55,7 @@ module.exports = {
           .setDescription("A deck that is cheap for new players")
           .setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Decks")
+          .setLabel("Competitive Deck")
           .setValue("comp")
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
@@ -107,8 +107,8 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const rustboltDecks = {
       budgetDecks: ["budgetrb"],
-      competitiveDecks: ["bustbolt", "uncrackabolt"],
-      ladderDecks: ["boltbolt", "marxbolt", "mechacontrol"],
+      competitiveDecks: ["boltbolt"],
+      ladderDecks: ["marxbolt", "mechacontrol"],
       memeDecks: [
         "coggerazzi",
         "igmablobchum",
@@ -118,26 +118,23 @@ module.exports = {
       aggroDecks: ["marxbolt"],
       comboDecks: [
         "boltbolt",
-        "bustbolt",
         "coggerazzi",
         "igmablobchum",
         "sunbandits",
         "terrifytricksterazzi",
       ],
-      controlDecks: ["bustbolt", "mechacontrol", "sunbandits", "uncrackabolt"],
+      controlDecks: ["mechacontrol", "sunbandits"],
       midrangeDecks: ["boltbolt", "budgetrb", "igmablobchum"],
       tempoDecks: ["coggerazzi", "terrifytricksterazzi"],
       allDecks: [
         "boltbolt",
         "budgetrb",
-        "bustbolt",
         "coggerazzi",
         "igmablobchum",
         "marxbolt",
         "mechacontrol",
         "sunbandits",
         "terrifytricksterazzi",
-        "uncrackabolt",
       ],
     };
      /**
@@ -151,7 +148,6 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(rustboltDecks.allDecks);
-    const toBuildCompString = buildDeckString(rustboltDecks.competitiveDecks);
     const toBuildLadderString = buildDeckString(rustboltDecks.ladderDecks);
     const toBuildMemeString = buildDeckString(rustboltDecks.memeDecks);
     const toBuildComboString = buildDeckString(rustboltDecks.comboDecks);
@@ -176,44 +172,35 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("uncrackabolt", "bol");
+    const alldecksrow = createButtons("terrifytricksterazzi", "bol");
     const bol = createButtons("helpall", "brb");
-    const brb = createButtons("boltbolt", "bust");
-    const bust = createButtons("budgetrb", "cog");
-    const cog = createButtons("bustbolt", "igb");
+    const brb = createButtons("boltbolt", "cog");
+    const cog = createButtons("budgetrb", "igb");
     const igb = createButtons("coggerazzi", "marx");
     const marx = createButtons("igmablobchum", "mc");
     const mc = createButtons("marxbolt", "sb");
     const sb = createButtons("mechacontrol", "tster");
-    const tster = createButtons("sunbandits", "uncrack");
-    const uncrack = createButtons("terrifytricksterazzi", "allhelp");
-    const comprow = createButtons("uncrackabolt2", "bust2");
-    const bust2 = createButtons("comphelp", "uncrack2");
-    const uncrack2 = createButtons("bustbolt2", "helpcomp");
-    const ladderrow = createButtons("mechacontrol2", "bol2");
-    const bol2 = createButtons("ladderhelp", "marx2");
-    const marx2 = createButtons("boltbolt2", "mc2");
+    const tster = createButtons("sunbandits", "allhelp");
+    const ladderrow = createButtons("mechacontrol2", "marx2");
+    const marx2 = createButtons("ladderhelp", "mc2");
     const mc2 = createButtons("marxbolt2", "helpladder");
     const memerow = createButtons("terrifytricksterazzi2", "cog2");
     const cog2 = createButtons("memehelp", "igb2");
     const igb2 = createButtons("coggerazzi2", "sb2");
     const sb2 = createButtons("igmablobchum2", "tster2");
     const tster2 = createButtons("sunbandits2", "helpmeme");
-    const comborow = createButtons("terrifytricksterazzi3", "bol3");
-    const bol3 = createButtons("combohelp", "bust3");
-    const bust3 = createButtons("boltbolt3", "cog3");
-    const cog3 = createButtons("bustbolt3", "igb3");
+    const comborow = createButtons("terrifytricksterazzi3", "bol2");
+    const bol2 = createButtons("combohelp", "cog3");
+    const cog3 = createButtons("boltbolt2", "igb3");
     const igb3 = createButtons("coggerazzi3", "sb3");
     const sb3 = createButtons("igmablobchum3", "tster3");
     const tster3 = createButtons("sunbandits3", "helpcombo");
-    const controlrow = createButtons("uncrackabolt3", "bust4");
-    const bust4 = createButtons("controlhelp", "mc3");
-    const mc3 = createButtons("bustbolt4", "sb4");
-    const sb4 = createButtons("mechacontrol3", "uncrack3");
-    const uncrack3 = createButtons("sunbandits4", "helpcontrol");
-    const midrangerow = createButtons("igmablobchum4", "bol4");
-    const bol4 = createButtons("midrangehelp", "brb2");
-    const brb2 = createButtons("boltbolt4", "igb4");
+    const controlrow = createButtons("sunbandits4", "mc3");
+    const mc3 = createButtons("controlhelp", "sb4");
+    const sb4 = createButtons("mechacontrol3", "helpcontrol");
+    const midrangerow = createButtons("igmablobchum4", "bol3");
+    const bol3 = createButtons("midrangehelp", "brb2");
+    const brb2 = createButtons("boltbolt3", "igb4");
     const igb4 = createButtons("budgetrb2", "helpmidrange");
     const temporow = createButtons("terrifytricksterazzi4", "cog4");
     const cog4 = createButtons("tempohelp", "tster4");
@@ -230,13 +217,6 @@ Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`
       `To view the RustBolt decks please select an option from the select menu below!
 Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
-    );
-    const compEmbed = createHelpEmbed(
-      "Rustbolt Competitive Decks",
-      `My commands for Rustbolt(RB) are ${toBuildCompString}`,
-      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
-      `To view the RustBolt competitive decks please use the commands listed above or click on the buttons below to navigate through all competitive decks!
-Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive decks in Tbot`
     );
     const ladderEmbed = createHelpEmbed(
       "Rustbolt Ladder Decks",
@@ -306,7 +286,6 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
     }
     const boltbolt = createDeckEmbed(result, "boltbolt");
     const budgetrb = createDeckEmbed(result, "budgetrb");
-    const bustbolt = createDeckEmbed(result, "bustbolt");
     const igmablobchum = createDeckEmbed(result, "igmablobchum");
     const marxbolt = createDeckEmbed(result, "marxbolt");
     const mechacontrol = createDeckEmbed(result, "mechacontrol");
@@ -316,7 +295,6 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
       result,
       "terrifytricksterazzi"
     );
-    const uncrackabolt = createDeckEmbed(result, "uncrackabolt");
     const m = await message.channel.send({
       embeds: [helprb],
       components: [row],
@@ -331,7 +309,7 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "comp") {
-        await i.update({ embeds: [compEmbed], components: [comprow] });
+        await i.reply({embeds: [boltbolt], flags: MessageFlags.Ephemeral})
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -358,8 +336,6 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
       const buttonActions = {
         helpall: { embed: alldecksEmbed, component: alldecksrow },
         allhelp: { embed: alldecksEmbed, component: alldecksrow },
-        helpcomp: { embed: compEmbed, component: comprow },
-        comphelp: { embed: compEmbed, component: comprow },
         helpladder: { embed: ladderEmbed, component: ladderrow },
         ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpmeme: { embed: memeEmbed, component: memerow },
@@ -378,20 +354,10 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
         boltbolt2: { embed: boltbolt, component: bol2 },
         bol3: { embed: boltbolt, component: bol3 },
         boltbolt3: { embed: boltbolt, component: bol3 },
-        bol4: { embed: boltbolt, component: bol4 },
-        boltbolt4: { embed: boltbolt, component: bol4 },
         brb: { embed: budgetrb, component: brb },
         budgetrb: { embed: budgetrb, component: brb },
         brb2: { embed: budgetrb, component: brb2 },
         budgetrb2: { embed: budgetrb, component: brb2 },
-        bust: { embed: bustbolt, component: bust },
-        bustbolt: { embed: bustbolt, component: bust },
-        bust2: { embed: bustbolt, component: bust2 },
-        bustbolt2: { embed: bustbolt, component: bust2 },
-        bust3: { embed: bustbolt, component: bust3 },
-        bustbolt3: { embed: bustbolt, component: bust3 },
-        bust4: { embed: bustbolt, component: bust4 },
-        bustbolt4: { embed: bustbolt, component: bust4 },
         cog: { embed: coggerazzi, component: cog },
         coggerazzi: { embed: coggerazzi, component: cog },
         cog2: { embed: coggerazzi, component: cog2 },
@@ -443,12 +409,6 @@ Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
           embed: terrifytricksterazzi,
           component: tster4,
         },
-        uncrack: { embed: uncrackabolt, component: uncrack },
-        uncrackabolt: { embed: uncrackabolt, component: uncrack },
-        uncrack2: { embed: uncrackabolt, component: uncrack2 },
-        uncrackabolt2: { embed: uncrackabolt, component: uncrack2 },
-        uncrack3: { embed: uncrackabolt, component: uncrack3 },
-        uncrackabolt3: { embed: uncrackabolt, component: uncrack3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

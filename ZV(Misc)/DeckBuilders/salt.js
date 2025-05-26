@@ -102,7 +102,6 @@ module.exports = {
       budgetDecks: ["budgetykm"],
       competitiveDecks: [
         "abeans",
-        "bustbolt",
         "chemotherapy",
         "cyburn",
         "figlottery",
@@ -113,7 +112,6 @@ module.exports = {
         "seacret",
         "shamcontrol",
         "spacestars",
-        "uncrackabolt",
         "watertron",
       ],
       ladderDecks: ["gravestache", "schoolyard"],
@@ -121,7 +119,6 @@ module.exports = {
       aggroDecks: ["abeans", "logbait", "schoolyard", "seacret", "watertron"],
       comboDecks: [
         "budgetykm",
-        "bustbolt",
         "cyburn",
         "gargburn",
         "gravestache",
@@ -129,13 +126,11 @@ module.exports = {
         "spacestars"
       ],
       controlDecks: [
-        "bustbolt",
         "chemotherapy",
         "healcontrol",
         "noplayingallowed",
         "radiotherapy",
         "shamcontrol",
-        "uncrackabolt",
       ],
       midrangeDecks: [
         "budgetykm",
@@ -147,7 +142,6 @@ module.exports = {
       allDecks: [
         "abeans",
         "budgetykm",
-        "bustbolt",
         "chemotherapy",
         "cyburn",
         "figlottery",
@@ -161,7 +155,6 @@ module.exports = {
         "seacret",
         "shamcontrolbc",
         "spacestars",
-        "uncrackabolt",
         "watertron",
       ],
     };
@@ -204,10 +197,9 @@ module.exports = {
       );
     }
     const competitiverow = createButtons("watertron", "ab");
-    const ab = createButtons("helpcomp", "bust");
-    const bust = createButtons("abeans", "chemo");
-    const chemo = createButtons("bustbolt", "cburn");
-    const cburn = createButtons("chemo", "flottery");
+    const ab = createButtons("helpcomp", "chemo");
+    const chemo = createButtons("abeans", "cburn");
+    const cburn = createButtons("chemotherapy", "flottery");
     const flottery = createButtons("cyburn", "gb");
     const gb = createButtons("figlottery", "healcon");
     const healcon = createButtons("gargburn", "lbait");
@@ -215,9 +207,8 @@ module.exports = {
     const radio = createButtons("logbait", "sea");
     const sea = createButtons("radiotherapy", "sham");
     const sham = createButtons("seacret", "stars");
-    const stars = createButtons("shamcontrol", "uncrack");
-    const uncrack = createButtons("spacestars", "wt");
-    const wt = createButtons("uncrackabolt", "helpcomp");
+    const stars = createButtons("shamcontrol", "wt");
+    const wt = createButtons("spacestars", "helpcomp");
     const ladderrow = createButtons("schoolyard", "gstache");
     const gstache = createButtons("ladderhelp", "syard");
     const syard = createButtons("gravestache", "ladderhelp");
@@ -228,9 +219,8 @@ module.exports = {
     const sea2 = createButtons("schoolyard2", "wt2");
     const wt2 = createButtons("seacret2", "helpaggro");
     const comborow = createButtons("spacestars2", "bykm");
-    const bykm = createButtons("combohelp", "bust2");
-    const bust2 = createButtons("budgetykm", "cburn2");
-    const cburn2 = createButtons("bustbolt2", "gb2");
+    const bykm = createButtons("combohelp", "cburn2");
+    const cburn2 = createButtons("budgetykm", "gb2");
     const gb2 = createButtons("cyburn2", "gstache2");
     const gstache2 = createButtons("gargburn2", "sea3");
     const sea3 = createButtons("gravestache2", "stars2");
@@ -241,18 +231,15 @@ module.exports = {
     const flottery2 = createButtons("cyburn3", "gb3");
     const gb3 = createButtons("figlottery2", "stars3");
     const stars3 = createButtons("gargburn3", "helpmid");
-    const controlrow = createButtons("uncrackabolt2", "bust3");
-    const bust3 = createButtons("helpcontrol", "chemo2");
-    const chemo2 = createButtons("bustbolt3", "healcon2");
+    const controlrow = createButtons("shamcontrol2", "chemo2");
+    const chemo2 = createButtons("helpcontrol", "healcon2");
     const healcon2 = createButtons("chemotherapy2", "npa2");
     const npa2 = createButtons("healcontrol2", "radio2");
     const radio2 = createButtons("noplayingallowed2", "sham2");
-    const sham2 = createButtons("radiotherapy2", "uncrack2");
-    const uncrack2 = createButtons("shamcontrol2", "controlhelp");
+    const sham2 = createButtons("radiotherapy2", "controlhelp");
     const alldecksrow = createButtons("watertron3", "ab3");
-    const ab3 = createButtons("allhelp", "bust4");
-    const bust4 = createButtons("abeans3", "bykm3");
-    const bykm3 = createButtons("bustbolt4", "chemo3");
+    const ab3 = createButtons("allhelp", "bykm3");
+    const bykm3 = createButtons("abeans3", "chemo3");
     const chemo3 = createButtons("budgetykm3", "cburn4");
     const cburn4 = createButtons("chemotherapy3", "flottery3");
     const flottery3 = createButtons("cyburn4", "gb4");
@@ -265,13 +252,12 @@ module.exports = {
     const syard3 = createButtons("radiotherapy3", "sea4");
     const sea4 = createButtons("schoolyard3", "sham3");
     const sham3 = createButtons("seacret4", "stars4");
-    const stars4 = createButtons("shamcontrol3", "uncrack3");
-    const uncrack3 = createButtons("spacestars4", "wt3");
-    const wt3 = createButtons("uncrackabolt3", "helpall");
+    const stars4 = createButtons("shamcontrol3", "wt3");
+    const wt3 = createButtons("spacestars4", "helpall");
     const [result] = await db.query(`select abeans, apotk,
-budgetykm, bustbolt, chemotherapy,
+budgetykm, chemotherapy,
 cyburn, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
-schoolyard, seacret, shamcontrol, spacestars, radiotherapy, uncrackabolt, watertron
+schoolyard, seacret, shamcontrol, spacestars, radiotherapy, watertron
 from gsdecks gs 
 inner join czdecks cz
 on (gs.deckinfo = cz.deckinfo)
@@ -283,8 +269,6 @@ inner join imdecks im
 on (gs.deckinfo = im.deckinfo)
 inner join hgdecks hg
 on (gs.deckinfo = hg.deckinfo)
-inner join rbdecks rb 
-on (gs.deckinfo = rb.deckinfo)
 inner join ncdecks nc
 on (gs.deckinfo = nc.deckinfo)
 inner join ntdecks nt
@@ -393,7 +377,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
     const healcontrol = createDeckEmbed(result, "apotk");
     const logbait = createDeckEmbed(result, "logbait");
     const budgetykm = createDeckEmbed(result, "budgetykm");
-    const bustbolt = createDeckEmbed(result, "bustbolt");
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
     const cyburn = createDeckEmbed(result, "cyburn");
     const figlottery = createDeckEmbed(result, "healmidflare");
@@ -405,7 +388,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
     const schoolyard = createDeckEmbed(result, "schoolyard");
     const shamcontrol = createDeckEmbed(result, "shamcontrol");
     const spacestars = createDeckEmbed(result, "spacestars");
-    const uncrackabolt = createDeckEmbed(result, "uncrackabolt");
     const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [salt], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -472,14 +454,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         budgetykm2: { embed: budgetykm, component: bykm2 },
         bykm3: { embed: budgetykm, component: bykm3 },
         budgetykm3: { embed: budgetykm, component: bykm3 },
-        bust: { embed: bustbolt, component: bust },
-        bust2: { embed: bustbolt, component: bust2 },
-        bust3: { embed: bustbolt, component: bust3 },
-        bust4: { embed: bustbolt, component: bust4 },
-        bustbolt: { embed: bustbolt, component: bust },
-        bustbolt2: { embed: bustbolt, component: bust2 },
-        bustbolt3: { embed: bustbolt, component: bust3 },
-        bustbolt4: { embed: bustbolt, component: bust4 },
         cburn: { embed: cyburn, component: cburn },
         cburn2: { embed: cyburn, component: cburn2 },
         cburn3: { embed: cyburn, component: cburn3 },
@@ -538,14 +512,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         shamcontrol: { embed: shamcontrol, component: sham },
         shamcontrol2: { embed: shamcontrol, component: sham2 },
         shamcontrol3: { embed: shamcontrol, component: sham3 },
-        uncrack: { embed: uncrackabolt, component: uncrack },
-        uncrack2: { embed: uncrackabolt, component: uncrack2 },
-        uncrack3: { embed: uncrackabolt, component: uncrack3 },
-        uncrack4: { embed: uncrackabolt, component: uncrack3 },
-        uncrackabolt: { embed: uncrackabolt, component: uncrack },
-        uncrackabolt2: { embed: uncrackabolt, component: uncrack2 },
-        uncrackabolt3: { embed: uncrackabolt, component: uncrack3 },
-        uncrackabolt4: { embed: uncrackabolt, component: uncrack3 },
         wt: { embed: watertron, component: wt },
         wt2: { embed: watertron, component: wt2 },
         wt3: { embed: watertron, component: wt3 },

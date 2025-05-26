@@ -434,7 +434,7 @@ module.exports = {
         "budgetzm",
       ],
       competitiveDecks: [
-        "bustbolt",
+        "boltbolt",
         "gargburn",
         "limerence",
         "lockthebathroom",
@@ -445,15 +445,13 @@ module.exports = {
         "slugged",
         "spacestars",
         "telimps",
-        "trickstache",
-        "uncrackabolt",
+        "trickstache"
       ],
       ladderDecks: [
         "agraves",
         "bfmidgargs",
         "bfplankcontrol",
         "binaryflagwar",
-        "boltbolt",
         "brady",
         "cryoboy",
         "gargstar22",
@@ -533,7 +531,6 @@ module.exports = {
         "budgetsm",
         "budgetykm",
         "budgetzm",
-        "bustbolt",
         "coggerazzi",
         "congabait",
         "cryoboy",
@@ -568,7 +565,6 @@ module.exports = {
         "bfplankcontrol",
         "bonusducks",
         "budgetim",
-        "bustbolt",
         "frozentelimps",
         "huntgargs",
         "kaleidoscope",
@@ -578,7 +574,6 @@ module.exports = {
         "pbfeast",
         "sunbandits",
         "telimps",
-        "uncrackabolt",
         "uncrackamech",
         "whalepharaoh",
       ],
@@ -647,7 +642,6 @@ module.exports = {
         "budgetsm",
         "budgetykm",
         "budgetzm",
-        "bustbolt",
         "coggerazzi",
         "congabait",
         "conjureleap",
@@ -694,7 +688,6 @@ module.exports = {
         "terrifytricksterazzi",
         "trickstache",
         "trickmech",
-        "uncrackabolt",
         "uncrackamech",
         "valkster",
         "watersports",
@@ -939,7 +932,7 @@ module.exports = {
     const bfmg = createButtons("banhammer", "bfpc");
     const bfpc = createButtons("bfmidgargs", "bas");
     const bas = createButtons("bfplankcontrol", "bfw");
-    const bfw = createButtons("bastet", "bbolt");
+    const bfw = createButtons("bastet", "brad");
     const bbolt = createButtons("binaryflagwar", "bducks");
     const bducks = createButtons("boltbolt", "brad");
     const brad = createButtons("bonusducks", "bbf");
@@ -953,9 +946,8 @@ module.exports = {
     const bsb = createButtons("budgetrb", "bsm");
     const bsm = createButtons("budgetsb", "bykm");
     const bykm = createButtons("budgetsm", "bzm");
-    const bzm = createButtons("budgetykm", "bust");
-    const bust = createButtons("budgetzm", "cog");
-    const cog = createButtons("bustbolt", "cbait");
+    const bzm = createButtons("budgetykm", "cog");
+    const cog = createButtons("budgetzm", "cbait");
     const cbait = createButtons("coggerazzi", "cleap");
     const cleap = createButtons("congabait", "cboy");
     const cboy = createButtons("conjureleap", "dmech");
@@ -1000,9 +992,8 @@ module.exports = {
     const timps = createButtons("sunlord", "terrifyster");
     const terrifyster = createButtons("telimps", "tstache");
     const tstache = createButtons("terrifytricksterazzi", "tmech");
-    const tmech = createButtons("trickstache", "ubolt");
-    const ubolt = createButtons("trickmech", "umech");
-    const umech = createButtons("uncrackabolt", "vster");
+    const tmech = createButtons("trickstache", "umech");
+    const umech = createButtons("trickmech", "vster");
     const vster = createButtons("uncrackamech", "wsports");
     const wsports = createButtons("valkster", "wph");
     const wph = createButtons("watersports", "yemartin");
@@ -1021,9 +1012,9 @@ module.exports = {
     const bsm2 = createButtons("budgetsb2", "bykm2");
     const bykm2 = createButtons("budgetsm2", "bzm2");
     const bzm2 = createButtons("budgetykm2", "helpzbudget");
-    const compzrow = createButtons("uncrackabolt2", "bust2");
-    const bust2 = createButtons("helpzcomp", "gburn2");
-    const gburn2 = createButtons("bustbolt2", "kscope2");
+    const compzrow = createButtons("trickstache2", "bbolt2");
+    const bbolt2 = createButtons("helpzcomp", "gburn2");
+    const gburn2 = createButtons("boltbolt2", "kscope2");
     const kscope2 = createButtons("gargburn2", "lime2");
     const lime2 = createButtons("kaleidoscope2", "ltbr2");
     const ltbr2 = createButtons("limerence2", "pyeeyz2");
@@ -1033,15 +1024,13 @@ module.exports = {
     const slug2 = createButtons("seacret2", "stars2");
     const stars2 = createButtons("slugged2", "timps2");
     const timps2 = createButtons("spacestars2", "tstache2");
-    const tstache2 = createButtons("telimps2", "ubolt2");
-    const ubolt2 = createButtons("trickstache2", "compzhelp");
+    const tstache2 = createButtons("telimps2", "compzhelp");
     const ladderzrow = createButtons("valkster2", "agr2");
     const agr2 = createButtons("helpzladder", "bfmg2");
     const bfmg2 = createButtons("agraves2", "bfpc2");
     const bfpc2 = createButtons("bfmidgargs2", "bfw2");
-    const bfw2 = createButtons("bfplankcontrol2", "bbolt2");
-    const bbolt2 = createButtons("binaryflagwar2", "brad2");
-    const brad2 = createButtons("boltbolt2", "cboy2");
+    const bfw2 = createButtons("bfplankcontrol2", "brad2");
+    const brad2 = createButtons("binaryflagwar2", "cboy2");
     const cboy2 = createButtons("brady2", "gstar222");
     const gstar222 = createButtons("cryoboy2", "gom2");
     const gom2 = createButtons("gargstar222", "gps2");
@@ -1118,9 +1107,8 @@ module.exports = {
     const bnt4 = createButtons("budgetim3", "bsm4");
     const bsm4 = createButtons("budgetnt4", "bykm3");
     const bykm3 = createButtons("budgetsm4", "bzm4");
-    const bzm4 = createButtons("budgetykm3", "bust3");
-    const bust3 = createButtons("budgetykm3", "cog3");
-    const cog3 = createButtons("bustbolt3", "cbait3");
+    const bzm4 = createButtons("budgetykm3", "cog3");
+    const cog3 = createButtons("budgetzm3", "cbait3");
     const cbait3 = createButtons("coggerazzi3", "cboy3");
     const cboy3 = createButtons("congabait3", "flo3");
     const flo3 = createButtons("cryoboy3", "ftimps3");
@@ -1152,19 +1140,17 @@ module.exports = {
     const controlzrow = createButtons("whalepharaoh3", "bfpc3");
     const bfpc3 = createButtons("helpzcontrol", "bducks4");
     const bducks4 = createButtons("bfplankcontrol3", "bim4");
-    const bim4 = createButtons("bonusducks4", "bust4");
-    const bust4 = createButtons("budgetim4", "ftimps4");
-    const ftimps4 = createButtons("bustbolt4", "hgargs3");
+    const bim4 = createButtons("bonusducks4", "ftimps4");
+    const ftimps4 = createButtons("budgetim4", "hgargs3");
     const hgargs3 = createButtons("frozentelimps4", "kscope3");
-    const kscope3 = createButtons("frozentelimps4", "mcon3");
+    const kscope3 = createButtons("huntgargs3", "mcon3");
     const mcon3 = createButtons("kaleidoscope3", "mscope4");
     const mscope4 = createButtons("mechacontrol3", "npa3");
     const npa3 = createButtons("mechascope4", "pfeast3");
     const pfeast3 = createButtons("noplayingallowed3", "sbandits4");
     const sbandits4 = createButtons("pbfeast3", "timps4");
-    const timps4 = createButtons("sunbandits4", "ubolt3");
-    const ubolt3 = createButtons("telimps4", "umech4");
-    const umech4 = createButtons("uncrackabolt3", "wph4");
+    const timps4 = createButtons("sunbandits4", "umech4");
+    const umech4 = createButtons("telimps4", "wph4");
     const wph4 = createButtons("uncrackamech4", "controlzhelp");
     const midrangezrow = createButtons("youngkenmartin4", "sav4");
     const sav4 = createButtons("helpzmid", "bhammer4");
@@ -1596,7 +1582,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const youngeggmartin = createZombieDeckEmbed(result, "youngeggmartin");
     const boltbolt = createZombieDeckEmbed(result, "boltbolt");
     const budgetrb = createZombieDeckEmbed(result, "budgetrb");
-    const bustbolt = createZombieDeckEmbed(result, "bustbolt");
     const igmablobchum = createZombieDeckEmbed(result, "igmablobchum");
     const marxbolt = createZombieDeckEmbed(result, "marxbolt");
     const mechacontrol = createZombieDeckEmbed(result, "mechacontrol");
@@ -1606,7 +1591,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
       result,
       "terrifytricksterazzi"
     );
-    const uncrackabolt = createZombieDeckEmbed(result, "uncrackabolt");
     const budgetsm = createZombieDeckEmbed(result, "budgetsm");
     const horts = createZombieDeckEmbed(result, "horts");
     const pablosyeezys = createZombieDeckEmbed(result, "pablosyeezys");
@@ -2104,14 +2088,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         budgetzm3: { embed: budgetzm, component: bzm3 },
         bzm4: { embed: budgetzm, component: bzm4 },
         budgetzm4: { embed: budgetzm, component: bzm4 },
-        bust: { embed: bustbolt, component: bust },
-        bustbolt: { embed: bustbolt, component: bust },
-        bust2: { embed: bustbolt, component: bust2 },
-        bustbolt2: { embed: bustbolt, component: bust2 },
-        bust3: { embed: bustbolt, component: bust3 },
-        bustbolt3: { embed: bustbolt, component: bust3 },
-        bust4: { embed: bustbolt, component: bust4 },
-        bustbolt4: { embed: bustbolt, component: bust4 },
         cog: { embed: coggerazzi, component: cog },
         coggerazzi: { embed: coggerazzi, component: cog },
         cog2: { embed: coggerazzi, component: cog2 },
@@ -2412,12 +2388,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         trickstache3: { embed: trickstache, component: tstache3 },
         tstache4: { embed: trickstache, component: tstache4 },
         trickstache4: { embed: trickstache, component: tstache4 },
-        ubolt: { embed: uncrackabolt, component: ubolt },
-        uncrackabolt: { embed: uncrackabolt, component: ubolt },
-        ubolt2: { embed: uncrackabolt, component: ubolt2 },
-        uncrackabolt2: { embed: uncrackabolt, component: ubolt2 },
-        ubolt3: { embed: uncrackabolt, component: ubolt3 },
-        uncrackabolt3: { embed: uncrackabolt, component: ubolt3 },
         umech: { embed: uncrackamech, component: umech },
         uncrackamech: { embed: uncrackamech, component: umech },
         umech2: { embed: uncrackamech, component: umech2 },

@@ -52,28 +52,22 @@ module.exports = {
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Deck")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
+          .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
+          .setLabel("Midrange Decks")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -86,11 +80,10 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const superBrainzDecks = {
       budgetDecks: ["budgetsb"],
-      ladderDecks: ["telimpssb"],
-      comboDecks: ["otkswabbie", "telimpssb"],
-      controlDecks: ["telimpssb"],
-      midrangeDecks: ["budgetsb"],
-      allDecks: ["budgetsb", "otkswabbie", "telimpssb"],
+      compdecks: ["limerence"],
+      comboDecks: ["otkswabbie"],
+      midrangeDecks: ["budgetsb", "limerence"],
+      allDecks: ["budgetsb", "limerence", "otkswabbie",],
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -102,7 +95,7 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildComboString = buildDeckString(superBrainzDecks.comboDecks);
+    const toBuildMidrangeString = buildDeckString(superBrainzDecks.midrangeDecks);
     const toBuildString = buildDeckString(superBrainzDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -122,25 +115,25 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const comboRow = createButtons("telimps", "otks");
-    const otks = createButtons("helpcombo", "timps");
-    const timps = createButtons("otkswabbie", "combohelp");
-    const allDecksRow = createButtons("telimps2", "budsb");
-    const budsb = createButtons("helpall", "otks2");
-    const otks2 = createButtons("budgetsb", "timps2");
-    const timps2 = createButtons("otkswabbie2", "allhelp");
+    const midrangeRow = createButtons("limerence", "budsb");
+    const budsb = createButtons("helpmidrange", "lime");
+    const lime = createButtons("budgetsb", "midrangehelp");
+    const allDecksRow = createButtons("otkswabbie", "budsb2");
+    const budsb2 = createButtons("helpall", "lime2");
+    const lime2 = createButtons("budgetsb2", "otks");
+    const otks = createButtons("limerence2", "allhelp");
     const helpsb = createHelpEmbed(
       "Super Brainz Decks",
       `To view the SuperBrainz decks please select an option from the select menu below!
 Note: There are ${superBrainzDecks.allDecks.length} total decks for Super Brainz in Tbot`,
       "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723"
     );
-    const comboEmbed = createHelpEmbed(
-      "Super Brainz Combo Decks",
-      `My combo decks for Super Brainz are ${toBuildComboString}`,
+    const midrangeEmbed = createHelpEmbed(
+      "Super Brainz Midrange Decks",
+      `My midrange decks for Super Brainz are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/pvzheroes_gamepedia_en/images/3/37/Super_Brainz.png/revision/latest?cb=20160722160723",
-      `To view the SuperBrainz combo decks please use the commands listed above or click on the buttons below!
-Note: There are ${superBrainzDecks.comboDecks.length} combo decks for Super Brainz in Tbot`
+      `To view the SuperBrainz midrange decks please use the commands listed above or click on the buttons below!
+Note: There are ${superBrainzDecks.midrangeDecks.length} midrange decks for Super Brainz in Tbot`
     );
     const allDecksEmbed = createHelpEmbed(
       "Super Brainz Decks",
@@ -174,7 +167,7 @@ Note: There are ${superBrainzDecks.allDecks.length} decks for Super Brainz in Tb
       return embed;
     }
     const budgetsb = createDeckEmbed(result, "budgetsb");
-    const telimps = createDeckEmbed(result, "telimpssb");
+    const limerence = createDeckEmbed(result, "limerence");
     const otkswabbie = createDeckEmbed(result, "otkswabbie");
     const m = await message.channel.send({
       embeds: [helpsb],
@@ -183,20 +176,20 @@ Note: There are ${superBrainzDecks.allDecks.length} decks for Super Brainz in Tb
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleButtonInteraction(i) {
       const buttonActions = {
-        timps: { embeds: telimps, component: timps },
-        telimps: { embeds: telimps, component: timps },
-        otks: { embeds: otkswabbie, component: otks },
-        otkswabbie: { embeds: otkswabbie, component: otks },
-        helpcombo: { embeds: comboEmbed, component: comboRow },
-        combohelp: { embeds: comboEmbed, component: comboRow },
-        helpall: { embeds: allDecksEmbed, component: allDecksRow },
-        allhelp: { embeds: allDecksEmbed, component: allDecksRow },
         budsb: { embeds: budgetsb, component: budsb },
         budgetsb: { embeds: budgetsb, component: budsb },
-        timps2: { embeds: telimps, component: timps2 },
-        telimps2: { embeds: telimps, component: timps2 },
-        otks2: { embeds: otkswabbie, component: otks2 },
-        otkswabbie2: { embeds: otkswabbie, component: otks2 },
+        budsb2: { embeds: budgetsb, component: budsb2 },
+        budgetsb2: { embeds: budgetsb, component: budsb2 },
+        lime: { embeds: limerence, component: lime },
+        limerence: { embeds: limerence, component: lime },
+        lime2: { embeds: limerence, component: lime2 },
+        limerence2: { embeds: limerence, component: lime2 },
+        otks: { embeds: otkswabbie, component: otks },
+        otkswabbie: { embeds: otkswabbie, component: otks },
+        helpmidrange: { embeds: midrangeEmbed, component: midrangeRow },
+        midrangehelp: { embeds: midrangeEmbed, component: midrangeRow },
+        helpall: { embeds: allDecksEmbed, component: allDecksRow },
+        allhelp: { embeds: allDecksEmbed, component: allDecksRow },
       };
       const action = buttonActions[i.customId];
       if (action) {
@@ -213,16 +206,18 @@ Note: There are ${superBrainzDecks.allDecks.length} decks for Super Brainz in Tb
     }
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget" || value == "midrange") {
+      if (value == "budget") {
         await i.reply({ embeds: [budgetsb], flags: MessageFlags.Ephemeral });
-      } else if (value == "ladder" || value == "control") {
-        await i.reply({ embeds: [telimps], flags: MessageFlags.Ephemeral });
-      } else if (value == "combo") {
-        await i.update({ embeds: [comboEmbed], components: [comboRow] });
       } else if (value == "all") {
         await i.update({ embeds: [allDecksEmbed], components: [allDecksRow] });
-      } else if (value == "meme") {
+      } else if (value == "meme" || value == "combo") {
         await i.reply({ embeds: [otkswabbie], flags: MessageFlags.Ephemeral });
+      }
+      else if (value == "comp"){
+        await i.reply({ embeds: [limerence], flags: MessageFlags.Ephemeral });
+      }
+      else if( value == "midrange"){
+        await i.update({ embeds: [midrangeEmbed], components: [midrangeRow] });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });

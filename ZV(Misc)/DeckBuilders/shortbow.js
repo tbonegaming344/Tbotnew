@@ -41,6 +41,11 @@ module.exports = {
       .setCustomId("select")
       .setPlaceholder("Please select an option below to view ShortBow's Decks")
       .addOptions(
+         new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setDescription("Some of the best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>")
+          .setValue("comp"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Decks")
           .setDescription("Decks that are generally only good for ranked games")
@@ -65,7 +70,7 @@ module.exports = {
           )
           .setValue("control"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
+          .setLabel("Midrange Decks")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           )
@@ -83,15 +88,17 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
+      compdecks: ["limerence"],
       ladderDecks: ["gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage"],
       aggroDecks: ["gravepiratestache"],
       comboDecks: ["gravepiratestache"],
       controlDecks: ["pawntrickstab"],
-      midrangeDecks: ["gomorrah"],
+      midrangeDecks: ["gomorrah", "limerence"],
       tempoDecks: ["raiserpackage"],
       allDecks: [
         "gomorrah",
         "gravepiratestache",
+        "limerence",
         "pawntrickstab",
         "raiserpackage",
       ],
@@ -108,6 +115,7 @@ module.exports = {
     }
     const toBuildLadderString = buildDeckString(shortbowDecks.ladderDecks);
     const toBuildString = buildDeckString(shortbowDecks.allDecks);
+    const toBuildMidrangeString = buildDeckString(shortbowDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -128,19 +136,25 @@ module.exports = {
     }
     const alldecksrow = createButtons("raiserpackage", "go");
     const go = createButtons("helpall", "gps");
-    const gps = createButtons("gomorrah", "pts");
-    const pts = createButtons("gravepiratestache", "rpack");
+    const gps = createButtons("gomorrah", "lime");
+    const lime = createButtons("gravepiratestache", "pts");
+    const pts = createButtons("limerence", "rpack");
     const rpack = createButtons("pawntrickstab", "allhelp");
     const ladderrow = createButtons("raiserpackage2", "go2");
     const go2 = createButtons("helpladder", "gps2");
     const gps2 = createButtons("gomorrah2", "pts2");
     const pts2 = createButtons("gravepiratestache2", "rpack2");
     const rpack2 = createButtons("pawntrickstab2", "ladderhelp");
+    const midrangerow = createButtons("limerence2", "go3");
+    const go3 = createButtons("helpmidrange", "lime2");
+    const lime2 = createButtons("gomorrah3", "midrangehelp");
+   
     const [result] =
-      await db.query(`select gomorrah, gps, pawntrickstab, raiserpackage from ntdecks nt 
+      await db.query(`select gomorrah, gps, limerence, pawntrickstab, raiserpackage from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
-        inner join bfdecks bf on nt.deckinfo = bf.deckinfo`);
+        inner join bfdecks bf on nt.deckinfo = bf.deckinfo
+        inner join sbdecks sb on nt.deckinfo = sb.deckinfo`);
     const user = await client.users.fetch("824024125491380303");
     const shortbow = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -161,6 +175,13 @@ Note: ${user.displayName} has ${shortbowDecks.allDecks.length} total decks in Tb
       user.displayAvatarURL(),
       `To view the ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks in Tbot`
+    );
+    const midrangeEmbed = createHelpEmbed(
+      `${user.displayName} Midrange Decks`,
+      `My midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
+      user.displayAvatarURL(),
+      `To view the midrange decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${shortbowDecks.midrangeDecks.length} midrange decks in Tbot`
     );
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -187,6 +208,7 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
     }
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const gravepiratestache = createDeckEmbed(result, "gps");
+    const limerence = createDeckEmbed(result, "limerence");
     const raiserpackage = createDeckEmbed(result, "raiserpackage");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const m = await message.channel.send({
@@ -215,13 +237,19 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "midrange") {
-        await i.reply({ embeds: [gomorrah], flags: MessageFlags.Ephemeral });
+        await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
       } else if (value == "tempo") {
         await i.reply({
           embeds: [raiserpackage],
           flags: MessageFlags.Ephemeral,
         });
       }
+      else if (value == "comp") {
+        await i.reply({
+          embeds: [limerence],
+          flags: MessageFlags.Ephemeral,
+        });
+      } 
     }
     /**
      * the handleButtonInteraction function handles the button interactions for the decks
@@ -233,6 +261,8 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
         helpall: { embed: alldecksEmbed, component: alldecksrow },
         ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpladder: { embed: ladderEmbed, component: ladderrow },
+        midrangehelp: { embed: midrangeEmbed, component: midrangerow },
+        helpmidrange: { embed: midrangeEmbed, component: midrangerow },
         gps: { embed: gravepiratestache, component: gps },
         gravepiratestache: { embed: gravepiratestache, component: gps },
         gps2: { embed: gravepiratestache, component: gps2 },
@@ -241,6 +271,8 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
         gomorrah: { embed: gomorrah, component: go },
         go2: { embed: gomorrah, component: go2 },
         gomorrah2: { embed: gomorrah, component: go2 },
+        go3: { embed: gomorrah, component: go3 },
+        gomorrah3: { embed: gomorrah, component: go3 },
         rpack: { embed: raiserpackage, component: rpack },
         raiserpackage: { embed: raiserpackage, component: rpack },
         rpack2: { embed: raiserpackage, component: rpack2 },
@@ -249,12 +281,16 @@ Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks i
         pawntrickstab: { embed: pawntrickstab, component: pts },
         pts2: { embed: pawntrickstab, component: pts2 },
         pawntrickstab2: { embed: pawntrickstab, component: pts2 },
+        lime: { embed: limerence, component: lime },
+        limerence: { embed: limerence, component: lime },
+        lime2: { embed: limerence, component: lime2 },
+        limerence2: { embed: limerence, component: lime2 },
       };
       const action = buttonActions[i.customId];
       if (action) {
         await i.update({
           embeds: [action.embed],
-          components: action.components,
+          components: [action.component],
         });
       } else {
         await i.reply({

@@ -37,7 +37,7 @@ module.exports = {
       .setPlaceholder("Please select an option below to view Xera's Decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
+          .setLabel("Competitive Decks")
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>")
           .setValue("comp"),
@@ -86,7 +86,7 @@ module.exports = {
           .setValue("all")
       );
     const xeraDecks = {
-      competitiveDecks: ["toyotacontrolla"],
+      competitiveDecks: ["limerence", "toyotacontrolla"],
       ladderDecks: ["brady", "gomorrah", "gravepiratestache"],
       memeDecks: [
         "22savage",
@@ -123,6 +123,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "limerence",
         "recycling",
         "startron",
         "watersports",
@@ -138,6 +139,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "limerence",
         "recycling",
         "reversecatster",
         "startron",
@@ -158,6 +160,7 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(xeraDecks.allDecks);
+    const toBuildCompString = buildDeckString(xeraDecks.competitiveDecks);
     const toBuildLadderString = buildDeckString(xeraDecks.ladderDecks);
     const toBuildMeme = buildDeckString(xeraDecks.memeDecks);
     const toBuildComboString = buildDeckString(xeraDecks.comboDecks);
@@ -181,6 +184,9 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
+    const comprow = createButtons("toyotacontrolla", "lime");
+    const lime = createButtons("helpcomp", "tc");
+    const tc = createButtons("limerence", "comphelp");
     const ladderrow = createButtons("gravepiratestache", "br");
     const br = createButtons("helpladder", "go");
     const go = createButtons("brady", "gps");
@@ -210,17 +216,18 @@ module.exports = {
     const um2 = createButtons("startron2", "ws2");
     const ws2 = createButtons("uncrackamech2", "combohelp");
     const controlrow = createButtons("uncrackmech3", "ftimps3");
-    const ftimps3 = createButtons("helpcontrol", "tc");
-    const tc = createButtons("frozentelimps3", "um3");
-    const um3 = createButtons("toyotacontrolla", "controlhelp");
+    const ftimps3 = createButtons("helpcontrol", "tc2");
+    const tc2 = createButtons("frozentelimps3", "um3");
+    const um3 = createButtons("toyotacontrolla2", "controlhelp");
     const midrangerow = createButtons("watersports3", "sav3");
     const sav3 = createButtons("helpmid", "ff3");
     const ff3 = createButtons("savage3", "go2");
     const go2 = createButtons("funnyflare3", "hburn3");
     const hburn3 = createButtons("gomorrah2", "hi3");
     const hi3 = createButtons("healburn3", "lrings3");
-    const lrings3 = createButtons("himps3", "recy2");
-    const recy2 = createButtons("laserrings3", "star3");
+    const lrings3 = createButtons("himps3", "lime2");
+    const lime2 = createButtons("laserrings3", "recy2");
+    const recy2 = createButtons("limerence", "star3");
     const star3 = createButtons("recycling2", "ws3");
     const ws3 = createButtons("startron3", "midhelp");
     const alldecksrow = createButtons("watersports4", "sav4");
@@ -232,16 +239,17 @@ module.exports = {
     const gps3 = createButtons("gomorrah3", "hburn4");
     const hburn4 = createButtons("gravepiratestache3", "hi4");
     const hi4 = createButtons("healburn4", "lrings4");
-    const lrings4 = createButtons("himps4", "recy3");
-    const recy3 = createButtons("laserrings4", "rcatster3");
+    const lrings4 = createButtons("himps4", "lime3");
+    const lime3 = createButtons("laserrings4", "recy3");
+    const recy3 = createButtons("limerence3", "rcatster3");
     const rcatster3 = createButtons("recycling3", "star4");
-    const star4 = createButtons("reversecatster3", "tc2");
-    const tc2 = createButtons("startron4", "um4");
-    const um4 = createButtons("toyotacontrolla2", "ws4");
+    const star4 = createButtons("reversecatster3", "tc3");
+    const tc3 = createButtons("startron4", "um4");
+    const um4 = createButtons("toyotacontrolla3", "ws4");
     const ws4 = createButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, 
-      himps, lasersnap, recycling, reversecatster, startron, toyotacontrolla, feastmech, brady, watersports 
+      himps, lasersnap, limerence, recycling, reversecatster, startron, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
@@ -251,6 +259,7 @@ module.exports = {
             inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
             inner join hgdecks hg on (im.deckinfo = hg.deckinfo)
+            inner join sbdecks sb on (im.deckinfo = sb.deckinfo)
             inner join ntdecks nt on (im.deckinfo = nt.deckinfo)
             inner join zmdecks zm on (im.deckinfo = zm.deckinfo)`);
     const user = await client.users.fetch("742719800395956244");
@@ -267,6 +276,13 @@ Note: ${user.displayName} has ${xeraDecks.allDecks.length} total decks in Tbot`,
       `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.allDecks.length} total decks in Tbot`
     );
+    const compxera = createHelpEmbed(
+      `${user.displayName} Competitive Decks`,
+      `My Competitive Decks made by ${user.displayName} are ${toBuildCompString}`,
+      user.displayAvatarURL(),
+      `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${xeraDecks.competitiveDecks.length} Competitive decks in tbot`
+    )
     const ladderxera = createHelpEmbed(
       `${user.displayName} Ladder Decks`,
       `My Ladder Decks made by ${user.displayName} are ${toBuildLadderString}`,
@@ -331,6 +347,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const himps = createDeckEmbed(result, "himps");
     const laserrings = createDeckEmbed(result, "lasersnap");
+    const limerence =  createDeckEmbed(result, "limerence")
     const reversecatster = createDeckEmbed(result, "reversecatster");
     const startron = createDeckEmbed(result, "startron");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
@@ -349,10 +366,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "comp") {
-        await i.reply({
-          embeds: [toyotacontrolla],
-          flags: MessageFlags.Ephemeral,
-        });
+        await i.update({embeds: [compxera], component: [comprow]})
       } else if (value == "control") {
         await i.update({ embeds: [controlxera], components: [controlrow] });
       } else if (value == "all") {
@@ -438,6 +452,8 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
           toyotacontrolla: { embed: toyotacontrolla, component: tc },
           tc2: { embed: toyotacontrolla, component: tc2 },
           toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
+          tc3: { embed: toyotacontrolla, component: tc3 },
+          toyotacontrolla3: { embed: toyotacontrolla, component: tc3 },
           br: { embed: brady, component: br },
           brady: { embed: brady, component: br },
           br2: { embed: brady, component: br2 },
@@ -450,6 +466,14 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
           laserrings3: { embed: laserrings, component: lrings3 },
           lrings4: { embed: laserrings, component: lrings4 },
           laserrings4: { embed: laserrings, component: lrings4 },
+          lime: { embed: limerence, component: lime },
+          limerence: { embed: limerence, component: lime },
+          lime2: { embed: limerence, component: lime2 },
+          limerence2: { embed: limerence, component: lime2 },
+          lime3: { embed: limerence, component: lime3 },
+          limerence3: { embed: limerence, component: lime3 },
+          helpcomp: { embed: compxera, component: comprow },
+          comphelp: { embed: compxera, component: comprow },
           helpall: { embed: allxera, component: alldecksrow },
           allhelp: { embed: allxera, component: alldecksrow },
           sav: { embed: savage22, component: sav },

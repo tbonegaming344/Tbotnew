@@ -86,14 +86,14 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const sushiDecks = {
       competitiveDecks: ["healmidrose", "telimps"], 
-      ladderDecks: ["professorpackage", "telimpssb", "trickmech"], 
+      ladderDecks: ["professorpackage", "trickmech"], 
       memeDecks: ["sunbandits"], 
       aggroDecks: ["trickmech"], 
-      comboDecks: ["sunbandits", "telimps", "telimpssb"], 
-      controlDecks: ["sunbandits", "telimps", "telimpssb"], 
+      comboDecks: ["sunbandits", "telimps"], 
+      controlDecks: ["sunbandits", "telimps"], 
       midrangeDecks: ["healmidrose"], 
       tempoDecks: ["professorpackage"],
-      allDecks: ["healmidrose", "professorpackage", "sunbandits", "telimps", "telimpssb", "trickmech"]
+      allDecks: ["healmidrose", "professorpackage", "sunbandits", "telimps", "trickmech"]
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -129,29 +129,25 @@ module.exports = {
       );
     }
     const ladderrow = createButtons("trickmech", "propack");
-    const propack =  createButtons("helpladder", "tisb");
-    const tisb =  createButtons("professorpackage", "tmech");
-    const tmech =  createButtons("telimpssb", "ladderhelp");
-    const comborow = createButtons("telimpssb2", "sb");
+    const propack =  createButtons("helpladder", "tmech");
+    const tmech =  createButtons("professorpackage", "ladderhelp");
+    const comborow = createButtons("telimps", "sb");
     const sb = createButtons("combohelp", "ti");
-    const ti = createButtons("sunbandits", "tisb2");
-    const tisb2 = createButtons("telimps", "helpcombo")
+    const ti = createButtons("sunbandits", "helpcombo");
     const competitiverow =  createButtons("telimps2", "hmrose");
     const hmrose =  createButtons("helpcomp", "ti2");
     const ti2 =  createButtons("healmidrose2", "comphelp");
-    const controlrow =  createButtons("telimpssb3", "sb2");
+    const controlrow =  createButtons("telimps3", "sb2");
     const sb2 = createButtons("helpcontrol", "ti3")
-    const ti3 =  createButtons("sunbandits2", "tisb3");
-    const tisb3 =  createButtons("telimps3", "controlhelp");
+    const ti3 =  createButtons("sunbandits2", "controlhelp");
     const alldecksrow = createButtons("trickmech2", "hmrose2");
     const hmrose2 = createButtons("helpall", "propack2");
     const propack2 = createButtons("healmidrose2", "sb3");
     const sb3 = createButtons("professorpackage2", "ti4");
-    const ti4 = createButtons("sunbandits3", "tisb4");
-    const tisb4 = createButtons("telimps4", "tmech2");
-    const tmech2 =  createButtons("telimpssb4", "allhelp");
+    const ti4 = createButtons("sunbandits3", "tmech2");
+    const tmech2 =  createButtons("telimps4", "allhelp");
     const [result] =
-      await db.query(`select hmr, professorpackage, sunbandits, telimps, telimpssb,trickmech
+      await db.query(`select hmr, professorpackage, sunbandits, telimps, trickmech
 from rodecks ro
 inner join pbdecks pb 
 on (ro.deckinfo = pb.deckinfo)
@@ -159,8 +155,6 @@ inner join rbdecks rb
 on (ro.deckinfo = rb.deckinfo)
 inner join hgdecks hg
 on (ro.deckinfo = hg.deckinfo)
-inner join sbdecks sb
-on (ro.deckinfo = sb.deckinfo)
 inner join zmdecks zm
 on (ro.deckinfo = zm.deckinfo)`);
     const user = await client.users.fetch("198942472565555200");
@@ -234,7 +228,6 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
     const sband = createDeckEmbed(result, "sunbandits");
     const timps = createDeckEmbed(result, "telimps");
     const trickmech = createDeckEmbed(result, "trickmech");
-    const timpsb = createDeckEmbed(result, "telimpssb")
     const m = await message.channel.send({
       embeds: [sushi],
       components: [row],
@@ -292,14 +285,7 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         telimps3: {embed: timps, component: ti3},
         ti4: {embed: timps, component: ti4},
         telimps4: {embed: timps, component: ti4},
-        tisb: {embed: timpsb, component: tisb},
-        telimpssb: {embed: timpsb, component: tisb},
-        tisb2: {embed: timpsb, component: tisb2},
-        telimpssb2: {embed: timpsb, component: tisb2},
-        tisb3: {embed: timpsb, component: tisb3},
-        telimpssb3: {embed: timpsb, component: tisb3},
-        tisb4: {embed: timpsb, component: tisb4},
-        telimpssb4: {embed: timpsb, component: tisb4},
+        
         hmrose: {embed: hmr, component: hmrose},
         healmidrose: {embed: hmr, component: hmrose},
         hmrose2: {embed: hmr, component: hmrose2},

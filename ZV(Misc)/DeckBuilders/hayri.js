@@ -32,7 +32,7 @@ const {
       );
       const decks = ["uncrackamech"];
       let toBuildString = "";
-      for (const deck in decks) {
+      for (const deck of decks) {
         toBuildString += `\n<@1043528908148052089> **${deck}**`;
       }
       const [result] = await db.query(`select feastmech from zmdecks`)

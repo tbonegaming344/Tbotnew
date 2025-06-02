@@ -235,8 +235,6 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         budgetmopzilla: { embed: budgetcz, component: bmz },
         bmz2: { embed: budgetcz, component: bmz2 },
         budgetmopzilla2: { embed: budgetcz, component: bmz2 },
-        bmz3: { embed: budgetcz, component: bmz3 },
-        budgetmopzilla3: { embed: budgetcz, component: bmz3 },
         vzilla: { embed: valuezilla, component: vzilla },
         valuezilla: { embed: valuezilla, component: vzilla },
         lsnap: { embed: lasersnap, component: lsnap },

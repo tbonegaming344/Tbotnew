@@ -37,7 +37,7 @@ module.exports = {
       .setPlaceholder("select an option below to view Boris's decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
+          .setLabel("Competitive Decks")
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>")
           .setValue("comp"),
@@ -51,6 +51,18 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           )
           .setValue("combo"),
+           new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setValue("control")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          ),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Deck")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
         new StringSelectMenuOptionBuilder()
           .setLabel("Tempo Decks")
           .setDescription(
@@ -64,11 +76,13 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const borisDecks = {
-      competitiveDecks: ["lockthebathroom"],
+      competitiveDecks: ["lockthebathroom", "valuezilla"],
       memeDecks: ["lifecouldbedream", "mspotk"],
       comboDeck: ["mspotk"],
+      controlDecks: ["valuezilla"],
+      midrangeDecks: ["valuezilla"],
       tempoDecks: ["lifecouldbedream", "lockthebathroom"],
-      allDecks: ["lifecouldbedream", "lockthebathroom", "mspotk"],
+      allDecks: ["lifecouldbedream", "lockthebathroom", "mspotk", "valuezilla"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -81,6 +95,7 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(borisDecks.allDecks);
+    const toBuildComp = buildDeckString(borisDecks.competitiveDecks);
     const toBuildTempo = buildDeckString(borisDecks.tempoDecks);
     const toBuildMeme = buildDeckString(borisDecks.memeDecks);
     /**
@@ -101,18 +116,22 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const tempo = createButtons("lockthebathroom", "lcbd");
-    const lcbd = createButtons("helptempo", "ltbr");
-    const ltbr = createButtons("lifecouldbedream", "tempohelp");
-    const alldecksrow = createButtons("mspotk", "lcbd2");
-    const lcbd2 = createButtons("helpall", "ltbr2");
-    const ltbr2 = createButtons("lifecouldbedream2", "msp");
-    const msp = createButtons("lockthebathroom2", "allhelp");
+    const compRow = createButtons("valuezilla", "ltbr"); 
+    const ltbr = createButtons("helpcomp", "vzilla");
+    const vzilla = createButtons("lockthebathroom", "comphelp");
+    const tempo = createButtons("lockthebathroom2", "lcbd");
+    const lcbd = createButtons("helptempo", "ltbr2");
+    const ltbr2 = createButtons("lifecouldbedream", "tempohelp");
+    const alldecksrow = createButtons("valuezilla2", "lcbd2");
+    const lcbd2 = createButtons("helpall", "ltbr3");
+    const ltbr3 = createButtons("lifecouldbedream2", "msp");
+    const msp = createButtons("lockthebathroom3", "vzilla2");
+    const vzilla2 = createButtons("mspotk", "allhelp");
     const memerow = createButtons("mspotk2", "lcbd3");
     const lcbd3 = createButtons("helpmeme", "msp2");
     const msp2 = createButtons("lifecouldbedream3", "memehelp");
-    const [result] = await db.query(`SELECT lockin, lcbd, mspotk FROM bfdecks bf
-      inner join ccdecks cc on (bf.deckinfo = cc.deckinfo)`);
+    const [result] = await db.query(`SELECT apotk, lockin, lcbd, mspotk FROM bfdecks bf
+      inner join ccdecks cc on (bf.deckinfo = cc.deckinfo) inner join czdecks cz on (bf.deckinfo = cz.deckinfo)`);
     const user = await client.users.fetch("705167235429433435");
     const boris = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -126,6 +145,13 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
       user.displayAvatarURL(),
       `To view the tempo Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${borisDecks.tempoDecks.length} tempo decks in Tbot`
+    );
+    const compbor = createHelpEmbed(
+      `${user.displayName} Competitive Decks`,
+      `My Competitive decks made by ${user.displayName} are ${toBuildComp}`,
+      user.displayAvatarURL(),
+      `To view the Competitive Decks Made By ${user.displayName} please click on the buttons below!
+Note: ${user.displayName} has ${borisDecks.competitiveDecks.length} competitive decks in Tbot`
     );
     const memebor = createHelpEmbed(
       `${user.displayName} Meme Decks`,
@@ -164,6 +190,7 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
       }
       return embed;
     }
+    const valuezilla = createDeckEmbed(result, "apotk");
     const lockin = createDeckEmbed(result, "lockin");
     const lcbdream = createDeckEmbed(result, "lcbd");
     const mspotk = createDeckEmbed(result, "mspotk");
@@ -179,7 +206,10 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
     async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "comp") {
-        await i.reply({ embeds: [lockin], flags: MessageFlags.Ephemeral });
+        await i.update({
+          embeds: [compbor],
+          components: [compRow],
+        });
       } else if (value == "meme") {
         await i.update({ embeds: [memebor], components: [memerow] });
       } else if (value == "combo") {
@@ -188,6 +218,9 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
         await i.update({ embeds: [tempbor], components: [tempo] });
       } else if (value == "all") {
         await i.update({ embeds: [allbor], components: [alldecksrow] });
+      }
+      else if(value == "midrange" || value == "control"){
+        await i.reply({embeds: [valuezilla], flags: MessageFlags.Ephemeral});
       }
     }
     /**
@@ -202,6 +235,8 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
         lockthebathroom: { embed: lockin, component: ltbr },
         ltbr2: { embed: lockin, component: ltbr2 },
         lockthebathroom2: { embed: lockin, component: ltbr2 },
+        ltbr3: { embed: lockin, component: ltbr3 },
+        lockthebathroom3: { embed: lockin, component: ltbr3 },
         lcbd: { embed: lcbdream, component: lcbd },
         lifecouldbedream: { embed: lcbdream, component: lcbd },
         lcbd2: { embed: lcbdream, component: lcbd2 },
@@ -212,10 +247,17 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
         mspotk: { embed: mspotk, component: msp },
         msp2: { embed: mspotk, component: msp2 },
         mspotk2: { embed: mspotk, component: msp2 },
+        vzilla: { embed: valuezilla, component: vzilla },
+        valuezilla: { embed: valuezilla, component: vzilla },
+        vzilla2: { embed: valuezilla, component: vzilla2 },
+        valuezilla2: { embed: valuezilla, component: vzilla2 },
         allhelp: { embed: allbor, component: alldecksrow },
         helpall: { embed: allbor, component: alldecksrow },
         tempohelp: { embed: tempbor, component: tempo },
         helptempo: { embed: tempbor, component: tempo },
+        helpcomp: { embed: compbor, component: compRow },
+        comphelp: { embed: compbor, component: compRow }
+
       };
       const action = buttonActions[i.customId];
       if (action) {

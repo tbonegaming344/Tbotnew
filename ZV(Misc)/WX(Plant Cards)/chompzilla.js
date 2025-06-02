@@ -40,112 +40,102 @@ module.exports = {
         .setStyle(ButtonStyle.Success)
     );
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view chompzilla's decks")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setValue("budget")
-        .setEmoji("💰")
-        .setDescription("A Deck that is cheap for new players"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("comp")
-        .setEmoji("<:compemote:1325461143136764060>")
-        .setDescription("Some of the best decks in the game"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setValue("meme")
-        .setDescription("Decks that are built off a weird/fun combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
-        .setValue("combo")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Control Deck")
-        .setValue("control")
-        .setDescription(
-          'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setValue("midrange")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Chompzilla Decks")
-        .setValue("all")
-        .setEmoji("<:constsFrickenChomp:1100168574829596824>")
-        .setDescription("View all Chompzilla Decks")
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view chompzilla's decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setEmoji("💰")
+          .setDescription("A Deck that is cheap for new players"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setEmoji("<:compemote:1325461143136764060>")
+          .setDescription("Some of the best decks in the game"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setValue("meme")
+          .setDescription("Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setValue("control")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          )
+      );
+    const row = new ActionRowBuilder().addComponents(select);
+    const chompzillaDecks = {
+      budgetDecks: ["budgetmopzilla"],
+      compDecks: ["valuezilla"],
+      memeDecks: ["lasersnap", "moprbius"],
+      comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
+      controlDecks: ["valuezilla"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "valuezilla"],
+      allDecks: [
+        "budgetmopzilla",
+        "lasersnap",
+        "moprbius",
+        "valuezilla"
+      ],
+    };
+     /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildMemeString = buildDeckString(chompzillaDecks.memeDecks);
+    const toBuildComboString = buildDeckString(chompzillaDecks.comboDecks);
+    const toBuildMidrangeString = buildDeckString(
+      chompzillaDecks.midrangeDecks
     );
-  const row = new ActionRowBuilder().addComponents(select);
-  const chompzillaDecks = {
-    budgetDecks: ["budgetmopzilla"],
-    compDecks: ["healcontrol"],
-    memeDecks: ["lasersnap", "moprbius"],
-    comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
-    controlDecks: ["healcontrol"],
-    midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
-    allDecks: [
-      "budgetmopzilla",
-      "healcontrol",
-      "lasersnap",
-      "moprbius",
-    ],
-  };
-   /**
-   * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-   * @param {Array} decks - The array of deck names to build the string from
-   * @returns {string} - The string of deck names
-   */
-  function buildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
-  const toBuildMemeString = buildDeckString(chompzillaDecks.memeDecks);
-  const toBuildComboString = buildDeckString(chompzillaDecks.comboDecks);
-  const toBuildMidrangeString = buildDeckString(
-    chompzillaDecks.midrangeDecks
-  );
-  const toBuildString = buildDeckString(chompzillaDecks.allDecks);
-  /**
-   * The createButtons function creates a row of buttons for the embed
-   * @param {string} leftButtonId - The ID of the left button to control the left button 
-   * @param {string} rightButtonId - The ID of the right button to control the right button
-   * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-   */
-  function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
-  const memerow = createButtons("mopribus", "lsnap");
-  const lsnap = createButtons("helpmeme", "mop");
-  const mop = createButtons("lasersnap", "memehelp");
-  const comborow = createButtons("mopribus2", "bmz");
-  const bmz = createButtons("helpcombo", "lsnap2");
-  const lsnap2 = createButtons("budgetmopzilla", "mop2");
-  const mop2 = createButtons("lasersnap2", "combohelp");
-  const midrangerow = createButtons("mopribus3", "bmz2");
-  const bmz2 = createButtons("helpmid", "lsnap3");
-  const lsnap3 = createButtons("budgetmopzilla2", "mop3");
-  const mop3 = createButtons("lasersnap3", "midhelp");
-  const alldecksrow = createButtons("mopribus4", "bmz3");
-  const bmz3 = createButtons("helpall", "healcon");
-  const healcon = createButtons("budgetmopzilla3", "lsnap4");
-  const lsnap4 = createButtons("healcontrol", "mop4");
-  const mop4 = createButtons("lasersnap4", "allhelp");
+    /**
+     * The createButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
+    function createButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const memerow = createButtons("mopribus", "lsnap");
+    const lsnap = createButtons("helpmeme", "mop");
+    const mop = createButtons("lasersnap", "memehelp");
+    const comborow = createButtons("mopribus2", "bmz");
+    const bmz = createButtons("helpcombo", "lsnap2");
+    const lsnap2 = createButtons("budgetmopzilla", "mop2");
+    const mop2 = createButtons("lasersnap2", "combohelp");
+    const midrangerow = createButtons("mopribus3", "bmz2");
+    const bmz2 = createButtons("helpmid", "lsnap3");
+    const lsnap3 = createButtons("budgetmopzilla2", "mop3");
+    const mop3 = createButtons("lasersnap3", "vzilla");
+    const vzilla = createButtons("mopribus3", "midhelp");
     const cz = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
@@ -175,7 +165,7 @@ module.exports = {
       const embed = createHelpEmbed(
         "Chompzilla Decks",
         `To view the Chompzilla decks please select an option from the select menu below!
-  Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot`,
+Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot. Select Midrange decks to view all Chompzilla decks`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
       );
       const memeEmbed = createHelpEmbed(
@@ -185,26 +175,19 @@ module.exports = {
         `To view the Meme Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Meme decks!
   Note: Chompzilla has ${chompzillaDecks.memeDecks.length} Meme decks in Tbot`
       );
-      const allEmbed = createHelpEmbed(
-        "Chompzilla Decks",
-        `My decks for Chompzilla(CZ) are ${toBuildString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
-        `To view the Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all decks!
-  Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
-      );
       const comboEmbed = createHelpEmbed(
         "Chompzilla Combo Decks",
         `My Combo decks for Chompzilla(CZ) are ${toBuildComboString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
         `To view the Combo Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Combo decks!
-  Note: Chompzilla has ${chompzillaDecks.comboDecks.length} Combo decks in Tbot`
+Note: Chompzilla has ${chompzillaDecks.comboDecks.length} Combo decks in Tbot`
       );
       const midrangeEmbed = createHelpEmbed(
         "Chompzilla Midrange Decks",
         `My Midrange decks for Chompzilla(CZ) are ${toBuildMidrangeString}`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
         `To view the Midrange Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Midrange decks!
-  Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in Tbot`
+Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in Tbot`
       );
     const [result] = await db.query(`SELECT * from czdecks`);
     /**
@@ -230,7 +213,7 @@ module.exports = {
       }
       return embed;
     }
-    const healcontrol = createDeckEmbed(result, "apotk");
+    const valuezilla = createDeckEmbed(result, "apotk");
     const budgetcz = createDeckEmbed(result, "budgetcz");
     const lasersnap = createDeckEmbed(result, "lasersnap");
     const mopribus = createDeckEmbed(result, "mopribus");
@@ -242,18 +225,16 @@ module.exports = {
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget") {
+     if (value == "budget") {
         await i.reply({ embeds: [budgetcz], flags: MessageFlags.Ephemeral });
       } else if (value == "comp" || value == "control") {
-        await i.reply({ embeds: [healcontrol], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [valuezilla], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
     /**
@@ -263,10 +244,8 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-        memehelp: { embed: memeEmbed, component: memerow },
+         memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpall: { embed: allEmbed, component: alldecksrow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcombo: { embed: comboEmbed, component: comborow },
         midhelp: { embed: midrangeEmbed, component: midrangerow },
@@ -277,24 +256,20 @@ module.exports = {
         budgetmopzilla2: { embed: budgetcz, component: bmz2 },
         bmz3: { embed: budgetcz, component: bmz3 },
         budgetmopzilla3: { embed: budgetcz, component: bmz3 },
-        healcon: { embed: healcontrol, component: healcon },
-        healcontrol: { embed: healcontrol, component: healcon },
+        vzilla: { embed: valuezilla, component: vzilla },
+        valuezilla: { embed: valuezilla, component: vzilla },
         lsnap: { embed: lasersnap, component: lsnap },
         lasersnap: { embed: lasersnap, component: lsnap },
         lsnap2: { embed: lasersnap, component: lsnap2 },
         lasersnap2: { embed: lasersnap, component: lsnap2 },
         lsnap3: { embed: lasersnap, component: lsnap3 },
         lasersnap3: { embed: lasersnap, component: lsnap3 },
-        lsnap4: { embed: lasersnap, component: lsnap4 },
-        lasersnap4: { embed: lasersnap, component: lsnap4 },
         mop: { embed: mopribus, component: mop },
         mopribus: { embed: mopribus, component: mop },
         mop2: { embed: mopribus, component: mop2 },
         mopribus2: { embed: mopribus, component: mop2 },
         mop3: { embed: mopribus, component: mop3 },
-        mopribus3: { embed: mopribus, component: mop3 },
-        mop4: { embed: mopribus, component: mop4 },
-        mopribus4: { embed: mopribus, component: mop4 },
+        mopribus3: { embed: mopribus, component: mop3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -79,26 +79,21 @@ module.exports = {
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Chompzilla Decks")
-          .setValue("all")
-          .setEmoji("<:constsFrickenChomp:1100168574829596824>")
-          .setDescription("View all Chompzilla Decks")
+          )
       );
     const row = new ActionRowBuilder().addComponents(select);
     const chompzillaDecks = {
       budgetDecks: ["budgetmopzilla"],
-      compDecks: ["healcontrol"],
+      compDecks: ["valuezilla"],
       memeDecks: ["lasersnap", "moprbius"],
       comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
-      controlDecks: ["healcontrol"],
-      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
+      controlDecks: ["valuezilla"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "valuezilla"],
       allDecks: [
         "budgetmopzilla",
-        "healcontrol",
         "lasersnap",
         "moprbius",
+        "valuezilla"
       ],
     };
      /**
@@ -116,7 +111,6 @@ module.exports = {
     const toBuildMidrangeString = buildDeckString(
       chompzillaDecks.midrangeDecks
     );
-    const toBuildString = buildDeckString(chompzillaDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -145,16 +139,12 @@ module.exports = {
     const midrangerow = createButtons("mopribus3", "bmz2");
     const bmz2 = createButtons("helpmid", "lsnap3");
     const lsnap3 = createButtons("budgetmopzilla2", "mop3");
-    const mop3 = createButtons("lasersnap3", "midhelp");
-    const alldecksrow = createButtons("mopribus4", "bmz3");
-    const bmz3 = createButtons("helpall", "healcon");
-    const healcon = createButtons("budgetmopzilla3", "lsnap4");
-    const lsnap4 = createButtons("healcontrol", "mop4");
-    const mop4 = createButtons("lasersnap4", "allhelp");
+    const mop3 = createButtons("lasersnap3", "vzilla");
+    const vzilla = createButtons("mopribus3", "midhelp");
     const embed = createHelpEmbed(
       "Chompzilla Decks",
       `To view the Chompzilla decks please select an option from the select menu below!
-Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot`,
+Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot. Select Midrange decks to view all Chompzilla decks`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
     );
     const memeEmbed = createHelpEmbed(
@@ -163,13 +153,6 @@ Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
       `To view the Meme Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Meme decks!
 Note: Chompzilla has ${chompzillaDecks.memeDecks.length} Meme decks in Tbot`
-    );
-    const allEmbed = createHelpEmbed(
-      "Chompzilla Decks",
-      `My decks for Chompzilla(CZ) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
-      `To view the Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all decks!
-Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
     );
     const comboEmbed = createHelpEmbed(
       "Chompzilla Combo Decks",
@@ -209,7 +192,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       }
       return embed;
     }
-    const healcontrol = createDeckEmbed(result, "apotk");
+    const valuezilla = createDeckEmbed(result, "apotk");
     const budgetcz = createDeckEmbed(result, "budgetcz");
     const lasersnap = createDeckEmbed(result, "lasersnap");
     const mopribus = createDeckEmbed(result, "mopribus");
@@ -227,15 +210,13 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       if (value == "budget") {
         await i.reply({ embeds: [budgetcz], flags: MessageFlags.Ephemeral });
       } else if (value == "comp" || value == "control") {
-        await i.reply({ embeds: [healcontrol], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [valuezilla], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
     /**
@@ -246,8 +227,6 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       const buttonActions = {
         memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpall: { embed: allEmbed, component: alldecksrow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcombo: { embed: comboEmbed, component: comborow },
         midhelp: { embed: midrangeEmbed, component: midrangerow },
@@ -258,24 +237,20 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         budgetmopzilla2: { embed: budgetcz, component: bmz2 },
         bmz3: { embed: budgetcz, component: bmz3 },
         budgetmopzilla3: { embed: budgetcz, component: bmz3 },
-        healcon: { embed: healcontrol, component: healcon },
-        healcontrol: { embed: healcontrol, component: healcon },
+        vzilla: { embed: valuezilla, component: vzilla },
+        valuezilla: { embed: valuezilla, component: vzilla },
         lsnap: { embed: lasersnap, component: lsnap },
         lasersnap: { embed: lasersnap, component: lsnap },
         lsnap2: { embed: lasersnap, component: lsnap2 },
         lasersnap2: { embed: lasersnap, component: lsnap2 },
         lsnap3: { embed: lasersnap, component: lsnap3 },
         lasersnap3: { embed: lasersnap, component: lsnap3 },
-        lsnap4: { embed: lasersnap, component: lsnap4 },
-        lasersnap4: { embed: lasersnap, component: lsnap4 },
         mop: { embed: mopribus, component: mop },
         mopribus: { embed: mopribus, component: mop },
         mop2: { embed: mopribus, component: mop2 },
         mopribus2: { embed: mopribus, component: mop2 },
         mop3: { embed: mopribus, component: mop3 },
-        mopribus3: { embed: mopribus, component: mop3 },
-        mop4: { embed: mopribus, component: mop4 },
-        mopribus4: { embed: mopribus, component: mop4 },
+        mopribus3: { embed: mopribus, component: mop3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

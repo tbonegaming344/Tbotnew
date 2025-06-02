@@ -1,7 +1,7 @@
 const {EmbedBuilder} = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
-	name: `healcontrol`,
+	name: `valuezilla`,
 	aliases: [`otktcz`, `czotk`, `otktrickstercz`, `czotktrickster`, `apotatootk`, `apotk`],
 	category: `Chompzilla(CZ)`,
 		run: async(client, message, args) => {

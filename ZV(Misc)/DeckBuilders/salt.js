@@ -106,7 +106,6 @@ module.exports = {
         "cyburn",
         "figlottery",
         "gargburn",
-        "healcontrol",
         "logbait",
         "radiotherapy",
         "seacret",
@@ -127,7 +126,6 @@ module.exports = {
       ],
       controlDecks: [
         "chemotherapy",
-        "healcontrol",
         "noplayingallowed",
         "radiotherapy",
         "shamcontrol",
@@ -147,7 +145,6 @@ module.exports = {
         "figlottery",
         "gargburn",
         "gravestache",
-        "healcontrol",
         "logbait",
         "noplayingallowed",
         "radiotherapy",
@@ -201,9 +198,8 @@ module.exports = {
     const chemo = createButtons("abeans", "cburn");
     const cburn = createButtons("chemotherapy", "flottery");
     const flottery = createButtons("cyburn", "gb");
-    const gb = createButtons("figlottery", "healcon");
-    const healcon = createButtons("gargburn", "lbait");
-    const lbait = createButtons("healcontrol", "radio");
+    const gb = createButtons("figlottery", "lbait");
+    const lbait = createButtons("gargburn", "radio");
     const radio = createButtons("logbait", "sea");
     const sea = createButtons("radiotherapy", "sham");
     const sham = createButtons("seacret", "stars");
@@ -232,9 +228,8 @@ module.exports = {
     const gb3 = createButtons("figlottery2", "stars3");
     const stars3 = createButtons("gargburn3", "helpmid");
     const controlrow = createButtons("shamcontrol2", "chemo2");
-    const chemo2 = createButtons("helpcontrol", "healcon2");
-    const healcon2 = createButtons("chemotherapy2", "npa2");
-    const npa2 = createButtons("healcontrol2", "radio2");
+    const chemo2 = createButtons("helpcontrol", "npa2");
+    const npa2 = createButtons("chemotherapy2", "radio2");
     const radio2 = createButtons("noplayingallowed2", "sham2");
     const sham2 = createButtons("radiotherapy2", "controlhelp");
     const alldecksrow = createButtons("watertron3", "ab3");
@@ -244,9 +239,8 @@ module.exports = {
     const cburn4 = createButtons("chemotherapy3", "flottery3");
     const flottery3 = createButtons("cyburn4", "gb4");
     const gb4 = createButtons("figlottery3", "gstache3");
-    const gstache3 = createButtons("gargburn4", "healcon3");
-    const healcon3 = createButtons("gravestache3", "lbait3");
-    const lbait3 = createButtons("healcontrol3", "npa3");
+    const gstache3 = createButtons("gargburn4", "lbait3");
+    const lbait3 = createButtons("gravestache3", "npa3");
     const npa3 = createButtons("logbait3", "radio3");
     const radio3 = createButtons("noplayingallowed3", "syard3");
     const syard3 = createButtons("radiotherapy3", "sea4");
@@ -374,7 +368,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
       return embed;
     }
     const abeans = createDeckEmbed(result, "abeans");
-    const healcontrol = createDeckEmbed(result, "apotk");
     const logbait = createDeckEmbed(result, "logbait");
     const budgetykm = createDeckEmbed(result, "budgetykm");
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
@@ -442,12 +435,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         helpcomp: { embed: compsalt, component: competitiverow },
         allhelp: { embed: alldecksEmbed, component: alldecksrow },
         helpall: { embed: alldecksEmbed, component: alldecksrow },
-        healcon: { embed: healcontrol, component: healcon },
-        healcon2: { embed: healcontrol, component: healcon2 },
-        healcon3: { embed: healcontrol, component: healcon3 },
-        healcontrol: { embed: healcontrol, component: healcon },
-        healcontrol2: { embed: healcontrol, component: healcon2 },
-        healcontrol3: { embed: healcontrol, component: healcon3 },
         bykm: { embed: budgetykm, component: bykm },
         budgetykm: { embed: budgetykm, component: bykm },
         bykm2: { embed: budgetykm, component: bykm2 },

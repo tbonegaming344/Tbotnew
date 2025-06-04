@@ -52,17 +52,17 @@ module.exports = {
           .setLabel("Meme Deck")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Deck")
+          .setDescription(
+            "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          )
+          .setValue("aggro"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           ),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Deck")
@@ -77,68 +77,21 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const durgaDecks = {
-      ladderDecks: ["bfplankcontrol", "pbeans"],
+      ladderDecks: ["pbeans"],
       memeDecks: ["bastet"],
+      aggroDecks: ["pbeans"],
       comboDecks: ["bastet"],
-      controlDecks: ["bfplankcontrol"],
       midrangeDecks: ["bastet"],
-      allDecks: ["bastet", "bfplankcontrol", "pbeans"],
     };
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-    }
-    const ladderrow = createButtons("pbeans", "bfpc");
-    const bfpc = createButtons("helpladder", "pb");
-    const pb = createButtons("bfplankcontrol", "ladderhelp");
-    const alldecksrow = createButtons("pbeans2", "bas");
-    const bas = createButtons("helpall", "bfpc2");
-    const bfpc2 = createButtons("bastet", "pb2");
-    const pb2 = createButtons("bfplankcontrol2", "allhelp");
-    function BuildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-    const toBuildString = BuildDeckString(durgaDecks.allDecks);
-    const ladderString = BuildDeckString(durgaDecks.ladderDecks);
     const user = await client.users.fetch("736455305457696779");
-    const [result] = await db.query(`select bastet, bfplankcontrol, pbeans from 
-          imdecks im inner join bfdecks bf on (im.deckinfo = bf.deckinfo)
+    const [result] = await db.query(`select bastet, pbeans from 
+          imdecks im 
           inner join gsdecks gs on (im.deckinfo = gs.deckinfo)`);
     const durga = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
 Note: ${user.displayName} has ${durgaDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
-    );
-    const ladderEmbed = createHelpEmbed(
-      `${user.displayName} Ladder Decks`,
-      `My ladder decks made by Durga are to ${ladderString}`,
-      user.displayAvatarURL(),
-      `To view the ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
-Note: Durga has ${durgaDecks.ladderDecks.length} ladder decks in Tbot`
-    );
-    const allDecksEmbed = createHelpEmbed(
-      `${user.displayName} Decks`,
-      `My decks made by Durga are to ${toBuildString}`,
-      user.displayAvatarURL(),
-      `To view all the decks made by ${user.displayName} please click on the buttons below or use commands listed above
-Note: Durga has ${durgaDecks.allDecks.length} decks in Tbot`
     );
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -164,7 +117,6 @@ Note: Durga has ${durgaDecks.allDecks.length} decks in Tbot`
       return embed;
     }
     const bastet = createDeckEmbed(result, "bastet");
-    const bfplankcontrol = createDeckEmbed(result, "bfplankcontrol");
     const pbeans = createDeckEmbed(result, "pbeans");
     const m = await message.channel.send({
       embeds: [durga],
@@ -177,59 +129,17 @@ Note: Durga has ${durgaDecks.allDecks.length} decks in Tbot`
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "control") {
-        await i.reply({
-          embeds: [bfplankcontrol],
-          flags: MessageFlags.Ephemeral,
-        });
-      } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (value == "meme" || value == "combo" || value == "midrange") {
+     if (value == "ladder" || value == "aggro") {
+        await i.reply({embeds: [pbeans], flags: MessageFlags.Ephemeral });
+     }
+    else if (value == "meme" || value == "combo" || value == "midrange") {
         await i.reply({ embeds: [bastet], flags: MessageFlags.Ephemeral });
-      } else if (value == "all") {
-        await i.update({ embeds: [allDecksEmbed], components: [alldecksrow] });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        helpladder: { embed: ladderEmbed, component: ladderrow },
-        ladderhelp: { embed: ladderEmbed, component: ladderrow },
-        helpall: { embed: allDecksEmbed, component: alldecksrow },
-        allhelp: { embed: allDecksEmbed, component: alldecksrow },
-        pb: { embed: pbeans, component: pb },
-        pbeans: { embed: pbeans, component: pb },
-        pb2: { embed: pbeans, component: pb2 },
-        pbeans2: { embed: pbeans, component: pb2 },
-        bfpc: { embed: bfplankcontrol, component: bfpc },
-        bfplankcontrol: { embed: bfplankcontrol, component: bfpc },
-        bfpc2: { embed: bfplankcontrol, component: bfpc2 },
-        bfplankcontrol2: { embed: bfplankcontrol, component: bfpc2 },
-        bas: { embed: bastet, component: bas },
-        bastet: { embed: bastet, component: bas },
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Invalid button interaction",
-          flags: MessageFlags.Ephemeral,
-        });
       }
     }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
       if (i.customId === "select") {
         await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
       }
     });
   },

@@ -87,7 +87,7 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Decks")
+          .setLabel("Tempo Deck")
           .setValue("tempo")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
@@ -107,7 +107,6 @@ module.exports = {
         "coggerazzi",
         "igmablobchum",
         "sunbandits",
-        "terrifytricksterazzi",
       ],
       aggroDecks: ["marxbolt"],
       comboDecks: [
@@ -115,11 +114,10 @@ module.exports = {
         "coggerazzi",
         "igmablobchum",
         "sunbandits",
-        "terrifytricksterazzi",
       ],
       controlDecks: ["mechacontrol", "sunbandits"],
       midrangeDecks: ["boltbolt", "budgetrb", "igmablobchum"],
-      tempoDecks: ["coggerazzi", "terrifytricksterazzi"],
+      tempoDecks: ["coggerazzi"],
       allDecks: [
         "boltbolt",
         "budgetrb",
@@ -127,8 +125,7 @@ module.exports = {
         "igmablobchum",
         "marxbolt",
         "mechacontrol",
-        "sunbandits",
-        "terrifytricksterazzi",
+        "sunbandits"      
       ],
     };
      /**
@@ -147,7 +144,6 @@ module.exports = {
     const toBuildComboString = buildDeckString(rustboltDecks.comboDecks);
     const toBuildControlString = buildDeckString(rustboltDecks.controlDecks);
     const toBuildMidrangeString = buildDeckString(rustboltDecks.midrangeDecks);
-    const toBuildTempoString = buildDeckString(rustboltDecks.tempoDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -166,29 +162,26 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("terrifytricksterazzi", "bol");
+    const alldecksrow = createButtons("sunbandits", "bol");
     const bol = createButtons("helpall", "brb");
     const brb = createButtons("boltbolt", "cog");
     const cog = createButtons("budgetrb", "igb");
     const igb = createButtons("coggerazzi", "marx");
     const marx = createButtons("igmablobchum", "mc");
     const mc = createButtons("marxbolt", "sb");
-    const sb = createButtons("mechacontrol", "tster");
-    const tster = createButtons("sunbandits", "allhelp");
+    const sb = createButtons("mechacontrol", "allhelp");
     const ladderrow = createButtons("mechacontrol2", "marx2");
     const marx2 = createButtons("ladderhelp", "mc2");
     const mc2 = createButtons("marxbolt2", "helpladder");
-    const memerow = createButtons("terrifytricksterazzi2", "cog2");
+    const memerow = createButtons("sunbandits2", "cog2");
     const cog2 = createButtons("memehelp", "igb2");
     const igb2 = createButtons("coggerazzi2", "sb2");
-    const sb2 = createButtons("igmablobchum2", "tster2");
-    const tster2 = createButtons("sunbandits2", "helpmeme");
-    const comborow = createButtons("terrifytricksterazzi3", "bol2");
+    const sb2 = createButtons("igmablobchum2", "helpmeme");
+    const comborow = createButtons("sunbandits3", "bol2");
     const bol2 = createButtons("combohelp", "cog3");
     const cog3 = createButtons("boltbolt2", "igb3");
     const igb3 = createButtons("coggerazzi3", "sb3");
-    const sb3 = createButtons("igmablobchum3", "tster3");
-    const tster3 = createButtons("sunbandits3", "helpcombo");
+    const sb3 = createButtons("igmablobchum3", "helpcombo");
     const controlrow = createButtons("sunbandits4", "mc3");
     const mc3 = createButtons("controlhelp", "sb4");
     const sb4 = createButtons("mechacontrol3", "helpcontrol");
@@ -196,9 +189,6 @@ module.exports = {
     const bol3 = createButtons("midrangehelp", "brb2");
     const brb2 = createButtons("boltbolt3", "igb4");
     const igb4 = createButtons("budgetrb2", "helpmidrange");
-    const temporow = createButtons("terrifytricksterazzi4", "cog4");
-    const cog4 = createButtons("tempohelp", "tster4");
-    const tster4 = createButtons("coggerazzi4", "helptempo");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
@@ -309,10 +299,6 @@ module.exports = {
     const mechacontrol = createDeckEmbed(result, "mechacontrol");
     const coggerazzi = createDeckEmbed(result, "poggerrazzi");
     const sunbandits = createDeckEmbed(result, "sunbandits");
-    const terrifytricksterazzi = createDeckEmbed(
-      result,
-      "terrifytricksterazzi"
-    );
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],
@@ -411,23 +397,6 @@ module.exports = {
         sunbandits3: { embed: sunbandits, component: sb3 },
         sb4: { embed: sunbandits, component: sb4 },
         sunbandits4: { embed: sunbandits, component: sb4 },
-        tster: { embed: terrifytricksterazzi, component: tster },
-        terrifytricksterazzi: { embed: terrifytricksterazzi, component: tster },
-        tster2: { embed: terrifytricksterazzi, component: tster2 },
-        terrifytricksterazzi2: {
-          embed: terrifytricksterazzi,
-          component: tster2,
-        },
-        tster3: { embed: terrifytricksterazzi, component: tster3 },
-        terrifytricksterazzi3: {
-          embed: terrifytricksterazzi,
-          component: tster3,
-        },
-        tster4: { embed: terrifytricksterazzi, component: tster4 },
-        terrifytricksterazzi4: {
-          embed: terrifytricksterazzi,
-          component: tster4,
-        },
       };
       const action = buttonActions[i.customId];
       if (action) {

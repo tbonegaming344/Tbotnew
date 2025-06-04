@@ -39,179 +39,163 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
         .setEmoji("<:Brain_FreezeH:1088196729192587284>")
     );
-    const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Brainfreeze's decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setValue("budget")
-        .setDescription("Decks that are cheap for new players")
-        .setEmoji("💰"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("comp")
-        .setDescription("Some of the Best Decks in the game")
-        .setEmoji("<:compemote:1325461143136764060>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Ladder Decks")
-        .setValue("ladder")
-        .setDescription("Decks that mostly only good for ranked games")
-        .setEmoji("<:ladder:1271503994857979964>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setValue("meme")
-        .setDescription("Decks that are built off a weird/fun combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Aggro Decks")
-        .setValue("aggro")
-        .setDescription(
-          "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
-        .setValue("combo")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Control Deck")
-        .setValue("control")
-        .setDescription(
-          'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setValue("midrange")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Tempo Decks")
-        .setValue("tempo")
-        .setDescription(
-          "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Brainfreeze Decks")
-        .setValue("all")
-        .setDescription("View all of Brainfreeze's decks")
-        .setEmoji("<:Brain_FreezeH:1088196729192587284>")
-    );
-  const row = new ActionRowBuilder().addComponents(select);
-  const brainFreezeDecks = {
-    budgetDecks: ["budgetbf"],
-    competitiveDecks: ["lockthebathroom"],
-    ladderDecks: ["bfmidgargs", "bfplankcontrol", "raiserpackage"],
-    memeDecks: [
-      "gargolithtech",
-      "himpter",
-      "lunchtime",
-      "petmop",
-      "banhammer",
-      "watersports",
-    ],
-    aggroDecks: ["budgetbf"],
-    comboDecks: ["banhammer", "himpter", "watersports"],
-    controlDecks: ["bfplankcontrol"],
-    midrangeDecks: [
-      "bhammer",
-      "bfmidgargs",
-      "gargolithtech",
-      "himpter",
-      "lunchtime",
-      "petmop",
-      "watersports",
-    ],
-    tempoDecks: ["lockthebathroom", "raiserpackage"],
-    allDecks: [
-      "banhammer",
-      "bfmidgargs",
-      "bfplankcontrol",
-      "budgetbf",
-      "gargolithtech",
-      "himpter",
-      "lunchtime",
-      "lockthebathroom",
-      "petmop",
-      "raiserpackage",
-      "watersports",
-    ],
-  };
-   /**
+     const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Brainfreeze's decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("Decks that are cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Decks")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setValue("meme")
+          .setDescription("Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Decks")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Decks")
+          .setValue("tempo")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Brainfreeze Decks")
+          .setValue("all")
+          .setDescription("View all of Brainfreeze's decks")
+          .setEmoji("<:Brain_FreezeH:1088196729192587284>")
+      );
+    const row = new ActionRowBuilder().addComponents(select);
+    const brainFreezeDecks = {
+      budgetDecks: ["budgetbf"],
+      competitiveDecks: ["lockthebathroom"],
+      ladderDecks: ["bfmidgargs", "raiserpackage"],
+      memeDecks: [
+        "himpter",
+        "lunchtime",
+        "petmop",
+        "banhammer",
+        "watersports",
+      ],
+      aggroDecks: ["budgetbf"],
+      comboDecks: ["banhammer", "himpter", "watersports"],
+      midrangeDecks: [
+        "bhammer",
+        "bfmidgargs",
+        "himpter",
+        "lunchtime",
+        "petmop",
+        "watersports",
+      ],
+      tempoDecks: ["lockthebathroom", "raiserpackage"],
+      allDecks: [
+        "banhammer",
+        "bfmidgargs",
+        "budgetbf",
+        "himpter",
+        "lunchtime",
+        "lockthebathroom",
+        "petmop",
+        "raiserpackage",
+        "watersports",
+      ],
+    };
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
      */
     function buildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
-  const toBuildString = buildDeckString(brainFreezeDecks.allDecks);
-  const toBuildLadderString = buildDeckString(brainFreezeDecks.ladderDecks);
-  const toBuildMemeString = buildDeckString(brainFreezeDecks.memeDecks);
-  const toBuildComboString = buildDeckString(brainFreezeDecks.comboDecks);
-  const toBuildMidrangeString = buildDeckString(
-    brainFreezeDecks.midrangeDecks
-  );
-  const toBuildTempoString = buildDeckString(brainFreezeDecks.tempoDecks);
-  /**
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildString = buildDeckString(brainFreezeDecks.allDecks);
+    const toBuildLadderString = buildDeckString(brainFreezeDecks.ladderDecks);
+    const toBuildMemeString = buildDeckString(brainFreezeDecks.memeDecks);
+    const toBuildComboString = buildDeckString(brainFreezeDecks.comboDecks);
+    const toBuildMidrangeString = buildDeckString(
+      brainFreezeDecks.midrangeDecks
+    );
+    const toBuildTempoString = buildDeckString(brainFreezeDecks.tempoDecks);
+    /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
-  const alldecksrow = createButtons("watersports", "bhammer");
-  const bhammer = createButtons("helpall", "bfmg");
-  const bfmg = createButtons("banhammer", "bbf");
-  const bbf = createButtons("bfmidgargs", "bfpc");
-  const bfpc = createButtons("budgetbf", "gt");
-  const gt = createButtons("bfplankcontrol", "hi");
-  const hi = createButtons("gargolithtech", "lt");
-  const lt = createButtons("himps", "ltbr");
-  const ltbr = createButtons("lunchtime", "pm");
-  const pm = createButtons("lockthebathroom", "rp");
-  const rp = createButtons("petmop", "ws");
-  const ws = createButtons("raiserpackage", "allhelp");
-  const ladderrow = createButtons("watersports", "bfmg2");
-  const bfmg2 = createButtons("helpladder", "bfpc2");
-  const bfpc2 = createButtons("bfmidgargs2", "rp2");
-  const rp2 = createButtons("bfplancontrol2", "ladderhelp");
-  const memerow = createButtons("watersports2", "bhammer2");
-  const bhammer2 = createButtons("helpmeme", "gt2");
-  const gt2 = createButtons("banhammer2", "hi2");
-  const hi2 = createButtons("gargolithtech2", "lt2");
-  const lt2 = createButtons("himps2", "pm2");
-  const pm2 = createButtons("lunchtime2", "ws2");
-  const ws2 = createButtons("petmop2", "memehelp");
-  const comborow = createButtons("watersports3", "bhammer3");
-  const bhammer3 = createButtons("helpcombo", "hi3");
-  const hi3 = createButtons("banhammer3", "ws3");
-  const ws3 = createButtons("himps3", "combohelp");
-  const midrangerow = createButtons("watersports4", "bhammer4");
-  const bhammer4= createButtons("helpmid", "bfmg3");
-  const bfmg3 = createButtons("banhammer4", "gt3");
-  const gt3 = createButtons("bfmidgargs3", "hi4");
-  const hi4 = createButtons("gargolithtech3", "lt3");
-  const lt3 = createButtons("himps4", "pm3");
-  const pm3 = createButtons("lunchtime3", "ws4");
-  const ws4 = createButtons("petmop3", "midhelp");
-  const temporow = createButtons("raiserpackage3", "ltbr2");
-  const ltbr2 = createButtons("helptempo", "rp3");
-  const rp3 = createButtons("lockthebathroom2", "tempohelp");
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const alldecksrow = createButtons("watersports", "bhammer");
+    const bhammer = createButtons("helpall", "bfmg");
+    const bfmg = createButtons("banhammer", "bbf");
+    const bbf = createButtons("bfmidgargs", "hi");
+    const hi = createButtons("budgetbf", "lt");
+    const lt = createButtons("himps", "ltbr");
+    const ltbr = createButtons("lunchtime", "pm");
+    const pm = createButtons("lockthebathroom", "rp");
+    const rp = createButtons("petmop", "ws");
+    const ws = createButtons("raiserpackage", "allhelp");
+    const ladderrow = createButtons("watersports", "bfmg2");
+    const bfmg2 = createButtons("helpladder", "rp2");
+    const rp2 = createButtons("bfmidgargs2", "ladderhelp");
+    const memerow = createButtons("watersports2", "bhammer2");
+    const bhammer2 = createButtons("helpmeme", "hi2");
+    const hi2 = createButtons("banhammer2", "lt2");
+    const lt2 = createButtons("himps2", "pm2");
+    const pm2 = createButtons("lunchtime2", "ws2");
+    const ws2 = createButtons("petmop2", "memehelp");
+    const comborow = createButtons("watersports3", "bhammer3");
+    const bhammer3 = createButtons("helpcombo", "hi3");
+    const hi3 = createButtons("banhammer3", "ws3");
+    const ws3 = createButtons("himps3", "combohelp");
+    const midrangerow = createButtons("watersports4", "bhammer4");
+    const bhammer4= createButtons("helpmid", "bfmg3");
+    const bfmg3 = createButtons("banhammer4", "hi4");
+    const hi4 = createButtons("bfmidgargs3", "lt3");
+    const lt3 = createButtons("himps4", "pm3");
+    const pm3 = createButtons("lunchtime3", "ws4");
+    const ws4 = createButtons("petmop3", "midhelp");
+    const temporow = createButtons("raiserpackage3", "ltbr2");
+    const ltbr2 = createButtons("helptempo", "rp3");
+    const rp3 = createButtons("lockthebathroom2", "tempohelp");
     const [result] = await db.query(`select * from bfdecks`);
     const embed = new EmbedBuilder()
       .setThumbnail(
@@ -310,9 +294,7 @@ module.exports = {
       return embed;
     }
     const bfmidgargs = createDeckEmbed(result, "bfmidgargs");
-    const bfplankcontrol = createDeckEmbed(result, "bfplankcontrol");
     const budgetbf = createDeckEmbed(result, "budgetbf");
-    const gargolithtech = createDeckEmbed(result, "gargolithtech");
     const himps = createDeckEmbed(result, "himps");
     const lockthebathroom = createDeckEmbed(result, "lockin");
     const lunchtime = createDeckEmbed(result, "midpets");
@@ -346,11 +328,6 @@ module.exports = {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "control") {
-        await i.reply({
-          embeds: [bfplankcontrol],
-          flags: MessageFlags.Ephemeral,
-        });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
@@ -390,18 +367,8 @@ module.exports = {
         bfmidgargs2: {embed: bfmidgargs, component: bfmg2},
         bfmg3: {embed: bfmidgargs, component: bfmg3},
         bfmidgargs3: {embed: bfmidgargs, component: bfmg3},
-        bfpc: {embed: bfplankcontrol, component: bfpc},
-        bfplankcontrol: {embed: bfplankcontrol, component: bfpc},
-        bfpc2: {embed: bfplankcontrol, component: bfpc2},
-        bfplankcontrol2: {embed: bfplankcontrol, component: bfpc2},
         bbf: {embed: budgetbf, component: bbf},
         budgetbf: {embed: budgetbf, component: bbf},
-        gt: {embed: gargolithtech, component: gt}, 
-        gargolithtech: {embed: gargolithtech, component: gt},
-        gt2: {embed: gargolithtech, component: gt2}, 
-        gargolithtech2: {embed: gargolithtech, component: gt2},
-        gt3: {embed: gargolithtech, component: gt3}, 
-        gargolithtech3: {embed: gargolithtech, component: gt3},
         hi: {embed: himps, component: hi}, 
         himps: {embed: himps, component: hi},
         hi2: {embed: himps, component: hi2}, 

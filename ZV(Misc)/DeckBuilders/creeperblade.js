@@ -54,10 +54,6 @@ module.exports = {
 					.setDescription('Decks that mostly only good for ranked games')
 					.setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
-          new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setDescription("Decks that are built off a weird/fun combo")
-          .setValue("meme"),
         new StringSelectMenuOptionBuilder()
         .setLabel("Aggro Deck")
         .setValue("aggro")
@@ -67,7 +63,7 @@ module.exports = {
         .setValue("combo")
         .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
         new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
+        .setLabel("Midrange Deck")
         .setValue("midrange")
         .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
         new StringSelectMenuOptionBuilder()
@@ -84,14 +80,12 @@ module.exports = {
       const creeperBladeDecks = {
         competitiveDecks:["abeans", "pablosyeezys"],
         ladderDecks: ["professorpackage"],
-        memeDecks: ["gargolithtech"],
         aggroDecks: ["abeans"],
         comboDecks: ["pablosyeezys"],
-        midrangeDecks: ["gargolithtech", "pablosyeezys"],
+        midrangeDecks: ["pablosyeezys"],
         tempoDecks: ["professorpackage"],
         allDecks: [
           "abeans",
-          "gargolithtech",
           "pablosyeezys",
           "professorpackage",
         ],
@@ -107,7 +101,6 @@ module.exports = {
           .join("");
       }
       const toBuildComp = buildDeckString(creeperBladeDecks.competitiveDecks);
-      const toBuildMidrangeString = buildDeckString(creeperBladeDecks.midrangeDecks);
       const toBuildString = buildDeckString(creeperBladeDecks.allDecks);
       /**
      * The createButtons function creates a row of buttons for the embed
@@ -130,19 +123,12 @@ module.exports = {
     const comprow = createButtons("pablosyeezys", "ab");
     const ab = createButtons("helpcomp", "py");
     const py = createButtons("abeans", "comphelp");
-    const midrangerow = createButtons("pablosyeezys2", "gtech");
-    const gtech= createButtons("helpmidrange", "py2");
-    const py2 = createButtons("gargolithtech", "midrangehelp");
     const alldecksrow = createButtons("professorpackage", "ab2");
-    const ab2 = createButtons("helpall", "gtech2");
-    const gtech2 = createButtons("abeans2", "py3");
-    const py3 = createButtons("gargolithtech2", "propack");
+    const ab2 = createButtons("helpall", "py2");
+    const py2 = createButtons("abeans2", "propack");
     const propack = createButtons("pablosyeezys3", "allhelp");
-    const [result] = await db.query(`select abeans,
-		gargolithtech, pablosyeezys, professorpackage
+    const [result] = await db.query(`select abeans, pablosyeezys, professorpackage
 		from gsdecks gs 
-    inner join bfdecks bf
-    on (gs.deckinfo = bf.deckinfo)
 		inner join smdecks sm 
 		on (gs.deckinfo = sm.deckinfo)
     inner join pbdecks pb 
@@ -161,13 +147,6 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} total decks i
       `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${creeperBladeDecks.competitiveDecks.length} Competitive decks in Tbot`
     )
-const midrangeEmbed =  createHelpEmbed(
-  `${user.displayName} Midrange Decks`,
-  `My Midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
-  user.displayAvatarURL(),
-  `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${creeperBladeDecks.midrangeDecks.length} Midrange decks in Tbot`
-)
 const alldecksEmbed = createHelpEmbed(
   `${user.displayName} Decks`,
   `My All decks made by ${user.displayName} are ${toBuildString}`,
@@ -199,7 +178,6 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
   return embed;
 }
     const abeans = createDeckEmbed(result, "abeans");
-    const gargolithtech= createDeckEmbed(result, "gargolithtech");
     const pyeez = createDeckEmbed(result, "pablosyeezys");
     const professorpackage = createDeckEmbed(result, "professorpackage");
     const m = await message.channel.send({
@@ -228,9 +206,6 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
       else if(value == "midrange"){
         await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
       }
-      else if(value == "meme"){
-        await i.reply({embeds: [gargolithtech], flags: MessageFlags.Ephemeral})
-      }
       else if(value == "all"){
         await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
       }
@@ -241,8 +216,6 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
         comphelp: {embed: comp, component: comprow},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
-        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
         ab: {embed: abeans, component: ab},
         abeans: {embed: abeans, component: ab},
         ab2: {embed: abeans, component: ab2},
@@ -251,14 +224,8 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
         pablosyeezys: {embed: pyeez, component: py},
         py2: {embed: pyeez, component: py2},
         pablosyeezys2: {embed: pyeez, component: py2},
-        py3: {embed: pyeez, component: py3},
-        pablosyeezys3: {embed: pyeez, component: py3},
         propack: {embed: professorpackage, component: propack},
         professorpackage: {embed: professorpackage, component: propack},
-        gtech: {embed: gargolithtech, component: gtech},
-        gargolithtech: {embed: gargolithtech, component: gtech},
-        gtech2: {embed: gargolithtech, component: gtech2},
-        gargolithtech2: {embed: gargolithtech, component: gtech2},
       };
       const action = buttonActions[i.customId];
       if(action){

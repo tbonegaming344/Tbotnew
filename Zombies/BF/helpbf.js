@@ -77,12 +77,6 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setValue("midrange")
           .setDescription(
@@ -104,9 +98,8 @@ module.exports = {
     const brainFreezeDecks = {
       budgetDecks: ["budgetbf"],
       competitiveDecks: ["lockthebathroom"],
-      ladderDecks: ["bfmidgargs", "bfplankcontrol", "raiserpackage"],
+      ladderDecks: ["bfmidgargs", "raiserpackage"],
       memeDecks: [
-        "gargolithtech",
         "himpter",
         "lunchtime",
         "petmop",
@@ -115,11 +108,9 @@ module.exports = {
       ],
       aggroDecks: ["budgetbf"],
       comboDecks: ["banhammer", "himpter", "watersports"],
-      controlDecks: ["bfplankcontrol"],
       midrangeDecks: [
         "bhammer",
         "bfmidgargs",
-        "gargolithtech",
         "himpter",
         "lunchtime",
         "petmop",
@@ -129,9 +120,7 @@ module.exports = {
       allDecks: [
         "banhammer",
         "bfmidgargs",
-        "bfplankcontrol",
         "budgetbf",
-        "gargolithtech",
         "himpter",
         "lunchtime",
         "lockthebathroom",
@@ -179,23 +168,19 @@ module.exports = {
     const alldecksrow = createButtons("watersports", "bhammer");
     const bhammer = createButtons("helpall", "bfmg");
     const bfmg = createButtons("banhammer", "bbf");
-    const bbf = createButtons("bfmidgargs", "bfpc");
-    const bfpc = createButtons("budgetbf", "gt");
-    const gt = createButtons("bfplankcontrol", "hi");
-    const hi = createButtons("gargolithtech", "lt");
+    const bbf = createButtons("bfmidgargs", "hi");
+    const hi = createButtons("budgetbf", "lt");
     const lt = createButtons("himps", "ltbr");
     const ltbr = createButtons("lunchtime", "pm");
     const pm = createButtons("lockthebathroom", "rp");
     const rp = createButtons("petmop", "ws");
     const ws = createButtons("raiserpackage", "allhelp");
     const ladderrow = createButtons("watersports", "bfmg2");
-    const bfmg2 = createButtons("helpladder", "bfpc2");
-    const bfpc2 = createButtons("bfmidgargs2", "rp2");
-    const rp2 = createButtons("bfplancontrol2", "ladderhelp");
+    const bfmg2 = createButtons("helpladder", "rp2");
+    const rp2 = createButtons("bfmidgargs2", "ladderhelp");
     const memerow = createButtons("watersports2", "bhammer2");
-    const bhammer2 = createButtons("helpmeme", "gt2");
-    const gt2 = createButtons("banhammer2", "hi2");
-    const hi2 = createButtons("gargolithtech2", "lt2");
+    const bhammer2 = createButtons("helpmeme", "hi2");
+    const hi2 = createButtons("banhammer2", "lt2");
     const lt2 = createButtons("himps2", "pm2");
     const pm2 = createButtons("lunchtime2", "ws2");
     const ws2 = createButtons("petmop2", "memehelp");
@@ -205,9 +190,8 @@ module.exports = {
     const ws3 = createButtons("himps3", "combohelp");
     const midrangerow = createButtons("watersports4", "bhammer4");
     const bhammer4= createButtons("helpmid", "bfmg3");
-    const bfmg3 = createButtons("banhammer4", "gt3");
-    const gt3 = createButtons("bfmidgargs3", "hi4");
-    const hi4 = createButtons("gargolithtech3", "lt3");
+    const bfmg3 = createButtons("banhammer4", "hi4");
+    const hi4 = createButtons("bfmidgargs3", "lt3");
     const lt3 = createButtons("himps4", "pm3");
     const pm3 = createButtons("lunchtime3", "ws4");
     const ws4 = createButtons("petmop3", "midhelp");
@@ -287,9 +271,7 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
       return embed;
     }
     const bfmidgargs = createDeckEmbed(result, "bfmidgargs");
-    const bfplankcontrol = createDeckEmbed(result, "bfplankcontrol");
     const budgetbf = createDeckEmbed(result, "budgetbf");
-    const gargolithtech = createDeckEmbed(result, "gargolithtech");
     const himps = createDeckEmbed(result, "himps");
     const lockthebathroom = createDeckEmbed(result, "lockin");
     const lunchtime = createDeckEmbed(result, "midpets");
@@ -323,11 +305,6 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "control") {
-        await i.reply({
-          embeds: [bfplankcontrol],
-          flags: MessageFlags.Ephemeral,
-        });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
@@ -366,18 +343,8 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
         bfmidgargs2: {embed: bfmidgargs, component: bfmg2},
         bfmg3: {embed: bfmidgargs, component: bfmg3},
         bfmidgargs3: {embed: bfmidgargs, component: bfmg3},
-        bfpc: {embed: bfplankcontrol, component: bfpc},
-        bfplankcontrol: {embed: bfplankcontrol, component: bfpc},
-        bfpc2: {embed: bfplankcontrol, component: bfpc2},
-        bfplankcontrol2: {embed: bfplankcontrol, component: bfpc2},
         bbf: {embed: budgetbf, component: bbf},
         budgetbf: {embed: budgetbf, component: bbf},
-        gt: {embed: gargolithtech, component: gt}, 
-        gargolithtech: {embed: gargolithtech, component: gt},
-        gt2: {embed: gargolithtech, component: gt2}, 
-        gargolithtech2: {embed: gargolithtech, component: gt2},
-        gt3: {embed: gargolithtech, component: gt3}, 
-        gargolithtech3: {embed: gargolithtech, component: gt3},
         hi: {embed: himps, component: hi}, 
         himps: {embed: himps, component: hi},
         hi2: {embed: himps, component: hi2}, 

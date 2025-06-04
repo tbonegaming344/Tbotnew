@@ -95,13 +95,11 @@ module.exports = {
       budgetDecks: ["budgetnt"],
       competitiveDecks: ["slugged"],
       ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
-      memeDecks: ["antiagor", "floss", "sunlord"],
-      aggroDecks: ["agraves", "budgetnt", "schoolyard"],
-      comboDecks: ["antiagor","budgetnt", "floss", "sunlord"],
+      memeDecks: ["floss", "sunlord"],
+      aggroDecks: ["budgetnt", "schoolyard"],
+      comboDecks: ["budgetnt", "floss", "sunlord"],
       midrangeDecks: ["gomorrah", "ladytuna", "slugged", "sunlord"],
       allDecks: [
-        "agraves",
-        "antiagor",
         "budgetnt",
         "floss",
         "gomorrah",
@@ -145,32 +143,26 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("sunlord", "ag");
-    const ag = createButtons("helpall", "anti");
-    const anti = createButtons("agraves", "bnt");
-    const bnt = createButtons("antiagor", "fl");
+    const alldecksrow = createButtons("sunlord", "bnt");
+    const bnt = createButtons("helpall", "fl");
     const fl = createButtons("budgetnt", "go");
     const go = createButtons("floss", "lt");
     const lt = createButtons("gomorrah", "sy");
     const sy = createButtons("ladytuna", "slug");
     const slug = createButtons("schoolyard", "sl");
     const sl = createButtons("slugged", "allhelp");
-    const ladderrow = createButtons("schoolyard2", "ag2");
-    const ag2 = createButtons("helpladder", "go2");
-    const go2 = createButtons("agraves2", "sy2");
+    const ladderrow = createButtons("schoolyard2", "go2");
+    const go2 = createButtons("helpladder", "sy2");
     const sy2 = createButtons("gomorrah2", "ladderhelp");
-    const memerow = createButtons("sunlord2", "anti2");
-    const anti2 = createButtons("helpmeme", "fl2");
-    const fl2 = createButtons("antiagor2", "lt2");
+    const memerow = createButtons("sunlord2", "fl2");
+    const fl2 = createButtons("helpmeme", "lt2");
     const lt2 = createButtons("floss2", "sl2");
     const sl2 = createButtons("ladytuna2", "memehelp");
-    const aggrorow = createButtons("schoolyard3", "ag3");
-    const ag3 = createButtons("helpaggro", "bnt2");
-    const bnt2 = createButtons("agraves3", "sy3");
+    const aggrorow = createButtons("schoolyard3", "bnt3");
+    const bnt2 = createButtons("helpaggro", "sy3");
     const sy3 = createButtons("budgetnt2", "aggrohelp");
-    const comborow = createButtons("sunlord3", "anti3");
-    const anti3 = createButtons("helpcombo", "bnt3");
-    const bnt3 = createButtons("antiagor3", "fl3");
+    const comborow = createButtons("sunlord3", "bnt3");
+    const bnt3 = createButtons("helpcombo", "fl3");
     const fl3 = createButtons("budgetnt3", "sl3");
     const sl3 = createButtons("floss3", "combohelp");
     const midrangerow = createButtons("sunlord4", "go3");
@@ -250,8 +242,6 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
       }
       return embed;
     }
-    const agraves = createDeckEmbed(result, "agraves");
-    const antiagor = createDeckEmbed(result, "antiagor");
     const budgetnt = createDeckEmbed(result, "budgetnt");
     const floss = createDeckEmbed(result, "floss");
     const gomorrah = createDeckEmbed(result, "gomorrah");
@@ -306,18 +296,6 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         helpcombo: {embed: comboEmbed, component: comborow},
         helpmid: {embed: midrangeEmbed, component: midrangerow},
         midhelp: {embed: midrangeEmbed, component: midrangerow},
-        ag: {embed: agraves, component: ag},
-        agraves: {embed: agraves, component: ag},
-        ag2: {embed: agraves, component: ag2},
-        agraves2: {embed: agraves, component: ag2},
-        ag3: {embed: agraves, component: ag3},
-        agraves3: {embed: agraves, component: ag3},
-        anti: {embed: antiagor, component: anti},
-        antiagor: {embed: antiagor, component: anti},
-        anti2: {embed: antiagor, component: anti2},
-        antiagor2: {embed: antiagor, component: anti2},
-        anti3: {embed: antiagor, component: anti3},
-        antiagor3: {embed: antiagor, component: anti3},
         bnt: {embed: budgetnt, component: bnt},
         budgetnt: {embed: budgetnt, component: bnt},
         bnt2: {embed: budgetnt, component: bnt2},

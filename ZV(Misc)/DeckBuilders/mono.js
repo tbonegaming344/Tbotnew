@@ -89,10 +89,10 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const monoDecks = {
       competitiveDecks: ["kaleidoscope", "nohokaistars", "seacret", "slugged"],
-      memeDecks: ["cancerknight", "coggerazzi", "pbfeast", "rampticia"],
+      memeDecks: ["cancerknight", "coggerazzi", "rampticia"],
       aggroDecks: ["seacret"],
       comboDecks: ["coggerazzi", "rampticia", "seacret"],
-      controlDecks: ["cancerknight", "kaleidoscope", "pbfeast"],
+      controlDecks: ["cancerknight", "kaleidoscope"],
       midrangeDecks: ["nohokaistars", "slugged"],
       tempoDecks: ["coggerazzi"],
       allDecks: [
@@ -100,7 +100,6 @@ module.exports = {
         "coggerazzi",
         "kaleidoscope",
         "nohokaistars",
-        "pbfeast",
         "rampticia",
         "seacret",
         "slugged",
@@ -143,13 +142,11 @@ module.exports = {
     }
     const memerow = createButtons("rampticia", "ck");
     const ck = createButtons("helpmeme", "cog");
-    const cog = createButtons("cancerknight", "pbf");
-    const pbf = createButtons("coggerazzi", "rticia");
-    const rticia = createButtons("pbfeast", "memehelp");
-    const controlrow = createButtons("pbfeast2", "ck2");
+    const cog = createButtons("cancerknight", "rticia");
+    const rticia = createButtons("coggerazzi", "memehelp");
+    const controlrow = createButtons("kaliedoscope", "ck2");
     const ck2 = createButtons("helpcontrol", "kscope");
-    const kscope = createButtons("cancerknight2", "pbf2");
-    const pbf2 = createButtons("kaliedoscope", "controlhelp");
+    const kscope = createButtons("cancerknight2", "controlhelp");
     const comborow = createButtons("seacret", "cog2");
     const cog2 = createButtons("helpcombo", "rticia2");
     const rticia2 = createButtons("coggerazzi2", "sea");
@@ -166,21 +163,18 @@ module.exports = {
     const ck3 = createButtons("helpall", "cog3");
     const cog3 = createButtons("cancerknight3", "kscope3");
     const kscope3 = createButtons("coggerazzi3", "nhks3");
-    const nhks3 = createButtons("kaleidoscope3", "pbf3");
-    const pbf3 = createButtons("nohokaistars3", "rticia3");
-    const rticia3 = createButtons("pbfeast3", "sea3");
+    const nhks3 = createButtons("kaleidoscope3", "rticia3");
+    const rticia3 = createButtons("nohokaistars3", "sea3");
     const sea3 = createButtons("rampticia3", "slug3");
     const slug3 = createButtons("seacret3", "allhelp");
     const [result] =
       await db.query(`select cancerknight, icebox, otktrickster, nohokaistars, seacret,
-pbfeast, poggerrazzi, rampticia
+        poggerrazzi, rampticia
 from wkdecks wk 
 inner join ebdecks eb
 on (wk.deckinfo = eb.deckinfo)
 inner join ifdecks fi 
 on (wk.deckinfo = fi.deckinfo)
-inner join pbdecks pb 
-on (wk.deckinfo = pb.deckinfo)
 inner join ntdecks nt 
 on (wk.deckinfo = nt.deckinfo)
 inner join rbdecks rb 
@@ -265,7 +259,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
     const nohonkaistars = createDeckEmbed(result, "nohokaistars");
     const seacret = createDeckEmbed(result, "seacret");
     const slugged = createDeckEmbed(result, "icebox");
-    const pbfeast = createDeckEmbed(result, "pbfeast");
     const rampticia = createDeckEmbed(result, "rampticia");
     const m = await message.channel.send({ embeds: [mono], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -349,12 +342,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         nohokaistars2: { embed: nohonkaistars, component: nhks2 },
         nhks3: { embed: nohonkaistars, component: nhks3 },
         nohokaistars3: { embed: nohonkaistars, component: nhks3 },
-        pbf: { embed: pbfeast, component: pbf },
-        pbfeast: { embed: pbfeast, component: pbf },
-        pbf2: { embed: pbfeast, component: pbf2 },
-        pbfeast2: { embed: pbfeast, component: pbf2 },
-        pbf3: { embed: pbfeast, component: pbf3 },
-        pbfeast3: { embed: pbfeast, component: pbf3 },
         rticia: { embed: rampticia, component: rticia },
         rampticia: { embed: rampticia, component: rticia },
         rticia2: { embed: rampticia, component: rticia2 },

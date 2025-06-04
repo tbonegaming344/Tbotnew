@@ -125,13 +125,6 @@ Note: Dozza has ${dozzaDecks.allDecks.length} total decks in Tbot`,
       `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${dozzaDecks.allDecks.length} total decks in Tbot`
     )
-      const middozza = createHelpEmbed(
-        `${user.displayName} Midrange Decks`,
-        `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
-        user.displayAvatarURL(),
-        `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${dozzaDecks.midrangeDecks.length} Midrange decks in Tbot`
-      )
       const memedozza = createHelpEmbed(
         `${user.displayName} Meme Decks`,
         `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
@@ -183,7 +176,7 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
         await i.reply({embeds: [trickmech], flags: MessageFlags.Ephemeral})
       }
       else if(value == "midrange"){
-        await i.update({embeds: [middozza], components: [midrange]});
+        await i.reply({embeds: [highlander], flags: MessageFlags.Ephemeral})
       }
       else if(value == "meme"){
         await i.update({embeds: [memedozza], components: [meme]});
@@ -219,6 +212,7 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
         trickmech: {embed: trickmech, component: tmech},
         tmech2: {embed: trickmech, component: tmech2},
         trickmech2: {embed: trickmech, component: tmech2},
+        
       };
       const action = buttonActions[i.customId];
       if (action) {

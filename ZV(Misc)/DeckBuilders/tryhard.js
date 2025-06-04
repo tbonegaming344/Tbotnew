@@ -51,20 +51,9 @@ module.exports = {
       .setPlaceholder("Select an option below to view Tryhards decklists")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
-          .setValue("aggro")
-          .setDescription(
-            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
         new StringSelectMenuOptionBuilder()
           .setLabel("Combo Decks")
           .setValue("combo")
@@ -82,21 +71,14 @@ module.exports = {
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Decks")
-          .setValue("all")
-          .setDescription("View all the decks made by Tryhard")
+          )
       );
     const row = new ActionRowBuilder().addComponents(select);
     const pvzTryHardDecks = {
-      ladderDecks: ["agraves"],
       memeDecks: ["sunbandits", "ykm"],
-      aggroDecks: ["agraves"],
       comboDecks: ["sunbandits", "ykm"],
-      midrangeDecks: ["ykm"],
       controlDecks: ["sunbandits"],
-      allDecks: ["agraves", "sunbandits", "ykm"],
+      midrangeDecks: ["ykm"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -110,7 +92,6 @@ module.exports = {
     }
     const toBuildCombo = buildDeckString(pvzTryHardDecks.comboDecks);
     const toBuildMeme = buildDeckString(pvzTryHardDecks.memeDecks);
-    const toBuildString = buildDeckString(pvzTryHardDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -135,21 +116,16 @@ module.exports = {
     const memerow = createButtons("youngkenmartin2", "sb2");
     const sb2 = createButtons("helpmeme", "ykm2");
     const ykm2 = createButtons("sunbandits2", "memehelp");
-    const alldecksrow = createButtons("youngkenmartin3", "agr");
-    const agr = createButtons("helpall", "sb3");
-    const sb3 = createButtons("agraves", "ykm3");
-    const ykm3 = createButtons("sunbandits3", "allhelp");
-    const [result] = await db.query(`select agraves, sunbandits, ykm 
-from ntdecks nt
-inner join rbdecks rb 
-on (nt.deckinfo = rb.deckinfo)
+    const [result] = await db.query(`select sunbandits, ykm 
+from rbdecks rb 
 inner join hgdecks hg
-on (nt.deckinfo = hg.deckinfo)`);
+on (rb.deckinfo = hg.deckinfo)`);
     const user = await client.users.fetch("265754905828917259");
     const tryhard = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
-Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot`,
+Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot. 
+To view all of ${user.displayName}'s decks, please select the meme or combo option below`,
       user.displayAvatarURL()
     );
     const memehard = createHelpEmbed(
@@ -165,13 +141,6 @@ Note: ${user.displayName} has ${pvzTryHardDecks.memeDecks.length} Meme decks in 
       user.displayAvatarURL(),
       `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${pvzTryHardDecks.comboDecks.length} Combo decks in tbot`
-    );
-    const allhard = createHelpEmbed(
-      `${user.displayName} Decks`,
-      `My All Decks made by ${user.displayName} are ${toBuildString}`,
-      user.displayAvatarURL(),
-      `To view the All Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot`
     );
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -196,7 +165,6 @@ Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in 
       }
       return embed;
     }
-    const agraves = createDeckEmbed(result, "agraves");
     const sunbandits = createDeckEmbed(result, "sunbandits");
     const youngkenmartin = createDeckEmbed(result, "ykm");
     const m = await message.channel.send({
@@ -210,9 +178,7 @@ Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in 
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "ladder" || value == "aggro") {
-        await i.reply({ embeds: [agraves], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
+       if (value == "meme") {
         await i.update({ embeds: [memehard], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [combohard], components: [comborow] });
@@ -223,8 +189,6 @@ Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in 
         });
       } else if (value == "control") {
         await i.reply({ embeds: [sunbandits], flags: MessageFlags.Ephemeral });
-      } else if (value == "all") {
-        await i.update({ embeds: [allhard], components: [alldecksrow] });
       }
     }
     /**
@@ -237,22 +201,14 @@ Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in 
         helpmeme: { embed: memehard, component: memerow },
         combohelp: { embed: combohard, component: comborow },
         helpcombo: { embed: combohard, component: comborow },
-        helpall: { embed: allhard, component: alldecksrow },
-        allhelp: { embed: allhard, component: alldecksrow },
-        agr: { embed: agraves, component: agr },
-        agraves: { embed: agraves, component: agr },
         sb: { embed: sunbandits, component: sb },
         sunbandits: { embed: sunbandits, component: sb },
         sb2: { embed: sunbandits, component: sb2 },
         sunbandits2: { embed: sunbandits, component: sb2 },
-        sb3: { embed: sunbandits, component: sb3 },
-        sunbandits3: { embed: sunbandits, component: sb3 },
         ykm: { embed: youngkenmartin, component: ykm },
         youngkenmartin: { embed: youngkenmartin, component: ykm },
         ykm2: { embed: youngkenmartin, component: ykm2 },
         youngkenmartin2: { embed: youngkenmartin, component: ykm2 },
-        ykm3: { embed: youngkenmartin, component: ykm3 },
-        youngkenmartin3: { embed: youngkenmartin, component: ykm3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

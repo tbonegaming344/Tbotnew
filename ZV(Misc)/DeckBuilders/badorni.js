@@ -64,13 +64,13 @@ module.exports = {
     )
     const row = new ActionRowBuilder().addComponents(select);
     const badorniDecks = {
-      memeDecks: ["antiagor",
+      memeDecks: [
       "freezeheal",
       "frozentelimps",
       "moprbius",
       "plantmop",
       "psychosolstice"], 
-      comboDecks: ["antiagor",
+      comboDecks: [
       "freezeheal",
       "frozentelimps",
       "moprbius",
@@ -110,16 +110,14 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const combo = createButtons("psychosolstice2", "aa");
-    const aa = createButtons("combo", "freeze");
-    const freeze = createButtons("antiagor", "ftimps");
+    const combo = createButtons("psychosolstice2", "freeze");
+    const freeze = createButtons("combo", "ftimps");
     const ftimps = createButtons("freezeheal", "mopr");
     const mopr = createButtons("frozentelimps", "pmop2");
     const pmop2 = createButtons("moprbius", "psy2");
     const psy2 = createButtons("plantmop2", "helpcombo");
-    const meme = createButtons("psychosolstice", "aa2");
-    const aa2 = createButtons("meme", "freeze2");
-    const freeze2 = createButtons("antiagor2", "fti2");
+    const meme = createButtons("psychosolstice", "freeze2");
+    const freeze2 = createButtons("meme", "fti2");
     const fti2 = createButtons("freezeheal2", "mopr2");
     const mopr2 = createButtons("ftimps2", "pmop");
     const pmop = createButtons("mopribus2", "psy");
@@ -128,21 +126,19 @@ module.exports = {
     const mopr3 = createButtons("midrange", "psy3");
     const psy3 = createButtons("mopribus3", "mid");
     const [result] =
-      await db.query(`select antiagor,
+      await db.query(`select
 	freezeheal, frozentelimps, mopribus, plantmop,
-	psychosolstice from ntdecks nt
-	inner join ccdecks cc
-	on (nt.deckinfo = cc.deckinfo)
+	psychosolstice from ccdecks cc
 	inner join rodecks ro
-	on (nt.deckinfo = ro.deckinfo)
+	on (cc.deckinfo = ro.deckinfo)
 	inner join hgdecks hg 
-	on (nt.deckinfo = hg.deckinfo)
+	on (cc.deckinfo = hg.deckinfo)
 	inner join sfdecks sf
-	on (nt.deckinfo = sf.deckinfo)
+	on (cc.deckinfo = sf.deckinfo)
 	inner join czdecks cz 
-	on (nt.deckinfo = cz.deckinfo)
+	on (cc.deckinfo = cz.deckinfo)
   inner join ctdecks ct 
-  on (nt.deckinfo = ct.deckinfo)`);
+  on (cc.deckinfo = ct.deckinfo)`);
     const user = await client.users.fetch("749149322561716294");
     const bad = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -195,7 +191,6 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         }
         return embed;
       }
-    const coloboy = createDeckEmbed(result, "antiagor");
     const freal = createDeckEmbed(result, "freezeheal");
     const fti = createDeckEmbed(result, "frozentelimps");
     const mop = createDeckEmbed(result, "mopribus");
@@ -228,7 +223,6 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         mopr: {embed: mop, component: mopr},
         psy: {embed: pysol, component: psy},
         combo: {embed: combobad, component: combo},
-        aa: {embed: coloboy, component: aa},
         freeze: {embed: freal, component: freeze},
         ftimps: {embed: fti, component: ftimps},
         ftimps2: {embed: fti, component: fti2},
@@ -237,7 +231,6 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         psy2: {embed: pysol, component: psy2},
         meme: {embed: memebad, component: meme},
         meme2: {embed: memebad, component: meme},
-        aa2: {embed: coloboy, component: aa2},
         freeze2: {embed: freal, component: freeze2},
         fti2: {embed: fti, component: fti2},
         mopr3: {embed: mop, component: mopr3},
@@ -245,7 +238,6 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         mid: {embed: midbad, component: midrange},
         midrange: {embed: midbad, component: midrange},
         mopribus: {embed: mop, component: mopr},
-        antiagor: {embed: coloboy, component: aa},
         freezeheal: {embed: freal, component: freeze},
         freezeheal2: {embed: freal, component: freeze2},
         plantmop: {embed: plantmop, component: pmop},
@@ -253,7 +245,6 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         mopribus2: {embed: mop, component: mopr2},
         mopribus3: {embed: mop, component: mopr3},
         frozentelimps: {embed: fti, component: ftimps},
-        antiagor2: {embed: coloboy, component: aa2},
         psychosolstice: {embed: pysol, component: psy},
         psychosolstice2: {embed: pysol, component: psy2},
         psychosolstice3: {embed: pysol, component: psy3},

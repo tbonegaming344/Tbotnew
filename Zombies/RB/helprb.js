@@ -302,7 +302,7 @@ Note: Rustbolt has ${rustboltDecks.midrangeDecks.length} total midrange decks in
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
-        await i.update({ embeds: [tempoEmbed], components: [temporow] });
+        await i.replY({ embeds: [coggerazzi], flags: MessageFlags.Ephemeral });
       } else if (value == "budget") {
         await i.reply({ embeds: [budgetrb], flags: MessageFlags.Ephemeral });
       }

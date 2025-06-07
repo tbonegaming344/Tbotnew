@@ -40,67 +40,68 @@ module.exports = {
         .setStyle(ButtonStyle.Danger)
         .setEmoji("<:NeptunaH:1087845030867247174>")
     );
-    const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Please select an option below to view Neptuna Decks")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setDescription("A Deck that is cheap for new players")
-        .setEmoji("💰")
-        .setValue("budget"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setDescription("Some of the best Decks in the game")
-        .setEmoji("<:compemote:1325461143136764060>")
-        .setValue("comp"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Ladder Decks")
-        .setDescription("Decks that are generally only good for ranked games")
-        .setEmoji("<:ladder:1271503994857979964>")
-        .setValue("ladder"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setDescription("Decks that are built off a weird/fun combo")
-        .setValue("meme"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Aggro Decks")
-        .setDescription(
-          "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-        )
-        .setValue("aggro"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        )
-        .setValue("combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        )
-        .setValue("midrange"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Neptuna Decks")
-        .setDescription("An option to view all decks")
-        .setEmoji("<:NeptunaH:1087845030867247174>")
-        .setValue("all")
-    );
-  const row = new ActionRowBuilder().addComponents(select);
-  const neptunaDecks = {
+   const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Please select an option below to view Neptuna Decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setDescription("A Deck that is cheap for new players")
+          .setEmoji("💰")
+          .setValue("budget"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Decks")
+          .setDescription("Some of the best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>")
+          .setValue("comp"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Decks")
+          .setDescription("Decks that are generally only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>")
+          .setValue("ladder"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setDescription("Decks that are built off a weird/fun combo")
+          .setValue("meme"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Decks")
+          .setDescription(
+            "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          )
+          .setValue("aggro"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          )
+          .setValue("combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          )
+          .setValue("midrange"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Neptuna Decks")
+          .setDescription("An option to view all decks")
+          .setEmoji("<:NeptunaH:1087845030867247174>")
+          .setValue("all")
+      );
+    const row = new ActionRowBuilder().addComponents(select);
+    const neptunaDecks = {
       budgetDecks: ["budgetnt"],
-      competitiveDecks: ["slugged"],
+      competitiveDecks: ["piport", "slugged"],
       ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
       memeDecks: ["floss", "sunlord"],
       aggroDecks: ["budgetnt", "schoolyard"],
       comboDecks: ["budgetnt", "floss", "sunlord"],
-      midrangeDecks: ["gomorrah", "ladytuna", "slugged", "sunlord"],
+      midrangeDecks: ["gomorrah", "ladytuna", "piport", "slugged", "sunlord"],
       allDecks: [
         "budgetnt",
         "floss",
         "gomorrah",
         "ladytuna",
+        "piport",
         "schoolyard",
         "slugged",
         "sunlord",
@@ -117,6 +118,9 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(neptunaDecks.allDecks);
+    const toBuildCompString = buildDeckString(
+      neptunaDecks.competitiveDecks
+    );
     const toBuildLadderString = buildDeckString(neptunaDecks.ladderDecks);
     const toBuildMemeString = buildDeckString(neptunaDecks.memeDecks);
     const toBuildAggroString = buildDeckString(neptunaDecks.aggroDecks);
@@ -144,10 +148,14 @@ module.exports = {
     const bnt = createButtons("helpall", "fl");
     const fl = createButtons("budgetnt", "go");
     const go = createButtons("floss", "lt");
-    const lt = createButtons("gomorrah", "sy");
-    const sy = createButtons("ladytuna", "slug");
+    const lt = createButtons("gomorrah", "pip");
+    const pip = createButtons("ladytuna", "sy");
+    const sy = createButtons("piport", "slug");
     const slug = createButtons("schoolyard", "sl");
     const sl = createButtons("slugged", "allhelp");
+    const comprow = createButtons("slugged2", "pip2"); 
+    const pip2 = createButtons("helpcomp", "slug2");
+    const slug2 = createButtons("piport2", "comphelp");
     const ladderrow = createButtons("schoolyard2", "go2");
     const go2 = createButtons("helpladder", "sy2");
     const sy2 = createButtons("gomorrah2", "ladderhelp");
@@ -164,9 +172,10 @@ module.exports = {
     const sl3 = createButtons("floss3", "combohelp");
     const midrangerow = createButtons("sunlord4", "go3");
     const go3 = createButtons("helpmid", "lt3");
-    const lt3 = createButtons("gomorrah3", "slug2");
-    const slug2 = createButtons("ladytuna3", "sl4");
-    const sl4 = createButtons("slugged2", "midhelp");
+    const lt3 = createButtons("gomorrah3", "pip3");
+    const pip3 = createButtons("ladytuna3", "slug3");
+    const slug3 = createButtons("ladytuna3", "sl4");
+    const sl4 = createButtons("slugged3", "midhelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
@@ -192,53 +201,60 @@ module.exports = {
       )
       .setColor("Orange");
       const alldecksEmbed = createHelpEmbed(
-        "Neptuna Decks",
-        `My commands for Neptuna(NT) are ${toBuildString}`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-        `To view the Neptuna decks please use the commands listed above or click on the buttons below!
-  Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`
-      );
-      const ladderEmbed = createHelpEmbed(
-        "Neptuna Ladder Decks",
-        `My commands for Neptuna(NT) are ${toBuildLadderString}`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-        `To view the Neptuna ladder decks please use the commands listed above or click on the buttons below!
-  Note: Neptuna has a total of ${neptunaDecks.ladderDecks.length} ladder decks in Tbot`
-      );
-      const memeEmbed = createHelpEmbed(
-        "Neptuna Meme Decks",
-        `My commands for Neptuna(NT) are ${toBuildMemeString}`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-        `To view the Neptuna meme decks please use the commands listed above or click on the buttons below!
-  Note: Neptuna has a total of ${neptunaDecks.memeDecks.length} meme decks in Tbot`
-      );
-      const aggroEmbed = createHelpEmbed(
-        "Neptuna Aggro Decks",
-        `My commands for Neptuna(NT) are ${toBuildAggroString}`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-        `To view the Neptuna aggro decks please use the commands listed above or click on the buttons below!
-  Note: Neptuna has a total of ${neptunaDecks.aggroDecks.length} aggro decks in Tbot`
-      );
-      const comboEmbed = createHelpEmbed(
-        "Neptuna Combo Decks",
-        `My commands for Neptuna(NT) are ${toBuildComboString}`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-        `To view the Neptuna combo decks please use the commands listed above or click on the buttons below!
-  Note: Neptuna has a total of ${neptunaDecks.comboDecks.length} combo decks in Tbot`
-      );
-      const midrangeEmbed = createHelpEmbed(
-        "Neptuna Midrange Decks",
-        `My commands for Neptuna(NT) are ${toBuildMidrangeString}`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-        `To view the Neptuna midrange decks please use the commands listed above or click on the buttons below!
-  Note: Neptuna has a total of ${neptunaDecks.midrangeDecks.length} midrange decks in Tbot`
-      );
-      const nthelp = createHelpEmbed(
-        "Neptuna Decks",
-        `To view the Neptuna decks please select an option from the select menu below!
-  Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
-        "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
-      );
+      "Neptuna Decks",
+      `My commands for Neptuna(NT) are ${toBuildString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`
+    );
+    const compEmbed = createHelpEmbed(
+      "Neptuna Competitive Decks",
+      `My competitive decks for Neptuna(NT) are ${toBuildCompString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna competitive decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has a total of ${neptunaDecks.competitiveDecks.length} competitive decks in Tbot`
+    );
+    const ladderEmbed = createHelpEmbed(
+      "Neptuna Ladder Decks",
+      `My ladder decks for Neptuna(NT) are ${toBuildLadderString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna ladder decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has a total of ${neptunaDecks.ladderDecks.length} ladder decks in Tbot`
+    );
+    const memeEmbed = createHelpEmbed(
+      "Neptuna Meme Decks",
+      `My meme decks for Neptuna(NT) are ${toBuildMemeString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna meme decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has a total of ${neptunaDecks.memeDecks.length} meme decks in Tbot`
+    );
+    const aggroEmbed = createHelpEmbed(
+      "Neptuna Aggro Decks",
+      `My aggro decks for Neptuna(NT) are ${toBuildAggroString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna aggro decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has a total of ${neptunaDecks.aggroDecks.length} aggro decks in Tbot`
+    );
+    const comboEmbed = createHelpEmbed(
+      "Neptuna Combo Decks",
+      `My combo decks for Neptuna(NT) are ${toBuildComboString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna combo decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has a total of ${neptunaDecks.comboDecks.length} combo decks in Tbot`
+    );
+    const midrangeEmbed = createHelpEmbed(
+      "Neptuna Midrange Decks",
+      `My midrange decks for Neptuna(NT) are ${toBuildMidrangeString}`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
+      `To view the Neptuna midrange decks please use the commands listed above or click on the buttons below!
+Note: Neptuna has a total of ${neptunaDecks.midrangeDecks.length} midrange decks in Tbot`
+    );
+    const nthelp = createHelpEmbed(
+      "Neptuna Decks",
+      `To view the Neptuna decks please select an option from the select menu below!
+Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
+    );
     const [result] = await db.query(`select * from ntdecks`);
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -267,6 +283,7 @@ module.exports = {
     const floss = createDeckEmbed(result, "floss");
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const slugged = createDeckEmbed(result, "icebox");
+    const piport = createDeckEmbed(result, "piport");
     const ladytuna = createDeckEmbed(result, "ladytuna");
     const schoolyard = createDeckEmbed(result, "schoolyard");
     const sunlord = createDeckEmbed(result, "wimps");
@@ -284,7 +301,7 @@ module.exports = {
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "comp") {
-        await i.reply({ embeds: [slugged], flags: MessageFlags.Ephemeral });
+        await i.update({ embeds: [compEmbed], components: [comprow] });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -306,8 +323,10 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         helpnt: {embed: nthelp, component: row},
-         helpall: {embed: alldecksEmbed, component: alldecksrow},
+       helpall: {embed: alldecksEmbed, component: alldecksrow},
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
+        comphelp: {embed: compEmbed, component: comprow},
+        helpcomp: {embed: compEmbed, component: comprow},
         ladderhelp: {embed: ladderEmbed, component: ladderrow},
         helpladder: {embed: ladderEmbed, component: ladderrow},
         memehelp: {embed: memeEmbed, component: memerow},
@@ -360,6 +379,14 @@ module.exports = {
         slugged: {embed: slugged, component: slug},
         slug2: {embed: slugged, component: slug2},
         slugged2: {embed: slugged, component: slug2},
+        slug3: {embed: slugged, component: slug3},
+        slugged3: {embed: slugged, component: slug3},
+        pip: {embed: piport, component: pip},
+        piport: {embed: piport, component: pip},
+        pip2: {embed: piport, component: pip2},
+        piport2: {embed: piport, component: pip2},
+        pip3: {embed: piport, component: pip3},
+        piport3: {embed: piport, component: pip3},
       }
       const action = buttonActions[i.customId];
       if (action) {

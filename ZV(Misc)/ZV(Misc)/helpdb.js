@@ -491,6 +491,7 @@ module.exports = {
         "reversecatster",
         "sunbandits",
         "sunlord",
+        "tangen",
         "uncrackamech",
         "watersports",
         "whalepharaoh",
@@ -544,6 +545,7 @@ module.exports = {
         "spacestars",
         "sunbandits",
         "sunlord",
+        "tangen",
         "telimps",
         "trickstache",
         "uncrackamech",
@@ -596,6 +598,7 @@ module.exports = {
         "slugged",
         "spacestars",
         "sunlord",
+        "tangen",
         "trickstache",
         "valkster",
         "watersports",
@@ -670,6 +673,7 @@ module.exports = {
         "splimps",
         "sunbandits",
         "sunlord",
+        "tangen",
         "telimps",
         "trickstache",
         "trickmech",
@@ -970,8 +974,9 @@ module.exports = {
     const stars = createButtons("slugged", "spl");
     const spl = createButtons("spacestars", "sbandits");
     const sbandits = createButtons("splimps", "slord");
-    const slord = createButtons("sunbandits", "timps");
-    const timps = createButtons("sunlord", "tstache");
+    const slord = createButtons("sunbandits", "tan");
+    const tan = createButtons("sunlord", "timps");
+    const timps = createButtons("tangen", "tstache");
     const tstache = createButtons("telimps", "tmech");
     const tmech = createButtons("trickstache", "umech");
     const umech = createButtons("trickmech", "vster");
@@ -1048,8 +1053,9 @@ module.exports = {
     const rticia2 = createButtons("otkswabbie2", "rcatster2");
     const rcatster2 = createButtons("rampticia2", "sbandits2");
     const sbandits2 = createButtons("reversecatster2", "slord2");
-    const slord2 = createButtons("sunbandits2", "umech2");
-    const umech2 = createButtons("sunlord2", "wsports2");
+    const slord2 = createButtons("sunbandits2", "tan2");
+    const tan2 = createButtons("sunlord2", "umech2");
+    const umech2 = createButtons("tangen2", "wsports2");
     const wsports2 = createButtons("uncrackamech2", "wph2");
     const wph2 = createButtons("watersports2", "yemartin2");
     const yemartin2 = createButtons("whalepharaoh2", "ykmartin2");
@@ -1100,8 +1106,9 @@ module.exports = {
     const rcatster3 = createButtons("rampticia3", "stars3");
     const stars3 = createButtons("reversecatster3", "sbandits3");
     const sbandits3 = createButtons("spacestars3", "slord3");
-    const slord3 = createButtons("sunbandits3", "timps3");
-    const timps3 = createButtons("sunlord3", "tstache3");
+    const slord3 = createButtons("sunbandits3", "tan3");
+    const tan3 = createButtons("sunlord3", "timps3");
+    const timps3 = createButtons("tangen3", "tstache3");
     const tstache3 = createButtons("telimps3", "umech3");
     const umech3 = createButtons("trickstache3", "vster3");
     const vster3 = createButtons("uncrackamech3", "wsports3");
@@ -1150,8 +1157,9 @@ module.exports = {
     const nhks3 = createButtons("piport3", "slug3");
     const slug3 = createButtons("nohokaistars3", "stars4");
     const stars4 = createButtons("slugged3", "slord4");
-    const slord4 = createButtons("spacestars4", "tstache4");
-    const tstache4 = createButtons("sunlord4", "vster4");
+    const slord4 = createButtons("spacestars4", "tan4");
+    const tan4 = createButtons("sunlord4", "tstache4");
+    const tstache4 = createButtons("tangen4", "vster4");
     const vster4 = createButtons("trickstache4", "wsports4");
     const wsports4 = createButtons("valkster4", "ykmartin4");
     const ykmartin4 = createButtons("watersports4", "midzhelp");
@@ -1561,6 +1569,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const trickmech = createZombieDeckEmbed(result, "trickmech");
     const zmoss = createZombieDeckEmbed(result, "zmoss");
     const limerence = createZombieDeckEmbed(result, "limerence");
+    const tangen = createZombieDeckEmbed(result, "tangen");
     const iFilter = (i) => i.user.id === message.author.id;
     /**
      * The handleSelectMenu function handles the select menu interactions for the user
@@ -2472,6 +2481,14 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         piport2: { embed: piport, component: pip2 },
         pip3: { embed: piport, component: pip3 },
         piport3: { embed: piport, component: pip3 },
+        tan: { embed: tangen, component: tan },
+        tangen: { embed: tangen, component: tan },
+        tan2: { embed: tangen, component: tan2 },
+        tangen2: { embed: tangen, component: tan2 },
+        tan3: { embed: tangen, component: tan3 },
+        tangen3: { embed: tangen, component: tan3 },
+        tan4: { embed: tangen, component: tan4 },
+        tangen4: { embed: tangen, component: tan4 },
       };
       const action = buttonActions[i.customId];
       if (action) {

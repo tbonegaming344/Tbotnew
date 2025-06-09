@@ -51,6 +51,10 @@ module.exports = {
           .setDescription("Decks that are generally only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Deck")
+          .setDescription("Decks that are built off a weird/fun combo")
+          .setValue("meme"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Aggro Deck")
           .setDescription(
@@ -58,7 +62,7 @@ module.exports = {
           )
           .setValue("aggro"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
+          .setLabel("Combo Decks")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           )
@@ -90,18 +94,20 @@ module.exports = {
     const shortbowDecks = {
       compdecks: ["limerence"],
       ladderDecks: ["gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage"],
+      memeDecks: ["tangen"],
       aggroDecks: ["gravepiratestache"],
-      comboDecks: ["gravepiratestache"],
+      comboDecks: ["gravepiratestache", "tangen"],
       controlDecks: ["pawntrickstab"],
-      midrangeDecks: ["gomorrah", "limerence"],
+      midrangeDecks: ["gomorrah", "limerence", "tangen"],
       tempoDecks: ["raiserpackage"],
       allDecks: [
         "gomorrah",
         "gravepiratestache",
         "limerence",
         "pawntrickstab",
-        "raiserpackage",
-      ],
+        "raiserpackage", 
+        "tangen"
+      ]
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -114,6 +120,7 @@ module.exports = {
         .join("");
     }
     const toBuildLadderString = buildDeckString(shortbowDecks.ladderDecks);
+    const toBuildComboString = buildDeckString(shortbowDecks.comboDecks);
     const toBuildString = buildDeckString(shortbowDecks.allDecks);
     const toBuildMidrangeString = buildDeckString(shortbowDecks.midrangeDecks);
     /**
@@ -134,27 +141,32 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("raiserpackage", "go");
+    const alldecksrow = createButtons("tangen", "go");
     const go = createButtons("helpall", "gps");
     const gps = createButtons("gomorrah", "lime");
     const lime = createButtons("gravepiratestache", "pts");
     const pts = createButtons("limerence", "rpack");
-    const rpack = createButtons("pawntrickstab", "allhelp");
+    const rpack = createButtons("pawntrickstab", "tan");
+    const tan = createButtons("raiserpackage", "allhelp");
     const ladderrow = createButtons("raiserpackage2", "go2");
     const go2 = createButtons("helpladder", "gps2");
     const gps2 = createButtons("gomorrah2", "pts2");
     const pts2 = createButtons("gravepiratestache2", "rpack2");
     const rpack2 = createButtons("pawntrickstab2", "ladderhelp");
-    const midrangerow = createButtons("limerence2", "go3");
+    const comborow = createButtons("tangen", "gps3");
+    const gps3 = createButtons("helpcombo", "tan2");
+    const tan2 = createButtons("gravepiratestache3", "combohelp");
+    const midrangerow = createButtons("tangen3", "go3");
     const go3 = createButtons("helpmidrange", "lime2");
-    const lime2 = createButtons("gomorrah3", "midrangehelp");
-   
+    const lime2 = createButtons("gomorrah3", "tan3");
+    const tan3 = createButtons("limerence2", "midrangehelp"); 
     const [result] =
-      await db.query(`select gomorrah, gps, limerence, pawntrickstab, raiserpackage from ntdecks nt 
+      await db.query(`select gomorrah, gps, limerence, pawntrickstab, raiserpackage, tangen from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
         inner join bfdecks bf on nt.deckinfo = bf.deckinfo
-        inner join sbdecks sb on nt.deckinfo = sb.deckinfo`);
+        inner join sbdecks sb on nt.deckinfo = sb.deckinfo
+        inner join ifdecks if on nt.deckinfo = if.deckinfo`);
     const user = await client.users.fetch("824024125491380303");
     const shortbow = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -175,6 +187,13 @@ Note: ${user.displayName} has ${shortbowDecks.allDecks.length} total decks in Tb
       user.displayAvatarURL(),
       `To view the ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks in Tbot`
+    );
+    const comboEmbed = createHelpEmbed(
+      `${user.displayName} Combo Decks`,
+      `My combo decks made by ${user.displayName} are ${toBuildComboString}`,
+      user.displayAvatarURL(),
+      `To view the combo decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${shortbowDecks.comboDecks.length} combo decks in Tbot`
     );
     const midrangeEmbed = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
@@ -211,6 +230,7 @@ Note: ${user.displayName} has ${shortbowDecks.midrangeDecks.length} midrange dec
     const limerence = createDeckEmbed(result, "limerence");
     const raiserpackage = createDeckEmbed(result, "raiserpackage");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
+    const tangen = createDeckEmbed(result, "tangen");
     const m = await message.channel.send({
       embeds: [shortbow],
       components: [row],
@@ -250,6 +270,12 @@ Note: ${user.displayName} has ${shortbowDecks.midrangeDecks.length} midrange dec
           flags: MessageFlags.Ephemeral,
         });
       } 
+      else if (value == "meme") {
+        await i.reply({
+          embeds: [tangen],
+          flags: MessageFlags.Ephemeral,
+        });
+      }
     }
     /**
      * the handleButtonInteraction function handles the button interactions for the decks
@@ -263,10 +289,14 @@ Note: ${user.displayName} has ${shortbowDecks.midrangeDecks.length} midrange dec
         helpladder: { embed: ladderEmbed, component: ladderrow },
         midrangehelp: { embed: midrangeEmbed, component: midrangerow },
         helpmidrange: { embed: midrangeEmbed, component: midrangerow },
+        helpcombo: { embed: comboEmbed, component: comborow },
+        combohelp: { embed: comboEmbed, component: comborow },
         gps: { embed: gravepiratestache, component: gps },
         gravepiratestache: { embed: gravepiratestache, component: gps },
         gps2: { embed: gravepiratestache, component: gps2 },
         gravepiratestache2: { embed: gravepiratestache, component: gps2 },
+        gps3: { embed: gravepiratestache, component: gps3 },
+        gravepiratestache3: { embed: gravepiratestache, component: gps3 },
         go: { embed: gomorrah, component: go },
         gomorrah: { embed: gomorrah, component: go },
         go2: { embed: gomorrah, component: go2 },
@@ -285,6 +315,12 @@ Note: ${user.displayName} has ${shortbowDecks.midrangeDecks.length} midrange dec
         limerence: { embed: limerence, component: lime },
         lime2: { embed: limerence, component: lime2 },
         limerence2: { embed: limerence, component: lime2 },
+        tan: { embed: tangen, component: tan },
+        tangen: { embed: tangen, component: tan },
+        tan2: { embed: tangen, component: tan2 },
+        tangen2: { embed: tangen, component: tan2 },
+        tan3: { embed: tangen, component: tan3 },
+        tangen3: { embed: tangen, component: tan3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

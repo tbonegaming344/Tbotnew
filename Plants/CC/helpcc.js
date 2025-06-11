@@ -61,6 +61,11 @@ module.exports = {
           .setValue("comp")
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setDescription("Decks that are generally only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>")
+          .setValue("ladder"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
@@ -93,11 +98,13 @@ module.exports = {
     const captainCombustibleDecks = {
       budgetDecks: ["budgetcc"],
       competitiveDecks: ["logbait"],
+      ladderDecks: ["bayonet"],
       memeDecks: ["lifecouldbedream", "mspotk", "plantmop", "reflourished"],
       aggroDecks: ["budgetcc", "logbait"],
-      comboDecks: ["budgetcc", "mspotk", "plantmop", "reflourished"],
-      tempoDecks: ["lifecouldbedream"],
+      comboDecks: ["bayonet", "budgetcc",  "mspotk", "plantmop", "reflourished"],
+      tempoDecks: ["bayonet", "lifecouldbedream"],
       allDecks: [
+        "bayonet",
         "budgetcc",
         "lifecouldbedream",
         "logbait",
@@ -124,6 +131,9 @@ module.exports = {
     );
     const toBuildComboString = buildDeckString(
       captainCombustibleDecks.comboDecks
+    );
+    const toBuildTempoString = buildDeckString(
+      captainCombustibleDecks.tempoDecks
     );
     const toBuildString = buildDeckString(captainCombustibleDecks.allDecks);
     /**
@@ -152,15 +162,20 @@ module.exports = {
     const aggrorow = createButtons("logbait", "bpm");
     const bpm = createButtons("helpaggro", "lbait");
     const lbait = createButtons("budgetplantmop", "aggrohelp");
-    const comborow = createButtons("reflourished2", "bpm2");
-    const bpm2 = createButtons("helpcombo", "msp2");
+    const comborow = createButtons("reflourished2", "bay");
+    const bay = createButtons("helpcombo", "bpm2");
+    const bpm2 = createButtons("bayonet", "msp2");
     const msp2 = createButtons("budgetplantmop2", "pm2");
     const pm2 = createButtons("mspotk2", "rfl2");
     const rfl2 = createButtons("plantmop2", "combohelp");
-    const alldecksrow = createButtons("reflourished3", "bpm3");
-    const bpm3 = createButtons("helpall", "lcbd2");
-    const lcbd2 = createButtons("budgetplantmop3", "lbait2");
-    const lbait2 = createButtons("lifecouldbedream2", "msp3");
+    const temporow = createButtons("lifecouldbedream2", "bay2");
+    const bay2 = createButtons("helptempo", "lcbd2");
+    const lcbd2 = createButtons("bayonet2", "tempohelp");
+    const alldecksrow = createButtons("reflourished3", "bay3");
+    const bay3 = createButtons("helpall", "bpm3");
+    const bpm3 = createButtons("bayonet3", "lcbd3");
+    const lcbd3 = createButtons("budgetplantmop3", "lbait2");
+    const lbait2 = createButtons("lifecouldbedream3", "msp3");
     const msp3 = createButtons("logbait2", "pm3");
     const pm3 = createButtons("mspotk3", "rfl3");
     const rfl3 = createButtons("plantmop3", "allhelp");
@@ -198,6 +213,13 @@ Note: Captain Combustible has ${captainCombustibleDecks.aggroDecks.length} Aggro
       `To view the Combo Decks for Captain Combustible decks please use the commands listed above or click on the buttons below!
 Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo Decks in Tbot`
     );
+    const tempoEmbed = createHelpEmbed(
+      "Captain Combustible Tempo Decks",
+      `My Tempo Decks for Captain Combustible(CC) are ${toBuildTempoString}`,
+      "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212",
+      `To view the Tempo Decks for Captain Combustible decks please use the commands listed above or click on the buttons below!
+Note: Captain Combustible has ${captainCombustibleDecks.tempoDecks.length} Tempo Decks in Tbot`
+    );
     const [result] = await db.query(`SELECT * from ccdecks`);
 
      /**
@@ -223,6 +245,7 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
       }
       return embed;
     }
+    const bayonet = createDeckEmbed(result, "bayonet");
     const budetplantmop = createDeckEmbed(result, "budgetcc");
     const lcbdream = createDeckEmbed(result, "lcbd");
     const logbait = createDeckEmbed(result, "logbait");
@@ -248,6 +271,12 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
       } else if (value == "comp") {
         await i.reply({
           embeds: [logbait],
+          flags: MessageFlags.Ephemeral,
+        });
+      }
+        else if (value == "ladder") {
+        await i.reply({
+          embeds: [bayonet],
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "aggro") {
@@ -276,6 +305,8 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
         aggrohelp: { embed: aggroEmbed, component: aggrorow },
         helpcombo: { embed: comboEmbed, component: comborow },
         combohelp: { embed: comboEmbed, component: comborow },
+        tempohelp: { embed: tempoEmbed, component: temporow },
+        helptempo: { embed: tempoEmbed, component: temporow },
         pm: { embed: plantmop, component: pm },
         plantmop: { embed: plantmop, component: pm },
         pm2: { embed: plantmop, component: pm2 },
@@ -286,12 +317,20 @@ Note: Captain Combustible has ${captainCombustibleDecks.comboDecks.length} Combo
         lifecouldbedream: { embed: lcbdream, component: lcbd },
         lcbd2: { embed: lcbdream, component: lcbd2 },
         lifecouldbedream2: { embed: lcbdream, component: lcbd2 },
+        lcbd3: { embed: lcbdream, component: lcbd3 },
+        lifecouldbedream3: { embed: lcbdream, component: lcbd3 },
         msp: { embed: mspotk, component: msp },
         mspotk: { embed: mspotk, component: msp },
         msp2: { embed: mspotk, component: msp2 },
         mspotk2: { embed: mspotk, component: msp2 },
         msp3: { embed: mspotk, component: msp3 },
         mspotk3: { embed: mspotk, component: msp3 },
+        bay: { embed: bayonet, component: bay },
+        bayonet: { embed: bayonet, component: bay },
+        bay2: { embed: bayonet, component: bay2 },
+        bayonet2: { embed: bayonet, component: bay2 },
+        bay3: { embed: bayonet, component: bay3 },
+        bayonet3: { embed: bayonet, component: bay3 },
         bpm: { embed: budetplantmop, component: bpm },
         budgetplantmop: { embed: budetplantmop, component: bpm },
         bpm2: { embed: budetplantmop, component: bpm2 },

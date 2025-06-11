@@ -256,6 +256,7 @@ module.exports = {
         "watertron",
       ],
       ladderDecks: [
+        "bayonet",
         "carroot",
         "dinocounter",
         "frymidrose",
@@ -301,6 +302,7 @@ module.exports = {
         "watertron",
       ],
       comboDecks: [
+        "bayonet",
         "budgetcc",
         "budgetcz",
         "carroot",
@@ -362,6 +364,7 @@ module.exports = {
       ],
       tempoDecks: [
         "100%winrate",
+        "bayonet",
         "carroot",
         "lifecouldbedream",
         "translattail",
@@ -369,6 +372,7 @@ module.exports = {
       allDecks: [
         "100%winrate",
         "abeans",
+        "bayonet",
         "budgetct",
         "budgetcc",
         "budgetcz",
@@ -736,8 +740,9 @@ module.exports = {
     }
     const allprow = createButtons("watertron", "wr100");
     const wr100 = createButtons("helpallp", "ab");
-    const ab = createButtons("winrate100", "bct");
-    const bct = createButtons("abeans", "bcc");
+    const ab = createButtons("winrate100", "bay");
+    const bay = createButtons("abeans", "bct");
+    const bct = createButtons("bayonet", "bcc");
     const bcc = createButtons("budgetct", "bcz");
     const bcz = createButtons("budgetcc", "bgk");
     const bgk = createButtons("budgetcz", "bgs");
@@ -809,8 +814,9 @@ module.exports = {
     const tc2 = createButtons("shamcontrolbc2", "vzilla2");
     const vzilla2 = createButtons("toyotacontrolla2", "wtron2");
     const wtron2 = createButtons("valuezilla2", "helppcomp");
-    const ladderprow = createButtons("pbeans2", "carr2");
-    const carr2 = createButtons("helppladder", "dcounter2");
+    const ladderprow = createButtons("pbeans2", "bay2");
+    const bay2 = createButtons("helppladder", "carr2");
+    const carr2 = createButtons("bayonet2", "dcounter2");
     const dcounter2 = createButtons("carroot2", "fmr2");
     const fmr2 = createButtons("dinocounter2", "g3n2");
     const g3n2 = createButtons("frymidrose2", "pts2");
@@ -851,8 +857,9 @@ module.exports = {
     const lbait3 = createButtons("dinogloves3", "pb3");
     const pb3 = createButtons("logbait3", "wtron3");
     const wtron3 = createButtons("pbeans3", "aggrophelp");
-    const comboprow = createButtons("translattail3", "bcc4");
-    const bcc4 = createButtons("helppcombo", "bcz3");
+    const comboprow = createButtons("translattail3", "bay3");
+    const bay3 = createButtons("helppcombo", "bcc4");
+    const bcc4 = createButtons("bayonet3", "bcz3");
     const bcz3 = createButtons("budgetcc4", "carr3");
     const carr3 = createButtons("budgetcz3", "cburn3");
     const cburn3 = createButtons("carroot3", "dcounter3");
@@ -910,8 +917,9 @@ module.exports = {
     const stron4 = createButtons("starrings4", "vzilla4");
     const vzilla4 = createButtons("startron4", "midrangephelp");
     const tempoprow = createButtons("translattail4", "wr1003");
-    const wr1003 = createButtons("tempophelp", "carr4");
-    const carr4 = createButtons("winrate1003", "lcbd3");
+    const wr1003 = createButtons("tempophelp", "bay4");
+    const bay4 = createButtons("winrate1003", "carr4");
+    const carr4 = createButtons("bayonet4", "lcbd3");
     const lcbd3 = createButtons("carroot4", "tlattail4");
     const tlattail4 = createButtons("lifecouldbedream3", "helpptempo");
     const allzrow = createButtons("zmoss", "sav");
@@ -1425,6 +1433,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
       }
       return embed;
     }
+    const bayonet = createPlantDeckEmbed(result, "bayonet");
     const carroot = createPlantDeckEmbed(result, "carroot");
     const shamcontrolbc = createPlantDeckEmbed(result, "shamcontrol");
     const budgetct = createPlantDeckEmbed(result, "budgetct");
@@ -2489,6 +2498,14 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         tangen3: { embed: tangen, component: tan3 },
         tan4: { embed: tangen, component: tan4 },
         tangen4: { embed: tangen, component: tan4 },
+        bay: {embed: bayonet, component: bay},
+        bayonet: {embed: bayonet, component: bay},
+        bay2: {embed: bayonet, component: bay2},
+        bayonet2: {embed: bayonet, component: bay2},
+        bay3: {embed: bayonet, component: bay3},
+        bayonet3: {embed: bayonet, component: bay3},
+        bay4: {embed: bayonet, component: bay4},
+        bayonet4: {embed: bayonet, component: bay4}
       };
       const action = buttonActions[i.customId];
       if (action) {

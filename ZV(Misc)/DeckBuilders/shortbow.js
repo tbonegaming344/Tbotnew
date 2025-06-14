@@ -169,7 +169,8 @@ module.exports = {
     const bay4 = createButtons("helptempo", "rpack3");
     const rpack3 = createButtons("bayonet4", "tempohelp");
     const [result] =
-      await db.query(`select bayonet, gomorrah, gps, limerence, pawntrickstab, raiserpackage, tangen from ntdecks nt 
+      await db.query(`select bayonet, gomorrah, 
+        gps, limerence, pawntrickstab, raiserpackage, tangen from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
         inner join bfdecks bf on nt.deckinfo = bf.deckinfo

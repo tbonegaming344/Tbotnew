@@ -570,7 +570,6 @@ module.exports = {
         "mechascope",
         "noplayingallowed",
         "sunbandits",
-        "telimps",
         "uncrackamech",
         "whalepharaoh",
       ],
@@ -603,6 +602,7 @@ module.exports = {
         "spacestars",
         "sunlord",
         "tangen",
+        "telimps",
         "trickstache",
         "valkster",
         "watersports",
@@ -1134,9 +1134,8 @@ module.exports = {
     const mcon3 = createButtons("kaleidoscope3", "mscope4");
     const mscope4 = createButtons("mechacontrol3", "npa3");
     const npa3 = createButtons("mechascope4", "sbandits4");
-    const sbandits4 = createButtons("noplayingallowed3", "timps4");
-    const timps4 = createButtons("sunbandits4", "umech4");
-    const umech4 = createButtons("telimps4", "wph4");
+    const sbandits4 = createButtons("noplayingallowed3", "umech4");
+    const umech4 = createButtons("sunbandits4", "wph4");
     const wph4 = createButtons("uncrackamech4", "controlzhelp");
     const midrangezrow = createButtons("youngkenmartin4", "sav4");
     const sav4 = createButtons("helpzmid", "bhammer4");
@@ -1166,8 +1165,9 @@ module.exports = {
     const slug3 = createButtons("nohokaistars3", "stars4");
     const stars4 = createButtons("slugged3", "slord4");
     const slord4 = createButtons("spacestars4", "tan4");
-    const tan4 = createButtons("sunlord4", "tstache4");
-    const tstache4 = createButtons("tangen4", "vster4");
+    const tan4 = createButtons("sunlord4", "timps4");
+    const timps4 = createButtons("tangen4", "tstache4");
+    const tstache4 = createButtons("telimps4", "vster4");
     const vster4 = createButtons("trickstache4", "wsports4");
     const wsports4 = createButtons("valkster4", "ykmartin4");
     const ykmartin4 = createButtons("watersports4", "midzhelp");

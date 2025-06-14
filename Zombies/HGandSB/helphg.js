@@ -80,7 +80,7 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Decks")
+          .setLabel("Control Deck")
           .setValue("control")
           .setDescription(
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
@@ -119,8 +119,8 @@ module.exports = {
         "telimps",
         "ykm",
       ],
-      controlDecks: ["frozentelimps", "telimps"],
-      midrangeDecks: ["cryoboy", "ykm"],
+      controlDecks: ["frozentelimps"],
+      midrangeDecks: ["cryoboy","telimps", "ykm"],
       tempoDecks: ["conjureleap"],
       allDecks: [
         "budgetykm",
@@ -149,9 +149,6 @@ module.exports = {
     );
     const toBuildMemeString = buildDeckString(hugeGigantacusDecks.memeDecks);
     const toBuildComboString = buildDeckString(hugeGigantacusDecks.comboDecks);
-    const toBuildControlString = buildDeckString(
-      hugeGigantacusDecks.controlDecks
-    );
     const toBuildMidrangeString = buildDeckString(
       hugeGigantacusDecks.midrangeDecks
     );
@@ -198,12 +195,11 @@ module.exports = {
     const gs3 = createButtons("gravepiratestache3", "ti2");
     const ti2 = createButtons("gravestache3", "ykm3");
     const ykm3 = createButtons("telimps2", "combohelp");
-    const controlrow = createButtons("telimps3", "ft4");
-    const ft4 = createButtons("helpcontrol", "ti3");
     const ti3 = createButtons("frozentelimps4", "controlhelp");
     const midrangerow = createButtons("youngkenmartin3", "cboy4");
-    const cboy4 = createButtons("helpmidrange", "ykm4");
-    const ykm4 = createButtons("cryoboy4", "midrangehelp");
+    const cboy4 = createButtons("helpmidrange", "ti4");
+    const ti4 = createButtons("cyroboy4", "ykm4");
+    const ykm4 = createButtons("telimps4", "midrangehelp");
     const allEmbed = createHelpEmbed(
       "Huge Gigantacus Decks",
       `My commands for Huge-Gigantacus(HG) are ${toBuildString}`,
@@ -237,13 +233,6 @@ Note: there are ${hugeGigantacusDecks.memeDecks.length} meme decks for Huge Giga
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
       `To view the combo Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: there are ${hugeGigantacusDecks.comboDecks.length} combo decks for Huge Gigantacus in Tbot`
-    );
-    const controlEmbed = createHelpEmbed(
-      "Huge Gigantacus Control Decks",
-      `My control decks for Huge-Gigantacus(HG) are ${toBuildControlString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
-      `To view the control Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-Note: there are ${hugeGigantacusDecks.controlDecks.length} control decks for Huge Gigantacus in Tbot`
     );
     const midrangeEmbed = createHelpEmbed(
       "Huge Gigantacus Midrange Decks",
@@ -311,7 +300,8 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "control") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
+        await i.reply({
+          embeds: [frozentelimps], flags: MessageFlags.Ephemeral})
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
@@ -334,8 +324,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         memehelp: {embed: memeEmbed, component: memerow},
         helpcombo: {embed: comboEmbed, component: comborow},
         combohelp: {embed: comboEmbed, component: comborow},
-        helpcontrol: {embed: controlEmbed, component: controlrow},
-        controlhelp: {embed: controlEmbed, component: controlrow},
         helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         midrangehelp: {embed: midrangeEmbed, component: midrangerow},
         bgus: {embed: budgetykm, component: bgus},
@@ -360,8 +348,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         frozentelimps2: {embed: frozentelimps, component: ft2},
         ft3: {embed: frozentelimps, component: ft3},
         frozentelimps3: {embed: frozentelimps, component: ft3},
-        ft4: {embed: frozentelimps, component: ft4},
-        frozentelimps4: {embed: frozentelimps, component: ft4},
         gs: {embed: gravestache, component: gs},
         gravestache: {embed: gravestache, component: gs},
         gs2: {embed: gravestache, component: gs2},
@@ -380,6 +366,8 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         telimps2: {embed: telimps, component: ti2},
         ti3: {embed: telimps, component: ti3},
         telimps3: {embed: telimps, component: ti3},
+        ti4: {embed: telimps, component: ti4},
+        telimps4: {embed: telimps, component: ti4},
         ykm: {embed: youngkenmartin, component: ykm},
         youngkenmartin: {embed: youngkenmartin, component: ykm},
         ykm2: {embed: youngkenmartin, component: ykm2},

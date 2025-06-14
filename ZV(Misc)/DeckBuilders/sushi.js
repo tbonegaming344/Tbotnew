@@ -67,8 +67,8 @@ module.exports = {
       .setValue("combo")
       .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Control Decks")
-      .setValue("control")
+      .setLabel("Midrange Decks")
+      .setValue("Midrange")
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'), 
       new StringSelectMenuOptionBuilder()
       .setLabel("Midrange Deck")
@@ -90,8 +90,8 @@ module.exports = {
       memeDecks: ["sunbandits"], 
       aggroDecks: ["trickmech"], 
       comboDecks: ["sunbandits", "telimps"], 
-      controlDecks: ["sunbandits", "telimps"], 
-      midrangeDecks: ["healmidrose"], 
+      MidrangeDecks: ["sunbandits"], 
+      midrangeDecks: ["healmidrose", "telimps"], 
       tempoDecks: ["professorpackage"],
       allDecks: ["healmidrose", "professorpackage", "sunbandits", "telimps", "trickmech"]
     }
@@ -108,12 +108,12 @@ module.exports = {
     const toBuildCompetitive = buildDeckString(sushiDecks.competitiveDecks);
     const toBuildLadder = buildDeckString(sushiDecks.ladderDecks);
     const toBuildCombo = buildDeckString(sushiDecks.comboDecks);
-    const toBuildControl = buildDeckString(sushiDecks.controlDecks);
+    const toBuildMidrange = buildDeckString(sushiDecks.midrangeDecks);
     const toBuildString = buildDeckString(sushiDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @param {string} leftButtonId - The ID of the left button to Midrange the left button 
+     * @param {string} rightButtonId - The ID of the right button to Midrange the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function createButtons(leftButtonId, rightButtonId) {
@@ -137,12 +137,12 @@ module.exports = {
     const competitiverow =  createButtons("telimps2", "hmrose");
     const hmrose =  createButtons("helpcomp", "ti2");
     const ti2 =  createButtons("healmidrose2", "comphelp");
-    const controlrow =  createButtons("telimps3", "sb2");
-    const sb2 = createButtons("helpcontrol", "ti3")
-    const ti3 =  createButtons("sunbandits2", "controlhelp");
-    const alldecksrow = createButtons("trickmech2", "hmrose2");
-    const hmrose2 = createButtons("helpall", "propack2");
-    const propack2 = createButtons("healmidrose2", "sb3");
+    const midrangerow =  createButtons("telimps3", "hmrose2");
+    const hmrose2 = createButtons("helpmidrange", "ti3")
+    const ti3 =  createButtons("healmidrose2", "midrangehelp");
+    const alldecksrow = createButtons("trickmech2", "hmrose3");
+    const hmrose3 = createButtons("helpall", "propack2");
+    const propack2 = createButtons("healmidrose3", "sb3");
     const sb3 = createButtons("professorpackage2", "ti4");
     const ti4 = createButtons("sunbandits3", "tmech2");
     const tmech2 =  createButtons("telimps4", "allhelp");
@@ -178,12 +178,12 @@ Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`
         `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${sushiDecks.comboDecks.length} Combo decks in Tbot`
       )
-      const controlsushi = createHelpEmbed(
-        `${user.displayName} Control Decks`,
-        `My Control decks made by ${user.displayName} are ${toBuildControl}`,
+      const midrangesushi = createHelpEmbed(
+        `${user.displayName} Midrange Decks`,
+        `My Midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
         user.displayAvatarURL(), 
-        `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${sushiDecks.controlDecks.length} Control decks in Tbot`
+        `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${sushiDecks.MidrangeDecks.length} Midrange decks in Tbot`
       )
       const competitivesushi = createHelpEmbed(
         `${user.displayName} Competitive Decks`,
@@ -245,7 +245,7 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         await i.update({embeds: [combosushi], components: [comborow]})
       }
       else if(value == "control"){
-        await i.update({embeds: [controlsushi], components: [controlrow]})
+        await i.reply({embeds: [sband], flags: MessageFlags.Ephemeral})
       }
       else if(value == "midrange"){
         await i.update({embeds: [midrangesushi], components: [midrangerow]})
@@ -269,8 +269,8 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         comphelp: {embed: competitivesushi, component: competitiverow}, 
         combohelp: {embed: combosushi, component: comborow},
         helpcombo: {embed: combosushi, component: comborow},
-        helpcontrol: {embed: controlsushi, component: controlrow},
-        controlhelp: {embed: controlsushi, component: controlrow},
+        helpmidrange: {embed: midrangesushi, component: midrangerow},
+        midrangehelp: {embed: Midrangesushi, component: midrangerow},
         sb: {embed: sband, component: sb},
         sunbandits: {embed: sband, component: sb},
         sb2: {embed: sband, component: sb2},
@@ -285,11 +285,12 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         telimps3: {embed: timps, component: ti3},
         ti4: {embed: timps, component: ti4},
         telimps4: {embed: timps, component: ti4},
-        
         hmrose: {embed: hmr, component: hmrose},
         healmidrose: {embed: hmr, component: hmrose},
         hmrose2: {embed: hmr, component: hmrose2},
         healmidrose2: {embed: hmr, component: hmrose2},
+        hmrose3: {embed: hmr, component: hmrose3},
+        healmidrose3: {embed: hmr, component: hmrose3},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
         ladderhelp: {embed: laddersushi, component: ladderrow},

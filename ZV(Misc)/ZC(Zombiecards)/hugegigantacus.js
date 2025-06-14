@@ -44,7 +44,7 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
         .setEmoji("<:hg:1087736553557725217>")
     );
-    const select = new StringSelectMenuBuilder()
+   const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder(
         "Select an option below to view Huge Gigantacus decklists"
@@ -82,7 +82,7 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Decks")
+          .setLabel("Control Deck")
           .setValue("control")
           .setDescription(
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
@@ -121,8 +121,8 @@ module.exports = {
         "telimps",
         "ykm",
       ],
-      controlDecks: ["frozentelimps", "telimps"],
-      midrangeDecks: ["cryoboy", "ykm"],
+      controlDecks: ["frozentelimps"],
+      midrangeDecks: ["cryoboy","telimps", "ykm"],
       tempoDecks: ["conjureleap"],
       allDecks: [
         "budgetykm",
@@ -135,7 +135,7 @@ module.exports = {
         "ykm",
       ],
     };
-    /**
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -151,15 +151,12 @@ module.exports = {
     );
     const toBuildMemeString = buildDeckString(hugeGigantacusDecks.memeDecks);
     const toBuildComboString = buildDeckString(hugeGigantacusDecks.comboDecks);
-    const toBuildControlString = buildDeckString(
-      hugeGigantacusDecks.controlDecks
-    );
     const toBuildMidrangeString = buildDeckString(
       hugeGigantacusDecks.midrangeDecks
     );
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -200,12 +197,11 @@ module.exports = {
     const gs3 = createButtons("gravepiratestache3", "ti2");
     const ti2 = createButtons("gravestache3", "ykm3");
     const ykm3 = createButtons("telimps2", "combohelp");
-    const controlrow = createButtons("telimps3", "ft4");
-    const ft4 = createButtons("helpcontrol", "ti3");
     const ti3 = createButtons("frozentelimps4", "controlhelp");
     const midrangerow = createButtons("youngkenmartin3", "cboy4");
-    const cboy4 = createButtons("helpmidrange", "ykm4");
-    const ykm4 = createButtons("cryoboy4", "midrangehelp");
+    const cboy4 = createButtons("helpmidrange", "ti4");
+    const ti4 = createButtons("cyroboy4", "ykm4");
+    const ykm4 = createButtons("telimps4", "midrangehelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
@@ -289,13 +285,6 @@ Note: there are ${hugeGigantacusDecks.memeDecks.length} meme decks for Huge Giga
       `To view the combo Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: there are ${hugeGigantacusDecks.comboDecks.length} combo decks for Huge Gigantacus in Tbot`
     );
-    const controlEmbed = createHelpEmbed(
-      "Huge Gigantacus Control Decks",
-      `My control decks for Huge-Gigantacus(HG) are ${toBuildControlString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
-      `To view the control Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-Note: there are ${hugeGigantacusDecks.controlDecks.length} control decks for Huge Gigantacus in Tbot`
-    );
     const midrangeEmbed = createHelpEmbed(
       "Huge Gigantacus Midrange Decks",
       `My midrange decks for Huge-Gigantacus(HG) are ${toBuildMidrangeString}`,
@@ -346,7 +335,7 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget") {
+       if (value == "budget") {
         await i.reply({ embeds: [budgetykm], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
         await i.reply({ embeds: [telimps], flags: MessageFlags.Ephemeral });
@@ -362,7 +351,8 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "control") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
+        await i.reply({
+          embeds: [frozentelimps], flags: MessageFlags.Ephemeral})
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
@@ -378,68 +368,66 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
     async function handleButtonInteraction(i) {
       const buttonActions = {
         huge: { embed: helphgEmbed, component: row },
-        helpall: { embed: allEmbed, component: alldecksrow },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpladder: { embed: ladderEmbed, component: ladderrow },
-        ladderhelp: { embed: ladderEmbed, component: ladderrow },
-        helpmeme: { embed: memeEmbed, component: memerow },
-        memehelp: { embed: memeEmbed, component: memerow },
-        helpcombo: { embed: comboEmbed, component: comborow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        helpcontrol: { embed: controlEmbed, component: controlrow },
-        controlhelp: { embed: controlEmbed, component: controlrow },
-        helpmidrange: { embed: midrangeEmbed, component: midrangerow },
-        midrangehelp: { embed: midrangeEmbed, component: midrangerow },
-        bgus: { embed: budgetykm, component: bgus },
-        budgetgus: { embed: budgetykm, component: bgus },
-        bgus2: { embed: budgetykm, component: bgus2 },
-        budgetgus2: { embed: budgetykm, component: bgus2 },
-        cboy: { embed: cryoboy, component: cboy },
-        cyroboy: { embed: cryoboy, component: cboy },
-        cboy2: { embed: cryoboy, component: cboy2 },
-        cyroboy2: { embed: cryoboy, component: cboy2 },
-        cboy3: { embed: cryoboy, component: cboy3 },
-        cyroboy3: { embed: cryoboy, component: cboy3 },
-        cboy4: { embed: cryoboy, component: cboy4 },
-        cyroboy4: { embed: cryoboy, component: cboy4 },
-        cl: { embed: conjureleap, component: cl },
-        conjureleap: { embed: conjureleap, component: cl },
-        cl2: { embed: conjureleap, component: cl2 },
-        conjureleap2: { embed: conjureleap, component: cl2 },
-        ft: { embed: frozentelimps, component: ft },
-        frozentelimps: { embed: frozentelimps, component: ft },
-        ft2: { embed: frozentelimps, component: ft2 },
-        frozentelimps2: { embed: frozentelimps, component: ft2 },
-        ft3: { embed: frozentelimps, component: ft3 },
-        frozentelimps3: { embed: frozentelimps, component: ft3 },
-        ft4: { embed: frozentelimps, component: ft4 },
-        frozentelimps4: { embed: frozentelimps, component: ft4 },
-        gs: { embed: gravestache, component: gs },
-        gravestache: { embed: gravestache, component: gs },
-        gs2: { embed: gravestache, component: gs2 },
-        gravestache2: { embed: gravestache, component: gs2 },
-        gs3: { embed: gravestache, component: gs3 },
-        gravestache3: { embed: gravestache, component: gs3 },
-        gps: { embed: gravepiratestache, component: gps },
-        gravepiratestache: { embed: gravepiratestache, component: gps },
-        gps2: { embed: gravepiratestache, component: gps2 },
-        gravepiratestache2: { embed: gravepiratestache, component: gps2 },
-        gps3: { embed: gravepiratestache, component: gps3 },
-        gravepiratestache3: { embed: gravepiratestache, component: gps3 },
-        ti: { embed: telimps, component: ti },
-        telimps: { embed: telimps, component: ti },
-        ti2: { embed: telimps, component: ti2 },
-        telimps2: { embed: telimps, component: ti2 },
-        ti3: { embed: telimps, component: ti3 },
-        telimps3: { embed: telimps, component: ti3 },
-        ykm: { embed: youngkenmartin, component: ykm },
-        youngkenmartin: { embed: youngkenmartin, component: ykm },
-        ykm2: { embed: youngkenmartin, component: ykm2 },
-        youngkenmartin2: { embed: youngkenmartin, component: ykm2 },
-        ykm3: { embed: youngkenmartin, component: ykm3 },
-        youngkenmartin3: { embed: youngkenmartin, component: ykm3 },
-        ykm4: { embed: youngkenmartin, component: ykm4 },
-        youngkenmartin4: { embed: youngkenmartin, component: ykm4 },
+         helpall: {embed: allEmbed, component: alldecksrow},
+        allhelp: {embed: allEmbed, component: alldecksrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+        bgus: {embed: budgetykm, component: bgus},
+        budgetgus: {embed: budgetykm, component: bgus},
+        bgus2: {embed: budgetykm, component: bgus2},
+        budgetgus2: {embed: budgetykm, component: bgus2},
+        cboy: {embed: cryoboy, component: cboy},
+        cyroboy: {embed: cryoboy, component: cboy},
+        cboy2: {embed: cryoboy, component: cboy2},
+        cyroboy2: {embed: cryoboy, component: cboy2},
+        cboy3: {embed: cryoboy, component: cboy3},
+        cyroboy3: {embed: cryoboy, component: cboy3},
+        cboy4: {embed: cryoboy, component: cboy4},
+        cyroboy4: {embed: cryoboy, component: cboy4},
+        cl: {embed: conjureleap, component: cl},
+        conjureleap: {embed: conjureleap, component: cl},
+        cl2: {embed: conjureleap, component: cl2},
+        conjureleap2: {embed: conjureleap, component: cl2},
+        ft: {embed: frozentelimps, component: ft},
+        frozentelimps: {embed: frozentelimps, component: ft},
+        ft2: {embed: frozentelimps, component: ft2},
+        frozentelimps2: {embed: frozentelimps, component: ft2},
+        ft3: {embed: frozentelimps, component: ft3},
+        frozentelimps3: {embed: frozentelimps, component: ft3},
+        gs: {embed: gravestache, component: gs},
+        gravestache: {embed: gravestache, component: gs},
+        gs2: {embed: gravestache, component: gs2},
+        gravestache2: {embed: gravestache, component: gs2},
+        gs3: {embed: gravestache, component: gs3},
+        gravestache3: {embed: gravestache, component: gs3},
+        gps: {embed: gravepiratestache, component: gps},
+        gravepiratestache: {embed: gravepiratestache, component: gps},
+        gps2: {embed: gravepiratestache, component: gps2},
+        gravepiratestache2: {embed: gravepiratestache, component: gps2},
+        gps3: {embed: gravepiratestache, component: gps3},
+        gravepiratestache3: {embed: gravepiratestache, component: gps3},
+        ti: {embed: telimps, component: ti},
+        telimps: {embed: telimps, component: ti},
+        ti2: {embed: telimps, component: ti2},
+        telimps2: {embed: telimps, component: ti2},
+        ti3: {embed: telimps, component: ti3},
+        telimps3: {embed: telimps, component: ti3},
+        ti4: {embed: telimps, component: ti4},
+        telimps4: {embed: telimps, component: ti4},
+        ykm: {embed: youngkenmartin, component: ykm},
+        youngkenmartin: {embed: youngkenmartin, component: ykm},
+        ykm2: {embed: youngkenmartin, component: ykm2},
+        youngkenmartin2: {embed: youngkenmartin, component: ykm2},
+        ykm3: {embed: youngkenmartin, component: ykm3},
+        youngkenmartin3: {embed: youngkenmartin, component: ykm3},
+        ykm4: {embed: youngkenmartin, component: ykm4},
+        youngkenmartin4: {embed: youngkenmartin, component: ykm4},
       };
       const action = buttonActions[i.customId];
       if (action) {

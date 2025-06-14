@@ -249,8 +249,8 @@ module.exports = {
         "figlottery",
         "healmidrose",
         "logbait",
+        "neurotherapy",
         "radiotherapy",
-        "shamcontrolbc",
         "toyotacontrolla",
         "valuezilla",
         "watertron",
@@ -329,10 +329,10 @@ module.exports = {
       controlDecks: [
         "cancerknight",
         "chemotherapy",
+        "neurotherapy",
         "pawntrickstab",
         "popsicle",
         "radiotherapy",
-        "shamcontrolbc",
         "shitknight",
         "toyotacontrolla",
         "valuezilla",
@@ -403,18 +403,18 @@ module.exports = {
         "logbait",
         "mopribus",
         "mspotk",
+        "neurotherapy",
+        "nuttin",
         "pawntrickstab",
         "pbeans",
         "plantmop",
         "popsicle",
         "psychosolstice",
-        "nuttin",
         "radiotherapy",
         "ramp2seedling",
         "recycling",
         "reflourished",
         "savagemayflower",
-        "shamcontrolbc",
         "shitknight",
         "starrings",
         "startron",
@@ -769,22 +769,22 @@ module.exports = {
     const hland = createButtons("healthotk", "lsnap");
     const lsnap = createButtons("highlander", "lcbd");
     const lcbd = createButtons("lasersnap", "lbait");
-    const lbait = createButtons("lifecouldbedream", "mopr");
+    const lbait = createButtons("lifecouldbedream", "neuro");
+    const neuro = createButtons("logbait", "nut");
+    const nut = createButtons("neurotherapy", "mopr");
     const mopr = createButtons("logbait", "msp");
     const msp = createButtons("mopribus", "pts");
     const pts = createButtons("mspotk", "pb");
     const pb = createButtons("pawntrickstab", "plmop");
     const plmop = createButtons("pbeans", "pop");
     const pop = createButtons("plantmop", "psol");
-    const psol = createButtons("popsicle", "nut");
-    const nut = createButtons("psychosolstice", "radio");
-    const radio = createButtons("nuttin", "r2s");
+    const psol = createButtons("popsicle", "radio");
+    const radio = createButtons("psychosolstice", "r2s");
     const r2s = createButtons("radiotherapy", "recy");
     const recy = createButtons("ramp2seedling", "rfl");
     const rfl = createButtons("recycling", "smf");
-    const smf = createButtons("reflourished", "shambc");
-    const shambc = createButtons("savagemayflower", "sknight");
-    const sknight = createButtons("shamcontrolbc", "srings");
+    const smf = createButtons("reflourished", "sknight");
+    const sknight = createButtons("savagemayflower", "srings");
     const srings = createButtons("shitknight", "stron");
     const stron = createButtons("starrings", "tc");
     const tc = createButtons("startron", "tlattail");
@@ -808,10 +808,10 @@ module.exports = {
     const cburn2 = createButtons("chemotherapy2", "flottery2");
     const flottery2 = createButtons("cyburn2", "hmr2");
     const hmr2 = createButtons("figlottery2", "lbait2");
-    const lbait2 = createButtons("healmidrose2", "radio2");
-    const radio2 = createButtons("logbait2", "shambc2");
-    const shambc2 = createButtons("radiotherapy2", "tc2");
-    const tc2 = createButtons("shamcontrolbc2", "vzilla2");
+    const lbait2 = createButtons("healmidrose2", "neuro2");
+    const neuro2 = createButtons("logbait2", "radio2");
+    const radio2 = createButtons("neurotherapy2", "tc2");
+    const tc2 = createButtons("radiotherapy2", "vzilla2");
     const vzilla2 = createButtons("toyotacontrolla2", "wtron2");
     const wtron2 = createButtons("valuezilla2", "helppcomp");
     const ladderprow = createButtons("pbeans2", "bay2");
@@ -883,12 +883,12 @@ module.exports = {
     const tlattail3 = createButtons("startron3", "helppcombo");
     const controlprow = createButtons("valuezilla3", "cank3");
     const cank3 = createButtons("helppcontrol", "chemo3");
-    const chemo3 = createButtons("cancerknight3", "pts3");
-    const pts3 = createButtons("chemotherapy3", "pop3");
+    const chemo3 = createButtons("cancerknight3", "neuro3");
+    const neuro3 = createButtons("chemotherapy3", "pts3");
+    const pts3 = createButtons("neurotherapy3", "pop3");
     const pop3 = createButtons("pawntrickstab3", "radio3");
-    const radio3 = createButtons("popsicle3", "shambc3");
-    const shambc3 = createButtons("radiotherapy3", "sknight3");
-    const sknight3 = createButtons("shamcontrolbc3", "tc3");
+    const radio3 = createButtons("popsicle3", "sknight3");
+    const sknight3 = createButtons("radiotherapy3", "tc3");
     const tc3 = createButtons("shitknight3", "vzilla3");
     const vzilla3 = createButtons("toyotacontrolla3", "helpcontrolp");
     const midrangeprow = createButtons("valuezilla4", "bcz4");
@@ -1435,7 +1435,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     }
     const bayonet = createPlantDeckEmbed(result, "bayonet");
     const carroot = createPlantDeckEmbed(result, "carroot");
-    const shamcontrolbc = createPlantDeckEmbed(result, "shamcontrol");
+    const neurotherapy = createPlantDeckEmbed(result, "shamcontrol");
     const budgetct = createPlantDeckEmbed(result, "budgetct");
     const going3nuts = createPlantDeckEmbed(result, "going3nuts");
     const startron = createPlantDeckEmbed(result, "startron");
@@ -1878,12 +1878,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         savagemayflower2: { embed: savagemayflower, component: smf2 },
         smf3: { embed: savagemayflower, component: smf3 },
         savagemayflower3: { embed: savagemayflower, component: smf3 },
-        shambc: { embed: shamcontrolbc, component: shambc },
-        shamcontrolbc: { embed: shamcontrolbc, component: shambc },
-        shambc2: { embed: shamcontrolbc, component: shambc2 },
-        shamcontrolbc2: { embed: shamcontrolbc, component: shambc2 },
-        shambc3: { embed: shamcontrolbc, component: shambc3 },
-        shamcontrolbc3: { embed: shamcontrolbc, component: shambc3 },
+        neuro: { embed: neurotherapy, component: neuro },
+        neurotherapy: { embed: neurotherapy, component: neuro },
+        neuro2: { embed: neurotherapy, component: neuro2 },
+        neurotherapy2: { embed: neurotherapy, component: neuro2 },
+        neuro3: { embed: neurotherapy, component: neuro3 },
+        neurotherapy3: { embed: neurotherapy, component: neuro3 },
         sknight: { embed: shitknight, component: sknight },
         shitknight: { embed: shitknight, component: sknight },
         sknight2: { embed: shitknight, component: sknight2 },

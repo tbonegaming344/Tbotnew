@@ -93,13 +93,13 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const betaCarrotinaDecks = {
-      competitiveDecks: ["shamcontrolbc"],
+      competitiveDecks: ["neurotherapy"],
       ladderDecks: ["carroot", "dinocounter"],
       comboDecks: ["carroot", "dinocounter"],
-      controlDecks: ["shamcontrol"],
+      controlDecks: ["neurotherapy"],
       midrangedecks: ["dinocounter"],
       tempoDecks: ["carroot"],
-      allDecks: ["carroot", "dinocounter", "shamcontrolbc"],
+      allDecks: ["carroot", "dinocounter", "neurotherapy"],
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.

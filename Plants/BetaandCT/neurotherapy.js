@@ -1,16 +1,18 @@
 const { EmbedBuilder } = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
-  name: `shamcontrolbc`,
+  name: `neurotherapy`,
   aliases: [
     `bccontrol`,
     `cbc`,
     `controlbc`,
+    `shamcontrolbc`,
     `bcwnbcontrol`,
     `controltina`,
     `bcshamcontrol`,
     `shamcontrol`,
-    `shamctrl`  
+    `shamctrl`, 
+    `techcontrol`
   ],
   category: `Beta-Carrotina/Citron`,
   run: async (client, message, args) => {

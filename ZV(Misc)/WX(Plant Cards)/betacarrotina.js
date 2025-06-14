@@ -84,13 +84,13 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const betaCarrotinaDecks = {
-      competitiveDecks: ["shamcontrolbc"],
+      competitiveDecks: ["neurotherapy"],
       ladderDecks: ["carroot", "dinocounter"],
       comboDecks: ["carroot", "dinocounter"],
-      controlDecks: ["shamcontrol"],
+      controlDecks: ["neurotherapy"],
       midrangedecks: ["dinocounter"],
       tempoDecks: ["carroot"],
-      allDecks: ["carroot", "dinocounter", "shamcontrolbc"],
+      allDecks: ["carroot", "dinocounter", "neurotherapy"],
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -133,37 +133,32 @@ module.exports = {
     const car3 = createButtons("helpall", "dcounter3");
     const dcounter3 = createButtons("carroot3", "scontrol");
     const scontrol = createButtons("dinocounter3", "allhelp");
+    const [heroresult] = await db.query(`select betacarrotina from plantheroes`)
     const bc = new EmbedBuilder()
       .setThumbnail(
-        "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist"
+        `${heroresult[2].betacarrotina}`
       )
       .setTitle(
-        "Beta-Carrotina | <:Guardian:1062501130501885973><:Smarty:1062502890448638022>"
+        `${heroresult[5].betacarrotina}`
       )
-      .setDescription("**\\- Root Hero  -**")
+      .setDescription(`${heroresult[0].betacarrotina}`)
       .setColor("#964B00")
 
       .addFields(
         {
           name: "Superpowers",
-          value: `Ensign Uproot <:Guardian:1062501130501885973> 
-**When played:** Move another Plant or Zombie. 
-Lieutenant Carrotron <:Smarty:1062502890448638022> 
-**When played:** __Conjure__ a Root.
-Lightspeed Seed <:Smarty:1062502890448638022> 
-__Conjure__ two Tricks. 
-Genetic Amplification <:Guardian:1062501130501885973><:Smarty:1062502890448638022> 
-__Conjure__ a Plant that costs 2<:Sun:1062501177679413409>. 
-It gets +2<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>, __Amphibious__, and __Team-Up__.`,
+          value: `${heroresult[4].betacarrotina}`,
+          inline: true,
         },
         {
           name: "Set-Rarity",
-          value: "**Premium - Hero**",
+          value: `${heroresult[3].betacarrotina}`,
+          inline: true,
         },
         {
           name: "Flavor Text",
-          value:
-            "As leader of the Plant-etary Guard, she's ready to root out Zombies wherever they crop up.",
+          value: `${heroresult[1].betacarrotina}`,
+          inline: true,
         }
       );
     const [result] = await db.query("SELECT * FROM bcdecks");

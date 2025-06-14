@@ -109,7 +109,6 @@ module.exports = {
         "logbait",
         "radiotherapy",
         "seacret",
-        "shamcontrol",
         "spacestars",
         "watertron",
       ],
@@ -128,7 +127,6 @@ module.exports = {
         "chemotherapy",
         "noplayingallowed",
         "radiotherapy",
-        "shamcontrol",
       ],
       midrangeDecks: [
         "budgetykm",
@@ -150,7 +148,6 @@ module.exports = {
         "radiotherapy",
         "schoolyard",
         "seacret",
-        "shamcontrolbc",
         "spacestars",
         "watertron",
       ],
@@ -201,9 +198,8 @@ module.exports = {
     const gb = createButtons("figlottery", "lbait");
     const lbait = createButtons("gargburn", "radio");
     const radio = createButtons("logbait", "sea");
-    const sea = createButtons("radiotherapy", "sham");
-    const sham = createButtons("seacret", "stars");
-    const stars = createButtons("shamcontrol", "wt");
+    const sea = createButtons("radiotherapy", "stars");
+    const stars = createButtons("seacret", "wt");
     const wt = createButtons("spacestars", "helpcomp");
     const ladderrow = createButtons("schoolyard", "gstache");
     const gstache = createButtons("ladderhelp", "syard");
@@ -227,11 +223,10 @@ module.exports = {
     const flottery2 = createButtons("cyburn3", "gb3");
     const gb3 = createButtons("figlottery2", "stars3");
     const stars3 = createButtons("gargburn3", "helpmid");
-    const controlrow = createButtons("shamcontrol2", "chemo2");
+    const controlrow = createButtons("radiotherapy2", "chemo2");
     const chemo2 = createButtons("helpcontrol", "npa2");
     const npa2 = createButtons("chemotherapy2", "radio2");
-    const radio2 = createButtons("noplayingallowed2", "sham2");
-    const sham2 = createButtons("radiotherapy2", "controlhelp");
+    const radio2 = createButtons("noplayingallowed2", "controlhelp");
     const alldecksrow = createButtons("watertron3", "ab3");
     const ab3 = createButtons("allhelp", "bykm3");
     const bykm3 = createButtons("abeans3", "chemo3");
@@ -244,14 +239,13 @@ module.exports = {
     const npa3 = createButtons("logbait3", "radio3");
     const radio3 = createButtons("noplayingallowed3", "syard3");
     const syard3 = createButtons("radiotherapy3", "sea4");
-    const sea4 = createButtons("schoolyard3", "sham3");
-    const sham3 = createButtons("seacret4", "stars4");
-    const stars4 = createButtons("shamcontrol3", "wt3");
+    const sea4 = createButtons("schoolyard3", "stars4");
+    const stars4 = createButtons("seacret4", "wt3");
     const wt3 = createButtons("spacestars4", "helpall");
     const [result] = await db.query(`select abeans, apotk,
 budgetykm, chemotherapy,
 cyburn, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
-schoolyard, seacret, shamcontrol, spacestars, radiotherapy, watertron
+schoolyard, seacret, spacestars, radiotherapy, watertron
 from gsdecks gs 
 inner join czdecks cz
 on (gs.deckinfo = cz.deckinfo)
@@ -379,7 +373,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
     const radiotherapy = createDeckEmbed(result, "radiotherapy");
     const seacret = createDeckEmbed(result, "seacret");
     const schoolyard = createDeckEmbed(result, "schoolyard");
-    const shamcontrol = createDeckEmbed(result, "shamcontrol");
     const spacestars = createDeckEmbed(result, "spacestars");
     const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [salt], components: [row] });
@@ -491,12 +484,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         seacret2: { embed: seacret, component: sea2 },
         seacret3: { embed: seacret, component: sea3 },
         seacret4: { embed: seacret, component: sea4 },
-        sham: { embed: shamcontrol, component: sham },
-        sham2: { embed: shamcontrol, component: sham2 },
-        sham3: { embed: shamcontrol, component: sham3 },
-        shamcontrol: { embed: shamcontrol, component: sham },
-        shamcontrol2: { embed: shamcontrol, component: sham2 },
-        shamcontrol3: { embed: shamcontrol, component: sham3 },
         wt: { embed: watertron, component: wt },
         wt2: { embed: watertron, component: wt2 },
         wt3: { embed: watertron, component: wt3 },

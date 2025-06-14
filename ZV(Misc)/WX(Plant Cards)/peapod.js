@@ -5,7 +5,7 @@ module.exports = {
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
 		const pp = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c2/Pea_Pod%28Halloween%29.png/revision/latest/scale-to-width-down/250?cb=20131230014347")
+		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/ac/PeaPodCardImage.png/revision/latest?cb=20180212033420")
 		.setTitle("Pea Pod | <:MegaGrow:1062501412992458802>")
 		.setDescription("**\\- Pea Plant -**")
 		.setColor("Random")

@@ -5,7 +5,7 @@ module.exports = {
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
 		const pp = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/f/f7/Primalpeashooterpvz2.png/revision/latest/scale-to-width-down/250?cb=20190502155146")
+		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ea/Primal_Peashooter_cardface.png/revision/latest?cb=20170701141646")
 		.setTitle("Primal Peashooter | <:Smarty:1062502890448638022>")
 		.setDescription("**\\- Pea Plant -**")
 		.setColor("Random")

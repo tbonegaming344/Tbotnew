@@ -10,7 +10,7 @@ const {
   module.exports = {
       name: "help",
       description: "Help command",
-      aliases: ["helpcommand", "decks", "decklists", "commands", "cmds", "deck", "names", "list"],
+      aliases: ["helpcommand", "commands", "cmds", "names"],
       category: "Miscellaneous",
       run: async (client, message, args) => {
       const commands = Array.from(client.commands.values())

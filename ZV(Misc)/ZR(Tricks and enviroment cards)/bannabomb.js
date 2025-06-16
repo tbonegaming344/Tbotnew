@@ -1,28 +1,31 @@
 const {EmbedBuilder}= require("discord.js")
 module.exports = {
-	name: `bannabomb`,
+	name: `bananabomb`,
 	aliases: [`bbomb`, `bomb1`, `bb2`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
 		const bb = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a4/BananaLTarget.png/revision/latest/scale-to-width-down/334?cb=20221031054544")
-		.setTitle("Banana Bomb | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Fruit Trick -**")
+		.setThumbnail(`${result[4].bananabomb}`)
+		.setTitle(`${result[7].bananabomb}`)
+		.setDescription(`${result[2].bananabomb}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "1 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].bananabomb}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "Do 2 damage to a Zombie."
+								 value: `${result[0].bananabomb}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Uncommon**"
+								 value: `${result[5].bananabomb}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Beware fruity vengeance from above."
+								 value: `${result[3].bananabomb}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [bb]})
 	}

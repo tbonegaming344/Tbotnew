@@ -1,32 +1,40 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `admiralnavybean`,
 	aliases: [`anb`, `broth`, `admiral`, `admiralnavy`, `admiralbean`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
+		const [result]= await db.query(`select anb from smartycards`);
 		const anb = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/80/Another_HD_Admiral_Navy_Bean.png/revision/latest?cb=20161023084810")
-		.setTitle("Admiral Navy Bean | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Bean Plant -**")
+		.setThumbnail(`${result[4].anb}`)
+		.setTitle(`${result[7].anb}`)
+		.setDescription(`${result[2].anb}`)
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "1 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							value: `${result[6].anb}`, 
+							inline: true},
 							 {
 								 name: "Traits",
-								 value: "__Amphibious__, __Team-Up__"
+								 value: `${result[8].anb}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "When you play a Bean, do 2 damage to the Zombie Hero."
+								 value: `${result[0].anb}`,
+								 inline: true
 							 },
+							
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Rare**"
+								 value: `${result[5].anb}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"Heavy is the weight of command. And my cap. Heavy is the cap."`
+								 value: `${result[3].anb}`, 
+								 inline: true
 							 })
 		message.channel.send({embeds: [anb]})
 	}

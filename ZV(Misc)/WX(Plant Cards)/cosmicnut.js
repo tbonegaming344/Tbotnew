@@ -11,10 +11,10 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "3 <:Strength:1062501774612779039>, 3 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
+							 	value: "4 <:Strength:1062501774612779039>, 3 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "**When played:** __Conjure__ a Nut, and its <:Strength:1062501774612779039> becomes 3<:Strength:1062501774612779039>. "
+								 value: "**When played:** __Conjure__ a Nut, and its <:Strength:1062501774612779039> becomes 4<:Strength:1062501774612779039>. "
 							 },
 							 {
 								 name: "Set-Rarity",

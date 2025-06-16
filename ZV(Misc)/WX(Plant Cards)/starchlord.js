@@ -14,7 +14,7 @@ module.exports = {
 							 	value: "2 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "When you play a Root, that Root gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>. \n **Start of Turn:** __Conjure__ a Root. "
+								 value: "When you play a Root, both that Root and Starchlord gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>. \n **Start of Turn:** __Conjure__ a Root. "
 							 },
 							 {
 								 name: "Set-Rarity",

@@ -1,27 +1,32 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `cactus`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select cactus from guardiancards`);
 		const cac = new EmbedBuilder()
-			.setThumbnail("https://static.wikia.nocookie.net/poohadventures/images/d/d2/HD_Cactus%28PvZH%29.webp/revision/latest?cb=20211114213945")
-		.setTitle("Cactus | <:Guardian:1062501130501885973>")
-		.setDescription("**\\- Cactus Flower Plant -**")
+			.setThumbnail(`${result[4].cactus}`)
+		.setTitle(`${result[7].cactus}`)
+		.setDescription(`${result[2].cactus}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 value: "1 <:Bullseye:1062501003313819678>, 5 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 value: `${result[6].cactus}`,
+							 inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Bullseye:1062501003313819678>__Bullseye__"
+								 value: `${result[8].cactus}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Uncommon**"
+								 value: `${result[5].cactus}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"It's true." I'm prickly on the outside but spongy on the inside."`
+								 value: `${result[3].cactus}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [cac]})
 	}

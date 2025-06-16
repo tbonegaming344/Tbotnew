@@ -9,9 +9,8 @@ module.exports = {
 		.setTitle("Mixed Nuts | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Nut Plant -**")
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "**When played:** This gets +2<:Strength:1062501774612779039>/+2<:Health:1062515540712751184> if there's a Plant with Team-Up here."

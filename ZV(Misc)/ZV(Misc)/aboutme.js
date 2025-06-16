@@ -41,7 +41,7 @@ module.exports = {
         "Tbot has plenty of decks stored in its database for viewing and playing with.",
         "To see decks with a **specific hero** do <@1043528908148052089> [insertherohere] and then click on the decks button.",
         "To see **every deck** in the tbot database please use the <@1043528908148052089> helpdb command.",
-		"If you would like to see your deck or a specific deck added to the database please use the <@1043528908148052089> adddeck command.",
+        "If you would like to see your deck or a specific deck added to the database please use the <@1043528908148052089> adddeck command.",
       ].join("\n")
     );
     container.addTextDisplayComponents(aboutText3);
@@ -59,7 +59,9 @@ module.exports = {
         "https://discord.com/api/oauth2/authorize?client_id=1043528908148052089&permissions=378944&scope=bot"
       )
       .setEmoji("🔗");
-	  const aboutSection4= new SectionBuilder().addTextDisplayComponents(aboutText4).setButtonAccessory(tbotInvite);
+    const aboutSection4 = new SectionBuilder()
+      .addTextDisplayComponents(aboutText4)
+      .setButtonAccessory(tbotInvite);
     container.addSectionComponents(aboutSection4);
     const developerText = new TextDisplayBuilder().setContent(
       [
@@ -81,7 +83,9 @@ module.exports = {
       .setStyle(ButtonStyle.Link)
       .setURL("https://discord.gg/2NSwt96vmS")
       .setEmoji("<:thanosswabbie:1296923069817819137>");
-	  const discordSection = new SectionBuilder().addTextDisplayComponents(discordText).setButtonAccessory(discordInvite);
+    const discordSection = new SectionBuilder()
+      .addTextDisplayComponents(discordText)
+      .setButtonAccessory(discordInvite);
     container.addSectionComponents(discordSection);
     await message.channel.send({
       components: [container],

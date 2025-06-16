@@ -1,33 +1,39 @@
-const {EmbedBuilder}= require("discord.js")
+const { EmbedBuilder } = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
-	name: `blockbuster`,
-	aliases: [`block`, `buster2`],
-	category: `Plant Cards`,
-	run: async(client, message, args)=> {
-		const bust = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/0/00/Blockbuster_vectorized.png/revision/latest/scale-to-width-down/250?cb=20180118204243")
-		.setTitle("Blockbuster | <:Guardian:1062501130501885973>")
-		.setDescription("**\\- Root Plant -**")
-		.setColor("Random")
-		
-		.addFields({name: "Stats",
-							 	value: "3 <:Bullseye:1062501003313819678>, 3 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
-							 {
-								 name: "Trait",
-								 value: "<:Bullseye:1062501003313819678>__Bullseye__"
-							 },
-							 {
-								 name: "Ability",
-								 value: "**__Plant Evolution__:** Destroy all Gravestones here and next door. "
-							 },
-							 {
-								 name: "Set-Rarity",
-								 value: "**Colossal - Rare**"
-							 },
-							 {
-								 name: "Flavor Text",
-								 value: "They call it a graveyard. She calls it a buffet."
-							 })
-		message.channel.send({embeds: [bust]})
-	}
-}
+  name: `blockbuster`,
+  aliases: [`block`, `buster2`],
+  category: `Plant Cards`,
+  run: async (client, message, args) => {
+    const [result] = await db.query(`select blockbuster from guardiancards`);
+    const bust = new EmbedBuilder()
+      .setThumbnail(`${result[4].blockbuster}`)
+      .setTitle(`${result[7].blockbuster}`)
+      .setDescription(`${result[2].blockbuster}`)
+      .setColor("Random")
+      .addFields(
+        { name: "Stats", value: `${result[6].blockbuster}`, inline: true },
+        {
+          name: "Trait",
+          value: `${result[8].blockbuster}`,
+          inline: true,
+        },
+        {
+          name: "Ability",
+          value: `${result[0].blockbuster}`,
+          inline: true,
+        },
+        {
+          name: "Set-Rarity",
+          value: `${result[5].blockbuster}`,
+          inline: true,
+        },
+        {
+          name: "Flavor Text",
+          value: `${result[3].blockbuster}`,
+          inline: true,
+        }
+      );
+    message.channel.send({ embeds: [bust] });
+  },
+};

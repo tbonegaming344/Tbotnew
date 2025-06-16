@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: "2 <:Strength:1062501774612779039>, 3 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "**When played:** If you made at least 6<:Sun:1062501177679413409> this turn, draw a card. "

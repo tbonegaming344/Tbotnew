@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "5 <:Strength:1062501774612779039>, 10 <:Armored:1062502392005922919>, 7 <:Sun:1062501177679413409>"},
+							 	value: "5 <:Strength:1062501774612779039>, 10 <:Armored:1062502392005922919>, 6 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Trait",
 								 value: "__Armored 1__"

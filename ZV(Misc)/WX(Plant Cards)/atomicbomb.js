@@ -1,56 +1,65 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags } = require('discord.js');
+const db = require("../../index.js");
 module.exports = {
 	name: `atomicbombegranate`,
 	aliases: [`atomic`, `bombegranate`, `bomb2`, `ab`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select atomicbombegranate, seedling from kabloomcards`);
 		const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('seed')
-                    .setLabel('Seedling')
+                    .setLabel(`${result[1].atomicbombegranate}`)
                     .setStyle(ButtonStyle.Success)
-										.setEmoji('<:seed:1094704185074794578>')
+					.setEmoji('<:seed:1094704185074794578>')
             );
 		const ab = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/7/75/AtomicBombegrenate.png/revision/latest/scale-to-width-down/250?cb=20180217024029")
-		.setTitle("Atomic Bombegranate | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Fruit Plant -**")
+		.setThumbnail(`${result[4].atomicbombegranate}`)
+		.setTitle(`${result[7].atomicbombegranate}`)
+		.setDescription(`${result[2].atomicbombegranate}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 value: "5 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 5 <:Sun:1062501177679413409>"},
+							 value: `${result[6].atomicbombegranate}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "**When destroyed:** Make __Seedlings__ here and next door. "
+								 value: `${result[0].atomicbombegranate}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Event**"
+								 value: `${result[5].atomicbombegranate}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Remember: Never ever EVER split a fruit. Oh, hold on, actually fruits are OK, just never split an atom."
+								 value: `${result[3].atomicbombegranate}`,
+								 inline: true
 							 })
 		const seed = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/5/58/HD_Seedling.png/revision/latest?cb=20170421135619")
-		.setTitle("Seedling | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Seed Plant -**")
+		.setThumbnail(`${result[4].seedling}`)
+		.setTitle(`${result[7].seedling}`)
+		.setDescription(`${result[2].seedling}`)
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "0 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].seedling}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "**Start of Turn:** This transforms into a random Plant that costs 6<:Sun:1062501177679413409> or less."
+								 value: `${result[0].seedling}`,
+								 inline: true
 							 },
 							 {
 								 name:"Set-Rarity",
-								 value: "**Basic - Common**"
+								 value: `${result[5].seedling}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "It's the tiny seed of a... nobody actually knows."
+								 value: `${result[3].seedling}`,
+								 inline: true
 							 })
 			const m = await	message.channel.send({embeds: [ab], components: [row] } )
 			const collector = m.createMessageComponentCollector()

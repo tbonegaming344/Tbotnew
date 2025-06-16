@@ -1,32 +1,38 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `astroshroom`,
 	aliases: [`astro1`, `as1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select astroshroom from kabloomcards`);
 		const as = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/94/Astro-shroom_HD.png/revision/latest?cb=20170225005845")
-		.setTitle("Astro-Shroom | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Mushroom Plant -**")
+		.setThumbnail(`${result[4].astroshroom}`)
+		.setTitle(`${result[7].astroshroom}`)
+		.setDescription(`${result[2].astroshroom}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "1 <:Bullseye:1062501003313819678>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							value: `${result[6].astroshroom}`,
+							 inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Bullseye:1062501003313819678>__Bullseye__"
+								 value: `${result[8].astroshroom}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "When you play a Plant, do 1 damage to the Zombie Hero."
+								 value: `${result[0].astroshroom}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Super-Rare**"
+								 value: `${result[5].astroshroom}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "He's had good meetings with a lot of smaller asteroids. They really made an impression."
+								 value: `${result[3].astroshroom}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [as]})
 	}

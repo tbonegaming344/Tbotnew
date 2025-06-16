@@ -1,62 +1,72 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle, EmbedBuilder, MessageFlags} = require('discord.js');
+const db = require("../../index.js")
 module.exports = {
 	name: `astrocado`,
 	aliases: [`cado`, `astro2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select astrocado, astrocadopit from solarcards`)		 
 		const row = new ActionRowBuilder()
             .addComponents(
                 new ButtonBuilder()
                     .setCustomId('cado')
-                    .setLabel('Astrocado Pit')
+                    .setLabel(`${result[1].astrocado}`)
                     .setStyle(ButtonStyle.Success)
-										.setEmoji('<:AstrocadoPitCardImage:1107464101103411280>')
+					.setEmoji('<:AstrocadoPitCardImage:1107464101103411280>')
             );
 		const cado = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/22/AstrocadoCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135303")
-		.setTitle("Astrocado | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Fruit Plant -**")
+		.setThumbnail(`${result[4].astrocado}`)
+		.setTitle(`${result[7].astrocado}`)
+		.setDescription(`${result[2].astrocado}`)
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "5 <:Strikethrough:1062502987425140806>, 3 <:Health:1062515540712751184>, 5 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].astrocado}`,
+								inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Strikethrough:1062502987425140806>__Strikethrough__"
+								 value: `${result[8].astrocado}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "**When destroyed:** Gain an __Astrocado Pit__. "
+								 value: `${result[0].astrocado}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Legendary**"
+								 value: `${result[5].astrocado}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"Holy guacamole!"`
+								 value: `${result[3].astrocado}`,
+								 inline: true
 							 })
 		const pit = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/c7/AstrocadoPitCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135314")
-		.setTitle("Astrocado Pit | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Seed Plant -**")
+		.setThumbnail(`${result[4].astrocadopit}`)
+		.setTitle(`${result[7].astrocadopit}`)
+		.setDescription(`${result[2].astrocadopit}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "0 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].astrocadopit}`,
+								inline: true},
 							 {
 								 name: "Ability",
-								 value: "**Start of Turn:** This transforms into an Astrocado. "
+								 value: `${result[0].astrocadopit}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Token**"
+								 value: `${result[5].astrocadopit}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Getting defeated is the pits."
+								 value: `${result[3].astrocadopit}`,
+								 inline: true
 							 })
-								const m = await	message.channel.send({embeds: [cado], components: [row] } )
+			const m = await	message.channel.send({embeds: [cado], components: [row] } )
 			const collector = m.createMessageComponentCollector()
 		collector.on('collect', async i  => {
 			if (i.customId == 'cado')  {

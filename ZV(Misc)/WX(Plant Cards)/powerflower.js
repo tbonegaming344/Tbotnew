@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "3 <:Strikethrough:1062502987425140806>, 5 <:Health:1062515540712751184>, 5 <:Sun:1062501177679413409>"},
+							 	value: "3 <:Strikethrough:1062502987425140806>, 5 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Trait",
 								 value: "<:Strikethrough:1062502987425140806>__Strikethrough__"

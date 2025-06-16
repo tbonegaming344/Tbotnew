@@ -14,7 +14,7 @@ module.exports = {
 							 value: "1 <:Bullseye:1062501003313819678>, 2 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Traits",
-								 value: "__Amphibious__, <:Bullseye:1062501003313819678>__Bullseye__"
+								 value: "__Amphibious__, <:Bullseye:1062501003313819678>__Bullseye__, __Teamup__"
 							 },
 							 {
 								 name: "Set-Rarity",

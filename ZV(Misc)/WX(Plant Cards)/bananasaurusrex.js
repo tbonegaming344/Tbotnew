@@ -1,32 +1,38 @@
-const {EmbedBuilder} = require("discord.js")
+const {EmbedBuilder} = require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `bananasaurusrex`,
 	aliases: [`brex`, `bananasaurus`, `rex`, `br1`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select bananasaurusrex from megagrowcards`);
 		const brex = new EmbedBuilder()
-		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1140729997942861954/Bananasaurus_rex.webp")
-		.setTitle("Bananasaurus Rex | <:MegaGrow:1062501412992458802>")
-		.setDescription("**\\- Animal Fruit Plant -**")
+		.setThumbnail(`${result[4].bananasaurusrex}`)
+		.setTitle(`${result[7].bananasaurusrex}`)
+		.setDescription(`${result[2].bananasaurusrex}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "3 <:DoubleStrike:1062501703494160394>, 3 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
+							 value: `${result[6].bananasaurusrex}`,
+							 inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:DoubleStrike:1062501703494160394>__Double Strike__"
+								 value: `${result[8].bananasaurusrex}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "**Dino-Roar:** This gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>."
+								 value: `${result[0].bananasaurusrex}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Legendary**"
+								 value: `${result[5].bananasaurusrex}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "She's a banana first and a dinosaur second. But it's a close second."
+								 value: `${result[3].bananasaurusrex}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [brex]})
 	}

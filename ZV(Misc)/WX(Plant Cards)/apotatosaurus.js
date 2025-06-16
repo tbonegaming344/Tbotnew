@@ -1,32 +1,39 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `apotatosaurus`,
 	aliases: [`apotato`, `asurus`, `apo`, `bowlingcard`, `bowlingcard`, `bowlingbulbcard`, `bowlingbulbenjoyercard`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select apotatosaurus from megagrowcards`);	
 		const ap = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ea/Tater_titan.png/revision/latest/scale-to-width-down/250?cb=20170816155348")
-		.setTitle("Apotatosaurus | <:MegaGrow:1062501412992458802>")
-		.setDescription("**\\- Root Plant -**")
+		.setThumbnail(`${result[4].apotatosaurus}`)
+		.setTitle(`${result[7].apotatosaurus}`)
+		.setDescription(`${result[2].apotatosaurus}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "5 <:Strength:1062501774612779039>, 5 <:Untrickable:1062501535126409277>, 6 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].apotatosaurus}`,
+								inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Untrickable:1062501535126409277>__Untrickable__"
+								 value: `${result[8].apotatosaurus}`,
+								 inline: true
 							 },
+							 { name: "\u200B", value: "\u200B", inline: true },
 							 {
 								 name: "Ability",
-								 value: "**When played:** __Conjure__ a Root. \n **__Dino-Roar__:** This gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>. "
+								 value: `${result[0].apotatosaurus}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Triassic - Legendary**"
+								 value: `${result[5].apotatosaurus}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Some potatoes are sweet. Others are dinosaurs."
+								 value: `${result[3].apotatosaurus}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [ap]})
 	}

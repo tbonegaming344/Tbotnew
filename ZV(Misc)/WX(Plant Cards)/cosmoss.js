@@ -13,7 +13,7 @@ module.exports = {
 							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "When an Environment is played, this gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184>."
+								 value: "When an Environment is played, this gets +2<:Strength:1062501774612779039>/+2<:Health:1062515540712751184>."
 							 },
 							 {
 								 name: "Set-Rarity",

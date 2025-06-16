@@ -18,7 +18,7 @@ module.exports = {
 							 },
 							 {
 								 name: "Ability",
-								 value: "Peas behind this get +2<:Strength:1062501774612779039>."
+								 value: "Peas behind this get +2<:Strength:1062501774612779039> and <:Bullseye:1062501003313819678>__Bullseye__"
 							 },
 							 {
 								 name: "Set-Rarity",

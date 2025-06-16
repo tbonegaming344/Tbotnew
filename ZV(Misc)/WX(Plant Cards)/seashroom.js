@@ -10,7 +10,7 @@ module.exports = {
 		.setDescription("**\\- Mushroom Plant -**")
 		.setColor("Random")
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Trait",
 								 value: "__Amphibious__"

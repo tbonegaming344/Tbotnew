@@ -10,7 +10,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "2 <:DoubleStrike:1062501703494160394>, 2 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: "2 <:DoubleStrike:1062501703494160394>, 3 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Trait",
 								 value: "<:DoubleStrike:1062501703494160394>__Double Strike__"

@@ -1,32 +1,38 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `brainana`,
 	aliases: [`brainna`, `braindamage`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select brainana from smartycards`);
 		const br = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/90/HD-Brainana.png/revision/latest?cb=20160530173509")
-	.setTitle("Brainana | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Fruit Plant -**")
+		.setThumbnail(`${result[4].brainana}`)
+		.setTitle(`${result[7].brainana}`)
+		.setDescription(`${result[2].brainana}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "4 <:Strength:1062501774612779039>, 3 <:Health:1062515540712751184>, 6 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].brainana}`,
+							 	inline: true},
 							 {
 								 name: "Trait",
-								 value: "__Amphibious__"
+								 value: `${result[8].brainana}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "**When played:** The Zombie Hero loses their Brains."
+								 value: `${result[0].brainana}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Legendary**"
+								 value: `${result[5].brainana}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `In this case, "brain drain" is a good thing.`
+								 value: `${result[3].brainana}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [br]})
 	}

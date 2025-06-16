@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "4 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 6 <:Sun:1062501177679413409>"},
+							 	value: "4 <:Strength:1062501774612779039>, 5 <:Health:1062515540712751184>, 6 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "**When played:** Destroy a Zombie with 4<:Strength:1062501774612779039> or less. \n**Start of Turn:** You get +1<:Sun:1062501177679413409> this turn. "

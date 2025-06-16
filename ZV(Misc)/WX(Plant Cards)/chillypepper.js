@@ -1,28 +1,33 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `chillypepper`,
 	aliases: [`chilly`, `cp4`, `cpepper`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select chillypepper from smartycards`);
 		const cp = new EmbedBuilder()
-		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106217265822707854/HD_Chilly_Pepper.webp")
-		.setTitle("Chilly Pepper | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Fruit Plant -**")
+		.setThumbnail(`${result[4].chillypepper}`)
+		.setTitle(`${result[7].chillypepper}`)
+		.setDescription(`${result[2].chillypepper}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: 	`${result[6].chillypepper}`,
+								inline: true},
 							 {
 								 name: "Ability",
-								 value: "**When played:** <:freeze:1323059404874055774>__Freeze__ a Zombie."
+								 value: `${result[0].chillypepper}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Rare**"
+								 value: `${result[5].chillypepper}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"It's not easy being both hot *and* cold. A comfortable lukewarm might be nice for a change."`
+								 value: `${result[3].chillypepper}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [cp]})
 		}

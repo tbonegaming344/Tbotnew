@@ -14,7 +14,7 @@ module.exports = {
 							 	value: "1 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "Move a Plant. It gets +4<:Health:1062515540712751184>. "
+								 value: "Move a Plant. It gets +4<:Health:1062515540712751184> and __Teamup__"
 							 },
 							 {
 								 name: "Set-Rarity",

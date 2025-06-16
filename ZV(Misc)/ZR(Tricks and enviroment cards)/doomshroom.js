@@ -14,7 +14,7 @@ module.exports = {
 							 	value: "5 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "Destroy all Plants and Zombies with 4<:Strength:1062501774612779039> or more. "
+								 value: "Destroy all Plants and Zombies with 4<:Strength:1062501774612779039> or more. \n Conjure a mushroom."
 							 },
 							 {
 								 name: "Set-Rarity",

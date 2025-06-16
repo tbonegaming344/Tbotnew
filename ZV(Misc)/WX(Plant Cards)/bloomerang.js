@@ -1,28 +1,33 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js");
+const db = require("../../index.js");
 module.exports = {
 	name: `bloomerang`,
 	aliases: [`bloom`, `bloomer`, `boomerang`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select bloomerang from solarcards`);
 		const bl = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/6/6a/Plants-vs-Zombies-2-13.png/revision/latest/scale-to-width-down/1200?cb=20200407205412")
-		.setTitle("Bloomerang | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Flower Plant -**")
+		.setThumbnail(`${result[4].bloomerang}`)
+		.setTitle(`${result[7].bloomerang}`)
+		.setDescription(`${result[2].bloomerang}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "3 <:Strikethrough:1062502987425140806>, 3 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].bloomerang}`,
+							 inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Strikethrough:1062502987425140806>__Strikethrough__"
+								 value: `${result[8].bloomerang}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Uncommon**"
+								 value: `${result[5].bloomerang}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"Magnets? Gravity? Crikey, I don't have a clue why they come back."`
+								 value: `${result[3].bloomerang}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [bl]})
 	}

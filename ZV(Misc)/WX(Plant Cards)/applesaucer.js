@@ -1,28 +1,34 @@
 const {EmbedBuilder}= require("discord.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `applesaucer`,
 	aliases: [`apple`, `saucer`, `as2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select applesaucer from solarcards`)
 		const as = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/4/4a/Apple_Saucer_HD.png/revision/latest/scale-to-width-down/250?cb=20170227033131")
-		.setTitle("Apple-Saucer | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Fruit Plant -**")
+		.setThumbnail(`${result[4].applesaucer}`)
+		.setTitle(`${result[7].applesaucer}`)
+		.setDescription(`${result[2].applesaucer}`)
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "3 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].applesaucer}`,
+								inline: true},
 							 {
 								 name: "Ability",
-								 value: "**When played:** If you made at least 6<:Sun:1062501177679413409> this turn, this gets <:Strikethrough:1062502987425140806>__Strikethrough__."
+								 value: `${result[0].applesaucer}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Uncommon**"
+								 value: `${result[5].applesaucer}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Watchful Quasar Wizards sometimes spot an Unidentified Fruiting Object."
+								 value: `${result[3].applesaucer}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [as]})
 	}

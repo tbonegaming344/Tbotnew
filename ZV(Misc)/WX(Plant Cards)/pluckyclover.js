@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 value: "1 <:Strength:1062501774612779039>, 5 <:Health:1062515540712751184>, 5 <:Sun:1062501177679413409>"},
+							 value: "2 <:Strength:1062501774612779039>, 5 <:Health:1062515540712751184>, 5 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "**When played:** __Conjure__ an Event card. Plucky Clover gets +<:Strength:1062501774612779039> equal to that card's cost."

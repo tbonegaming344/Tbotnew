@@ -1,28 +1,34 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `captaincucumber`,
 	aliases: [`cucc`, `ccuc`, `cucumber`, `cc1`, `captaincucc`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select captaincucumber from megagrowcards`);
 		const cucc = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2a/CaptainCucumberCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226135731")
-		.setTitle("Captain Cucumber | <:MegaGrow:1062501412992458802>")
-		.setDescription("**\\- Fruit Plant -**")
+		.setThumbnail(`${result[4].captaincucumber}`)
+		.setTitle(`${result[7].captaincucumber}`)
+		.setDescription(`${result[2].captaincucumber}`)
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "1 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].captaincucumber}`,
+								inline: true},
 							 {
 								 name: "Ability",
-								 value: "Cards you __Conjure__ cost 1<:Sun:1062501177679413409> less. \n When this does damage, __Conjure__ a Legendary card."
+								 value: `${result[0].captaincucumber}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Legendary**"
+								 value: `${result[5].captaincucumber}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "He's steered his crew through many a pickle."
+								 value: `${result[3].captaincucumber}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [cucc]})
 	}

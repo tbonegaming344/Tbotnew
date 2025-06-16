@@ -1,29 +1,40 @@
-const {EmbedBuilder}= require("discord.js")
+const { EmbedBuilder } = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
-	name: `bonkchoy`, 
-	aliases: [`bonk`, `choy`, `bc2`, `bchoy`],
-	category: `Plant Cards`, 
-	run: async(client, message, args)=> {
-		const bc = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plants-vs-zombies-heroes-through-time/images/2/27/HD_Bonk_Choy_%28PvZH%29.png/revision/latest/thumbnail/width/360/height/360?cb=20170330140458")
-		.setTitle("Bonk Choy | <:MegaGrow:1062501412992458802>")
-		.setDescription("**\\- Leafy Plant -**")
-		.setColor("Random")
-		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
-							 {
-								 name: "Ability",
-								 value: "**When played:** This gets +1<:Strength:1062501774612779039> this turn. "
-							 },
-							 {
-								 name: "Set-Rarity",
-								 value: "**Premium - Uncommon**"
-							 },
-							 {
-								 name: "Flavor Text",
-								 value: "Little known fact: He used to have two teeth."
-							 })
-		
-		message.channel.send({embeds: [bc]})
-	}
-}
+  name: `bonkchoy`,
+  aliases: [`bonk`, `choy`, `bc2`, `bchoy`],
+  category: `Plant Cards`,
+  run: async (client, message, args) => {
+    const [result] = await db.query(`select bonkchoy from megagrowcards`);
+    const bc = new EmbedBuilder()
+      .setThumbnail(`${result[4].bonkchoy}`)
+      .setTitle(`${result[7].bonkchoy}`)
+      .setDescription(`${result[2].bonkchoy}`)
+      .setColor("Random")
+      .addFields(
+        { name: "Stats", value: `${result[6].bonkchoy}`, inline: true },
+        {
+          name: "Traits",
+          value: `${result[8].bonkchoy}`,
+          inline: true,
+        },
+        {
+          name: "Ability",
+          value: `${result[0].bonkchoy}`,
+          inline: true,
+        },
+        {
+          name: "Set-Rarity",
+          value: `${result[5].bonkchoy}`,
+          inline: true,
+        },
+        {
+          name: "Flavor Text",
+          value: `${result[3].bonkchoy}`,
+          inline: true,
+        }
+      );
+
+    message.channel.send({ embeds: [bc] });
+  },
+};

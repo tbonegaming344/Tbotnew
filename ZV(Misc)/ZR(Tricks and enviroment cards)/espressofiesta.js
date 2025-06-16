@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "8 <:Sun:1062501177679413409>"},
+							 	value: "7 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "A Plant does three Bonus Attacks."

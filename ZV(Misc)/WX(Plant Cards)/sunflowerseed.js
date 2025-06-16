@@ -17,9 +17,8 @@ module.exports= {
 		.setTitle("Sunflower Seed | <:Solar:1062502678384607262>")
 		.setDescription("**\\- Flower Seed Plant -**")
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "**When destroyed:** Make a __Sunflower__ here. "

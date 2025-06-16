@@ -1,29 +1,35 @@
-const {EmbedBuilder}= require("discord.js")
+const { EmbedBuilder } = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
-	name: `blackeyedpea`, 
-	aliases: [`bep`, `blackeyed`],
-	category: `Plant Cards`,
-	run: async(client, message, args)=> {
-		const bep = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/2d/HD_Black-Eyed_Pea.png/revision/latest?cb=20160630003911")
-		.setTitle("Black-Eyed Pea | <:MegaGrow:1062501412992458802>")
-		.setDescription("**\\- Bean Pea Plant -**")
-		.setColor("Random")
-		
-		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
-							 {
-								 name: "Ability",
-								 value: "This gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184> when a Zombie Trick is played."
-							 },
-							 {
-								 name: "Set-Rarity",
-								 value: "**Premium - Super-Rare**"
-							 },
-							 {
-								 name: "Flavor Text",
-								 value: `"You shoulda seen the other guy!"`
-							 })
-		message.channel.send({embeds: [bep]})
-	}
-}
+  name: `blackeyedpea`,
+  aliases: [`bep`, `blackeyed`],
+  category: `Plant Cards`,
+  run: async (client, message, args) => {
+    const [result] = await db.query(`select blackeyedpea from megagrowcards`);
+    const bep = new EmbedBuilder()
+      .setThumbnail(`${result[4].blackeyedpea}`)
+      .setTitle(`${result[7].blackeyedpea}`)
+      .setDescription(`${result[2].blackeyedpea}`)
+      .setColor("Random")
+      .addFields(
+        { name: "Stats", value: `${result[6].blackeyedpea}`, inline: true },
+        {
+          name: "Ability",
+          value: `${result[0].blackeyedpea}`,
+          inline: true,
+        },
+        { name: "\u200B", value: "\u200B", inline: true },
+        {
+          name: "Set-Rarity",
+          value: `${result[5].blackeyedpea}`,
+          inline: true,
+        },
+        {
+          name: "Flavor Text",
+          value: `${result[3].blackeyedpea}`,
+          inline: true,
+        }
+      );
+    message.channel.send({ embeds: [bep] });
+  },
+};

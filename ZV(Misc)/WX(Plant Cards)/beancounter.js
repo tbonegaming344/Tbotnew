@@ -1,33 +1,39 @@
-const {EmbedBuilder}= require("discord.js")
+const { EmbedBuilder } = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
-	name: `beancounter`,
-	aliases: [`counter`, `bc3`, `bcounter`],
-	category: `Plant Cards`,
-	run: async(client, message, args)=> {
-		const bc = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/d5/HD_Bean_Counter.png/revision/latest?cb=20160630041122")
-		.setTitle("Bean Counter | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Bean Plant -**")
-		.setColor("Random")
-		
-		.addFields({name: "Stats",
-							 	value: "1 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
-								 {
-									name: "Trait",
-									value: "__Team-Up__"
-								},
-							 {
-								 name: "Ability",
-								 value: "This gets +1<:Strength:1062501774612779039>/+1<:Health:1062515540712751184> when you play a Bean. \n **When played:** Gain two 1<:Strength:1062501774612779039>/1<:Health:1062515540712751184> Weenie Beanies. "
-							 },
-							 {
-								 name: "Set-Rarity",
-								 value: "**Premium - Super-Rare**"
-							 },
-							 {
-								 name: "Flavor Text",
-								 value: `"Every Bean is accounted for. I assure you, they all add up."`
-							 })
-		message.channel.send({embeds: [bc]})
-	}
-}
+  name: `beancounter`,
+  aliases: [`counter`, `bc3`, `bcounter`],
+  category: `Plant Cards`,
+  run: async (client, message, args) => {
+    const [result] = await db.query(`select beancounter from smartycards`);
+    const bc = new EmbedBuilder()
+      .setThumbnail(`${result[4].beancounter}`)
+      .setTitle(`${result[7].beancounter}`)
+      .setDescription(`${result[2].beancounter}`)
+      .setColor("Random")
+      .addFields(
+        { name: "Stats", value: `${result[6].beancounter}`, inline: true },
+        {
+          name: "Trait",
+          value: `${result[8].beancounter}`,
+          inline: true,
+        },
+        {
+          name: "Ability",
+          value: `${result[0].beancounter}`,
+          inline: true,
+        },
+        {
+          name: "Set-Rarity",
+          value: `${result[5].beancounter}`,
+          inline: true,
+        },
+        {
+          name: "Flavor Text",
+          value: `${result[3].beancounter}`,
+          inline: true,
+        }
+      );
+    message.channel.send({ embeds: [bc] });
+  },
+};

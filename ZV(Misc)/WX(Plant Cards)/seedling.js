@@ -1,28 +1,34 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `seedling`,
 	aliases: [`seed`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select seedling from kabloomcards`);
 		const seed = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/pvzcc/images/5/58/HD_Seedling.png/revision/latest?cb=20170421135619")
-		.setTitle("Seedling | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Seed Plant -**")
+		.setThumbnail(`${result[4].seedling}`)
+		.setTitle(`${result[7].seedling}`)
+		.setDescription(`${result[2].seedling}`)
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "0 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].seedling}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "**Start of Turn:** This transforms into a random Plant that costs 6<:Sun:1062501177679413409> or less."
+								 value: `${result[0].seedling}`,
+								 inline: true
 							 },
 							 {
 								 name:"Set-Rarity",
-								 value: "**Basic - Common**"
+								 value: `${result[5].seedling}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "It's the tiny seed of a... nobody actually knows."
+								 value: `${result[3].seedling}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [seed]})
 	}

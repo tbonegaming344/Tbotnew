@@ -18,7 +18,7 @@ module.exports = {
 							 },
 							 {
 								 name: "Ability",
-								 value: "**When destroyed:** Make a 5<:Strength:1062501774612779039>/4<:Health:1062515540712751184> Grizzly Pear with __Amphibious__ here. "
+								 value: "**When destroyed:** Make a 5<:Strength:1062501774612779039>/4<:Health:1062515540712751184> Grizzly Pear with __Amphibious__ here and all fruit plants get 1 <:Strength:1062501774612779039>/1 <:Health:1062515540712751184> "
 							 },
 							 {
 								 name: "Set-Rarity",

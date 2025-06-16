@@ -1,24 +1,28 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require(`../../index.js`);
 module.exports = {
 	name: `buttonmushroom`,
 	aliases: [`button`, `buttonshroom`, `bm`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select buttonmushroom from kabloomcards`);
 		const bm = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/b/bb/HD_Button_Mushroom.png/revision/latest?cb=20160607014803")
-		.setTitle("Button Mushroom | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Mushroom Plant -**")
+		.setThumbnail(`${result[4].buttonmushroom}`)
+		.setTitle(`${result[7].buttonmushroom}`)
+		.setDescription(`${result[2].buttonmushroom}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "1 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].buttonmushroom}`,
+								inline: true},
 							 {
 								 name: "Set-Rarity",
-								 value: "**Basic - Common**"
+								 value: `${result[5].buttonmushroom}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `Everyone's always telling her, "You're cute as a button!" But she's not just cute. She's smart and funny too.`
+								 value: `${result[3].buttonmushroom}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [bm]})
 	}

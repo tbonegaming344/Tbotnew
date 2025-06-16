@@ -11,14 +11,14 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 value: "2 <:Strength:1062501774612779039>, 7 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
+							 value: "3 <:Strength:1062501774612779039>, 7 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Trait",
 								 value: "__Team-Up__"
 							 },
 							 {
 								 name: "Ability",
-								 value: "**When played behind a Plant:** This becomes 7<:Strength:1062501774612779039>/2<:Health:1062515540712751184>. "
+								 value: "**When played behind a Plant:** This becomes 7<:Strength:1062501774612779039>/3<:Health:1062515540712751184>. "
 							 },
 							 {
 								 name: "Set-Rarity",

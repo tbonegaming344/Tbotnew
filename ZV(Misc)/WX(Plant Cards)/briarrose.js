@@ -1,28 +1,33 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `briarrose`,
 	aliases: [`briar`, `br2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select briarrose from solarcards`);
 		const br = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/95/BriarRoseCardImage.png/revision/latest/scale-to-width-down/250?cb=20170303220252")
-		.setTitle("Briar Rose | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Flower Plant -**")
+		.setThumbnail(`${result[4].briarrose}`)
+		.setTitle(`${result[7].briarrose}`)
+		.setDescription(`${result[2].briarrose}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "3 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 5 <:Sun:1062501177679413409>"},
+							 	value:`${result[6].briarrose}`,
+								inline: true},
 							 {
 								 name: "Ability",
-								 value: "When a Zombie hurts a Flower, destroy that Zombie."
+								 value: `${result[0].briarrose}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Legendary**"
+								 value: `${result[5].briarrose}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"You mess with the rose, you get the thorns!"`
+								 value: `${result[3].briarrose}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [br]})
 	}

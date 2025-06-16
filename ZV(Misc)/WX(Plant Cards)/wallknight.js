@@ -142,7 +142,15 @@ module.exports = {
         {
           name: "Superpowers",
           value:
-            "Geyser <:Solar:1062502678384607262> \n Heal your Hero and all Plants for 4. \n Nut Signal <:Guardian:1062501130501885973> \n Make a __Wall-Nut__. Draw a card. \n Wall-Nut 0<:Strength:1062501774612779039>/6<:Health:1062515540712751184>, __Team-Up__ \n Bubble Up <:Guardian:1062501130501885973> \n Move a Plant. It gets +4<:Health:1062515540712751184>. \n Uncrackable <:Guardian:1062501130501885973><:Solar:1062502678384607262>\n You Hero can't be hurt this turn. Draw a card. ",
+            `Geyser <:Solar:1062502678384607262> 
+            Heal your Hero and all Plants for 4. 
+            Nut Signal <:Guardian:1062501130501885973> 
+            Make a __Wall-Nut__. Draw a card. 
+            Wall-Nut 0<:Strength:1062501774612779039>/6<:Health:1062515540712751184>, __Team-Up__ 
+            Bubble Up <:Guardian:1062501130501885973> 
+            Move a Plant. It gets +4<:Health:1062515540712751184> and __Teamup__. 
+            Uncrackable <:Guardian:1062501130501885973><:Solar:1062502678384607262>
+            You Hero can't be hurt this turn. Draw a card.`,
         },
         {
           name: "Set-Rarity",

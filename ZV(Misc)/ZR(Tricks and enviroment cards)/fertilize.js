@@ -13,7 +13,7 @@ module.exports = {
 							 value: "3 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "A Plant gets +3<:Strength:1062501774612779039>/+3<:Health:1062515540712751184>."
+								 value: "A Plant gets +4<:Strength:1062501774612779039>/+4<:Health:1062515540712751184>."
 							 },
 							 {
 								 name: "Set - Rarity",

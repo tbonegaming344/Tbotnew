@@ -19,7 +19,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "9 <:Sun:1062501177679413409>"},
+							 	value: "8 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "Make a __Wall-Nut__ in each Ground lane. \n Attack for 6 damage in those lanes. "

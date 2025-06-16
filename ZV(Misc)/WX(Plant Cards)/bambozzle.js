@@ -1,28 +1,33 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `bamboozle`,
 	aliases: [`bamboo`, `bam`],
 	category: `Plant Cards`,
 	run: async(client, message,args)=> {
+		const [result] = await db.query(`select bamboozle from megagrowcards`);
 		const bam = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/a/a9/Bamboozle_HD.png/revision/latest?cb=20170227030606")
-		.setTitle("Bamboozle | <:MegaGrow:1062501412992458802>")
-		.setDescription("**\\- Leafy Root Plant -**")
+		.setThumbnail(`${result[4].bamboozle}`)
+		.setTitle(`${result[7].bamboozle}`)
+		.setDescription(`${result[2].bamboozle}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "6 <:Strength:1062501774612779039>, 6 <:Health:1062515540712751184>, 6 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].bamboozle}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "**__Plant Evolution__:** Draw two cards. "
+								 value: `${result[0].bamboozle}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Colossal - Rare**"
+								 value: `${result[5].bamboozle}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Only among the hyper-evolved Plants of Hollow Earth can you be outwitted by a tree."
+								 value: `${result[3].bamboozle}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [bam]})
 	}

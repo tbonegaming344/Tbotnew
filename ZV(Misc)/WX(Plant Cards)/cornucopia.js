@@ -11,7 +11,7 @@ module.exports = {
 		.setColor("Random")
 		
 		.addFields({name: "Stats",
-							 	value: "6 <:Strength:1062501774612779039>, 6 <:Health:1062515540712751184>, 10 <:Sun:1062501177679413409>"},
+							 	value: "6 <:Strength:1062501774612779039>, 6 <:Health:1062515540712751184>, 9 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
 								 value: "**When played:** Make a random Plant in each other lane. "

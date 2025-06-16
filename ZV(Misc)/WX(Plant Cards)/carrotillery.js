@@ -1,28 +1,33 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js")
 module.exports = {
 	name: `carrotillery`,
 	aliases: [`carrot2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select carrotillery from smartycards`);
 		const c = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/ec/Carrotillery_vectorized.png/revision/latest/scale-to-width-down/250?cb=20180120102128")
-		.setTitle("Carrotillery | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Root Plant -**")
+		.setThumbnail(`${result[4].carrotillery}`)
+		.setTitle(`${result[7].carrotillery}`)
+		.setDescription(`${result[2].carrotillery}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "5 <:Strength:1062501774612779039>, 3 <:Health:1062515540712751184>, 4 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].carrotillery}`,
+							 	inline: true},
 							 {
 								 name: "Trait",
-								 value: "__Team-Up__"
+								 value: `${result[8].carrotillery}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Uncommon**"
+								 value: `${result[5].carrotillery}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "His artillery is a rich source of vitamin A and beta-carotene - a fact the Zombies do not seem to appreciate."
+								 value: `${result[3].carrotillery}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [c]})
 	}

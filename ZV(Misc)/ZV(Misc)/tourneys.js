@@ -1,5 +1,6 @@
 const { ButtonBuilder, ButtonStyle,  ContainerBuilder,
  SectionBuilder, SeparatorSpacingSize, TextDisplayBuilder, MessageFlags } = require("discord.js");
+const { sep } = require("node:path");
 module.exports = {
   name: `tourneys`,
   aliases: [
@@ -25,6 +26,7 @@ module.exports = {
     const tourneyText = new TextDisplayBuilder().setContent(
       "# Looking for Tournaments for PvZ Heroes? Below are some servers that host tournaments for PvZ Heroes!");
       container.addTextDisplayComponents(tourneyText);
+      container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
       const tourneyText2 = new TextDisplayBuilder().setContent([
         "# Gimmick Tournaments",
         "PvZH Gimmick Tournaments is a server that exclusively hosts niche, unordinary tournaments in pvzh.", 
@@ -37,6 +39,7 @@ module.exports = {
       .setEmoji('<:gimmick:1273840288942522485>')
     const section2 = new SectionBuilder().addTextDisplayComponents(tourneyText2).setButtonAccessory(gimmickTournaments);
     container.addSectionComponents(section2);
+     container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
     const tourneyText3 = new TextDisplayBuilder().setContent([
        "# PvzHeroes Revived",
       "PvZ Heroes Revived is a server where you can find various databases of the people in the community, occasional tournaments and other fun things PvZH. Let's revive PvZH together!"
@@ -48,6 +51,7 @@ module.exports = {
       .setEmoji('<:pvzheroesrevived:1273835442512461886>')
     const section3 = new SectionBuilder().addTextDisplayComponents(tourneyText3).setButtonAccessory(pvzhRevived);
     container.addSectionComponents(section3);
+    container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
     const tourneyText4 = new TextDisplayBuilder().setContent([
       "# Quicksand", 
       "Quicksand Tournaments is an elo system server, meaning that rather than participating in a bracket-style tournament, you can play at any time you like as long as there is another player who is down to play against you. Top 8 of each season (=3 months) participates in a special Playoffs Tournament. Hope to see you there!"
@@ -59,6 +63,7 @@ module.exports = {
       .setEmoji('<:quicksand:1273834699072081920>')
     const section4 = new SectionBuilder().addTextDisplayComponents(tourneyText4).setButtonAccessory(quicksand);
     container.addSectionComponents(section4);
+    container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
     const tourneyText5 = new TextDisplayBuilder().setContent([
       "# pvzhtwjizñë", 
       "Essentially a tournament-focused server that aims to invite both new and experienced players. We tend to have tournaments every few months, sometimes being “gimmick” tournaments with special rules, while other times being a regular tournament with two brackets"
@@ -70,6 +75,19 @@ module.exports = {
       .setEmoji('<:pvzhtw:1369013512709345372>')
     const section5 = new SectionBuilder().addTextDisplayComponents(tourneyText5).setButtonAccessory(pvzhtwjizne);
     container.addSectionComponents(section5);
+    container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
+    const tourneyText6 = new TextDisplayBuilder().setContent([
+      "# Slungus Gang", 
+      "Slungus Gang is a pvzh tournament server where mainly gimmickless tournaments will be held. We have a small yet welcoming community, and are always looking for new members.", 
+      "Tournamnets are hosted about once every 2 months"
+    ].join("\n"))
+    const slungus = new ButtonBuilder()
+    .setLabel('Slungus Gang')
+    .setStyle(ButtonStyle.Link)
+    .setURL('https://discord.gg/kpuhGXdw')
+    .setEmoji("<:slungus:1384909314757496902>")
+    const section6 = new SectionBuilder().addTextDisplayComponents(tourneyText6).setButtonAccessory(slungus);
+    container.addSectionComponents(section6)
     message.channel.send({
       components: [container],
       flags: MessageFlags.IsComponentsV2

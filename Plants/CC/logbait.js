@@ -2,6 +2,7 @@ const {EmbedBuilder} = require('discord.js');
 const db = require("../../index.js");
 module.exports = {
     name: `logbait`,
+    aliases: [`ccaggro`, `aggrocc`],
     category: `Captain Combustible(CC)`, 
     run: async(client, message, args) => {
         const [result] = await db.query(`select logbait from ccdecks`);

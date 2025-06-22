@@ -104,6 +104,7 @@ module.exports = {
         "abeans",
         "chemotherapy",
         "cyburn",
+        "espressoaggro",
         "figlottery",
         "gargburn",
         "logbait",
@@ -114,7 +115,7 @@ module.exports = {
       ],
       ladderDecks: ["gravestache", "schoolyard"],
       memeDecks: ["noplayingallowed"],
-      aggroDecks: ["abeans", "logbait", "schoolyard", "seacret", "watertron"],
+      aggroDecks: ["abeans", "espressoaggro", "logbait", "schoolyard", "seacret", "watertron"],
       comboDecks: [
         "budgetykm",
         "cyburn",
@@ -140,6 +141,7 @@ module.exports = {
         "budgetykm",
         "chemotherapy",
         "cyburn",
+        "espressoaggro",
         "figlottery",
         "gargburn",
         "gravestache",
@@ -193,8 +195,9 @@ module.exports = {
     const competitiverow = createButtons("watertron", "ab");
     const ab = createButtons("helpcomp", "chemo");
     const chemo = createButtons("abeans", "cburn");
-    const cburn = createButtons("chemotherapy", "flottery");
-    const flottery = createButtons("cyburn", "gb");
+    const cburn = createButtons("chemotherapy", "eaggro");
+    const eaggro = createButtons("cyburn", "flottery");
+    const flottery = createButtons("espressoaggro", "gb");
     const gb = createButtons("figlottery", "lbait");
     const lbait = createButtons("gargburn", "radio");
     const radio = createButtons("logbait", "sea");
@@ -205,8 +208,9 @@ module.exports = {
     const gstache = createButtons("ladderhelp", "syard");
     const syard = createButtons("gravestache", "ladderhelp");
     const aggrorow = createButtons("watertron2", "ab2");
-    const ab2 = createButtons("aggrohelp", "lbait2");
-    const lbait2 = createButtons("abeans2", "syard2");
+    const ab2 = createButtons("aggrohelp", "eaggro2");
+    const eaggro2 = createButtons("abeans2", "lbait2");
+    const lbait2 = createButtons("espressoaggro2", "syard2");
     const syard2 = createButtons("logbait2", "sea2");
     const sea2 = createButtons("schoolyard2", "wt2");
     const wt2 = createButtons("seacret2", "helpaggro");
@@ -231,8 +235,9 @@ module.exports = {
     const ab3 = createButtons("allhelp", "bykm3");
     const bykm3 = createButtons("abeans3", "chemo3");
     const chemo3 = createButtons("budgetykm3", "cburn4");
-    const cburn4 = createButtons("chemotherapy3", "flottery3");
-    const flottery3 = createButtons("cyburn4", "gb4");
+    const cburn4 = createButtons("chemotherapy3", "eaggro3");
+    const eaggro3 = createButtons("cyburn4", "flottery3");
+    const flottery3 = createButtons("espressoaggro3", "gb4");
     const gb4 = createButtons("figlottery3", "gstache3");
     const gstache3 = createButtons("gargburn4", "lbait3");
     const lbait3 = createButtons("gravestache3", "npa3");
@@ -244,7 +249,7 @@ module.exports = {
     const wt3 = createButtons("spacestars4", "helpall");
     const [result] = await db.query(`select abeans, apotk,
 budgetykm, chemotherapy,
-cyburn, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
+cyburn, espressoaggro, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
 schoolyard, seacret, spacestars, radiotherapy, watertron
 from gsdecks gs 
 inner join czdecks cz
@@ -255,6 +260,8 @@ inner join spdecks sp
 on (gs.deckinfo = sp.deckinfo)
 inner join imdecks im 
 on (gs.deckinfo = im.deckinfo)
+inner join gkdecks gk
+on (gs.deckinfo = gk.deckinfo)
 inner join hgdecks hg
 on (gs.deckinfo = hg.deckinfo)
 inner join ncdecks nc
@@ -367,6 +374,7 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
     const cyburn = createDeckEmbed(result, "cyburn");
     const figlottery = createDeckEmbed(result, "healmidflare");
+    const espressoaggro = createDeckEmbed(result, "espressoaggro");
     const gargburn = createDeckEmbed(result, "gargburn");
     const gravestache = createDeckEmbed(result, "gravestache");
     const noplayingallowed = createDeckEmbed(result, "noplayingallowed");
@@ -518,6 +526,12 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         radiotherapy: { embed: radiotherapy, component: radio },
         radiotherapy2: { embed: radiotherapy, component: radio2 },
         radiotherapy3: { embed: radiotherapy, component: radio3 },
+        eaggro: { embed: espressoaggro, component: eaggro },
+        espressoaggro: { embed: espressoaggro, component: eaggro },
+        eaggro2: { embed: espressoaggro, component: eaggro2 },
+        espressoaggro2: { embed: espressoaggro, component: eaggro2}, 
+        eaggro3: { embed: espressoaggro, component: eaggro3 },
+        espressoaggro3: { embed: espressoaggro, component: eaggro3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

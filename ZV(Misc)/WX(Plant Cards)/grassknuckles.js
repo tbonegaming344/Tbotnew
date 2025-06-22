@@ -39,7 +39,7 @@ module.exports = {
         .setEmoji("<:FUCKLES:1100168498363240518>")
         .setStyle(ButtonStyle.Success)
     );
-    const select = new StringSelectMenuBuilder()
+   const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Grass Knuckles decklists")
       .addOptions(
@@ -49,6 +49,11 @@ module.exports = {
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
           new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Deck")
           .setValue("ladder")
           .setDescription("Decks that mostly only good for ranked games")
@@ -58,7 +63,7 @@ module.exports = {
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
+          .setLabel("Aggro Decks")
           .setValue("aggro")
           .setDescription(
             "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
@@ -84,13 +89,14 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const grassKnucklesDecks = {
       budgetDecks: ["budgetgk"],
+      comprtitiveDecks: ["esspressoaggro"],
       ladderDecks: ["pawntrickstab"],
       memeDecks: ["dinogloves", "healthotk"],
-      aggroDecks: ["dinogloves"],
+      aggroDecks: ["dinogloves", "espressoaggro"],
       comboDecks: ["healthotk"],
       controlDecks: ["pawntrickstab"],
       midrangeDecks: ["budgetgk", "healthotk"],
-      allDecks: ["budgetgk", "dinogloves", "healthotk", "pawntrickstab"],
+      allDecks: ["budgetgk", "dinogloves", "espressoaggro", "healthotk", "pawntrickstab"],
     };
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -113,13 +119,17 @@ module.exports = {
     const memerow = createButtons("healthotk", "dgloves");
     const dgloves = createButtons("helpmeme", "hotk");
     const hotk = createButtons("dinogloves", "memehelp");
+    const aggrorow = createButtons("espressoaggro", "dgloves2"); 
+    const dgloves2 = createButtons("helpaggro", "eaggro");
+    const eaggro = createButtons("dinogloves", "aggrohelp");
     const midrangerow = createButtons("healthotk2", "bgk");
     const bgk = createButtons("helpmidrange", "hotk2");
     const hotk2 = createButtons("budgetgk", "midrangehelp");
     const alldecksrow = createButtons("pawntrickstab", "bgk2");
-    const bgk2 = createButtons("helpall", "dgloves2");
-    const dgloves2 = createButtons("budgetgk2", "hotk3");
-    const hotk3 = createButtons("dinogloves2", "pts");
+    const bgk2 = createButtons("helpall", "dgloves3");
+    const dgloves3 = createButtons("budgetgk2", "eaggro2");
+    const eaggro2 = createButtons("dinogloves3", "hotk3");
+    const hotk3 = createButtons("espressoaggro2", "pts");
     const pts = createButtons("healthotk3", "allhelp");
     function BuildDeckString(decks) {
       return decks
@@ -178,6 +188,14 @@ Note: Grass Knuckles has ${grassKnucklesDecks.memeDecks.length} meme decks in Tb
       `To view the Grass Knuckles decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: Grass Knuckles has ${grassKnucklesDecks.midrangeDecks.length} midrange decks in Tbot`
     );
+      const aggroEmbed = createHelpEmbed(
+      "Grass Knuckles Aggro Decks",
+      `My aggro decks for Grass Knuckles(GK) are ${toBuildAggroString}`,
+      "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist",
+      `To view the Grass Knuckles decks please use the commands listed above or click on the
+buttons below to navigate through all aggro decks!
+Note: Grass Knuckles has ${grassKnucklesDecks.aggroDecks.length} aggro decks in Tbot`
+    );
     const allEmbed = createHelpEmbed(
       "All Grass Knuckles Decks",
       `My decks for Grass Knuckles(GK) are ${toBuildString}`,
@@ -212,6 +230,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
     }
     const budgetgk = createDeckEmbed(result, "budgetgk");
     const dinogloves = createDeckEmbed(result, "dinogloves");
+    const espressoaggro = createDeckEmbed(result, "espressoaggro");
     const healthotk = createDeckEmbed(result, "healthotk");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const m = await message.channel.send({ embeds: [gk], components: [cmd] });
@@ -225,7 +244,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       if (value == "budget" || value == "tempo") {
         await i.reply({ embeds: [budgetgk], flags: MessageFlags.Ephemeral });
       } else if (value == "aggro") {
-        await i.reply({ embeds: [dinogloves], flags: MessageFlags.Ephemeral });
+        await i.update({embeds: [aggroEmbed], components: [aggrorow]});
       } else if (value == "combo") {
         await i.reply({ embeds: [healthotk], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
@@ -240,6 +259,11 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
+      else if(value == "comp"){
+        await i.reply({
+          embeds: [espressoaggro], flags: MessageFlags.Ephemeral
+        });
+      }
     }
     /**
      * the handleButtonInteraction function handles the button interactions for the decks
@@ -248,12 +272,14 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-        helpmeme: { embed: memeEmbed, component: memerow },
+       helpmeme: { embed: memeEmbed, component: memerow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpmidrange: { embed: midrangeEmbed, component: midrangerow },
         midrangehelp: { embed: midrangeEmbed, component: midrangerow },
         helpall: { embed: allEmbed, component: alldecksrow },
         allhelp: { embed: allEmbed, component: alldecksrow },
+        aggrohelp: { embed: aggroEmbed, component: aggrorow },
+        helpaggro: { embed: aggroEmbed, component: aggrorow },
         bgk: { embed: budgetgk, component: bgk },
         budgetgk: { embed: budgetgk, component: bgk },
         bgk2: { embed: budgetgk, component: bgk2 },
@@ -262,6 +288,8 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
         dinogloves: { embed: dinogloves, component: dgloves },
         dgloves2: { embed: dinogloves, component: dgloves2 },
         dinogloves2: { embed: dinogloves, component: dgloves2 },
+        dgloves3: { embed: dinogloves, component: dgloves3 },
+        dinogloves3: { embed: dinogloves, component: dgloves3 },
         hotk: { embed: healthotk, component: hotk },
         healthotk: { embed: healthotk, component: hotk },
         hotk2: { embed: healthotk, component: hotk2 },
@@ -270,6 +298,10 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
         healthotk3: { embed: healthotk, component: hotk3 },
         pts: { embed: pawntrickstab, component: pts },
         pawntrickstab: { embed: pawntrickstab, component: pts },
+        eaggro: {embeds: espressoaggro, component: eaggro},
+        espressoaggro: { embed: espressoaggro, component: eaggro },
+        eaggro2: { embed: espressoaggro, component: eaggro2 },
+        espressoaggro2: { embed: espressoaggro, component: eaggro2 },
       };
       const action = buttonActions[i.customId];
       if (action) {

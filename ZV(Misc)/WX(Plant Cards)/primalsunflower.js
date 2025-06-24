@@ -14,7 +14,7 @@ module.exports = {
 							 	value: "2 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "**Start of Turn:** You get +2<:Sun:1062501177679413409>."
+								 value: "**Start of Turn:** You get +1<:Sun:1062501177679413409>."
 							 },
 							 {
 								 name: "Set-Rarity",

@@ -12,7 +12,7 @@ module.exports = {
 							 value: "2 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
 							 {
 								 name: "Ability",
-								 value: "Zombie Tricks cost 2<:Brainz:1062503146745774183> more."
+								 value: "Zombie Tricks cost 1<:Brainz:1062503146745774183> more."
 							 },
 							 {
 								 name: "Set-Rarity",

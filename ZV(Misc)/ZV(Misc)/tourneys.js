@@ -84,7 +84,7 @@ module.exports = {
     const slungus = new ButtonBuilder()
     .setLabel('Slungus Gang')
     .setStyle(ButtonStyle.Link)
-    .setURL('https://discord.gg/kpuhGXdw')
+    .setURL('https://discord.gg/NeStx9Fe9R')
     .setEmoji("<:slungus:1384909314757496902>")
     const section6 = new SectionBuilder().addTextDisplayComponents(tourneyText6).setButtonAccessory(slungus);
     container.addSectionComponents(section6)

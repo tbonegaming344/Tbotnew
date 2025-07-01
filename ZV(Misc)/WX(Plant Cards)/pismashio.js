@@ -12,10 +12,15 @@ module.exports= {
 		
 		.addFields({name: "Stats",
 							 	value: "2 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+								 {
+								 name: "Trait",
+								 value: "__Team-Up__"
+							 },
 							 {
 								 name: "Set-Rarity",
 								 value: "**Basic - Common**"
 							 },
+
 							 {
 								 name: "Flavor Text",
 								 value: `"I'm a kind of ice cream! Sort of!"`

@@ -86,7 +86,7 @@ module.exports = {
           )
           .setValue("combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
+          .setLabel("Control Decks")
           .setDescription(
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           )
@@ -114,7 +114,13 @@ module.exports = {
       budgetDecks: ["budgetpb"],
       competitiveDecks: ["trickstache"],
       ladderDecks: ["professorpackage", "valkster"],
-      memeDecks: ["bonusducks", "congabait", "reversecatster", "youngeggmartin"],
+      memeDecks: [
+        "bonusducks",
+        "congabait",
+        "mechagold",
+        "reversecatster",
+        "youngeggmartin",
+      ],
       aggroDecks: ["budgetpb"],
       comboDecks: [
         "bonusducks",
@@ -124,13 +130,14 @@ module.exports = {
         "valkster",
         "youngeggmartin",
       ],
-      controlDecks: ["bonusducks"],
+      controlDecks: ["bonusducks", "mechagold"],
       midrangeDecks: ["congabait", "trickstache", "valkster"],
       tempoDecks: ["professorpackage"],
       allDecks: [
         "bonusducks",
         "budgetpb",
         "congabait",
+        "mechagold",
         "professorpackage",
         "reversecatster",
         "trickstache",
@@ -138,7 +145,7 @@ module.exports = {
         "youngeggmartin",
       ],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -155,6 +162,9 @@ module.exports = {
     const toBuildMemeString = buildDeckString(
       professorBrainstormDecks.memeDecks
     );
+    const toBuildControlString = buildDeckString(
+      professorBrainstormDecks.controlDecks
+    );
     const toBuildComboString = buildDeckString(
       professorBrainstormDecks.comboDecks
     );
@@ -163,7 +173,7 @@ module.exports = {
     );
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -182,8 +192,9 @@ module.exports = {
     const alldecksrow = createButtons("youngeggmartin", "bd");
     const bd = createButtons("helpall", "bpb");
     const bpb = createButtons("bonusducks", "cb");
-    const cb = createButtons("budgetpb", "pa");
-    const pa = createButtons("congabait", "rcatster");
+    const cb = createButtons("budgetpb", "mgold");
+    const mgold = createButtons("congabait", "pa");
+    const pa = createButtons("mechagold", "rcatster");
     const rcatster = createButtons("professorpackage", "ts");
     const ts = createButtons("reversecatster", "valk");
     const valk = createButtons("trickstache", "yem");
@@ -193,8 +204,9 @@ module.exports = {
     const valk2 = createButtons("package2", "ladderhelp");
     const memerow = createButtons("youngeggmartin2", "bd2");
     const bd2 = createButtons("helpmeme", "cb2");
-    const cb2 = createButtons("bonusducks2", "rcatster2");
-    const rcatster2 = createButtons("congabait2", "yem2");
+    const cb2 = createButtons("bonusducks2", "mgold2");
+    const mgold2 = createButtons("congabait2", "rcatster2");
+    const rcatster2 = createButtons("mechagold2", "yem2");
     const yem2 = createButtons("reversecatster2", "memehelp");
     const comborow = createButtons("youngeggmartin3", "bd3");
     const bd3 = createButtons("helpcombo", "cb3");
@@ -203,6 +215,9 @@ module.exports = {
     const ts2 = createButtons("reversecatster3", "valk3");
     const valk3 = createButtons("trickstache2", "yem3");
     const yem3 = createButtons("valkster3", "combohelp");
+    const controlrow = createButtons("mechagold3", "bd4");
+    const bd4 = createButtons("helpcontrol", "mgold3");
+    const mgold3 = createButtons("bonusducks4", "controlhelp");
     const midrangerow = createButtons("valkster4", "cb4");
     const cb4 = createButtons("helpmid", "ts3");
     const ts3 = createButtons("congabait4", "valk4");
@@ -235,6 +250,13 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.memeDecks.length} meme
       `To view the Professor Brainstrom combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.comboDecks.length} combo decks in Tbot`
     );
+    const controlEmbed = createHelpEmbed(
+      "Professor Brainstorm Control Decks",
+      `My control commands for Professor Brainstorm(PB) are ${toBuildControlString}`,
+      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
+      `To view the Professor Brainstrom control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
+Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} control decks in Tbot`
+    );
     const midrangeEmbed = createHelpEmbed(
       "Professor Brainstorm Midrange Decks",
       `My midrange commands for Professor Brainstorm(PB) are ${toBuildMidrangeString}`,
@@ -246,10 +268,10 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.midrangeDecks.length} 
       "Professor Brainstorm Decks",
       `To view the Professor Brainstrom decks please select an option from the select menu below!
 Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`,
-      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
+      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022"
     );
     const [result] = await db.query(`select * from pbdecks`);
-     /**
+    /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
@@ -275,6 +297,7 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     const bonusducks = createDeckEmbed(result, "bonusducks");
     const budgetpb = createDeckEmbed(result, "budgetpb");
     const congabait = createDeckEmbed(result, "congabait");
+    const mechagold = createDeckEmbed(result, "mechagold");
     const professorpackage = createDeckEmbed(result, "professorpackage");
     const reversecatster = createDeckEmbed(result, "reversecatster");
     const trickstache = createDeckEmbed(result, "trickstache");
@@ -302,10 +325,7 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "control") {
-        await i.reply({
-          embeds: [bonusducks],
-          flags: MessageFlags.Ephemeral,
-        });
+        await i.update({ embeds: [controlEmbed], components: [controlrow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
@@ -323,62 +343,72 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
      */
     async function handleButtonInteraction(i) {
       const buttonActions = {
-        allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        helpall: {embed: alldecksEmbed, component: alldecksrow},
-        ladderhelp: {embed: ladderEmbed, component: ladderrow},
-        helpladder: {embed: ladderEmbed, component: ladderrow},
-        helpmeme: {embed: memeEmbed, component: memerow},
-        memehelp: {embed: memeEmbed, component: memerow},
-        helpcombo: {embed: comboEmbed, component: comborow},
-        combohelp: {embed: comboEmbed, component: comborow},
-        helpmid: {embed: midrangeEmbed, component: midrangerow},
-        midhelp: {embed: midrangeEmbed, component: midrangerow},
-        bd: {embed: bonusducks, component: bd},
-        bonusducks: {embed: bonusducks, component: bd},
-        bd2: {embed: bonusducks, component: bd2},
-        bonusducks2: {embed: bonusducks, component: bd2},
-        bd3: {embed: bonusducks, component: bd3},
-        bonusducks3: {embed: bonusducks, component: bd3},
-        bpb: {embed: budgetpb, component: bpb},
-        budgetpb: {embed: budgetpb, component: bpb},
-        cb: {embed: congabait, component: cb},
-        congabait: {embed: congabait, component: cb},
-        cb2: {embed: congabait, component: cb2},
-        congabait2: {embed: congabait, component: cb2},
-        cb3: {embed: congabait, component: cb3},
-        congabait3: {embed: congabait, component: cb3},
-        cb4: {embed: congabait, component: cb4},
-        congabait4: {embed: congabait, component: cb4},
-        pa: {embed: professorpackage, component: pa},
-        professorpackage: {embed: professorpackage, component: pa},
-        pa2: {embed: professorpackage, component: pa2},
-        professorpackage2: {embed: professorpackage, component: pa2},
-        rcatster: {embed: reversecatster, component: rcatster},
-        reversecatster: {embed: reversecatster, component: rcatster},
-        rcatster2: {embed: reversecatster, component: rcatster2},
-        reversecatster2: {embed: reversecatster, component: rcatster2},
-        rcatster3: {embed: reversecatster, component: rcatster3},
-        reversecatster3: {embed: reversecatster, component: rcatster3},
-        ts: {embed: trickstache, component: ts},
-        trickstache: {embed: trickstache, component: ts},
-        ts2: {embed: trickstache, component: ts2},
-        trickstache2: {embed: trickstache, component: ts2},
-        ts3: {embed: trickstache, component: ts3},
-        trickstache3: {embed: trickstache, component: ts3},
-        valk: {embed: valkster, component: valk},
-        valkster: {embed: valkster, component: valk},
-        valk2: {embed: valkster, component: valk2},
-        valkster2: {embed: valkster, component: valk2},
-        valk3: {embed: valkster, component: valk3},
-        valkster3: {embed: valkster, component: valk3},
-        valk4: {embed: valkster, component: valk4},
-        valkster4: {embed: valkster, component: valk4},
-        yem: {embed: youngeggmartin, component: yem},
-        youngeggmartin: {embed: youngeggmartin, component: yem},
-        yem2: {embed: youngeggmartin, component: yem2},
-        youngeggmartin2: {embed: youngeggmartin, component: yem2},
-        yem3: {embed: youngeggmartin, component: yem3},
-        youngeggmartin3: {embed: youngeggmartin, component: yem3},
+        allhelp: { embed: alldecksEmbed, component: alldecksrow },
+        helpall: { embed: alldecksEmbed, component: alldecksrow },
+        ladderhelp: { embed: ladderEmbed, component: ladderrow },
+        helpladder: { embed: ladderEmbed, component: ladderrow },
+        helpmeme: { embed: memeEmbed, component: memerow },
+        memehelp: { embed: memeEmbed, component: memerow },
+        helpcombo: { embed: comboEmbed, component: comborow },
+        combohelp: { embed: comboEmbed, component: comborow },
+        helpmid: { embed: midrangeEmbed, component: midrangerow },
+        midhelp: { embed: midrangeEmbed, component: midrangerow },
+        controlhelp: { embed: controlEmbed, component: controlrow },
+        helpcontrol: { embed: controlEmbed, component: controlrow },
+        bd: { embed: bonusducks, component: bd },
+        bonusducks: { embed: bonusducks, component: bd },
+        bd2: { embed: bonusducks, component: bd2 },
+        bonusducks2: { embed: bonusducks, component: bd2 },
+        bd3: { embed: bonusducks, component: bd3 },
+        bonusducks3: { embed: bonusducks, component: bd3 },
+        bd4: { embed: bonusducks, component: bd4 },
+        bonusducks4: { embed: bonusducks, component: bd4 },
+        bpb: { embed: budgetpb, component: bpb },
+        budgetpb: { embed: budgetpb, component: bpb },
+        cb: { embed: congabait, component: cb },
+        congabait: { embed: congabait, component: cb },
+        cb2: { embed: congabait, component: cb2 },
+        congabait2: { embed: congabait, component: cb2 },
+        cb3: { embed: congabait, component: cb3 },
+        congabait3: { embed: congabait, component: cb3 },
+        cb4: { embed: congabait, component: cb4 },
+        congabait4: { embed: congabait, component: cb4 },
+        pa: { embed: professorpackage, component: pa },
+        professorpackage: { embed: professorpackage, component: pa },
+        pa2: { embed: professorpackage, component: pa2 },
+        professorpackage2: { embed: professorpackage, component: pa2 },
+        rcatster: { embed: reversecatster, component: rcatster },
+        reversecatster: { embed: reversecatster, component: rcatster },
+        rcatster2: { embed: reversecatster, component: rcatster2 },
+        reversecatster2: { embed: reversecatster, component: rcatster2 },
+        rcatster3: { embed: reversecatster, component: rcatster3 },
+        reversecatster3: { embed: reversecatster, component: rcatster3 },
+        ts: { embed: trickstache, component: ts },
+        trickstache: { embed: trickstache, component: ts },
+        ts2: { embed: trickstache, component: ts2 },
+        trickstache2: { embed: trickstache, component: ts2 },
+        ts3: { embed: trickstache, component: ts3 },
+        trickstache3: { embed: trickstache, component: ts3 },
+        valk: { embed: valkster, component: valk },
+        valkster: { embed: valkster, component: valk },
+        valk2: { embed: valkster, component: valk2 },
+        valkster2: { embed: valkster, component: valk2 },
+        valk3: { embed: valkster, component: valk3 },
+        valkster3: { embed: valkster, component: valk3 },
+        valk4: { embed: valkster, component: valk4 },
+        valkster4: { embed: valkster, component: valk4 },
+        yem: { embed: youngeggmartin, component: yem },
+        youngeggmartin: { embed: youngeggmartin, component: yem },
+        yem2: { embed: youngeggmartin, component: yem2 },
+        youngeggmartin2: { embed: youngeggmartin, component: yem2 },
+        yem3: { embed: youngeggmartin, component: yem3 },
+        youngeggmartin3: { embed: youngeggmartin, component: yem3 },
+        mgold: { embed: mechagold, component: mgold },
+        mechagold: { embed: mechagold, component: mgold },
+        mgold2: { embed: mechagold, component: mgold2 },
+        mechagold2: { embed: mechagold, component: mgold2 },
+        mgold3: { embed: mechagold, component: mgold3 },
+        mechagold3: { embed: mechagold, component: mgold3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

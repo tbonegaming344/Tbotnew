@@ -494,6 +494,7 @@ module.exports = {
         "igmablobchum",
         "ladytuna",
         "lunchtime",
+        "mechagold",
         "noplayingallowed",
         "petmop",
         "otkswabbie",
@@ -573,6 +574,7 @@ module.exports = {
         "huntgargs",
         "kaleidoscope",
         "mechacontrol",
+        "mechagold",
         "mechascope",
         "noplayingallowed",
         "sunbandits",
@@ -665,6 +667,7 @@ module.exports = {
         "lunchtime",
         "marxbolt",
         "mechacontrol",
+        "mechagold",
         "mechascope",
         "nohokaistars",
         "noplayingallowed",
@@ -973,8 +976,9 @@ module.exports = {
     const ltbr = createButtons("ladytuna", "ltime");
     const ltime = createButtons("lockthebathroom", "mbolt");
     const mbolt = createButtons("lunchtime", "mcon");
-    const mcon = createButtons("marxbolt", "mscope");
-    const mscope = createButtons("mechacontrol", "nhks");
+    const mcon = createButtons("marxbolt", "mgold");
+    const mgold = createButtons("mechacontrol", "mscope");
+    const mscope = createButtons("mechagold", "nhks");
     const nhks = createButtons("mechascope", "npa");
     const npa = createButtons("nohokaistars", "otksw");
     const otksw = createButtons("noplayingallowed", "pyeeyz");
@@ -1063,8 +1067,9 @@ module.exports = {
     const hgargs2 = createButtons("himpter2", "igbc2");
     const igbc2 = createButtons("huntgargs2", "lt2");
     const lt2 = createButtons("igmablobchum2", "ltime2");
-    const ltime2 = createButtons("ladytuna2", "npa2");
-    const npa2 = createButtons("lunchtime2", "pmop2");
+    const ltime2 = createButtons("ladytuna2", "mgold2");
+    const mgold2 = createButtons("lunchtime2", "npa2");
+    const npa2 = createButtons("medcha", "pmop2");
     const pmop2 = createButtons("noplayingallowed2", "otksw2");
     const otksw2 = createButtons("petmop2", "rticia2");
     const rticia2 = createButtons("otkswabbie2", "rcatster2");
@@ -1140,8 +1145,9 @@ module.exports = {
     const ftimps4 = createButtons("budgetim4", "hgargs3");
     const hgargs3 = createButtons("frozentelimps4", "kscope3");
     const kscope3 = createButtons("huntgargs3", "mcon3");
-    const mcon3 = createButtons("kaleidoscope3", "mscope4");
-    const mscope4 = createButtons("mechacontrol3", "npa3");
+    const mcon3 = createButtons("kaleidoscope3", "mgold3");
+    const mgold3 = createButtons("mechacontrol3", "mscope4");
+    const mscope4 = createButtons("mechagold3", "npa3");
     const npa3 = createButtons("mechascope4", "sbandits4");
     const sbandits4 = createButtons("noplayingallowed3", "umech4");
     const umech4 = createButtons("sunbandits4", "wph4");
@@ -1581,6 +1587,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const binaryflagwar = createZombieDeckEmbed(result, "binaryflagwar");
     const brady = createZombieDeckEmbed(result, "brady");
     const budgetzm = createZombieDeckEmbed(result, "budgetzm");
+    const mechagold = createZombieDeckEmbed(result, "mechagold");
     const dozzamech = createZombieDeckEmbed(result, "dozzamech");
     const uncrackamech = createZombieDeckEmbed(result, "feastmech");
     const gargburn = createZombieDeckEmbed(result, "gargburn");
@@ -2522,6 +2529,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         espressoaggro2: { embed: espressoaggro, component: eaggro2 },
         eaggro3: { embed: espressoaggro, component: eaggro3 },
         espressoaggro3: { embed: espressoaggro, component: eaggro3 },
+        mgold: { embed: mechagold, component: mgold },
+        mechagold: { embed: mechagold, component: mgold },
+        mgold2: { embed: mechagold, component: mgold2 },
+        mechagold2: { embed: mechagold, component: mgold2 },
+        mgold3: {embed: mechagold, component: mgold3 },
+        mechagold3: {embed: mechagold, component: mgold3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

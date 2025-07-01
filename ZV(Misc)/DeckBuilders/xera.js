@@ -95,6 +95,7 @@ module.exports = {
         "healburn",
         "himpter",
         "laserrings",
+        "mechagold",
         "recycling",
         "reversecatster",
         "startron",
@@ -117,6 +118,7 @@ module.exports = {
       ],
       controlDecks: [
         "frozentelimps",
+        "mechagold",
         "neurotherapy",
         "toyotacontrolla",
         "uncrackamech",
@@ -145,6 +147,7 @@ module.exports = {
         "himpter",
         "laserrings",
         "limerence",
+        "mechagold",
         "neurotherapy",
         "recycling",
         "reversecatster",
@@ -204,8 +207,9 @@ module.exports = {
     const ff = createButtons("frozentelimps", "hburn");
     const hburn = createButtons("funnyflare", "hi");
     const hi = createButtons("healburn", "lrings");
-    const lrings = createButtons("himps", "recy");
-    const recy = createButtons("laserrings", "rcatster");
+    const lrings = createButtons("himps", "mgold");
+    const mgold = createButtons("laserrings", "recy");
+    const recy = createButtons("mechagold", "rcatster");
     const rcatster = createButtons("recycling", "star");
     const star = createButtons("reversecatster", "um");
     const um = createButtons("startron", "ws");
@@ -223,8 +227,9 @@ module.exports = {
     const um2 = createButtons("startron2", "ws2");
     const ws2 = createButtons("uncrackamech2", "combohelp");
     const controlrow = createButtons("uncrackmech3", "ftimps3");
-    const ftimps3 = createButtons("helpcontrol", "neuro2");
-    const neuro2 = createButtons("frozentelimps3", "tc2");
+    const ftimps3 = createButtons("helpcontrol", "mgold2");
+    const mgold2 = createButtons("frozentelimps3", "neuro2")
+    const neuro2 = createButtons("mechagold2", "tc2");
     const tc2 = createButtons("neurotherapy2", "um3");
     const um3 = createButtons("toyotacontrolla2", "controlhelp");
     const midrangerow = createButtons("watersports3", "sav3");
@@ -248,8 +253,9 @@ module.exports = {
     const hburn4 = createButtons("gravepiratestache3", "hi4");
     const hi4 = createButtons("healburn4", "lrings4");
     const lrings4 = createButtons("himps4", "lime3");
-    const lime3 = createButtons("laserrings4", "neuro3");
-    const neuro3 = createButtons("limerence3", "recy3");
+    const lime3 = createButtons("laserrings4", "mgold3");
+    const mgold3 = createButtons("limerence3", "neuro3")
+    const neuro3 = createButtons("mechagold3", "recy3");
     const recy3 = createButtons("neurotherapy3", "rcatster3");
     const rcatster3 = createButtons("recycling3", "star4");
     const star4 = createButtons("reversecatster3", "tc3");
@@ -258,7 +264,7 @@ module.exports = {
     const ws4 = createButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, 
-      himps, lasersnap, limerence, recycling, reversecatster, startron, shamcontrol, toyotacontrolla, feastmech, brady, watersports 
+      himps, lasersnap, limerence, mechagold, recycling, reversecatster, startron, shamcontrol, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
@@ -361,6 +367,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const reversecatster = createDeckEmbed(result, "reversecatster");
     const startron = createDeckEmbed(result, "startron");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
+    const mechagold = createDeckEmbed(result, "mechagold");
     const healburn = createDeckEmbed(result, "healburn");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
@@ -537,6 +544,12 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         neurotherapy2: { embed: neurotherapy, component: neuro2 },
         neuro3: { embed: neurotherapy, component: neuro3 },
         neurotherapy3: { embed: neurotherapy, component: neuro3 },
+        mgold: {embed: mechagold, component: mgold },
+        mechagold: { embed: mechagold, component: mgold },
+        mgold2: { embed: mechagold, component: mgold2 },
+        mechagold2: { embed: mechagold, component: mgold2 },
+        mgold3: { embed: mechagold, component: mgold3 },
+        mechagold3: { embed: mechagold, component: mgold3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

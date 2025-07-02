@@ -93,6 +93,7 @@ module.exports = {
         "frozentelimps",
         "funnyflare",
         "healburn",
+        "healthotk",
         "himpter",
         "laserrings",
         "mechagold",
@@ -109,6 +110,7 @@ module.exports = {
         "funnyflare",
         "gravepiratestache",
         "healburn",
+        "healthotk",
         "himpter",
         "laserrings",
         "reversecatster",
@@ -128,6 +130,7 @@ module.exports = {
         "funnyflare",
         "gomorrah",
         "healburn",
+        "healthotk",
         "himpter",
         "laserrings",
         "limerence",
@@ -144,6 +147,7 @@ module.exports = {
         "gomorrah",
         "gravepiratestache",
         "healburn",
+        "healthotk",
         "himpter",
         "laserrings",
         "limerence",
@@ -205,8 +209,9 @@ module.exports = {
     const sav = createButtons("helpmeme", "ftimps");
     const ftimps = createButtons("savage", "ff");
     const ff = createButtons("frozentelimps", "hburn");
-    const hburn = createButtons("funnyflare", "hi");
-    const hi = createButtons("healburn", "lrings");
+    const hburn = createButtons("funnyflare", "hotk");
+    const hotk = createButtons("healburn", "hi");
+    const hi = createButtons("healthotk", "lrings");
     const lrings = createButtons("himps", "mgold");
     const mgold = createButtons("laserrings", "recy");
     const recy = createButtons("mechagold", "rcatster");
@@ -219,8 +224,9 @@ module.exports = {
     const ftimps2 = createButtons("savage2", "ff2");
     const ff2 = createButtons("frozentelimps2", "gps2");
     const gps2 = createButtons("funnyflare2", "hburn2");
-    const hburn2 = createButtons("gravepiratestache2", "hi2");
-    const hi2 = createButtons("healburn2", "lrings2");
+    const hburn2 = createButtons("gravepiratestache2", "hotk2");
+    const hotk2 = createButtons("healburn2", "hi2");
+    const hi2 = createButtons("healthotk2", "lrings2");
     const lrings2 = createButtons("himps2", "rcatster2");
     const rcatster2 = createButtons("laserrings2", "star2");
     const star2 = createButtons("reversecatster2", "um2");
@@ -228,7 +234,7 @@ module.exports = {
     const ws2 = createButtons("uncrackamech2", "combohelp");
     const controlrow = createButtons("uncrackmech3", "ftimps3");
     const ftimps3 = createButtons("helpcontrol", "mgold2");
-    const mgold2 = createButtons("frozentelimps3", "neuro2")
+    const mgold2 = createButtons("frozentelimps3", "neuro2");
     const neuro2 = createButtons("mechagold2", "tc2");
     const tc2 = createButtons("neurotherapy2", "um3");
     const um3 = createButtons("toyotacontrolla2", "controlhelp");
@@ -236,8 +242,9 @@ module.exports = {
     const sav3 = createButtons("helpmid", "ff3");
     const ff3 = createButtons("savage3", "go2");
     const go2 = createButtons("funnyflare3", "hburn3");
-    const hburn3 = createButtons("gomorrah2", "hi3");
-    const hi3 = createButtons("healburn3", "lrings3");
+    const hburn3 = createButtons("gomorrah2", "hotk3");
+    const hotk3 = createButtons("healburn3", "hi3");
+    const hi3 = createButtons("healthotk3", "lrings3");
     const lrings3 = createButtons("himps3", "lime2");
     const lime2 = createButtons("laserrings3", "recy2");
     const recy2 = createButtons("limerence", "star3");
@@ -250,11 +257,12 @@ module.exports = {
     const ff4 = createButtons("frozentelimps4", "go3");
     const go3 = createButtons("funnyflare4", "gps3");
     const gps3 = createButtons("gomorrah3", "hburn4");
-    const hburn4 = createButtons("gravepiratestache3", "hi4");
-    const hi4 = createButtons("healburn4", "lrings4");
+    const hburn4 = createButtons("gravepiratestache3", "hotk4");
+    const hotk4 = createButtons("healburn4", "hi4");
+    const hi4 = createButtons("healthotk4", "lrings4");
     const lrings4 = createButtons("himps4", "lime3");
     const lime3 = createButtons("laserrings4", "mgold3");
-    const mgold3 = createButtons("limerence3", "neuro3")
+    const mgold3 = createButtons("limerence3", "neuro3");
     const neuro3 = createButtons("mechagold3", "recy3");
     const recy3 = createButtons("neurotherapy3", "rcatster3");
     const rcatster3 = createButtons("recycling3", "star4");
@@ -263,13 +271,14 @@ module.exports = {
     const um4 = createButtons("toyotacontrolla3", "ws4");
     const ws4 = createButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
-      savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, 
+      savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
       himps, lasersnap, limerence, mechagold, recycling, reversecatster, startron, shamcontrol, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
             inner join spdecks sp on (im.deckinfo = sp.deckinfo)
             inner join pbdecks pb on (im.deckinfo = pb.deckinfo)
+            inner join gkdecks gk on (im.deckinfo = gk.deckinfo)
             inner join ctdecks ct on (im.deckinfo = ct.deckinfo)
             inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
@@ -371,6 +380,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const healburn = createDeckEmbed(result, "healburn");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
+    const healthotk = createDeckEmbed(result, "healthotk");
     const recycling = createDeckEmbed(result, "recycling");
     const uncrackamech = createDeckEmbed(result, "feastmech");
     const watersports = createDeckEmbed(result, "watersports");
@@ -544,12 +554,20 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         neurotherapy2: { embed: neurotherapy, component: neuro2 },
         neuro3: { embed: neurotherapy, component: neuro3 },
         neurotherapy3: { embed: neurotherapy, component: neuro3 },
-        mgold: {embed: mechagold, component: mgold },
+        mgold: { embed: mechagold, component: mgold },
         mechagold: { embed: mechagold, component: mgold },
         mgold2: { embed: mechagold, component: mgold2 },
         mechagold2: { embed: mechagold, component: mgold2 },
         mgold3: { embed: mechagold, component: mgold3 },
         mechagold3: { embed: mechagold, component: mgold3 },
+        hotk: { embed: healthotk, component: hotk },
+        healthotk: { embed: healthotk, component: hotk },
+        hotk2: { embed: healthotk, component: hotk2 },
+        healthotk2: { embed: healthotk, component: hotk2 },
+        hotk3: { embed: healthotk, component: hotk3 },
+        healthotk3: { embed: healthotk, component: hotk3 },
+        hotk4: { embed: healthotk, component: hotk4 },
+        healthotk4: { embed: healthotk, component: hotk4 },
       };
       const action = buttonActions[i.customId];
       if (action) {

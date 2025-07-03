@@ -1,19 +1,8 @@
 const { EmbedBuilder } = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
-  name: `goingnuts3`,
-  aliases: [
-    `gn3`,
-    `3gn`,
-    `gonutsthreenut`,
-    `gonuts3nut`,
-    `3gn`,
-    `3gonuts`,
-    `going3nuts`,
-    `go3nuts`,
-    `goingnuts`,
-	`gonuts3`,
-  ],
+  name: `goingnuts`,
+  aliases: [`ctteamup`],
   category: `Beta-Carrotina/Citron`,
   run: async (client, message, args) => {
     const [result] = await db.query("SELECT going3nuts FROM ctdecks");

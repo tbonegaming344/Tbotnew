@@ -264,7 +264,7 @@ module.exports = {
         "carroot",
         "dinocounter",
         "frymidrose",
-        "going3nuts",
+        "goingnuts",
         "pawntrickstab",
         "pbeans",
       ],
@@ -302,6 +302,7 @@ module.exports = {
         "budgetsf",
         "dinogloves",
         "espressoaggro",
+        "goingnuts",
         "logbait",
         "pbeans",
         "watertron",
@@ -315,7 +316,7 @@ module.exports = {
         "dinocounter",
         "freezeheal",
         "funnyflare",
-        "going3nuts",
+        "goingnuts",
         "healburn",
         "healthotk",
         "lasersnap",
@@ -353,7 +354,6 @@ module.exports = {
         "figlottery",
         "frymidrose",
         "funnyflare",
-        "going3nuts",
         "healburn",
         "healmidrose",
         "healthotk",
@@ -399,7 +399,7 @@ module.exports = {
         "freezeheal",
         "frymidrose",
         "funnyflare",
-        "going3nuts",
+        "goingnuts",
         "healburn",
         "healmidrose",
         "healthotk",
@@ -771,9 +771,9 @@ module.exports = {
     const flottery = createButtons("espressoaggro", "fheal");
     const fheal = createButtons("figlottery", "fmr");
     const fmr = createButtons("freezeheal", "fflare");
-    const fflare = createButtons("frymidrose", "g3n");
-    const g3n = createButtons("funnyflare", "hburn");
-    const hburn = createButtons("going3nuts", "hmr");
+    const fflare = createButtons("frymidrose", "gnuts");
+    const gnuts = createButtons("funnyflare", "hburn");
+    const hburn = createButtons("goingnuts", "hmr");
     const hmr = createButtons("healburn", "hotk");
     const hotk = createButtons("healmidrose", "hland");
     const hland = createButtons("healthotk", "lsnap");
@@ -829,9 +829,9 @@ module.exports = {
     const bay2 = createButtons("helppladder", "carr2");
     const carr2 = createButtons("bayonet2", "dcounter2");
     const dcounter2 = createButtons("carroot2", "fmr2");
-    const fmr2 = createButtons("dinocounter2", "g3n2");
-    const g3n2 = createButtons("frymidrose2", "pts2");
-    const pts2 = createButtons("going3nuts2", "pb2");
+    const fmr2 = createButtons("dinocounter2", "gnuts2");
+    const gnuts2 = createButtons("frymidrose2", "pts2");
+    const pts2 = createButtons("goingnuts2", "pb2");
     const pb2 = createButtons("pawntrickstab2", "ladderphelp");
     const memeprow = createButtons("translattail2", "wr1002");
     const wr1002 = createButtons("memephelp", "cank2");
@@ -865,8 +865,9 @@ module.exports = {
     const bnc3 = createButtons("budgetct3", "bsf3");
     const bsf3 = createButtons("budgetct3", "dgloves3");
     const dgloves3 = createButtons("budgetsf3", "eaggro3");
-    const eaggro3 = createButtons("dinogloves3", "lbait3");
-    const lbait3 = createButtons("espressoaggro3", "pb3");
+    const eaggro3 = createButtons("dinogloves3", "gnuts3");
+    const gnuts3 = createButtons("espressoaggro3", "hburn3");
+    const lbait3 = createButtons("goingnuts3", "pb3");
     const pb3 = createButtons("logbait3", "wtron3");
     const wtron3 = createButtons("pbeans3", "aggrophelp");
     const comboprow = createButtons("translattail3", "bay3");
@@ -877,9 +878,9 @@ module.exports = {
     const cburn3 = createButtons("carroot3", "dcounter3");
     const dcounter3 = createButtons("cyburn3", "fheal3");
     const fheal3 = createButtons("dinocounter3", "fflare3");
-    const fflare3 = createButtons("freezeheal3", "g3n3");
-    const g3n3 = createButtons("funnyflare3", "hburn3");
-    const hburn3 = createButtons("going3nuts3", "hotk3");
+    const fflare3 = createButtons("freezeheal3", "gnuts4");
+    const gnuts4 = createButtons("funnyflare3", "hburn3");
+    const hburn3 = createButtons("goingnuts4", "hotk3");
     const hotk3 = createButtons("healburn3", "lsnap3");
     const lsnap3 = createButtons("healthotk3", "mopr3");
     const mopr3 = createButtons("lasersnap3", "msp3");
@@ -914,9 +915,8 @@ module.exports = {
     const dcounter4 = createButtons("cyburn4", "flottery3");
     const flottery3 = createButtons("dinocounter4", "fmr3");
     const fmr3 = createButtons("figlottery3", "fflare4");
-    const fflare4 = createButtons("frymidrose3", "g3n4");
-    const g3n4 = createButtons("funnyflare4", "hburn4");
-    const hburn4 = createButtons("going3nuts4", "hmr3");
+    const fflare4 = createButtons("frymidrose3", "hburn4");
+    const hburn4 = createButtons("funnyflare4", "hmr3");
     const hmr3 = createButtons("healburn4", "hotk4");
     const hotk4 = createButtons("healmidrose3", "hland3");
     const hland3 = createButtons("healthotk4", "lsnap4");
@@ -1452,7 +1452,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const carroot = createPlantDeckEmbed(result, "carroot");
     const neurotherapy = createPlantDeckEmbed(result, "shamcontrol");
     const budgetct = createPlantDeckEmbed(result, "budgetct");
-    const going3nuts = createPlantDeckEmbed(result, "going3nuts");
+    const goingnuts = createPlantDeckEmbed(result, "going3nuts");
     const startron = createPlantDeckEmbed(result, "startron");
     const watertron = createPlantDeckEmbed(result, "watertron");
     const budgetcc = createPlantDeckEmbed(result, "budgetcc");
@@ -1813,14 +1813,14 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         funnyflare3: { embed: funnyflare, component: fflare3 },
         fflare4: { embed: funnyflare, component: fflare4 },
         funnyflare4: { embed: funnyflare, component: fflare4 },
-        g3n: { embed: going3nuts, component: g3n },
-        going3nuts: { embed: going3nuts, component: g3n },
-        g3n2: { embed: going3nuts, component: g3n2 },
-        going3nuts2: { embed: going3nuts, component: g3n2 },
-        g3n3: { embed: going3nuts, component: g3n3 },
-        going3nuts3: { embed: going3nuts, component: g3n3 },
-        g3n4: { embed: going3nuts, component: g3n4 },
-        going3nuts4: { embed: going3nuts, component: g3n4 },
+        gnuts: { embed: goingnuts, component: gnuts },
+        goingnuts: { embed: goingnuts, component: gnuts },
+        gnuts2: { embed: goingnuts, component: gnuts2 },
+        goingnuts2: { embed: goingnuts, component: gnuts2 },
+        gnuts3: { embed: goingnuts, component: gnuts3 },
+        goingnuts3: { embed: goingnuts, component: gnuts3 },
+        gnuts4: { embed: goingnuts, component: gnuts4 },
+        goingnuts4: { embed: goingnuts, component: gnuts4 },
         hburn: { embed: healburn, component: hburn },
         healburn: { embed: healburn, component: hburn },
         hburn2: { embed: healburn, component: hburn2 },

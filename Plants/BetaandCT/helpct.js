@@ -79,7 +79,7 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -94,14 +94,14 @@ module.exports = {
     const citronDecks = {
       budgetDecks: ["budgetct"],
       competitiveDecks: ["wetron"],
-      ladderDecks: ["going3nuts"],
+      ladderDecks: ["goingnuts"],
       memeDecks: ["startron"],
-      aggroDecks: ["budgetct", "wetron"],
-      comboDecks: ["going3nuts", "startron"],
-      midrangeDecks: ["going3nuts", "startron"],
-      allDecks: ["budgetct", "going3nuts", "startron", "wetron"],
+      aggroDecks: ["budgetct", "goingnuts", "wetron"],
+      comboDecks: ["goingnuts", "startron"],
+      midrangeDecks: ["startron"],
+      allDecks: ["budgetct", "goingnuts", "startron", "wetron"],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -111,13 +111,12 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildAggroString = buildDeckString(citronDecks.aggroDecks)
+    const toBuildAggroString = buildDeckString(citronDecks.aggroDecks);
     const toBuildComboString = buildDeckString(citronDecks.comboDecks);
-    const toBuildMidrangeString = buildDeckString(citronDecks.midrangeDecks);
     const toBuildString = buildDeckString(citronDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -134,19 +133,17 @@ module.exports = {
       );
     }
     const aggrorow = createButtons("wetron", "bct");
-    const bct = createButtons("helpaggro", "wt");
-    const wt = createButtons("budgetct", "aggrohelp");
-    const comborow = createButtons("startron", "g3n");
-    const g3n = createButtons("helpcombo", "star");
-    const star = createButtons("going3nuts", "combohelp");
-    const midrangerow = createButtons("startron2", "g3n2");
-    const g3n2 = createButtons("helpmid", "star2");
-    const star2 = createButtons("going3nuts2", "midhelp");
+    const bct = createButtons("helpaggro", "gnuts");
+    const gnuts = createButtons("budgetct", "wt");
+    const wt = createButtons("goingnuts", "aggrohelp");
+    const comborow = createButtons("startron", "gnuts2");
+    const gnuts2 = createButtons("helpcombo", "star");
+    const star = createButtons("goingnuts2", "combohelp");
     const alldecksrow = createButtons("watertron", "bct2");
-    const bct2 = createButtons("helpall", "g3n3");
-    const g3n3 = createButtons("budgetct", "star3");
-    const star3 = createButtons("going3nuts3", "wt2");
-    const wt2 = createButtons("startron3", "helpall");
+    const bct2 = createButtons("helpall", "gnuts3");
+    const gnuts3 = createButtons("budgetct", "star2");
+    const star2 = createButtons("goingnuts3", "wt2");
+    const wt2 = createButtons("startron2", "helpall");
     const embed = createHelpEmbed(
       "Citron Decks",
       `To view the Citron decks Please select an option from the select menu below!
@@ -174,15 +171,8 @@ Note: Citron has ${citronDecks.aggroDecks.length} aggro decks in Tbot`
       `To view the combo Citron decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Citron has ${citronDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = createHelpEmbed(
-      "Citron Midrange Decks",
-      `My midrange decks for Citron(CT) are ${toBuildMidrangeString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
-      `To view the midrange Citron decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: Citron has ${citronDecks.midrangeDecks.length} midrange decks in Tbot`
-    );
     const [result] = await db.query("SELECT * FROM ctdecks");
-     /**
+    /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
@@ -206,7 +196,7 @@ Note: Citron has ${citronDecks.midrangeDecks.length} midrange decks in Tbot`
       return embed;
     }
     const budgetct = createDeckEmbed(result, "budgetct");
-    const going3nuts = createDeckEmbed(result, "going3nuts");
+    const goingnuts = createDeckEmbed(result, "going3nuts");
     const startron = createDeckEmbed(result, "startron");
     const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({
@@ -216,7 +206,7 @@ Note: Citron has ${citronDecks.midrangeDecks.length} midrange decks in Tbot`
     const iFilter = (i) => i.user.id === message.author.id;
     /**
      * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i 
+     * @param {*} i
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
@@ -227,18 +217,18 @@ Note: Citron has ${citronDecks.midrangeDecks.length} midrange decks in Tbot`
       } else if (value == "aggro") {
         await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
       } else if (value == "ladder") {
-        await i.reply({ embeds: [going3nuts], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [goingnuts], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.reply({ embeds: [startron], flags: MessageFlags.Ephemeral });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+        await i.reply({ embeds: [startron], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
-  /**
+    /**
      * the handleButtonInteraction function handles the button interactions for the decks
      * @param {*} i - The interaction object
      */
@@ -256,24 +246,21 @@ Note: Citron has ${citronDecks.midrangeDecks.length} midrange decks in Tbot`
         budgetct: { embed: budgetct, component: bct },
         bct2: { embed: budgetct, component: bct2 },
         budgetct2: { embed: budgetct, component: bct2 },
-        g3n: { embed: going3nuts, component: g3n },
-        going3nuts: { embed: going3nuts, component: g3n },
-        g3n2: { embed: going3nuts, component: g3n2 },
-        going3nuts2: { embed: going3nuts, component: g3n2 },
-        g3n3: { embed: going3nuts, component: g3n3 },
-        going3nuts3: { embed: going3nuts, component: g3n3 },
+        gnuts: { embed: goingnuts, component: gnuts },
+        goingnuts: { embed: goingnuts, component: gnuts },
+        gnuts2: { embed: goingnuts, component: gnuts2 },
+        goingnuts2: { embed: goingnuts, component: gnuts2 },
+        gnuts3: { embed: goingnuts, component: gnuts3 },
+        goingnuts3: { embed: goingnuts, component: gnuts3 },
         star: { embed: startron, component: star },
         startron: { embed: startron, component: star },
         star2: { embed: startron, component: star2 },
         startron2: { embed: startron, component: star2 },
-        star3: { embed: startron, component: star3 },
-        startron3: { embed: startron, component: star3 },
         wt: { embed: watertron, component: wt },
         watertron: { embed: watertron, component: wt },
         wt2: { embed: watertron, component: wt2 },
         watertron2: { embed: watertron, component: wt2 },
-
-      }
+      };
       const action = buttonActions[i.customId];
       if (action) {
         await i.update({

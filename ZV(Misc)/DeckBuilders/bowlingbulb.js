@@ -50,6 +50,12 @@ module.exports = {
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Deck")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
           .setLabel("Combo Decks")
           .setValue("combo")
           .setDescription(
@@ -64,11 +70,12 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const bowlingBulbEnjoyerDecks = {
-      ladderDecks: ["bfmidgargs", "binaryflagwar", "goingnuts3"],
-      comboDecks: ["binaryflagwar", "goingnuts3"],
-      midrangeDecks: ["bfmidgargs", "binaryflagwar", "goingnuts3"],
+      ladderDecks: ["bfmidgargs", "binaryflagwar", "goingnuts"],
+      aggroDecks: ["goingnuts"],
+      comboDecks: ["binaryflagwar", "goingnuts"],
+      midrangeDecks: ["bfmidgargs", "binaryflagwar"],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -89,7 +96,7 @@ module.exports = {
     );
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -105,18 +112,18 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = createButtons("going3nuts", "bfmg");
+    const ladderrow = createButtons("goingnuts", "bfmg");
     const bfmg = createButtons("ladderhelp", "bfw");
-    const bfw = createButtons("bfmidgargs", "g3n");
-    const g3n = createButtons("binaryflagwar", "ladderhelp");
-    const comborow = createButtons("going3nuts2", "bfw2");
-    const bfw2 = createButtons("helpcombo", "g3n2");
-    const g3n2 = createButtons("binaryflagwar2", "combohelp");
-    const midrangerow = createButtons("going3nuts3", "bfmg2");
+    const bfw = createButtons("bfmidgargs", "gnuts");
+    const gnuts = createButtons("binaryflagwar", "ladderhelp");
+    const comborow = createButtons("goingnuts2", "bfw2");
+    const bfw2 = createButtons("helpcombo", "gnuts2");
+    const gnuts2 = createButtons("binaryflagwar2", "combohelp");
+    const midrangerow = createButtons("binaryflagwar3", "bfmg2");
     const bfmg2 = createButtons("helpmid", "bfw3");
-    const bfw3 = createButtons("bfmidgargs2", "g3n3");
-    const g3n3 = createButtons("binaryflagwar3", "midhelp");
-    const [result] = await db.query(`select bfmidgargs, binaryflagwar, going3nuts 
+    const bfw3 = createButtons("bfmidgargs2", "midhelp");
+    const [result] =
+      await db.query(`select bfmidgargs, binaryflagwar, going3nuts 
 		from zmdecks zm
 		inner join ctdecks ct
 		on (zm.deckinfo = ct.deckinfo)
@@ -126,7 +133,7 @@ module.exports = {
     const bowlingbulbenjoyer = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks made by ${user.displayName} please select an option from the select menu below!
-Select either ladder or midrange decks to view all of ${user.displayName} decks!
+Select either ladder decks to view all of ${user.displayName} decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
@@ -151,7 +158,7 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.comboDecks.length} Combo
       `To view the Midrange Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Midrange decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
-     /**
+    /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
@@ -176,7 +183,7 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
     }
     const bfmidgargs = createDeckEmbed(result, "bfmidgargs");
     const binaryflagwar = createDeckEmbed(result, "binaryflagwar");
-    const going3nuts = createDeckEmbed(result, "going3nuts");
+    const goingnuts = createDeckEmbed(result, "going3nuts");
     const m = await message.channel.send({
       embeds: [bowlingbulbenjoyer],
       components: [row],
@@ -184,7 +191,7 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
     const iFilter = (i) => i.user.id === message.author.id;
     /**
      * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i 
+     * @param {*} i
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
@@ -194,6 +201,8 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+      } else if (value == "aggro") {
+        await i.reply({ embeds: [goingnuts], flags: MessageFlags.Ephemeral });
       }
     }
     /**
@@ -214,12 +223,10 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
         binaryflagwar2: { embed: binaryflagwar, component: bfw2 },
         bfw3: { embed: binaryflagwar, component: bfw3 },
         binaryflagwar3: { embed: binaryflagwar, component: bfw3 },
-        g3n: { embed: going3nuts, component: g3n },
-        going3nuts: { embed: going3nuts, component: g3n },
-        g3n2: { embed: going3nuts, component: g3n2 },
-        going3nuts2: { embed: going3nuts, component: g3n2 },
-        g3n3: { embed: going3nuts, component: g3n3 },
-        going3nuts3: { embed: going3nuts, component: g3n3 },
+        gnuts: { embed: goingnuts, component: gnuts },
+        goingnuts: { embed: goingnuts, component: gnuts },
+        gnuts2: { embed: goingnuts, component: gnuts2 },
+        goingnuts2: { embed: goingnuts, component: gnuts2 },
         bfmg: { embed: bfmidgargs, component: bfmg },
         bfmidgargs: { embed: bfmidgargs, component: bfmg },
         bfmg2: { embed: bfmidgargs, component: bfmg2 },

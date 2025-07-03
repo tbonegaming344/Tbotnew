@@ -2,7 +2,7 @@ const {EmbedBuilder} = require("discord.js");
 const db = require("../../index.js")
 module.exports = {
 	name: `himpter`, 
-	aliases: [`huntinggroundimps`, `huntingimps`, `huntimps`, `himps`],
+	aliases: [`huntinggroundimps`, `huntingimps`, `huntimps`, `himps`, `imphunt`],
 	category: `Brain Freeze(BF)`,
 	run: async(client, message, args) => {
 		const [result] = await db.query(`SELECT himps FROM bfdecks`)

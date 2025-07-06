@@ -559,6 +559,7 @@ module.exports = {
         "tangen",
         "telimps",
         "trickstache",
+        "trickmech",
         "uncrackamech",
         "valkster",
         "watersports",
@@ -1131,8 +1132,9 @@ module.exports = {
     const slord3 = createButtons("sunbandits3", "tan3");
     const tan3 = createButtons("sunlord3", "timps3");
     const timps3 = createButtons("tangen3", "tstache3");
-    const tstache3 = createButtons("telimps3", "umech3");
-    const umech3 = createButtons("trickstache3", "vster3");
+    const tstache3 = createButtons("telimps3", "tmech4");
+    const tmech4 = createButtons("trickstache3", "umech3");
+    const umech3 = createButtons("trickmech4", "vster3");
     const vster3 = createButtons("uncrackamech3", "wsports3");
     const wsports3 = createButtons("valkster3", "wph3");
     const wph3 = createButtons("watersports3", "yemartin3");
@@ -2189,6 +2191,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         trickmech2: { embed: trickmech, component: tmech2 },
         tmech3: { embed: trickmech, component: tmech3 },
         trickmech3: { embed: trickmech, component: tmech3 },
+        tmech4: { embed: trickmech, component: tmech4 },
+        trickmech4: { embed: trickmech, component: tmech4 },
         mbolt: { embed: marxbolt, component: mbolt },
         marxbolt: { embed: marxbolt, component: mbolt },
         mbolt2: { embed: marxbolt, component: mbolt2 },

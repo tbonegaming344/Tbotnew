@@ -49,6 +49,12 @@ module.exports = {
           .setLabel("Aggro Decks")
           .setValue("aggro")
           .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
+           new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Deck")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Deck")
           .setValue("midrange")
@@ -63,6 +69,7 @@ module.exports = {
       ladderDecks: ["trickmech"],
       memeDecks: ["dozzamech", "highlander"],
       aggroDecks: ["dozzamech", "trickmech"],
+      comboDecks: ["trickmech"],
       midrangeDecks: ["highlander"],
       allDecks: ["dozzamech", "highlander", "trickmech"],
     }
@@ -172,7 +179,7 @@ Note: ${user.displayName} has ${dozzaDecks.aggroDecks.length} Aggro decks in Tbo
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleSelectMenu(i){
       const value = i.values[0]
-      if(value == "ladder"){
+      if(value == "ladder" || value == "combo"){
         await i.reply({embeds: [trickmech], flags: MessageFlags.Ephemeral})
       }
       else if(value == "midrange"){

@@ -105,7 +105,7 @@ module.exports = {
     ladderDecks: ["binaryflagwar", "brady", "trickmech"],
     memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
     aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
-    comboDecks: ["binaryflagwar", "budgetzm", "gargburn", "uncrackamech", "zmoss"],
+    comboDecks: ["binaryflagwar", "budgetzm", "gargburn", "trickmech", "uncrackamech", "zmoss"],
     controlDecks: ["uncrackamech"],
     midrangeDecks: ["binaryflagwar", "gargburn"],
     tempoDecks: ["brady"],
@@ -178,8 +178,9 @@ module.exports = {
   const comborow = createButtons("zmoss3", "bfw3");
   const bfw3 = createButtons("combohelp", "bzm3");
   const bzm3 = createButtons("binaryflagwar3", "gb2");
-  const gb2 = createButtons("budgetzm3", "um3");
-  const um3 = createButtons("gargburn2", "zm3");
+  const gb2 = createButtons("budgetzm3", "tm4");
+  const tm4 = createButtons("gargburn2", "helpcombo");
+  const um3 = createButtons("trickmech4", "zm3");
   const zm3 = createButtons("uncrackamech3", "helpcombo");
   const midrangerow = createButtons("gargburn3", "bfw4");
   const bfw4 = createButtons("midrangehelp", "gb3");
@@ -379,6 +380,8 @@ module.exports = {
         trickmech2: {embed: trickmech, component: tm2},
         tm3: {embed: trickmech, component: tm3},
         trickmech3: {embed: trickmech, component: tm3},
+        tm4: {embed: trickmech, component: tm4},
+        trickmech4: {embed: trickmech, component: tm4},
         um: {embed: uncrackamech, component: um},
         uncrackamech: {embed: uncrackamech, component: um},
         um2: {embed: uncrackamech, component: um2},

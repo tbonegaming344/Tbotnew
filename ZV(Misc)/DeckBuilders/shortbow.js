@@ -56,7 +56,7 @@ module.exports = {
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
+          .setLabel("Aggro Decks")
           .setDescription(
             "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
           )
@@ -93,10 +93,10 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
       compdecks: ["limerence", "neurotherapy"],
-      ladderDecks: ["bayonet", "gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage"],
+      ladderDecks: ["bayonet", "gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage", "trickmech"],
       memeDecks: ["tangen"],
-      aggroDecks: ["gravepiratestache"],
-      comboDecks: ["bayonet", "gravepiratestache", "tangen"],
+      aggroDecks: ["gravepiratestache", "trickmech"],
+      comboDecks: ["bayonet", "gravepiratestache", "tangen", "trickmech"],
       controlDecks: ["neurotherapy", "pawntrickstab"],
       midrangeDecks: ["gomorrah", "limerence", "tangen"],
       tempoDecks: ["bayonet", "raiserpackage"],
@@ -108,7 +108,8 @@ module.exports = {
         "neurotherapy",
         "pawntrickstab",
         "raiserpackage", 
-        "tangen"
+        "tangen", 
+        "trickmech"
       ]
     };
      /**
@@ -122,6 +123,7 @@ module.exports = {
         .join("");
     }
     const toBuildLadderString = buildDeckString(shortbowDecks.ladderDecks);
+    const toBuildAggroString = buildDeckString(shortbowDecks.aggroDecks);
     const toBuildComboString = buildDeckString(shortbowDecks.comboDecks);
     const toBuildControlString = buildDeckString(shortbowDecks.controlDecks);
     const toBuildString = buildDeckString(shortbowDecks.allDecks);
@@ -145,7 +147,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("tangen", "bay");
+    const alldecksrow = createButtons("trickmech", "bay");
     const bay = createButtons("helpall", "go");
     const go = createButtons("bayonet", "gps");
     const gps = createButtons("gomorrah", "lime");
@@ -153,20 +155,26 @@ module.exports = {
     const neuro = createButtons("limerence", "pts");
     const pts = createButtons("neurotherapy", "rpack");
     const rpack = createButtons("pawntrickstab", "tan");
-    const tan = createButtons("raiserpackage", "allhelp");
+    const tan = createButtons("raiserpackage", "tmech");
+    const tmech = createButtons("tangen", "allhelp");
     const comprow = createButtons("neurotherapy2", "lime2");
     const lime2 = createButtons("helpcomp", "neuro2");
     const neuro2 = createButtons("limerence2", "comphelp");
-    const ladderrow = createButtons("raiserpackage2", "bay2");
+    const ladderrow = createButtons("trickemech2", "bay2");
     const bay2 = createButtons("helpladder", "go2");
     const go2 = createButtons("helpladder", "gps2");
     const gps2 = createButtons("gomorrah2", "pts2");
     const pts2 = createButtons("gravepiratestache2", "rpack2");
-    const rpack2 = createButtons("pawntrickstab2", "ladderhelp");
-    const comborow = createButtons("tangen", "bay3");
-    const bay3 = createButtons("helpcombo", "gps3");
-    const gps3 = createButtons("bayonet3", "tan2");
-    const tan2 = createButtons("gravepiratestache3", "combohelp");
+    const rpack2 = createButtons("pawntrickstab2", "tmech2");
+    const tmech2 = createButtons("raiserpackage2", "ladderhelp");
+    const aggrorow = createButtons("trickmech3", "gps3");
+    const gps3 = createButtons("helpaggro", "tmech3");
+    const tmech3 = createButtons("gravepiratestache3", "aggrohelp");
+    const comborow = createButtons("trickmech4", "bay3");
+    const bay3 = createButtons("helpcombo", "gps4");
+    const gps4 = createButtons("bayonet3", "tan2");
+    const tan2 = createButtons("gravepiratestache4", "tmech4");
+    const tmech4 = createButtons("tangen2", "combohelp");
     const controlrow = createButtons("pawntrickstab3", "neuro3");
     const neuro3 = createButtons("helpcontrol", "pts3");
     const pts3 = createButtons("neurotherapy3", "controlhelp");
@@ -179,14 +187,15 @@ module.exports = {
     const rpack3 = createButtons("bayonet4", "tempohelp");
     const [result] =
       await db.query(`select bayonet, gomorrah, 
-        gps, limerence, shamcontrol, pawntrickstab, raiserpackage, tangen from ntdecks nt 
+        gps, limerence, shamcontrol, pawntrickstab, raiserpackage, tangen, trickmech from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
         inner join bfdecks bf on nt.deckinfo = bf.deckinfo
         inner join sbdecks sb on nt.deckinfo = sb.deckinfo
         inner join ifdecks fi on nt.deckinfo = fi.deckinfo
         inner join ccdecks cc on nt.deckinfo = cc.deckinfo
-        inner join bcdecks bc on nt.deckinfo = bc.deckinfo`);
+        inner join bcdecks bc on nt.deckinfo = bc.deckinfo
+        inner join zmdecks zm on nt.deckinfo = zm.deckinfo`);
     const user = await client.users.fetch("824024125491380303");
     const shortbow = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -214,6 +223,13 @@ Note: ${user.displayName} has ${shortbowDecks.compdecks.length} competitive deck
       user.displayAvatarURL(),
       `To view the ladder decks made by ${user.displayName} please click on the buttons below or use commands listed above
 Note: ${user.displayName} has ${shortbowDecks.ladderDecks.length} ladder decks in Tbot`
+    );
+    const aggroEmbed = createHelpEmbed(
+      `${user.displayName} Aggro Decks`,
+      `My aggro decks made by ${user.displayName} are ${toBuildAggroString}`,
+      user.displayAvatarURL(),
+      `To view the aggro decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${shortbowDecks.aggroDecks.length} aggro decks in Tbot`
     );
     const comboEmbed = createHelpEmbed(
       `${user.displayName} Combo Decks`,
@@ -273,6 +289,7 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
     const bayonet = createDeckEmbed(result, "bayonet");
+    const trickmech = createDeckEmbed(result, "trickmech");
     const tangen = createDeckEmbed(result, "tangen");
     const m = await message.channel.send({
       embeds: [shortbow],
@@ -294,12 +311,19 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (value == "aggro" || value == "combo") {
-        await i.reply({
-          embeds: [gravepiratestache],
-          flags: MessageFlags.Ephemeral,
+      } else if (value == "aggro") {
+        await i.update({
+          embeds: [aggroEmbed],
+          components: [aggrorow],
         });
-      } else if (value == "midrange") {
+      }
+      else if (value == "combo") {
+        await i.update({
+          embeds: [comboEmbed],
+          components: [comborow],
+        });
+      } 
+      else if (value == "midrange") {
         await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
       } else if (value == "tempo") {
         await i.update({
@@ -346,6 +370,8 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         gravepiratestache2: { embed: gravepiratestache, component: gps2 },
         gps3: { embed: gravepiratestache, component: gps3 },
         gravepiratestache3: { embed: gravepiratestache, component: gps3 },
+        gps4: { embed: gravepiratestache, component: gps4 },
+        gravepiratestache4: { embed: gravepiratestache, component: gps4 },
         go: { embed: gomorrah, component: go },
         gomorrah: { embed: gomorrah, component: go },
         go2: { embed: gomorrah, component: go2 },
@@ -376,6 +402,14 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         tangen2: { embed: tangen, component: tan2 },
         tan3: { embed: tangen, component: tan3 },
         tangen3: { embed: tangen, component: tan3 }, 
+        tmech: { embed: trickmech, component: tmech },
+        trickmech: { embed: trickmech, component: tmech },
+        tmech2: { embed: trickmech, component: tmech2 },
+        trickmech2: { embed: trickmech, component: tmech2 },
+        tmech3: { embed: trickmech, component: tmech3 },
+        trickmech3: { embed: trickmech, component: tmech3 },
+        tmech4: { embed: trickmech, component: tmech4 },
+        trickmech4: { embed: trickmech, component: tmech4 },
         bay: { embed: bayonet, component: bay },
         bayonet: { embed: bayonet, component: bay },
         bay2: { embed: bayonet, component: bay2 },

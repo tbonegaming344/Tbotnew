@@ -89,7 +89,7 @@ module.exports = {
       ladderDecks: ["professorpackage", "trickmech"], 
       memeDecks: ["sunbandits"], 
       aggroDecks: ["trickmech"], 
-      comboDecks: ["sunbandits", "telimps"], 
+      comboDecks: ["sunbandits", "telimps", "trickmech"], 
       MidrangeDecks: ["sunbandits"], 
       midrangeDecks: ["healmidrose", "telimps"], 
       tempoDecks: ["professorpackage"],
@@ -131,21 +131,22 @@ module.exports = {
     const ladderrow = createButtons("trickmech", "propack");
     const propack =  createButtons("helpladder", "tmech");
     const tmech =  createButtons("professorpackage", "ladderhelp");
-    const comborow = createButtons("telimps", "sb");
+    const comborow = createButtons("trickmech2", "sb");
     const sb = createButtons("combohelp", "ti");
-    const ti = createButtons("sunbandits", "helpcombo");
+    const ti = createButtons("sunbandits", "tmech2");
+    const tmech2 = createButtons("telimps", "helpcombo")
     const competitiverow =  createButtons("telimps2", "hmrose");
     const hmrose =  createButtons("helpcomp", "ti2");
     const ti2 =  createButtons("healmidrose2", "comphelp");
     const midrangerow =  createButtons("telimps3", "hmrose2");
     const hmrose2 = createButtons("helpmidrange", "ti3")
     const ti3 =  createButtons("healmidrose2", "midrangehelp");
-    const alldecksrow = createButtons("trickmech2", "hmrose3");
+    const alldecksrow = createButtons("trickmech3", "hmrose3");
     const hmrose3 = createButtons("helpall", "propack2");
     const propack2 = createButtons("healmidrose3", "sb3");
     const sb3 = createButtons("professorpackage2", "ti4");
-    const ti4 = createButtons("sunbandits3", "tmech2");
-    const tmech2 =  createButtons("telimps4", "allhelp");
+    const ti4 = createButtons("sunbandits3", "tmech3");
+    const tmech3 =  createButtons("telimps4", "allhelp");
     const [result] =
       await db.query(`select hmr, professorpackage, sunbandits, telimps, trickmech
 from rodecks ro
@@ -303,6 +304,8 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         trickmech: {embed: trickmech, component: tmech},
         tmech2: {embed: trickmech, component: tmech2},
         trickmech2: {embed: trickmech, component: tmech2},
+        tmech3: {embed: trickmech, component: tmech3},
+        trickmech3: {embed: trickmech, component: tmech3},
       };
      const action = buttonActions[i.customId]
      if (action) {

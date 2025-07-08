@@ -5,7 +5,7 @@ module.exports = {
 	category: `Plant Cards`,
 	run: async(client,message,args)=> {
 		const pn = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/5f/HD_peanut2.png/revision/latest/scale-to-width-down/250?cb=20200409182803")
+		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/d/dc/Pea-NutPvZH.png/revision/latest?cb=20170830133653")
 		.setTitle("Pea-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Pea Nut Plant -**")
 		.setColor("Random")

@@ -202,7 +202,11 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
         await i.update({ embeds: [compbor], components: [comp] });
       } else if (value == "meme") {
         await i.update({ embeds: [memebor], components: [memerow] });
-      } else if (value == "combo") {
+      } 
+      else if (value == "control") {
+        await i.reply({embeds: [shamcontrol], flags: MessageFlags.Ephemeral});
+      }
+      else if (value == "combo") {
         await i.reply({ embeds: [mspotk], flags: MessageFlags.Ephemeral });
       } else if (value == "tempo") {
         await i.update({ embeds: [tempbor], components: [tempo] });

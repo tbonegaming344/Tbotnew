@@ -37,7 +37,7 @@ module.exports = {
       .setPlaceholder("select an option below to view Boris's decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
+          .setLabel("Competitive Decks")
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>")
           .setValue("comp"),
@@ -51,6 +51,12 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           )
           .setValue("combo"),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          )
+          .setValue("control"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Tempo Decks")
           .setDescription(
@@ -64,11 +70,12 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const borisDecks = {
-      competitiveDecks: ["lockthebathroom"],
+      competitiveDecks: ["lockthebathroom", "shamcontrol"],
       memeDecks: ["lifecouldbedream", "mspotk"],
-      comboDeck: ["mspotk"],
+      comboDecks: ["mspotk"],
+      controldecks: ["shamcontrol"],
       tempoDecks: ["lifecouldbedream", "lockthebathroom"],
-      allDecks: ["lifecouldbedream", "lockthebathroom", "mspotk"],
+      allDecks: ["lifecouldbedream", "lockthebathroom", "mspotk", "shamcontrol"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -83,6 +90,7 @@ module.exports = {
     const toBuildString = buildDeckString(borisDecks.allDecks);
     const toBuildTempo = buildDeckString(borisDecks.tempoDecks);
     const toBuildMeme = buildDeckString(borisDecks.memeDecks);
+    const toBuildComp = buildDeckString(borisDecks.competitiveDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -101,24 +109,35 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const tempo = createButtons("lockthebathroom", "lcbd");
-    const lcbd = createButtons("helptempo", "ltbr");
-    const ltbr = createButtons("lifecouldbedream", "tempohelp");
-    const alldecksrow = createButtons("mspotk", "lcbd2");
-    const lcbd2 = createButtons("helpall", "ltbr2");
-    const ltbr2 = createButtons("lifecouldbedream2", "msp");
-    const msp = createButtons("lockthebathroom2", "allhelp");
+    const comp = createButtons("shamcontrol", "ltbr"); 
+    const ltbr = createButtons("helpcomp", "scon"); 
+    const scon = createButtons("lockthebathroom", "comphelp");
+    const tempo = createButtons("lockthebathroom2", "lcbd");
+    const lcbd = createButtons("helptempo", "ltbr2");
+    const ltbr2 = createButtons("lifecouldbedream", "tempohelp");
+    const alldecksrow = createButtons("shamcontrol2", "lcbd2");
+    const lcbd2 = createButtons("helpall", "ltbr3");
+    const ltbr3 = createButtons("lifecouldbedream2", "msp");
+    const msp = createButtons("lockthebathroom3", "scon2");
+    const scon2 = createButtons("mspotk", "allhelp");
     const memerow = createButtons("mspotk2", "lcbd3");
     const lcbd3 = createButtons("helpmeme", "msp2");
     const msp2 = createButtons("lifecouldbedream3", "memehelp");
-    const [result] = await db.query(`SELECT lockin, lcbd, mspotk FROM bfdecks bf
-inner join ccdecks cc on (bf.deckinfo = cc.deckinfo)`);
+    const [result] = await db.query(`SELECT lockin, lcbd, mspotk, shamcontrol FROM bfdecks bf
+inner join ccdecks cc on (bf.deckinfo = cc.deckinfo) inner join bcdecks bc on (bf.deckinfo = bc.deckinfo)`);
     const user = await client.users.fetch("705167235429433435");
     const boris = createHelpEmbed(
       `${user.displayName} Decks`,
       `To find out more about the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
+    );
+    const compbor = createHelpEmbed(
+      `${user.displayName} Competitive Decks`,
+      `My competitive decks made by ${user.displayName} are ${toBuildComp}`,
+      user.displayAvatarURL(),
+      `To view the Competitive Decks Made By ${user.displayName} please click on the buttons below!
+Note: ${user.displayName} has ${borisDecks.competitiveDecks.length} competitive decks in Tbot`
     );
     const tempbor = createHelpEmbed(
       `${user.displayName} Tempo Decks`,
@@ -167,6 +186,7 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
     const lockin = createDeckEmbed(result, "lockin");
     const lcbdream = createDeckEmbed(result, "lcbd");
     const mspotk = createDeckEmbed(result, "mspotk");
+    const shamcontrol = createDeckEmbed(result, "shamcontrol");
     const m = await message.channel.send({
       embeds: [boris],
       components: [row],
@@ -179,10 +199,7 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
     async function handleSelectMenu(i) {
       const value = i.values[0];
       if (value == "comp") {
-        await i.reply({
-          embeds: [lockin],
-          flags: MessageFlags.Ephemeral,
-        });
+        await i.update({ embeds: [compbor], components: [comp] });
       } else if (value == "meme") {
         await i.update({ embeds: [memebor], components: [memerow] });
       } else if (value == "combo") {
@@ -205,6 +222,8 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
         lockthebathroom: { embed: lockin, component: ltbr },
         ltbr2: { embed: lockin, component: ltbr2 },
         lockthebathroom2: { embed: lockin, component: ltbr2 },
+        ltbr3: { embed: lockin, component: ltbr3 },
+        lockthebathroom3: { embed: lockin, component: ltbr3 },
         lcbd: { embed: lcbdream, component: lcbd },
         lifecouldbedream: { embed: lcbdream, component: lcbd },
         lcbd2: { embed: lcbdream, component: lcbd2 },
@@ -219,6 +238,12 @@ Note: ${user.displayName} has ${borisDecks.allDecks.length} total decks in Tbot`
         helpall: { embed: allbor, component: alldecksrow },
         tempohelp: { embed: tempbor, component: tempo },
         helptempo: { embed: tempbor, component: tempo },
+        comphelp: { embed: compbor, component: comp },
+        helpcomp: { embed: compbor, component: comp },
+        scon: { embed: shamcontrol, component: scon },
+        shamcontrol: { embed: shamcontrol, component: scon },
+        scon2: { embed: shamcontrol, component: scon2 },
+        shamcontrol2: { embed: shamcontrol, component: scon2 },
       };
       const action = buttonActions[i.customId];
       if (action) {

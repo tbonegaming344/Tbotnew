@@ -246,7 +246,7 @@ module.exports = {
         "budgetwk",
       ],
       competitiveDecks: [
-        "abeans",
+        "cartasbuenas",
         "chemotherapy",
         "cyburn",
         "espressoaggro",
@@ -295,11 +295,11 @@ module.exports = {
         "translattail",
       ],
       aggroDecks: [
-        "abeans",
         "budgetcc",
         "budgetct",
         "budgetnc",
         "budgetsf",
+        "cartasbuenas",
         "dinogloves",
         "espressoaggro",
         "goingnuts",
@@ -376,7 +376,6 @@ module.exports = {
       ],
       allDecks: [
         "100%winrate",
-        "abeans",
         "bayonet",
         "budgetct",
         "budgetcc",
@@ -390,6 +389,7 @@ module.exports = {
         "budgetwk",
         "cancerknight",
         "carroot",
+        "cartasbuenas",
         "chemotherapy",
         "cyburn",
         "dinocounter",
@@ -749,9 +749,8 @@ module.exports = {
       );
     }
     const allprow = createButtons("watertron", "wr100");
-    const wr100 = createButtons("helpallp", "ab");
-    const ab = createButtons("winrate100", "bay");
-    const bay = createButtons("abeans", "bct");
+    const wr100 = createButtons("helpallp", "bay");
+    const bay = createButtons("winrate100", "bct");
     const bct = createButtons("bayonet", "bcc");
     const bcc = createButtons("budgetct", "bcz");
     const bcz = createButtons("budgetcc", "bgk");
@@ -763,8 +762,9 @@ module.exports = {
     const bsp = createButtons("budgetsf", "bwk");
     const bwk = createButtons("budgetsp", "cank");
     const cank = createButtons("budgetwk", "carr");
-    const carr = createButtons("cancerknight", "chemo");
-    const chemo = createButtons("carroot", "cburn");
+    const carr = createButtons("cancerknight", "cb");
+    const cb = createButtons("carroot", "chemo");
+    const chemo = createButtons("cartasbuenas", "cburn");
     const cburn = createButtons("chemotherapy", "dgloves");
     const dgloves = createButtons("cyburn", "dcounter");
     const dcounter = createButtons("dinogloves", "eaggro");
@@ -813,9 +813,9 @@ module.exports = {
     const bsf2 = createButtons("budgetro2", "bsp2");
     const bsp2 = createButtons("budgetsf2", "bwk2");
     const bwk2 = createButtons("budgetsp2", "helppbudget");
-    const compprow = createButtons("watertron2", "ab2");
-    const ab2 = createButtons("compphelp", "chemo2");
-    const chemo2 = createButtons("abeans2", "cburn2");
+    const compprow = createButtons("watertron2", "cb2");
+    const cb2 = createButtons("compphelp", "chemo2");
+    const chemo2 = createButtons("cartasbuenas2", "cburn2");
     const cburn2 = createButtons("chemotherapy2", "eaggro2");
     const eaggro2 = createButtons("cyburn2", "flottery2");
     const flottery2 = createButtons("espressoaggro2", "hmr2");
@@ -859,13 +859,13 @@ module.exports = {
     const srings2 = createButtons("shitknight2", "stron2");
     const stron2 = createButtons("starrings2", "tlattail2");
     const tlattail2 = createButtons("startron2", "helppmeme");
-    const aggroprow = createButtons("watertron3", "ab3");
-    const ab3 = createButtons("helppaggro", "bcc3");
-    const bcc3 = createButtons("abeans3", "bct3");
+    const aggroprow = createButtons("watertron3", "bcc3");
+    const bcc3 = createButtons("helppaggro", "bct3");
     const bct3 = createButtons("budgetcc3", "bnc3");
     const bnc3 = createButtons("budgetct3", "bsf3");
-    const bsf3 = createButtons("budgetct3", "dgloves3");
-    const dgloves3 = createButtons("budgetsf3", "eaggro3");
+    const bsf3 = createButtons("budgetct3", "cb3");
+    const cb3 = createButtons("budgetsf3", "dgloves3");
+    const dgloves3 = createButtons("cartasbuenas3", "eaggro3");
     const eaggro3 = createButtons("dinogloves3", "gnuts3");
     const gnuts3 = createButtons("espressoaggro3", "hburn3");
     const lbait3 = createButtons("goingnuts3", "pb3");
@@ -1473,7 +1473,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const healthotk = createPlantDeckEmbed(result, "healthotk");
     const pawntrickstab = createPlantDeckEmbed(result, "pawntrickstab");
     const winrate100 = createPlantDeckEmbed(result, "wr100");
-    const abeans = createPlantDeckEmbed(result, "abeans");
+    const cartasbuenas= createPlantDeckEmbed(result, "abeans");
     const budgetgs = createPlantDeckEmbed(result, "budgetgs");
     const pbeans = createPlantDeckEmbed(result, "pbeans");
     const savagemayflower = createPlantDeckEmbed(result, "savagemayflower");
@@ -1691,12 +1691,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         winrate1002: { embed: winrate100, component: wr1002 },
         wr1003: { embed: winrate100, component: wr1003 },
         winrate1003: { embed: winrate100, component: wr1003 },
-        ab: { embed: abeans, component: ab },
-        abeans: { embed: abeans, component: ab },
-        ab2: { embed: abeans, component: ab2 },
-        abeans2: { embed: abeans, component: ab2 },
-        ab3: { embed: abeans, component: ab3 },
-        abeans3: { embed: abeans, component: ab3 },
+        cb: { embed: cartasbuenas, component: cb },
+        cartasbuenas: { embed: cartasbuenas, component: cb },
+        cb2: { embed: cartasbuenas, component: cb2 },
+        cartasbuenas2: { embed: cartasbuenas, component: cb2 },
+        cb3: { embed: cartasbuenas, component: cb3 },
+        cartasbuenas3: { embed: cartasbuenas, component: cb3 },
         vce: { embed: venice, component: vce },
         venice: { embed: venice, component: vce },
         vce2: { embed: venice, component: vce2 },

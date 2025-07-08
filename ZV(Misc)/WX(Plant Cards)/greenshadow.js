@@ -32,125 +32,125 @@ module.exports = {
         .setEmoji("<a:GreenShadow:1100168011270328390>")
     );
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Green Shadow's Decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setValue("budget")
-        .setDescription("Plant Decks that are cheap for new players")
-        .setEmoji("💰"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("comp")
-        .setDescription("Some of the Best  Decks in the game")
-        .setEmoji("<:compemote:1325461143136764060>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Ladder Deck")
-        .setValue("ladder")
-        .setDescription("Decks that mostly only good for ranked games"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setValue("meme")
-        .setDescription("Decks that are built off a weird/fun combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Aggro Decks")
-        .setValue("aggro")
-        .setDescription(
-          "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
-        .setValue("combo")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Deck")
-        .setValue("midrange")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Tempo Deck")
-        .setValue("tempo")
-        .setDescription(
-          "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Green Shadow Decks")
-        .setValue("all")
-        .setDescription("View All Green Shadow Decks")
-        .setEmoji("<a:GreenShadow:1100168011270328390>")
-    );
-  const row = new ActionRowBuilder().addComponents(select);
-  const greenShadowDecks = {
-    budgetDecks: ["budgetmopshadow"],
-    competitiveDecks: ["abeans"],
-    ladderDecks: ["pbeans"],
-    memeDecks: ["100%winrate", "savagemayflower", "starrings"],
-    aggroDecks: ["abeans", "pbeans"],
-    comboDecks: ["savagemayflower", "starrings"],
-    midrangeDecks: ["budgetmopshadow", "starrings"],
-    tempoDecks: ["100%winrate"],
-    allDecks: [
-      "100%winrate",
-      "abeans",
-      "budgetmopshadow",
-      "pbeans",
-      "savagemayflower",
-      "starrings",
-    ],
-  };
-  /**
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Green Shadow's Decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("Plant Decks that are cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the Best  Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setValue("meme")
+          .setDescription("Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Decks")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Deck")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Deck")
+          .setValue("tempo")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Green Shadow Decks")
+          .setValue("all")
+          .setDescription("View All Green Shadow Decks")
+          .setEmoji("<a:GreenShadow:1100168011270328390>")
+      );
+    const row = new ActionRowBuilder().addComponents(select);
+    const greenShadowDecks = {
+      budgetDecks: ["budgetmopshadow"],
+      competitiveDecks: ["cartasbuenas"],
+      ladderDecks: ["pbeans"],
+      memeDecks: ["100%winrate", "savagemayflower", "starrings"],
+      aggroDecks: ["cartasbuenas", "pbeans"],
+      comboDecks: ["savagemayflower", "starrings"],
+      midrangeDecks: ["budgetmopshadow", "starrings"],
+      tempoDecks: ["100%winrate"],
+      allDecks: [
+        "100%winrate",
+        "budgetmopshadow",
+        "cartasbuenas",
+        "pbeans",
+        "savagemayflower",
+        "starrings",
+      ],
+    };
+    /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
 
-  function BuildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
-  const toBuildString = BuildDeckString(greenShadowDecks.allDecks);
-  const toBuildAggroString = BuildDeckString(greenShadowDecks.aggroDecks);
-  const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
-  const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
-  const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
-  const memerow = createButtons("starrings", "wr100");
-  const wr100 = createButtons("helpmeme", "smf");
-  const smf = createButtons("winrate100", "srings");
-  const srings = createButtons("savagemayflower", "memehelp");
-  const comborow = createButtons("starrings2", "smf2");
-  const smf2 = createButtons("helpcombo", "srings2");
-  const srings2 = createButtons("savagemayflower2", "combohelp");
-  const midrangerow = createButtons("starrings3", "bms");
-  const bms = createButtons("helpmidrange", "srings3");
-  const srings3 = createButtons("budgetmopshadow", "midrangehelp");
-  const aggrorow = createButtons("pbeans", "ab2");
-  const ab2 = createButtons("aggrohelp", "pb");
-  const pb = createButtons("abeans2", "helpaggro");
-  const alldecksrow = createButtons("starrings4", "wr1002");
-  const wr1002 = createButtons("helpall", "ab");
-  const ab = createButtons("winrate1002", "bms2");
-  const bms2 = createButtons("ab", "pb2");
-  const pb2 = createButtons("budgetmopshadow2", "smf3");
-  const smf3 = createButtons("pbeans2", "srings4");
-  const srings4 = createButtons("savagemayflower3", "allhelp");
+    function BuildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildString = BuildDeckString(greenShadowDecks.allDecks);
+    const toBuildAggroString = BuildDeckString(greenShadowDecks.aggroDecks);
+    const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
+    const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
+    const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
+    const memerow = createButtons("starrings", "wr100");
+    const wr100 = createButtons("helpmeme", "smf");
+    const smf = createButtons("winrate100", "srings");
+    const srings = createButtons("savagemayflower", "memehelp");
+    const comborow = createButtons("starrings2", "smf2");
+    const smf2 = createButtons("helpcombo", "srings2");
+    const srings2 = createButtons("savagemayflower2", "combohelp");
+    const midrangerow = createButtons("starrings3", "bms");
+    const bms = createButtons("helpmidrange", "srings3");
+    const srings3 = createButtons("budgetmopshadow", "midrangehelp");
+    const aggrorow = createButtons("pbeans", "cb");
+    const cb = createButtons("aggrohelp", "pb");
+    const pb = createButtons("cartasbuenas", "helpaggro");
+    const alldecksrow = createButtons("starrings4", "wr1002");
+    const wr1002 = createButtons("helpall", "bms2");
+    const bms2 = createButtons("winrate1002", "cb2");
+    const cb2 = createButtons("budgetmopshadow2", "pb2");
+    const pb2 = createButtons("cartasbuenas2", "smf3");
+    const smf3 = createButtons("pbeans2", "srings4");
+    const srings4 = createButtons("savagemayflower3", "allhelp");
     const gs = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/pvzcc/images/2/26/GreenShadowBYL.png/revision/latest?cb=20200704033327"
@@ -243,7 +243,7 @@ module.exports = {
         return embed;
       }
       const winrate100 = createDeckEmbed(result, "wr100")
-      const abeans = createDeckEmbed(result, "abeans")
+      const cartasbuenas= createDeckEmbed(result, "abeans")
       const budgetgs = createDeckEmbed(result, "budgetgs")
       const savagemayflower = createDeckEmbed(result, "savagemayflower")
       const starrings = createDeckEmbed(result, "sovietonion")
@@ -258,7 +258,7 @@ module.exports = {
       if (value == "budget") {
         await i.reply({ embeds: [budgetgs], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
-        await i.reply({ embeds: [abeans], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [cartasbuenas], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.reply({ embeds: [pbeans], flags: MessageFlags.Ephemeral });
       } else if (value == "aggro") {
@@ -290,10 +290,10 @@ module.exports = {
         combohelp: {embed: comboEmbed, component: comborow},
         helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         midrangehelp: {embed: midrangeEmbed, component: midrangerow},
-        ab: {embed: abeans, component: ab},
-        abeans: {embed: abeans, component: ab},
-        ab2: {embed: abeans, component: ab2},
-        abeans2: {embed: abeans, component: ab2},
+        cb: {embed: cartasbuenas, component: cb}, 
+        cartasbuenas: {embed: cartasbuenas, component: cb},
+        cb2: {embed: cartasbuenas, component: cb2},
+        cartasbuenas2: {embed: cartasbuenas, component: cb2},
         bms: {embed: budgetgs, component: bms},
         budgetmopshadow: {embed: budgetgs, component: bms},
         bms2: {embed: budgetgs, component: bms2},
@@ -319,7 +319,7 @@ module.exports = {
         wr100: {embed: winrate100, component: wr100},
         winrate100: {embed: winrate100, component: wr100},
         wr1002: {embed: winrate100, component: wr1002},
-        winrate1002: {embed: winrate100, component: wr1002},
+        winrate1002: {embed: winrate100, component: wr1002}
       }
       const action = buttonActions[i.customId];
       if (action) {

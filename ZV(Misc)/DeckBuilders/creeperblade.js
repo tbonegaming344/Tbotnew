@@ -45,7 +45,7 @@ module.exports = {
       .setPlaceholder("Select an option below to view creeperblade's decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Decks")
+        .setLabel("Competitive Deck")
         .setValue("comp")
         .setEmoji("<:compemote:1325461143136764060>")
         .setDescription('Some of the Best Decks in the game'), 
@@ -54,10 +54,6 @@ module.exports = {
 					.setDescription('Decks that mostly only good for ranked games')
 					.setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
-        new StringSelectMenuOptionBuilder()
-        .setLabel("Aggro Deck")
-        .setValue("aggro")
-        .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
         new StringSelectMenuOptionBuilder()
         .setLabel("Combo Deck")
         .setValue("combo")
@@ -74,18 +70,15 @@ module.exports = {
         .setLabel("All Decks")
         .setDescription("All decks made by creeperblade")
         .setValue("all")
-
       );
       const row = new ActionRowBuilder().addComponents(select);
       const creeperBladeDecks = {
-        competitiveDecks:["abeans", "pablosyeezys"],
+        competitiveDecks:["pablosyeezys"],
         ladderDecks: ["professorpackage"],
-        aggroDecks: ["abeans"],
         comboDecks: ["pablosyeezys"],
         midrangeDecks: ["pablosyeezys"],
         tempoDecks: ["professorpackage"],
         allDecks: [
-          "abeans",
           "pablosyeezys",
           "professorpackage",
         ],
@@ -100,7 +93,6 @@ module.exports = {
           .map((deck) => `\n<@1043528908148052089> **${deck}**`)
           .join("");
       }
-      const toBuildComp = buildDeckString(creeperBladeDecks.competitiveDecks);
       const toBuildString = buildDeckString(creeperBladeDecks.allDecks);
       /**
      * The createButtons function creates a row of buttons for the embed
@@ -120,32 +112,18 @@ module.exports = {
             .setStyle(ButtonStyle.Primary)
         );
       }
-    const comprow = createButtons("pablosyeezys", "ab");
-    const ab = createButtons("helpcomp", "py");
-    const py = createButtons("abeans", "comphelp");
-    const alldecksrow = createButtons("professorpackage", "ab2");
-    const ab2 = createButtons("helpall", "py2");
-    const py2 = createButtons("abeans2", "propack");
+    const alldecksrow = createButtons("professorpackage", "py");
+    const py2 = createButtons("helpall", "propack");
     const propack = createButtons("pablosyeezys3", "allhelp");
-    const [result] = await db.query(`select abeans, pablosyeezys, professorpackage
-		from gsdecks gs 
-		inner join smdecks sm 
-		on (gs.deckinfo = sm.deckinfo)
-    inner join pbdecks pb 
-    on (gs.deckinfo = pb.deckinfo)`);
+    const [result] = await db.query(`select pablosyeezys, professorpackage
+    from smdecks sm inner join pbdecks pb 
+    on (sm.deckinfo = pb.deckinfo)`);
     const user = await client.users.fetch("738926530000060416");
     const creep = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
-    )
-    const comp = createHelpEmbed(
-      `${user.displayName} Competitive Decks`,
-      `My Competitive decks made by ${user.displayName} are ${toBuildComp}`,
-      user.displayAvatarURL(),
-      `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${creeperBladeDecks.competitiveDecks.length} Competitive decks in Tbot`
     )
 const alldecksEmbed = createHelpEmbed(
   `${user.displayName} Decks`,
@@ -177,7 +155,6 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
   }
   return embed;
 }
-    const abeans = createDeckEmbed(result, "abeans");
     const pyeez = createDeckEmbed(result, "pablosyeezys");
     const professorpackage = createDeckEmbed(result, "professorpackage");
     const m = await message.channel.send({
@@ -191,20 +168,11 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if(value == "comp"){
-        await i.update({embeds: [comp], components: [comprow]});
-      }
-      else if(value == "ladder" || value == "tempo"){
+      if(value == "ladder" || value == "tempo"){
         await i.reply({embeds: [professorpackage], flags: MessageFlags.Ephemeral})
       }
-      else if(value == "aggro"){
-        await i.reply({embeds: [abeans], flags: MessageFlags.Ephemeral});
-      }
-      else if(value == "combo"){
+      else if(value == "combo" ||value == "comp" || value == "midrange"){
         await i.reply({embeds: [pyeez], flags: MessageFlags.Ephemeral});
-      }
-      else if(value == "midrange"){
-        await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
       }
       else if(value == "all"){
         await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
@@ -212,18 +180,10 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
     }
     async function handleButtonInteraction(i){
       const buttonActions = {
-        helpcomp: {embed: comp, component: comprow},
-        comphelp: {embed: comp, component: comprow},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        ab: {embed: abeans, component: ab},
-        abeans: {embed: abeans, component: ab},
-        ab2: {embed: abeans, component: ab2},
-        abeans2: {embed: abeans, component: ab2},
         py: {embed: pyeez, component: py},
         pablosyeezys: {embed: pyeez, component: py},
-        py2: {embed: pyeez, component: py2},
-        pablosyeezys2: {embed: pyeez, component: py2},
         propack: {embed: professorpackage, component: propack},
         professorpackage: {embed: professorpackage, component: propack},
       };

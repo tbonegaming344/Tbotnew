@@ -73,12 +73,12 @@ function createHelpEmbed(title, description, thumbnail, footer) {
       )
       const row = new ActionRowBuilder().addComponents(select);
       const pillowyDecks = {
-        competitiveDecks: ["abeans"], 
+        competitiveDecks: ["cartasbuenas"], 
         memeDecks: ["healburn", "starrings"], 
-        aggroDecks: ["abeans"], 
+        aggroDecks: ["cartasbuenas"], 
         comboDecks: ["healburn", "starrings"],
         midrangeDecks: ["healburn", "starrings"], 
-        allDecks: ["abeans", "healburn", "starrings"],
+        allDecks: ["cartasbuenas", "healburn", "starrings"],
       }
        /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -121,9 +121,9 @@ function createHelpEmbed(title, description, thumbnail, footer) {
       const midrangeRow = createButtons("starrings3", "hburn3");
       const hburn3 = createButtons("helpmidrange", "srings3");
       const srings3 = createButtons("healburn3", "midrangehelp");
-      const allDecksRow = createButtons("starrings4", "ab");
-      const ab = createButtons("helpall", "hburn4");
-      const hburn4 = createButtons("abeans", "srings4");
+      const allDecksRow = createButtons("starrings4", "cb");
+      const cb = createButtons("helpall", "hburn4");
+      const hburn4 = createButtons("cartasbuenas", "srings4");
       const srings4 = createButtons("healburn4", "allhelp");
           const [result] = await db.query(`SELECT abeans, healburn, sovietonion FROM gsdecks gs
             inner join sfdecks sf on (gs.deckinfo = sf.deckinfo)`)
@@ -185,7 +185,7 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
             }
             return embed;
           }
-            const abeans = createDeckEmbed(result, "abeans")
+            const cartasbuenas = createDeckEmbed(result, "abeans")
             const healburn = createDeckEmbed(result, "healburn")
             const starrings = createDeckEmbed(result, "sovietonion")
           const m = await message.channel.send({ embeds: [pillowy], components: [row] });
@@ -193,7 +193,7 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
           async function handleSelectMenu(i){
             const value = i.values[0];
             if(value == "competitive" || value == "aggro"){
-              await i.reply({embeds: [abeans], flags: MessageFlags.Ephemeral})
+              await i.reply({embeds: [cartasbuenas], flags: MessageFlags.Ephemeral})
             }
             else if(value == "meme" ){
               await i.update({embeds: [memeEmbed], components: [memeRow]})
@@ -249,8 +249,8 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
             else if(i.customId == "hburn4"|| i.customId == "healburn4"){
               await i.update({embeds: [healburn], components: [hburn4]})
             }
-            else if(i.customId == "ab" || i.customId == "abeans"){
-              await i.update({embeds: [abeans], components: [ab]})
+            else if(i.customId == "cb" || i.customId == "cartasbuenas"){
+              await i.update({embeds: [cartasbuenas], components: [cb]})
             }
 
           }

@@ -101,7 +101,6 @@ module.exports = {
     const snortingSaltDecks = {
       budgetDecks: ["budgetykm"],
       competitiveDecks: [
-        "abeans",
         "chemotherapy",
         "cyburn",
         "espressoaggro",
@@ -115,7 +114,7 @@ module.exports = {
       ],
       ladderDecks: ["gravestache", "schoolyard"],
       memeDecks: ["noplayingallowed"],
-      aggroDecks: ["abeans", "espressoaggro", "logbait", "schoolyard", "seacret", "watertron"],
+      aggroDecks: ["espressoaggro", "logbait", "schoolyard", "seacret", "watertron"],
       comboDecks: [
         "budgetykm",
         "cyburn",
@@ -137,7 +136,6 @@ module.exports = {
         "spacestars",
       ],
       allDecks: [
-        "abeans",
         "budgetykm",
         "chemotherapy",
         "cyburn",
@@ -192,9 +190,8 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const competitiverow = createButtons("watertron", "ab");
-    const ab = createButtons("helpcomp", "chemo");
-    const chemo = createButtons("abeans", "cburn");
+    const competitiverow = createButtons("watertron", "chemo");
+    const chemo = createButtons("helpcomp", "cburn");
     const cburn = createButtons("chemotherapy", "eaggro");
     const eaggro = createButtons("cyburn", "flottery");
     const flottery = createButtons("espressoaggro", "gb");
@@ -207,9 +204,8 @@ module.exports = {
     const ladderrow = createButtons("schoolyard", "gstache");
     const gstache = createButtons("ladderhelp", "syard");
     const syard = createButtons("gravestache", "ladderhelp");
-    const aggrorow = createButtons("watertron2", "ab2");
-    const ab2 = createButtons("aggrohelp", "eaggro2");
-    const eaggro2 = createButtons("abeans2", "lbait2");
+    const aggrorow = createButtons("watertron2", "eaggro2");
+    const eaggro2 = createButtons("aggrohelp", "lbait2");
     const lbait2 = createButtons("espressoaggro2", "syard2");
     const syard2 = createButtons("logbait2", "sea2");
     const sea2 = createButtons("schoolyard2", "wt2");
@@ -231,9 +227,8 @@ module.exports = {
     const chemo2 = createButtons("helpcontrol", "npa2");
     const npa2 = createButtons("chemotherapy2", "radio2");
     const radio2 = createButtons("noplayingallowed2", "controlhelp");
-    const alldecksrow = createButtons("watertron3", "ab3");
-    const ab3 = createButtons("allhelp", "bykm3");
-    const bykm3 = createButtons("abeans3", "chemo3");
+    const alldecksrow = createButtons("watertron3", "bykm3");
+    const bykm3 = createButtons("allhelp", "chemo3");
     const chemo3 = createButtons("budgetykm3", "cburn4");
     const cburn4 = createButtons("chemotherapy3", "eaggro3");
     const eaggro3 = createButtons("cyburn4", "flottery3");
@@ -247,41 +242,33 @@ module.exports = {
     const sea4 = createButtons("schoolyard3", "stars4");
     const stars4 = createButtons("seacret4", "wt3");
     const wt3 = createButtons("spacestars4", "helpall");
-    const [result] = await db.query(`select abeans, apotk,
+    const [result] = await db.query(`select
 budgetykm, chemotherapy,
 cyburn, espressoaggro, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
 schoolyard, seacret, spacestars, radiotherapy, watertron
-from gsdecks gs 
-inner join czdecks cz
-on (gs.deckinfo = cz.deckinfo)
-inner join ccdecks cc
-on (gs.deckinfo = cc.deckinfo)
-inner join spdecks sp
-on (gs.deckinfo = sp.deckinfo)
-inner join imdecks im 
-on (gs.deckinfo = im.deckinfo)
-inner join gkdecks gk
-on (gs.deckinfo = gk.deckinfo)
-inner join hgdecks hg
-on (gs.deckinfo = hg.deckinfo)
+from hgdecks hg
+inner join wkdecks wk
+on (hg.deckinfo = wk.deckinfo)
 inner join ncdecks nc
-on (gs.deckinfo = nc.deckinfo)
-inner join ntdecks nt
-on (gs.deckinfo = nt.deckinfo)
-inner join ebdecks eb 
-on (gs.deckinfo = eb.deckinfo)
-inner join wkdecks wk 
-on (gs.deckinfo = wk.deckinfo)
-inner join zmdecks zm 
-on (gs.deckinfo = zm.deckinfo)
-inner join bcdecks bc 
-on (gs.deckinfo = bc.deckinfo)
-inner join ifdecks fi
-on (gs.deckinfo = fi.deckinfo)
-inner join ctdecks ct 
-on (gs.deckinfo = ct.deckinfo)
+on (hg.deckinfo = nc.deckinfo)
+inner join gkdecks gk
+on (hg.deckinfo = gk.deckinfo)
 inner join sfdecks sf
-on (gs.deckinfo = sf.deckinfo)`);
+on (hg.deckinfo = sf.deckinfo)
+inner join ccdecks cc
+on (hg.deckinfo = cc.deckinfo)
+inner join ebdecks eb
+on (hg.deckinfo = eb.deckinfo)
+inner join ntdecks nt
+on (hg.deckinfo = nt.deckinfo)
+inner join zmdecks zm
+on (hg.deckinfo = zm.deckinfo)
+inner join ifdecks fi
+on (hg.deckinfo = fi.deckinfo)
+inner join ctdecks ct
+on (hg.deckinfo = ct.deckinfo)
+inner join spdecks sp
+on (hg.deckinfo = sp.deckinfo)`);
     const user = await client.users.fetch("599750713509281792");
     const salt = createHelpEmbed(
       `${user.username} Decks`,
@@ -368,7 +355,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
       }
       return embed;
     }
-    const abeans = createDeckEmbed(result, "abeans");
     const logbait = createDeckEmbed(result, "logbait");
     const budgetykm = createDeckEmbed(result, "budgetykm");
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
@@ -502,12 +488,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         npa3: { embed: noplayingallowed, component: npa3 },
         noplayingallowed2: { embed: noplayingallowed, component: npa2 },
         noplayingallowed3: { embed: noplayingallowed, component: npa3 },
-        ab: { embed: abeans, component: ab },
-        ab2: { embed: abeans, component: ab2 },
-        ab3: { embed: abeans, component: ab3 },
-        abeans: { embed: abeans, component: ab },
-        abeans2: { embed: abeans, component: ab2 },
-        abeans3: { embed: abeans, component: ab3 },
         flottery: { embed: figlottery, component: flottery },
         flottery2: { embed: figlottery, component: flottery2 },
         flottery3: { embed: figlottery, component: flottery3 },

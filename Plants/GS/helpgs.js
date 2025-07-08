@@ -99,17 +99,17 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const greenShadowDecks = {
       budgetDecks: ["budgetmopshadow"],
-      competitiveDecks: ["abeans"],
+      competitiveDecks: ["cartasbuenas"],
       ladderDecks: ["pbeans"],
       memeDecks: ["100%winrate", "savagemayflower", "starrings"],
-      aggroDecks: ["abeans", "pbeans"],
+      aggroDecks: ["cartasbuenas", "pbeans"],
       comboDecks: ["savagemayflower", "starrings"],
       midrangeDecks: ["budgetmopshadow", "starrings"],
       tempoDecks: ["100%winrate"],
       allDecks: [
         "100%winrate",
-        "abeans",
         "budgetmopshadow",
+        "cartasbuenas",
         "pbeans",
         "savagemayflower",
         "starrings",
@@ -154,14 +154,14 @@ module.exports = {
     const midrangerow = createButtons("starrings3", "bms");
     const bms = createButtons("helpmidrange", "srings3");
     const srings3 = createButtons("budgetmopshadow", "midrangehelp");
-    const aggrorow = createButtons("pbeans", "ab2");
-    const ab2 = createButtons("aggrohelp", "pb");
-    const pb = createButtons("abeans2", "helpaggro");
+    const aggrorow = createButtons("pbeans", "cb");
+    const cb = createButtons("aggrohelp", "pb");
+    const pb = createButtons("cartasbuenas", "helpaggro");
     const alldecksrow = createButtons("starrings4", "wr1002");
-    const wr1002 = createButtons("helpall", "ab");
-    const ab = createButtons("winrate1002", "bms2");
-    const bms2 = createButtons("ab", "pb2");
-    const pb2 = createButtons("budgetmopshadow2", "smf3");
+    const wr1002 = createButtons("helpall", "bms2");
+    const bms2 = createButtons("winrate1002", "cb2");
+    const cb2 = createButtons("budgetmopshadow2", "pb2");
+    const pb2 = createButtons("cartasbuenas2", "smf3");
     const smf3 = createButtons("pbeans2", "srings4");
     const srings4 = createButtons("savagemayflower3", "allhelp");
     const embed = createHelpEmbed(
@@ -230,7 +230,7 @@ Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks i
       return embed;
     }
     const winrate100 = createDeckEmbed(result, "wr100");
-    const abeans = createDeckEmbed(result, "abeans");
+    const cartasbuenas = createDeckEmbed(result, "abeans");
     const budgetgs = createDeckEmbed(result, "budgetgs");
     const savagemayflower = createDeckEmbed(result, "savagemayflower");
     const starrings = createDeckEmbed(result, "sovietonion");
@@ -249,7 +249,7 @@ Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks i
       if (value == "budget") {
         await i.reply({ embeds: [budgetgs], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
-        await i.reply({ embeds: [abeans], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [cartasbuenas], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.reply({ embeds: [pbeans], flags: MessageFlags.Ephemeral });
       } else if (value == "aggro") {
@@ -280,10 +280,10 @@ Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks i
         combohelp: {embed: comboEmbed, component: comborow},
         helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         midrangehelp: {embed: midrangeEmbed, component: midrangerow},
-        ab: {embed: abeans, component: ab},
-        abeans: {embed: abeans, component: ab},
-        ab2: {embed: abeans, component: ab2},
-        abeans2: {embed: abeans, component: ab2},
+        cb: {embed: cartasbuenas, component: cb}, 
+        cartasbuenas: {embed: cartasbuenas, component: cb},
+        cb2: {embed: cartasbuenas, component: cb2},
+        cartasbuenas2: {embed: cartasbuenas, component: cb2},
         bms: {embed: budgetgs, component: bms},
         budgetmopshadow: {embed: budgetgs, component: bms},
         bms2: {embed: budgetgs, component: bms2},

@@ -92,13 +92,13 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
-      compdecks: ["limerence", "neurotherapy"],
+      compdecks: ["limerence", "neurotherapy", "venice"],
       ladderDecks: ["bayonet", "gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage", "trickmech"],
       memeDecks: ["tangen"],
       aggroDecks: ["gravepiratestache", "trickmech"],
-      comboDecks: ["bayonet", "gravepiratestache", "tangen", "trickmech"],
+      comboDecks: ["bayonet", "gravepiratestache", "tangen", "trickmech", "venice"],
       controlDecks: ["neurotherapy", "pawntrickstab"],
-      midrangeDecks: ["gomorrah", "limerence", "tangen"],
+      midrangeDecks: ["gomorrah", "limerence", "tangen", "venice"],
       tempoDecks: ["bayonet", "raiserpackage"],
       allDecks: [
         "bayonet",
@@ -109,7 +109,8 @@ module.exports = {
         "pawntrickstab",
         "raiserpackage", 
         "tangen", 
-        "trickmech"
+        "trickmech", 
+        "venice"
       ]
     };
      /**
@@ -147,7 +148,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("trickmech", "bay");
+    const alldecksrow = createButtons("venice", "bay");
     const bay = createButtons("helpall", "go");
     const go = createButtons("bayonet", "gps");
     const gps = createButtons("gomorrah", "lime");
@@ -156,13 +157,15 @@ module.exports = {
     const pts = createButtons("neurotherapy", "rpack");
     const rpack = createButtons("pawntrickstab", "tan");
     const tan = createButtons("raiserpackage", "tmech");
-    const tmech = createButtons("tangen", "allhelp");
-    const comprow = createButtons("neurotherapy2", "lime2");
+    const tmech = createButtons("tangen", "vce");
+    const vce = createButtons("trickmech", "allhelp");
+    const comprow = createButtons("venice2", "lime2");
     const lime2 = createButtons("helpcomp", "neuro2");
-    const neuro2 = createButtons("limerence2", "comphelp");
+    const neuro2 = createButtons("limerence2", "vce2");
+    const vce2 = createButtons("neurotherapy2", "comphelp");
     const ladderrow = createButtons("trickemech2", "bay2");
     const bay2 = createButtons("helpladder", "go2");
-    const go2 = createButtons("helpladder", "gps2");
+    const go2 = createButtons("bayonet2", "gps2");
     const gps2 = createButtons("gomorrah2", "pts2");
     const pts2 = createButtons("gravepiratestache2", "rpack2");
     const rpack2 = createButtons("pawntrickstab2", "tmech2");
@@ -170,24 +173,26 @@ module.exports = {
     const aggrorow = createButtons("trickmech3", "gps3");
     const gps3 = createButtons("helpaggro", "tmech3");
     const tmech3 = createButtons("gravepiratestache3", "aggrohelp");
-    const comborow = createButtons("trickmech4", "bay3");
+    const comborow = createButtons("venice3", "bay3");
     const bay3 = createButtons("helpcombo", "gps4");
     const gps4 = createButtons("bayonet3", "tan2");
     const tan2 = createButtons("gravepiratestache4", "tmech4");
-    const tmech4 = createButtons("tangen2", "combohelp");
+    const tmech4 = createButtons("tangen2", "vce3");
+    const vce3 = createButtons("trickmech4", "combohelp");
     const controlrow = createButtons("pawntrickstab3", "neuro3");
     const neuro3 = createButtons("helpcontrol", "pts3");
     const pts3 = createButtons("neurotherapy3", "controlhelp");
-    const midrangerow = createButtons("tangen3", "go3");
+    const midrangerow = createButtons("venice4", "go3");
     const go3 = createButtons("helpmidrange", "lime3");
     const lime3 = createButtons("gomorrah3", "tan3");
-    const tan3 = createButtons("limerence3", "midrangehelp"); 
+    const tan3 = createButtons("limerence3", "vce4");
+    const vce4 = createButtons("tangen3", "midrangehelp"); 
     const temporow = createButtons("raiserpackage3", "bay4");
     const bay4 = createButtons("helptempo", "rpack3");
     const rpack3 = createButtons("bayonet4", "tempohelp");
     const [result] =
       await db.query(`select bayonet, gomorrah, 
-        gps, limerence, shamcontrol, pawntrickstab, raiserpackage, tangen, trickmech from ntdecks nt 
+        gps, limerence, shamcontrol, pawntrickstab, raiserpackage, tangen, trickmech, apotk from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
         inner join bfdecks bf on nt.deckinfo = bf.deckinfo
@@ -195,7 +200,8 @@ module.exports = {
         inner join ifdecks fi on nt.deckinfo = fi.deckinfo
         inner join ccdecks cc on nt.deckinfo = cc.deckinfo
         inner join bcdecks bc on nt.deckinfo = bc.deckinfo
-        inner join zmdecks zm on nt.deckinfo = zm.deckinfo`);
+        inner join zmdecks zm on nt.deckinfo = zm.deckinfo
+        inner join czdecks cz on nt.deckinfo = cz.deckinfo`);
     const user = await client.users.fetch("824024125491380303");
     const shortbow = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -291,6 +297,7 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
     const bayonet = createDeckEmbed(result, "bayonet");
     const trickmech = createDeckEmbed(result, "trickmech");
     const tangen = createDeckEmbed(result, "tangen");
+    const venice = createDeckEmbed(result, "apotk");
     const m = await message.channel.send({
       embeds: [shortbow],
       components: [row],
@@ -424,6 +431,14 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         neurotherapy2: { embed: neurotherapy, component: neuro2 },
         neuro3: { embed: neurotherapy, component: neuro3 },
         neurotherapy3: { embed: neurotherapy, component: neuro3 },
+        vce: { embed: venice, component: vce },
+        venice: { embed: venice, component: vce },
+        vce2:  {embed: venice, component: vce2},
+        venice2: { embed: venice, component: vce2 },
+        vce3: { embed: venice, component: vce3 },
+        venice3: { embed: venice, component: vce3 },
+        vce4: { embed: venice, component: vce4 },
+        venice4: { embed: venice, component: vce4},
       };
       const action = buttonActions[i.customId];
       if (action) {

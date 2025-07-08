@@ -79,19 +79,14 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const chompzillaDecks = {
       budgetDecks: ["budgetmopzilla"],
-      compDecks: ["valuezilla"],
+      compDecks: ["venice"],
       memeDecks: ["lasersnap", "moprbius"],
       comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
-      controlDecks: ["valuezilla"],
-      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "valuezilla"],
-      allDecks: [
-        "budgetmopzilla",
-        "lasersnap",
-        "moprbius",
-        "valuezilla"
-      ],
+      controlDecks: ["venice"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "venice"],
+      allDecks: ["budgetmopzilla", "lasersnap", "moprbius", "venice"],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -108,7 +103,7 @@ module.exports = {
     );
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -131,64 +126,62 @@ module.exports = {
     const bmz = createButtons("helpcombo", "lsnap2");
     const lsnap2 = createButtons("budgetmopzilla", "mop2");
     const mop2 = createButtons("lasersnap2", "combohelp");
-    const midrangerow = createButtons("mopribus3", "bmz2");
+    const midrangerow = createButtons("venice", "bmz2");
     const bmz2 = createButtons("helpmid", "lsnap3");
     const lsnap3 = createButtons("budgetmopzilla2", "mop3");
-    const mop3 = createButtons("lasersnap3", "vzilla");
-    const vzilla = createButtons("mopribus3", "midhelp");
+    const mop3 = createButtons("lasersnap3", "vce");
+    const vce = createButtons("mopribus3", "midhelp");
+    const [heroResult] = await db.query(`select chompzilla from plantheroes`);
     const cz = new EmbedBuilder()
-      .setThumbnail(
-        "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
-      )
-      .setTitle(
-        "Chompzilla | <:MegaGrow:1062501412992458802><:Solar:1062502678384607262>"
-      )
-      .setDescription("**\\- Flytrap Hero  -**")
+      .setThumbnail(`${heroResult[2].chompzilla}`)
+      .setTitle(`${heroResult[5].chompzilla}`)
+      .setDescription(`${heroResult[0].chompzilla}`)
       .setColor("Green")
 
       .addFields(
         {
           name: "Superpowers",
-          value:
-            "Holo-Flora <:MegaGrow:1062501412992458802> \n Draw two cards. \n Geyser <:Solar:1062502678384607262> \n Heal your Hero and all Plants for 4. \n Scorched Earth <:Solar:1062502678384607262> \n All Zombies on the Ground get -1<:Strength:1062501774612779039>/-1<:Health:1062515540712751184>. \n Devour <:MegaGrow:1062501412992458802><:Solar:1062502678384607262> \n Destroy a Zombie with the lowest Health. ",
+          value: `${heroResult[4].chompzilla}`,
+          inline: true,
         },
         {
           name: "Set-Rarity",
-          value: "Premium - Hero",
+          value: `${heroResult[3].chompzilla}`,
+          inline: true,
         },
         {
           name: "Flavor Text",
-          value:
-            "She flosses after every meal and still, Zombie Breath is a real problem.",
+          value: `${heroResult[1].chompzilla}`,
+          inline: true,
         }
       );
-      const embed = createHelpEmbed(
-        "Chompzilla Decks",
-        `To view the Chompzilla decks please select an option from the select menu below!
+    const embed = createHelpEmbed(
+      "Chompzilla Decks",
+      `To view the Chompzilla decks please select an option from the select menu below!
 Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot. Select Midrange decks to view all Chompzilla decks`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
-      );
-      const memeEmbed = createHelpEmbed(
-        "Chompzilla Meme Decks",
-        `My Meme decks for Chompzilla(CZ) are ${toBuildMemeString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
-        `To view the Meme Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Meme decks!
+      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
+    );
+    const memeEmbed = createHelpEmbed(
+      "Chompzilla Meme Decks",
+      `My Meme decks for Chompzilla(CZ) are ${toBuildMemeString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
+      `To view the Meme Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Meme decks!
   Note: Chompzilla has ${chompzillaDecks.memeDecks.length} Meme decks in Tbot`
-      );
-      const comboEmbed = createHelpEmbed(
-        "Chompzilla Combo Decks",
-        `My Combo decks for Chompzilla(CZ) are ${toBuildComboString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
-        `To view the Combo Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Combo decks!
+    );
+    const comboEmbed = createHelpEmbed(
+      "Chompzilla Combo Decks",
+      `My Combo decks for Chompzilla(CZ) are ${toBuildComboString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
+      `To view the Combo Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Combo decks!
 Note: Chompzilla has ${chompzillaDecks.comboDecks.length} Combo decks in Tbot`
-      );
-      const midrangeEmbed = createHelpEmbed(
-        "Chompzilla Midrange Decks",
-        `My Midrange decks for Chompzilla(CZ) are ${toBuildMidrangeString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
-        `To view the Midrange Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Midrange decks!
+    );
+    const midrangeEmbed = createHelpEmbed(
+      "Chompzilla Midrange Decks",
+      `My Midrange decks for Chompzilla(CZ) are ${toBuildMidrangeString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
+      `To view the Midrange Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Midrange decks!
 Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in Tbot`
-      );
+    );
     const [result] = await db.query(`SELECT * from czdecks`);
     /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -213,7 +206,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       }
       return embed;
     }
-    const valuezilla = createDeckEmbed(result, "apotk");
+    const venice = createDeckEmbed(result, "apotk");
     const budgetcz = createDeckEmbed(result, "budgetcz");
     const lasersnap = createDeckEmbed(result, "lasersnap");
     const mopribus = createDeckEmbed(result, "mopribus");
@@ -225,10 +218,10 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-     if (value == "budget") {
+      if (value == "budget") {
         await i.reply({ embeds: [budgetcz], flags: MessageFlags.Ephemeral });
-      } else if (value == "comp" || value == "control") {
-        await i.reply({ embeds: [valuezilla], flags: MessageFlags.Ephemeral });
+      } else if (value == "comp") {
+        await i.reply({ embeds: [venice], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
@@ -244,7 +237,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-         memehelp: { embed: memeEmbed, component: memerow },
+        memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcombo: { embed: comboEmbed, component: comborow },
@@ -254,8 +247,8 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         budgetmopzilla: { embed: budgetcz, component: bmz },
         bmz2: { embed: budgetcz, component: bmz2 },
         budgetmopzilla2: { embed: budgetcz, component: bmz2 },
-        vzilla: { embed: valuezilla, component: vzilla },
-        valuezilla: { embed: valuezilla, component: vzilla },
+        vce: { embed: venice, component: vce },
+        venice: { embed: venice, component: vce },
         lsnap: { embed: lasersnap, component: lsnap },
         lasersnap: { embed: lasersnap, component: lsnap },
         lsnap2: { embed: lasersnap, component: lsnap2 },
@@ -267,7 +260,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         mop2: { embed: mopribus, component: mop2 },
         mopribus2: { embed: mopribus, component: mop2 },
         mop3: { embed: mopribus, component: mop3 },
-        mopribus3: { embed: mopribus, component: mop3 }
+        mopribus3: { embed: mopribus, component: mop3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

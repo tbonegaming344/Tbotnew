@@ -256,7 +256,7 @@ module.exports = {
         "neurotherapy",
         "radiotherapy",
         "toyotacontrolla",
-        "valuezilla",
+        "venice",
         "watertron",
       ],
       ladderDecks: [
@@ -331,6 +331,7 @@ module.exports = {
         "starrings",
         "startron",
         "translattail",
+        "venice"
       ],
       controlDecks: [
         "cancerknight",
@@ -341,7 +342,6 @@ module.exports = {
         "radiotherapy",
         "shitknight",
         "toyotacontrolla",
-        "valuezilla",
       ],
       midrangeDecks: [
         "budgetcz",
@@ -365,7 +365,7 @@ module.exports = {
         "recycling",
         "starrings",
         "startron",
-        "valuezilla",
+        "venice",
       ],
       tempoDecks: [
         "100%winrate",
@@ -426,7 +426,7 @@ module.exports = {
         "startron",
         "toyotacontrolla",
         "translattail",
-        "valuezilla",
+        "venice",
         "watertron",
       ],
     };
@@ -799,9 +799,9 @@ module.exports = {
     const srings = createButtons("shitknight", "stron");
     const stron = createButtons("starrings", "tc");
     const tc = createButtons("startron", "tlattail");
-    const tlattail = createButtons("toyotacontrolla", "vzilla");
-    const vzilla = createButtons("translattail", "wtron");
-    const wtron = createButtons("valuezilla", "allphelp");
+    const tlattail = createButtons("toyotacontrolla", "vce");
+    const vce = createButtons("translattail", "wtron");
+    const wtron = createButtons("venice", "allphelp");
     const budgetprow = createButtons("budgetwk2", "bcc2");
     const bcc2 = createButtons("budgetphelp", "bct2");
     const bct2 = createButtons("budgetcc2", "bcz2");
@@ -823,9 +823,9 @@ module.exports = {
     const lbait2 = createButtons("healmidrose2", "neuro2");
     const neuro2 = createButtons("logbait2", "radio2");
     const radio2 = createButtons("neurotherapy2", "tc2");
-    const tc2 = createButtons("radiotherapy2", "vzilla2");
-    const vzilla2 = createButtons("toyotacontrolla2", "wtron2");
-    const wtron2 = createButtons("valuezilla2", "helppcomp");
+    const tc2 = createButtons("radiotherapy2", "vce2");
+    const vce2 = createButtons("toyotacontrolla2", "wtron2");
+    const wtron2 = createButtons("venice2", "helppcomp");
     const ladderprow = createButtons("pbeans2", "bay2");
     const bay2 = createButtons("helppladder", "carr2");
     const carr2 = createButtons("bayonet2", "dcounter2");
@@ -871,7 +871,7 @@ module.exports = {
     const lbait3 = createButtons("goingnuts3", "pb3");
     const pb3 = createButtons("logbait3", "wtron3");
     const wtron3 = createButtons("pbeans3", "aggrophelp");
-    const comboprow = createButtons("translattail3", "bay3");
+    const comboprow = createButtons("venice3", "bay3");
     const bay3 = createButtons("helppcombo", "bcc4");
     const bcc4 = createButtons("bayonet3", "bcz3");
     const bcz3 = createButtons("budgetcc4", "carr3");
@@ -894,8 +894,9 @@ module.exports = {
     const smf3 = createButtons("reflourished3", "srings3");
     const srings3 = createButtons("savagemayflower3", "stron3");
     const stron3 = createButtons("starrings3", "tlattail3");
-    const tlattail3 = createButtons("startron3", "helppcombo");
-    const controlprow = createButtons("valuezilla3", "cank3");
+    const tlattail3 = createButtons("startron3", "vce3");
+    const vce3 = createButtons("translattail3", "helppcombo");
+    const controlprow = createButtons("toyotacontrolla3", "cank3");
     const cank3 = createButtons("helppcontrol", "chemo3");
     const chemo3 = createButtons("cancerknight3", "neuro3");
     const neuro3 = createButtons("chemotherapy3", "pts3");
@@ -903,9 +904,8 @@ module.exports = {
     const pop3 = createButtons("pawntrickstab3", "radio3");
     const radio3 = createButtons("popsicle3", "sknight3");
     const sknight3 = createButtons("radiotherapy3", "tc3");
-    const tc3 = createButtons("shitknight3", "vzilla3");
-    const vzilla3 = createButtons("toyotacontrolla3", "helpcontrolp");
-    const midrangeprow = createButtons("valuezilla4", "bcz4");
+    const tc3 = createButtons("shitknight3", "helpcontrolp");
+    const midrangeprow = createButtons("venice4", "bcz4");
     const bcz4 = createButtons("helppmidrange", "bgk3");
     const bgk3 = createButtons("budgetcz4", "bgs3");
     const bgs3 = createButtons("budgetgk3", "bro3");
@@ -927,8 +927,8 @@ module.exports = {
     const r2s4 = createButtons("psychosolstice4", "recy3");
     const recy3 = createButtons("ramp2seedling4", "srings4");
     const srings4 = createButtons("recyling3", "stron4");
-    const stron4 = createButtons("starrings4", "vzilla4");
-    const vzilla4 = createButtons("startron4", "midrangephelp");
+    const stron4 = createButtons("starrings4", "vce4");
+    const vce4 = createButtons("startron4", "midrangephelp");
     const tempoprow = createButtons("translattail4", "wr1003");
     const wr1003 = createButtons("tempophelp", "bay4");
     const bay4 = createButtons("winrate1003", "carr4");
@@ -1464,7 +1464,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const dinocounter = createPlantDeckEmbed(result, "dinocounter");
     const plantmop = createPlantDeckEmbed(result, "plantmop");
     const reflourished = createPlantDeckEmbed(result, "reflourished");
-    const valuezilla = createPlantDeckEmbed(result, "apotk");
+    const venice = createPlantDeckEmbed(result, "apotk");
     const budgetcz = createPlantDeckEmbed(result, "budgetcz");
     const lasersnap = createPlantDeckEmbed(result, "lasersnap");
     const mopribus = createPlantDeckEmbed(result, "mopribus");
@@ -1697,14 +1697,14 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         abeans2: { embed: abeans, component: ab2 },
         ab3: { embed: abeans, component: ab3 },
         abeans3: { embed: abeans, component: ab3 },
-        vzilla: { embed: valuezilla, component: vzilla },
-        valuezilla: { embed: valuezilla, component: vzilla },
-        vzilla2: { embed: valuezilla, component: vzilla2 },
-        valuezilla2: { embed: valuezilla, component: vzilla2 },
-        vzilla3: { embed: valuezilla, component: vzilla3 },
-        valuezilla3: { embed: valuezilla, component: vzilla3 },
-        vzilla4: { embed: valuezilla, component: vzilla4 },
-        valuezilla4: { embed: valuezilla, component: vzilla4 },
+        vce: { embed: venice, component: vce },
+        venice: { embed: venice, component: vce },
+        vce2: { embed: venice, component: vce2 },
+        venice2: { embed: venice, component: vce2 },
+        vce3: { embed: venice, component: vce3 },
+        venice3: { embed: venice, component: vce3 },
+        vce4: { embed: venice, component: vce4 },
+        venice4: { embed: venice, component: vce4 },
         bct: { embed: budgetct, component: bct },
         budgetct: { embed: budgetct, component: bct },
         bct2: { embed: budgetct, component: bct2 },

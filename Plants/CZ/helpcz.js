@@ -84,16 +84,16 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const chompzillaDecks = {
       budgetDecks: ["budgetmopzilla"],
-      compDecks: ["valuezilla"],
+      compDecks: ["venice"],
       memeDecks: ["lasersnap", "moprbius"],
       comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
-      controlDecks: ["valuezilla"],
-      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "valuezilla"],
+      controlDecks: ["venice"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "venice"],
       allDecks: [
         "budgetmopzilla",
         "lasersnap",
         "moprbius",
-        "valuezilla"
+        "venice"
       ],
     };
      /**
@@ -136,11 +136,11 @@ module.exports = {
     const bmz = createButtons("helpcombo", "lsnap2");
     const lsnap2 = createButtons("budgetmopzilla", "mop2");
     const mop2 = createButtons("lasersnap2", "combohelp");
-    const midrangerow = createButtons("mopribus3", "bmz2");
+    const midrangerow = createButtons("venice", "bmz2");
     const bmz2 = createButtons("helpmid", "lsnap3");
     const lsnap3 = createButtons("budgetmopzilla2", "mop3");
-    const mop3 = createButtons("lasersnap3", "vzilla");
-    const vzilla = createButtons("mopribus3", "midhelp");
+    const mop3 = createButtons("lasersnap3", "vce");
+    const vce = createButtons("mopribus3", "midhelp");
     const embed = createHelpEmbed(
       "Chompzilla Decks",
       `To view the Chompzilla decks please select an option from the select menu below!
@@ -192,7 +192,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       }
       return embed;
     }
-    const valuezilla = createDeckEmbed(result, "apotk");
+    const venice = createDeckEmbed(result, "apotk");
     const budgetcz = createDeckEmbed(result, "budgetcz");
     const lasersnap = createDeckEmbed(result, "lasersnap");
     const mopribus = createDeckEmbed(result, "mopribus");
@@ -210,7 +210,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       if (value == "budget") {
         await i.reply({ embeds: [budgetcz], flags: MessageFlags.Ephemeral });
       } else if (value == "comp" || value == "control") {
-        await i.reply({ embeds: [valuezilla], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [venice], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
@@ -235,8 +235,8 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         budgetmopzilla: { embed: budgetcz, component: bmz },
         bmz2: { embed: budgetcz, component: bmz2 },
         budgetmopzilla2: { embed: budgetcz, component: bmz2 },
-        vzilla: { embed: valuezilla, component: vzilla },
-        valuezilla: { embed: valuezilla, component: vzilla },
+        vce: { embed: venice, component: vce },
+        venice: { embed: venice, component: vce },
         lsnap: { embed: lasersnap, component: lsnap },
         lasersnap: { embed: lasersnap, component: lsnap },
         lsnap2: { embed: lasersnap, component: lsnap2 },

@@ -143,9 +143,9 @@ module.exports = {
     const ti3 =  createButtons("healmidrose2", "midrangehelp");
     const alldecksrow = createButtons("trickmech3", "hmrose3");
     const hmrose3 = createButtons("helpall", "propack2");
-    const propack2 = createButtons("healmidrose3", "sb3");
-    const sb3 = createButtons("professorpackage2", "ti4");
-    const ti4 = createButtons("sunbandits3", "tmech3");
+    const propack2 = createButtons("healmidrose3", "sb2");
+    const sb2 = createButtons("professorpackage2", "ti4");
+    const ti4 = createButtons("sunbandits2", "tmech3");
     const tmech3 =  createButtons("telimps4", "allhelp");
     const [result] =
       await db.query(`select hmr, professorpackage, sunbandits, telimps, trickmech
@@ -271,13 +271,11 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         combohelp: {embed: combosushi, component: comborow},
         helpcombo: {embed: combosushi, component: comborow},
         helpmidrange: {embed: midrangesushi, component: midrangerow},
-        midrangehelp: {embed: Midrangesushi, component: midrangerow},
+        midrangehelp: {embed: midrangesushi, component: midrangerow},
         sb: {embed: sband, component: sb},
         sunbandits: {embed: sband, component: sb},
         sb2: {embed: sband, component: sb2},
         sunbandits2: {embed: sband, component: sb2},
-        sb3: {embed: sband, component: sb3},
-        sunbandits3: {embed: sband, component: sb3},
         ti: {embed: timps, component: ti},
         telimps: {embed: timps, component: ti},
         ti2: {embed: timps, component: ti2},

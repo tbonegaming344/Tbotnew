@@ -8,7 +8,7 @@ const {
 const db = require("../../index.js");
 module.exports = {
   name: `stingray`,
-  aliases: [`decksmadebystingray`, `stingraydecks`, `stingrayhelp`, `helpstingray`, `gigraduate`],
+  aliases: [`decksmadebystingray`, `stingraydecks`, `stingrayhelp`, `helpstingray`, `gigraduate`, `stingray201`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
     const row = new ActionRowBuilder().addComponents(

@@ -234,6 +234,7 @@ module.exports = {
         //season
         "Making Pile Decks",
         "Losing to Cali Roll",
+        "Quarterly bonus users are coping with the fixes",
         //T3
         "We Need A Leap",
         "Fighting broth alts",
@@ -296,6 +297,7 @@ module.exports = {
         "Fixins bugs by adding new ones",
         //Make me a coffee
         "Ramping to seedling.",
+        "Playing wrath with a empty field.",
         //Misez
         "hello everybody my name is Tbot",
         //mono
@@ -310,19 +312,6 @@ module.exports = {
         "Tbot recently went on tbonegaming344's twitch, and he watched some good pvz heroes gameplay!",
         "Tbot recently went on tbonegaming344's youtube, and he watched some good pvz heroes tourament matches!",
         "One day, tbot thinks, it can go against the world! Unfortunately, tbot is a bot",
-        "Badorni specialises in funny, unconventional decks that somehow work. Use @tbot badorni to see for yourself!",
-        "Bowling Bulb Enjoyer uses fun off-meta decks. Check them out using @tbot bowlingbulb when you can!",
-        "CGP23 mainly has budget decks alongside decks that focus on combos. @tbot cgp23 to see for yourself!",
-        "Creeperblade offers unique off-meta decks. Use @tbot creeperblade to give them a try sometime!",
-        "Dozza presents the decks used by a bygone meta. @tbot dozza to see what once was a different meta!",
-        "FryEmUp is one of the eldest and most famous in the community. @tbot fryemup to see his decks!",
-        "Tryhard's mythical deckbuilder, unconventional in his methods. @tbot kenmartin to view his legacy!",
-        "Mono is a formidable tournament player who you would never want to face. @tbot mono to see his decks!",
-        "He has questionable deck names, yet onebigfluke's decks are viable. @tbot onebigfluke to cringe!",
-        "SnortingSalt is THE deckbuilder. You seen his decks at least once. @tbot salt to see all his decks!",
-        "Ikurasushi's presence was formidable, and once was THE deckbuilder. @tbot sushi to see his decks!",
-        "Tryhard, part time streamer, full time dad, famous, and a big thrower. @tbot tryhard to throw like him",
-        "Liia's decks are unique, and relatively competitive. @tbot liia to see their decklists!",
         "@Justini12 shut the fuck up",
         "You should add zombot to this deck",
         "Tbot encourages people to mod all the decks in its database!",
@@ -356,6 +345,7 @@ module.exports = {
         "Do zombies dream of undead sheep?",
         "Playing the same 4 decks then wondering why I keep losing tourneys",
         "The pea patch drama is crazy rn",
+        "Pea patch users stay winning",
         "I think I miss sunstrike",
         "Resisting the urge to nibble the galacta cactus on purpose",
         //One Big Fluke
@@ -380,7 +370,8 @@ module.exports = {
         "Attempting rank 1-50 Sow the Seeds speedrun", 
         "Being clueless about lane placement", 
         "Nibble on Potato Mines doesn't softlock if there is no zombie in front of them.", 
-        "Studying PvZH source code in order to figure out why nibble softlocks the game."
+        "Studying PvZH source code in order to figure out why nibble softlocks the game.", 
+        "Most probably a bot with good decks."
       ];
       const status =
         customStatus[Math.floor(Math.random() * customStatus.length)];

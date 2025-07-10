@@ -82,6 +82,7 @@ module.exports = {
       aggroDecks: ["pbeans"],
       comboDecks: ["bastet"],
       midrangeDecks: ["bastet"],
+      allDecks: ["bastet", "pbeans"],
     };
     const user = await client.users.fetch("736455305457696779");
     const [result] = await db.query(`select bastet, pbeans from 

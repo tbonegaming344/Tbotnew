@@ -102,6 +102,7 @@ module.exports = {
         "startron",
         "uncrackamech",
         "watersports",
+        "youngeggmartin",
       ],
       aggroDecks: ["gravepiratestache"],
       comboDecks: [
@@ -117,6 +118,7 @@ module.exports = {
         "startron",
         "uncrackamech",
         "watersports",
+        "youngeggmartin",
       ],
       controlDecks: [
         "frozentelimps",
@@ -160,6 +162,7 @@ module.exports = {
         "toyotacontrolla",
         "uncrackamech",
         "watersports",
+        "youngeggmartin"
       ],
     };
     const row = new ActionRowBuilder().addComponents(select);
@@ -208,7 +211,7 @@ module.exports = {
     const go = createButtons("brady", "gps");
     const gps = createButtons("gomorrah", "lstrike");
     const lstrike = createButtons("gravepiratestache", "ladderhelp");
-    const memerow = createButtons("watersports", "sav");
+    const memerow = createButtons("youngeggmartin", "sav");
     const sav = createButtons("helpmeme", "ftimps");
     const ftimps = createButtons("savage", "ff");
     const ff = createButtons("frozentelimps", "hburn");
@@ -221,8 +224,9 @@ module.exports = {
     const rcatster = createButtons("recycling", "star");
     const star = createButtons("reversecatster", "um");
     const um = createButtons("startron", "ws");
-    const ws = createButtons("uncrackamech", "memehelp");
-    const comborow = createButtons("watersports2", "sav2");
+    const ws = createButtons("uncrackamech", "yem");
+    const yem = createButtons("watersports", "memehelp");
+    const comborow = createButtons("youngeggmartin2", "sav2");
     const sav2 = createButtons("helpcombo", "ftimps2");
     const ftimps2 = createButtons("savage2", "ff2");
     const ff2 = createButtons("frozentelimps2", "gps2");
@@ -234,7 +238,8 @@ module.exports = {
     const rcatster2 = createButtons("laserrings2", "star2");
     const star2 = createButtons("reversecatster2", "um2");
     const um2 = createButtons("startron2", "ws2");
-    const ws2 = createButtons("uncrackamech2", "combohelp");
+    const ws2 = createButtons("uncrackamech2", "yem2");
+    const yem2 = createButtons("watersports2", "combohelp");
     const controlrow = createButtons("uncrackmech3", "ftimps3");
     const ftimps3 = createButtons("helpcontrol", "mgold2");
     const mgold2 = createButtons("frozentelimps3", "neuro2");
@@ -256,7 +261,7 @@ module.exports = {
     const temporow = createButtons("leafystrike2", "br2"); 
     const br2 = createButtons("helptempo", "lstrike2");
     const lstrike2 = createButtons("brady2", "tempohelp");
-    const alldecksrow = createButtons("watersports4", "sav4");
+    const alldecksrow = createButtons("youngeggmartin3", "sav4");
     const sav4 = createButtons("helpall", "br3");
     const br3 = createButtons("savage4", "ftimps4");
     const ftimps4 = createButtons("brady3", "ff4");
@@ -276,10 +281,13 @@ module.exports = {
     const star4 = createButtons("reversecatster3", "tc3");
     const tc3 = createButtons("startron4", "um4");
     const um4 = createButtons("toyotacontrolla3", "ws4");
-    const ws4 = createButtons("uncrackamech4", "allhelp");
+    const ws4 = createButtons("uncrackamech4", "yem3");
+    const yem3 = createButtons("watersports4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
-      himps, lasersnap, leafystrike, limerence, mechagold, recycling, reversecatster, startron, shamcontrol, toyotacontrolla, feastmech, brady, watersports 
+      himps, lasersnap, leafystrike, limerence, mechagold, recycling,
+      reversecatster, startron, shamcontrol, toyotacontrolla, 
+      feastmech, brady, watersports, youngeggmartin
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
@@ -392,6 +400,7 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
     const startron = createDeckEmbed(result, "startron");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
     const mechagold = createDeckEmbed(result, "mechagold");
+    const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
     const healburn = createDeckEmbed(result, "healburn");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
@@ -593,6 +602,12 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
         leafystrike2: { embed: leafystrike, component: lstrike2 },
         lstrike3: { embed: leafystrike, component: lstrike3 },
         leafystrike3: { embed: leafystrike, component: lstrike3 },
+        yem: { embed: youngeggmartin, component: yem },
+        youngeggmartin: { embed: youngeggmartin, component: yem },
+        yem2: { embed: youngeggmartin, component: yem2 },
+        youngeggmartin2: { embed: youngeggmartin, component: yem2 },
+        yem3: { embed: youngeggmartin, component: yem3 },
+        youngeggmartin3: { embed: youngeggmartin, component: yem3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

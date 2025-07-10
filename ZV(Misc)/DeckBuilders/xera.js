@@ -75,7 +75,7 @@ module.exports = {
           )
           .setValue("midrange"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
+          .setLabel("Tempo Decks")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
@@ -87,7 +87,7 @@ module.exports = {
       );
     const xeraDecks = {
       competitiveDecks: ["limerence", "neurotherapy", "toyotacontrolla"],
-      ladderDecks: ["brady", "gomorrah", "gravepiratestache"],
+      ladderDecks: ["brady", "gomorrah", "gravepiratestache", "leafystrike"],
       memeDecks: [
         "22savage",
         "frozentelimps",
@@ -138,7 +138,7 @@ module.exports = {
         "startron",
         "watersports",
       ],
-      tempoDecks: ["brady"],
+      tempoDecks: ["brady", "leafystrike"],
       allDecks: [
         "22savage",
         "brady",
@@ -150,6 +150,7 @@ module.exports = {
         "healthotk",
         "himpter",
         "laserrings",
+        "leafystrike",
         "limerence",
         "mechagold",
         "neurotherapy",
@@ -178,6 +179,7 @@ module.exports = {
     const toBuildMeme = buildDeckString(xeraDecks.memeDecks);
     const toBuildComboString = buildDeckString(xeraDecks.comboDecks);
     const toBuildControlString = buildDeckString(xeraDecks.controlDecks);
+    const toBuildTempoString = buildDeckString(xeraDecks.tempoDecks);
     const toBuildMidString = buildDeckString(xeraDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -201,10 +203,11 @@ module.exports = {
     const lime = createButtons("helpcomp", "neuro");
     const neuro = createButtons("limerence", "tc");
     const tc = createButtons("neurotherapy", "comphelp");
-    const ladderrow = createButtons("gravepiratestache", "br");
+    const ladderrow = createButtons("leafystrike", "br");
     const br = createButtons("helpladder", "go");
     const go = createButtons("brady", "gps");
-    const gps = createButtons("gomorrah", "ladderhelp");
+    const gps = createButtons("gomorrah", "lstrike");
+    const lstrike = createButtons("gravepiratestache", "ladderhelp");
     const memerow = createButtons("watersports", "sav");
     const sav = createButtons("helpmeme", "ftimps");
     const ftimps = createButtons("savage", "ff");
@@ -250,18 +253,22 @@ module.exports = {
     const recy2 = createButtons("limerence", "star3");
     const star3 = createButtons("recycling2", "ws3");
     const ws3 = createButtons("startron3", "midhelp");
+    const temporow = createButtons("leafystrike2", "br2"); 
+    const br2 = createButtons("helptempo", "lstrike2");
+    const lstrike2 = createButtons("brady2", "tempohelp");
     const alldecksrow = createButtons("watersports4", "sav4");
-    const sav4 = createButtons("helpall", "br2");
-    const br2 = createButtons("savage4", "ftimps4");
-    const ftimps4 = createButtons("brady2", "ff4");
+    const sav4 = createButtons("helpall", "br3");
+    const br3 = createButtons("savage4", "ftimps4");
+    const ftimps4 = createButtons("brady3", "ff4");
     const ff4 = createButtons("frozentelimps4", "go3");
     const go3 = createButtons("funnyflare4", "gps3");
     const gps3 = createButtons("gomorrah3", "hburn4");
     const hburn4 = createButtons("gravepiratestache3", "hotk4");
     const hotk4 = createButtons("healburn4", "hi4");
     const hi4 = createButtons("healthotk4", "lrings4");
-    const lrings4 = createButtons("himps4", "lime3");
-    const lime3 = createButtons("laserrings4", "mgold3");
+    const lrings4 = createButtons("himps4", "lstrike3");
+    const lstrike3 = createButtons("laserrings4", "lime3");
+    const lime3 = createButtons("leafystrike3", "mgold3");
     const mgold3 = createButtons("limerence3", "neuro3");
     const neuro3 = createButtons("mechagold3", "recy3");
     const recy3 = createButtons("neurotherapy3", "rcatster3");
@@ -272,7 +279,7 @@ module.exports = {
     const ws4 = createButtons("uncrackamech4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
-      himps, lasersnap, limerence, mechagold, recycling, reversecatster, startron, shamcontrol, toyotacontrolla, feastmech, brady, watersports 
+      himps, lasersnap, leafystrike, limerence, mechagold, recycling, reversecatster, startron, shamcontrol, toyotacontrolla, feastmech, brady, watersports 
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
@@ -343,6 +350,13 @@ Note: ${user.displayName} has ${xeraDecks.controlDecks.length} Control decks in 
       `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks in tbot`
     );
+    const tempoxera = createHelpEmbed(
+      `${user.displayName} Tempo Decks`,
+      `My Tempo Decks made by ${user.displayName} are ${toBuildTempoString}`,
+      user.displayAvatarURL(),
+      `To view the Tempo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot`
+    );
     /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
@@ -372,6 +386,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const himps = createDeckEmbed(result, "himps");
     const laserrings = createDeckEmbed(result, "lasersnap");
+    const leafystrike = createDeckEmbed(result, "leafystrike");
     const limerence = createDeckEmbed(result, "limerence");
     const reversecatster = createDeckEmbed(result, "reversecatster");
     const startron = createDeckEmbed(result, "startron");
@@ -413,7 +428,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderxera], components: [ladderrow] });
       } else if (value == "tempo") {
-        await i.reply({ embeds: [brady], flags: MessageFlags.Ephemeral });
+        await i.update({ embeds: [tempoxera], components: [temporow] });
       }
     }
     /**
@@ -424,6 +439,8 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
       const buttonActions = {
         ladderhelp: { embed: ladderxera, component: ladderrow },
         helpladder: { embed: ladderxera, component: ladderrow },
+        helptempo: { embed: tempoxera, component: temporow },
+        tempohelp: { embed: tempoxera, component: temporow },
         hi: { embed: himps, component: hi },
         himps: { embed: himps, component: hi },
         hi2: { embed: himps, component: hi2 },
@@ -486,6 +503,8 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         brady: { embed: brady, component: br },
         br2: { embed: brady, component: br2 },
         brady2: { embed: brady, component: br2 },
+        br3: { embed: brady, component: br3 },
+        brady3: { embed: brady, component: br3 },
         lrings: { embed: laserrings, component: lrings },
         laserrings: { embed: laserrings, component: lrings },
         lrings2: { embed: laserrings, component: lrings2 },
@@ -568,6 +587,12 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         healthotk3: { embed: healthotk, component: hotk3 },
         hotk4: { embed: healthotk, component: hotk4 },
         healthotk4: { embed: healthotk, component: hotk4 },
+        lstrike: { embed: leafystrike, component: lstrike },
+        leafystrike: { embed: leafystrike, component: lstrike },
+        lstrike2: { embed: leafystrike, component: lstrike2 },
+        leafystrike2: { embed: leafystrike, component: lstrike2 },
+        lstrike3: { embed: leafystrike, component: lstrike3 },
+        leafystrike3: { embed: leafystrike, component: lstrike3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

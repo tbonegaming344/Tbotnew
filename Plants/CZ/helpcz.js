@@ -58,6 +58,11 @@ module.exports = {
           .setValue("comp")
           .setEmoji("<:compemote:1325461143136764060>")
           .setDescription("Some of the best decks in the game"),
+           new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
@@ -79,19 +84,28 @@ module.exports = {
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ), 
+           new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Deck")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
+          .setValue("tempo")
       );
     const row = new ActionRowBuilder().addComponents(select);
     const chompzillaDecks = {
       budgetDecks: ["budgetmopzilla"],
       compDecks: ["venice"],
+      ladderDecks: ["leafystrike"],
       memeDecks: ["lasersnap", "moprbius"],
       comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
       controlDecks: ["venice"],
       midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "venice"],
+      tempoDecks: ["leafystrike"],
       allDecks: [
         "budgetmopzilla",
         "lasersnap",
+        "leafystrike",
         "moprbius",
         "venice"
       ],
@@ -138,7 +152,8 @@ module.exports = {
     const mop2 = createButtons("lasersnap2", "combohelp");
     const midrangerow = createButtons("venice", "bmz2");
     const bmz2 = createButtons("helpmid", "lsnap3");
-    const lsnap3 = createButtons("budgetmopzilla2", "mop3");
+    const lsnap3 = createButtons("budgetmopzilla2", "lstrike");
+    const lstrike = createButtons("lasersnap3", "mop3");
     const mop3 = createButtons("lasersnap3", "vce");
     const vce = createButtons("mopribus3", "midhelp");
     const embed = createHelpEmbed(
@@ -195,6 +210,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
     const venice = createDeckEmbed(result, "apotk");
     const budgetcz = createDeckEmbed(result, "budgetcz");
     const lasersnap = createDeckEmbed(result, "lasersnap");
+    const leafystrike = createDeckEmbed(result, "leafystrike");
     const mopribus = createDeckEmbed(result, "mopribus");
     const m = await message.channel.send({
       embeds: [embed],
@@ -217,6 +233,9 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+      }
+      else if(value == "ladder" || value == "tempo") {
+        await i.reply({ embeds: [leafystrike], flags: MessageFlags.Ephemeral });
       }
     }
     /**
@@ -248,7 +267,9 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         mop2: { embed: mopribus, component: mop2 },
         mopribus2: { embed: mopribus, component: mop2 },
         mop3: { embed: mopribus, component: mop3 },
-        mopribus3: { embed: mopribus, component: mop3 }
+        mopribus3: { embed: mopribus, component: mop3 }, 
+        lstrike: { embed: leafystrike, component: lstrike },
+        leafystrike: { embed: leafystrike, component: lstrike }
       };
       const action = buttonActions[i.customId];
       if (action) {

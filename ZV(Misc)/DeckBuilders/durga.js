@@ -69,11 +69,7 @@ module.exports = {
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Decks")
-          .setValue("all")
-          .setDescription("View all decks created by Durga")
+          )
       );
     const row = new ActionRowBuilder().addComponents(select);
     const durgaDecks = {

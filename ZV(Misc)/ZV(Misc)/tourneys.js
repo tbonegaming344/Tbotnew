@@ -88,6 +88,18 @@ module.exports = {
     .setEmoji("<:slungus:1384909314757496902>")
     const section6 = new SectionBuilder().addTextDisplayComponents(tourneyText6).setButtonAccessory(slungus);
     container.addSectionComponents(section6)
+    container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
+    const tourneyText7 = new TextDisplayBuilder().setContent([
+      "# Soup Gang", 
+      "The Official Soup Gang is a server built to stop broth gang and revive Plants vs Zombies: Heroes tournaments. Quick Draft Tournaments are being host here every 1-2 months. What's Quick Draft you ask? Quick Draft is a tournament with gimmicks which those are; hero picks being randomised, no hero bans & card bans! The soup is waiting for you..."
+    ].join("\n"))
+    const soupGang = new ButtonBuilder()
+    .setLabel('Soup Gang')
+    .setStyle(ButtonStyle.Link)
+    .setURL('https://discord.gg/24VSU6uKYD')
+    .setEmoji("<:soupgang:1394325298257858560>")
+    const section7 = new SectionBuilder().addTextDisplayComponents(tourneyText7).setButtonAccessory(soupGang);
+    container.addSectionComponents(section7);
     message.channel.send({
       components: [container],
       flags: MessageFlags.IsComponentsV2

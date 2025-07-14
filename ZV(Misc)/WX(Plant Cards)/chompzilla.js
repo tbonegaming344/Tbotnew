@@ -39,7 +39,7 @@ module.exports = {
         .setEmoji("<:constsFrickenChomp:1100168574829596824>")
         .setStyle(ButtonStyle.Success)
     );
-     const select = new StringSelectMenuBuilder()
+    const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view chompzilla's decks")
       .addOptions(
@@ -85,7 +85,12 @@ module.exports = {
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
-          .setValue("tempo")
+          .setValue("tempo"), 
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("All of the Chompzilla decks in Tbot")
+          .setEmoji("<:LetsFrickenChomp:1100168574829596824>")
       );
     const row = new ActionRowBuilder().addComponents(select);
     const chompzillaDecks = {
@@ -120,6 +125,7 @@ module.exports = {
     const toBuildMidrangeString = buildDeckString(
       chompzillaDecks.midrangeDecks
     );
+    const toBuildString = buildDeckString(chompzillaDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -147,10 +153,15 @@ module.exports = {
     const mop2 = createButtons("lasersnap2", "combohelp");
     const midrangerow = createButtons("venice", "bmz2");
     const bmz2 = createButtons("helpmid", "lsnap3");
-    const lsnap3 = createButtons("budgetmopzilla2", "lstrike");
-    const lstrike = createButtons("lasersnap3", "mop3");
+    const lsnap3 = createButtons("budgetmopzilla2", "mop3");
     const mop3 = createButtons("lasersnap3", "vce");
     const vce = createButtons("mopribus3", "midhelp");
+    const alldecksrow = createButtons("venice2", "bmz3");
+    const bmz3 = createButtons("helpall", "lsnap4");
+    const lsnap4 = createButtons("budgetmopzilla3", "lstrike");
+    const lstrike= createButtons("lasersnap4", "mop4");
+    const mop4 = createButtons("leafystrike", "vce2");
+    const vce2 = createButtons("mopribu4", "allhelp");
     const [heroResult] = await db.query(`select chompzilla from plantheroes`);
     const cz = new EmbedBuilder()
       .setThumbnail(`${heroResult[2].chompzilla}`)
@@ -202,6 +213,13 @@ Note: Chompzilla has ${chompzillaDecks.comboDecks.length} Combo decks in Tbot`
       `To view the Midrange Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Midrange decks!
 Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
+    const allEmbed = createHelpEmbed(
+      "Chompzilla Decks",
+      `My decks for Chompzilla(CZ) are ${toBuildString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110", 
+      `To view the Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Chompzilla decks!
+Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
+    );
     const [result] = await db.query(`SELECT * from czdecks`);
     /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -239,7 +257,7 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-        if (value == "budget") {
+       if (value == "budget") {
         await i.reply({ embeds: [budgetcz], flags: MessageFlags.Ephemeral });
       } else if (value == "comp" || value == "control") {
         await i.reply({ embeds: [venice], flags: MessageFlags.Ephemeral });
@@ -252,6 +270,9 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
       }
       else if(value == "ladder" || value == "tempo") {
         await i.reply({ embeds: [leafystrike], flags: MessageFlags.Ephemeral });
+      }
+      else if (value == "all") {
+        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
     /**
@@ -271,20 +292,28 @@ Note: Chompzilla has ${chompzillaDecks.midrangeDecks.length} Midrange decks in T
         budgetmopzilla: { embed: budgetcz, component: bmz },
         bmz2: { embed: budgetcz, component: bmz2 },
         budgetmopzilla2: { embed: budgetcz, component: bmz2 },
+        bmz3: { embed: budgetcz, component: bmz3 },
+        budgetmopzilla3: { embed: budgetcz, component: bmz3 },
         vce: { embed: venice, component: vce },
         venice: { embed: venice, component: vce },
+        vce2: { embed: venice, component: vce2 },
+        venice2: { embed: venice, component: vce2 },
         lsnap: { embed: lasersnap, component: lsnap },
         lasersnap: { embed: lasersnap, component: lsnap },
         lsnap2: { embed: lasersnap, component: lsnap2 },
         lasersnap2: { embed: lasersnap, component: lsnap2 },
         lsnap3: { embed: lasersnap, component: lsnap3 },
         lasersnap3: { embed: lasersnap, component: lsnap3 },
+        lsnap4: { embed: lasersnap, component: lsnap4 },
+        lasersnap4: { embed: lasersnap, component: lsnap4 },
         mop: { embed: mopribus, component: mop },
         mopribus: { embed: mopribus, component: mop },
         mop2: { embed: mopribus, component: mop2 },
         mopribus2: { embed: mopribus, component: mop2 },
         mop3: { embed: mopribus, component: mop3 },
         mopribus3: { embed: mopribus, component: mop3 }, 
+        mop4: { embed: mopribus, component: mop4 },
+        mopribu4: { embed: mopribus, component: mop4 },
         lstrike: { embed: leafystrike, component: lstrike },
         leafystrike: { embed: leafystrike, component: lstrike }
       };

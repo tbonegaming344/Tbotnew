@@ -93,15 +93,16 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
       compdecks: ["limerence", "neurotherapy", "venice"],
-      ladderDecks: ["bayonet", "gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage", "trickmech"],
+      ladderDecks: ["bayonet", "ginseng", "gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage", "trickmech"],
       memeDecks: ["tangen"],
       aggroDecks: ["gravepiratestache", "trickmech"],
       comboDecks: ["bayonet", "gravepiratestache", "tangen", "trickmech", "venice"],
-      controlDecks: ["neurotherapy", "pawntrickstab"],
+      controlDecks: ["ginseng", "neurotherapy", "pawntrickstab"],
       midrangeDecks: ["gomorrah", "limerence", "tangen", "venice"],
       tempoDecks: ["bayonet", "raiserpackage"],
       allDecks: [
         "bayonet",
+        "ginseng",
         "gomorrah",
         "gravepiratestache",
         "limerence",
@@ -149,8 +150,9 @@ module.exports = {
       );
     }
     const alldecksrow = createButtons("venice", "bay");
-    const bay = createButtons("helpall", "go");
-    const go = createButtons("bayonet", "gps");
+    const bay = createButtons("helpall", "gseg");
+    const gseg = createButtons("bayonet", "go");
+    const go = createButtons("ginseng", "gps");
     const gps = createButtons("gomorrah", "lime");
     const lime = createButtons("gravepiratestache", "neuro");
     const neuro = createButtons("limerence", "pts");
@@ -164,8 +166,9 @@ module.exports = {
     const neuro2 = createButtons("limerence2", "vce2");
     const vce2 = createButtons("neurotherapy2", "comphelp");
     const ladderrow = createButtons("trickemech2", "bay2");
-    const bay2 = createButtons("helpladder", "go2");
-    const go2 = createButtons("bayonet2", "gps2");
+    const bay2 = createButtons("helpladder", "gseg2");
+    const gseg2 = createButtons("bayonet2", "go2");
+    const go2 = createButtons("ginseng2", "gps2");
     const gps2 = createButtons("gomorrah2", "pts2");
     const pts2 = createButtons("gravepiratestache2", "rpack2");
     const rpack2 = createButtons("pawntrickstab2", "tmech2");
@@ -179,8 +182,9 @@ module.exports = {
     const tan2 = createButtons("gravepiratestache4", "tmech4");
     const tmech4 = createButtons("tangen2", "vce3");
     const vce3 = createButtons("trickmech4", "combohelp");
-    const controlrow = createButtons("pawntrickstab3", "neuro3");
-    const neuro3 = createButtons("helpcontrol", "pts3");
+    const controlrow = createButtons("pawntrickstab3", "gseg3");
+    const gseg3 = createButtons("helpcontrol", "neuro3");
+    const neuro3 = createButtons("ginseng3", "pts3");
     const pts3 = createButtons("neurotherapy3", "controlhelp");
     const midrangerow = createButtons("venice4", "go3");
     const go3 = createButtons("helpmidrange", "lime3");
@@ -191,9 +195,10 @@ module.exports = {
     const bay4 = createButtons("helptempo", "rpack3");
     const rpack3 = createButtons("bayonet4", "tempohelp");
     const [result] =
-      await db.query(`select bayonet, gomorrah, 
+      await db.query(`select bayonet, ginseng, gomorrah, 
         gps, limerence, shamcontrol, pawntrickstab, raiserpackage, tangen, trickmech, apotk from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
+        inner join wkdecks wk on nt.deckinfo = wk.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
         inner join bfdecks bf on nt.deckinfo = bf.deckinfo
         inner join sbdecks sb on nt.deckinfo = sb.deckinfo
@@ -294,6 +299,7 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
     const raiserpackage = createDeckEmbed(result, "raiserpackage");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
+    const ginseng = createDeckEmbed(result, "ginseng");
     const bayonet = createDeckEmbed(result, "bayonet");
     const trickmech = createDeckEmbed(result, "trickmech");
     const tangen = createDeckEmbed(result, "tangen");
@@ -439,6 +445,12 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         venice3: { embed: venice, component: vce3 },
         vce4: { embed: venice, component: vce4 },
         venice4: { embed: venice, component: vce4},
+        gseg: { embed: ginseng, component: gseg },
+        ginseng: { embed: ginseng, component: gseg },
+        gseg2: { embed: ginseng, component: gseg2 },
+        ginseng2: { embed: ginseng, component: gseg2 },
+        gseg3: { embed: ginseng, component: gseg3 },
+        ginseng3: { embed: ginseng, component: gseg3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

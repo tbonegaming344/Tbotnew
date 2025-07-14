@@ -265,6 +265,7 @@ module.exports = {
         "dinocounter",
         "frymidrose",
         "goingnuts",
+        "ginseng",
         "leafystrike",
         "pawntrickstab",
         "pbeans",
@@ -337,6 +338,7 @@ module.exports = {
       controlDecks: [
         "cancerknight",
         "chemotherapy",
+        "ginseng",
         "neurotherapy",
         "pawntrickstab",
         "popsicle",
@@ -402,6 +404,7 @@ module.exports = {
         "frymidrose",
         "funnyflare",
         "goingnuts",
+        "ginseng",
         "healburn",
         "healmidrose",
         "healthotk",
@@ -776,8 +779,9 @@ module.exports = {
     const fheal = createButtons("figlottery", "fmr");
     const fmr = createButtons("freezeheal", "fflare");
     const fflare = createButtons("frymidrose", "gnuts");
-    const gnuts = createButtons("funnyflare", "hburn");
-    const hburn = createButtons("goingnuts", "hmr");
+    const gnuts = createButtons("funnyflare", "gseg");
+    const gseg = createButtons("goingnuts", "hburn");
+    const hburn = createButtons("ginseng", "hmr");
     const hmr = createButtons("healburn", "hotk");
     const hotk = createButtons("healmidrose", "hland");
     const hland = createButtons("healthotk", "lsnap");
@@ -835,8 +839,9 @@ module.exports = {
     const carr2 = createButtons("bayonet2", "dcounter2");
     const dcounter2 = createButtons("carroot2", "fmr2");
     const fmr2 = createButtons("dinocounter2", "gnuts2");
-    const gnuts2 = createButtons("frymidrose2", "lstrike2");
-    const lstrike2 = createButtons("goingnuts2", "pts2");
+    const gnuts2 = createButtons("frymidrose2", "gseg2");
+    const gseg2 = createButtons("goingnuts2", "lstrike2");
+    const lstrike2 = createButtons("ginseng2", "pts2");
     const pts2 = createButtons("leafystrike2", "pb2");
     const pb2 = createButtons("pawntrickstab2", "ladderphelp");
     const memeprow = createButtons("translattail2", "wr1002");
@@ -903,8 +908,9 @@ module.exports = {
     const vce3 = createButtons("translattail3", "helppcombo");
     const controlprow = createButtons("toyotacontrolla3", "cank3");
     const cank3 = createButtons("helppcontrol", "chemo3");
-    const chemo3 = createButtons("cancerknight3", "neuro3");
-    const neuro3 = createButtons("chemotherapy3", "pts3");
+    const chemo3 = createButtons("cancerknight3", "gseg3");
+    const gseg3 = createButtons("chemotherapy3", "neuro3");
+    const neuro3 = createButtons("ginseng3", "pts3");
     const pts3 = createButtons("neurotherapy3", "pop3");
     const pop3 = createButtons("pawntrickstab3", "radio3");
     const radio3 = createButtons("popsicle3", "sknight3");
@@ -1475,6 +1481,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const lasersnap = createPlantDeckEmbed(result, "lasersnap");
     const mopribus = createPlantDeckEmbed(result, "mopribus");
     const budgetgk = createPlantDeckEmbed(result, "budgetgk");
+    const ginseng = createPlantDeckEmbed(result, "ginseng");
     const dinogloves = createPlantDeckEmbed(result, "dinogloves");
     const healthotk = createPlantDeckEmbed(result, "healthotk");
     const pawntrickstab = createPlantDeckEmbed(result, "pawntrickstab");
@@ -2551,7 +2558,13 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         lstrike2: { embed: leafystrike, component: lstrike2 },
         leafystrike2: { embed: leafystrike, component: lstrike2 },
         lstrike3: { embed: leafystrike, component: lstrike3 },
-        leafystrike3: { embed: leafystrike, component: lstrike3 }
+        leafystrike3: { embed: leafystrike, component: lstrike3 }, 
+        gseg: { embed: ginseng, component: gseg },
+        ginseng: { embed: ginseng, component: gseg },
+        gseg2: { embed: ginseng, component: gseg2 },
+        ginseng2: { embed: ginseng, component: gseg2 },
+        gseg3: { embed: ginseng, component: gseg3 },
+        ginseng3: { embed: ginseng, component: gseg3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -57,6 +57,11 @@ module.exports = {
       .setValue("comp")
       .setDescription('Some of the Best Decks in the game')
 			.setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
       new StringSelectMenuOptionBuilder()
       .setLabel("Meme Decks")
       .setValue("meme")
@@ -79,10 +84,11 @@ module.exports = {
     const wallKnightDecks = {
       budgetDecks: ["budgetwk"], 
       competitiveDecks: ["chemotherapy"],
-      memeDecks: ["cancerknight", "highlander", "shitknight"],
-      controlDecks: ["cancerknight", "chemotherapy"],
+      ladderDecks: ["ginseng"],
+      memeDecks: ["cancerknight", "ginseng", "highlander", "shitknight"],
+      controlDecks: ["cancerknight", "chemotherapy", "ginseng"],
       midrangeDecks: ["budgetwk", "highlander"],
-      allDecks: ["budgetwk", "cancerknight", "chemotherapy", "highlander", "shitknight"]
+      allDecks: ["budgetwk", "cancerknight", "chemotherapy", "ginseng", "highlander", "shitknight"]
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -122,15 +128,17 @@ module.exports = {
     const sk = createButtons("highlander", "memehelp");
     const controlrow = createButtons("chemotherapy", "cknight2");
     const cknight2 = createButtons("controlhelp", "chemo");
-    const chemo = createButtons("cancerknight", "helpcontrol");
+    const chemo = createButtons("cancerknight", "gseg");
+    const gseg = createButtons("chemotherapy", "helpcontrol");
     const midrangerow = createButtons("highlander2", "bwk");
     const bwk = createButtons("helpmidrange", "hl2");
     const hl2 = createButtons("budgetwk", "midrangehelp");
     const alldecksrow = createButtons("shitknight2", "bwk2");
     const bwk2 = createButtons("helpall", "cknight3");
     const cknight3 = createButtons("budgetwk2", "chemo2");
-    const chemo2 = createButtons("cancerknight3", "hl3");
-    const hl3 = createButtons("chemotherapy2", "sk2");
+    const chemo2 = createButtons("cancerknight3", "gseg2");
+    const gseg2 = createButtons("chemotherapy2", "hl3");
+    const hl3 = createButtons("ginseng2", "sk2");
     const sk2 = createButtons("highlander3", "allhelp");
     const embed = createHelpEmbed(
       "WallKnight Decks",
@@ -193,6 +201,7 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
     const budgetwk = createDeckEmbed(result, "budgetwkmidheal");
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
     const cancerknight = createDeckEmbed(result, "cancerknight");
+    const ginseng = createDeckEmbed(result, "ginseng");
     const highlander = createDeckEmbed(result, "highlander");
     const shitknight = createDeckEmbed(result, "shitknight");
     const m = await message.channel.send({
@@ -223,6 +232,9 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
         }
         else if(value == "all"){
           await i.update({embeds: [allEmbed], components: [alldecksrow]})
+        }
+        else if(value == "ladder"){
+          await i.reply({embeds: [ginseng], flags: MessageFlags.Ephemeral})
         }
       }
       async function handleButtonInteraction(i){
@@ -259,6 +271,10 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
           shitknight: {embed: shitknight, component: sk},
           sk2: {embed: shitknight, component: sk2}, 
           shitknight2: {embed: shitknight, component: sk2},
+          gseg: {embed: ginseng, component: gseg},
+          ginseng: {embed: ginseng, component: gseg},
+          gseg2: {embed: ginseng, component: gseg2},
+          ginseng2: {embed: ginseng, component: gseg2},
         }
         const action = buttonActions[i.customId];
         if(action){

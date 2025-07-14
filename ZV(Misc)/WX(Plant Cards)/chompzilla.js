@@ -189,7 +189,7 @@ module.exports = {
     const embed = createHelpEmbed(
       "Chompzilla Decks",
       `To view the Chompzilla decks please select an option from the select menu below!
-Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot. Select Midrange decks to view all Chompzilla decks`,
+Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot.`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
     );
     const memeEmbed = createHelpEmbed(
@@ -288,6 +288,8 @@ Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
         helpcombo: { embed: comboEmbed, component: comborow },
         midhelp: { embed: midrangeEmbed, component: midrangerow },
         helpmid: { embed: midrangeEmbed, component: midrangerow },
+        allhelp: { embed: allEmbed, component: alldecksrow },
+        helpall: { embed: allEmbed, component: alldecksrow },
         bmz: { embed: budgetcz, component: bmz },
         budgetmopzilla: { embed: budgetcz, component: bmz },
         bmz2: { embed: budgetcz, component: bmz2 },

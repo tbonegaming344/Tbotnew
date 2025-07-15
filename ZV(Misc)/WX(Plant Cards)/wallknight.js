@@ -230,6 +230,7 @@ module.exports = {
       }
       const budgetwk = createDeckEmbed(result, "budgetwkmidheal");
       const chemotherapy = createDeckEmbed(result, "chemotherapy");
+      const ginseng = createDeckEmbed(result, "ginseng");
       const cancerknight = createDeckEmbed(result, "cancerknight");
       const highlander = createDeckEmbed(result, "highlander");
       const shitknight = createDeckEmbed(result, "shitknight");

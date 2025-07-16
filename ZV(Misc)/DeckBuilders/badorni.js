@@ -58,26 +58,24 @@ module.exports = {
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
       .setValue("control"),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Decks")
+      .setLabel("Midrange Deck")
       .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
       .setValue("midrange")
     )
     const row = new ActionRowBuilder().addComponents(select);
     const badorniDecks = {
       memeDecks: [
-      "freezeheal",
       "frozentelimps",
-      "moprbius",
       "plantmop",
-      "psychosolstice"], 
+      "psychosolstice"
+    ],
       comboDecks: [
-      "freezeheal",
       "frozentelimps",
-      "moprbius",
       "plantmop",
-      "psychosolstice"],
+      "psychosolstice"
+    ],
       controlDecks: ["frozentelimps"],
-      midrangeDecks: [ "moprbius","psychosolstice"]
+      midrangeDecks: ["psychosolstice"]
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -91,7 +89,6 @@ module.exports = {
     }
     const toBuildMeme = buildDeckString(badorniDecks.memeDecks);
     const toBuildCombo = buildDeckString(badorniDecks.comboDecks);
-    const toBuildMid = buildDeckString(badorniDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -110,35 +107,21 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const combo = createButtons("psychosolstice2", "freeze");
-    const freeze = createButtons("combo", "ftimps");
-    const ftimps = createButtons("freezeheal", "mopr");
-    const mopr = createButtons("frozentelimps", "pmop2");
-    const pmop2 = createButtons("moprbius", "psy2");
+    const combo = createButtons("psychosolstice2", "ftimps");
+    const ftimps = createButtons("combo", "pmop2");
+    const pmop2 = createButtons("frozentelimps", "psy2");
     const psy2 = createButtons("plantmop2", "helpcombo");
-    const meme = createButtons("psychosolstice", "freeze2");
-    const freeze2 = createButtons("meme", "fti2");
-    const fti2 = createButtons("freezeheal2", "mopr2");
-    const mopr2 = createButtons("ftimps2", "pmop");
-    const pmop = createButtons("mopribus2", "psy");
+    const meme = createButtons("psychosolstice", "fti2");
+    const fti2 = createButtons("meme", "pmop");
+    const pmop = createButtons("ftimps2", "psy");
     const psy = createButtons("plantmop", "meme2");
-    const midrange = createButtons("psychosolstice3", "mopr3");
-    const mopr3 = createButtons("midrange", "psy3");
-    const psy3 = createButtons("mopribus3", "mid");
     const [result] =
-      await db.query(`select
-	freezeheal, frozentelimps, mopribus, plantmop,
-	psychosolstice from ccdecks cc
-	inner join rodecks ro
-	on (cc.deckinfo = ro.deckinfo)
-	inner join hgdecks hg 
-	on (cc.deckinfo = hg.deckinfo)
+      await db.query(`select frozentelimps, plantmop,
+	psychosolstice from hgdecks hg
+	inner join ccdecks cc
+  on (hg.deckinfo = cc.deckinfo)
 	inner join sfdecks sf
-	on (cc.deckinfo = sf.deckinfo)
-	inner join czdecks cz 
-	on (cc.deckinfo = cz.deckinfo)
-  inner join ctdecks ct 
-  on (cc.deckinfo = ct.deckinfo)`);
+	on (hg.deckinfo = sf.deckinfo)`);
     const user = await client.users.fetch("749149322561716294");
     const bad = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -160,13 +143,6 @@ Note: ${user.displayName} has ${badorniDecks.comboDecks.length} combo decks in T
         user.displayAvatarURL(),
         `To view the Meme Decks Made By ${user.displayName} please click on the buttons below!
 Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbot`
-      )
-      const midbad = createHelpEmbed(
-        `${user.displayName} Midrange Decks`,
-        `My Midrange decks made by ${user.displayName} are ${toBuildMid}`,
-        user.displayAvatarURL(),
-        `To view the Midrange Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange decks in Tbot`
       )
        /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -191,9 +167,7 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         }
         return embed;
       }
-    const freal = createDeckEmbed(result, "freezeheal");
     const fti = createDeckEmbed(result, "frozentelimps");
-    const mop = createDeckEmbed(result, "mopribus");
     const plantmop = createDeckEmbed(result, "plantmop");
     const pysol = createDeckEmbed(result, "psychosolstice");
     const m = await message.channel.send({ embeds: [bad], components: [row] });
@@ -211,7 +185,7 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
         await i.update({embeds: [memebad], components: [meme]});
       }
       else if(value == "midrange"){
-        await i.update({embeds: [midbad], components: [midrange]});
+        await i.reply({embeds: [pysol], flags: MessageFlags.Ephemeral});
       }
       else if(value == "control"){
         await i.reply({embeds: [ftimps], flags: MessageFlags.Ephemeral});
@@ -220,34 +194,20 @@ Note: ${user.displayName} has ${badorniDecks.midrangeDecks.length} midrange deck
     async function handleButtonInteraction(i){
       const buttonActions = {
         pmop: {embed: plantmop, component: pmop},
-        mopr: {embed: mop, component: mopr},
         psy: {embed: pysol, component: psy},
         combo: {embed: combobad, component: combo},
-        freeze: {embed: freal, component: freeze},
         ftimps: {embed: fti, component: ftimps},
         ftimps2: {embed: fti, component: fti2},
-        mopr2: {embed: mop, component: mopr2},
         pmop2: {embed: plantmop, component: pmop2},
         psy2: {embed: pysol, component: psy2},
         meme: {embed: memebad, component: meme},
         meme2: {embed: memebad, component: meme},
-        freeze2: {embed: freal, component: freeze2},
         fti2: {embed: fti, component: fti2},
-        mopr3: {embed: mop, component: mopr3},
-        psy3: {embed: pysol, component: psy3},
-        mid: {embed: midbad, component: midrange},
-        midrange: {embed: midbad, component: midrange},
-        mopribus: {embed: mop, component: mopr},
-        freezeheal: {embed: freal, component: freeze},
-        freezeheal2: {embed: freal, component: freeze2},
         plantmop: {embed: plantmop, component: pmop},
         helpcombo: {embed: combobad, component: combo},
-        mopribus2: {embed: mop, component: mopr2},
-        mopribus3: {embed: mop, component: mopr3},
         frozentelimps: {embed: fti, component: ftimps},
         psychosolstice: {embed: pysol, component: psy},
         psychosolstice2: {embed: pysol, component: psy2},
-        psychosolstice3: {embed: pysol, component: psy3},
       }
       const action = buttonActions[i.customId];
       if(action){

@@ -261,13 +261,6 @@ module.exports = {
       `To view the RustBolt midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
   Note: Rustbolt has ${rustboltDecks.midrangeDecks.length} total midrange decks in Tbot`
     );
-    const tempoEmbed = createHelpEmbed(
-      "Rustbolt Tempo Decks",
-      `My commands for Rustbolt(RB) are ${toBuildTempoString}`,
-      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
-      `To view the RustBolt tempo decks please use the commands listed above or click on the buttons below to navigate through all tempo decks!
-  Note: Rustbolt has ${rustboltDecks.tempoDecks.length} total tempo decks in Tbot`
-    );
     const [result] = await db.query(`select * from rbdecks`);
      /**
      * The createDeckEmbed function creates an embed for a specific deck

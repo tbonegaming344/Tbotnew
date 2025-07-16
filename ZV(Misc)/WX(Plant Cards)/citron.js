@@ -39,7 +39,7 @@ module.exports = {
         .setEmoji("<:Citron_Pog:1100168420743450654>")
         .setStyle(ButtonStyle.Primary)
     );
-    const select = new StringSelectMenuBuilder()
+   const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Citron's Decklists")
       .addOptions(
@@ -48,11 +48,6 @@ module.exports = {
           .setValue("budget")
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Deck")
           .setValue("ladder")
@@ -89,13 +84,12 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const citronDecks = {
       budgetDecks: ["budgetct"],
-      competitiveDecks: ["wetron"],
       ladderDecks: ["goingnuts"],
       memeDecks: ["startron"],
-      aggroDecks: ["budgetct", "goingnuts", "wetron"],
+      aggroDecks: ["budgetct", "goingnuts"],
       comboDecks: ["goingnuts", "startron"],
       midrangeDecks: ["startron"],
-      allDecks: ["budgetct", "goingnuts", "startron", "wetron"],
+      allDecks: ["budgetct", "goingnuts", "startron"],
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -128,18 +122,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const aggrorow = createButtons("wetron", "bct");
+    const aggrorow = createButtons("goingnuts", "bct");
     const bct = createButtons("helpaggro", "gnuts");
-    const gnuts = createButtons("budgetct", "wt");
-    const wt = createButtons("goingnuts", "aggrohelp");
+    const gnuts = createButtons("budgetct", "aggrohelp");
     const comborow = createButtons("startron", "gnuts2");
     const gnuts2 = createButtons("helpcombo", "star");
     const star = createButtons("goingnuts2", "combohelp");
-    const alldecksrow = createButtons("watertron", "bct2");
+    const alldecksrow = createButtons("startron2", "bct2");
     const bct2 = createButtons("helpall", "gnuts3");
     const gnuts3 = createButtons("budgetct", "star2");
-    const star2 = createButtons("goingnuts3", "wt2");
-    const wt2 = createButtons("startron2", "helpall");
+    const star2 = createButtons("goingnuts3", "helpall");
     const [heroResult] = await db.query("select citron from plantheroes");
     const ct = new EmbedBuilder()
       .setThumbnail(`${heroResult[2].citron}`)
@@ -218,7 +210,6 @@ module.exports = {
     const budgetct = createDeckEmbed(result, "budgetct");
     const goingnuts = createDeckEmbed(result, "going3nuts");
     const startron = createDeckEmbed(result, "startron");
-    const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [ct], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -229,8 +220,6 @@ module.exports = {
       const value = i.values[0];
       if (value == "budget") {
         await i.reply({ embeds: [budgetct], flags: MessageFlags.Ephemeral });
-      } else if (value == "comp") {
-        await i.reply({ embeds: [watertron], flags: MessageFlags.Ephemeral });
       } else if (value == "aggro") {
         await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
       } else if (value == "ladder") {
@@ -273,11 +262,7 @@ module.exports = {
         star: { embed: startron, component: star },
         startron: { embed: startron, component: star },
         star2: { embed: startron, component: star2 },
-        startron2: { embed: startron, component: star2 },
-        wt: { embed: watertron, component: wt },
-        watertron: { embed: watertron, component: wt },
-        wt2: { embed: watertron, component: wt2 },
-        watertron2: { embed: watertron, component: wt2 },
+        startron2: { embed: startron, component: star2 }
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -80,7 +80,7 @@ module.exports = {
           )
           .setValue("midrange"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Decks")
+          .setLabel("Tempo Deck")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
@@ -93,13 +93,13 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
       compdecks: ["limerence", "neurotherapy", "venice"],
-      ladderDecks: ["bayonet", "ginseng", "gomorrah", "gravepiratestache", "pawntrickstab", "raiserpackage", "trickmech"],
+      ladderDecks: ["bayonet", "ginseng", "gomorrah", "gravepiratestache", "pawntrickstab", "trickmech"],
       memeDecks: ["tangen"],
       aggroDecks: ["gravepiratestache", "trickmech"],
       comboDecks: ["bayonet", "gravepiratestache", "tangen", "trickmech", "venice"],
       controlDecks: ["ginseng", "neurotherapy", "pawntrickstab"],
       midrangeDecks: ["gomorrah", "limerence", "tangen", "venice"],
-      tempoDecks: ["bayonet", "raiserpackage"],
+      tempoDecks: ["bayonet"],
       allDecks: [
         "bayonet",
         "ginseng",
@@ -108,7 +108,6 @@ module.exports = {
         "limerence",
         "neurotherapy",
         "pawntrickstab",
-        "raiserpackage", 
         "tangen", 
         "trickmech", 
         "venice"
@@ -156,9 +155,8 @@ module.exports = {
     const gps = createButtons("gomorrah", "lime");
     const lime = createButtons("gravepiratestache", "neuro");
     const neuro = createButtons("limerence", "pts");
-    const pts = createButtons("neurotherapy", "rpack");
-    const rpack = createButtons("pawntrickstab", "tan");
-    const tan = createButtons("raiserpackage", "tmech");
+    const pts = createButtons("neurotherapy", "tan");
+    const tan = createButtons("pawntrickstab", "tmech");
     const tmech = createButtons("tangen", "vce");
     const vce = createButtons("trickmech", "allhelp");
     const comprow = createButtons("venice2", "lime2");
@@ -170,9 +168,8 @@ module.exports = {
     const gseg2 = createButtons("bayonet2", "go2");
     const go2 = createButtons("ginseng2", "gps2");
     const gps2 = createButtons("gomorrah2", "pts2");
-    const pts2 = createButtons("gravepiratestache2", "rpack2");
-    const rpack2 = createButtons("pawntrickstab2", "tmech2");
-    const tmech2 = createButtons("raiserpackage2", "ladderhelp");
+    const pts2 = createButtons("gravepiratestache2", "tmech2");
+    const tmech2 = createButtons("pawntrickstab2", "ladderhelp");
     const aggrorow = createButtons("trickmech3", "gps3");
     const gps3 = createButtons("helpaggro", "tmech3");
     const tmech3 = createButtons("gravepiratestache3", "aggrohelp");
@@ -191,16 +188,12 @@ module.exports = {
     const lime3 = createButtons("gomorrah3", "tan3");
     const tan3 = createButtons("limerence3", "vce4");
     const vce4 = createButtons("tangen3", "midrangehelp"); 
-    const temporow = createButtons("raiserpackage3", "bay4");
-    const bay4 = createButtons("helptempo", "rpack3");
-    const rpack3 = createButtons("bayonet4", "tempohelp");
     const [result] =
       await db.query(`select bayonet, ginseng, gomorrah, 
-        gps, limerence, shamcontrol, pawntrickstab, raiserpackage, tangen, trickmech, apotk from ntdecks nt 
+        gps, limerence, shamcontrol, pawntrickstab, tangen, trickmech, apotk from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join wkdecks wk on nt.deckinfo = wk.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
-        inner join bfdecks bf on nt.deckinfo = bf.deckinfo
         inner join sbdecks sb on nt.deckinfo = sb.deckinfo
         inner join ifdecks fi on nt.deckinfo = fi.deckinfo
         inner join ccdecks cc on nt.deckinfo = cc.deckinfo
@@ -296,7 +289,6 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const gravepiratestache = createDeckEmbed(result, "gps");
     const limerence = createDeckEmbed(result, "limerence");
-    const raiserpackage = createDeckEmbed(result, "raiserpackage");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
     const ginseng = createDeckEmbed(result, "ginseng");
@@ -391,12 +383,6 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         gomorrah2: { embed: gomorrah, component: go2 },
         go3: { embed: gomorrah, component: go3 },
         gomorrah3: { embed: gomorrah, component: go3 },
-        rpack: { embed: raiserpackage, component: rpack },
-        raiserpackage: { embed: raiserpackage, component: rpack },
-        rpack2: { embed: raiserpackage, component: rpack2 },
-        raiserpackage2: { embed: raiserpackage, component: rpack2 },
-        rpack3: { embed: raiserpackage, component: rpack3 },
-        raiserpackage3: { embed: raiserpackage, component: rpack3 },
         pts: { embed: pawntrickstab, component: pts },
         pawntrickstab: { embed: pawntrickstab, component: pts },
         pts2: { embed: pawntrickstab, component: pts2 },

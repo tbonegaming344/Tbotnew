@@ -3,9 +3,6 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags,
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
 } = require("discord.js");
 const db = require("../../index.js");
 /**
@@ -40,103 +37,45 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Select an option below to view creeperblade's decks")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("comp")
-        .setEmoji("<:compemote:1325461143136764060>")
-        .setDescription('Some of the Best Decks in the game'), 
-        new StringSelectMenuOptionBuilder()
-        .setLabel('Ladder Deck')
-					.setDescription('Decks that mostly only good for ranked games')
-					.setEmoji("<:ladder:1271503994857979964>")
-          .setValue("ladder"),
-        new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Deck")
-        .setValue("combo")
-        .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
-        new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Deck")
-        .setValue("midrange")
-        .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-        new StringSelectMenuOptionBuilder()
-        .setLabel("Tempo Deck")
-        .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.') 
-        .setValue("tempo"), 
-        new StringSelectMenuOptionBuilder()
-        .setLabel("All Decks")
-        .setDescription("All decks made by creeperblade")
-        .setValue("all")
+   const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("pablosyeezys")
+         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId("py")
+         .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
       );
-      const row = new ActionRowBuilder().addComponents(select);
-      const creeperBladeDecks = {
-        competitiveDecks:["pablosyeezys"],
-        ladderDecks: ["professorpackage"],
-        comboDecks: ["pablosyeezys"],
-        midrangeDecks: ["pablosyeezys"],
-        tempoDecks: ["professorpackage"],
-        allDecks: [
-          "pablosyeezys",
-          "professorpackage",
-        ],
+      const py = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("helpc")
+         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId("help")
+         .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+      const decks = ["pablosyeezys"];
+      let toBuildString = "";
+      for (const deck of decks) {
+        toBuildString += `\n<@${client.user.id}> **${deck}**`;
       }
-       /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-        return decks
-          .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-          .join("");
-      }
-      const toBuildString = buildDeckString(creeperBladeDecks.allDecks);
-      /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-        return new ActionRowBuilder().addComponents(
-          new ButtonBuilder()
-            .setCustomId(leftButtonId)
-            .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-            .setStyle(ButtonStyle.Primary),
-          new ButtonBuilder()
-            .setCustomId(rightButtonId)
-            .setEmoji("<:arrowright:1271446796207525898>")
-            .setStyle(ButtonStyle.Primary)
-        );
-      }
-    const alldecksrow = createButtons("professorpackage", "py");
-    const py2 = createButtons("helpall", "propack");
-    const propack = createButtons("pablosyeezys3", "allhelp");
-    const [result] = await db.query(`select pablosyeezys, professorpackage
-    from smdecks sm inner join pbdecks pb 
-    on (sm.deckinfo = pb.deckinfo)`);
+    const [result] = await db.query(`select pablosyeezys
+    from smdecks sm`);
     const user = await client.users.fetch("738926530000060416");
     const creep = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
-    )
-const alldecksEmbed = createHelpEmbed(
-  `${user.displayName} Decks`,
-  `My All decks made by ${user.displayName} are ${toBuildString}`,
-  user.displayAvatarURL(),
-  `To view the All Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in Tbot`
-)
- /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
+    );
+  /**
+   * The createDeckEmbed function creates an embed for a specific deck
+   * @param {string} deckName - The name of the deck
+   * @param {*} result - The result from the database query
+   * @returns The embed for the deck
      */
     function createDeckEmbed(result, deckName) {
   const embed = new EmbedBuilder()
@@ -156,53 +95,19 @@ Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} All decks in 
   return embed;
 }
     const pyeez = createDeckEmbed(result, "pablosyeezys");
-    const professorpackage = createDeckEmbed(result, "professorpackage");
     const m = await message.channel.send({
       embeds: [creep],
       components: [row] 
     });
     const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i 
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if(value == "ladder" || value == "tempo"){
-        await i.reply({embeds: [professorpackage], flags: MessageFlags.Ephemeral})
-      }
-      else if(value == "combo" ||value == "comp" || value == "midrange"){
-        await i.reply({embeds: [pyeez], flags: MessageFlags.Ephemeral});
-      }
-      else if(value == "all"){
-        await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-      }
-    }
-    async function handleButtonInteraction(i){
-      const buttonActions = {
-        helpall: {embed: alldecksEmbed, component: alldecksrow},
-        allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        py: {embed: pyeez, component: py},
-        pablosyeezys: {embed: pyeez, component: py},
-        propack: {embed: professorpackage, component: propack},
-        professorpackage: {embed: professorpackage, component: propack},
-      };
-      const action = buttonActions[i.customId];
-      if(action){
-        await i.update({embeds: [action.embed], components: [action.component]});
-      }
-      else{
-        await i.reply({content: "Invalid button interaction", flags: MessageFlags.Ephemeral});
-      }
-    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if(i.customId == "select"){
-        await handleSelectMenu(i);
-      }
-      else{
-        await handleButtonInteraction(i);
-      }
+      if (i.customId == "pablosyeezys" || i.customId == "py") {
+          await i.update({ embeds: [pyeez], components: [py] });
+        }
+        else if (i.customId == "helpc" || i.customId == "help") {
+          await i.update({ embeds: [creep], components: [row] });
+        }
     });  
   },
 };

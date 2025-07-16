@@ -50,7 +50,7 @@ module.exports = {
       .setDescription('Some of the Best Decks in the game')
       .setEmoji("<:compemote:1325461143136764060>"), 
       new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Decks")
+      .setLabel("Ladder Deck")
       .setValue("ladder")
       .setDescription('Decks that mostly only good for ranked games')
 			.setEmoji("<:ladder:1271503994857979964>"),
@@ -86,14 +86,13 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const sushiDecks = {
       competitiveDecks: ["healmidrose", "telimps"], 
-      ladderDecks: ["professorpackage", "trickmech"], 
+      ladderDecks: ["trickmech"], 
       memeDecks: ["sunbandits"], 
       aggroDecks: ["trickmech"], 
       comboDecks: ["sunbandits", "telimps", "trickmech"], 
       MidrangeDecks: ["sunbandits"], 
       midrangeDecks: ["healmidrose", "telimps"], 
-      tempoDecks: ["professorpackage"],
-      allDecks: ["healmidrose", "professorpackage", "sunbandits", "telimps", "trickmech"]
+      allDecks: ["healmidrose", "sunbandits", "telimps", "trickmech"]
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -106,7 +105,6 @@ module.exports = {
         .join("");
     }
     const toBuildCompetitive = buildDeckString(sushiDecks.competitiveDecks);
-    const toBuildLadder = buildDeckString(sushiDecks.ladderDecks);
     const toBuildCombo = buildDeckString(sushiDecks.comboDecks);
     const toBuildMidrange = buildDeckString(sushiDecks.midrangeDecks);
     const toBuildString = buildDeckString(sushiDecks.allDecks);
@@ -128,13 +126,10 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = createButtons("trickmech", "propack");
-    const propack =  createButtons("helpladder", "tmech");
-    const tmech =  createButtons("professorpackage", "ladderhelp");
-    const comborow = createButtons("trickmech2", "sb");
+    const comborow = createButtons("trickmech", "sb");
     const sb = createButtons("combohelp", "ti");
-    const ti = createButtons("sunbandits", "tmech2");
-    const tmech2 = createButtons("telimps", "helpcombo")
+    const ti = createButtons("sunbandits", "tmech");
+    const tmech = createButtons("telimps", "helpcombo")
     const competitiverow =  createButtons("telimps2", "hmrose");
     const hmrose =  createButtons("helpcomp", "ti2");
     const ti2 =  createButtons("healmidrose2", "comphelp");
@@ -142,16 +137,13 @@ module.exports = {
     const hmrose2 = createButtons("helpmidrange", "ti3")
     const ti3 =  createButtons("healmidrose2", "midrangehelp");
     const alldecksrow = createButtons("trickmech3", "hmrose3");
-    const hmrose3 = createButtons("helpall", "propack2");
-    const propack2 = createButtons("healmidrose3", "sb2");
-    const sb2 = createButtons("professorpackage2", "ti4");
-    const ti4 = createButtons("sunbandits2", "tmech3");
-    const tmech3 =  createButtons("telimps4", "allhelp");
+    const hmrose3 = createButtons("helpall", "sb2");
+    const sb2 = createButtons("healmidrose3", "ti4");
+    const ti4 = createButtons("sunbandits2", "tmech2");
+    const tmech2 =  createButtons("telimps4", "allhelp");
     const [result] =
-      await db.query(`select hmr, professorpackage, sunbandits, telimps, trickmech
+      await db.query(`select hmr, sunbandits, telimps, trickmech
 from rodecks ro
-inner join pbdecks pb 
-on (ro.deckinfo = pb.deckinfo)
 inner join rbdecks rb 
 on (ro.deckinfo = rb.deckinfo)
 inner join hgdecks hg
@@ -193,13 +185,6 @@ Note: ${user.displayName} has ${sushiDecks.MidrangeDecks.length} Midrange decks 
         `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${sushiDecks.competitiveDecks.length} Competitive decks in Tbot`
       )
-      const laddersushi = createHelpEmbed(
-        `${user.displayName} Ladder Decks`, 
-         `My Ladder decks made by ${user.displayName} are ${toBuildLadder}`, 
-         user.displayAvatarURL(), 
-        `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in Tbot`
-      )
     
        /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -225,7 +210,6 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         return embed;
       }
     const hmr = createDeckEmbed(result, "hmr");
-    const professorpackage= createDeckEmbed(result, "professorpackage");
     const sband = createDeckEmbed(result, "sunbandits");
     const timps = createDeckEmbed(result, "telimps");
     const trickmech = createDeckEmbed(result, "trickmech");
@@ -251,14 +235,11 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
       else if(value == "midrange"){
         await i.update({embeds: [midrangesushi], components: [midrangerow]})
       }
-      else if(value == "tempo"){
-        await i.reply({embeds: [professorpackage], flags: MessageFlags.Ephemeral})
-      }
       else if(value == "all"){
         await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
       }
       else if(value == "ladder"){
-        await i.update({embeds: [laddersushi], components: [ladderrow]})
+        await i.reply({embeds: [trickmech], flags: MessageFlags.Ephemeral})
       }
       else if(value == "meme"){
         await i.reply({embeds: [sband], flags: MessageFlags.Ephemeral})
@@ -292,18 +273,10 @@ Note: ${user.displayName} has ${sushiDecks.ladderDecks.length} Ladder decks in T
         healmidrose3: {embed: hmr, component: hmrose3},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        ladderhelp: {embed: laddersushi, component: ladderrow},
-        helpladder: {embed: laddersushi, component: ladderrow}, 
-        propack: {embed: professorpackage, component: propack},
-        professorpackage: {embed: professorpackage, component: propack},
-        propack2: {embed: professorpackage, component: propack2},
-        professorpackage2: {embed: professorpackage, component: propack2},
         tmech: {embed: trickmech, component: tmech},
         trickmech: {embed: trickmech, component: tmech},
         tmech2: {embed: trickmech, component: tmech2},
-        trickmech2: {embed: trickmech, component: tmech2},
-        tmech3: {embed: trickmech, component: tmech3},
-        trickmech3: {embed: trickmech, component: tmech3},
+        trickmech2: {embed: trickmech, component: tmech2}
       };
      const action = buttonActions[i.customId]
      if (action) {

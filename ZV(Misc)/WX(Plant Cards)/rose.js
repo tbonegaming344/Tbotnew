@@ -54,15 +54,6 @@ module.exports = {
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setValue("meme")
-          .setDescription("Plant Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription(
@@ -73,22 +64,13 @@ module.exports = {
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Rose Decks")
-          .setValue("all")
-          .setDescription("View all of Rose's decks")
-          .setEmoji("<:DeadInside:1100168228027760800>")
+          )
       );
     const row = new ActionRowBuilder().addComponents(select);
     const roseDecks = {
       budgetDecks: ["budgetro"],
       competitiveDecks: ["healmidrose"],
-      ladderDecks: ["frymidrose"],
-      memeDecks: ["freezeheal"],
-      comboDecks: ["freezeheal"],
-      midrangeDecks: ["budgetro", "frymidrose", "healmidrose"],
-      allDecks: ["budgetro", "freezeheal", "frymidrose", "healmidrose"],
+      midrangeDecks: ["budgetro", "healmidrose"]
     };
     function BuildDeckString(decks) {
       return decks
@@ -96,7 +78,6 @@ module.exports = {
         .join("");
     }
     const toBuildMidrangeString = BuildDeckString(roseDecks.midrangeDecks);
-    const toBuildString = BuildDeckString(roseDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -116,14 +97,8 @@ module.exports = {
       );
     }
     const midrangerow = createButtons("healmidrose", "bro");
-    const bro = createButtons("helpmid", "fmr");
-    const fmr = createButtons("budgetro", "hmr");
-    const hmr = createButtons("frymidrose", "midhelp");
-    const alldecksrow = createButtons("healmidrose2", "bro2");
-    const bro2 = createButtons("helpall", "fheal");
-    const fheal = createButtons("budgetro2", "fmr2");
-    const fmr2 = createButtons("freezeheal", "hmr2");
-    const hmr2 = createButtons("frymidrose2", "allhelp");
+    const bro = createButtons("helpmid", "hmr");
+    const hmr = createButtons("budgetro", "midhelp");
     const ro = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/vsbattles/images/1/1f/RosePVZ.png/revision/latest?cb=20181016204100"
@@ -154,13 +129,6 @@ module.exports = {
       `To view the Rose decks please select an option from the select menu below!
   Note: Rose has ${roseDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/2/2f/RoseBYL.png/revision/latest?cb=20200707025517"
-    );
-    const allEmbed = createHelpEmbed(
-      "Rose Decks",
-      `My decks for Rose(RO) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/pvzcc/images/2/2f/RoseBYL.png/revision/latest?cb=20200707025517",
-      `To view the Rose decks please use the commands listed above or click on the buttons below to navigate through all decks!
-  Note: Rose has ${roseDecks.allDecks.length} decks in Tbot`
     );
     const midrangeEmbed = createHelpEmbed(
       "Rose Midrange Decks",
@@ -194,8 +162,6 @@ module.exports = {
       return embed;
     }
     const budgetrose = createDeckEmbed(result, "budgetro");
-    const freezeheal = createDeckEmbed(result, "freezeheal");
-    const frymidrose = createDeckEmbed(result, "frymidrose");
     const healmidrose = createDeckEmbed(result, "hmr");
     const m = await message.channel.send({ embeds: [ro], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -205,18 +171,12 @@ module.exports = {
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget") {
+       if (value == "budget") {
         await i.reply({ embeds: [budgetrose], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
         await i.reply({ embeds: [healmidrose], flags: MessageFlags.Ephemeral });
-      } else if (value == "ladder") {
-        await i.reply({ embeds: [frymidrose], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme" || value == "combo") {
-        await i.reply({ embeds: [freezeheal], flags: MessageFlags.Ephemeral });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
     }
     /**
@@ -226,24 +186,12 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpall: { embed: allEmbed, component: alldecksrow },
         midhelp: { embed: midrangeEmbed, component: midrangerow },
         helpmid: { embed: midrangeEmbed, component: midrangerow },
         bro: { embed: budgetrose, component: bro },
         budgetro: { embed: budgetrose, component: bro },
-        bro2: { embed: budgetrose, component: bro2 },
-        budgetro2: { embed: budgetrose, component: bro2 },
-        fheal: { embed: freezeheal, component: fheal },
-        freezeheal: { embed: freezeheal, component: fheal },
-        fmr: { embed: frymidrose, component: fmr },
-        frymidrose: { embed: frymidrose, component: fmr },
-        fmr2: { embed: frymidrose, component: fmr2 },
-        frymidrose2: { embed: frymidrose, component: fmr2 },
         hmr: { embed: healmidrose, component: hmr },
-        healmidrose: { embed: healmidrose, component: hmr },
-        hmr2: { embed: healmidrose, component: hmr2 },
-        healmidrose2: { embed: healmidrose, component: hmr2 },
+        healmidrose: { embed: healmidrose, component: hmr }
       };
       const action = buttonActions[i.customId];
       if (action) {

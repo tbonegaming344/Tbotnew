@@ -39,7 +39,7 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
         .setEmoji("<:HD_ProfessorBrainstorm:1088083603918958682>")
     );
-    const select = new StringSelectMenuBuilder()
+  const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Brainstorm's decks")
       .addOptions(
@@ -53,11 +53,6 @@ module.exports = {
           .setValue("comp")
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>")
-          .setValue("ladder"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setDescription("Decks that are built off a weird/fun combo")
@@ -81,17 +76,11 @@ module.exports = {
           )
           .setValue("control"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           )
           .setValue("midrange"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          )
-          .setValue("tempo"),
         new StringSelectMenuOptionBuilder()
           .setLabel("All Brainstorm Decks")
           .setValue("all")
@@ -102,10 +91,8 @@ module.exports = {
     const professorBrainstormDecks = {
       budgetDecks: ["budgetpb"],
       competitiveDecks: ["trickstache"],
-      ladderDecks: ["professorpackage", "valkster"],
       memeDecks: [
         "bonusducks",
-        "congabait",
         "mechagold",
         "reversecatster",
         "youngeggmartin",
@@ -113,24 +100,18 @@ module.exports = {
       aggroDecks: ["budgetpb"],
       comboDecks: [
         "bonusducks",
-        "congabait",
         "reversecatster",
         "trickstache",
-        "valkster",
         "youngeggmartin",
       ],
       controlDecks: ["bonusducks", "mechagold"],
-      midrangeDecks: ["congabait", "trickstache", "valkster"],
-      tempoDecks: ["professorpackage"],
+      midrangeDecks: ["trickstache"],
       allDecks: [
         "bonusducks",
         "budgetpb",
-        "congabait",
         "mechagold",
-        "professorpackage",
         "reversecatster",
         "trickstache",
-        "valkster",
         "youngeggmartin",
       ],
     };
@@ -145,9 +126,6 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(professorBrainstormDecks.allDecks);
-    const toBuildLadderString = buildDeckString(
-      professorBrainstormDecks.ladderDecks
-    );
     const toBuildMemeString = buildDeckString(
       professorBrainstormDecks.memeDecks
     );
@@ -156,9 +134,6 @@ module.exports = {
     );
     const toBuildComboString = buildDeckString(
       professorBrainstormDecks.comboDecks
-    );
-    const toBuildMidrangeString = buildDeckString(
-      professorBrainstormDecks.midrangeDecks
     );
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -180,37 +155,24 @@ module.exports = {
     }
     const alldecksrow = createButtons("youngeggmartin", "bd");
     const bd = createButtons("helpall", "bpb");
-    const bpb = createButtons("bonusducks", "cb");
-    const cb = createButtons("budgetpb", "mgold");
-    const mgold = createButtons("congabait", "pa");
-    const pa = createButtons("mechagold", "rcatster");
-    const rcatster = createButtons("professorpackage", "ts");
-    const ts = createButtons("reversecatster", "valk");
-    const valk = createButtons("trickstache", "yem");
-    const yem = createButtons("valkster", "allhelp");
-    const ladderrow = createButtons("valkster2", "pa2");
-    const pa2 = createButtons("helpladder", "valk2");
-    const valk2 = createButtons("package2", "ladderhelp");
+    const bpb = createButtons("bonusducks", "mgold");
+    const mgold = createButtons("budgetpb", "rcatster");
+    const rcatster = createButtons("mechagold", "ts");
+    const ts = createButtons("reversecatster", "yem");
+    const yem = createButtons("trickstache", "allhelp");
     const memerow = createButtons("youngeggmartin2", "bd2");
-    const bd2 = createButtons("helpmeme", "cb2");
-    const cb2 = createButtons("bonusducks2", "mgold2");
-    const mgold2 = createButtons("congabait2", "rcatster2");
+    const bd2 = createButtons("helpmeme", "mgold2");
+    const mgold2 = createButtons("bonusducks2", "rcatster2");
     const rcatster2 = createButtons("mechagold2", "yem2");
     const yem2 = createButtons("reversecatster2", "memehelp");
     const comborow = createButtons("youngeggmartin3", "bd3");
-    const bd3 = createButtons("helpcombo", "cb3");
-    const cb3 = createButtons("bonusducks3", "rcatster3");
-    const rcatster3 = createButtons("congabait3", "ts2");
-    const ts2 = createButtons("reversecatster3", "valk3");
-    const valk3 = createButtons("trickstache2", "yem3");
-    const yem3 = createButtons("valkster3", "combohelp");
+    const bd3 = createButtons("helpcombo", "rcatster3");
+    const rcatster3 = createButtons("bonusducks3", "ts2");
+    const ts2 = createButtons("reversecatster3", "yem3");
+    const yem3 = createButtons("trickstache2", "combohelp");
     const controlrow = createButtons("mechagold3", "bd4");
     const bd4 = createButtons("helpcontrol", "mgold3");
     const mgold3 = createButtons("bonusducks4", "controlhelp");
-    const midrangerow = createButtons("valkster4", "cb4");
-    const cb4 = createButtons("helpmid", "ts3");
-    const ts3 = createButtons("congabait4", "valk4");
-    const valk4 = createButtons("trickstache3", "midhelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022"
@@ -235,19 +197,12 @@ module.exports = {
         }
       )
       .setColor("#FFC0CB");
-    const alldecksEmbed = createHelpEmbed(
+ const alldecksEmbed = createHelpEmbed(
       "Professor Brainstorm Decks",
       `My commands for Professor Brainstorm(PB) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
       `To view the Professor Brainstrom decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total decks in Tbot`
-    );
-    const ladderEmbed = createHelpEmbed(
-      "Professor Brainstorm Ladder Decks",
-      `My ladder commands for Professor Brainstorm(PB) are ${toBuildLadderString}`,
-      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
-      `To view the Professor Brainstrom ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Professor Brainstorm has ${professorBrainstormDecks.ladderDecks.length} ladder decks in Tbot`
     );
     const memeEmbed = createHelpEmbed(
       "Professor Brainstorm Meme Decks",
@@ -256,13 +211,6 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.ladderDecks.length} la
       `To view the Professor Brainstrom meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.memeDecks.length} meme decks in Tbot`
     );
-    const controlEmbed = createHelpEmbed(
-      "Professor Brainstorm Control Decks",
-      `My control commands for Professor Brainstorm(PB) are ${toBuildControlString}`,
-      "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
-      `To view the Professor Brainstrom control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
-Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} control decks in Tbot`
-    );
     const comboEmbed = createHelpEmbed(
       "Professor Brainstorm Combo Decks",
       `My combo commands for Professor Brainstorm(PB) are ${toBuildComboString}`,
@@ -270,12 +218,12 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} c
       `To view the Professor Brainstrom combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Professor Brainstorm has ${professorBrainstormDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = createHelpEmbed(
-      "Professor Brainstorm Midrange Decks",
-      `My midrange commands for Professor Brainstorm(PB) are ${toBuildMidrangeString}`,
+    const controlEmbed = createHelpEmbed(
+      "Professor Brainstorm Control Decks",
+      `My control commands for Professor Brainstorm(PB) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/villains/images/e/eb/HD_ProfessorBrainstorm.png/revision/latest?cb=20190401134022",
-      `To view the Professor Brainstrom midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: Professor Brainstorm has ${professorBrainstormDecks.midrangeDecks.length} midrange decks in Tbot`
+      `To view the Professor Brainstrom control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
+Note: Professor Brainstorm has ${professorBrainstormDecks.controlDecks.length} control decks in Tbot`
     );
     const helppb = createHelpEmbed(
       "Professor Brainstorm Decks",
@@ -307,14 +255,11 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       }
       return embed;
     }
-    const bonusducks = createDeckEmbed(result, "bonusducks");
+   const bonusducks = createDeckEmbed(result, "bonusducks");
     const budgetpb = createDeckEmbed(result, "budgetpb");
-    const congabait = createDeckEmbed(result, "congabait");
-    const professorpackage = createDeckEmbed(result, "professorpackage");
-    const reversecatster = createDeckEmbed(result, "reversecatster");
     const mechagold = createDeckEmbed(result, "mechagold");
+    const reversecatster = createDeckEmbed(result, "reversecatster");
     const trickstache = createDeckEmbed(result, "trickstache");
-    const valkster = createDeckEmbed(result, "valkster");
     const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
     const m = await message.channel.send({
       embeds: [embed],
@@ -327,25 +272,16 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "all") {
+    if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (value == "comp") {
+      } else if (value == "comp" || value == "midrange") {
         await i.reply({ embeds: [trickstache], flags: MessageFlags.Ephemeral });
-      } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "control") {
         await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "tempo") {
-        await i.reply({
-          embeds: [professorpackage],
-          flags: MessageFlags.Ephemeral,
-        });
       } else if (value == "budget" || value == "aggro") {
         await i.reply({ embeds: [budgetpb], flags: MessageFlags.Ephemeral });
       }
@@ -357,16 +293,12 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     async function handleButtonInteraction(i) {
       const buttonActions = {
         helppb: { embed: helppb, component: row },
-        allhelp: { embed: alldecksEmbed, component: alldecksrow },
+         allhelp: { embed: alldecksEmbed, component: alldecksrow },
         helpall: { embed: alldecksEmbed, component: alldecksrow },
-        ladderhelp: { embed: ladderEmbed, component: ladderrow },
-        helpladder: { embed: ladderEmbed, component: ladderrow },
         helpmeme: { embed: memeEmbed, component: memerow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpcombo: { embed: comboEmbed, component: comborow },
         combohelp: { embed: comboEmbed, component: comborow },
-        helpmid: { embed: midrangeEmbed, component: midrangerow },
-        midhelp: { embed: midrangeEmbed, component: midrangerow },
         controlhelp: { embed: controlEmbed, component: controlrow },
         helpcontrol: { embed: controlEmbed, component: controlrow },
         bd: { embed: bonusducks, component: bd },
@@ -379,18 +311,6 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         bonusducks4: { embed: bonusducks, component: bd4 },
         bpb: { embed: budgetpb, component: bpb },
         budgetpb: { embed: budgetpb, component: bpb },
-        cb: { embed: congabait, component: cb },
-        congabait: { embed: congabait, component: cb },
-        cb2: { embed: congabait, component: cb2 },
-        congabait2: { embed: congabait, component: cb2 },
-        cb3: { embed: congabait, component: cb3 },
-        congabait3: { embed: congabait, component: cb3 },
-        cb4: { embed: congabait, component: cb4 },
-        congabait4: { embed: congabait, component: cb4 },
-        pa: { embed: professorpackage, component: pa },
-        professorpackage: { embed: professorpackage, component: pa },
-        pa2: { embed: professorpackage, component: pa2 },
-        professorpackage2: { embed: professorpackage, component: pa2 },
         rcatster: { embed: reversecatster, component: rcatster },
         reversecatster: { embed: reversecatster, component: rcatster },
         rcatster2: { embed: reversecatster, component: rcatster2 },
@@ -401,16 +321,6 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         trickstache: { embed: trickstache, component: ts },
         ts2: { embed: trickstache, component: ts2 },
         trickstache2: { embed: trickstache, component: ts2 },
-        ts3: { embed: trickstache, component: ts3 },
-        trickstache3: { embed: trickstache, component: ts3 },
-        valk: { embed: valkster, component: valk },
-        valkster: { embed: valkster, component: valk },
-        valk2: { embed: valkster, component: valk2 },
-        valkster2: { embed: valkster, component: valk2 },
-        valk3: { embed: valkster, component: valk3 },
-        valkster3: { embed: valkster, component: valk3 },
-        valk4: { embed: valkster, component: valk4 },
-        valkster4: { embed: valkster, component: valk4 },
         yem: { embed: youngeggmartin, component: yem },
         youngeggmartin: { embed: youngeggmartin, component: yem },
         yem2: { embed: youngeggmartin, component: yem2 },

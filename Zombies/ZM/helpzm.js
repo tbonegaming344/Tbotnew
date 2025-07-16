@@ -57,11 +57,6 @@ module.exports = {
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Decks")
           .setValue("ladder")
           .setDescription("Decks that mostly only good for ranked games")
@@ -89,7 +84,7 @@ module.exports = {
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -109,20 +104,18 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const zmechDecks = {
       budgetDecks: ["budgetzm"],
-      competitiveDecks: ["gargburn"],
       ladderDecks: ["binaryflagwar", "brady", "trickmech"],
       memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
       aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
-      comboDecks: ["binaryflagwar", "budgetzm", "gargburn", "trickmech", "uncrackamech", "zmoss"],
+      comboDecks: ["binaryflagwar", "budgetzm", "trickmech", "uncrackamech", "zmoss"],
       controlDecks: ["uncrackamech"],
-      midrangeDecks: ["binaryflagwar", "gargburn"],
+      midrangeDecks: ["binaryflagwar"],
       tempoDecks: ["brady"],
       allDecks: [
         "binaryflagwar",
         "brady",
         "budgetzm",
         "dozzamech",
-        "gargburn",
         "trickmech",
         "uncrackamech",
         "zmoss",
@@ -143,7 +136,6 @@ module.exports = {
     const toBuildMemeString = buildDeckString(zmechDecks.memeDecks);
     const toBuildAggroString = buildDeckString(zmechDecks.aggroDecks);
     const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
-    const toBuildMidrangeString = buildDeckString(zmechDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -166,9 +158,8 @@ module.exports = {
     const bfw = createButtons("helpall", "br");
     const br = createButtons("binaryflagwar", "bzm");
     const bzm = createButtons("brady", "dm");
-    const dm = createButtons("budgetzm", "gb");
-    const gb = createButtons("dozzamech", "tm");
-    const tm = createButtons("gargburn", "um");
+    const dm = createButtons("budgetzm", "tm");
+    const tm = createButtons("dozzamech", "um");
     const um = createButtons("trickmech", "zm");
     const zm = createButtons("uncrackamech", "allhelp");
     const ladderrow = createButtons("trickmech2", "bfw2");
@@ -185,14 +176,10 @@ module.exports = {
     const tm3 = createButtons("dozzamech3", "helpaggro");
     const comborow = createButtons("zmoss3", "bfw3");
     const bfw3 = createButtons("combohelp", "bzm3");
-    const bzm3 = createButtons("binaryflagwar3", "gb2");
-    const gb2 = createButtons("budgetzm3", "tm4");
-    const tm4 = createButtons("gargburn2", "um3");
+    const bzm3 = createButtons("binaryflagwar3", "tm4");
+    const tm4 = createButtons("budgetzm3", "um3");
     const um3 = createButtons("trickmech4", "zm3");
     const zm3 = createButtons("uncrackamech3", "helpcombo");
-    const midrangerow = createButtons("gargburn3", "bfw4");
-    const bfw4 = createButtons("midrangehelp", "gb3");
-    const gb3 = createButtons("binaryflagwar4", "helpmidrange");
     const embed = createHelpEmbed(
       "Zmech Decks",
       `To view the Zmech decks please select an option from the select menu below!
@@ -270,7 +257,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
     const budgetzm = createDeckEmbed(result, "budgetzm");
     const dozzamech = createDeckEmbed(result, "dozzamech");
     const uncrackamech = createDeckEmbed(result, "feastmech");
-    const gargburn = createDeckEmbed(result, "gargburn");
     const trickmech = createDeckEmbed(result, "trickmech");
     const zmoss = createDeckEmbed(result, "zmoss");
     const m = await message.channel.send({
@@ -286,8 +272,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
       const value = i.values[0];
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (value == "comp") {
-        await i.reply({ embeds: [gargburn], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -351,12 +335,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         dozzamech2: {embed: dozzamech, component: dm2},
         dm3: {embed: dozzamech, component: dm3},
         dozzamech3: {embed: dozzamech, component: dm3},
-        gb: {embed: gargburn, component: gb},
-        gargburn: {embed: gargburn, component: gb},
-        gb2: {embed: gargburn, component: gb2},
-        gargburn2: {embed: gargburn, component: gb2},
-        gb3: {embed: gargburn, component: gb3},
-        gargburn3: {embed: gargburn, component: gb3},
         tm: {embed: trickmech, component: tm},
         trickmech: {embed: trickmech, component: tm},
         tm2: {embed: trickmech, component: tm2},

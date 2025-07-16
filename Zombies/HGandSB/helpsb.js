@@ -57,16 +57,6 @@ module.exports = {
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setValue("meme")
-          .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setValue("midrange")
           .setDescription(
@@ -81,9 +71,8 @@ module.exports = {
     const superBrainzDecks = {
       budgetDecks: ["budgetsb"],
       compdecks: ["limerence"],
-      comboDecks: ["otkswabbie"],
       midrangeDecks: ["budgetsb", "limerence"],
-      allDecks: ["budgetsb", "limerence", "otkswabbie",],
+      allDecks: ["budgetsb", "limerence"]
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -118,10 +107,9 @@ module.exports = {
     const midrangeRow = createButtons("limerence", "budsb");
     const budsb = createButtons("helpmidrange", "lime");
     const lime = createButtons("budgetsb", "midrangehelp");
-    const allDecksRow = createButtons("otkswabbie", "budsb2");
+    const allDecksRow = createButtons("limerence2", "budsb2");
     const budsb2 = createButtons("helpall", "lime2");
-    const lime2 = createButtons("budgetsb2", "otks");
-    const otks = createButtons("limerence2", "allhelp");
+    const lime2 = createButtons("budgetsb2", "allhelp");
     const helpsb = createHelpEmbed(
       "Super Brainz Decks",
       `To view the SuperBrainz decks please select an option from the select menu below!
@@ -168,7 +156,6 @@ Note: There are ${superBrainzDecks.allDecks.length} decks for Super Brainz in Tb
     }
     const budgetsb = createDeckEmbed(result, "budgetsb");
     const limerence = createDeckEmbed(result, "limerence");
-    const otkswabbie = createDeckEmbed(result, "otkswabbie");
     const m = await message.channel.send({
       embeds: [helpsb],
       components: [row],
@@ -184,8 +171,6 @@ Note: There are ${superBrainzDecks.allDecks.length} decks for Super Brainz in Tb
         limerence: { embeds: limerence, component: lime },
         lime2: { embeds: limerence, component: lime2 },
         limerence2: { embeds: limerence, component: lime2 },
-        otks: { embeds: otkswabbie, component: otks },
-        otkswabbie: { embeds: otkswabbie, component: otks },
         helpmidrange: { embeds: midrangeEmbed, component: midrangeRow },
         midrangehelp: { embeds: midrangeEmbed, component: midrangeRow },
         helpall: { embeds: allDecksEmbed, component: allDecksRow },
@@ -210,13 +195,9 @@ Note: There are ${superBrainzDecks.allDecks.length} decks for Super Brainz in Tb
         await i.reply({ embeds: [budgetsb], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
         await i.update({ embeds: [allDecksEmbed], components: [allDecksRow] });
-      } else if (value == "meme" || value == "combo") {
-        await i.reply({ embeds: [otkswabbie], flags: MessageFlags.Ephemeral });
-      }
-      else if (value == "comp"){
+      } else if (value == "comp") {
         await i.reply({ embeds: [limerence], flags: MessageFlags.Ephemeral });
-      }
-      else if( value == "midrange"){
+      } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangeRow] });
       }
     }

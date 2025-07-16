@@ -59,7 +59,7 @@ module.exports = {
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
+          .setLabel("Meme Deck")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
@@ -97,16 +97,15 @@ module.exports = {
       budgetDecks: ["budgetmopzilla"],
       compDecks: ["venice"],
       ladderDecks: ["leafystrike"],
-      memeDecks: ["lasersnap", "moprbius"],
-      comboDecks: ["budgetmopzilla", "lasersnap", "moprbius"],
+      memeDecks: ["lasersnap"],
+      comboDecks: ["budgetmopzilla", "lasersnap"],
       controlDecks: ["venice"],
-      midrangeDecks: ["budgetmopzilla", "lasersnap", "moprbius", "venice"],
+      midrangeDecks: ["budgetmopzilla", "lasersnap", "venice"],
       tempoDecks: ["leafystrike"],
       allDecks: [
         "budgetmopzilla",
         "lasersnap",
         "leafystrike",
-        "moprbius",
         "venice"
       ],
     };
@@ -120,7 +119,6 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildMemeString = buildDeckString(chompzillaDecks.memeDecks);
     const toBuildComboString = buildDeckString(chompzillaDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(
       chompzillaDecks.midrangeDecks
@@ -144,24 +142,18 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = createButtons("mopribus", "lsnap");
-    const lsnap = createButtons("helpmeme", "mop");
-    const mop = createButtons("lasersnap", "memehelp");
-    const comborow = createButtons("mopribus2", "bmz");
+    const comborow = createButtons("lasersnap2", "bmz");
     const bmz = createButtons("helpcombo", "lsnap2");
-    const lsnap2 = createButtons("budgetmopzilla", "mop2");
-    const mop2 = createButtons("lasersnap2", "combohelp");
+    const lsnap2 = createButtons("budgetmopzilla", "combohelp");
     const midrangerow = createButtons("venice", "bmz2");
     const bmz2 = createButtons("helpmid", "lsnap3");
-    const lsnap3 = createButtons("budgetmopzilla2", "mop3");
-    const mop3 = createButtons("lasersnap3", "vce");
-    const vce = createButtons("mopribus3", "midhelp");
+    const lsnap3 = createButtons("budgetmopzilla2", "vce");
+    const vce = createButtons("lasersnap3", "midhelp");
     const alldecksrow = createButtons("venice2", "bmz3");
     const bmz3 = createButtons("helpall", "lsnap4");
     const lsnap4 = createButtons("budgetmopzilla3", "lstrike");
-    const lstrike= createButtons("lasersnap4", "mop4");
-    const mop4 = createButtons("leafystrike", "vce2");
-    const vce2 = createButtons("mopribu4", "allhelp");
+    const lstrike= createButtons("lasersnap4", "vce2");
+    const vce2 = createButtons("leafystrike", "allhelp");
     const [heroResult] = await db.query(`select chompzilla from plantheroes`);
     const cz = new EmbedBuilder()
       .setThumbnail(`${heroResult[2].chompzilla}`)
@@ -248,7 +240,6 @@ Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
     const budgetcz = createDeckEmbed(result, "budgetcz");
     const lasersnap = createDeckEmbed(result, "lasersnap");
     const leafystrike = createDeckEmbed(result, "leafystrike");
-    const mopribus = createDeckEmbed(result, "mopribus");
     const m = await message.channel.send({ embeds: [cz], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -308,14 +299,6 @@ Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
         lasersnap3: { embed: lasersnap, component: lsnap3 },
         lsnap4: { embed: lasersnap, component: lsnap4 },
         lasersnap4: { embed: lasersnap, component: lsnap4 },
-        mop: { embed: mopribus, component: mop },
-        mopribus: { embed: mopribus, component: mop },
-        mop2: { embed: mopribus, component: mop2 },
-        mopribus2: { embed: mopribus, component: mop2 },
-        mop3: { embed: mopribus, component: mop3 },
-        mopribus3: { embed: mopribus, component: mop3 }, 
-        mop4: { embed: mopribus, component: mop4 },
-        mopribu4: { embed: mopribus, component: mop4 },
         lstrike: { embed: leafystrike, component: lstrike },
         leafystrike: { embed: leafystrike, component: lstrike }
       };

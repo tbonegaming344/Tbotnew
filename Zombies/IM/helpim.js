@@ -98,13 +98,12 @@ module.exports = {
       budgetDecks: ["budgetim"],
       competitiveDecks: ["kaleidoscope"],
       ladderDecks: ["mechascope"],
-      memeDecks: ["22savage", "bastet", "rampticia"],
+      memeDecks: ["22savage", "bastet"],
       comboDecks: [
         "22savage",
         "bastet",
         "budgetim",
         "mechascope",
-        "rampticia",
       ],
       controlDecks: ["budgetim", "kaleidoscope", "mechascope"],
       midrangeDecks: ["22savage", "bastet", "budgetim"],
@@ -113,8 +112,7 @@ module.exports = {
         "bastet",
         "budgetim",
         "kaleidoscope",
-        "mechascope",
-        "rampticia",
+        "mechascope"
       ],
     };
      /**
@@ -152,23 +150,20 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("rampticia", "sav");
+    const alldecksrow = createButtons("mechascope", "sav");
     const sav = createButtons("helpall", "bas");
     const bas = createButtons("savage", "bim");
     const bim = createButtons("bastet", "kscope");
     const kscope = createButtons("budgetim", "ms");
-    const ms = createButtons("kaleidoscope", "rim");
-    const rim = createButtons("otkmecha", "allhelp");
-    const memerow = createButtons("rampticia2", "sav2");
+    const ms = createButtons("kaleidoscope", "allhelp");
+    const memerow = createButtons("bastet2", "sav2");
     const sav2 = createButtons("memehelp", "bas2");
-    const bas2 = createButtons("savage2", "rim2");
-    const rim2 = createButtons("bastet2", "helpmeme");
-    const comborow = createButtons("rampticia3", "sav3");
+    const bas2 = createButtons("savage2", "helpmeme");
+    const comborow = createButtons("mechascope2", "sav3");
     const sav3 = createButtons("combohelp", "bas3");
     const bas3 = createButtons("savage3", "bim2");
     const bim2 = createButtons("bastet3", "ms2");
-    const ms2 = createButtons("budgetim2", "rim3");
-    const rim3 = createButtons("mechascope2", "helpcombo");
+    const ms2 = createButtons("budgetim2", "helpcombo");
     const controlrow = createButtons("mechascope3", "bim3");
     const bim3 = createButtons("controlhelp", "kscope2");
     const kscope2 = createButtons("budgetim3", "ms3");
@@ -247,7 +242,6 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
     const budgetim = createDeckEmbed(result, "budgetim");
     const mechascope = createDeckEmbed(result, "otkmecha");
     const kaleidoscope = createDeckEmbed(result, "otktrickster");
-    const rampticia = createDeckEmbed(result, "rampticia");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -316,12 +310,6 @@ Note: Immorticia has ${immorticiaDecks.midrangeDecks.length} midrange decks in T
         kaleidoscope: {embed: kaleidoscope, component: kscope},
         kscope2: {embed: kaleidoscope, component: kscope2},
         kaleidoscope2: {embed: kaleidoscope, component: kscope2},
-        rim: {embed: rampticia, component: rim},
-        rampticia: {embed: rampticia, component: rim},
-        rim2: {embed: rampticia, component: rim2},
-        rampticia2: {embed: rampticia, component: rim2},
-        rim3: {embed: rampticia, component: rim3},
-        rampticia3: {embed: rampticia, component: rim3},
         sav: {embed: savage22, component: sav},
         savage: {embed: savage22, component: sav},
         sav2: {embed: savage22, component: sav2},

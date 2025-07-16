@@ -49,11 +49,6 @@ module.exports = {
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
@@ -84,24 +79,19 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const solarFlareDecks = {
       budgetDecks: ["budgetswarmsf"],
-      competitiveDecks: ["figlottery"],
-      memeDecks: ["funnyflare", "healburn", "psychosolstice", "ramp2seedling"],
+      memeDecks: ["funnyflare", "healburn", "psychosolstice"],
       aggroDecks: ["budgetswarmsf"],
-      comboDecks: ["funnyflare", "healburn", "psychosolstice", "ramp2seedling"],
+      comboDecks: ["funnyflare", "healburn", "psychosolstice"],
       midrangeDecks: [
-        "figlottery",
         "funnyflare",
         "healburn",
         "psychosolstice",
-        "ramp2seedling",
       ],
       allDecks: [
         "budgetswarmsf",
-        "figlottery",
         "funnyflare",
         "healburn",
-        "psychosolstice",
-        "ramp2seedling",
+        "psychosolstice"
       ],
     };
     /**
@@ -122,29 +112,23 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = createButtons("ramp2seedling", "ff");
+    const memerow = createButtons("psychosolstice", "ff");
     const ff = createButtons("helpmeme", "hburn");
     const hburn = createButtons("funnyflare", "psol");
-    const psol = createButtons("healburn", "r2s");
-    const r2s = createButtons("psychosolstice", "memehelp");
-    const comborow = createButtons("ramp2seedling2", "ff2");
+    const psol = createButtons("healburn", "memehelp");
+    const comborow = createButtons("psychosolstice2", "ff2");
     const ff2 = createButtons("helpcombo", "hburn2");
     const hburn2 = createButtons("funnyflare2", "psol2");
-    const psol2 = createButtons("healburn2", "r2s2");
-    const r2s2 = createButtons("psychosolstice2", "combohelp");
-    const midrangerow = createButtons("ramp2seedling3", "flottery");
-    const flottery = createButtons("helpmid", "ff3");
-    const ff3 = createButtons("figlottery", "hburn3");
+    const psol2 = createButtons("healburn2", "combohelp");
+    const midrangerow = createButtons("psychosolstice3", "ff3");
+    const ff3 = createButtons("helpmid", "hburn3");
     const hburn3 = createButtons("funnyflare3", "psol3");
-    const psol3 = createButtons("healburn3", "r2s3");
-    const r2s3 = createButtons("psychosolstice3", "midhelp");
-    const alldecksrow = createButtons("ramp2seedling4", "bsf");
+    const psol3 = createButtons("healburn3", "midhelp");
+    const alldecksrow = createButtons("psychosolstice4", "bsf");
     const bsf = createButtons("helpall", "flottery2");
-    const flottery2 = createButtons("budgetsf", "ff4");
-    const ff4 = createButtons("figlottery2", "hburn4");
+    const ff4 = createButtons("budgetsf", "hburn4");
     const hburn4 = createButtons("funnyflare3", "psol4");
-    const psol4 = createButtons("psol4", "r2s4");
-    const r2s4 = createButtons("psychosolstice4", "allhelp");
+    const psol4 = createButtons("psol4", "allhelp");
     function BuildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -184,7 +168,7 @@ module.exports = {
     const embed = createHelpEmbed(
       "Solar Flare Decks",
       `To view the Solar Flare decks please select an option from the select menu below!
-  Note: Solar Flare has ${solarFlareDecks.allDecks.length} total decks in Tbot`,
+Note: Solar Flare has ${solarFlareDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist"
     );
     const memeEmbed = createHelpEmbed(
@@ -192,28 +176,28 @@ module.exports = {
       `My meme decks for Solar Flare(SF) are ${toBuildMemeString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the meme Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-  Note: Solar Flare has ${solarFlareDecks.memeDecks.length} meme decks in Tbot`
+Note: Solar Flare has ${solarFlareDecks.memeDecks.length} meme decks in Tbot`
     );
     const allEmbed = createHelpEmbed(
       "Solar Flare Decks",
       `My decks for Solar Flare(SF) are ${toBuildString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all decks!
-  Note: Solar Flare has ${solarFlareDecks.allDecks.length} decks in Tbot`
+Note: Solar Flare has ${solarFlareDecks.allDecks.length} decks in Tbot`
     );
     const comboEmbed = createHelpEmbed(
       "Solar Flare Combo Decks",
       `My combo decks for Solar Flare(SF) are ${toBuildComboString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the combo Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-  Note: Solar Flare has ${solarFlareDecks.comboDecks.length} combo decks in Tbot`
+Note: Solar Flare has ${solarFlareDecks.comboDecks.length} combo decks in Tbot`
     );
     const midrangeEmbed = createHelpEmbed(
       "Solar Flare Midrange Decks",
       `My midrange decks for Solar Flare(SF) are ${toBuildMidrangeString}`,
       "https://static.wikia.nocookie.net/p__/images/5/57/SolarFlareTransparent.png/revision/latest?cb=20190624185221&path-prefix=protagonist",
       `To view the midrange Solar Flare decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-  Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in Tbot`
+Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in Tbot`
     );
     const [result] = await db.query(`SELECT * from sfdecks`);
      /**
@@ -242,9 +226,7 @@ module.exports = {
     const budgetsf = createDeckEmbed(result, "budgetswarmsf");
     const funnyflare = createDeckEmbed(result, "funnyflare");
     const healburn = createDeckEmbed(result, "healburn");
-    const figlottery = createDeckEmbed(result, "healmidflare");
     const psychosolstice = createDeckEmbed(result, "psychosolstice");
-    const ramp2seedling = createDeckEmbed(result, "ramp2seedling");
     const m = await message.channel.send({ embeds: [sf], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -253,9 +235,7 @@ module.exports = {
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "comp") {
-        await i.reply({ embeds: [figlottery], flags: MessageFlags.Ephemeral });
-      } else if (value == "budget" || value == "aggro") {
+      if (value == "budget" || value == "aggro") {
         await i.reply({ embeds: [budgetsf], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
@@ -274,7 +254,7 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-        allhelp: { embed: allEmbed, component: alldecksrow },
+       allhelp: { embed: allEmbed, component: alldecksrow },
         helpall: { embed: allEmbed, component: alldecksrow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
@@ -284,10 +264,6 @@ module.exports = {
         helpmid: { embed: midrangeEmbed, component: midrangerow },
         bsf: { embed: budgetsf, component: bsf },
         budgetsf: { embed: budgetsf, component: bsf },
-        flottery: { embed: figlottery, component: flottery },
-        figlottery: { embed: figlottery, component: flottery },
-        flottery2: { embed: figlottery, component: flottery2 },
-        figlottery2: { embed: figlottery, component: flottery2 },
         ff: { embed: funnyflare, component: ff },
         funnyflare: { embed: funnyflare, component: ff },
         ff2: { embed: funnyflare, component: ff2 },
@@ -311,15 +287,7 @@ module.exports = {
         psol3: { embed: psychosolstice, component: psol3 },
         psychosolstice3: { embed: psychosolstice, component: psol3 },
         psol4: { embed: psychosolstice, component: psol4 },
-        psychosolstice4: { embed: psychosolstice, component: psol4 },
-        r2s: { embed: ramp2seedling, component: r2s },
-        ramp2seedling: { embed: ramp2seedling, component: r2s },
-        r2s2: { embed: ramp2seedling, component: r2s2 },
-        ramp2seedling2: { embed: ramp2seedling, component: r2s2 },
-        r2s3: { embed: ramp2seedling, component: r2s3 },
-        ramp2seedling3: { embed: ramp2seedling, component: r2s3 },
-        r2s4: { embed: ramp2seedling, component: r2s4 },
-        ramp2seedling4: { embed: ramp2seedling, component: r2s4 },
+        psychosolstice4: { embed: psychosolstice, component: psol4 }
       };
       const action = buttonActions[i.customId];
       if (action) {

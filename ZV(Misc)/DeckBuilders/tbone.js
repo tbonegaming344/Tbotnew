@@ -70,11 +70,11 @@ module.exports = {
       );
     const tboneDecks = {
       competitiveDecks: ["seacret"],
-      memeDecks: ["huntgargs", "otkswabbie", "whalepharaoh"],
+      memeDecks: ["huntgargs","whalepharaoh"],
       aggroDecks: ["seacret"],
-      comboDecks: ["otkswabbie", "whalepharaoh"],
+      comboDecks: ["seacret", "whalepharaoh"],
       controlDecks: ["huntgargs", "whalepharaoh"],
-      allDecks: ["huntgargs", "seacret", "otkswabbie", "whalepharaoh"],
+      allDecks: ["huntgargs", "seacret", "whalepharaoh"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -87,8 +87,8 @@ module.exports = {
         .join("");
     }
     const toBuildMeme = buildDeckString(tboneDecks.memeDecks);
-    const toBuildComb = buildDeckString(tboneDecks.comboDecks);
     const toBuildControl =  buildDeckString(tboneDecks.controlDecks);
+    const toBuildComb = buildDeckString(tboneDecks.comboDecks);
     const toBuildString = buildDeckString(tboneDecks.allDecks);
     const row = new ActionRowBuilder().addComponents(select);
     /**
@@ -111,24 +111,19 @@ module.exports = {
     }
     const alldecksrow = createButtons("whalepharaoh", "hgargs");
     const hgargs = createButtons("helpall", "sea");
-    const sea = createButtons("huntgargs", "os");
-    const os = createButtons("seacret", "wp");
-    const wp = createButtons("otkswabbie", "allhelp");
+    const sea = createButtons("huntgargs", "wp");
+    const wp = createButtons("seacret", "allhelp");
     const memerow = createButtons("whalepharaoh2", "hgargs2");
-    const hgargs2 = createButtons("helpmeme", "os2");
-    const os2 = createButtons("huntgargs2", "wp2");
-    const wp2 = createButtons("otkswabbie2", "memehelp");
+    const hgargs2 = createButtons("helpmeme", "wp2");
+    const wp2 = createButtons("huntgargs2", "memehelp");
     const user = await client.users.fetch("625172218120372225");
-    const comborow = createButtons("whalepharaoh3", "os3");
-    const os3 = createButtons("helpcombo", "sea2");
-    const sea2 = createButtons("otkswabbie3", "wp3");
+    const comborow = createButtons("whalepharaoh3", "sea2");
+    const sea2 = createButtons("helpcombo", "wp3");
     const wp3 = createButtons("seacret2", "combohelp");
     const controlrow = createButtons("whalepharaoh4", "hgargs3");
     const hgargs3 = createButtons("helpcontrol", "wp4");
-    const [result] = await db.query(`select huntgargs, seacret, otkswabbie,
+    const [result] = await db.query(`select huntgargs, seacret,
 whalepharaoh from ebdecks eb 
-inner join sbdecks sb
-on (eb.deckinfo = sb.deckinfo) 
 inner join smdecks sm
 on (eb.deckinfo = sm.deckinfo)`);
     const tbone = createHelpEmbed(
@@ -190,7 +185,6 @@ Note: ${user.displayName} has ${tboneDecks.controlDecks.length} Control decks in
     }
     const huntgargs = createDeckEmbed(result, "huntgargs");
     const seacret = createDeckEmbed(result, "seacret");
-    const otkswabbie = createDeckEmbed(result, "otkswabbie");
     const whalepharaoh = createDeckEmbed(result, "whalepharaoh");
     const m = await message.channel.send({
       embeds: [tbone],
@@ -240,12 +234,6 @@ Note: ${user.displayName} has ${tboneDecks.controlDecks.length} Control decks in
         seacret: { embed: seacret, component: sea },
         sea2: { embed: seacret, component: sea2 },
         seacret2: { embed: seacret, component: sea2 },
-        os: { embed: otkswabbie, component: os },
-        otkswabbie: { embed: otkswabbie, component: os },
-        os2: { embed: otkswabbie, component: os2 },
-        otkswabbie2: { embed: otkswabbie, component: os2 },
-        os3: { embed: otkswabbie, component: os3 },
-        otkswabbie3: { embed: otkswabbie, component: os3 },
         wp: { embed: whalepharaoh, component: wp },
         whalepharaoh: { embed: whalepharaoh, component: wp },
         wp2: { embed: whalepharaoh, component: wp2 },

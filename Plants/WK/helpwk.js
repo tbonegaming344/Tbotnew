@@ -63,15 +63,11 @@ module.exports = {
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Meme Decks")
-      .setValue("meme")
-      .setDescription('Plant Decks that are built off a weird/fun combo'), 
-      new StringSelectMenuOptionBuilder()
       .setLabel("Control Decks")
       .setValue("control")
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'),
       new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Decks")
+      .setLabel("Midrange Deck")
       .setValue("midrange")
       .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'),
       new StringSelectMenuOptionBuilder()
@@ -85,10 +81,9 @@ module.exports = {
       budgetDecks: ["budgetwk"], 
       competitiveDecks: ["chemotherapy"],
       ladderDecks: ["ginseng"],
-      memeDecks: ["cancerknight", "ginseng", "highlander", "shitknight"],
-      controlDecks: ["cancerknight", "chemotherapy", "ginseng"],
-      midrangeDecks: ["budgetwk", "highlander"],
-      allDecks: ["budgetwk", "cancerknight", "chemotherapy", "ginseng", "highlander", "shitknight"]
+      controlDecks: ["chemotherapy", "ginseng"],
+      midrangeDecks: ["budgetwk"],
+      allDecks: ["budgetwk", "chemotherapy", "ginseng"]
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -100,10 +95,8 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildMemeString = buildDeckString(wallKnightDecks.memeDecks);
     const toBuildControlString = buildDeckString(wallKnightDecks.controlDecks);
     const toBuildString = buildDeckString(wallKnightDecks.allDecks);
-    const toBuildMidrangeString = buildDeckString(wallKnightDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -122,24 +115,13 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = createButtons("shitknight", "cknight");
-    const cknight = createButtons("helpmeme", "hl");
-    const hl = createButtons("cancerknight", "sk");
-    const sk = createButtons("highlander", "memehelp");
-    const controlrow = createButtons("chemotherapy", "cknight2");
-    const cknight2 = createButtons("controlhelp", "chemo");
-    const chemo = createButtons("cancerknight", "gseg");
+    const controlrow = createButtons("ginseng", "chemo");
+    const chemo = createButtons("controlhelp", "gseg");
     const gseg = createButtons("chemotherapy", "helpcontrol");
-    const midrangerow = createButtons("highlander2", "bwk");
-    const bwk = createButtons("helpmidrange", "hl2");
-    const hl2 = createButtons("budgetwk", "midrangehelp");
-    const alldecksrow = createButtons("shitknight2", "bwk2");
-    const bwk2 = createButtons("helpall", "cknight3");
-    const cknight3 = createButtons("budgetwk2", "chemo2");
-    const chemo2 = createButtons("cancerknight3", "gseg2");
-    const gseg2 = createButtons("chemotherapy2", "hl3");
-    const hl3 = createButtons("ginseng2", "sk2");
-    const sk2 = createButtons("highlander3", "allhelp");
+    const alldecksrow = createButtons("ginseng2", "bwk");
+    const bwk = createButtons("helpall", "chemo2");
+    const chemo2 = createButtons("budgetwk", "gseg2");
+    const gseg2 = createButtons("chemotherapy2", "allhelp");
     const embed = createHelpEmbed(
       "WallKnight Decks",
       `To view the WallKnight decks please select an option from the select menu below!
@@ -153,26 +135,12 @@ Note: WallKnight has ${wallKnightDecks.allDecks.length} total decks in Tbot`,
       `To view the Wall-Knight decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: WallKnight has ${wallKnightDecks.allDecks.length} decks in Tbot`
       )
-      const memeEmbed = createHelpEmbed(
-      "WallKnight Meme Decks",
-      `My meme decks for Wall Knight(WK) are ${toBuildMemeString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
-      `To view the Wall-Knight meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-Note: WallKnight has ${wallKnightDecks.memeDecks.length} meme decks in Tbot`
-      )
       const controlEmbed = createHelpEmbed(
       "WallKnight Control Decks",
       `My control decks for Wall Knight(WK) are ${toBuildControlString}`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
       `To view the Wall-Knight control decks please use the commands listed above or click on the buttons below to navigate through all control decks!
 Note: WallKnight has ${wallKnightDecks.controlDecks.length} control decks in Tbot`
-      )
-      const midrangeEmbed = createHelpEmbed(
-      "WallKnight Midrange Decks",
-      `My midrange decks for Wall Knight(WK) are ${toBuildMidrangeString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/1/16/WallHD.png/revision/latest/scale-to-width-down/250?cb=20170414165945",
-      `To view the Wall-Knight midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in Tbot`
       )
     const [result] = await db.query(`SELECT * from wkdecks`);
      /**
@@ -200,10 +168,7 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
     }
     const budgetwk = createDeckEmbed(result, "budgetwkmidheal");
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
-    const cancerknight = createDeckEmbed(result, "cancerknight");
     const ginseng = createDeckEmbed(result, "ginseng");
-    const highlander = createDeckEmbed(result, "highlander");
-    const shitknight = createDeckEmbed(result, "shitknight");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -215,20 +180,17 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-        if(value == "budget" || value == "tempo"){
+        if(value == "budget"){
           await i.reply({embeds: [budgetwk], flags: MessageFlags.Ephemeral})
         }
         else if(value == "comp"){
           await i.reply({embeds: [chemotherapy], flags: MessageFlags.Ephemeral})
         }
-        else if(value == "meme"){
-          await i.update({embeds: [memeEmbed], components: [memerow]})
-        }
         else if(value == "control"){
           await i.update({embeds: [controlEmbed], components: [controlrow]})
         }
         else if(value == "midrange"){
-          await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
+          await i.reply({embeds: [budgetwk], flags: MessageFlags.Ephemeral})
         }
         else if(value == "all"){
           await i.update({embeds: [allEmbed], components: [alldecksrow]})
@@ -241,36 +203,14 @@ Note: WallKnight has ${wallKnightDecks.midrangeDecks.length} midrange decks in T
         const buttonActions = {
           allhelp: {embed: allEmbed, component: alldecksrow},
           helpall: {embed: allEmbed, component: alldecksrow},
-          helpmeme: {embed: memeEmbed, component: memerow},
-          memehelp: {embed: memeEmbed, component: memerow},
           helpcontrol: {embed: controlEmbed, component: controlrow},
           controlhelp: {embed: controlEmbed, component: controlrow},
-          helpmidrange: {embed: midrangeEmbed, component: midrangerow},
-          midrangehelp: {embed: midrangeEmbed, component: midrangerow},
           bwk: {embed: budgetwk, component: bwk},
           budgetwk: {embed: budgetwk, component: bwk},
-          bwk2: {embed: budgetwk, component: bwk2},
-          budgetwk2: {embed: budgetwk, component: bwk2},
-          cknight: {embed: cancerknight, component: cknight},
-          cancerknight: {embed: cancerknight, component: cknight},
-          cknight2: {embed: cancerknight, component: cknight2},
-          cancerknight2: {embed: cancerknight, component: cknight2},
-          cknight3: {embed: cancerknight, component: cknight3},
-          cancerknight3: {embed: cancerknight, component: cknight3},
           chemo: {embed: chemotherapy, component: chemo},
           chemotherapy: {embed: chemotherapy, component: chemo},
           chemo2: {embed: chemotherapy, component: chemo2},
           chemotherapy2: {embed: chemotherapy, component: chemo2},
-          hl: {embed: highlander, component: hl},
-          highlander: {embed: highlander, component: hl},
-          hl2: {embed: highlander, component: hl2},
-          highlander2: {embed: highlander, component: hl2},
-          hl3: {embed: highlander, component: hl3},
-          highlander3: {embed: highlander, component: hl3},
-          sk: {embed: shitknight, component: sk}, 
-          shitknight: {embed: shitknight, component: sk},
-          sk2: {embed: shitknight, component: sk2}, 
-          shitknight2: {embed: shitknight, component: sk2},
           gseg: {embed: ginseng, component: gseg},
           ginseng: {embed: ginseng, component: gseg},
           gseg2: {embed: ginseng, component: gseg2},

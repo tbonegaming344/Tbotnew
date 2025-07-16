@@ -65,9 +65,9 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const kingFishCommanderDecks = {
-      memeDecks: ["lunchtime", "petmop", "savagemayflower", "sunlord"],
-      comboDecks: ["lunchtime", "petmop", "sunlord"],
-      midrangeDecks: ["lunchtime", "petmop", "sunlord"],
+      memeDecks: ["lunchtime", "savagemayflower", "sunlord"],
+      comboDecks: ["lunchtime", "sunlord"],
+      midrangeDecks: ["lunchtime", "sunlord"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -103,23 +103,20 @@ module.exports = {
       );
     }
     const memerow = createButtons("sunlord", "lt");
-    const lt = createButtons("helpmeme", "pm");
-    const pm = createButtons("lunchtime", "smf");
-    const smf = createButtons("petmop", "sl");
-    const sl = createButtons("petmop", "memehelp");
+    const lt = createButtons("helpmeme", "smf");
+    const smf = createButtons("lunchtime", "sl");
+    const sl = createButtons("savagemayflower", "memehelp");
     const midrangerow = createButtons("sunlord2", "lt2");
-    const lt2 = createButtons("helpmidrange", "pm2");
-    const pm2 = createButtons("lunchtime2", "sl2");
-    const sl2 = createButtons("petmop2", "midrangehelp");
+    const lt2 = createButtons("helpmidrange", "sl2");
+    const sl2 = createButtons("lunchtime2", "midrangehelp");
     const comborow = createButtons("sunlord3", "lt3");
-    const lt3 = createButtons("helpcombo", "pm3");
-    const pm3 = createButtons("lunchtime3", "sl3");
-    const sl3 = createButtons("petmop3", "combohelp");
+    const lt3 = createButtons("helpcombo", "sl3");
+    const sl3 = createButtons("lunchtime3", "combohelp");
     const user = await client.users.fetch("1160392548423061516");
     const kfish = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below! 
-      Select meme to view all the decks made by ${user.displayName} or select combo to view all the combo decks made by ${user.displayName}
+      Select meme to view all the decks made by ${user.displayName}
 Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     );
@@ -145,7 +142,7 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.comboDecks.length} Combo 
 Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
     const [result] =
-      await db.query(`select petmop, midpets, savagemayflower, wimps
+      await db.query(`select midpets, savagemayflower, wimps
 		from gsdecks gs 
     inner join bfdecks bf 
 		on (gs.deckinfo = bf.deckinfo)
@@ -176,7 +173,6 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
     }
     const lunchtime = createDeckEmbed(result, "midpets");
     const savagemayflower = createDeckEmbed(result, "savagemayflower");
-    const pmop = createDeckEmbed(result, "petmop");
     const sunlord = createDeckEmbed(result, "wimps");
     const m = await message.channel.send({
       embeds: [kfish],
@@ -217,12 +213,6 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
         sunlord3: { embed: sunlord, component: sl3 },
         smf: { embed: savagemayflower, component: smf },
         savagemayflower: { embed: savagemayflower, component: smf },
-        pm: { embed: pmop, component: pm },
-        petmop: { embed: pmop, component: pm },
-        pm2: { embed: pmop, component: pm2 },
-        petmop2: { embed: pmop, component: pm2 },
-        pm3: { embed: pmop, component: pm3 },
-        petmop3: { embed: pmop, component: pm3 },
         lt: { embed: lunchtime, component: lt },
         lunchtime: { embed: lunchtime, component: lt },
         lt2: { embed: lunchtime, component: lt2 },

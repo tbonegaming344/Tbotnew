@@ -54,12 +54,7 @@ module.exports = {
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
+          .setLabel("Meme Deck")
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
@@ -81,7 +76,7 @@ module.exports = {
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -96,63 +91,55 @@ module.exports = {
     const smashDecks = {
       budgetDecks: ["budgetsm"],
       competitiveDecks: ["pablosyeezys"],
-      ladderDecks: ["horts"],
       memeDecks: ["whalepharaoh"],
       aggroDecks: ["budgetsm"],
-      comboDecks: ["budgetsm", "horts", "pablosyeezys", "whalepharaoh"],
+      comboDecks: ["budgetsm", "pablosyeezys", "whalepharaoh"],
       controlDecks: ["whalepharaoh"],
-      midrangeDecks: ["horts", "pablosyeezys"],
+      midrangeDecks: ["pablosyeezys"],
       allDecks: [
         "budgetsm",
-        "horts",
         "pablosyeezys",
         "whalepharaoh",
       ],
     };
-   /**
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
      */
     function buildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
-  const toBuildString = buildDeckString(smashDecks.allDecks);
-  const toBuildComboString = buildDeckString(smashDecks.comboDecks);
-  const toBuildMidrangeString = buildDeckString(smashDecks.midrangeDecks);
-  /**
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildString = buildDeckString(smashDecks.allDecks);
+    const toBuildComboString = buildDeckString(smashDecks.comboDecks);
+    /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
-  const alldecksrow = createButtons("whalepharaoh", "bsm");
-  const bsm = createButtons("helpall", "hor");
-  const hor = createButtons("budgetsm", "py");
-  const py = createButtons("horts", "wp");
-  const wp = createButtons("pablosyeezys", "allhelp");
-  const comborow = createButtons("whalepharoh2", "bsm2");
-  const bsm2 = createButtons("combohelp", "hor2");
-  const hor2 = createButtons("budgetsm2", "py2");
-  const py2 = createButtons("horts2", "wp2");
-  const wp2 = createButtons("pablosyeezys2", "helpcombo");
-  const midrangerow = createButtons("pablosyeezys3", "hor3");
-  const hor3 = createButtons("midrangehelp", "py3");
-  const py3 = createButtons("horts3", "helpmidrange");
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const alldecksrow = createButtons("whalepharaoh", "bsm");
+    const bsm = createButtons("helpall", "py");
+    const py = createButtons("budgetsm", "wp");
+    const wp = createButtons("pablosyeezys", "allhelp");
+    const comborow = createButtons("whalepharoh2", "bsm2");
+    const bsm2 = createButtons("combohelp", "py2");
+    const py2 = createButtons("budgetsm2", "wp2");
+    const wp2 = createButtons("pablosyeezys2", "helpcombo");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543"
@@ -197,13 +184,6 @@ module.exports = {
         `To view the Smash combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
       );
-      const midrangeEmbed = createHelpEmbed(
-        "Smash Midrange Decks",
-        `My midrange decks for Smash(SM) are ${toBuildMidrangeString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543",
-        `To view the Smash midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-  Note: Smash has ${smashDecks.midrangeDecks.length} midrange decks in Tbot`
-      );
     const [result] = await db.query(`SELECT * FROM smdecks`);
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -229,7 +209,6 @@ module.exports = {
       return embed;
     }
     const budgetsm = createDeckEmbed(result, "budgetsm");
-    const horts = createDeckEmbed(result, "horts");
     const pablosyeezys = createDeckEmbed(result, "pablosyeezys");
     const whalepharaoh = createDeckEmbed(result, "whalepharaoh");
     const m = await message.channel.send({
@@ -248,14 +227,12 @@ module.exports = {
           embeds: [pablosyeezys],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "ladder") {
-        await i.reply({ embeds: [horts], flags: MessageFlags.Ephemeral });
       } else if (value == "meme" || value == "control") {
         await i.reply({embeds: [whalepharaoh], flags: MessageFlags.Ephemeral})
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+        await i.reply({ embeds: [pablosyeezys], flags: MessageFlags.Ephemeral });
       } else if (value == "budget" || value == "tempo") {
         await i.reply({ embeds: [budgetsm], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
@@ -269,32 +246,22 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         helpsm: {embed: helpsm, component: row},
-        helpall: {embed: alldecksEmbed, component: alldecksrow}, 
+       helpall: {embed: alldecksEmbed, component: alldecksrow}, 
         allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
         combohelp: {embed: comboEmbed, component: comborow}, 
         helpcombo: {embed: comboEmbed, component: comborow}, 
-        midrangehelp: {embed: midrangeEmbed, component: midrangerow}, 
-        helpmidrange: {embed: midrangeEmbed, component: midrangerow}, 
         bsm: {embed: budgetsm, component: bsm}, 
         budgetsm: {embed: budgetsm, component: bsm},
-        bsm2: {embed: budgetsm, component: bsm2}, 
-        budgetsm2: {embed: budgetsm, component: bsm2}, 
-        hor: {embed: horts, component: hor},
-        horts: {embed: horts, component: hor},
-        hor2: {embed: horts, component: hor2},
-        horts2: {embed: horts, component: hor2},
-        hor3: {embed: horts, component: hor3},
-        horts3: {embed: horts, component: hor3},
+        bsm2: {embed: budgetsm, component: bsm2},
+        budgetsm2: {embed: budgetsm, component: bsm2},
         py: {embed: pablosyeezys, component: py},
         pablosyeezys: {embed: pablosyeezys, component: py},
         py2: {embed: pablosyeezys, component: py2},
         pablosyeezys2: {embed: pablosyeezys, component: py2},
-        py3: {embed: pablosyeezys, component: py3},
-        pablosyeezys3: {embed: pablosyeezys, component: py3},
         wp: {embed: whalepharaoh, component: wp},
         whalepharaoh: {embed: whalepharaoh, component: wp},
         wp2: {embed: whalepharaoh, component: wp2},
-        whalepharaoh2: {embed: whalepharaoh, component: wp2},
+        whalepharaoh2: {embed: whalepharaoh, component: wp2}
       }
       const action = buttonActions[i.customId];
       if (action) {

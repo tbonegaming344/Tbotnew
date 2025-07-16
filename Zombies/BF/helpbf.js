@@ -56,7 +56,7 @@ module.exports = {
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setValue("ladder")
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
@@ -65,7 +65,7 @@ module.exports = {
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Decks")
+          .setLabel("Aggro Deck")
           .setValue("aggro")
           .setDescription(
             "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
@@ -83,7 +83,7 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Decks")
+          .setLabel("Tempo Deck")
           .setValue("tempo")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
@@ -98,12 +98,11 @@ module.exports = {
     const brainFreezeDecks = {
       budgetDecks: ["budgetbf"],
       competitiveDecks: ["lockthebathroom"],
-      ladderDecks: ["bfmidgargs", "raiserpackage"],
+      ladderDecks: ["bfmidgargs"],
       memeDecks: [
+        "banhammer",
         "himpter",
         "lunchtime",
-        "petmop",
-        "banhammer",
         "watersports",
       ],
       aggroDecks: ["budgetbf"],
@@ -113,10 +112,9 @@ module.exports = {
         "bfmidgargs",
         "himpter",
         "lunchtime",
-        "petmop",
         "watersports",
       ],
-      tempoDecks: ["lockthebathroom", "raiserpackage"],
+      tempoDecks: ["lockthebathroom"],
       allDecks: [
         "banhammer",
         "bfmidgargs",
@@ -124,8 +122,6 @@ module.exports = {
         "himpter",
         "lunchtime",
         "lockthebathroom",
-        "petmop",
-        "raiserpackage",
         "watersports",
       ],
     };
@@ -140,13 +136,11 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(brainFreezeDecks.allDecks);
-    const toBuildLadderString = buildDeckString(brainFreezeDecks.ladderDecks);
     const toBuildMemeString = buildDeckString(brainFreezeDecks.memeDecks);
     const toBuildComboString = buildDeckString(brainFreezeDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(
       brainFreezeDecks.midrangeDecks
     );
-    const toBuildTempoString = buildDeckString(brainFreezeDecks.tempoDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -171,19 +165,13 @@ module.exports = {
     const bbf = createButtons("bfmidgargs", "hi");
     const hi = createButtons("budgetbf", "lt");
     const lt = createButtons("himps", "ltbr");
-    const ltbr = createButtons("lunchtime", "pm");
-    const pm = createButtons("lockthebathroom", "rp");
-    const rp = createButtons("petmop", "ws");
-    const ws = createButtons("raiserpackage", "allhelp");
-    const ladderrow = createButtons("watersports", "bfmg2");
-    const bfmg2 = createButtons("helpladder", "rp2");
-    const rp2 = createButtons("bfmidgargs2", "ladderhelp");
+    const ltbr = createButtons("lunchtime", "ws")
+    const ws = createButtons("lockthebathroom", "allhelp");
     const memerow = createButtons("watersports2", "bhammer2");
     const bhammer2 = createButtons("helpmeme", "hi2");
     const hi2 = createButtons("banhammer2", "lt2");
-    const lt2 = createButtons("himps2", "pm2");
-    const pm2 = createButtons("lunchtime2", "ws2");
-    const ws2 = createButtons("petmop2", "memehelp");
+    const lt2 = createButtons("himps2", "ws2");
+    const ws2 = createButtons("lunchtime2", "memehelp");
     const comborow = createButtons("watersports3", "bhammer3");
     const bhammer3 = createButtons("helpcombo", "hi3");
     const hi3 = createButtons("banhammer3", "ws3");
@@ -192,12 +180,8 @@ module.exports = {
     const bhammer4= createButtons("helpmid", "bfmg3");
     const bfmg3 = createButtons("banhammer4", "hi4");
     const hi4 = createButtons("bfmidgargs3", "lt3");
-    const lt3 = createButtons("himps4", "pm3");
-    const pm3 = createButtons("lunchtime3", "ws4");
-    const ws4 = createButtons("petmop3", "midhelp");
-    const temporow = createButtons("raiserpackage3", "ltbr2");
-    const ltbr2 = createButtons("helptempo", "rp3");
-    const rp3 = createButtons("lockthebathroom2", "tempohelp");
+    const lt3 = createButtons("himps4", "ws4");
+    const ws4 = createButtons("lunchtime3", "midhelp");
     const [result] = await db.query(`SELECT * FROM bfdecks`);
     const allEmbed = createHelpEmbed(
       "Brainfreeze Decks",
@@ -211,13 +195,6 @@ Note: Brainfreeze has ${brainFreezeDecks.allDecks.length} total decks in Tbot`
       `To view the Brain Freeze decks please select an option from the select menu below!
 Note: Brainfreeze has ${brainFreezeDecks.allDecks.length} total decks in Tbot`,
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png"
-    );
-    const ladderEmbed = createHelpEmbed(
-      "Brainfreeze Ladder Decks",
-      `My Ladder decks for Brain Freeze(BF) are ${toBuildLadderString}`,
-      "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
-      `To view the Brain Freeze Ladder decks please use the commands listed above or click on the buttons below to navigate through all Ladder Decks!
-Note: Brainfreeze has ${brainFreezeDecks.ladderDecks.length} Ladder decks in Tbot`
     );
     const memeEmbed = createHelpEmbed(
       "Brainfreeze Meme Decks",
@@ -239,13 +216,6 @@ Note: Brainfreeze has ${brainFreezeDecks.comboDecks.length} Combo decks in Tbot`
       "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
       `To view the Brain Freeze Midrange decks please use the commands listed above or click on the buttons below to navigate through all Midrange Decks!
 Note: Brainfreeze has ${brainFreezeDecks.midrangeDecks.length} Midrange decks in Tbot`
-    );
-    const tempoEmbed = createHelpEmbed(
-      "Brainfreeze Tempo Decks",
-      `My Tempo decks for Brain Freeze(BF) are ${toBuildTempoString}`,
-      "https://cdn.discordapp.com/attachments/1044626284346605588/1088605569214070875/IMG_1834.png",
-      `To view the Brain Freeze Tempo decks please use the commands listed above or click on the buttons below to navigate through all Tempo Decks!
-Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
     );
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -275,9 +245,7 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
     const himps = createDeckEmbed(result, "himps");
     const lockthebathroom = createDeckEmbed(result, "lockin");
     const lunchtime = createDeckEmbed(result, "midpets");
-    const petmop = createDeckEmbed(result, "petmop");
     const banhammer= createDeckEmbed(result, "racism");
-    const raiserpackage = createDeckEmbed(result, "raiserpackage");
     const watersports = createDeckEmbed(result, "watersports");
     const m = await message.channel.send({
       embeds: [embed],
@@ -294,21 +262,20 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       } else if (value == "budget" || value == "aggro") {
         await i.reply({ embeds: [budgetbf], flags: MessageFlags.Ephemeral });
-      } else if (value == "comp") {
+      } else if (value == "comp"|| value == "tempo") {
         await i.reply({
           embeds: [lockthebathroom],
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+        await i.reply({
+          embeds: [bfmidgargs], flags: MessageFlags.Ephemeral})
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "tempo") {
-        await i.update({ embeds: [tempoEmbed], components: [temporow] });
       }
     }
     /**
@@ -363,18 +330,6 @@ Note: Brainfreeze has ${brainFreezeDecks.tempoDecks.length} Tempo decks in Tbot`
         lunchtime2: {embed: lunchtime, component: lt2},
         lt3: {embed: lunchtime, component: lt3},
         lunchtime3: {embed: lunchtime, component: lt3},
-        pm: {embed: petmop, component: pm},
-        petmop: {embed: petmop, component: pm},
-        pm2: {embed: petmop, component: pm2},
-        petmop2: {embed: petmop, component: pm2},
-        pm3: {embed: petmop, component: pm3},
-        petmop3: {embed: petmop, component: pm3},
-        rp: {embed: raiserpackage, component: rp},
-        raiserpackage: {embed: raiserpackage, component: rp},
-        rp2: {embed: raiserpackage, component: rp2},
-        raiserpackage2: {embed: raiserpackage, component: rp2},
-        rp3: {embed: raiserpackage, component: rp3},
-        raiserpackage3: {embed: raiserpackage, component: rp3},
         ws: {embed: watersports, component: ws},
         watersports: {embed: watersports, component: ws},
         ws2: {embed: watersports, component: ws2},

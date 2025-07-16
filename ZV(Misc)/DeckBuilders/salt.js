@@ -60,7 +60,7 @@ module.exports = {
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setValue("ladder")
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
@@ -104,22 +104,17 @@ module.exports = {
         "chemotherapy",
         "cyburn",
         "espressoaggro",
-        "figlottery",
-        "gargburn",
         "logbait",
         "radiotherapy",
         "seacret",
-        "spacestars",
-        "watertron",
+        "spacestars"
       ],
-      ladderDecks: ["gravestache", "schoolyard"],
+      ladderDecks: ["schoolyard"],
       memeDecks: ["noplayingallowed"],
-      aggroDecks: ["espressoaggro", "logbait", "schoolyard", "seacret", "watertron"],
+      aggroDecks: ["espressoaggro", "logbait", "schoolyard", "seacret"],
       comboDecks: [
         "budgetykm",
         "cyburn",
-        "gargburn",
-        "gravestache",
         "seacret",
         "spacestars"
       ],
@@ -131,8 +126,6 @@ module.exports = {
       midrangeDecks: [
         "budgetykm",
         "cyburn",
-        "figlottery",
-        "gargburn",
         "spacestars",
       ],
       allDecks: [
@@ -140,16 +133,12 @@ module.exports = {
         "chemotherapy",
         "cyburn",
         "espressoaggro",
-        "figlottery",
-        "gargburn",
-        "gravestache",
         "logbait",
         "noplayingallowed",
         "radiotherapy",
         "schoolyard",
         "seacret",
-        "spacestars",
-        "watertron",
+        "spacestars"
       ],
     };
      /**
@@ -166,8 +155,6 @@ module.exports = {
     const toBuildCompetitive = buildDeckString(
       snortingSaltDecks.competitiveDecks
     );
-    const toBuildLadder = buildDeckString(snortingSaltDecks.ladderDecks);
-    const toBuildMeme = buildDeckString(snortingSaltDecks.memeDecks);
     const toBuildAggro = buildDeckString(snortingSaltDecks.aggroDecks);
     const toBuildCombo = buildDeckString(snortingSaltDecks.comboDecks);
     const toBuildControl = buildDeckString(snortingSaltDecks.controlDecks);
@@ -190,62 +177,47 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const competitiverow = createButtons("watertron", "chemo");
+    const competitiverow = createButtons("spacestars", "chemo");
     const chemo = createButtons("helpcomp", "cburn");
     const cburn = createButtons("chemotherapy", "eaggro");
-    const eaggro = createButtons("cyburn", "flottery");
-    const flottery = createButtons("espressoaggro", "gb");
-    const gb = createButtons("figlottery", "lbait");
-    const lbait = createButtons("gargburn", "radio");
+    const eaggro = createButtons("cyburn", "lbait");
+    const lbait = createButtons("espressoaggro", "radio");
     const radio = createButtons("logbait", "sea");
     const sea = createButtons("radiotherapy", "stars");
-    const stars = createButtons("seacret", "wt");
-    const wt = createButtons("spacestars", "helpcomp");
-    const ladderrow = createButtons("schoolyard", "gstache");
-    const gstache = createButtons("ladderhelp", "syard");
-    const syard = createButtons("gravestache", "ladderhelp");
-    const aggrorow = createButtons("watertron2", "eaggro2");
+    const stars = createButtons("seacret", "helpcomp");
+    const aggrorow = createButtons("seacret2", "eaggro2");
     const eaggro2 = createButtons("aggrohelp", "lbait2");
-    const lbait2 = createButtons("espressoaggro2", "syard2");
-    const syard2 = createButtons("logbait2", "sea2");
-    const sea2 = createButtons("schoolyard2", "wt2");
-    const wt2 = createButtons("seacret2", "helpaggro");
+    const lbait2 = createButtons("espressoaggro2", "syard");
+    const syard = createButtons("logbait2", "sea2");
+    const sea2 = createButtons("schoolyard", "helpaggro");
     const comborow = createButtons("spacestars2", "bykm");
     const bykm = createButtons("combohelp", "cburn2");
-    const cburn2 = createButtons("budgetykm", "gb2");
-    const gb2 = createButtons("cyburn2", "gstache2");
-    const gstache2 = createButtons("gargburn2", "sea3");
-    const sea3 = createButtons("gravestache2", "stars2");
+    const cburn2 = createButtons("budgetykm", "sea3");
+    const sea3 = createButtons("cyburn2", "stars2");
     const stars2 = createButtons("seacret3", "helpcombo");
     const midrangerow = createButtons("spacestars3", "bykm2");
     const bykm2 = createButtons("midhelp", "cburn3");
-    const cburn3 = createButtons("budgetykm2", "flottery2");
-    const flottery2 = createButtons("cyburn3", "gb3");
-    const gb3 = createButtons("figlottery2", "stars3");
-    const stars3 = createButtons("gargburn3", "helpmid");
+    const cburn3 = createButtons("budgetykm2", "stars3");
+    const stars3 = createButtons("cyburn3", "helpmid");
     const controlrow = createButtons("radiotherapy2", "chemo2");
     const chemo2 = createButtons("helpcontrol", "npa2");
     const npa2 = createButtons("chemotherapy2", "radio2");
     const radio2 = createButtons("noplayingallowed2", "controlhelp");
-    const alldecksrow = createButtons("watertron3", "bykm3");
+    const alldecksrow = createButtons("spacestars4", "bykm3");
     const bykm3 = createButtons("allhelp", "chemo3");
     const chemo3 = createButtons("budgetykm3", "cburn4");
     const cburn4 = createButtons("chemotherapy3", "eaggro3");
-    const eaggro3 = createButtons("cyburn4", "flottery3");
-    const flottery3 = createButtons("espressoaggro3", "gb4");
-    const gb4 = createButtons("figlottery3", "gstache3");
-    const gstache3 = createButtons("gargburn4", "lbait3");
-    const lbait3 = createButtons("gravestache3", "npa3");
+    const eaggro3 = createButtons("cyburn4", "lbait3");
+    const lbait3 = createButtons("espressoaggro3", "npa3");
     const npa3 = createButtons("logbait3", "radio3");
-    const radio3 = createButtons("noplayingallowed3", "syard3");
-    const syard3 = createButtons("radiotherapy3", "sea4");
-    const sea4 = createButtons("schoolyard3", "stars4");
-    const stars4 = createButtons("seacret4", "wt3");
-    const wt3 = createButtons("spacestars4", "helpall");
+    const radio3 = createButtons("noplayingallowed3", "syard2");
+    const syard2 = createButtons("radiotherapy3", "sea4");
+    const sea4 = createButtons("schoolyard2", "stars4");
+    const stars4 = createButtons("seacret4", "helpall");
     const [result] = await db.query(`select
 budgetykm, chemotherapy,
-cyburn, espressoaggro, gargburn, gravestache, healmidflare,logbait, noplayingallowed, 
-schoolyard, seacret, spacestars, radiotherapy, watertron
+cyburn, espressoaggro,  logbait, noplayingallowed, 
+schoolyard, seacret, spacestars, radiotherapy
 from hgdecks hg
 inner join wkdecks wk
 on (hg.deckinfo = wk.deckinfo)
@@ -253,20 +225,14 @@ inner join ncdecks nc
 on (hg.deckinfo = nc.deckinfo)
 inner join gkdecks gk
 on (hg.deckinfo = gk.deckinfo)
-inner join sfdecks sf
-on (hg.deckinfo = sf.deckinfo)
 inner join ccdecks cc
 on (hg.deckinfo = cc.deckinfo)
 inner join ebdecks eb
 on (hg.deckinfo = eb.deckinfo)
 inner join ntdecks nt
 on (hg.deckinfo = nt.deckinfo)
-inner join zmdecks zm
-on (hg.deckinfo = zm.deckinfo)
 inner join ifdecks fi
 on (hg.deckinfo = fi.deckinfo)
-inner join ctdecks ct
-on (hg.deckinfo = ct.deckinfo)
 inner join spdecks sp
 on (hg.deckinfo = sp.deckinfo)`);
     const user = await client.users.fetch("599750713509281792");
@@ -304,26 +270,12 @@ Note: ${user.displayName} has ${snortingSaltDecks.competitiveDecks.length} compe
       `To view the Aggro Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.aggroDecks.length} aggro decks in Tbot`
     );
-    const memesalt = createHelpEmbed(
-      `${user.displayName} Meme Decks`,
-      `My commands for meme decks made by ${user.displayName} are ${toBuildMeme}`,
-      user.displayAvatarURL(),
-      `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${snortingSaltDecks.memeDecks.length} meme decks in Tbot`
-    );
     const controlsalt = createHelpEmbed(
       `${user.displayName} Control Decks`,
       `My commands for control decks made by ${user.displayName} are ${toBuildControl}`,
       user.displayAvatarURL(),
       `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${snortingSaltDecks.controlDecks.length} control decks in Tbot`
-    );
-    const laddersalt = createHelpEmbed(
-      `${user.displayName} Ladder Decks`,
-      `My commands for ladder decks made by ${user.displayName} are ${toBuildLadder}`,
-      user.displayAvatarURL(),
-      `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${snortingSaltDecks.ladderDecks.length} ladder decks in Tbot`
     );
     const alldecksEmbed = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -359,16 +311,12 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
     const budgetykm = createDeckEmbed(result, "budgetykm");
     const chemotherapy = createDeckEmbed(result, "chemotherapy");
     const cyburn = createDeckEmbed(result, "cyburn");
-    const figlottery = createDeckEmbed(result, "healmidflare");
     const espressoaggro = createDeckEmbed(result, "espressoaggro");
-    const gargburn = createDeckEmbed(result, "gargburn");
-    const gravestache = createDeckEmbed(result, "gravestache");
     const noplayingallowed = createDeckEmbed(result, "noplayingallowed");
     const radiotherapy = createDeckEmbed(result, "radiotherapy");
     const seacret = createDeckEmbed(result, "seacret");
     const schoolyard = createDeckEmbed(result, "schoolyard");
     const spacestars = createDeckEmbed(result, "spacestars");
-    const watertron = createDeckEmbed(result, "watertron");
     const m = await message.channel.send({ embeds: [salt], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -388,11 +336,11 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
       } else if (value == "aggro") {
         await i.update({ embeds: [aggrosalt], components: [aggrorow] });
       } else if (value == "ladder") {
-        await i.update({ embeds: [laddersalt], components: [ladderrow] });
+        await i.reply({embeds: [schoolyard], flags: MessageFlags.Ephemeral})
       } else if (value == "midrange") {
         await i.update({ embeds: [midsalt], components: [midrangerow] });
       } else if (value == "meme") {
-        await i.update({ embeds: [memesalt], components: [memerow] });
+        await i.reply({embeds: [noplayingallowed], flags: MessageFlags.Ephemeral})
       } else if (value == "all") {
         await i.update({
           embeds: [alldecksEmbed],
@@ -414,8 +362,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         helpmid: { embed: midsalt, component: midrangerow },
         aggrohelp: { embed: aggrosalt, component: aggrorow },
         helpaggro: { embed: aggrosalt, component: aggrorow },
-        ladderhelp: { embed: laddersalt, component: ladderrow },
-        helpladder: { embed: laddersalt, component: ladderrow },
         comphelp: { embed: compsalt, component: competitiverow },
         helpcomp: { embed: compsalt, component: competitiverow },
         allhelp: { embed: alldecksEmbed, component: alldecksrow },
@@ -434,20 +380,6 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         cyburn2: { embed: cyburn, component: cburn2 },
         cyburn3: { embed: cyburn, component: cburn3 },
         cyburn4: { embed: cyburn, component: cburn4 },
-        gb: { embed: gargburn, component: gb },
-        gb2: { embed: gargburn, component: gb2 },
-        gb3: { embed: gargburn, component: gb3 },
-        gb4: { embed: gargburn, component: gb4 },
-        gargburn: { embed: gargburn, component: gb },
-        gargburn2: { embed: gargburn, component: gb2 },
-        gargburn3: { embed: gargburn, component: gb3 },
-        gargburn4: { embed: gargburn, component: gb4 },
-        gstache: { embed: gravestache, component: gstache },
-        gstache2: { embed: gravestache, component: gstache2 },
-        gstache3: { embed: gravestache, component: gstache3 },
-        gravestache: { embed: gravestache, component: gstache },
-        gravestache2: { embed: gravestache, component: gstache2 },
-        gravestache3: { embed: gravestache, component: gstache3 },
         stars: { embed: spacestars, component: stars },
         stars2: { embed: spacestars, component: stars2 },
         stars3: { embed: spacestars, component: stars3 },
@@ -458,12 +390,8 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         spacestars4: { embed: spacestars, component: stars4 },
         syard: { embed: schoolyard, component: syard },
         syard2: { embed: schoolyard, component: syard2 },
-        syard3: { embed: schoolyard, component: syard3 },
-        syard4: { embed: schoolyard, component: syard3 },
         schoolyard: { embed: schoolyard, component: syard },
         schoolyard2: { embed: schoolyard, component: syard2 },
-        schoolyard3: { embed: schoolyard, component: syard3 },
-        schoolyard4: { embed: schoolyard, component: syard3 },
         chemo: { embed: chemotherapy, component: chemo },
         chemo2: { embed: chemotherapy, component: chemo2 },
         chemo3: { embed: chemotherapy, component: chemo3 },
@@ -478,22 +406,10 @@ Note: ${user.displayName} has ${snortingSaltDecks.allDecks.length} total decks i
         seacret2: { embed: seacret, component: sea2 },
         seacret3: { embed: seacret, component: sea3 },
         seacret4: { embed: seacret, component: sea4 },
-        wt: { embed: watertron, component: wt },
-        wt2: { embed: watertron, component: wt2 },
-        wt3: { embed: watertron, component: wt3 },
-        watertron: { embed: watertron, component: wt },
-        watertron2: { embed: watertron, component: wt2 },
-        watertron3: { embed: watertron, component: wt3 },
         npa2: { embed: noplayingallowed, component: npa2 },
         npa3: { embed: noplayingallowed, component: npa3 },
         noplayingallowed2: { embed: noplayingallowed, component: npa2 },
         noplayingallowed3: { embed: noplayingallowed, component: npa3 },
-        flottery: { embed: figlottery, component: flottery },
-        flottery2: { embed: figlottery, component: flottery2 },
-        flottery3: { embed: figlottery, component: flottery3 },
-        figlottery: { embed: figlottery, component: flottery },
-        figlottery2: { embed: figlottery, component: flottery2 },
-        figlottery3: { embed: figlottery, component: flottery3 },
         lbait: { embed: logbait, component: lbait },
         lbait2: { embed: logbait, component: lbait2 },
         lbait3: { embed: logbait, component: lbait3 },

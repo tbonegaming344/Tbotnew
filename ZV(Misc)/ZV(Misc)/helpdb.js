@@ -250,20 +250,17 @@ module.exports = {
         "chemotherapy",
         "cyburn",
         "espressoaggro",
-        "figlottery",
         "healmidrose",
         "logbait",
         "neurotherapy",
         "radiotherapy",
         "toyotacontrolla",
         "venice",
-        "watertron",
       ],
       ladderDecks: [
         "bayonet",
         "carroot",
         "dinocounter",
-        "frymidrose",
         "goingnuts",
         "ginseng",
         "leafystrike",
@@ -272,29 +269,21 @@ module.exports = {
       ],
       memeDecks: [
         "100%winrate",
-        "cancerknight",
-        "dinogloves",
-        "freezeheal",
         "funnyflare",
         "healburn",
         "healthotk",
-        "highlander",
         "lasersnap",
         "lifecouldbedream",
-        "mopribus",
         "mspotk",
         "nuttin",
         "plantmop",
         "popsicle",
         "psychosolstice",
-        "ramp2seedling",
         "recycling",
         "reflourished",
         "savagemayflower",
-        "shitknight",
         "starrings",
-        "startron",
-        "translattail",
+        "startron"
       ],
       aggroDecks: [
         "budgetcc",
@@ -302,12 +291,10 @@ module.exports = {
         "budgetnc",
         "budgetsf",
         "cartasbuenas",
-        "dinogloves",
         "espressoaggro",
         "goingnuts",
         "logbait",
-        "pbeans",
-        "watertron",
+        "pbeans"
       ],
       comboDecks: [
         "bayonet",
@@ -316,34 +303,28 @@ module.exports = {
         "carroot",
         "cyburn",
         "dinocounter",
-        "freezeheal",
         "funnyflare",
         "goingnuts",
         "healburn",
         "healthotk",
         "lasersnap",
-        "mopribus",
         "mspotk",
         "nuttin",
         "plantmop",
         "psychosolstice",
-        "ramp2seedling",
         "reflourished",
         "savagemayflower",
         "starrings",
         "startron",
-        "translattail",
         "venice"
       ],
       controlDecks: [
-        "cancerknight",
         "chemotherapy",
         "ginseng",
         "neurotherapy",
         "pawntrickstab",
         "popsicle",
         "radiotherapy",
-        "shitknight",
         "toyotacontrolla",
       ],
       midrangeDecks: [
@@ -354,17 +335,12 @@ module.exports = {
         "budgetwk",
         "cyburn",
         "dinocounter",
-        "figlottery",
-        "frymidrose",
         "funnyflare",
         "healburn",
         "healmidrose",
         "healthotk",
-        "highlander",
         "lasersnap",
-        "mopribus",
         "psychosolstice",
-        "ramp2seedling",
         "recycling",
         "starrings",
         "startron",
@@ -376,7 +352,6 @@ module.exports = {
         "carroot",
         "leafystrike",
         "lifecouldbedream",
-        "translattail",
       ],
       allDecks: [
         "100%winrate",
@@ -391,29 +366,22 @@ module.exports = {
         "budgetsf",
         "budgetsp",
         "budgetwk",
-        "cancerknight",
         "carroot",
         "cartasbuenas",
         "chemotherapy",
         "cyburn",
         "dinocounter",
-        "dinogloves",
         "espressoaggro",
-        "figlottery",
-        "freezeheal",
-        "frymidrose",
         "funnyflare",
         "goingnuts",
         "ginseng",
         "healburn",
         "healmidrose",
         "healthotk",
-        "highlander",
         "lasersnap",
         "leafystrike",
         "lifecouldbedream",
         "logbait",
-        "mopribus",
         "mspotk",
         "neurotherapy",
         "nuttin",
@@ -423,17 +391,13 @@ module.exports = {
         "popsicle",
         "psychosolstice",
         "radiotherapy",
-        "ramp2seedling",
         "recycling",
         "reflourished",
         "savagemayflower",
-        "shitknight",
         "starrings",
         "startron",
         "toyotacontrolla",
-        "translattail",
         "venice",
-        "watertron",
       ],
     };
     const zombieDecks = {
@@ -452,7 +416,6 @@ module.exports = {
       ],
       competitiveDecks: [
         "boltbolt",
-        "gargburn",
         "limerence",
         "lockthebathroom",
         "kaleidoscope",
@@ -473,16 +436,11 @@ module.exports = {
         "gargstar22",
         "gomorrah",
         "gravepiratestache",
-        "gravestache",
-        "horts",
         "marxbolt",
         "mechacontrol",
-        "professorpackage",
-        "raiserpackage",
         "schoolyard",
         "splimps",
-        "trickmech",
-        "valkster",
+        "trickmech"
       ],
       memeDecks: [
         "22savage",
@@ -490,7 +448,6 @@ module.exports = {
         "bastet",
         "bonusducks",
         "coggerazzi",
-        "congabait",
         "conjureleap",
         "dozzamech",
         "floss",
@@ -502,9 +459,6 @@ module.exports = {
         "lunchtime",
         "mechagold",
         "noplayingallowed",
-        "petmop",
-        "otkswabbie",
-        "rampticia",
         "reversecatster",
         "sunbandits",
         "sunlord",
@@ -544,20 +498,14 @@ module.exports = {
         "budgetykm",
         "budgetzm",
         "coggerazzi",
-        "congabait",
         "cryoboy",
         "floss",
         "frozentelimps",
-        "gargburn",
         "gravepiratestache",
-        "gravestache",
         "himpter",
-        "horts",
         "igmablobchum",
         "mechascope",
-        "otkswabbie",
         "pablosyeezys",
-        "rampticia",
         "reversecatster",
         "spacestars",
         "sunbandits",
@@ -567,7 +515,6 @@ module.exports = {
         "trickstache",
         "trickmech",
         "uncrackamech",
-        "valkster",
         "watersports",
         "whalepharaoh",
         "youngeggmartin",
@@ -598,20 +545,16 @@ module.exports = {
         "budgetrb",
         "budgetsb",
         "budgetykm",
-        "congabait",
         "cryoboy",
-        "gargburn",
         "gargstar22",
         "gomorrah",
         "himpter",
-        "horts",
         "igmablobchum",
         "ladytuna",
         "limerence",
         "lunchtime",
         "pablosyeezys",
         "piport",
-        "petmop",
         "nohokaistars",
         "slugged",
         "spacestars",
@@ -619,7 +562,6 @@ module.exports = {
         "tangen",
         "telimps",
         "trickstache",
-        "valkster",
         "watersports",
         "youngkenmartin",
       ],
@@ -628,8 +570,6 @@ module.exports = {
         "coggerazzi",
         "conjureleap",
         "lockthebathroom",
-        "professorpackage",
-        "raiserpackage",
       ],
       allDecks: [
         "22savage",
@@ -652,19 +592,15 @@ module.exports = {
         "budgetykm",
         "budgetzm",
         "coggerazzi",
-        "congabait",
         "conjureleap",
         "cryoboy",
         "dozzamech",
         "floss",
         "frozentelimps",
-        "gargburn",
         "gargstar22",
         "gomorrah",
         "gravepiratestache",
-        "gravestache",
         "himpter",
-        "horts",
         "huntgargs",
         "igmablobchum",
         "kaleidoscope",
@@ -678,13 +614,8 @@ module.exports = {
         "mechascope",
         "nohokaistars",
         "noplayingallowed",
-        "otkswabbie",
         "pablosyeezys",
-        "petmop",
         "piport",
-        "professorpackage",
-        "raiserpackage",
-        "rampticia",
         "reversecatster",
         "schoolyard",
         "seacret",
@@ -698,7 +629,6 @@ module.exports = {
         "trickstache",
         "trickmech",
         "uncrackamech",
-        "valkster",
         "watersports",
         "whalepharaoh",
         "youngeggmartin",
@@ -754,7 +684,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const allprow = createButtons("watertron", "wr100");
+    const allprow = createButtons("venice", "wr100");
     const wr100 = createButtons("helpallp", "bay");
     const bay = createButtons("winrate100", "bct");
     const bct = createButtons("bayonet", "bcc");
@@ -766,50 +696,39 @@ module.exports = {
     const bro = createButtons("budgetnc", "bsf");
     const bsf = createButtons("budgetro", "bsp");
     const bsp = createButtons("budgetsf", "bwk");
-    const bwk = createButtons("budgetsp", "cank");
-    const cank = createButtons("budgetwk", "carr");
-    const carr = createButtons("cancerknight", "cb");
+    const bwk = createButtons("budgetsp", "carr");
+    const carr = createButtons("budgetwk", "cb");
     const cb = createButtons("carroot", "chemo");
     const chemo = createButtons("cartasbuenas", "cburn");
-    const cburn = createButtons("chemotherapy", "dgloves");
-    const dgloves = createButtons("cyburn", "dcounter");
-    const dcounter = createButtons("dinogloves", "eaggro");
-    const eaggro = createButtons("dinocounter", "flottery");
-    const flottery = createButtons("espressoaggro", "fheal");
-    const fheal = createButtons("figlottery", "fmr");
-    const fmr = createButtons("freezeheal", "fflare");
-    const fflare = createButtons("frymidrose", "gnuts");
+    const cburn = createButtons("chemotherapy", "dcounter");
+    const dcounter = createButtons("cyburn", "eaggro");
+    const eaggro = createButtons("dinocounter", "fflare");
+    const fflare = createButtons("espressoaggro", "gnuts");
     const gnuts = createButtons("funnyflare", "gseg");
     const gseg = createButtons("goingnuts", "hburn");
     const hburn = createButtons("ginseng", "hmr");
     const hmr = createButtons("healburn", "hotk");
-    const hotk = createButtons("healmidrose", "hland");
-    const hland = createButtons("healthotk", "lsnap");
-    const lsnap = createButtons("highlander", "lstrike");
+    const hotk = createButtons("healmidrose", "lsnap");
+    const lsnap = createButtons("healthotk", "lstrike");
     const lstrike = createButtons("lasersnap", "lcbd");
     const lcbd = createButtons("leafystrike", "lbait");
     const lbait = createButtons("lifecouldbedream", "neuro");
     const neuro = createButtons("logbait", "nut");
-    const nut = createButtons("neurotherapy", "mopr");
-    const mopr = createButtons("logbait", "msp");
-    const msp = createButtons("mopribus", "pts");
+    const nut = createButtons("neurotherapy", "msp");
+    const msp = createButtons("logbait", "pts");
     const pts = createButtons("mspotk", "pb");
     const pb = createButtons("pawntrickstab", "plmop");
     const plmop = createButtons("pbeans", "pop");
     const pop = createButtons("plantmop", "psol");
     const psol = createButtons("popsicle", "radio");
-    const radio = createButtons("psychosolstice", "r2s");
-    const r2s = createButtons("radiotherapy", "recy");
-    const recy = createButtons("ramp2seedling", "rfl");
+    const radio = createButtons("psychosolstice", "recy");
+    const recy = createButtons("radiotherapy", "rfl");
     const rfl = createButtons("recycling", "smf");
-    const smf = createButtons("reflourished", "sknight");
-    const sknight = createButtons("savagemayflower", "srings");
-    const srings = createButtons("shitknight", "stron");
+    const smf = createButtons("reflourished", "srings");
+    const srings = createButtons("savagemayflower", "stron");
     const stron = createButtons("starrings", "tc");
-    const tc = createButtons("startron", "tlattail");
-    const tlattail = createButtons("toyotacontrolla", "vce");
-    const vce = createButtons("translattail", "wtron");
-    const wtron = createButtons("venice", "allphelp");
+    const tc = createButtons("startron", "vce");
+    const vce = createButtons("toyotacontrolla", "allphelp");
     const budgetprow = createButtons("budgetwk2", "bcc2");
     const bcc2 = createButtons("budgetphelp", "bct2");
     const bct2 = createButtons("budgetcc2", "bcz2");
@@ -821,101 +740,82 @@ module.exports = {
     const bsf2 = createButtons("budgetro2", "bsp2");
     const bsp2 = createButtons("budgetsf2", "bwk2");
     const bwk2 = createButtons("budgetsp2", "helppbudget");
-    const compprow = createButtons("watertron2", "cb2");
+    const compprow = createButtons("venice2", "cb2");
     const cb2 = createButtons("compphelp", "chemo2");
     const chemo2 = createButtons("cartasbuenas2", "cburn2");
     const cburn2 = createButtons("chemotherapy2", "eaggro2");
-    const eaggro2 = createButtons("cyburn2", "flottery2");
-    const flottery2 = createButtons("espressoaggro2", "hmr2");
-    const hmr2 = createButtons("figlottery2", "lbait2");
+    const eaggro2 = createButtons("cyburn2", "hmr2");
+    const hmr2 = createButtons("espressoaggro2", "lbait2");
     const lbait2 = createButtons("healmidrose2", "neuro2");
     const neuro2 = createButtons("logbait2", "radio2");
     const radio2 = createButtons("neurotherapy2", "tc2");
     const tc2 = createButtons("radiotherapy2", "vce2");
-    const vce2 = createButtons("toyotacontrolla2", "wtron2");
-    const wtron2 = createButtons("venice2", "helppcomp");
+    const vce2 = createButtons("toyotacontrolla2", "helppcomp");
     const ladderprow = createButtons("pbeans2", "bay2");
     const bay2 = createButtons("helppladder", "carr2");
     const carr2 = createButtons("bayonet2", "dcounter2");
-    const dcounter2 = createButtons("carroot2", "fmr2");
-    const fmr2 = createButtons("dinocounter2", "gnuts2");
-    const gnuts2 = createButtons("frymidrose2", "gseg2");
+    const dcounter2 = createButtons("carroot2", "gnuts2");
+    const gnuts2 = createButtons("dinocounter2", "gseg2");
     const gseg2 = createButtons("goingnuts2", "lstrike2");
     const lstrike2 = createButtons("ginseng2", "pts2");
     const pts2 = createButtons("leafystrike2", "pb2");
     const pb2 = createButtons("pawntrickstab2", "ladderphelp");
-    const memeprow = createButtons("translattail2", "wr1002");
-    const wr1002 = createButtons("memephelp", "cank2");
-    const cank2 = createButtons("winrate1002", "dgloves2");
-    const dgloves2 = createButtons("cancerknight2", "fheal2");
-    const fheal2 = createButtons("dinogloves2", "fflare2");
-    const fflare2 = createButtons("freezeheal2", "hburn2");
+    const memeprow = createButtons("startron2", "wr1002");
+    const wr1002 = createButtons("memephelp", "fflare2");
+    const fflare2 = createButtons("winrate1002", "hburn2");
     const hburn2 = createButtons("funnyflare2", "hotk2");
-    const hotk2 = createButtons("healburn2", "hland2");
-    const hland2 = createButtons("healthotk2", "lsnap2");
-    const lsnap2 = createButtons("highlander2", "lcbd2");
-    const lcbd2 = createButtons("lasersnap2", "mopr2");
-    const mopr2 = createButtons("lifecouldbedream2", "msp2");
-    const msp2 = createButtons("mopribus2", "nut2");
+    const hotk2 = createButtons("healburn2", "lsnap2");
+    const lsnap2 = createButtons("healthotk2", "lcbd2");
+    const lcbd2 = createButtons("lasersnap2", "msp2");
+    const msp2 = createButtons("lifecouldbedream2", "nut2");
     const nut2 = createButtons("mspotk2", "plmop2");
     const plmop2 = createButtons("nuttin2", "pop2");
     const pop2 = createButtons("plantmop2", "psol2");
-    const psol2 = createButtons("popsicle2", "r2s2");
-    const r2s2 = createButtons("psychosolstice2", "recy2");
-    const recy2 = createButtons("ramp2seedling2", "rfl2");
+    const psol2 = createButtons("popsicle2", "recy2");
+    const recy2 = createButtons("psychosolstice2", "rfl2");
     const rfl2 = createButtons("recycling2", "smf2");
-    const smf2 = createButtons("reflourished2", "sknight2");
-    const sknight2 = createButtons("savagemayflower2", "srings2");
-    const srings2 = createButtons("shitknight2", "stron2");
-    const stron2 = createButtons("starrings2", "tlattail2");
-    const tlattail2 = createButtons("startron2", "helppmeme");
-    const aggroprow = createButtons("watertron3", "bcc3");
+    const smf2 = createButtons("reflourished2", "srings2");
+    const srings2 = createButtons("savagemayflower2", "stron2");
+    const stron2 = createButtons("starrings2", "helppmeme");
+    const aggroprow = createButtons("pbeans3", "bcc3");
     const bcc3 = createButtons("helppaggro", "bct3");
     const bct3 = createButtons("budgetcc3", "bnc3");
     const bnc3 = createButtons("budgetct3", "bsf3");
     const bsf3 = createButtons("budgetct3", "cb3");
-    const cb3 = createButtons("budgetsf3", "dgloves3");
-    const dgloves3 = createButtons("cartasbuenas3", "eaggro3");
-    const eaggro3 = createButtons("dinogloves3", "gnuts3");
+    const cb3 = createButtons("budgetsf3", "eaggro3");
+    const eaggro3 = createButtons("cartasbuenas3", "gnuts3");
     const gnuts3 = createButtons("espressoaggro3", "hburn3");
     const lbait3 = createButtons("goingnuts3", "pb3");
-    const pb3 = createButtons("logbait3", "wtron3");
-    const wtron3 = createButtons("pbeans3", "aggrophelp");
+    const pb3 = createButtons("logbait3", "aggrophelp");
     const comboprow = createButtons("venice3", "bay3");
     const bay3 = createButtons("helppcombo", "bcc4");
     const bcc4 = createButtons("bayonet3", "bcz3");
     const bcz3 = createButtons("budgetcc4", "carr3");
     const carr3 = createButtons("budgetcz3", "cburn3");
     const cburn3 = createButtons("carroot3", "dcounter3");
-    const dcounter3 = createButtons("cyburn3", "fheal3");
-    const fheal3 = createButtons("dinocounter3", "fflare3");
-    const fflare3 = createButtons("freezeheal3", "gnuts4");
+    const dcounter3 = createButtons("cyburn3", "fflare3");
+    const fflare3 = createButtons("dinocounter3", "gnuts4");
     const gnuts4 = createButtons("funnyflare3", "hburn3");
     const hburn3 = createButtons("goingnuts4", "hotk3");
     const hotk3 = createButtons("healburn3", "lsnap3");
-    const lsnap3 = createButtons("healthotk3", "mopr3");
-    const mopr3 = createButtons("lasersnap3", "msp3");
-    const msp3 = createButtons("mopribus3", "nut3");
+    const lsnap3 = createButtons("healthotk3", "msp3");
+    const msp3 = createButtons("lasersnap3", "nut3");
     const nut3 = createButtons("mspotk3", "plmop3");
     const plmop3 = createButtons("nuttin3", "psol3");
-    const psol3 = createButtons("plantmop3", "r2s3");
-    const r2s3 = createButtons("psychosolstice3", "rfl3");
-    const rfl3 = createButtons("ramp2seedling3", "smf3");
+    const psol3 = createButtons("plantmop3", "rfl3");
+    const rfl3 = createButtons("psychosolstice3", "smf3");
     const smf3 = createButtons("reflourished3", "srings3");
     const srings3 = createButtons("savagemayflower3", "stron3");
-    const stron3 = createButtons("starrings3", "tlattail3");
-    const tlattail3 = createButtons("startron3", "vce3");
-    const vce3 = createButtons("translattail3", "helppcombo");
-    const controlprow = createButtons("toyotacontrolla3", "cank3");
-    const cank3 = createButtons("helppcontrol", "chemo3");
-    const chemo3 = createButtons("cancerknight3", "gseg3");
+    const stron3 = createButtons("starrings3", "vce3");
+    const vce3 = createButtons("startron3", "helppcombo");
+    const controlprow = createButtons("toyotacontrolla3", "chemo3");
+    const chemo3 = createButtons("helppcontrol", "gseg3");
     const gseg3 = createButtons("chemotherapy3", "neuro3");
     const neuro3 = createButtons("ginseng3", "pts3");
     const pts3 = createButtons("neurotherapy3", "pop3");
     const pop3 = createButtons("pawntrickstab3", "radio3");
-    const radio3 = createButtons("popsicle3", "sknight3");
-    const sknight3 = createButtons("radiotherapy3", "tc3");
-    const tc3 = createButtons("shitknight3", "helpcontrolp");
+    const radio3 = createButtons("popsicle3", "tc3");
+    const tc3 = createButtons("radiotherapy3", "helpcontrolp");
     const midrangeprow = createButtons("venice4", "bcz4");
     const bcz4 = createButtons("helppmidrange", "bgk3");
     const bgk3 = createButtons("budgetcz4", "bgs3");
@@ -924,29 +824,23 @@ module.exports = {
     const bsp3 = createButtons("budgetro3", "bwk3");
     const bwk3 = createButtons("budgetro3", "cburn4");
     const cburn4 = createButtons("budgetwk3", "dcounter4");
-    const dcounter4 = createButtons("cyburn4", "flottery3");
-    const flottery3 = createButtons("dinocounter4", "fmr3");
-    const fmr3 = createButtons("figlottery3", "fflare4");
-    const fflare4 = createButtons("frymidrose3", "hburn4");
+    const dcounter4 = createButtons("cyburn4", "fflare4");
+    const fflare4 = createButtons("dinocounter4", "hburn4");
     const hburn4 = createButtons("funnyflare4", "hmr3");
     const hmr3 = createButtons("healburn4", "hotk4");
-    const hotk4 = createButtons("healmidrose3", "hland3");
-    const hland3 = createButtons("healthotk4", "lsnap4");
-    const lsnap4 = createButtons("highlander3", "mopr4");
-    const mopr4 = createButtons("lasersnap4", "psol4");
-    const psol4 = createButtons("mopribus4", "r2s4");
-    const r2s4 = createButtons("psychosolstice4", "recy3");
-    const recy3 = createButtons("ramp2seedling4", "srings4");
+    const hotk4 = createButtons("healmidrose3", "lsnap4");
+    const lsnap4 = createButtons("healthotk4", "psol4");
+    const psol4 = createButtons("lasersnap4", "recy3");
+    const recy3 = createButtons("psychosolstice4", "srings4");
     const srings4 = createButtons("recyling3", "stron4");
     const stron4 = createButtons("starrings4", "vce4");
     const vce4 = createButtons("startron4", "midrangephelp");
-    const tempoprow = createButtons("translattail4", "wr1003");
+    const tempoprow = createButtons("lifecouldbedream3", "wr1003");
     const wr1003 = createButtons("tempophelp", "bay4");
     const bay4 = createButtons("winrate1003", "carr4");
     const carr4 = createButtons("bayonet4", "lstrike3");
     const lstrike3 = createButtons("carroot4", "lcbd3");
-    const lcbd3 = createButtons("leafystrike3", "tlattail4");
-    const tlattail4 = createButtons("lifecouldbedream3", "helpptempo");
+    const lcbd3 = createButtons("leafystrike3", "helpptempo");
     const allzrow = createButtons("zmoss", "sav");
     const sav = createButtons("allzhelp", "bhammer");
     const bhammer = createButtons("savage", "bfmg");
@@ -967,21 +861,17 @@ module.exports = {
     const bsm = createButtons("budgetsb", "bykm");
     const bykm = createButtons("budgetsm", "bzm");
     const bzm = createButtons("budgetykm", "cog");
-    const cog = createButtons("budgetzm", "cbait");
-    const cbait = createButtons("coggerazzi", "cleap");
-    const cleap = createButtons("congabait", "cboy");
+    const cog = createButtons("budgetzm", "cleap");
+    const cleap = createButtons("coggerazzi", "cboy");
     const cboy = createButtons("conjureleap", "dmech");
     const dmech = createButtons("cryoboy", "flo");
     const flo = createButtons("dozzamech", "ftimps");
-    const ftimps = createButtons("floss", "gburn");
-    const gburn = createButtons("frozentelimps", "gstar22");
-    const gstar22 = createButtons("gargburn", "gom");
+    const ftimps = createButtons("floss", "gstar22");
+    const gstar22 = createButtons("frozentelimps", "gom");
     const gom = createButtons("gargstar22", "gps");
-    const gps = createButtons("gomorrah", "gstache");
-    const gstache = createButtons("gravepiratestache", "hter");
-    const hter = createButtons("gravestache", "hor");
-    const hor = createButtons("himpter", "hgargs");
-    const hgargs = createButtons("horts", "igbc");
+    const gps = createButtons("gomorrah", "hter");
+    const hter = createButtons("gravepiratestache", "hgargs");
+    const hgargs = createButtons("himpter", "igbc");
     const igbc = createButtons("huntgargs", "kscope");
     const kscope = createButtons("igmablobchum", "lime");
     const lime = createButtons("kaleidoscope", "lt");
@@ -993,15 +883,10 @@ module.exports = {
     const mgold = createButtons("mechacontrol", "mscope");
     const mscope = createButtons("mechagold", "nhks");
     const nhks = createButtons("mechascope", "npa");
-    const npa = createButtons("nohokaistars", "otksw");
-    const otksw = createButtons("noplayingallowed", "pyeeyz");
-    const pyeeyz = createButtons("otkswabbie", "pmop");
-    const pmop = createButtons("pablosyeezys", "pip");
-    const pip = createButtons("petmop", "propackage");
-    const propackage = createButtons("piport", "rpackage");
-    const rpackage = createButtons("professorpackage", "rticia");
-    const rticia = createButtons("raiserpackage", "rcatster");
-    const rcatster = createButtons("rampticia", "syard");
+    const npa = createButtons("nohokaistars", "pyeeyz");
+    const pyeeyz = createButtons("noplayingallowed", "pip");
+    const pip = createButtons("pablosyeezys", "rcatster");
+    const rcatster = createButtons("piport", "syard");
     const syard = createButtons("reversecatster", "sea");
     const sea = createButtons("schoolyard", "slug");
     const slug = createButtons("seacret", "stars");
@@ -1013,9 +898,8 @@ module.exports = {
     const timps = createButtons("tangen", "tstache");
     const tstache = createButtons("telimps", "tmech");
     const tmech = createButtons("trickstache", "umech");
-    const umech = createButtons("trickmech", "vster");
-    const vster = createButtons("uncrackamech", "wsports");
-    const wsports = createButtons("valkster", "wph");
+    const umech = createButtons("trickmech", "wsports");
+    const wsports = createButtons("uncrackamech", "wph");
     const wph = createButtons("watersports", "yemartin");
     const yemartin = createButtons("whalepharaoh", "ykmartin");
     const ykmartin = createButtons("youngeggmartin", "zm");
@@ -1033,9 +917,8 @@ module.exports = {
     const bykm2 = createButtons("budgetsm2", "bzm2");
     const bzm2 = createButtons("budgetykm2", "helpzbudget");
     const compzrow = createButtons("trickstache2", "bbolt2");
-    const bbolt2 = createButtons("helpzcomp", "gburn2");
-    const gburn2 = createButtons("boltbolt2", "kscope2");
-    const kscope2 = createButtons("gargburn2", "lime2");
+    const bbolt2 = createButtons("helpzcomp", "kscope2");
+    const kscope2 = createButtons("boltbolt2", "lime2");
     const lime2 = createButtons("kaleidoscope2", "ltbr2");
     const ltbr2 = createButtons("limerence2", "pyeeyz2");
     const pyeeyz2 = createButtons("lockthebathroom2", "pip2");
@@ -1046,33 +929,27 @@ module.exports = {
     const stars2 = createButtons("slugged2", "timps2");
     const timps2 = createButtons("spacestars2", "tstache2");
     const tstache2 = createButtons("telimps2", "compzhelp");
-    const ladderzrow = createButtons("valkster2", "bfmg2");
+    const ladderzrow = createButtons("trickmech2", "bfmg2");
     const bfmg2 = createButtons("helpzladder", "bfw2");
     const bfw2 = createButtons("bfmidgargs2", "brad2");
     const brad2 = createButtons("binaryflagwar2", "cboy2");
     const cboy2 = createButtons("brady2", "gstar222");
     const gstar222 = createButtons("cryoboy2", "gom2");
     const gom2 = createButtons("gargstar222", "gps2");
-    const gps2 = createButtons("gomorrah2", "gstache2");
-    const gstache2 = createButtons("gravepiratestache2", "hor2");
-    const hor2 = createButtons("gravestache2", "mbolt2");
-    const mbolt2 = createButtons("horts2", "mcon2");
+    const gps2 = createButtons("gomorrah2", "mbolt2");
+    const mbolt2 = createButtons("gravepiratestache2", "mcon2");
     const mcon2 = createButtons("marxbolt2", "mscope2");
-    const mscope2 = createButtons("mechacontrol2", "propackage2");
-    const propackage2 = createButtons("mechascope2", "rpackage2");
-    const rpackage2 = createButtons("professorpackage2", "syard2");
-    const syard2 = createButtons("raiserpackage2", "spl2");
+    const mscope2 = createButtons("mechacontrol2", "syard2");
+    const syard2 = createButtons("mechascope2", "spl2");
     const spl2 = createButtons("schoolyard2", "tmech2");
-    const tmech2 = createButtons("splimps2", "vster2");
-    const vster2 = createButtons("trickmech2", "ladderzhelp");
+    const tmech2 = createButtons("splimps2", "ladderzhelp");
     const memezrow = createButtons("zmoss2", "sav2");
     const sav2 = createButtons("helpzmeme", "bhammer2");
     const bhammer2 = createButtons("savage2", "bas2");
     const bas2 = createButtons("banhammer2", "bducks2");
     const bducks2 = createButtons("bastet2", "cog2");
-    const cog2 = createButtons("bonusducks2", "cbait2");
-    const cbait2 = createButtons("coggerazzi2", "cleap2");
-    const cleap2 = createButtons("congabait2", "dmech2");
+    const cog2 = createButtons("bonusducks2", "cleap2");
+    const cleap2 = createButtons("coggerazzi2", "dmech2");
     const dmech2 = createButtons("conjureleap2", "flo2");
     const flo2 = createButtons("dozzamech2", "ftimps2");
     const ftimps2 = createButtons("floss2", "hter2");
@@ -1082,11 +959,8 @@ module.exports = {
     const lt2 = createButtons("igmablobchum2", "ltime2");
     const ltime2 = createButtons("ladytuna2", "mgold2");
     const mgold2 = createButtons("lunchtime2", "npa2");
-    const npa2 = createButtons("medcha", "pmop2");
-    const pmop2 = createButtons("noplayingallowed2", "otksw2");
-    const otksw2 = createButtons("petmop2", "rticia2");
-    const rticia2 = createButtons("otkswabbie2", "rcatster2");
-    const rcatster2 = createButtons("rampticia2", "sbandits2");
+    const npa2 = createButtons("medcha", "rcatster2");
+    const rcatster2 = createButtons("noplayingallowed2", "sbandits2");
     const sbandits2 = createButtons("reversecatster2", "slord2");
     const slord2 = createButtons("sunbandits2", "tan2");
     const tan2 = createButtons("sunlord2", "umech2");
@@ -1123,22 +997,16 @@ module.exports = {
     const bsm4 = createButtons("budgetnt4", "bykm3");
     const bykm3 = createButtons("budgetsm4", "bzm4");
     const bzm4 = createButtons("budgetykm3", "cog3");
-    const cog3 = createButtons("budgetzm3", "cbait3");
-    const cbait3 = createButtons("coggerazzi3", "cboy3");
-    const cboy3 = createButtons("congabait3", "flo3");
+    const cog3 = createButtons("budgetzm3", "cboy3");
+    const cboy3 = createButtons("coggerazzi3", "flo3");
     const flo3 = createButtons("cryoboy3", "ftimps3");
     const ftimps3 = createButtons("floss3", "gps4");
-    const gps4 = createButtons("frozentelimps3", "gburn3");
-    const gburn3 = createButtons("gravepiratestache4", "gstache3");
-    const gstache3 = createButtons("gargburn3", "hter3");
-    const hter3 = createButtons("gravestache3", "hor3");
-    const hor3 = createButtons("himpter3", "igbc3");
-    const igbc3 = createButtons("horts3", "mscope3");
-    const mscope3 = createButtons("igmablobchum3", "otksw3");
-    const otksw3 = createButtons("mechascope3", "pyeeyz3");
-    const pyeeyz3 = createButtons("otkswabbie3", "rticia3");
-    const rticia3 = createButtons("pablosyeezys3", "rcatster3");
-    const rcatster3 = createButtons("rampticia3", "stars3");
+    const gps4 = createButtons("frozentelimps3", "hter3");
+    const hter3 = createButtons("gravepiratestache4", "igbc3");
+    const igbc3 = createButtons("himpter3", "mscope3");
+    const mscope3 = createButtons("igmablobchum3", "pyeeyz3");
+    const pyeeyz3 = createButtons("mechascope3", "rcatster3");
+    const rcatster3 = createButtons("pablosyeezys3", "stars3");
     const stars3 = createButtons("reversecatster3", "sbandits3");
     const sbandits3 = createButtons("spacestars3", "slord3");
     const slord3 = createButtons("sunbandits3", "tan3");
@@ -1146,9 +1014,8 @@ module.exports = {
     const timps3 = createButtons("tangen3", "tstache3");
     const tstache3 = createButtons("telimps3", "tmech4");
     const tmech4 = createButtons("trickstache3", "umech3");
-    const umech3 = createButtons("trickmech4", "vster3");
-    const vster3 = createButtons("uncrackamech3", "wsports3");
-    const wsports3 = createButtons("valkster3", "wph3");
+    const umech3 = createButtons("trickmech4", "wsports3");
+    const wsports3 = createButtons("uncrackamech3", "wph3");
     const wph3 = createButtons("watersports3", "yemartin3");
     const yemartin3 = createButtons("whalepharaoh3", "ykmartin3");
     const ykmartin3 = createButtons("youngeggmartin3", "zm3");
@@ -1175,38 +1042,31 @@ module.exports = {
     const brb3 = createButtons("binaryflagwar4", "bsb3");
     const bsb3 = createButtons("budgetrb3", "bbolt4");
     const bbolt4 = createButtons("budgetsb3", "bykm4");
-    const bykm4 = createButtons("boltbolt4", "cbait4");
-    const cbait4 = createButtons("budgetykm4", "cboy4");
-    const cboy4 = createButtons("congabait4", "gburn4");
-    const gburn4 = createButtons("cryoboy4", "gstar223");
-    const gstar223 = createButtons("gargburn4", "gom3");
+    const bykm4 = createButtons("boltbolt4", "cboy4");
+    const cboy4 = createButtons("budgetykm4", "gstar223");
+    const gstar223 = createButtons("cryoboy4", "gom3");
     const gom3 = createButtons("gargstar223", "hter4");
-    const hter4 = createButtons("gomorrah3", "hor4");
-    const hor4 = createButtons("himpter4", "igbc4");
-    const igbc4 = createButtons("horts4", "lime3");
+    const hter4 = createButtons("gomorrah3", "igbc4");
+    const igbc4 = createButtons("himpter4", "lime3");
     const lime3 = createButtons("igmablobchum4", "lt3");
     const lt3 = createButtons("limerence3", "ltime3");
     const ltime3 = createButtons("ladytuna3", "pyeeyz4");
-    const pyeeyz4 = createButtons("lunchtime3", "pmop3");
-    const pmop3 = createButtons("pablosyeezys4", "pip3");
-    const pip3 = createButtons("petmop3", "nhks3");
+    const pyeeyz4 = createButtons("lunchtime3", "nhks3");
+    const pip3 = createButtons("pablosyeezys4", "nhks3");
     const nhks3 = createButtons("piport3", "slug3");
     const slug3 = createButtons("nohokaistars3", "stars4");
     const stars4 = createButtons("slugged3", "slord4");
     const slord4 = createButtons("spacestars4", "tan4");
     const tan4 = createButtons("sunlord4", "timps4");
     const timps4 = createButtons("tangen4", "tstache4");
-    const tstache4 = createButtons("telimps4", "vster4");
-    const vster4 = createButtons("trickstache4", "wsports4");
-    const wsports4 = createButtons("valkster4", "ykmartin4");
+    const tstache4 = createButtons("telimps4", "wsports4");
+    const wsports4 = createButtons("trickstache4", "ykmartin4");
     const ykmartin4 = createButtons("watersports4", "midzhelp");
-    const tempozrow = createButtons("raiserpackage3", "brad3");
+    const tempozrow = createButtons("lockthebathroom3", "brad3");
     const brad3 = createButtons("helpztempo", "cog4");
     const cog4 = createButtons("brady3", "cleap3");
     const cleap3 = createButtons("coggerazzi4", "ltbr3");
-    const ltbr3 = createButtons("conjureleap3", "propackage3");
-    const propackage3 = createButtons("lockthebathroom3", "rpackage3");
-    const rpackage3 = createButtons("professorpackage3", "tempozhelp");
+    const ltbr3 = createButtons("conjureleap3", "tempozhelp");
     const Ccommands = Array.from(client.commands.values());
     const commands = Ccommands.filter((command) => {
       if (
@@ -1468,7 +1328,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetct = createPlantDeckEmbed(result, "budgetct");
     const goingnuts = createPlantDeckEmbed(result, "going3nuts");
     const startron = createPlantDeckEmbed(result, "startron");
-    const watertron = createPlantDeckEmbed(result, "watertron");
     const budgetcc = createPlantDeckEmbed(result, "budgetcc");
     const lifecouldbedream = createPlantDeckEmbed(result, "lcbd");
     const logbait = createPlantDeckEmbed(result, "logbait");
@@ -1479,10 +1338,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const venice = createPlantDeckEmbed(result, "apotk");
     const budgetcz = createPlantDeckEmbed(result, "budgetcz");
     const lasersnap = createPlantDeckEmbed(result, "lasersnap");
-    const mopribus = createPlantDeckEmbed(result, "mopribus");
     const budgetgk = createPlantDeckEmbed(result, "budgetgk");
     const ginseng = createPlantDeckEmbed(result, "ginseng");
-    const dinogloves = createPlantDeckEmbed(result, "dinogloves");
     const healthotk = createPlantDeckEmbed(result, "healthotk");
     const pawntrickstab = createPlantDeckEmbed(result, "pawntrickstab");
     const winrate100 = createPlantDeckEmbed(result, "wr100");
@@ -1495,28 +1352,20 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const espressoaggro = createPlantDeckEmbed(result, "espressoaggro");
     const cyburn = createPlantDeckEmbed(result, "cyburn");
     const toyotacontrolla = createPlantDeckEmbed(result, "toyotacontrolla");
-    const translattail = createPlantDeckEmbed(result, "translattail");
     const budgetro = createPlantDeckEmbed(result, "budgetro");
-    const freezeheal = createPlantDeckEmbed(result, "freezeheal");
-    const frymidrose = createPlantDeckEmbed(result, "frymidrose");
     const healmidrose = createPlantDeckEmbed(result, "hmr");
     const budgetsf = createPlantDeckEmbed(result, "budgetswarmsf");
     const recycling = createPlantDeckEmbed(result, "recycling");
     const funnyflare = createPlantDeckEmbed(result, "funnyflare");
     const healburn = createPlantDeckEmbed(result, "healburn");
-    const figlottery = createPlantDeckEmbed(result, "healmidflare");
     const psychosolstice = createPlantDeckEmbed(result, "psychosolstice");
-    const ramp2seedling = createPlantDeckEmbed(result, "ramp2seedling");
     const budgetsp = createPlantDeckEmbed(result, "budgetburstsp");
     const nuttin = createPlantDeckEmbed(result, "nutting");
     const radiotherapy = createPlantDeckEmbed(result, "radiotherapy");
     const popsicle = createPlantDeckEmbed(result, "popsicle");
     const leafystrike = createPlantDeckEmbed(result, "leafystrike");
     const budgetwk = createPlantDeckEmbed(result, "budgetwkmidheal");
-    const cancerknight = createPlantDeckEmbed(result, "cancerknight");
     const chemotherapy = createPlantDeckEmbed(result, "chemotherapy");
-    const highlander = createPlantDeckEmbed(result, "highlander");
-    const shitknight = createPlantDeckEmbed(result, "shitknight");
     /**
      * The CreateZombieDeckEmbed function creates an embed for a zombie deck.
      * @param {*} result - The result object containing deck information.
@@ -1545,9 +1394,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const himps = createZombieDeckEmbed(result, "himps");
     const lockthebathroom = createZombieDeckEmbed(result, "lockin");
     const lunchtime = createZombieDeckEmbed(result, "midpets");
-    const petmop = createZombieDeckEmbed(result, "petmop");
     const banhammer = createZombieDeckEmbed(result, "racism");
-    const raiserpackage = createZombieDeckEmbed(result, "raiserpackage");
     const watersports = createZombieDeckEmbed(result, "watersports");
     const budgeteb = createZombieDeckEmbed(result, "budgetburn");
     const gargstar22 = createZombieDeckEmbed(result, "gargstar22");
@@ -1560,8 +1407,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const cryoboy = createZombieDeckEmbed(result, "cyroboy");
     const frozentelimps = createZombieDeckEmbed(result, "frozentelimps");
     const gravepiratestache = createZombieDeckEmbed(result, "gps");
-    const gravestache = createZombieDeckEmbed(result, "gravestache");
-    const otkswabbie = createZombieDeckEmbed(result, "otkswabbie");
     const telimps = createZombieDeckEmbed(result, "telimps");
     const youngkenmartin = createZombieDeckEmbed(result, "ykm");
     const budgetif = createZombieDeckEmbed(result, "budgetif");
@@ -1573,7 +1418,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetim = createZombieDeckEmbed(result, "budgetim");
     const mechascope = createZombieDeckEmbed(result, "otkmecha");
     const kaleidoscope = createZombieDeckEmbed(result, "otktrickster");
-    const rampticia = createZombieDeckEmbed(result, "rampticia");
     const budgetnt = createZombieDeckEmbed(result, "budgetnt");
     const floss = createZombieDeckEmbed(result, "floss");
     const gomorrah = createZombieDeckEmbed(result, "gomorrah");
@@ -1584,10 +1428,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const sunlord = createZombieDeckEmbed(result, "wimps");
     const bonusducks = createZombieDeckEmbed(result, "bonusducks");
     const budgetpb = createZombieDeckEmbed(result, "budgetpb");
-    const congabait = createZombieDeckEmbed(result, "congabait");
-    const professorpackage = createZombieDeckEmbed(result, "professorpackage");
     const trickstache = createZombieDeckEmbed(result, "trickstache");
-    const valkster = createZombieDeckEmbed(result, "valkster");
     const youngeggmartin = createZombieDeckEmbed(result, "youngeggmartin");
     const boltbolt = createZombieDeckEmbed(result, "boltbolt");
     const budgetrb = createZombieDeckEmbed(result, "budgetrb");
@@ -1597,7 +1438,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const coggerazzi = createZombieDeckEmbed(result, "poggerrazzi");
     const sunbandits = createZombieDeckEmbed(result, "sunbandits");
     const budgetsm = createZombieDeckEmbed(result, "budgetsm");
-    const horts = createZombieDeckEmbed(result, "horts");
     const pablosyeezys = createZombieDeckEmbed(result, "pablosyeezys");
     const whalepharaoh = createZombieDeckEmbed(result, "whalepharaoh");
     const binaryflagwar = createZombieDeckEmbed(result, "binaryflagwar");
@@ -1606,7 +1446,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const mechagold = createZombieDeckEmbed(result, "mechagold");
     const dozzamech = createZombieDeckEmbed(result, "dozzamech");
     const uncrackamech = createZombieDeckEmbed(result, "feastmech");
-    const gargburn = createZombieDeckEmbed(result, "gargburn");
     const reversecatster = createZombieDeckEmbed(result, "reversecatster");
     const trickmech = createZombieDeckEmbed(result, "trickmech");
     const zmoss = createZombieDeckEmbed(result, "zmoss");
@@ -1783,12 +1622,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         budgetwk2: { embed: budgetwk, component: bwk2 },
         bwk3: { embed: budgetwk, component: bwk3 },
         budgetwk3: { embed: budgetwk, component: bwk3 },
-        cank: { embed: cancerknight, component: cank },
-        cancerknight: { embed: cancerknight, component: cank },
-        cank2: { embed: cancerknight, component: cank2 },
-        cancerknight2: { embed: cancerknight, component: cank2 },
-        cank3: { embed: cancerknight, component: cank3 },
-        cancerknight3: { embed: cancerknight, component: cank3 },
         chemo: { embed: chemotherapy, component: chemo },
         chemotherapy: { embed: chemotherapy, component: chemo },
         chemo2: { embed: chemotherapy, component: chemo2 },
@@ -1803,24 +1636,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         cyburn3: { embed: cyburn, component: cburn3 },
         cburn4: { embed: cyburn, component: cburn4 },
         cyburn4: { embed: cyburn, component: cburn4 },
-        flottery: { embed: figlottery, component: flottery },
-        figlottery: { embed: figlottery, component: flottery },
-        flottery2: { embed: figlottery, component: flottery2 },
-        figlottery2: { embed: figlottery, component: flottery2 },
-        flottery3: { embed: figlottery, component: flottery3 },
-        figlottery3: { embed: figlottery, component: flottery3 },
-        fheal: { embed: freezeheal, component: fheal },
-        freezeheal: { embed: freezeheal, component: fheal },
-        fheal2: { embed: freezeheal, component: fheal2 },
-        freezeheal2: { embed: freezeheal, component: fheal2 },
-        fheal3: { embed: freezeheal, component: fheal3 },
-        freezeheal3: { embed: freezeheal, component: fheal3 },
-        fmr: { embed: frymidrose, component: fmr },
-        frymidrose: { embed: frymidrose, component: fmr },
-        fmr2: { embed: frymidrose, component: fmr2 },
-        frymidrose2: { embed: frymidrose, component: fmr2 },
-        fmr3: { embed: frymidrose, component: fmr3 },
-        frymidrose3: { embed: frymidrose, component: fmr3 },
         fflare: { embed: funnyflare, component: fflare },
         funnyflare: { embed: funnyflare, component: fflare },
         fflare2: { embed: funnyflare, component: fflare2 },
@@ -1851,26 +1666,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         healmidrose2: { embed: healmidrose, component: hmr2 },
         hmr3: { embed: healmidrose, component: hmr3 },
         healmidrose3: { embed: healmidrose, component: hmr3 },
-        hland: { embed: highlander, component: hland },
-        highlander: { embed: highlander, component: hland },
-        hland2: { embed: highlander, component: hland2 },
-        highlander2: { embed: highlander, component: hland2 },
-        hland3: { embed: highlander, component: hland3 },
-        highlander3: { embed: highlander, component: hland3 },
         lcbd: { embed: lifecouldbedream, component: lcbd },
         lifecouldbedream: { embed: lifecouldbedream, component: lcbd },
         lcbd2: { embed: lifecouldbedream, component: lcbd2 },
         lifecouldbedream2: { embed: lifecouldbedream, component: lcbd2 },
         lcbd3: { embed: lifecouldbedream, component: lcbd3 },
         lifecouldbedream3: { embed: lifecouldbedream, component: lcbd3 },
-        mopr: { embed: mopribus, component: mopr },
-        mopribus: { embed: mopribus, component: mopr },
-        mopr2: { embed: mopribus, component: mopr2 },
-        mopribus2: { embed: mopribus, component: mopr2 },
-        mopr3: { embed: mopribus, component: mopr3 },
-        mopribus3: { embed: mopribus, component: mopr3 },
-        mopr4: { embed: mopribus, component: mopr4 },
-        mopribus4: { embed: mopribus, component: mopr4 },
         msp: { embed: mspotk, component: msp },
         mspotk: { embed: mspotk, component: msp },
         msp2: { embed: mspotk, component: msp2 },
@@ -1897,14 +1698,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         radiotherapy2: { embed: radiotherapy, component: radio2 },
         radio3: { embed: radiotherapy, component: radio3 },
         radiotherapy3: { embed: radiotherapy, component: radio3 },
-        r2s: { embed: ramp2seedling, component: r2s },
-        ramp2seedling: { embed: ramp2seedling, component: r2s },
-        r2s2: { embed: ramp2seedling, component: r2s2 },
-        ramp2seedling2: { embed: ramp2seedling, component: r2s2 },
-        r2s3: { embed: ramp2seedling, component: r2s3 },
-        ramp2seedling3: { embed: ramp2seedling, component: r2s3 },
-        r2s4: { embed: ramp2seedling, component: r2s4 },
-        ramp2seedling4: { embed: ramp2seedling, component: r2s4 },
         smf: { embed: savagemayflower, component: smf },
         savagemayflower: { embed: savagemayflower, component: smf },
         smf2: { embed: savagemayflower, component: smf2 },
@@ -1917,12 +1710,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         neurotherapy2: { embed: neurotherapy, component: neuro2 },
         neuro3: { embed: neurotherapy, component: neuro3 },
         neurotherapy3: { embed: neurotherapy, component: neuro3 },
-        sknight: { embed: shitknight, component: sknight },
-        shitknight: { embed: shitknight, component: sknight },
-        sknight2: { embed: shitknight, component: sknight2 },
-        shitknight2: { embed: shitknight, component: sknight2 },
-        sknight3: { embed: shitknight, component: sknight3 },
-        shitknight3: { embed: shitknight, component: sknight3 },
         srings: { embed: starrings, component: srings },
         starrings: { embed: starrings, component: srings },
         srings2: { embed: starrings, component: srings2 },
@@ -1945,20 +1732,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
         tc3: { embed: toyotacontrolla, component: tc3 },
         toyotacontrolla3: { embed: toyotacontrolla, component: tc3 },
-        tlattail: { embed: translattail, component: tlattail },
-        translattail: { embed: translattail, component: tlattail },
-        tlattail2: { embed: translattail, component: tlattail2 },
-        translattail2: { embed: translattail, component: tlattail2 },
-        tlattail3: { embed: translattail, component: tlattail3 },
-        translattail3: { embed: translattail, component: tlattail3 },
-        tlattail4: { embed: translattail, component: tlattail4 },
-        translattail4: { embed: translattail, component: tlattail4 },
-        wtron: { embed: watertron, component: wtron },
-        watertron: { embed: watertron, component: wtron },
-        wtron2: { embed: watertron, component: wtron2 },
-        watertron2: { embed: watertron, component: wtron2 },
-        wtron3: { embed: watertron, component: wtron3 },
-        watertron3: { embed: watertron, component: wtron3 },
         bfmg: { embed: bfmidgargs, component: bfmg },
         bfmidgargs: { embed: bfmidgargs, component: bfmg },
         bfmg2: { embed: bfmidgargs, component: bfmg2 },
@@ -2087,14 +1860,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         coggerazzi3: { embed: coggerazzi, component: cog3 },
         cog4: { embed: coggerazzi, component: cog4 },
         coggerazzi4: { embed: coggerazzi, component: cog4 },
-        cbait: { embed: congabait, component: cbait },
-        congabait: { embed: congabait, component: cbait },
-        cbait2: { embed: congabait, component: cbait2 },
-        congabait2: { embed: congabait, component: cbait2 },
-        cbait3: { embed: congabait, component: cbait3 },
-        congabait3: { embed: congabait, component: cbait3 },
-        cbait4: { embed: congabait, component: cbait4 },
-        congabait4: { embed: congabait, component: cbait4 },
         cleap: { embed: conjureleap, component: cleap },
         conjureleap: { embed: conjureleap, component: cleap },
         cleap2: { embed: conjureleap, component: cleap2 },
@@ -2129,14 +1894,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         frozentelimps3: { embed: frozentelimps, component: ftimps3 },
         ftimps4: { embed: frozentelimps, component: ftimps4 },
         frozentelimps4: { embed: frozentelimps, component: ftimps4 },
-        gburn: { embed: gargburn, component: gburn },
-        gargburn: { embed: gargburn, component: gburn },
-        gburn2: { embed: gargburn, component: gburn2 },
-        gargburn2: { embed: gargburn, component: gburn2 },
-        gburn3: { embed: gargburn, component: gburn3 },
-        gargburn3: { embed: gargburn, component: gburn3 },
-        gburn4: { embed: gargburn, component: gburn4 },
-        gargburn4: { embed: gargburn, component: gburn4 },
         gstar22: { embed: gargstar22, component: gstar22 },
         gargstar22: { embed: gargstar22, component: gstar22 },
         gstar222: { embed: gargstar22, component: gstar222 },
@@ -2157,12 +1914,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         gravepiratestache3: { embed: gravepiratestache, component: gps3 },
         gps4: { embed: gravepiratestache, component: gps4 },
         gravepiratestache4: { embed: gravepiratestache, component: gps4 },
-        gstache: { embed: gravestache, component: gstache },
-        gravestache: { embed: gravestache, component: gstache },
-        gstache2: { embed: gravestache, component: gstache2 },
-        gravestache2: { embed: gravestache, component: gstache2 },
-        gstache3: { embed: gravestache, component: gstache3 },
-        gravestache3: { embed: gravestache, component: gstache3 },
         hter: { embed: himps, component: hter },
         himpter: { embed: himps, component: hter },
         hter2: { embed: himps, component: hter2 },
@@ -2171,14 +1922,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         himpter3: { embed: himps, component: hter3 },
         hter4: { embed: himps, component: hter4 },
         himpter4: { embed: himps, component: hter4 },
-        hor: { embed: horts, component: hor },
-        horts: { embed: horts, component: hor },
-        hor2: { embed: horts, component: hor2 },
-        horts2: { embed: horts, component: hor2 },
-        hor3: { embed: horts, component: hor3 },
-        horts3: { embed: horts, component: hor3 },
-        hor4: { embed: horts, component: hor4 },
-        horts4: { embed: horts, component: hor4 },
         slug: { embed: slugged, component: slug },
         slugged: { embed: slugged, component: slug },
         slug2: { embed: slugged, component: slug2 },
@@ -2239,12 +1982,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         noplayingallowed2: { embed: noplayingallowed, component: npa2 },
         npa3: { embed: noplayingallowed, component: npa3 },
         noplayingallowed3: { embed: noplayingallowed, component: npa3 },
-        otksw: { embed: otkswabbie, component: otksw },
-        otkswabbie: { embed: otkswabbie, component: otksw },
-        otksw2: { embed: otkswabbie, component: otksw2 },
-        otkswabbie2: { embed: otkswabbie, component: otksw2 },
-        otksw3: { embed: otkswabbie, component: otksw3 },
-        otkswabbie3: { embed: otkswabbie, component: otksw3 },
         kscope: { embed: kaleidoscope, component: kscope },
         kaleidoscope: { embed: kaleidoscope, component: kscope },
         kscope2: { embed: kaleidoscope, component: kscope2 },
@@ -2259,18 +1996,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         pablosyeezys3: { embed: pablosyeezys, component: pyeeyz3 },
         pyeeyz4: { embed: pablosyeezys, component: pyeeyz4 },
         pablosyeezys4: { embed: pablosyeezys, component: pyeeyz4 },
-        pmop: { embed: petmop, component: pmop },
-        petmop: { embed: petmop, component: pmop },
-        pmop2: { embed: petmop, component: pmop2 },
-        petmop2: { embed: petmop, component: pmop2 },
-        pmop3: { embed: petmop, component: pmop3 },
-        petmop3: { embed: petmop, component: pmop3 },
-        propackage: { embed: professorpackage, component: propackage },
-        professorpackage: { embed: professorpackage, component: propackage },
-        propackage2: { embed: professorpackage, component: propackage2 },
-        professorpackage2: { embed: professorpackage, component: propackage2 },
-        propackage3: { embed: professorpackage, component: propackage3 },
-        professorpackage3: { embed: professorpackage, component: propackage3 },
         bhammer: { embed: banhammer, component: bhammer },
         banhammer: { embed: banhammer, component: bhammer },
         bhammer2: { embed: banhammer, component: bhammer2 },
@@ -2279,18 +2004,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         banhammer3: { embed: banhammer, component: bhammer3 },
         bhammer4: { embed: banhammer, component: bhammer4 },
         banhammer4: { embed: banhammer, component: bhammer4 },
-        rpackage: { embed: raiserpackage, component: rpackage },
-        raiserpackage: { embed: raiserpackage, component: rpackage },
-        rpackage2: { embed: raiserpackage, component: rpackage2 },
-        raiserpackage2: { embed: raiserpackage, component: rpackage2 },
-        rpackage3: { embed: raiserpackage, component: rpackage3 },
-        raiserpackage3: { embed: raiserpackage, component: rpackage3 },
-        rticia: { embed: rampticia, component: rticia },
-        rampticia: { embed: rampticia, component: rticia },
-        rticia2: { embed: rampticia, component: rticia2 },
-        rampticia2: { embed: rampticia, component: rticia2 },
-        rticia3: { embed: rampticia, component: rticia3 },
-        rampticia3: { embed: rampticia, component: rticia3 },
         syard: { embed: schoolyard, component: syard },
         schoolyard: { embed: schoolyard, component: syard },
         syard2: { embed: schoolyard, component: syard2 },
@@ -2357,14 +2070,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         uncrackamech3: { embed: uncrackamech, component: umech3 },
         umech4: { embed: uncrackamech, component: umech4 },
         uncrackamech4: { embed: uncrackamech, component: umech4 },
-        vster: { embed: valkster, component: vster },
-        valkster: { embed: valkster, component: vster },
-        vster2: { embed: valkster, component: vster2 },
-        valkster2: { embed: valkster, component: vster2 },
-        vster3: { embed: valkster, component: vster3 },
-        valkster3: { embed: valkster, component: vster3 },
-        vster4: { embed: valkster, component: vster4 },
-        valkster4: { embed: valkster, component: vster4 },
         wsports: { embed: watersports, component: wsports },
         watersports: { embed: watersports, component: wsports },
         wsports2: { embed: watersports, component: wsports2 },
@@ -2475,12 +2180,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         popsicle2: { embed: popsicle, component: pop2 },
         pop3: { embed: popsicle, component: pop3 },
         popsicle3: { embed: popsicle, component: pop3 },
-        dgloves: { embed: dinogloves, component: dgloves },
-        dinogloves: { embed: dinogloves, component: dgloves },
-        dgloves2: { embed: dinogloves, component: dgloves2 },
-        dinogloves2: { embed: dinogloves, component: dgloves2 },
-        dgloves3: { embed: dinogloves, component: dgloves3 },
-        dinogloves3: { embed: dinogloves, component: dgloves3 },
         nhks: { embed: nohokaistars, component: nhks },
         nohokaistars: { embed: nohokaistars, component: nhks },
         nhks2: { embed: nohokaistars, component: nhks2 },

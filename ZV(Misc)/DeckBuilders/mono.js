@@ -48,7 +48,7 @@ module.exports = {
           .setEmoji("<:compemote:1325461143136764060>")
           .setValue("comp"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
+          .setLabel("Meme Deck")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
         new StringSelectMenuOptionBuilder()
@@ -64,7 +64,7 @@ module.exports = {
           )
           .setValue("combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Decks")
+          .setLabel("Control Deck")
           .setDescription(
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           )
@@ -89,20 +89,18 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const monoDecks = {
       competitiveDecks: ["kaleidoscope", "nohokaistars", "seacret", "slugged"],
-      memeDecks: ["cancerknight", "coggerazzi", "rampticia"],
+      memeDecks: ["coggerazzi"],
       aggroDecks: ["seacret"],
-      comboDecks: ["coggerazzi", "rampticia", "seacret"],
-      controlDecks: ["cancerknight", "kaleidoscope"],
+      comboDecks: ["coggerazzi", "seacret"],
+      controlDecks: ["kaleidoscope"],
       midrangeDecks: ["nohokaistars", "slugged"],
       tempoDecks: ["coggerazzi"],
       allDecks: [
-        "cancerknight",
         "coggerazzi",
         "kaleidoscope",
         "nohokaistars",
-        "rampticia",
         "seacret",
-        "slugged",
+        "slugged"
       ],
     };
      /**
@@ -115,9 +113,7 @@ module.exports = {
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
         .join("");
     }
-    const toBuildMeme = buildDeckString(monoDecks.memeDecks);
     const toBuildCombo = buildDeckString(monoDecks.comboDecks);
-    const toBuildControl = buildDeckString(monoDecks.controlDecks);
     const toBuildCompetitive = buildDeckString(monoDecks.competitiveDecks);
     const toBuildMidrange = buildDeckString(monoDecks.midrangeDecks);
     const toBuildString = buildDeckString(monoDecks.allDecks);
@@ -140,17 +136,9 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = createButtons("rampticia", "ck");
-    const ck = createButtons("helpmeme", "cog");
-    const cog = createButtons("cancerknight", "rticia");
-    const rticia = createButtons("coggerazzi", "memehelp");
-    const controlrow = createButtons("kaliedoscope", "ck2");
-    const ck2 = createButtons("helpcontrol", "kscope");
-    const kscope = createButtons("cancerknight2", "controlhelp");
-    const comborow = createButtons("seacret", "cog2");
-    const cog2 = createButtons("helpcombo", "rticia2");
-    const rticia2 = createButtons("coggerazzi2", "sea");
-    const sea = createButtons("rampticia2", "combohelp");
+    const comborow = createButtons("seacret", "cog");
+    const cog = createButtons("helpcombo", "sea");
+    const sea = createButtons("coggerazzi", "combohelp");
     const competitiverow = createButtons("slugged", "kscop2");
     const kscope2 = createButtons("helpcompetitive", "nhks");
     const nhks = createButtons("kaleidoscope2", "sea2");
@@ -159,28 +147,24 @@ module.exports = {
     const midrangerow = createButtons("slugged2", "nhks2");
     const nhks2 = createButtons("helpmidrange", "slug2");
     const slug2 = createButtons("nohokaistars2", "midrangehelp");
-    const alldecksrow = createButtons("slugged3", "ck3");
-    const ck3 = createButtons("helpall", "cog3");
-    const cog3 = createButtons("cancerknight3", "kscope3");
+    const alldecksrow = createButtons("slugged3", "cog2");
+    const cog2 = createButtons("helpall", "kscope3");
     const kscope3 = createButtons("coggerazzi3", "nhks3");
-    const nhks3 = createButtons("kaleidoscope3", "rticia3");
-    const rticia3 = createButtons("nohokaistars3", "sea3");
-    const sea3 = createButtons("rampticia3", "slug3");
+    const nhks3 = createButtons("kaleidoscope3", "sea3");
+    const sea3 = createButtons("nohokaistars3", "slug3");
     const slug3 = createButtons("seacret3", "allhelp");
     const [result] =
-      await db.query(`select cancerknight, icebox, otktrickster, nohokaistars, seacret,
-        poggerrazzi, rampticia
-from wkdecks wk 
+      await db.query(`select icebox, otktrickster, nohokaistars, seacret,
+        poggerrazzi
+from ntdecks nt
 inner join ebdecks eb
-on (wk.deckinfo = eb.deckinfo)
+on (nt.deckinfo = eb.deckinfo)
 inner join ifdecks fi 
-on (wk.deckinfo = fi.deckinfo)
-inner join ntdecks nt 
-on (wk.deckinfo = nt.deckinfo)
+on (nt.deckinfo = fi.deckinfo)
 inner join rbdecks rb 
-on (wk.deckinfo = rb.deckinfo)
+on (nt.deckinfo = rb.deckinfo)
 inner join imdecks im 
-on (wk.deckinfo = im.deckinfo)`);
+on (nt.deckinfo = im.deckinfo)`);
     const user = await client.users.fetch("444700385744257034");
     const mono = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -194,20 +178,6 @@ Note: ${user.displayName} has ${monoDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL(),
       `To view the decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${monoDecks.allDecks.length} decks in Tbot`
-    )
-    const mememono = createHelpEmbed(
-      `${user.displayName} Meme Decks`,
-      `My meme decks made by ${user.displayName} are ${toBuildMeme}`,
-      user.displayAvatarURL(),
-      `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${monoDecks.memeDecks.length} meme decks in Tbot`
-    )
-    const controlmono = createHelpEmbed(
-      `${user.displayName} Control Decks`,
-      `My control decks made by ${user.displayName} are ${toBuildControl}`,
-      user.displayAvatarURL(),
-      `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${monoDecks.controlDecks.length} control decks in Tbot`
     )
     const combomono = createHelpEmbed(
       `${user.displayName} Combo Decks`,
@@ -253,13 +223,11 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
       }
       return embed;
     }
-    const cknight = createDeckEmbed(result, "cancerknight");
     const coggerazzi = createDeckEmbed(result, "poggerrazzi");
     const kaleidoscope = createDeckEmbed(result, "otktrickster");
     const nohonkaistars = createDeckEmbed(result, "nohokaistars");
     const seacret = createDeckEmbed(result, "seacret");
     const slugged = createDeckEmbed(result, "icebox");
-    const rampticia = createDeckEmbed(result, "rampticia");
     const m = await message.channel.send({ embeds: [mono], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     async function handleSelectMenu(i){
@@ -318,18 +286,10 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         allhelp: { embed: alldecksEmbed, component: alldecksrow },
         helpmidrange: { embed: midrangemono, component: midrangerow },
         midrangehelp: { embed: midrangemono, component: midrangerow },
-        ck: { embed: cknight, component: ck },
-        cancerknight: { embed: cknight, component: ck },
-        ck2: { embed: cknight, component: ck2 },
-        cancerknight2: { embed: cknight, component: ck2 },
-        ck3: { embed: cknight, component: ck3 },
-        cancerknight3: { embed: cknight, component: ck3 },
         cog: { embed: coggerazzi, component: cog },
         coggerazzi: { embed: coggerazzi, component: cog },
         cog2: { embed: coggerazzi, component: cog2 },
         coggerazzi2: { embed: coggerazzi, component: cog2 },
-        cog3: { embed: coggerazzi, component: cog3 },
-        coggerazzi3: { embed: coggerazzi, component: cog3 },
         kscope: { embed: kaleidoscope, component: kscope },
         kaleidoscope: { embed: kaleidoscope, component: kscope },
         kscope2: { embed: kaleidoscope, component: kscope2 },
@@ -342,12 +302,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         nohokaistars2: { embed: nohonkaistars, component: nhks2 },
         nhks3: { embed: nohonkaistars, component: nhks3 },
         nohokaistars3: { embed: nohonkaistars, component: nhks3 },
-        rticia: { embed: rampticia, component: rticia },
-        rampticia: { embed: rampticia, component: rticia },
-        rticia2: { embed: rampticia, component: rticia2 },
-        rampticia2: { embed: rampticia, component: rticia2 },
-        rticia3: { embed: rampticia, component: rticia3 },
-        rampticia3: { embed: rampticia, component: rticia3 },
         sea: { embed: seacret, component: sea },
         seacret: { embed: seacret, component: sea },
         sea2: { embed: seacret, component: sea2 },

@@ -40,151 +40,138 @@ module.exports = {
         .setEmoji("<:zmech:1088189178224853063>")
     );
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Zmech's Decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setValue("budget")
-        .setDescription("Decks that are cheap for new players")
-        .setEmoji("💰"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("comp")
-        .setDescription("Some of the Best Decks in the game")
-        .setEmoji("<:compemote:1325461143136764060>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Ladder Decks")
-        .setValue("ladder")
-        .setDescription("Decks that mostly only good for ranked games")
-        .setEmoji("<:ladder:1271503994857979964>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setValue("meme")
-        .setDescription("Decks that are built off a weird/fun combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Aggro Decks")
-        .setValue("aggro")
-        .setDescription(
-          "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
-        .setValue("combo")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Control Deck")
-        .setValue("control")
-        .setDescription(
-          'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setValue("midrange")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Tempo Deck")
-        .setValue("tempo")
-        .setDescription(
-          "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-        ),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Zmech Decks")
-        .setValue("all")
-        .setDescription("View all Zmech decks in Tbot")
-        .setEmoji("<:zmech:1088189178224853063>")
-    );
-  const row = new ActionRowBuilder().addComponents(select);
-  const zmechDecks = {
-    budgetDecks: ["budgetzm"],
-    competitiveDecks: ["gargburn"],
-    ladderDecks: ["binaryflagwar", "brady", "trickmech"],
-    memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
-    aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
-    comboDecks: ["binaryflagwar", "budgetzm", "gargburn", "trickmech", "uncrackamech", "zmoss"],
-    controlDecks: ["uncrackamech"],
-    midrangeDecks: ["binaryflagwar", "gargburn"],
-    tempoDecks: ["brady"],
-    allDecks: [
-      "binaryflagwar",
-      "brady",
-      "budgetzm",
-      "dozzamech",
-      "gargburn",
-      "trickmech",
-      "uncrackamech",
-      "zmoss",
-    ],
-  };
-   /**
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Zmech's Decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("Decks that are cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Decks")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setValue("meme")
+          .setDescription("Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Decks")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setValue("control")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Deck")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Deck")
+          .setValue("tempo")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Zmech Decks")
+          .setValue("all")
+          .setDescription("View all Zmech decks in Tbot")
+          .setEmoji("<:zmech:1088189178224853063>")
+      );
+    const row = new ActionRowBuilder().addComponents(select);
+    const zmechDecks = {
+      budgetDecks: ["budgetzm"],
+      ladderDecks: ["binaryflagwar", "brady", "trickmech"],
+      memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
+      aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
+      comboDecks: ["binaryflagwar", "budgetzm", "trickmech", "uncrackamech", "zmoss"],
+      controlDecks: ["uncrackamech"],
+      midrangeDecks: ["binaryflagwar"],
+      tempoDecks: ["brady"],
+      allDecks: [
+        "binaryflagwar",
+        "brady",
+        "budgetzm",
+        "dozzamech",
+        "trickmech",
+        "uncrackamech",
+        "zmoss",
+      ],
+    };
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
      */
     function buildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
-  const toBuildString = buildDeckString(zmechDecks.allDecks);
-  const toBuildLadderString = buildDeckString(zmechDecks.ladderDecks);
-  const toBuildMemeString = buildDeckString(zmechDecks.memeDecks);
-  const toBuildAggroString = buildDeckString(zmechDecks.aggroDecks);
-  const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
-  const toBuildMidrangeString = buildDeckString(zmechDecks.midrangeDecks);
-  /**
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
+    const toBuildString = buildDeckString(zmechDecks.allDecks);
+    const toBuildLadderString = buildDeckString(zmechDecks.ladderDecks);
+    const toBuildMemeString = buildDeckString(zmechDecks.memeDecks);
+    const toBuildAggroString = buildDeckString(zmechDecks.aggroDecks);
+    const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
+    /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
     function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
-  const alldecksrow = createButtons("zmoss", "bfw");
-  const bfw = createButtons("helpall", "br");
-  const br = createButtons("binaryflagwar", "bzm");
-  const bzm = createButtons("brady", "dm");
-  const dm = createButtons("budgetzm", "gb");
-  const gb = createButtons("dozzamech", "tm");
-  const tm = createButtons("gargburn", "um");
-  const um = createButtons("trickmech", "zm");
-  const zm = createButtons("uncrackamech", "allhelp");
-  const ladderrow = createButtons("trickmech2", "bfw2");
-  const bfw2 = createButtons("ladderhelp", "br2");
-  const br2 = createButtons("binaryflagwar2", "tm2");
-  const tm2 = createButtons("brady2", "helpladder");
-  const memerow = createButtons("zmoss2", "dm2");
-  const dm2 = createButtons("memehelp", "um2");
-  const um2 = createButtons("dozzamech2", "zm2");
-  const zm2 = createButtons("uncrackamech2", "helpmeme");
-  const aggrorow = createButtons("trickmech2", "bzm2");
-  const bzm2 = createButtons("aggrohelp", "dm3");
-  const dm3 = createButtons("budgetzm2", "tm3");
-  const tm3 = createButtons("dozzamech3", "helpaggro");
-  const comborow = createButtons("zmoss3", "bfw3");
-  const bfw3 = createButtons("combohelp", "bzm3");
-  const bzm3 = createButtons("binaryflagwar3", "gb2");
-  const gb2 = createButtons("budgetzm3", "tm4");
-  const tm4 = createButtons("gargburn2", "helpcombo");
-  const um3 = createButtons("trickmech4", "zm3");
-  const zm3 = createButtons("uncrackamech3", "helpcombo");
-  const midrangerow = createButtons("gargburn3", "bfw4");
-  const bfw4 = createButtons("midrangehelp", "gb3");
-  const gb3 = createButtons("binaryflagwar4", "helpmidrange");
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const alldecksrow = createButtons("zmoss", "bfw");
+    const bfw = createButtons("helpall", "br");
+    const br = createButtons("binaryflagwar", "bzm");
+    const bzm = createButtons("brady", "dm");
+    const dm = createButtons("budgetzm", "tm");
+    const tm = createButtons("dozzamech", "um");
+    const um = createButtons("trickmech", "zm");
+    const zm = createButtons("uncrackamech", "allhelp");
+    const ladderrow = createButtons("trickmech2", "bfw2");
+    const bfw2 = createButtons("ladderhelp", "br2");
+    const br2 = createButtons("binaryflagwar2", "tm2");
+    const tm2 = createButtons("brady2", "helpladder");
+    const memerow = createButtons("zmoss2", "dm2");
+    const dm2 = createButtons("memehelp", "um2");
+    const um2 = createButtons("dozzamech2", "zm2");
+    const zm2 = createButtons("uncrackamech2", "helpmeme");
+    const aggrorow = createButtons("trickmech2", "bzm2");
+    const bzm2 = createButtons("aggrohelp", "dm3");
+    const dm3 = createButtons("budgetzm2", "tm3");
+    const tm3 = createButtons("dozzamech3", "helpaggro");
+    const comborow = createButtons("zmoss3", "bfw3");
+    const bfw3 = createButtons("combohelp", "bzm3");
+    const bzm3 = createButtons("binaryflagwar3", "tm4");
+    const tm4 = createButtons("budgetzm3", "um3");
+    const um3 = createButtons("trickmech4", "zm3");
+    const zm3 = createButtons("uncrackamech3", "helpcombo");
   const embed = new EmbedBuilder()
       .setThumbnail(
         "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8"
@@ -286,7 +273,6 @@ module.exports = {
     const budgetzm = createDeckEmbed(result, "budgetzm");
     const dozzamech = createDeckEmbed(result, "dozzamech");
     const uncrackamech = createDeckEmbed(result, "feastmech");
-    const gargburn = createDeckEmbed(result, "gargburn");
     const trickmech = createDeckEmbed(result, "trickmech");
     const zmoss = createDeckEmbed(result, "zmoss");
     const m = await message.channel.send({
@@ -302,8 +288,6 @@ module.exports = {
       const value = i.values[0];
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (value == "comp") {
-        await i.reply({ embeds: [gargburn], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -368,12 +352,6 @@ module.exports = {
         dozzamech2: {embed: dozzamech, component: dm2},
         dm3: {embed: dozzamech, component: dm3},
         dozzamech3: {embed: dozzamech, component: dm3},
-        gb: {embed: gargburn, component: gb},
-        gargburn: {embed: gargburn, component: gb},
-        gb2: {embed: gargburn, component: gb2},
-        gargburn2: {embed: gargburn, component: gb2},
-        gb3: {embed: gargburn, component: gb3},
-        gargburn3: {embed: gargburn, component: gb3},
         tm: {embed: trickmech, component: tm},
         trickmech: {embed: trickmech, component: tm},
         tm2: {embed: trickmech, component: tm2},

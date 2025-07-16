@@ -165,13 +165,6 @@ module.exports = {
 Note: Chompzilla has ${chompzillaDecks.allDecks.length} total decks in Tbot.`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110"
     );
-    const memeEmbed = createHelpEmbed(
-      "Chompzilla Meme Decks",
-      `My Meme decks for Chompzilla(CZ) are ${toBuildMemeString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110",
-      `To view the Meme Chompzilla decks please use the commands listed above or click on the buttons below to naviagte through all Meme decks!
-Note: Chompzilla has ${chompzillaDecks.memeDecks.length} Meme decks in Tbot`
-    );
     const comboEmbed = createHelpEmbed(
       "Chompzilla Combo Decks",
       `My Combo decks for Chompzilla(CZ) are ${toBuildComboString}`,

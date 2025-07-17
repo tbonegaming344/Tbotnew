@@ -147,17 +147,17 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const comborow = createButtons("lasersnap2", "bmz");
-    const bmz = createButtons("helpcombo", "lsnap2");
-    const lsnap2 = createButtons("budgetmopzilla", "combohelp");
+    const comborow = createButtons("lasersnap", "bmz");
+    const bmz = createButtons("helpcombo", "lsnap");
+    const lsnap = createButtons("budgetmopzilla", "combohelp");
     const midrangerow = createButtons("venice", "bmz2");
-    const bmz2 = createButtons("helpmid", "lsnap3");
-    const lsnap3 = createButtons("budgetmopzilla2", "vce");
-    const vce = createButtons("lasersnap3", "midhelp");
+    const bmz2 = createButtons("helpmid", "lsnap2");
+    const lsnap2 = createButtons("budgetmopzilla2", "vce");
+    const vce = createButtons("lasersnap2", "midhelp");
     const alldecksrow = createButtons("venice2", "bmz3");
-    const bmz3 = createButtons("helpall", "lsnap4");
-    const lsnap4 = createButtons("budgetmopzilla3", "lstrike");
-    const lstrike= createButtons("lasersnap4", "vce2");
+    const bmz3 = createButtons("helpall", "lsnap3");
+    const lsnap3 = createButtons("budgetmopzilla3", "lstrike");
+    const lstrike= createButtons("lasersnap3", "vce2");
     const vce2 = createButtons("leafystrike", "allhelp");
     const embed = createHelpEmbed(
       "Chompzilla Decks",
@@ -249,8 +249,6 @@ Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
      */
     async function handleButtonInteraction(i) {
       const buttonActions = {
-        memehelp: { embed: memeEmbed, component: memerow },
-        helpmeme: { embed: memeEmbed, component: memerow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcombo: { embed: comboEmbed, component: comborow },
         midhelp: { embed: midrangeEmbed, component: midrangerow },
@@ -273,8 +271,6 @@ Note: Chompzilla has ${chompzillaDecks.allDecks.length} decks in Tbot`
         lasersnap2: { embed: lasersnap, component: lsnap2 },
         lsnap3: { embed: lasersnap, component: lsnap3 },
         lasersnap3: { embed: lasersnap, component: lsnap3 },
-        lsnap4: { embed: lasersnap, component: lsnap4 },
-        lasersnap4: { embed: lasersnap, component: lsnap4 },
         lstrike: { embed: leafystrike, component: lstrike },
         leafystrike: { embed: leafystrike, component: lstrike }
       };

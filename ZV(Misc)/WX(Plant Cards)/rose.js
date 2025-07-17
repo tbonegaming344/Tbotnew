@@ -127,7 +127,7 @@ module.exports = {
     const embed = createHelpEmbed(
       "Rose Decks",
       `To view the Rose decks please select an option from the select menu below!
-  Note: Rose has ${roseDecks.allDecks.length} total decks in Tbot`,
+  Note: Rose has ${roseDecks.midrangeDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/pvzcc/images/2/2f/RoseBYL.png/revision/latest?cb=20200707025517"
     );
     const midrangeEmbed = createHelpEmbed(

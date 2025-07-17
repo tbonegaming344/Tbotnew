@@ -242,7 +242,7 @@ Note: WallKnight has ${wallKnightDecks.controlDecks.length} control decks in Tbo
           ginseng: {embed: ginseng, component: gseg},
           gseg2: {embed: ginseng, component: gseg2},
           ginseng2: {embed: ginseng, component: gseg2},
-          cmd: {embed: embed, component: cmd},
+          cmd: {embed: embed, component: row},
         }
         const action = buttonActions[i.customId];
         if(action){

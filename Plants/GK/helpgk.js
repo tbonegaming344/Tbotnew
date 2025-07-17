@@ -237,7 +237,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
         healthotk2: { embed: healthotk, component: hotk2 },
         pts: { embed: pawntrickstab, component: pts },
         pawntrickstab: { embed: pawntrickstab, component: pts },
-        eaggro: {embeds: espressoaggro, component: eaggro},
+        eaggro: {embed: espressoaggro, component: eaggro},
         espressoaggro: { embed: espressoaggro, component: eaggro },
       };
       const action = buttonActions[i.customId];

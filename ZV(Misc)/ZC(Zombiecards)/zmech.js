@@ -237,13 +237,6 @@ module.exports = {
       `To view the Zmech combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Zmech has ${zmechDecks.comboDecks.length} combo decks in Tbot`
     );
-    const midrangeEmbed = createHelpEmbed(
-      "Zmech Midrange Decks",
-      `My midrange decks for Zmech(ZM) are ${toBuildMidrangeString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-  Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
-    );
     const [result] = await db.query(`SELECT * FROM zmdecks`);
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -297,7 +290,7 @@ module.exports = {
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+        await i.reply({ embeds: [binaryflagwar], flags: MessageFlags.Ephemeral });
       } else if (value == "tempo") {
         await i.reply({ embeds: [brady], flags: MessageFlags.Ephemeral });
       } else if (value == "control") {
@@ -326,16 +319,12 @@ module.exports = {
         helpaggro: {embed: aggroEmbed, component: aggrorow},
         combohelp: {embed: comboEmbed, component: comborow},
         helpcombo: {embed: comboEmbed, component: comborow},
-        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
-        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         bfw: {embed: binaryflagwar, component: bfw},
         binaryflagwar: {embed: binaryflagwar, component: bfw},
         bfw2: {embed: binaryflagwar, component: bfw2},
         binaryflagwar2: {embed: binaryflagwar, component: bfw2},
         bfw3: {embed: binaryflagwar, component: bfw3},
         binaryflagwar3: {embed: binaryflagwar, component: bfw3},
-        bfw4: {embed: binaryflagwar, component: bfw4},
-        binaryflagwar4: {embed: binaryflagwar, component: bfw4},
         br: {embed: brady, component: br},
         brady: {embed: brady, component: br},
         br2: {embed: brady, component: br2},

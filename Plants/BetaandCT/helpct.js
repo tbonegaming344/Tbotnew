@@ -229,8 +229,6 @@ Note: Citron has ${citronDecks.comboDecks.length} combo decks in Tbot`
         helpaggro: { embed: aggroEmbed, component: aggrorow },
         combohelp: { embed: comboEmbed, component: comborow },
         helpcombo: { embed: comboEmbed, component: comborow },
-        midhelp: { embed: midrangeEmbed, component: midrangerow },
-        helpmid: { embed: midrangeEmbed, component: midrangerow },
         bct: { embed: budgetct, component: bct },
         budgetct: { embed: budgetct, component: bct },
         bct2: { embed: budgetct, component: bct2 },

@@ -1,9 +1,12 @@
 const { EmbedBuilder } = require("discord.js");
+const db = require('../../index.js');
 module.exports = {
   name: `halfbanana`,
   aliases: [`half`, `hb2`],
   category: `Plant Cards`,
   run: async (client, message, args) => {
+    const [result] = await db.query(`select halfbanana from megagrowcards`)
+
     const hb = new EmbedBuilder()
       .setThumbnail(`${result[4].halfbanana}`)
       .setTitle(`${result[7].halfbanana}`)

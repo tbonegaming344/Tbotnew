@@ -17,7 +17,11 @@ module.exports = {
         { name: 'Control', value: 'Control'},
         { name: 'Combo', value: 'Combo'},
         { name: 'Midrange', value: 'Midrange'},
-        { name: "Tempo", value: 'Tempo'}
+        { name: "Tempo", value: 'Tempo'}, 
+        {name: 'Aggro Combo', value: 'Aggro Combo'},
+        {name: 'Combo Midrange', value: 'Combo Midrange'},
+        {name: 'Control Combo', value: 'Control Combo'},
+        {name: 'Combo Tempo', value: 'Combo Tempo'},
       ))
           .addStringOption(option =>
       option.setName('deck_type').setDescription('The type of deck it is').setRequired(true)

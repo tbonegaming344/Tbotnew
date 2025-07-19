@@ -44,7 +44,7 @@ module.exports = {
         .setStyle(ButtonStyle.Primary)
         .setEmoji("<:Immorticia_Website:1087749695322988634>")
     );
-     const select = new StringSelectMenuBuilder()
+    const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Immorticia's decks")
       .addOptions(
@@ -94,7 +94,7 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const immorticiaDecks = {
       budgetDecks: ["budgetim"],
-      competitiveDecks: ["kaleidoscope"],
+      competitiveDecks: ["portalgun"],
       ladderDecks: ["mechascope"],
       memeDecks: ["22savage", "bastet"],
       comboDecks: [
@@ -102,15 +102,16 @@ module.exports = {
         "bastet",
         "budgetim",
         "mechascope",
+        "portalgun"
       ],
-      controlDecks: ["budgetim", "kaleidoscope", "mechascope"],
-      midrangeDecks: ["22savage", "bastet", "budgetim"],
+      controlDecks: ["budgetim", "mechascope"],
+      midrangeDecks: ["22savage", "bastet", "budgetim", "portalgun"],
       allDecks: [
         "22savage",
         "bastet",
         "budgetim",
-        "kaleidoscope",
-        "mechascope"
+        "mechascope", 
+        "portalgun"
       ],
     };
      /**
@@ -148,28 +149,29 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("mechascope", "sav");
+    const alldecksrow = createButtons("portalgun", "sav");
     const sav = createButtons("helpall", "bas");
     const bas = createButtons("savage", "bim");
-    const bim = createButtons("bastet", "kscope");
-    const kscope = createButtons("budgetim", "ms");
-    const ms = createButtons("kaleidoscope", "allhelp");
+    const bim = createButtons("bastet", "ms");
+    const ms = createButtons("budgetim", "pgun");
+    const pgun = createButtons("mechascope", "allhelp");
     const memerow = createButtons("bastet2", "sav2");
     const sav2 = createButtons("memehelp", "bas2");
     const bas2 = createButtons("savage2", "helpmeme");
-    const comborow = createButtons("mechascope2", "sav3");
+    const comborow = createButtons("portalgun2", "sav3");
     const sav3 = createButtons("combohelp", "bas3");
     const bas3 = createButtons("savage3", "bim2");
     const bim2 = createButtons("bastet3", "ms2");
-    const ms2 = createButtons("budgetim2", "helpcombo");
+    const ms2 = createButtons("budgetim2", "pgun2");
+    const pgun2 = createButtons("mechascope2", "helpcombo");
     const controlrow = createButtons("mechascope3", "bim3");
-    const bim3 = createButtons("controlhelp", "kscope2");
-    const kscope2 = createButtons("budgetim3", "ms3");
-    const ms3 = createButtons("kaleidoscope3", "helpcontrol");
-    const midrangerow = createButtons("budgetim4", "sav4");
+    const bim3 = createButtons("controlhelp", "ms3");
+    const ms3 = createButtons("budgetim3", "helpcontrol");
+    const midrangerow = createButtons("portalgun3", "sav4");
     const sav4 = createButtons("midrangehelp", "bas4");
     const bas4 = createButtons("savage4", "bim4");
-    const bim4 = createButtons("bastet4", "helpmidrange");
+    const bim4 = createButtons("bastet4", "pgun3");
+    const pgun3 = createButtons("budgetim4", "helpmidrange");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/magnificentbaddie/images/d/d1/Immortica.webp/revision/latest?cb=20220530183408"
@@ -297,7 +299,7 @@ module.exports = {
     const bastet = createDeckEmbed(result, "bastet");
     const budgetim = createDeckEmbed(result, "budgetim");
     const mechascope = createDeckEmbed(result, "otkmecha");
-    const kaleidoscope = createDeckEmbed(result, "otktrickster");
+    const portalgun = createDeckEmbed(result, "portalgun");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],
@@ -315,7 +317,7 @@ module.exports = {
         await i.reply({ embeds: [budgetim], flags: MessageFlags.Ephemeral });
       } else if (value == "comp") {
         await i.reply({
-          embeds: [kaleidoscope],
+          embeds: [portalgun],
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "ladder") {
@@ -337,7 +339,7 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         imhelp: { embed: helpim, component: row },
-        allhelp: {embed: alldecksEmbed, component: alldecksrow},
+       allhelp: {embed: alldecksEmbed, component: alldecksrow},
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         memehelp: {embed: memeEmbed, component: memerow},
         helpmeme: {embed: memeEmbed, component: memerow},
@@ -363,10 +365,6 @@ module.exports = {
         budgetim3: {embed: budgetim, component: bim3},
         bim4: {embed: budgetim, component: bim4},
         budgetim4: {embed: budgetim, component: bim4},
-        kscope: {embed: kaleidoscope, component: kscope},
-        kaleidoscope: {embed: kaleidoscope, component: kscope},
-        kscope2: {embed: kaleidoscope, component: kscope2},
-        kaleidoscope2: {embed: kaleidoscope, component: kscope2},
         sav: {embed: savage22, component: sav},
         savage: {embed: savage22, component: sav},
         sav2: {embed: savage22, component: sav2},
@@ -381,6 +379,12 @@ module.exports = {
         mechascope2: {embed: mechascope, component: ms2},
         ms3: {embed: mechascope, component: ms3},
         mechascope3: {embed: mechascope, component: ms3},
+        pgun: {embed: portalgun, component: pgun},
+        portalgun: {embed: portalgun, component: pgun},
+        pgun2: {embed: portalgun, component: pgun2},
+        portalgun2: {embed: portalgun, component: pgun2},
+        pgun3: {embed: portalgun, component: pgun3},
+        portalgun3: {embed: portalgun, component: pgun3}
       }
       const action = buttonActions[i.customId]
       if (action) {

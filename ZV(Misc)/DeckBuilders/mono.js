@@ -64,12 +64,6 @@ module.exports = {
           )
           .setValue("combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          )
-          .setValue("control"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -88,16 +82,14 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const monoDecks = {
-      competitiveDecks: ["kaleidoscope", "nohokaistars", "seacret", "slugged"],
+      competitiveDecks: ["nohokaistars", "seacret", "slugged"],
       memeDecks: ["coggerazzi"],
       aggroDecks: ["seacret"],
       comboDecks: ["coggerazzi", "seacret"],
-      controlDecks: ["kaleidoscope"],
       midrangeDecks: ["nohokaistars", "slugged"],
       tempoDecks: ["coggerazzi"],
       allDecks: [
         "coggerazzi",
-        "kaleidoscope",
         "nohokaistars",
         "seacret",
         "slugged"
@@ -139,22 +131,20 @@ module.exports = {
     const comborow = createButtons("seacret", "cog");
     const cog = createButtons("helpcombo", "sea");
     const sea = createButtons("coggerazzi", "combohelp");
-    const competitiverow = createButtons("slugged", "kscop2");
-    const kscope2 = createButtons("helpcompetitive", "nhks");
-    const nhks = createButtons("kaleidoscope2", "sea2");
+    const competitiverow = createButtons("slugged", "nhks");
+    const nhks = createButtons("helpcompetitive", "sea2");
     const sea2 = createButtons("nohokaistars", "slug");
     const slug = createButtons("seacret2", "competitivehelp");
     const midrangerow = createButtons("slugged2", "nhks2");
     const nhks2 = createButtons("helpmidrange", "slug2");
     const slug2 = createButtons("nohokaistars2", "midrangehelp");
     const alldecksrow = createButtons("slugged3", "cog2");
-    const cog2 = createButtons("helpall", "kscope3");
-    const kscope3 = createButtons("coggerazzi3", "nhks3");
-    const nhks3 = createButtons("kaleidoscope3", "sea3");
+    const cog2 = createButtons("helpall", "nhks3");
+    const nhks3 = createButtons("coggerazzi3", "sea3");
     const sea3 = createButtons("nohokaistars3", "slug3");
     const slug3 = createButtons("seacret3", "allhelp");
     const [result] =
-      await db.query(`select icebox, otktrickster, nohokaistars, seacret,
+      await db.query(`select icebox, nohokaistars, seacret,
         poggerrazzi
 from ntdecks nt
 inner join ebdecks eb
@@ -162,9 +152,7 @@ on (nt.deckinfo = eb.deckinfo)
 inner join ifdecks fi 
 on (nt.deckinfo = fi.deckinfo)
 inner join rbdecks rb 
-on (nt.deckinfo = rb.deckinfo)
-inner join imdecks im 
-on (nt.deckinfo = im.deckinfo)`);
+on (nt.deckinfo = rb.deckinfo)`);
     const user = await client.users.fetch("444700385744257034");
     const mono = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -224,7 +212,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
       return embed;
     }
     const coggerazzi = createDeckEmbed(result, "poggerrazzi");
-    const kaleidoscope = createDeckEmbed(result, "otktrickster");
     const nohonkaistars = createDeckEmbed(result, "nohokaistars");
     const seacret = createDeckEmbed(result, "seacret");
     const slugged = createDeckEmbed(result, "icebox");
@@ -249,8 +236,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
           embeds: [coggerazzi],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "control") {
-        await i.update({ embeds: [controlmono], components: [controlrow] });
       } else if (value == "combo") {
         await i.update({ embeds: [combomono], components: [comborow] });
       } else if (value == "aggro") {
@@ -280,8 +265,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         memehelp: { embed: mememono, component: memerow },
         helpcombo: { embed: combomono, component: comborow },
         combohelp: { embed: combomono, component: comborow },
-        helpcontrol: { embed: controlmono, component: controlrow },
-        controlhelp: { embed: controlmono, component: controlrow }, 
         helpall: { embed: alldecksEmbed, component: alldecksrow },
         allhelp: { embed: alldecksEmbed, component: alldecksrow },
         helpmidrange: { embed: midrangemono, component: midrangerow },
@@ -290,12 +273,6 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         coggerazzi: { embed: coggerazzi, component: cog },
         cog2: { embed: coggerazzi, component: cog2 },
         coggerazzi2: { embed: coggerazzi, component: cog2 },
-        kscope: { embed: kaleidoscope, component: kscope },
-        kaleidoscope: { embed: kaleidoscope, component: kscope },
-        kscope2: { embed: kaleidoscope, component: kscope2 },
-        kaleidoscope2: { embed: kaleidoscope, component: kscope2 },
-        kscope3: { embed: kaleidoscope, component: kscope3 },
-        kaleidoscope3: { embed: kaleidoscope, component: kscope3 },
         nhks: { embed: nohonkaistars, component: nhks },
         nohokaistars: { embed: nohonkaistars, component: nhks },
         nhks2: { embed: nohonkaistars, component: nhks2 },

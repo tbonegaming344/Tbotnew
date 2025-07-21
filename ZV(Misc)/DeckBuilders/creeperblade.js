@@ -5,25 +5,6 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
-function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
-    .setThumbnail(thumbnail)
-    .setColor("Green");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
-  }
-  return embed;
-}
 module.exports = {
   name: `creeperblade`,
   aliases: [
@@ -65,12 +46,17 @@ module.exports = {
     const [result] = await db.query(`select pablosyeezys
     from smdecks sm`);
     const user = await client.users.fetch("738926530000060416");
-    const creep = createHelpEmbed(
-      `${user.displayName} Decks`,
-      `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${creeperBladeDecks.allDecks.length} total decks in Tbot`,
-      user.displayAvatarURL()
-    );
+    const creep = new EmbedBuilder()
+      .setTitle(`${user.displayName} Decks`)
+        .setDescription(
+          `My commands for decks made by ${user.displayName} are ${toBuildString}`
+        )
+        .setFooter({
+          text: `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
+        })
+        .setThumbnail(user.displayAvatarURL())
+        .setColor("Green");
   /**
    * The createDeckEmbed function creates an embed for a specific deck
    * @param {string} deckName - The name of the deck

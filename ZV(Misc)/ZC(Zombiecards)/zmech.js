@@ -48,6 +48,11 @@ module.exports = {
           .setValue("budget")
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
+           new StringSelectMenuOptionBuilder()
+      .setLabel("Competitive Deck")
+      .setValue("comp")
+      .setDescription('Some of the Best Plant Decks in the game')
+			.setEmoji("<:compemote:1325461143136764060>"), 
         new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Decks")
           .setValue("ladder")
@@ -76,7 +81,7 @@ module.exports = {
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
+          .setLabel("Midrange Decks")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -97,17 +102,19 @@ module.exports = {
     const zmechDecks = {
       budgetDecks: ["budgetzm"],
       ladderDecks: ["binaryflagwar", "brady", "trickmech"],
+      compDecks: ["lawnmower2"],
       memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
       aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
-      comboDecks: ["binaryflagwar", "budgetzm", "trickmech", "uncrackamech", "zmoss"],
+      comboDecks: ["binaryflagwar", "budgetzm", "lawnmower2", "trickmech", "uncrackamech", "zmoss"],
       controlDecks: ["uncrackamech"],
-      midrangeDecks: ["binaryflagwar"],
+      midrangeDecks: ["binaryflagwar", "lawnmower2"],
       tempoDecks: ["brady"],
       allDecks: [
         "binaryflagwar",
         "brady",
         "budgetzm",
         "dozzamech",
+        "lawnmower2",
         "trickmech",
         "uncrackamech",
         "zmoss",
@@ -128,6 +135,7 @@ module.exports = {
     const toBuildMemeString = buildDeckString(zmechDecks.memeDecks);
     const toBuildAggroString = buildDeckString(zmechDecks.aggroDecks);
     const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
+    const toBuildMidrangeString = buildDeckString(zmechDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -150,8 +158,9 @@ module.exports = {
     const bfw = createButtons("helpall", "br");
     const br = createButtons("binaryflagwar", "bzm");
     const bzm = createButtons("brady", "dm");
-    const dm = createButtons("budgetzm", "tm");
-    const tm = createButtons("dozzamech", "um");
+    const dm = createButtons("budgetzm", "lm");
+    const lm = createButtons("dozzamech", "tm"); 
+    const tm = createButtons("lawnmower", "um");
     const um = createButtons("trickmech", "zm");
     const zm = createButtons("uncrackamech", "allhelp");
     const ladderrow = createButtons("trickmech2", "bfw2");
@@ -168,10 +177,14 @@ module.exports = {
     const tm3 = createButtons("dozzamech3", "helpaggro");
     const comborow = createButtons("zmoss3", "bfw3");
     const bfw3 = createButtons("combohelp", "bzm3");
-    const bzm3 = createButtons("binaryflagwar3", "tm4");
-    const tm4 = createButtons("budgetzm3", "um3");
+    const bzm3 = createButtons("binaryflagwar3", "lm2");
+    const lm2 = createButtons("budgetzm3", "tm4");
+    const tm4 = createButtons("lawnmower2", "um3");
     const um3 = createButtons("trickmech4", "zm3");
     const zm3 = createButtons("uncrackamech3", "helpcombo");
+    const midrangerow = createButtons("lawnmower3", "bfw4");
+    const bfw4 = createButtons("helpmidrange", "lm3");
+    const lm3 = createButtons("binaryflagwar4", "midrangehelp");
   const embed = new EmbedBuilder()
       .setThumbnail(
         "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8"
@@ -237,6 +250,13 @@ module.exports = {
       `To view the Zmech combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
   Note: Zmech has ${zmechDecks.comboDecks.length} combo decks in Tbot`
     );
+     const midrangeEmbed = createHelpEmbed(
+      "Zmech Midrange Decks",
+      `My midrange decks for Zmech(ZM) are ${toBuildMidrangeString}`,
+      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
+      `To view the Zmech midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
+Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
+    );
     const [result] = await db.query(`SELECT * FROM zmdecks`);
      /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -266,6 +286,7 @@ module.exports = {
     const budgetzm = createDeckEmbed(result, "budgetzm");
     const dozzamech = createDeckEmbed(result, "dozzamech");
     const uncrackamech = createDeckEmbed(result, "feastmech");
+    const lawnmower = createDeckEmbed(result, "lawnmower");
     const trickmech = createDeckEmbed(result, "trickmech");
     const zmoss = createDeckEmbed(result, "zmoss");
     const m = await message.channel.send({
@@ -279,7 +300,7 @@ module.exports = {
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "all") {
+     if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
@@ -290,7 +311,7 @@ module.exports = {
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.reply({ embeds: [binaryflagwar], flags: MessageFlags.Ephemeral });
+        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
         await i.reply({ embeds: [brady], flags: MessageFlags.Ephemeral });
       } else if (value == "control") {
@@ -301,6 +322,9 @@ module.exports = {
       } else if (value == "budget") {
         await i.reply({ embeds: [budgetzm], flags: MessageFlags.Ephemeral });
       }
+      else if (value == "comp") {
+        await i.reply({ embeds: [lawnmower], flags: MessageFlags.Ephemeral });
+      }
     }
     /**
      * the handleButtonInteraction function handles the button interactions for the decks
@@ -309,7 +333,7 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         helpzm: {embed: helpzm, component: row},
-        allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
+       allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         ladderhelp: {embed: ladderEmbed, component: ladderrow},
         helpladder: {embed: ladderEmbed, component: ladderrow},
@@ -319,12 +343,16 @@ module.exports = {
         helpaggro: {embed: aggroEmbed, component: aggrorow},
         combohelp: {embed: comboEmbed, component: comborow},
         helpcombo: {embed: comboEmbed, component: comborow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
         bfw: {embed: binaryflagwar, component: bfw},
         binaryflagwar: {embed: binaryflagwar, component: bfw},
         bfw2: {embed: binaryflagwar, component: bfw2},
         binaryflagwar2: {embed: binaryflagwar, component: bfw2},
         bfw3: {embed: binaryflagwar, component: bfw3},
         binaryflagwar3: {embed: binaryflagwar, component: bfw3},
+        bfw4: {embed: binaryflagwar, component: bfw4},
+        binaryflagwar4: {embed: binaryflagwar, component: bfw4},
         br: {embed: brady, component: br},
         brady: {embed: brady, component: br},
         br2: {embed: brady, component: br2},
@@ -361,6 +389,12 @@ module.exports = {
         zmoss2: {embed: zmoss, component: zm2},
         zm3: {embed: zmoss, component: zm3},
         zmoss3: {embed: zmoss, component: zm3},
+        lm: {embed: lawnmower, component: lm},
+        lawnmower: {embed: lawnmower, component: lm},
+        lm2: {embed: lawnmower, component: lm2},
+        lawnmower2: {embed: lawnmower, component: lm2},
+        lm3: {embed: lawnmower, component: lm3},
+        lawnmower3: {embed: lawnmower, component: lm3},
       }
       const action = buttonActions[i.customId];
       if (action) {

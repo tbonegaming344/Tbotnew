@@ -56,7 +56,7 @@ module.exports = {
       .setDescription('Decks that mostly only good for ranked games')
 			.setEmoji("<:ladder:1271503994857979964>"),
        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
+          .setLabel("Meme Decks")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
       new StringSelectMenuOptionBuilder()
@@ -82,11 +82,11 @@ module.exports = {
       budgetDecks: ["budgetif"],
       competitiveDecks: ["nohokaistars", "spacestars"],
       ladderDecks: ["splimps"],
-      memeDecks: ["tangen"],
+      memeDecks: ["tangen", "uno"],
       aggroDecks: ["budgetif", "splimps"],
-      comboDecks: ["spacestars", "tangen"],
-      midrangeDecks: ["nohokaistars", "spacestars", "tangen"],
-      allDecks: ["budgetif", "nohokaistars", "spacestars", "splimps", "tangen"],
+      comboDecks: ["spacestars", "tangen", "uno"],
+      midrangeDecks: ["nohokaistars", "spacestars", "tangen", "uno"],
+      allDecks: ["budgetif", "nohokaistars", "spacestars", "splimps", "tangen", "uno"],
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -119,24 +119,30 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("tangen", "bif")
+    const alldecksrow = createButtons("uno", "bif")
     const bif = createButtons("helpall", "nhks")
     const nhks = createButtons("budgetif", "stars")
     const stars = createButtons("nohokaistars", "spl")
     const spl = createButtons("spacestars", "tan")
-    const tan = createButtons("splimps", "allhelp")
+    const tan = createButtons("splimps", "un")
+    const un = createButtons("tangen", "allhelp")
     const competitiveRow = createButtons("spacestars2", "nhks2")
     const nhks2 = createButtons("helpcomp", "stars2")
     const stars2 = createButtons("nohokaistars2", "comphelp")
+    const memerow = createButtons("uno2", "tan2")
+    const tan2 = createButtons("helpmeme", "un2")
+    const un2 = createButtons("tangen2", "memehelp")
     const aggroRow = createButtons("splimps2", "bif2")
     const bif2 = createButtons("helpaggro", "spl2")
     const spl2 = createButtons("budgetif2", "aggrohelp")
-    const comboRow = createButtons("tangen2", "stars3")
-    const stars3 = createButtons("helpcombo", "tan2")
-    const tan2 = createButtons("spacestars3", "combohelp")
-    const midrangeRow = createButtons("spacestars4", "nhks3")
+    const comboRow = createButtons("uno3", "stars3")
+    const stars3 = createButtons("helpcombo", "tan3")
+    const tan3 = createButtons("spacestars3", "un3")
+    const un3 = createButtons("tangen3", "combohelp")
+    const midrangeRow = createButtons("uno4", "nhks3")
     const nhks3 = createButtons("helpmidrange", "stars4")
-    const stars4 = createButtons("nohokaistars3", "midrangehelp")
+    const stars4 = createButtons("nohokaistars3", "un4")
+    const un4 = createButtons("spacestars4", "midrangehelp")
     const alldecksEmbed = createHelpEmbed(
       "Impfinity(IF) Decks",
       `My commands for Impfinity(IF) are ${toBuildString}`, 
@@ -156,6 +162,13 @@ Note: Impfinity has ${impfinityDecks.allDecks.length} total decks in Tbot`,
         "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
         `To view the Impfinity competitive decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Impfinity has ${impfinityDecks.competitiveDecks.length} competitive decks in Tbot`
+      );
+      const memeEmbed = createHelpEmbed(
+        "Impfinity Meme Decks",
+        `My meme decks for Impfinity(IF) are ${buildDeckString(impfinityDecks.memeDecks)}`,
+        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
+        `To view the Impfinity meme decks please use the commands listed above or click on the buttons below to navigate through all decks!
+Note: Impfinity has ${impfinityDecks.memeDecks.length} meme decks in Tbot`
       );
       const aggroEmbed = createHelpEmbed(
         "Impfinity Aggro Decks",
@@ -206,6 +219,7 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
     const nohokaistars = createDeckEmbed(result, "nohokaistars");
     const tangen = createDeckEmbed(result, "tangen");
     const spacestars = createDeckEmbed(result, "spacestars");
+    const uno = createDeckEmbed(result, "uno");
     const splimps = createDeckEmbed(result, "splimps");
     const m = await message.channel.send({
       embeds: [embed],
@@ -225,7 +239,7 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
           await i.reply({embeds: [splimps], flags: MessageFlags.Ephemeral});
         }
         else if(value == "meme"){
-          await i.reply({embeds: [tangen], flags: MessageFlags.Ephemeral});
+          await i.update({embeds: [memeEmbed], components: [memerow]});
         }
         else if(value == "aggro"){
           await i.update({embeds: [aggroEmbed], components: [aggroRow]});
@@ -247,6 +261,8 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
         helpall: {embed: alldecksEmbed, component: alldecksrow},
         helpcomp: {embed: competitiveEmbed, component: competitiveRow},
         comphelp: {embed: competitiveEmbed, component: competitiveRow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpmeme: {embed: memeEmbed, component: memerow},
         helpaggro: {embed: aggroEmbed, component: aggroRow},
         aggrohelp: {embed: aggroEmbed, component: aggroRow},
         combohelp: {embed: comboEmbed, component: comboRow},
@@ -279,6 +295,16 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
         tangen: {embed: tangen, component: tan},
         tan2: {embed: tangen, component: tan2},
         tangen2: {embed: tangen, component: tan2},
+        tan3: {embed: tangen, component: tan3},
+        tangen3: {embed: tangen, component: tan3},
+        un: {embed: uno, component: un},
+        uno: {embed: uno, component: un},
+        un2: {embed: uno, component: un2},
+        uno2: {embed: uno, component: un2},
+        un3: {embed: uno, component: un3},
+        uno3: {embed: uno, component: un3},
+        un4: {embed: uno, component: un4},
+        uno4: {embed: uno, component: un4},
       }
       const action = buttonActions[i.customId];
       if(action) {

@@ -416,6 +416,7 @@ module.exports = {
       ],
       competitiveDecks: [
         "boltbolt",
+        "cardsbolt",
         "lawnmower2",
         "limerence",
         "lockthebathroom",
@@ -448,7 +449,6 @@ module.exports = {
         "banhammer",
         "bastet",
         "bonusducks",
-        "coggerazzi",
         "conjureleap",
         "dozzamech",
         "floss",
@@ -499,7 +499,7 @@ module.exports = {
         "budgetsm",
         "budgetykm",
         "budgetzm",
-        "coggerazzi",
+        "cardsbolt",
         "cryoboy",
         "floss",
         "frozentelimps",
@@ -574,7 +574,7 @@ module.exports = {
       ],
       tempoDecks: [
         "brady",
-        "coggerazzi",
+        "cardsbolt",
         "conjureleap",
         "lockthebathroom",
       ],
@@ -598,7 +598,7 @@ module.exports = {
         "budgetsm",
         "budgetykm",
         "budgetzm",
-        "coggerazzi",
+        "cardsbolt",
         "conjureleap",
         "cryoboy",
         "dozzamech",
@@ -868,9 +868,9 @@ module.exports = {
     const bsb = createButtons("budgetrb", "bsm");
     const bsm = createButtons("budgetsb", "bykm");
     const bykm = createButtons("budgetsm", "bzm");
-    const bzm = createButtons("budgetykm", "cog");
-    const cog = createButtons("budgetzm", "cleap");
-    const cleap = createButtons("coggerazzi", "cboy");
+    const bzm = createButtons("budgetykm", "cbolt");
+    const cbolt = createButtons("budgetzm", "cleap");
+    const cleap = createButtons("cardsbolt", "cboy");
     const cboy = createButtons("conjureleap", "dmech");
     const dmech = createButtons("cryoboy", "flo");
     const flo = createButtons("dozzamech", "ftimps");
@@ -927,8 +927,9 @@ module.exports = {
     const bykm2 = createButtons("budgetsm2", "bzm2");
     const bzm2 = createButtons("budgetykm2", "helpzbudget");
     const compzrow = createButtons("trickstache2", "bbolt2");
-    const bbolt2 = createButtons("helpzcomp", "lmower2");
-    const lmower2 = createButtons("boltbolt2", "lime2");
+    const bbolt2 = createButtons("helpzcomp", "cbolt2");
+    const cbolt2 = createButtons("boltbolt2", "lmower2");
+    const lmower2 = createButtons("cardsbolt2", "lime2");
     const lime2 = createButtons("lawnmower2", "ltbr2");
     const ltbr2 = createButtons("limerence2", "pyeeyz2");
     const pyeeyz2 = createButtons("lockthebathroom2", "pip2");
@@ -958,9 +959,8 @@ module.exports = {
     const sav2 = createButtons("helpzmeme", "bhammer2");
     const bhammer2 = createButtons("savage2", "bas2");
     const bas2 = createButtons("banhammer2", "bducks2");
-    const bducks2 = createButtons("bastet2", "cog2");
-    const cog2 = createButtons("bonusducks2", "cleap2");
-    const cleap2 = createButtons("coggerazzi2", "dmech2");
+    const bducks2 = createButtons("bastet2", "cleap2");
+    const cleap2 = createButtons("bonusducks2", "dmech2");
     const dmech2 = createButtons("conjureleap2", "flo2");
     const flo2 = createButtons("dozzamech2", "ftimps2");
     const ftimps2 = createButtons("floss2", "hter2");
@@ -1008,9 +1008,9 @@ module.exports = {
     const bnt4 = createButtons("budgetim3", "bsm4");
     const bsm4 = createButtons("budgetnt4", "bykm3");
     const bykm3 = createButtons("budgetsm4", "bzm4");
-    const bzm4 = createButtons("budgetykm3", "cog3");
-    const cog3 = createButtons("budgetzm3", "cboy3");
-    const cboy3 = createButtons("coggerazzi3", "flo3");
+    const bzm4 = createButtons("budgetykm3", "cbolt3");
+    const cbolt3 = createButtons("budgetzm3", "cboy3");
+    const cboy3 = createButtons("cardsbolt3", "flo3");
     const flo3 = createButtons("cryoboy3", "ftimps3");
     const ftimps3 = createButtons("floss3", "gps4");
     const gps4 = createButtons("frozentelimps3", "hter3");
@@ -1080,9 +1080,9 @@ module.exports = {
     const wsports4 = createButtons("uno4", "ykmartin4");
     const ykmartin4 = createButtons("watersports4", "midzhelp");
     const tempozrow = createButtons("lockthebathroom3", "brad3");
-    const brad3 = createButtons("helpztempo", "cog4");
-    const cog4 = createButtons("brady3", "cleap3");
-    const cleap3 = createButtons("coggerazzi4", "ltbr3");
+    const brad3 = createButtons("helpztempo", "cbolt4");
+    const cbolt4 = createButtons("brady3", "cleap3");
+    const cleap3 = createButtons("cardsbolt4", "ltbr3");
     const ltbr3 = createButtons("conjureleap3", "tempozhelp");
     const Ccommands = Array.from(client.commands.values());
     const commands = Ccommands.filter((command) => {
@@ -1454,7 +1454,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const igmablobchum = createZombieDeckEmbed(result, "igmablobchum");
     const marxbolt = createZombieDeckEmbed(result, "marxbolt");
     const mechacontrol = createZombieDeckEmbed(result, "mechacontrol");
-    const coggerazzi = createZombieDeckEmbed(result, "poggerrazzi");
+    const cardsbolt = createZombieDeckEmbed(result, "poggerrazzi");
     const sunbandits = createZombieDeckEmbed(result, "sunbandits");
     const budgetsm = createZombieDeckEmbed(result, "budgetsm");
     const pablosyeezys = createZombieDeckEmbed(result, "pablosyeezys");
@@ -1871,14 +1871,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         budgetzm3: { embed: budgetzm, component: bzm3 },
         bzm4: { embed: budgetzm, component: bzm4 },
         budgetzm4: { embed: budgetzm, component: bzm4 },
-        cog: { embed: coggerazzi, component: cog },
-        coggerazzi: { embed: coggerazzi, component: cog },
-        cog2: { embed: coggerazzi, component: cog2 },
-        coggerazzi2: { embed: coggerazzi, component: cog2 },
-        cog3: { embed: coggerazzi, component: cog3 },
-        coggerazzi3: { embed: coggerazzi, component: cog3 },
-        cog4: { embed: coggerazzi, component: cog4 },
-        coggerazzi4: { embed: coggerazzi, component: cog4 },
+        cbolt: { embed: cardsbolt, component: cbolt },
+        cardsbolt: { embed: cardsbolt, component: cbolt },
+        cbolt2: { embed: cardsbolt, component: cbolt2 },
+        cardsbolt2: { embed: cardsbolt, component: cbolt2 },
+        cbolt3: { embed: cardsbolt, component: cbolt3 },
+        cardsbolt3: { embed: cardsbolt, component: cbolt3 },
         cleap: { embed: conjureleap, component: cleap },
         conjureleap: { embed: conjureleap, component: cleap },
         cleap2: { embed: conjureleap, component: cleap2 },

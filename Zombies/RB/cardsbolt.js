@@ -1,7 +1,7 @@
 const { EmbedBuilder } = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
-  name: `coggerazzi`,
+  name: `cardsbolt`,
   aliases: [
     `poggerrazzirb`,
     `pogrb`,

@@ -101,27 +101,26 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const rustboltDecks = {
       budgetDecks: ["budgetrb"],
-      competitiveDecks: ["boltbolt"],
+      competitiveDecks: ["boltbolt", "cardsbolt"],
       ladderDecks: ["marxbolt", "mechacontrol"],
       memeDecks: [
-        "coggerazzi",
         "igmablobchum",
         "sunbandits",
       ],
       aggroDecks: ["marxbolt"],
       comboDecks: [
         "boltbolt",
-        "coggerazzi",
+        "cardsbolt",
         "igmablobchum",
         "sunbandits",
       ],
       controlDecks: ["mechacontrol", "sunbandits"],
       midrangeDecks: ["boltbolt", "budgetrb", "igmablobchum"],
-      tempoDecks: ["coggerazzi"],
+      tempoDecks: ["cardsbolt"],
       allDecks: [
         "boltbolt",
         "budgetrb",
-        "coggerazzi",
+        "cardsbolt",
         "igmablobchum",
         "marxbolt",
         "mechacontrol",
@@ -139,6 +138,7 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(rustboltDecks.allDecks);
+    const toBuildCompString = buildDeckString(rustboltDecks.competitiveDecks);
     const toBuildLadderString = buildDeckString(rustboltDecks.ladderDecks);
     const toBuildMemeString = buildDeckString(rustboltDecks.memeDecks);
     const toBuildComboString = buildDeckString(rustboltDecks.comboDecks);
@@ -164,30 +164,32 @@ module.exports = {
     }
     const alldecksrow = createButtons("sunbandits", "bol");
     const bol = createButtons("helpall", "brb");
-    const brb = createButtons("boltbolt", "cog");
-    const cog = createButtons("budgetrb", "igb");
-    const igb = createButtons("coggerazzi", "marx");
+    const brb = createButtons("boltbolt", "cbolt");
+    const cbolt = createButtons("budgetrb", "igb");
+    const igb = createButtons("cardsbolt", "marx");
     const marx = createButtons("igmablobchum", "mc");
     const mc = createButtons("marxbolt", "sb");
     const sb = createButtons("mechacontrol", "allhelp");
+    const comprow = createButtons("cardsbolt2", "bol2"); 
+    const bol2 = createButtons("helpcomp", "cbolt2");
+    const cbolt2 = createButtons("boltbolt2", "comphelp");
     const ladderrow = createButtons("mechacontrol2", "marx2");
     const marx2 = createButtons("ladderhelp", "mc2");
     const mc2 = createButtons("marxbolt2", "helpladder");
-    const memerow = createButtons("sunbandits2", "cog2");
-    const cog2 = createButtons("memehelp", "igb2");
-    const igb2 = createButtons("coggerazzi2", "sb2");
+    const memerow = createButtons("sunbandits2", "igb2");
+    const igb2 = createButtons("memehelp", "sb2");
     const sb2 = createButtons("igmablobchum2", "helpmeme");
-    const comborow = createButtons("sunbandits3", "bol2");
-    const bol2 = createButtons("combohelp", "cog3");
-    const cog3 = createButtons("boltbolt2", "igb3");
-    const igb3 = createButtons("coggerazzi3", "sb3");
+    const comborow = createButtons("sunbandits3", "bol3");
+    const bol3 = createButtons("combohelp", "cbolt3");
+    const cbolt3 = createButtons("boltbolt3", "igb3");
+    const igb3 = createButtons("cardsbolt3", "sb3");
     const sb3 = createButtons("igmablobchum3", "helpcombo");
     const controlrow = createButtons("sunbandits4", "mc3");
     const mc3 = createButtons("controlhelp", "sb4");
     const sb4 = createButtons("mechacontrol3", "helpcontrol");
-    const midrangerow = createButtons("igmablobchum4", "bol3");
-    const bol3 = createButtons("midrangehelp", "brb2");
-    const brb2 = createButtons("boltbolt3", "igb4");
+    const midrangerow = createButtons("igmablobchum4", "bol4");
+    const bol4 = createButtons("midrangehelp", "brb2");
+    const brb2 = createButtons("boltbolt4", "igb4");
     const igb4 = createButtons("budgetrb2", "helpmidrange");
     const embed = new EmbedBuilder()
       .setThumbnail(
@@ -225,6 +227,14 @@ module.exports = {
       `To view the RustBolt decks please select an option from the select menu below!
   Note: Rustbolt has ${rustboltDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
+    );
+     const compEmbed = createHelpEmbed(
+      "Rustbolt Competitive Decks",
+      `My commands for Rustbolt(RB) are ${toBuildCompString}`,
+      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027",
+      `To view the RustBolt competitive decks please use the commands listed above or click on the
+buttons below to navigate through all competitive decks!
+Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive decks in Tbot`
     );
     const ladderEmbed = createHelpEmbed(
       "Rustbolt Ladder Decks",
@@ -290,7 +300,7 @@ module.exports = {
     const igmablobchum = createDeckEmbed(result, "igmablobchum");
     const marxbolt = createDeckEmbed(result, "marxbolt");
     const mechacontrol = createDeckEmbed(result, "mechacontrol");
-    const coggerazzi = createDeckEmbed(result, "poggerrazzi");
+    const cardsbolt = createDeckEmbed(result, "poggerrazzi");
     const sunbandits = createDeckEmbed(result, "sunbandits");
     const m = await message.channel.send({
       embeds: [embed],
@@ -306,7 +316,7 @@ module.exports = {
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "comp") {
-        await i.reply({embeds: [boltbolt], flags: MessageFlags.Ephemeral})
+        await i.update({ embeds: [compEmbed], components: [comprow] });
       } else if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
@@ -320,7 +330,7 @@ module.exports = {
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
-        await i.replY({ embeds: [coggerazzi], flags: MessageFlags.Ephemeral });
+        await i.replY({ embeds: [cardsbolt], flags: MessageFlags.Ephemeral });
       } else if (value == "budget") {
         await i.reply({ embeds: [budgetrb], flags: MessageFlags.Ephemeral });
       }
@@ -344,6 +354,8 @@ module.exports = {
         controlhelp: { embed: controlEmbed, component: controlrow },
         helpmidrange: { embed: midrangeEmbed, component: midrangerow },
         midrangehelp: { embed: midrangeEmbed, component: midrangerow },
+        helpcomp: { embed: compEmbed, component: comprow },
+        comphelp: { embed: compEmbed, component: comprow },
         bol: { embed: boltbolt, component: bol },
         boltbolt: { embed: boltbolt, component: bol },
         bol2: { embed: boltbolt, component: bol2 },
@@ -354,12 +366,12 @@ module.exports = {
         budgetrb: { embed: budgetrb, component: brb },
         brb2: { embed: budgetrb, component: brb2 },
         budgetrb2: { embed: budgetrb, component: brb2 },
-        cog: { embed: coggerazzi, component: cog },
-        coggerazzi: { embed: coggerazzi, component: cog },
-        cog2: { embed: coggerazzi, component: cog2 },
-        coggerazzi2: { embed: coggerazzi, component: cog2 },
-        cog3: { embed: coggerazzi, component: cog3 },
-        coggerazzi3: { embed: coggerazzi, component: cog3 },
+        cbolt: { embed: cardsbolt, component: cbolt },
+        cardsbolt: { embed: cardsbolt, component: cbolt },
+        cbolt2: { embed: cardsbolt, component: cbolt2 },
+        cardsbolt2: { embed: cardsbolt, component: cbolt2 },
+        cbolt3: { embed: cardsbolt, component: cbolt3 },
+        cardsbolt3: { embed: cardsbolt, component: cbolt3 },
         igb: { embed: igmablobchum, component: igb },
         igmablobchum: { embed: igmablobchum, component: igb },
         igb2: { embed: igmablobchum, component: igb2 },
@@ -385,7 +397,7 @@ module.exports = {
         sb3: { embed: sunbandits, component: sb3 },
         sunbandits3: { embed: sunbandits, component: sb3 },
         sb4: { embed: sunbandits, component: sb4 },
-        sunbandits4: { embed: sunbandits, component: sb4 },
+        sunbandits4: { embed: sunbandits, component: sb4 }
       };
       const action = buttonActions[i.customId];
       if (action) {

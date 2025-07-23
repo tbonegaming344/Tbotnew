@@ -438,6 +438,7 @@ module.exports = {
         "gargstar22",
         "gomorrah",
         "gravepiratestache",
+        "luminous",
         "marxbolt",
         "mechacontrol",
         "schoolyard",
@@ -557,6 +558,7 @@ module.exports = {
         "ladytuna",
         "lawnmower2",
         "limerence",
+        "luminous",
         "lunchtime",
         "pablosyeezys",
         "piport",
@@ -577,6 +579,7 @@ module.exports = {
         "cardsbolt",
         "conjureleap",
         "lockthebathroom",
+        "luminous"
       ],
       allDecks: [
         "22savage",
@@ -614,6 +617,7 @@ module.exports = {
         "lawnmower2",
         "limerence",
         "lockthebathroom",
+        "luminous",
         "lunchtime",
         "marxbolt",
         "mechacontrol",
@@ -884,8 +888,9 @@ module.exports = {
     const lime = createButtons("igmablobchum", "lt");
     const lt = createButtons("limerence", "lmower");
     const lmower = createButtons("ladytuns", "ltbr");
-    const ltbr = createButtons("lawnmower", "ltime");
-    const ltime = createButtons("lockthebathroom", "mbolt");
+    const ltbr = createButtons("lawnmower", "lum");
+    const lum = createButtons("lockthebathroom", "ltime");
+    const ltime = createButtons("luminous", "mbolt");
     const mbolt = createButtons("lunchtime", "mcon");
     const mcon = createButtons("marxbolt", "mgold");
     const mgold = createButtons("mechacontrol", "mscope");
@@ -948,8 +953,9 @@ module.exports = {
     const cboy2 = createButtons("brady2", "gstar222");
     const gstar222 = createButtons("cryoboy2", "gom2");
     const gom2 = createButtons("gargstar222", "gps2");
-    const gps2 = createButtons("gomorrah2", "mbolt2");
-    const mbolt2 = createButtons("gravepiratestache2", "mcon2");
+    const gps2 = createButtons("gomorrah2", "lum2");
+    const lum2 = createButtons("gravepiratestache2", "mbolt2");
+    const mbolt2 = createButtons("luminous2", "mcon2");
     const mcon2 = createButtons("marxbolt2", "mscope2");
     const mscope2 = createButtons("mechacontrol2", "syard2");
     const syard2 = createButtons("mechascope2", "spl2");
@@ -1064,8 +1070,9 @@ module.exports = {
     const igbc4 = createButtons("himpter4", "lmower4");
     const lmower4 = createButtons("igmablobchum4", "lime3");
     const lime3 = createButtons("lawnmower4", "lt3");
-    const lt3 = createButtons("limerence3", "ltime3");
-    const ltime3 = createButtons("ladytuna3", "pyeeyz4");
+    const lt3 = createButtons("limerence3", "lum3");
+    const lum3 = createButtons("ladytuna3", "ltime3");
+    const ltime3 = createButtons("luminous3", "pyeeyz4");
     const pyeeyz4 = createButtons("lunchtime3", "pip3");
     const pip3 = createButtons("pablosyeezys4", "pgun4");
     const pgun4 = createButtons("piport3", "nhks3");
@@ -1079,11 +1086,12 @@ module.exports = {
     const un4 = createButtons("trickstache4", "wsports4");
     const wsports4 = createButtons("uno4", "ykmartin4");
     const ykmartin4 = createButtons("watersports4", "midzhelp");
-    const tempozrow = createButtons("lockthebathroom3", "brad3");
+    const tempozrow = createButtons("luminous4", "brad3");
     const brad3 = createButtons("helpztempo", "cbolt4");
     const cbolt4 = createButtons("brady3", "cleap3");
     const cleap3 = createButtons("cardsbolt4", "ltbr3");
-    const ltbr3 = createButtons("conjureleap3", "tempozhelp");
+    const ltbr3 = createButtons("conjureleap3", "lum4");
+    const lum4 = createButtons("lockthebathroom3", "tempozhelp");
     const Ccommands = Array.from(client.commands.values());
     const commands = Ccommands.filter((command) => {
       if (
@@ -1451,6 +1459,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const youngeggmartin = createZombieDeckEmbed(result, "youngeggmartin");
     const boltbolt = createZombieDeckEmbed(result, "boltbolt");
     const budgetrb = createZombieDeckEmbed(result, "budgetrb");
+    const luminous = createZombieDeckEmbed(result, "luminous");
     const igmablobchum = createZombieDeckEmbed(result, "igmablobchum");
     const marxbolt = createZombieDeckEmbed(result, "marxbolt");
     const mechacontrol = createZombieDeckEmbed(result, "mechacontrol");
@@ -1877,6 +1886,8 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         cardsbolt2: { embed: cardsbolt, component: cbolt2 },
         cbolt3: { embed: cardsbolt, component: cbolt3 },
         cardsbolt3: { embed: cardsbolt, component: cbolt3 },
+        cbolt4: { embed: cardsbolt, component: cbolt4 },
+        cardsbolt4: { embed: cardsbolt, component: cbolt4 },
         cleap: { embed: conjureleap, component: cleap },
         conjureleap: { embed: conjureleap, component: cleap },
         cleap2: { embed: conjureleap, component: cleap2 },
@@ -2299,6 +2310,14 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         lawnmower3: { embed: lawnmower, component: lmower3 },
         lmower4: { embed: lawnmower, component: lmower4 },
         lawnmower4: { embed: lawnmower, component: lmower4 },
+        lum: { embed: luminous, component: lum },
+        luminous: { embed: luminous, component: lum },
+        lum2: { embed: luminous, component: lum2 },
+        luminous2: { embed: luminous, component: lum2 },
+        lum3: { embed: luminous, component: lum3 },
+        luminous3: { embed: luminous, component: lum3 },
+        lum4: { embed: luminous, component: lum4 },
+        luminous4: { embed: luminous, component: lum4 }
       };
       const action = buttonActions[i.customId];
       if (action) {

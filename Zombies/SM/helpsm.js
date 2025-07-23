@@ -64,6 +64,11 @@ module.exports = {
           .setValue("comp")
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Deck")
           .setValue("meme")
@@ -92,6 +97,12 @@ module.exports = {
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
+          new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Deck")
+          .setValue("tempo")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          ),
         new StringSelectMenuOptionBuilder()
           .setLabel("All Smash Decks")
           .setValue("all")
@@ -101,14 +112,17 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const smashDecks = {
       budgetDecks: ["budgetsm"],
-      competitiveDecks: ["pablosyeezys"],
+      competitiveDecks: ["pablosyeezys"], 
+      ladderDecks: ["luminous"],
       memeDecks: ["whalepharaoh"],
       aggroDecks: ["budgetsm"],
       comboDecks: ["budgetsm", "pablosyeezys", "whalepharaoh"],
       controlDecks: ["whalepharaoh"],
-      midrangeDecks: ["pablosyeezys"],
+      midrangeDecks: ["luminous", "pablosyeezys"],
+      tempoDecks: ["luminous"],
       allDecks: [
         "budgetsm",
+        "luminous",
         "pablosyeezys",
         "whalepharaoh",
       ],
@@ -124,6 +138,7 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(smashDecks.allDecks);
+    const toBuildMidrangeString = buildDeckString(smashDecks.midrangeDecks);
     const toBuildComboString = buildDeckString(smashDecks.comboDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -144,13 +159,17 @@ module.exports = {
       );
     }
     const alldecksrow = createButtons("whalepharaoh", "bsm");
-    const bsm = createButtons("helpall", "py");
-    const py = createButtons("budgetsm", "wp");
+    const bsm = createButtons("helpall", "lum");
+    const lum = createButtons("budgetsm", "py");
+    const py = createButtons("luminous", "wp");
     const wp = createButtons("pablosyeezys", "allhelp");
     const comborow = createButtons("whalepharoh2", "bsm2");
     const bsm2 = createButtons("combohelp", "py2");
     const py2 = createButtons("budgetsm2", "wp2");
     const wp2 = createButtons("pablosyeezys2", "helpcombo");
+    const midrangerow = createButtons("pablosyeezys3", "lum2");
+    const lum2 = createButtons("helpmidrange", "py3");
+    const py3 = createButtons("luminous2", "midrangehelp");
     const helpsm = createHelpEmbed(
       "Smash Decks",
       `To view the Smash decks please select an option from the select menu below!
@@ -170,6 +189,13 @@ Note: Smash has ${smashDecks.allDecks.length} total decks in Tbot`
       "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543",
       `To view the Smash combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
 Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
+    );
+    const midrangeEmbed = createHelpEmbed(
+      "Smash Midrange Decks",
+      `My midrange decks for Smash(SM) are ${toBuildMidrangeString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543",
+      `To view the Smash midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
+Note: Smash has ${smashDecks.midrangeDecks.length} midrange decks in Tbot`
     );
     const [result] = await db.query(`SELECT * FROM smdecks`);
      /**
@@ -196,6 +222,7 @@ Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
       return embed;
     }
     const budgetsm = createDeckEmbed(result, "budgetsm");
+    const luminous = createDeckEmbed(result, "luminous");
     const pablosyeezys = createDeckEmbed(result, "pablosyeezys");
     const whalepharaoh = createDeckEmbed(result, "whalepharaoh");
     const m = await message.channel.send({
@@ -219,11 +246,14 @@ Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.reply({ embeds: [pablosyeezys], flags: MessageFlags.Ephemeral });
+        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "budget" || value == "tempo") {
         await i.reply({ embeds: [budgetsm], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
+      }
+      else if(value == "ladder" || value == "tempo"){
+        await i.reply({ embeds: [luminous], flags: MessageFlags.Ephemeral });
       }
     }
     /**
@@ -236,6 +266,8 @@ Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
         allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
         combohelp: {embed: comboEmbed, component: comborow}, 
         helpcombo: {embed: comboEmbed, component: comborow}, 
+        midrangehelp: {embed: midrangeEmbed, component: midrangerow},
+        helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         bsm: {embed: budgetsm, component: bsm}, 
         budgetsm: {embed: budgetsm, component: bsm},
         bsm2: {embed: budgetsm, component: bsm2},
@@ -244,10 +276,16 @@ Note: Smash has ${smashDecks.comboDecks.length} combo decks in Tbot`
         pablosyeezys: {embed: pablosyeezys, component: py},
         py2: {embed: pablosyeezys, component: py2},
         pablosyeezys2: {embed: pablosyeezys, component: py2},
+        py3: {embed: pablosyeezys, component: py3},
+        pablosyeezys3: {embed: pablosyeezys, component: py3},
         wp: {embed: whalepharaoh, component: wp},
         whalepharaoh: {embed: whalepharaoh, component: wp},
         wp2: {embed: whalepharaoh, component: wp2},
         whalepharaoh2: {embed: whalepharaoh, component: wp2},
+        lum: {embed: luminous, component: lum},
+        luminous: {embed: luminous, component: lum},
+        lum2: {embed: luminous, component: lum2},
+        luminous2: {embed: luminous, component: lum2},
       }
       const action = buttonActions[i.customId];
       if (action) {

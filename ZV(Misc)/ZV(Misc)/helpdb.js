@@ -273,6 +273,7 @@ module.exports = {
         "healburn",
         "healthotk",
         "lasersnap",
+        "leafstars",
         "lifecouldbedream",
         "mspotk",
         "nuttin",
@@ -282,7 +283,6 @@ module.exports = {
         "recycling",
         "reflourished",
         "savagemayflower",
-        "starrings",
         "startron"
       ],
       aggroDecks: [
@@ -308,13 +308,13 @@ module.exports = {
         "healburn",
         "healthotk",
         "lasersnap",
+        "leafstars",
         "mspotk",
         "nuttin",
         "plantmop",
         "psychosolstice",
         "reflourished",
         "savagemayflower",
-        "starrings",
         "startron",
         "venice"
       ],
@@ -340,9 +340,9 @@ module.exports = {
         "healmidrose",
         "healthotk",
         "lasersnap",
+        "leafstars",
         "psychosolstice",
         "recycling",
-        "starrings",
         "startron",
         "venice",
       ],
@@ -379,6 +379,7 @@ module.exports = {
         "healmidrose",
         "healthotk",
         "lasersnap",
+        "leafstars",
         "leafystrike",
         "lifecouldbedream",
         "logbait",
@@ -394,7 +395,6 @@ module.exports = {
         "recycling",
         "reflourished",
         "savagemayflower",
-        "starrings",
         "startron",
         "toyotacontrolla",
         "venice",
@@ -721,8 +721,9 @@ module.exports = {
     const hburn = createButtons("ginseng", "hmr");
     const hmr = createButtons("healburn", "hotk");
     const hotk = createButtons("healmidrose", "lsnap");
-    const lsnap = createButtons("healthotk", "lstrike");
-    const lstrike = createButtons("lasersnap", "lcbd");
+    const lsnap = createButtons("healthotk", "lstars");
+    const lstars = createButtons("lasersnap", "lstrike");
+    const lstrike = createButtons("leafstars", "lcbd");
     const lcbd = createButtons("leafystrike", "lbait");
     const lbait = createButtons("lifecouldbedream", "neuro");
     const neuro = createButtons("logbait", "nut");
@@ -736,9 +737,8 @@ module.exports = {
     const radio = createButtons("psychosolstice", "recy");
     const recy = createButtons("radiotherapy", "rfl");
     const rfl = createButtons("recycling", "smf");
-    const smf = createButtons("reflourished", "srings");
-    const srings = createButtons("savagemayflower", "stron");
-    const stron = createButtons("starrings", "tc");
+    const smf = createButtons("reflourished", "stron");
+    const stron = createButtons("savagemayflower", "tc");
     const tc = createButtons("startron", "vce");
     const vce = createButtons("toyotacontrolla", "allphelp");
     const budgetprow = createButtons("budgetwk2", "bcc2");
@@ -786,9 +786,8 @@ module.exports = {
     const psol2 = createButtons("popsicle2", "recy2");
     const recy2 = createButtons("psychosolstice2", "rfl2");
     const rfl2 = createButtons("recycling2", "smf2");
-    const smf2 = createButtons("reflourished2", "srings2");
-    const srings2 = createButtons("savagemayflower2", "stron2");
-    const stron2 = createButtons("starrings2", "helppmeme");
+    const smf2 = createButtons("reflourished2", "stron2");
+    const stron2 = createButtons("savagemayflower2", "helppmeme");
     const aggroprow = createButtons("pbeans3", "bcc3");
     const bcc3 = createButtons("helppaggro", "bct3");
     const bct3 = createButtons("budgetcc3", "bnc3");
@@ -810,15 +809,15 @@ module.exports = {
     const gnuts4 = createButtons("funnyflare3", "hburn3");
     const hburn3 = createButtons("goingnuts4", "hotk3");
     const hotk3 = createButtons("healburn3", "lsnap3");
-    const lsnap3 = createButtons("healthotk3", "msp3");
-    const msp3 = createButtons("lasersnap3", "nut3");
+    const lsnap3 = createButtons("healthotk3", "lstars3");
+    const lstars3 = createButtons("lasersnap3", "msp3");
+    const msp3 = createButtons("leafstars3", "nut3");
     const nut3 = createButtons("mspotk3", "plmop3");
     const plmop3 = createButtons("nuttin3", "psol3");
     const psol3 = createButtons("plantmop3", "rfl3");
     const rfl3 = createButtons("psychosolstice3", "smf3");
-    const smf3 = createButtons("reflourished3", "srings3");
-    const srings3 = createButtons("savagemayflower3", "stron3");
-    const stron3 = createButtons("starrings3", "vce3");
+    const smf3 = createButtons("reflourished3", "stron3");
+    const stron3 = createButtons("savagemayflower3", "vce3");
     const vce3 = createButtons("startron3", "helppcombo");
     const controlprow = createButtons("toyotacontrolla3", "chemo3");
     const chemo3 = createButtons("helppcontrol", "gseg3");
@@ -841,11 +840,11 @@ module.exports = {
     const hburn4 = createButtons("funnyflare4", "hmr3");
     const hmr3 = createButtons("healburn4", "hotk4");
     const hotk4 = createButtons("healmidrose3", "lsnap4");
-    const lsnap4 = createButtons("healthotk4", "psol4");
-    const psol4 = createButtons("lasersnap4", "recy3");
-    const recy3 = createButtons("psychosolstice4", "srings4");
-    const srings4 = createButtons("recyling3", "stron4");
-    const stron4 = createButtons("starrings4", "vce4");
+    const lsnap4 = createButtons("healthotk4", "lstars4");
+    const lstars4 = createButtons("lasersnap4", "psol4");
+    const psol4 = createButtons("leafstars4", "recy3");
+    const recy3 = createButtons("psychosolstice4", "stron4");
+    const stron4 = createButtons("recyling3", "vce4");
     const vce4 = createButtons("startron4", "midrangephelp");
     const tempoprow = createButtons("lifecouldbedream3", "wr1003");
     const wr1003 = createButtons("tempophelp", "bay4");
@@ -1372,7 +1371,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetgs = createPlantDeckEmbed(result, "budgetgs");
     const pbeans = createPlantDeckEmbed(result, "pbeans");
     const savagemayflower = createPlantDeckEmbed(result, "savagemayflower");
-    const starrings = createPlantDeckEmbed(result, "sovietonion");
+    const leafstars= createPlantDeckEmbed(result, "sovietonion");
     const budgetnc = createPlantDeckEmbed(result, "budgetnc");
     const espressoaggro = createPlantDeckEmbed(result, "espressoaggro");
     const cyburn = createPlantDeckEmbed(result, "cyburn");
@@ -1738,14 +1737,14 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         neurotherapy2: { embed: neurotherapy, component: neuro2 },
         neuro3: { embed: neurotherapy, component: neuro3 },
         neurotherapy3: { embed: neurotherapy, component: neuro3 },
-        srings: { embed: starrings, component: srings },
-        starrings: { embed: starrings, component: srings },
-        srings2: { embed: starrings, component: srings2 },
-        starrings2: { embed: starrings, component: srings2 },
-        srings3: { embed: starrings, component: srings3 },
-        starrings3: { embed: starrings, component: srings3 },
-        srings4: { embed: starrings, component: srings4 },
-        starrings4: { embed: starrings, component: srings4 },
+        lstars: { embed: leafstars, component: lstars },
+        leafstars: { embed: leafstars, component: lstars },
+        lstars2: { embed: leafstars, component: lstars2 },
+        leafstars2: { embed: leafstars, component: lstars2 },
+        lstars3: { embed: leafstars, component: lstars3 },
+        leafstars3: { embed: leafstars, component: lstars3 },
+        lstars4: { embed: leafstars, component: lstars4 },
+        leafstars4: { embed: leafstars, component: lstars4 },
         stron: { embed: startron, component: stron },
         startron: { embed: startron, component: stron },
         stron2: { embed: startron, component: stron2 },

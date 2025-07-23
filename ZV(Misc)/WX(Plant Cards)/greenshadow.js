@@ -88,18 +88,18 @@ module.exports = {
       budgetDecks: ["budgetmopshadow"],
       competitiveDecks: ["cartasbuenas"],
       ladderDecks: ["pbeans"],
-      memeDecks: ["100%winrate", "savagemayflower", "starrings"],
+      memeDecks: ["100%winrate", "leafstars", "savagemayflower"],
       aggroDecks: ["cartasbuenas", "pbeans"],
-      comboDecks: ["savagemayflower", "starrings"],
-      midrangeDecks: ["budgetmopshadow", "starrings"],
+      comboDecks: ["leafstars", "savagemayflower"],
+      midrangeDecks: ["budgetmopshadow", "leafstars"],
       tempoDecks: ["100%winrate"],
       allDecks: [
         "100%winrate",
         "budgetmopshadow",
         "cartasbuenas",
+        "leafstars",
         "pbeans",
-        "savagemayflower",
-        "starrings",
+        "savagemayflower"
       ],
     };
     /**
@@ -131,26 +131,26 @@ module.exports = {
     const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
     const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
     const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
-    const memerow = createButtons("starrings", "wr100");
-    const wr100 = createButtons("helpmeme", "smf");
-    const smf = createButtons("winrate100", "srings");
-    const srings = createButtons("savagemayflower", "memehelp");
-    const comborow = createButtons("starrings2", "smf2");
-    const smf2 = createButtons("helpcombo", "srings2");
-    const srings2 = createButtons("savagemayflower2", "combohelp");
-    const midrangerow = createButtons("starrings3", "bms");
-    const bms = createButtons("helpmidrange", "srings3");
-    const srings3 = createButtons("budgetmopshadow", "midrangehelp");
+    const memerow = createButtons("savagemayflower", "wr100");
+    const wr100 = createButtons("helpmeme", "lstars");
+    const lstars = createButtons("winrate100", "smf");
+    const smf = createButtons("leafstars", "memehelp");
+    const comborow = createButtons("savagemayflower2", "lstars2");
+    const lstars2 = createButtons("helpcombo", "smf2");
+    const smf2 = createButtons("leafstars2", "combohelp");
+    const midrangerow = createButtons("leafstars3", "bms");
+    const bms = createButtons("helpmidrange", "lstars3");
+    const lstars3 = createButtons("budgetmopshadow", "midrangehelp");
     const aggrorow = createButtons("pbeans", "cb");
     const cb = createButtons("aggrohelp", "pb");
     const pb = createButtons("cartasbuenas", "helpaggro");
-    const alldecksrow = createButtons("starrings4", "wr1002");
+    const alldecksrow = createButtons("savagemayflower3", "wr1002");
     const wr1002 = createButtons("helpall", "bms2");
     const bms2 = createButtons("winrate1002", "cb2");
-    const cb2 = createButtons("budgetmopshadow2", "pb2");
-    const pb2 = createButtons("cartasbuenas2", "smf3");
-    const smf3 = createButtons("pbeans2", "srings4");
-    const srings4 = createButtons("savagemayflower3", "allhelp");
+    const cb2 = createButtons("budgetmopshadow2", "lstars4");
+    const lstars4 = createButtons("cartasbuenas2", "smf3");
+    const pb2 = createButtons("leafstars4", "smf3");
+    const smf3 = createButtons("pbeans2", "allhelp");
     const gs = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/pvzcc/images/2/26/GreenShadowBYL.png/revision/latest?cb=20200704033327"
@@ -246,7 +246,7 @@ module.exports = {
       const cartasbuenas= createDeckEmbed(result, "abeans")
       const budgetgs = createDeckEmbed(result, "budgetgs")
       const savagemayflower = createDeckEmbed(result, "savagemayflower")
-      const starrings = createDeckEmbed(result, "sovietonion")
+      const leafstars = createDeckEmbed(result, "sovietonion")
       const pbeans = createDeckEmbed(result, "pbeans")
     const Filter = (i) => i.user.id === message.author.id;
     /**
@@ -282,7 +282,7 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: {embed: embed, component: row},
-        helpall: {embed: allEmbed, component: alldecksrow},
+         helpall: {embed: allEmbed, component: alldecksrow},
         allhelp: {embed: allEmbed, component: alldecksrow},
         helpmeme: {embed: memeEmbed, component: memerow},
         memehelp: {embed: memeEmbed, component: memerow},
@@ -302,14 +302,14 @@ module.exports = {
         pbeans: {embed: pbeans, component: pb},
         pb2: {embed: pbeans, component: pb2},
         pbeans2: {embed: pbeans, component: pb2},
-        srings: {embed: starrings, component: srings},
-        starrings: {embed: starrings, component: srings},
-        srings2: {embed: starrings, component: srings2},
-        starrings2: {embed: starrings, component: srings2},
-        srings3: {embed: starrings, component: srings3},
-        starrings3: {embed: starrings, component: srings3},
-        srings4: {embed: starrings, component: srings4},
-        starrings4: {embed: starrings, component: srings4},
+        lstars: {embed: leafstars, component: lstars},
+        leafstars: {embed: leafstars, component: lstars},
+        lstars2: {embed: leafstars, component: lstars2},
+        leafstars2: {embed: leafstars, component: lstars2},
+        lstars3: {embed: leafstars, component: lstars3},
+        leafstars3: {embed: leafstars, component: lstars3},
+        lstars4: {embed: leafstars, component: lstars4},
+        leafstars4: {embed: leafstars, component: lstars4},
         smf: {embed: savagemayflower, component: smf},
         savagemayflower: {embed: savagemayflower, component: smf},
         smf2: {embed: savagemayflower, component: smf2},
@@ -319,7 +319,7 @@ module.exports = {
         wr100: {embed: winrate100, component: wr100},
         winrate100: {embed: winrate100, component: wr100},
         wr1002: {embed: winrate100, component: wr1002},
-        winrate1002: {embed: winrate100, component: wr1002}
+        winrate1002: {embed: winrate100, component: wr1002},
       }
       const action = buttonActions[i.customId];
       if (action) {

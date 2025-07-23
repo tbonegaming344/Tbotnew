@@ -51,7 +51,7 @@ function createHelpEmbed(title, description, thumbnail, footer) {
         .setEmoji("<:compemote:1325461143136764060>")
         .setDescription("Some of the best decks in the game"),
         new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
+        .setLabel("Meme Deck")
         .setValue("meme")
         .setDescription("Decks that are built off a weird/fun combo"), 
         new StringSelectMenuOptionBuilder()
@@ -59,11 +59,11 @@ function createHelpEmbed(title, description, thumbnail, footer) {
         .setValue("aggro")
         .setDescription("Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."),
         new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Decks")
+        .setLabel("Combo Deck")
         .setValue("combo")
         .setDescription("Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."),
         new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
+        .setLabel("Midrange Deck")
         .setValue("midrange")
         .setDescription("Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"), 
         new StringSelectMenuOptionBuilder()
@@ -74,11 +74,11 @@ function createHelpEmbed(title, description, thumbnail, footer) {
       const row = new ActionRowBuilder().addComponents(select);
       const pillowyDecks = {
         competitiveDecks: ["cartasbuenas"], 
-        memeDecks: ["healburn", "starrings"], 
+        memeDecks: ["healburn"], 
         aggroDecks: ["cartasbuenas"], 
-        comboDecks: ["healburn", "starrings"],
-        midrangeDecks: ["healburn", "starrings"], 
-        allDecks: ["cartasbuenas", "healburn", "starrings"],
+        comboDecks: ["healburn"],
+        midrangeDecks: ["healburn"], 
+        allDecks: ["cartasbuenas", "healburn"],
       }
        /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -91,9 +91,6 @@ function createHelpEmbed(title, description, thumbnail, footer) {
           .join("");
       }
       const toBuildString = buildDeckString(pillowyDecks.allDecks);
-      const toBuildMemeString = buildDeckString(pillowyDecks.memeDecks);
-      const toBuildComboString = buildDeckString(pillowyDecks.comboDecks);
-      const toBuildMidrangeString = buildDeckString(pillowyDecks.midrangeDecks);
       /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -112,19 +109,9 @@ function createHelpEmbed(title, description, thumbnail, footer) {
             .setStyle(ButtonStyle.Primary)
         );
       }
-      const memeRow = createButtons("starrings", "hburn");
-      const hburn = createButtons("helpmeme", "srings");
-      const srings = createButtons("healburn", "memehelp");
-      const comboRow = createButtons("starrings2", "hburn2");
-      const hburn2 = createButtons("helpcombo", "srings2");
-      const srings2 = createButtons("healburn2", "combohelp");
-      const midrangeRow = createButtons("starrings3", "hburn3");
-      const hburn3 = createButtons("helpmidrange", "srings3");
-      const srings3 = createButtons("healburn3", "midrangehelp");
-      const allDecksRow = createButtons("starrings4", "cb");
-      const cb = createButtons("helpall", "hburn4");
-      const hburn4 = createButtons("cartasbuenas", "srings4");
-      const srings4 = createButtons("healburn4", "allhelp");
+      const allDecksRow = createButtons("healburn", "cb");
+      const cb = createButtons("helpall", "hburn");
+      const hburn= createButtons("cartasbuenas", "allhelp");
           const [result] = await db.query(`SELECT abeans, healburn, sovietonion FROM gsdecks gs
             inner join sfdecks sf on (gs.deckinfo = sf.deckinfo)`)
           const user = await client.users.fetch("1157720864679272549");
@@ -133,27 +120,6 @@ function createHelpEmbed(title, description, thumbnail, footer) {
             `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
 Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbot`,
             user.displayAvatarURL()
-          )
-          const memeEmbed = createHelpEmbed(
-            `${user.displayName} Meme Decks`,
-            `My meme decks created by ${user.displayName} are ${toBuildMemeString}`,
-            user.displayAvatarURL(), 
-            `To view the meme decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all meme decks!
-Note: ${user.displayName} has ${pillowyDecks.memeDecks.length} total meme decks in Tbot`
-          )
-          const comboEmbed = createHelpEmbed(
-            `${user.displayName} Combo Decks`,
-            `My combo decks created by ${user.displayName} are ${toBuildComboString}`,
-            user.displayAvatarURL(),
-            `To view the combo decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all combo decks!
-Note: ${user.displayName} has ${pillowyDecks.comboDecks.length} total combo decks in Tbot`
-          )
-          const midrangeEmbed = createHelpEmbed(
-            `${user.displayName} Midrange Decks`,
-            `My midrange decks created by ${user.displayName} are ${toBuildMidrangeString}`,
-            user.displayAvatarURL(),
-            `To view the midrange decks made by ${user.displayName} please use one of the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: ${user.displayName} has ${pillowyDecks.midrangeDecks.length} total midrange decks in Tbot`
           )
           const allDecksEmbed = createHelpEmbed(
             `${user.displayName} Decks`,
@@ -187,7 +153,6 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
           }
             const cartasbuenas = createDeckEmbed(result, "abeans")
             const healburn = createDeckEmbed(result, "healburn")
-            const starrings = createDeckEmbed(result, "sovietonion")
           const m = await message.channel.send({ embeds: [pillowy], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
           async function handleSelectMenu(i){
@@ -195,14 +160,8 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
             if(value == "competitive" || value == "aggro"){
               await i.reply({embeds: [cartasbuenas], flags: MessageFlags.Ephemeral})
             }
-            else if(value == "meme" ){
-              await i.update({embeds: [memeEmbed], components: [memeRow]})
-            }
-            else if(value == "combo"){
-              await i.update({embeds: [comboEmbed], components: [comboRow]})
-            }
-            else if(value == "midrange"){
-              await i.update({embeds: [midrangeEmbed], components: [midrangeRow]})
+            else if(value == "meme" || value == "midrange" || value == "combo"){
+              await i.reply({embeds: [healburn], flags: MessageFlags.Ephemeral})
             }
             else if(value == "all"){
               await i.update({embeds: [allDecksEmbed], components: [allDecksRow]})
@@ -213,46 +172,15 @@ Note: ${user.displayName} has ${pillowyDecks.allDecks.length} total decks in Tbo
      * @param {*} i - The interaction object
      */
     async function handleButtonInteraction(i) {
-            if(i.customId == "helpmeme" || i.customId == "memehelp"){
-              await i.update({embeds: [memeEmbed], components: [memeRow]})
-            }
-            else if(i.customId == "helpcombo" || i.customId == "combohelp"){
-              await i.update({embeds: [comboEmbed], components: [comboRow]})
-            }
-            else if(i.customId == "helpmidrange" || i.customId == "midrangehelp"){
-              await i.update({embeds: [midrangeEmbed], components: [midrangeRow]})
-            }
-            else if(i.customId == "helpall" || i.customId == "allhelp"){
+            if(i.customId == "helpall" || i.customId == "allhelp"){
               await i.update({embeds: [allDecksEmbed], components: [allDecksRow]})
-            }
-            else if(i.customId == "srings" || i.customId == "starrings"){
-              await i.update({embeds: [starrings], components: [srings]})
             }
             else if(i.customId == "hburn"|| i.customId == "healburn"){
               await i.update({embeds: [healburn], components: [hburn]})
             }
-            else if(i.customId == "srings2" || i.customId == "starrings2"){
-              await i.update({embeds: [starrings], components: [srings2]})
-            }
-            else if(i.customId == "hburn2"|| i.customId == "healburn2"){
-              await i.update({embeds: [healburn], components: [hburn2]})
-            }
-            else if(i.customId == "srings3" || i.customId == "starrings3"){
-              await i.update({embeds: [starrings], components: [srings3]})
-            }
-            else if(i.customId == "hburn3"|| i.customId == "healburn3"){
-              await i.update({embeds: [healburn], components: [hburn3]})
-            }
-            else if(i.customId == "srings4" || i.customId == "starrings4"){
-              await i.update({embeds: [starrings], components: [srings4]})
-            }
-            else if(i.customId == "hburn4"|| i.customId == "healburn4"){
-              await i.update({embeds: [healburn], components: [hburn4]})
-            }
             else if(i.customId == "cb" || i.customId == "cartasbuenas"){
               await i.update({embeds: [cartasbuenas], components: [cb]})
             }
-
           }
           const collector = m.createMessageComponentCollector({ filter: iFilter });
           collector.on("collect", async (i) => {

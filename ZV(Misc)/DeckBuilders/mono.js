@@ -72,12 +72,13 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const monoDecks = {
-      competitiveDecks: ["nohokaistars", "seacret", "slugged"],
+      competitiveDecks: ["nohokaistars", "quartsterstache", "seacret", "slugged"],
       aggroDecks: ["seacret"],
-      comboDecks: ["seacret"],
-      midrangeDecks: ["nohokaistars", "slugged"],
+      comboDecks: ["quartsterstache", "seacret"],
+      midrangeDecks: ["nohokaistars", "quartsterstache", "slugged"],
       allDecks: [
         "nohokaistars",
+        "quartsterstache",
         "seacret",
         "slugged"
       ],
@@ -94,6 +95,7 @@ module.exports = {
     }
     const toBuildCompetitive = buildDeckString(monoDecks.competitiveDecks);
     const toBuildMidrange = buildDeckString(monoDecks.midrangeDecks);
+    const toBuildCombo = buildDeckString(monoDecks.comboDecks);
     const toBuildString = buildDeckString(monoDecks.allDecks);
 
     /**
@@ -115,21 +117,29 @@ module.exports = {
       );
     }
     const competitiverow = createButtons("slugged", "nhks");
-    const nhks = createButtons("helpcompetitive", "sea2");
-    const sea2 = createButtons("nohokaistars", "slug");
-    const slug = createButtons("seacret2", "competitivehelp");
+    const nhks = createButtons("helpcompetitive", "qss");
+    const qss = createButtons("nohokaistars", "sea");
+    const sea = createButtons("quartsterstache", "slug");
+    const slug = createButtons("seacret", "competitivehelp");
+    const comborow = createButtons("seacret2", "qss2"); 
+    const qss2 = createButtons("helpcombo", "sea2");
+    const sea2 = createButtons("quartsterstache2", "combohelp");
     const midrangerow = createButtons("slugged2", "nhks2");
-    const nhks2 = createButtons("helpmidrange", "slug2");
-    const slug2 = createButtons("nohokaistars2", "midrangehelp");
+    const nhks2 = createButtons("helpmidrange", "qss3");
+    const qss3 = createButtons("nohokaistars2", "slug2");
+    const slug2 = createButtons("quartsterstache3", "midrangehelp");
     const alldecksrow = createButtons("slugged3", "nhks3");
-    const nhks3 = createButtons("helpall", "sea3");
-    const sea3 = createButtons("nohokaistars3", "slug3");
+    const nhks3 = createButtons("helpall", "qss4");
+    const qss4 = createButtons("nohokaistars3", "sea3");
+    const sea3 = createButtons("quartsterstache4", "slug3");
     const slug3 = createButtons("seacret3", "allhelp");
     const [result] =
-      await db.query(`select icebox, nohokaistars, seacret,
+      await db.query(`select icebox, nohokaistars, trckstache, seacret,
 from ntdecks nt
 inner join ebdecks eb
 on (nt.deckinfo = eb.deckinfo)
+inner join pbdecks pb
+on (nt.deckinfo = pb.deckinfo)
 inner join ifdecks fi 
 on (nt.deckinfo = fi.deckinfo)`);
     const user = await client.users.fetch("444700385744257034");
@@ -145,7 +155,14 @@ Note: ${user.displayName} has ${monoDecks.allDecks.length} total decks in Tbot`,
       user.displayAvatarURL(),
       `To view the decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${monoDecks.allDecks.length} decks in Tbot`
-    )
+    ); 
+    const comboEmbed = createHelpEmbed(
+      `${user.displayName} Combo Decks`,
+      `My combo decks made by ${user.displayName} are ${toBuildCombo}`,
+      user.displayAvatarURL(),
+      `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${monoDecks.comboDecks.length} combo decks in Tbot`
+    );
     const midrangemono = createHelpEmbed(
       `${user.displayName} Midrange Decks`,
       `My midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
@@ -185,6 +202,7 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
     }
     const nohonkaistars = createDeckEmbed(result, "nohokaistars");
     const seacret = createDeckEmbed(result, "seacret");
+    const quartsterstache = createDeckEmbed(result, "trickstache");
     const slugged = createDeckEmbed(result, "icebox");
     const m = await message.channel.send({ embeds: [mono], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
@@ -201,7 +219,7 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
           components: [midrangerow],
         })
       } else if (value == "combo") {
-        await i.reply({embeds: [seacret], flags: MessageFlags.Ephemeral});
+        await i.update({embeds: [comboEmbed], components: [comborow]});
       } else if (value == "aggro") {
         await i.reply({ embeds: [seacret], flags: MessageFlags.Ephemeral });
       } else if (value == "all") {
@@ -229,6 +247,8 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         allhelp: { embed: alldecksEmbed, component: alldecksrow },
         helpmidrange: { embed: midrangemono, component: midrangerow },
         midrangehelp: { embed: midrangemono, component: midrangerow },
+        helpcombo: { embed: comboEmbed, component: comborow },
+        combohelp: { embed: comboEmbed, component: comborow },
         nhks: { embed: nohonkaistars, component: nhks },
         nohokaistars: { embed: nohonkaistars, component: nhks },
         nhks2: { embed: nohonkaistars, component: nhks2 },
@@ -247,6 +267,14 @@ Note: ${user.displayName} has ${monoDecks.competitiveDecks.length} competitive d
         slugged2: { embed: slugged, component: slug2 },
         slug3: { embed: slugged, component: slug3 },
         slugged3: { embed: slugged, component: slug3 },
+        qss: { embed: quartsterstache, component: qss },
+        quartsterstache: { embed: quartsterstache, component: qss },
+        qss2: { embed: quartsterstache, component: qss2 },
+        quartsterstache2: { embed: quartsterstache, component: qss2 },
+        qss3: { embed: quartsterstache, component: qss3 },
+        quartsterstache3: { embed: quartsterstache, component: qss3 },
+        qss4: { embed: quartsterstache, component: qss4 },
+        quartsterstache4: { embed: quartsterstache, component: qss4 },
       }
       const action = buttonActions[i.customId];
       if (action) {

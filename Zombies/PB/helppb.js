@@ -101,7 +101,7 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const professorBrainstormDecks = {
       budgetDecks: ["budgetpb"],
-      competitiveDecks: ["trickstache"],
+      competitiveDecks: ["quartsterstache"],
       memeDecks: [
         "bonusducks",
         "mechagold",
@@ -111,18 +111,18 @@ module.exports = {
       aggroDecks: ["budgetpb"],
       comboDecks: [
         "bonusducks",
+        "quartsterstache",
         "reversecatster",
-        "trickstache",
         "youngeggmartin",
       ],
       controlDecks: ["bonusducks", "mechagold"],
-      midrangeDecks: ["trickstache"],
+      midrangeDecks: ["quartsterstache"],
       allDecks: [
         "bonusducks",
         "budgetpb",
         "mechagold",
+        "quartsterstache",
         "reversecatster",
-        "trickstache",
         "youngeggmartin",
       ],
     };
@@ -167,20 +167,20 @@ module.exports = {
     const alldecksrow = createButtons("youngeggmartin", "bd");
     const bd = createButtons("helpall", "bpb");
     const bpb = createButtons("bonusducks", "mgold");
-    const mgold = createButtons("budgetpb", "rcatster");
-    const rcatster = createButtons("mechagold", "ts");
-    const ts = createButtons("reversecatster", "yem");
-    const yem = createButtons("trickstache", "allhelp");
+    const mgold = createButtons("budgetpb", "qss");
+    const qss = createButtons("mechagold", "rcatster");
+    const rcatster = createButtons("quartsterstache", "yem");
+    const yem = createButtons("reversecatster", "allhelp");
     const memerow = createButtons("youngeggmartin2", "bd2");
     const bd2 = createButtons("helpmeme", "mgold2");
     const mgold2 = createButtons("bonusducks2", "rcatster2");
     const rcatster2 = createButtons("mechagold2", "yem2");
     const yem2 = createButtons("reversecatster2", "memehelp");
     const comborow = createButtons("youngeggmartin3", "bd3");
-    const bd3 = createButtons("helpcombo", "rcatster3");
-    const rcatster3 = createButtons("bonusducks3", "ts2");
-    const ts2 = createButtons("reversecatster3", "yem3");
-    const yem3 = createButtons("trickstache2", "combohelp");
+    const bd3 = createButtons("helpcombo", "qss2");
+    const qss2 = createButtons("bonusducks3", "rcatster3");
+    const rcatster3 = createButtons("quartsterstache2", "yem3");
+    const yem3 = createButtons("reversecatster3", "combohelp");
     const controlrow = createButtons("mechagold3", "bd4");
     const bd4 = createButtons("helpcontrol", "mgold3");
     const mgold3 = createButtons("bonusducks4", "controlhelp");
@@ -246,7 +246,7 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
     const budgetpb = createDeckEmbed(result, "budgetpb");
     const mechagold = createDeckEmbed(result, "mechagold");
     const reversecatster = createDeckEmbed(result, "reversecatster");
-    const trickstache = createDeckEmbed(result, "trickstache");
+    const quartsterstache = createDeckEmbed(result, "trickstache");
     const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
     const m = await message.channel.send({
       embeds: [helppb],
@@ -262,7 +262,7 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "comp" || value == "midrange") {
-        await i.reply({ embeds: [trickstache], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [quartsterstache], flags: MessageFlags.Ephemeral });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
@@ -303,10 +303,10 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         reversecatster2: { embed: reversecatster, component: rcatster2 },
         rcatster3: { embed: reversecatster, component: rcatster3 },
         reversecatster3: { embed: reversecatster, component: rcatster3 },
-        ts: { embed: trickstache, component: ts },
-        trickstache: { embed: trickstache, component: ts },
-        ts2: { embed: trickstache, component: ts2 },
-        trickstache2: { embed: trickstache, component: ts2 },
+        qssL : { embed: quartsterstache, component: qss },
+        quartsterstache: { embed: quartsterstache, component: qss },
+        qss2: { embed: quartsterstache, component: qss2 },
+        quartsterstache2: { embed: quartsterstache, component: qss2 }, 
         yem: { embed: youngeggmartin, component: yem },
         youngeggmartin: { embed: youngeggmartin, component: yem },
         yem2: { embed: youngeggmartin, component: yem2 },

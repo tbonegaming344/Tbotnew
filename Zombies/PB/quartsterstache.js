@@ -1,8 +1,8 @@
 const {EmbedBuilder} = require("discord.js");
 const db = require("../../index.js");
 module.exports = {
-	name: `trickstache`,
-	aliases: [`mustachetricks`, `pbtrickstache`, `trs`, `trickstash`],
+	name: `quartsterstache`,
+	aliases: [`mustachetricks`, `pbtrickstache`, `trs`, `trickstash`, `trickstache`, `qss`],
 	category: `Professor Brainstorm(PB)`,
 		run: async(client, message, args) => {
 			const [result] = await db.query(`SELECT trickstache FROM pbdecks`)

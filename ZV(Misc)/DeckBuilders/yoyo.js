@@ -38,89 +38,45 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Select an option below to view YoYo's Deck")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("competitive")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setValue("meme")
-          .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          )
-      );
-    const row = new ActionRowBuilder().addComponents(select);
-    const yoyoDecks = {
-      competitiveDecks: ["trickstache"],
-      memeDecks: ["reflourished"],
-      comboDecks: ["trickstache", "reflourished"],
-      midrangeDecks: ["trickstache"],
-    };
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-    const toBuildCombo = buildDeckString(yoyoDecks.comboDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-    }
-    const comborow = createButtons("trickstache", "rfl");
-    const rfl = createButtons("helpcombo", "ts");
-    const ts = createButtons("reflourished", "combohelp");
-    const [result] = await db.query(`select reflourished, trickstache
-from ccdecks cc
-inner join pbdecks pb 
-on (cc.deckinfo = pb.deckinfo)`);
-    const yoyo = createHelpEmbed(
-      "Yoyo Decks",
-      `To view the Decks Made By Yoyo please select an option from the select menu below! To view all of Yoyo decks select the combo decks option from the select menu
-Note: Yoyo has ${yoyoDecks.comboDecks} total decks in Tbot`,
-      "https://media.discordapp.net/attachments/832984002633269258/1159176803122946129/D85BDC68-3C9B-4F69-93B0-34BE08842E28.png?ex=651eef06&is=651d9d86&hm=635d383184d2aa08482b520b&=&width=492&height=580"
+     const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("reflourished")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("rfl")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
     );
-    const comboyoyo = createHelpEmbed(
-      "Combo Decks Made By Yoyo",
-      `My combo Decks made by Yoyo are ${toBuildCombo}`,
-      "https://media.discordapp.net/attachments/832984002633269258/1159176803122946129/D85BDC68-3C9B-4F69-93B0-34BE08842E28.png?ex=651eef06&is=651d9d86&hm=635d383184d2aa08482b520b&=&width=492&height=580",
-      `To view the Combo Decks Made By Yoyo please use the commands listed above or click on the buttons below!
-Note: Yoyo has ${yoyoDecks.comboDecks.length} Combo decks in Tbot`
+    const rfl = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpyoyo")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("help")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
     );
-     /**
+    const decks = ["reflourished"];
+    const toBuildString = decks
+      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+      .join("");
+    const [result] = await db.query(`select reflourished
+from ccdecks cc`);
+    const yoyo = new EmbedBuilder()
+      .setTitle(`${user.displayName} Decks`)
+      .setDescription(
+        `My commands for decks made by ${user.displayName} are ${toBuildString}`
+      )
+      .setFooter({
+        text: `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
+      })
+      .setThumbnail(user.displayAvatarURL())
+      .setColor("#ffcd59")
+
+   /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
@@ -144,61 +100,18 @@ Note: Yoyo has ${yoyoDecks.comboDecks.length} Combo decks in Tbot`
       return embed;
     }
     const reflourished = createDeckEmbed(result, "reflourished");
-    const trickstache = createDeckEmbed(result, "trickstache");
     const m = await message.channel.send({
       embeds: [yoyo],
       components: [row],
     });
     const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i 
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "combo") {
-        await i.update({ embeds: [comboyoyo], components: [comborow] });
-      } else if (value == "competitive" || value == "midrange") {
-        await i.reply({ embeds: [trickstache], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
-        await i.reply({
-          embeds: [reflourished],
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        helpcombo: { embed: comboyoyo, component: comborow },
-        combohelp: { embed: comboyoyo, component: comborow },
-        ts: { embed: trickstache, component: ts },
-        trickstache: { embed: trickstache, component: ts },
-        rfl: { embed: reflourished, component: rfl },
-        reflourished: { embed: reflourished, component: rfl },
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Invalid button interaction.",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
+      if (i.customId == "reflourished" || i.customId == "rfl") {
+        await i.update({ embeds: [reflourished], components: [rfl] });
+      }
+      else if (i.customId == "help" || i.customId == "helpyoyo") {
+        await i.update({ embeds: [yoyo], components: [row] });
       }
     });
   },

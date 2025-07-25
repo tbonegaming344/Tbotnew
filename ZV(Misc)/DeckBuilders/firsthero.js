@@ -21,13 +21,23 @@ const {
          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
           .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
-          .setCustomId("lmower")
+          .setCustomId("gbeyond")
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      const lmower = new ActionRowBuilder().addComponents(
+      const gbeyond = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("helpf")
+         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId("lmower")
+         .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)  
+      );
+      const lmower = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("gobeyond")
          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
           .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
@@ -35,12 +45,12 @@ const {
          .setEmoji("<:arrowright:1271446796207525898>")
           .setStyle(ButtonStyle.Primary)
       );
-      const decks = ["lawnmower2"];
+      const decks = ["gobeyond", "lawnmower2"];
       let toBuildString = "";
       for (const deck of decks) {
         toBuildString += `\n<@${client.user.id}> **${deck}**`;
       }
-      const [result] = await db.query(`SELECT lawnmower FROM zmdecks`);
+      const [result] = await db.query(`SELECT gobeyond, lawnmower FROM sfdecks sf inner join zmdecks zm on (sf.deckinfo = zm.deckinfo)`);
       const user = await client.users.fetch("758481952725532692");
       const firsthero = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
@@ -53,6 +63,27 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
         .setColor("Orange")
+        const gobeyond = new EmbedBuilder()
+        .setTitle(`${result[5].gobeyond}`)
+        .setDescription(`${result[3].gobeyond}`)
+        .setFooter({ text: `${result[2].gobeyond}` })
+        .addFields({
+          name: "Deck Type",
+          value: `${result[6].gobeyond}`,
+          inline: true,
+        },
+        {
+          name: "Archetype",
+          value: `${result[0].gobeyond}`,
+          inline: true,
+        },
+        {
+          name: "Deck Cost",
+          value: `${result[1].gobeyond}`,
+          inline: true,
+        })
+        .setColor("Orange")
+        .setImage(`${result[4].gobeyond}`);
         const lawnmower = new EmbedBuilder()
         .setTitle(`${result[5].lawnmower}`)
         .setDescription(`${result[3].lawnmower}`)
@@ -84,6 +115,9 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
         }
         else if (i.customId == "helpf" || i.customId == "help") {
           await i.update({ embeds: [firsthero], components: [row] });
+        }
+        else if (i.customId == "gobeyond" || i.customId == "gbeyond") {
+          await i.update({ embeds: [gobeyond], components: [gbeyond] });
         }
       });
     },

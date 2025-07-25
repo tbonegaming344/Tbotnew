@@ -250,6 +250,7 @@ module.exports = {
         "chemotherapy",
         "cyburn",
         "espressoaggro",
+        "gobeyond",
         "healmidrose",
         "logbait",
         "neurotherapy",
@@ -304,6 +305,7 @@ module.exports = {
         "cyburn",
         "dinocounter",
         "funnyflare",
+        "gobeyond",
         "goingnuts",
         "healburn",
         "healthotk",
@@ -336,6 +338,7 @@ module.exports = {
         "cyburn",
         "dinocounter",
         "funnyflare",
+        "gobeyond",
         "healburn",
         "healmidrose",
         "healthotk",
@@ -373,6 +376,7 @@ module.exports = {
         "dinocounter",
         "espressoaggro",
         "funnyflare",
+        "gobeyond",
         "goingnuts",
         "ginseng",
         "healburn",
@@ -715,8 +719,9 @@ module.exports = {
     const cburn = createButtons("chemotherapy", "dcounter");
     const dcounter = createButtons("cyburn", "eaggro");
     const eaggro = createButtons("dinocounter", "fflare");
-    const fflare = createButtons("espressoaggro", "gnuts");
-    const gnuts = createButtons("funnyflare", "gseg");
+    const fflare = createButtons("espressoaggro", "gbeyond");
+    const gbeyond = createButtons("funnyflare", "gnuts");
+    const gnuts = createButtons("gobeyond", "gseg");
     const gseg = createButtons("goingnuts", "hburn");
     const hburn = createButtons("ginseng", "hmr");
     const hmr = createButtons("healburn", "hotk");
@@ -806,8 +811,9 @@ module.exports = {
     const carr3 = createButtons("budgetcz3", "cburn3");
     const cburn3 = createButtons("carroot3", "dcounter3");
     const dcounter3 = createButtons("cyburn3", "fflare3");
-    const fflare3 = createButtons("dinocounter3", "gnuts4");
-    const gnuts4 = createButtons("funnyflare3", "hburn3");
+    const fflare3 = createButtons("dinocounter3", "gbeyond2");
+    const gbeyond2 = createButtons("funnyflare3", "gnuts4");
+    const gnuts4 = createButtons("gobeyond2", "hburn3");
     const hburn3 = createButtons("goingnuts4", "hotk3");
     const hotk3 = createButtons("healburn3", "lsnap3");
     const lsnap3 = createButtons("healthotk3", "lstars3");
@@ -837,8 +843,9 @@ module.exports = {
     const bwk3 = createButtons("budgetro3", "cburn4");
     const cburn4 = createButtons("budgetwk3", "dcounter4");
     const dcounter4 = createButtons("cyburn4", "fflare4");
-    const fflare4 = createButtons("dinocounter4", "hburn4");
-    const hburn4 = createButtons("funnyflare4", "hmr3");
+    const fflare4 = createButtons("dinocounter4", "gbeyond3");
+    const gbeyond3 = createButtons("funnyflare4", "hburn4");
+    const hburn4 = createButtons("gobeyond3", "hmr3");
     const hmr3 = createButtons("healburn4", "hotk4");
     const hotk4 = createButtons("healmidrose3", "lsnap4");
     const lsnap4 = createButtons("healthotk4", "lstars4");
@@ -1376,6 +1383,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetnc = createPlantDeckEmbed(result, "budgetnc");
     const espressoaggro = createPlantDeckEmbed(result, "espressoaggro");
     const cyburn = createPlantDeckEmbed(result, "cyburn");
+    const gobeyond = createPlantDeckEmbed(result, "gobeyond");
     const toyotacontrolla = createPlantDeckEmbed(result, "toyotacontrolla");
     const budgetro = createPlantDeckEmbed(result, "budgetro");
     const healmidrose = createPlantDeckEmbed(result, "hmr");
@@ -2317,7 +2325,13 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         lum3: { embed: luminous, component: lum3 },
         luminous3: { embed: luminous, component: lum3 },
         lum4: { embed: luminous, component: lum4 },
-        luminous4: { embed: luminous, component: lum4 }
+        luminous4: { embed: luminous, component: lum4 }, 
+        gbeyond: {embed: gobeyond, component: gbeyond },
+        gobeyond: {embed: gobeyond, component: gbeyond },
+        gbeyond2: {embed: gobeyond, component: gbeyond2 },
+        gobeyond2: {embed: gobeyond, component: gbeyond2 },
+        gbeyond3: {embed: gobeyond, component: gbeyond3 },
+        gobeyond3: {embed: gobeyond, component: gbeyond3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

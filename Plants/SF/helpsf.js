@@ -52,6 +52,11 @@ module.exports = {
           .setValue("budget")
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
+            new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
@@ -83,17 +88,20 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const solarFlareDecks = {
       budgetDecks: ["budgetswarmsf"],
+      compDecks: ["gobeyond"],
       memeDecks: ["funnyflare", "healburn", "psychosolstice"],
       aggroDecks: ["budgetswarmsf"],
-      comboDecks: ["funnyflare", "healburn", "psychosolstice"],
+      comboDecks: ["funnyflare", "gobeyond", "healburn", "psychosolstice"],
       midrangeDecks: [
         "funnyflare",
+        "gobeyond",
         "healburn",
         "psychosolstice",
       ],
       allDecks: [
         "budgetswarmsf",
         "funnyflare",
+        "gobeyond",
         "healburn",
         "psychosolstice"
       ],
@@ -121,17 +129,20 @@ module.exports = {
     const hburn = createButtons("funnyflare", "psol");
     const psol = createButtons("healburn", "memehelp");
     const comborow = createButtons("psychosolstice2", "ff2");
-    const ff2 = createButtons("helpcombo", "hburn2");
-    const hburn2 = createButtons("funnyflare2", "psol2");
+    const ff2 = createButtons("helpcombo", "gbeyond");
+    const gbeyond = createButtons("funnyflare2", "hburn2");
+    const hburn2 = createButtons("gobeyond", "psol2");
     const psol2 = createButtons("healburn2", "combohelp");
     const midrangerow = createButtons("psychosolstice3", "ff3");
-    const ff3 = createButtons("helpmid", "hburn3");
-    const hburn3 = createButtons("funnyflare3", "psol3");
+    const ff3 = createButtons("helpmid", "gbeyond2");
+    const gbeyond2 = createButtons("funnyflare3", "hburn3");
+    const hburn3 = createButtons("gobeyond2", "psol3");
     const psol3 = createButtons("healburn3", "midhelp");
     const alldecksrow = createButtons("psychosolstice4", "bsf");
     const bsf = createButtons("helpall", "flottery2");
-    const ff4 = createButtons("budgetsf", "hburn4");
-    const hburn4 = createButtons("funnyflare3", "psol4");
+    const ff4 = createButtons("budgetsf", "gbeyond3");
+    const gbeyond3 = createButtons("funnyflare4", "hburn4");
+    const hburn4 = createButtons("gobeyond3", "psol4");
     const psol4 = createButtons("psol4", "allhelp");
     function BuildDeckString(decks) {
       return decks
@@ -205,6 +216,7 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
     }
     const budgetsf = createDeckEmbed(result, "budgetswarmsf");
     const funnyflare = createDeckEmbed(result, "funnyflare");
+    const gobeyond = createDeckEmbed(result, "gobeyond");
     const healburn = createDeckEmbed(result, "healburn");
     const psychosolstice = createDeckEmbed(result, "psychosolstice");
     const m = await message.channel.send({
@@ -228,6 +240,9 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
+      }
+      else if (value == "comp"){
+        await i.reply({ embeds: [gobeyond], flags: MessageFlags.Ephemeral });
       }
     }
     /**
@@ -269,7 +284,13 @@ Note: Solar Flare has ${solarFlareDecks.midrangeDecks.length} midrange decks in 
         psol3: { embed: psychosolstice, component: psol3 },
         psychosolstice3: { embed: psychosolstice, component: psol3 },
         psol4: { embed: psychosolstice, component: psol4 },
-        psychosolstice4: { embed: psychosolstice, component: psol4 }
+        psychosolstice4: { embed: psychosolstice, component: psol4 }, 
+        gbeyond: { embed: gobeyond, component: gbeyond },
+        gobeyond: { embed: gobeyond, component: gbeyond },
+        gbeyond2: { embed: gobeyond, component: gbeyond2 },
+        gobeyond2: { embed: gobeyond, component: gbeyond2 },
+        gbeyond3: { embed: gobeyond, component: gbeyond3 },
+        gobeyond3: { embed: gobeyond, component: gbeyond3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

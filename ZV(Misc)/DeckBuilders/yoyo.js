@@ -64,6 +64,7 @@ module.exports = {
       .join("");
     const [result] = await db.query(`select reflourished
 from ccdecks cc`);
+const user = await client.users.fetch("1255818880211882077");
     const yoyo = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(

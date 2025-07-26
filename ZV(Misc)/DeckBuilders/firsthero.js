@@ -51,7 +51,7 @@ const {
         toBuildString += `\n<@${client.user.id}> **${deck}**`;
       }
       const [result] = await db.query(`SELECT gobeyond, lawnmower FROM sfdecks sf inner join zmdecks zm on (sf.deckinfo = zm.deckinfo)`);
-      const user = await client.users.fetch("758481952725532692");
+      const user = await client.users.fetch("746716954466713630");
       const firsthero = new EmbedBuilder()
         .setTitle(`${user.displayName} Decks`)
         .setDescription(

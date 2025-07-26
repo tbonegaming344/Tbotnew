@@ -139,11 +139,11 @@ module.exports = {
     const hburn3 = createButtons("gobeyond2", "psol3");
     const psol3 = createButtons("healburn3", "midhelp");
     const alldecksrow = createButtons("psychosolstice4", "bsf");
-    const bsf = createButtons("helpall", "flottery2");
+    const bsf = createButtons("helpall", "ff4");
     const ff4 = createButtons("budgetsf", "gbeyond3");
     const gbeyond3 = createButtons("funnyflare4", "hburn4");
     const hburn4 = createButtons("gobeyond3", "psol4");
-    const psol4 = createButtons("psol4", "allhelp");
+    const psol4 = createButtons("healburn4", "allhelp");
     function BuildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)

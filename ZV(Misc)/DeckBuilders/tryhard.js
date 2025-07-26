@@ -124,7 +124,7 @@ on (rb.deckinfo = hg.deckinfo)`);
     const tryhard = createHelpEmbed(
       `${user.displayName} Decks`,
       `To view the Decks Made By ${user.displayName} please select an option from the select menu below
-Note: ${user.displayName} has ${pvzTryHardDecks.allDecks.length} total decks in tbot. 
+Note: ${user.displayName} has ${pvzTryHardDecks.memeDecks.length} total decks in tbot. 
 To view all of ${user.displayName}'s decks, please select the meme or combo option below`,
       user.displayAvatarURL()
     );

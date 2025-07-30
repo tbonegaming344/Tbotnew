@@ -176,9 +176,9 @@ module.exports = {
     const ykm2 = createButtons("frozentelimps2", "memehelp");
     const comborow = createButtons("youngkenmartin3", "bgus2");
     const bgus2 = createButtons("helpcombo", "ft3");
-    const ft3 = createButtons("budgetgus2", "gps3");
-    const gps3 = createButtons("frozentelimps3", "ti2");
-    const ti2 = createButtons("gravepiratestache3", "ykm3");
+    const ft3 = createButtons("budgetgus2", "gps2");
+    const gps2 = createButtons("frozentelimps3", "ti2");
+    const ti2 = createButtons("gravepiratestache2", "ykm3");
     const ykm3 = createButtons("telimps2", "combohelp");
     const ti3 = createButtons("frozentelimps4", "controlhelp");
     const midrangerow = createButtons("youngkenmartin3", "ti4");
@@ -316,8 +316,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         gravepiratestache: {embed: gravepiratestache, component: gps},
         gps2: {embed: gravepiratestache, component: gps2},
         gravepiratestache2: {embed: gravepiratestache, component: gps2},
-        gps3: {embed: gravepiratestache, component: gps3},
-        gravepiratestache3: {embed: gravepiratestache, component: gps3},
         ti: {embed: telimps, component: ti},
         telimps: {embed: telimps, component: ti},
         ti2: {embed: telimps, component: ti2},

@@ -278,8 +278,6 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
         midrangehelp: { embed: midrangeEmbed, component: midrangeRow },
         bif: { embed: budgetif, component: bif },
         budgetif: { embed: budgetif, component: bif },
-        bif2: { embed: budgetif, component: bif2 },
-        budgetif2: { embed: budgetif, component: bif2 },
         stars: { embed: spacestars, component: stars },
         spacestars: { embed: spacestars, component: stars },
         stars2: { embed: spacestars, component: stars2 },

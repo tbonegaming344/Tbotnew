@@ -85,12 +85,6 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("All Green Shadow Decks")
           .setValue("all")
           .setDescription("View All Green Shadow Decks")
@@ -101,13 +95,11 @@ module.exports = {
       budgetDecks: ["budgetmopshadow"],
       competitiveDecks: ["cartasbuenas"],
       ladderDecks: ["pbeans"],
-      memeDecks: ["100%winrate", "leafstars", "savagemayflower"],
+      memeDecks: [ "leafstars", "savagemayflower"],
       aggroDecks: ["cartasbuenas", "pbeans"],
       comboDecks: ["leafstars", "savagemayflower"],
       midrangeDecks: ["budgetmopshadow", "leafstars"],
-      tempoDecks: ["100%winrate"],
       allDecks: [
-        "100%winrate",
         "budgetmopshadow",
         "cartasbuenas",
         "leafstars",
@@ -144,9 +136,8 @@ module.exports = {
     const toBuildMemeString = BuildDeckString(greenShadowDecks.memeDecks);
     const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
     const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
-    const memerow = createButtons("savagemayflower", "wr100");
-    const wr100 = createButtons("helpmeme", "lstars");
-    const lstars = createButtons("winrate100", "smf");
+    const memerow = createButtons("savagemayflower", "lstars");
+    const lstars = createButtons("helpmeme", "smf");
     const smf = createButtons("leafstars", "memehelp");
     const comborow = createButtons("savagemayflower2", "lstars2");
     const lstars2 = createButtons("helpcombo", "smf2");
@@ -157,9 +148,8 @@ module.exports = {
     const aggrorow = createButtons("pbeans", "cb");
     const cb = createButtons("aggrohelp", "pb");
     const pb = createButtons("cartasbuenas", "helpaggro");
-    const alldecksrow = createButtons("savagemayflower3", "wr1002");
-    const wr1002 = createButtons("helpall", "bms2");
-    const bms2 = createButtons("winrate1002", "cb2");
+    const alldecksrow = createButtons("savagemayflower3", "bms2");
+    const bms2 = createButtons("helpall", "cb2");
     const cb2 = createButtons("budgetmopshadow2", "lstars4");
     const lstars4 = createButtons("cartasbuenas2", "smf3");
     const pb2 = createButtons("leafstars4", "smf3");
@@ -229,7 +219,6 @@ Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks i
       }
       return embed;
     }
-    const winrate100 = createDeckEmbed(result, "wr100");
     const cartasbuenas = createDeckEmbed(result, "abeans");
     const budgetgs = createDeckEmbed(result, "budgetgs");
     const savagemayflower = createDeckEmbed(result, "savagemayflower");
@@ -260,8 +249,6 @@ Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks i
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "tempo") {
-        await i.reply({embeds: [winrate100], flags: MessageFlags.Ephemeral});
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
@@ -306,10 +293,6 @@ Note: Green Shadow has ${greenShadowDecks.midrangeDecks.length} midrange decks i
         savagemayflower2: {embed: savagemayflower, component: smf2},
         smf3: {embed: savagemayflower, component: smf3},
         savagemayflower3: {embed: savagemayflower, component: smf3},
-        wr100: {embed: winrate100, component: wr100},
-        winrate100: {embed: winrate100, component: wr100},
-        wr1002: {embed: winrate100, component: wr1002},
-        winrate1002: {embed: winrate100, component: wr1002},
       }
       const action = buttonActions[i.customId];
       if (action) {

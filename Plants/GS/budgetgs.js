@@ -2,7 +2,7 @@ const {EmbedBuilder} = require("discord.js")
 const db = require("../../index.js")
 module.exports = {
 	name: `budgetmopshadow`,
-	aliases: [`budgetgs`,`gsbudget`, `budgetgreenshadow`, `greenshadowbudget`, `budgetmopgs`, `gsbudgetmop`, `bgsmop`, `mopshadow`],
+	aliases: [`budgetgs`,`gsbudget`, `budgetgreenshadow`, `greenshadowbudget`, `budgetmopgs`, `gsbudgetmop`, `bgsmop`, `mopshadow`, `shadowfather`],
 	category: `Green Shadow(GS)`, 
 	run: async(client, message, args) => {
 		const [result] = await db.query(`SELECT budgetgs from gsdecks`);

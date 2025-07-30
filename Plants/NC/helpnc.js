@@ -60,6 +60,11 @@ module.exports = {
           .setValue("comp")
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
+           new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that are generally only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Aggro Deck")
           .setValue("aggro")
@@ -92,12 +97,13 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const nightcapDecks = {
       budgetDecks: ["budgetnc"],
-      competitiveDecks: ["cyburn", "toyotacontrolla"],
+      competitiveDecks: ["cyburn", "turles"],
+      ladderDecks: ["toyotacontrolla"],
       aggroDecks: ["budgetnc"],
       comboDecks: ["cyburn"],
       controlDecks: ["toyotacontrolla"],
-      midrangeDecks: ["cyburn"],
-      allDecks: ["budgetnc", "cyburn", "toyotacontrolla"],
+      midrangeDecks: ["cyburn", "turles"],
+      allDecks: ["budgetnc", "cyburn", "toyotacontrolla", "turles"],
     };
 
      /**
@@ -112,6 +118,8 @@ module.exports = {
     }
     const toBuildCompString = buildDeckString(nightcapDecks.competitiveDecks);
     const toBuildString = buildDeckString(nightcapDecks.allDecks);
+    const toBuildMidrangeString = buildDeckString(
+      nightcapDecks.midrangeDecks)
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -130,13 +138,17 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const compRow = createButtons("toyotacontrolla", "cburn");
-    const cburn = createButtons("helpcomp", "tc");
-    const tc = createButtons("cyburn", "comphelp");
-    const alldecksrow = createButtons("toyotacontrolla2", "bnc");
-    const bnc = createButtons("helpall", "cburn2");
-    const cburn2 = createButtons("budgetnc", "tc2");
-    const tc2 = createButtons("cyburn2", "allhelp");
+    const compRow = createButtons("turles", "cburn");
+    const cburn = createButtons("helpcomp", "tur");
+    const tur = createButtons("cyburn", "comphelp");
+    const midrangeRow = createButtons("turles2", "cburn2");
+    const cburn2 = createButtons("helpmidrange", "tur2");
+    const tur2 = createButtons("cyburn2", "midrangehelp");
+    const alldecksrow = createButtons("turles3", "bnc");
+    const bnc = createButtons("helpall", "cburn3");
+    const cburn3 = createButtons("budgetnc", "tc2");
+    const tc2 = createButtons("cyburn3", "tur3");
+    const tur3 = createButtons("toyotacontrolla2", "allhelp");
     const embed = createHelpEmbed(
       "Night Cap(NC) Decks",
       `To view the Night Cap decks please select an option from the select menu below!
@@ -149,6 +161,13 @@ Note: Night Cap has ${nightcapDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
       `To view the Competitive Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Competitive decks!
 Note: Night Cap has ${nightcapDecks.competitiveDecks.length} Competitive decks in Tbot`
+    );
+    const midrangeEmbed = createHelpEmbed(
+      "Night Cap Midrange Decks",
+      `My Midrange Decks for Night Cap(NC) are ${toBuildMidrangeString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
+      `To view the Midrange Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Midrange decks!
+Note: Night Cap has ${nightcapDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
     const allEmbed = createHelpEmbed(
       "Night Cap Decks",
@@ -185,6 +204,7 @@ Note: Night Cap has ${nightcapDecks.allDecks.length} decks in Tbot`
     const budgetnc = createDeckEmbed(result, "budgetnc");
     const cyburn = createDeckEmbed(result, "cyburn");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
+    const turles = createDeckEmbed(result, "turles");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -210,7 +230,9 @@ Note: Night Cap has ${nightcapDecks.allDecks.length} decks in Tbot`
           flags: MessageFlags.Ephemeral,
         });
       } else if (value == "midrange") {
-        await i.reply({ embeds: [cyburn], flags: MessageFlags.Ephemeral });
+        await i.update({
+          embeds: [midrangeEmbed],
+          components: [midrangeRow],})
       }
     }
     /**
@@ -223,16 +245,24 @@ Note: Night Cap has ${nightcapDecks.allDecks.length} decks in Tbot`
         comphelp: { embed: compEmbed, component: compRow },
         allhelp: { embed: allEmbed, component: alldecksrow },
         helpall: { embed: allEmbed, component: alldecksrow },
+        midrangehelp: { embed: midrangeEmbed, component: midrangeRow },
+        helpmidrange: { embed: midrangeEmbed, component: midrangeRow },
         bnc: { embed: budgetnc, component: bnc },
         budgetnc: { embed: budgetnc, component: bnc },
         cburn: { embed: cyburn, component: cburn },
         cyburn: { embed: cyburn, component: cburn },
         cburn2: { embed: cyburn, component: cburn2 },
         cyburn2: { embed: cyburn, component: cburn2 },
+        cburn3: { embed: cyburn, component: cburn3 },
+        cyburn3: { embed: cyburn, component: cburn3 },
         tc: { embed: toyotacontrolla, component: tc },
         toyotacontrolla: { embed: toyotacontrolla, component: tc },
         tc2: { embed: toyotacontrolla, component: tc2 },
         toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
+        tur: { embed: turles, component: tur },
+        turles: { embed: turles, component: tur },
+        tur2: { embed: turles, component: tur2 },
+        turles2: { embed: turles, component: tur2 },
       };
       const action = buttonActions[i.customId];
       if (action) {

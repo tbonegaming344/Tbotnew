@@ -59,7 +59,7 @@ module.exports = {
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setValue("ladder")
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
@@ -107,24 +107,22 @@ module.exports = {
     const hugeGigantacusDecks = {
       budgetDecks: ["budgethg"],
       competitiveDecks: ["telimps"],
-      ladderDecks: ["cryoboy", "gravepiratestache"],
+      ladderDecks: [ "gravepiratestache"],
       memeDecks: ["conjureleap", "frozentelimps", "ykm"],
       aggroDecks: ["gravepiratestache"],
       comboDecks: [
         "budgetykm",
-        "cryoboy",
         "frozentelimps",
         "gravepiratestache",
         "telimps",
         "ykm",
       ],
       controlDecks: ["frozentelimps"],
-      midrangeDecks: ["cryoboy","telimps", "ykm"],
+      midrangeDecks: ["telimps", "ykm"],
       tempoDecks: ["conjureleap"],
       allDecks: [
         "budgetykm",
         "conjureleap",
-        "cryoboy",
         "frozentelimps",
         "gravepiratestache",
         "telimps",
@@ -142,9 +140,6 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(hugeGigantacusDecks.allDecks);
-    const toBuildLadderString = buildDeckString(
-      hugeGigantacusDecks.ladderDecks
-    );
     const toBuildMemeString = buildDeckString(hugeGigantacusDecks.memeDecks);
     const toBuildComboString = buildDeckString(hugeGigantacusDecks.comboDecks);
     const toBuildMidrangeString = buildDeckString(
@@ -170,30 +165,24 @@ module.exports = {
     }
     const alldecksrow = createButtons("youngkenmartin", "bgus");
     const bgus = createButtons("helpall", "cl");
-    const cl = createButtons("budgetgus", "cboy");
-    const cboy = createButtons("conjureleap", "ft");
-    const ft = createButtons("cryoboy", "gps");
+    const cl = createButtons("budgetgus", "ft");
+    const ft = createButtons("conjureleap", "gps");
     const gps = createButtons("frozentelimps", "ti");
     const ti = createButtons("gravepiratestache", "ykm");
     const ykm = createButtons("telimps", "allhelp");
-    const ladderrow = createButtons("gravepiratestache2", "cboy2");
-    const cboy2 = createButtons("helpladder", "gps2");
-    const gps2 = createButtons("cryoboy2", "ladderhelp");
     const memerow = createButtons("youngkenmartin2", "cl2");
     const cl2 = createButtons("helpmeme", "ft2");
     const ft2 = createButtons("conjureleap2", "ykm2");
     const ykm2 = createButtons("frozentelimps2", "memehelp");
     const comborow = createButtons("youngkenmartin3", "bgus2");
-    const bgus2 = createButtons("helpcombo", "cboy3");
-    const cboy3 = createButtons("budgetgus2", "ft3");
-    const ft3 = createButtons("cryoboy3", "gps3");
+    const bgus2 = createButtons("helpcombo", "ft3");
+    const ft3 = createButtons("budgetgus2", "gps3");
     const gps3 = createButtons("frozentelimps3", "ti2");
     const ti2 = createButtons("gravepiratestache3", "ykm3");
     const ykm3 = createButtons("telimps2", "combohelp");
     const ti3 = createButtons("frozentelimps4", "controlhelp");
-    const midrangerow = createButtons("youngkenmartin3", "cboy4");
-    const cboy4 = createButtons("helpmidrange", "ti4");
-    const ti4 = createButtons("cyroboy4", "ykm4");
+    const midrangerow = createButtons("youngkenmartin3", "ti4");
+    const ti4 = createButtons("helpmidrange", "ykm4");
     const ykm4 = createButtons("telimps4", "midrangehelp");
     const allEmbed = createHelpEmbed(
       "Huge Gigantacus Decks",
@@ -207,13 +196,6 @@ Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Giga
       `To view the Huge Gigantacus decks please select an option from the select menu below!
 Note: there are ${hugeGigantacusDecks.allDecks.length} total decks for Huge Gigantacus in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349"
-    );
-    const ladderEmbed = createHelpEmbed(
-      "Huge Gigantacus Ladder Decks",
-      `My ladder decks for Huge-Gigantacus(HG) are ${toBuildLadderString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/Huge-Gigantacus%27s_victory_pose.png/revision/latest/scale-to-width-down/250?cb=20190116051349",
-      `To view the ladder Huge Gigantacus decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: there are ${hugeGigantacusDecks.ladderDecks.length} ladder decks for Huge Gigantacus in Tbot`
     );
     const memeEmbed = createHelpEmbed(
       "Huge Gigantacus Meme Decks",
@@ -262,7 +244,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
     }
     const budgetykm = createDeckEmbed(result, "budgetykm");
     const conjureleap = createDeckEmbed(result, "conjureleap");
-    const cryoboy = createDeckEmbed(result, "cyroboy");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const gravepiratestache = createDeckEmbed(result, "gps");
     const telimps = createDeckEmbed(result, "telimps");
@@ -283,7 +264,7 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
       } else if (value == "comp") {
         await i.reply({ embeds: [telimps], flags: MessageFlags.Ephemeral });
       } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+        await i.reply({embeds: [gravepiratestache], flags: MessageFlags.Ephemeral});
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "aggro") {
@@ -323,15 +304,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         bgus: {embed: budgetykm, component: bgus},
         budgetgus: {embed: budgetykm, component: bgus},
         bgus2: {embed: budgetykm, component: bgus2},
-        budgetgus2: {embed: budgetykm, component: bgus2},
-        cboy: {embed: cryoboy, component: cboy},
-        cyroboy: {embed: cryoboy, component: cboy},
-        cboy2: {embed: cryoboy, component: cboy2},
-        cyroboy2: {embed: cryoboy, component: cboy2},
-        cboy3: {embed: cryoboy, component: cboy3},
-        cyroboy3: {embed: cryoboy, component: cboy3},
-        cboy4: {embed: cryoboy, component: cboy4},
-        cyroboy4: {embed: cryoboy, component: cboy4},
         cl: {embed: conjureleap, component: cl},
         conjureleap: {embed: conjureleap, component: cl},
         cl2: {embed: conjureleap, component: cl2},

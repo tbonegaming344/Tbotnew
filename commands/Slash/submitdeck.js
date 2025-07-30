@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, ChannelType, EmbedBuilder, MessageFlags } = require('discord.js');
-
+const { SlashCommandBuilder, ChannelType, EmbedBuilder, MessageFlags, AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle} = require('discord.js');
+const axios = require('axios');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('submitdeck')
@@ -69,16 +69,33 @@ module.exports = {
     const hero = interaction.options.getString('hero');
     const deckcreator = interaction.options.getString('deck_creator');
     const aliases = interaction.options.getString('aliases') || '';
+    const imageUrl = image.url;
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const buffer = Buffer.from(response.data, 'utf-8');
+    const file = new AttachmentBuilder(buffer, { name: 'deck.png' });
+       const tbotServer = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setLabel('Tbot Server')
+          .setStyle(ButtonStyle.Link)
+          .setURL('https://discord.gg/2NSwt96vmS'),
+      );
+     const replyMessage = await interaction.reply({
+      content: `✅ Your deck has been submitted successfully!`,
+      files: [file], 
+      components: [tbotServer],
+      fetchReply: true
+      });
+      const permanentUrl = replyMessage.attachments.first().url;
 
-    const forumChannel = interaction.client.channels.cache.get('1100160031128830104');
-
+      const forumChannel = interaction.client.channels.cache.get('1100160031128830104');
     if (!forumChannel || forumChannel.type !== ChannelType.GuildForum) {
       return interaction.reply({ content: '❌ Forum channel not found or invalid.', ephemeral: true });
     }
     const fields = [
-  { name: 'Deck Archetype', value: deckarchetype, inline: true },
-  { name: 'Deck Type', value: decktype, inline: true },
-  { name: 'Deck Cost', value: deckcost.toString(), inline: true },
+  { name: 'Deck Archetype', value: `**__${deckarchetype}__**`, inline: true },
+  { name: 'Deck Type', value: `**__${decktype}__**`, inline: true },
+  { name: 'Deck Cost', value: `${deckcost.toString()}<:spar:1057791557387956274>`, inline: true },
 ];
 if (aliases && aliases.trim() !== '') {
   fields.push({ name: 'Aliases', value: aliases, inline: true });
@@ -91,7 +108,7 @@ if (aliases && aliases.trim() !== '') {
       .setFooter({ text: `Created By ${deckcreator} | Submitted by ${interaction.user.tag}`});
 
     if (image?.contentType?.startsWith('image/')) {
-      embed.setImage(image.url);
+      embed.setImage(permanentUrl);
     }
 
     // Create the thread in the forum
@@ -106,9 +123,5 @@ if (aliases && aliases.trim() !== '') {
     await starterMessage.pin();
     await starterMessage.react('<:upvote:1081953853903220876>');
     await starterMessage.react('<:downvote:1081953860534403102>');
-    await interaction.reply({
-      content: `✅ Your deck has been submitted successfully! You can view it here: ${thread.url}`,
-      ephemeral: MessageFlags.Ephemeral
-    });
   },
 };

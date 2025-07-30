@@ -1,5 +1,5 @@
-const { SlashCommandBuilder, ChannelType, EmbedBuilder, MessageFlags } = require('discord.js');
-
+const { SlashCommandBuilder, ChannelType, EmbedBuilder, MessageFlags, AttachmentBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle } = require('discord.js');
+const axios = require('axios');
 module.exports = {
   data: new SlashCommandBuilder()
     .setName('updatedeck')
@@ -35,9 +35,9 @@ module.exports = {
     .addAttachmentOption(option =>
       option.setName('image').setDescription('image of the decklist').setRequired(true))
        .addStringOption(option =>
-      option.setName('description').setDescription('Short description of the deck').setRequired(false))
+      option.setName('description').setDescription('Short description of the deck (optional)').setRequired(false))
     .addStringOption(option =>
-      option.setName('deck_archetype').setDescription('The archetype for the deck').setRequired(false)
+      option.setName('deck_archetype').setDescription('The archetype for the deck (optional)').setRequired(false)
       .addChoices(
         { name: 'Aggro', value: 'Aggro'},
         { name: 'Control', value: 'Control'},
@@ -46,7 +46,7 @@ module.exports = {
         { name: "Tempo", value: 'Tempo'}
       ))
           .addStringOption(option =>
-      option.setName('deck_type').setDescription('The type of deck it is').setRequired(false)
+      option.setName('deck_type').setDescription('The type of deck it is (optional)').setRequired(false)
       .addChoices(
         {name: 'Budget', value: 'Budget'},
         { name: 'Competitive', value: 'Competitive'},
@@ -62,23 +62,37 @@ module.exports = {
     const deckcost = interaction.options.getInteger('deck_cost');
     const hero = interaction.options.getString('hero');
     const deckcreator = interaction.options.getString('deck_creator');
-
+    const imageUrl = image.url;
+    const response = await axios.get(imageUrl, { responseType: 'arraybuffer' });
+    const buffer = Buffer.from(response.data, 'utf-8');
+    const file = new AttachmentBuilder(buffer, { name: 'deck.png' });
+    const tbotServer = new ActionRowBuilder()
+      .addComponents(
+        new ButtonBuilder()
+          .setLabel('Tbot Server')
+          .setStyle(ButtonStyle.Link)
+          .setURL('https://discord.gg/2NSwt96vmS'),
+      );
+      const replyMessage = await interaction.reply({
+      content: `✅ Your deck update has  been submitted successfully! Please join the tbot server below if you haven't already to be notified of updates on your submission or of updates to the bot`,
+      files: [file],
+      components: [tbotServer],
+      fetchReply: true
+    });
+    const permanentUrl = replyMessage.attachments.first().url;
     const forumChannel = interaction.client.channels.cache.get('1100160031128830104');
 
     if (!forumChannel || forumChannel.type !== ChannelType.GuildForum) {
       return interaction.reply({ content: '❌ Forum channel not found or invalid.', ephemeral: true });
     }
     const fields = [
-  { name: 'Deck Cost', value: deckcost.toString(), inline: true },
+  { name: 'Deck Cost', value: `${deckcost.toString()}<:spar:1057791557387956274>`, inline: true },
 ];
-if (aliases && aliases.trim() !== '') {
-  fields.push({ name: 'Aliases', value: aliases, inline: true });
-}
     if (deckarchetype) {
-      fields.push({ name: 'Deck Archetype', value: deckarchetype, inline: true });
+      fields.push({ name: 'Deck Archetype', value: `**__${deckarchetype}__**`, inline: true });
     }
     if (decktype) {
-      fields.push({ name: 'Deck Type', value: decktype, inline: true });
+      fields.push({ name: 'Deck Type', value: `**__${decktype}__**`, inline: true });
     }
     const embed = new EmbedBuilder()
       .setTitle(`Update ${name}`)
@@ -88,7 +102,7 @@ if (aliases && aliases.trim() !== '') {
       .setFooter({ text: `Created By ${deckcreator} | Submitted by ${interaction.user.tag}`})
 
     if (image?.contentType?.startsWith('image/')) {
-      embed.setImage(image.url);
+      embed.setImage(permanentUrl);
     }
 
     // Create the thread in the forum
@@ -103,9 +117,5 @@ if (aliases && aliases.trim() !== '') {
     await starterMessage.pin();
     await starterMessage.react('<:upvote:1081953853903220876>');
     await starterMessage.react('<:downvote:1081953860534403102>');
-    await interaction.reply({
-      content: `✅ Your deck has been submitted successfully! You can view it here: ${thread.url}`,
-      ephemeral: MessageFlags.Ephemeral
-    });
   },
 };

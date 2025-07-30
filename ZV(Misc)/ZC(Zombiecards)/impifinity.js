@@ -32,88 +32,71 @@ module.exports = {
         .setEmoji("<:Impfinity:1087754523050774659>")
     );
     const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Select an option below to view Impfinity's decklists")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setValue("budget")
-          .setDescription("Decks that are cheap for new players")
-          .setEmoji("💰"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Decks")
-          .setValue("comp")
-          .setDescription("Some of the Best Plant Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
+    .setCustomId("select")
+    .setPlaceholder("Select an option below to view Impfinity's decklists")
+    .addOptions(
+      new StringSelectMenuOptionBuilder()
+      .setLabel("Budget Deck")
+      .setValue("budget")
+      .setDescription('Decks that are cheap for new players')
+      .setEmoji("💰"),
+      new StringSelectMenuOptionBuilder()
+      .setLabel("Competitive Decks")
+      .setValue("comp")
+      .setDescription('Some of the Best Plant Decks in the game')
+			.setEmoji("<:compemote:1325461143136764060>"), 
+      new StringSelectMenuOptionBuilder()
+      .setLabel("Ladder Deck")
+      .setValue("ladder")
+      .setDescription('Decks that mostly only good for ranked games')
+			.setEmoji("<:ladder:1271503994857979964>"),
+       new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
-          .setValue("aggro")
-          .setDescription(
-            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Impfinity Decks")
-          .setValue("all")
-          .setDescription("View all of Impfinity(IF) decks")
-          .setEmoji("<:Impfinity:1087754523050774659>")
-      );
+      new StringSelectMenuOptionBuilder()
+      .setLabel("Aggro Deck")
+      .setValue("aggro")
+      .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
+      new StringSelectMenuOptionBuilder()
+      .setLabel("Combo Deck")
+      .setValue("combo")
+      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
+      new StringSelectMenuOptionBuilder()
+      .setLabel("Midrange Decks")
+      .setValue("midrange")
+      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
+      new StringSelectMenuOptionBuilder()
+      .setLabel("All Impfinity Decks")
+      .setValue("all")
+      .setDescription('View all of Impfinity(IF) decks')
+      .setEmoji("<:Impfinity:1087754523050774659>")
+    )
     const row = new ActionRowBuilder().addComponents(select);
     const impfinityDecks = {
       budgetDecks: ["budgetif"],
       competitiveDecks: ["nohokaistars", "spacestars"],
-      ladderDecks: ["splimps"],
       memeDecks: ["tangen", "uno"],
-      aggroDecks: ["budgetif", "splimps"],
+      aggroDecks: ["budgetif"],
       comboDecks: ["spacestars", "tangen", "uno"],
       midrangeDecks: ["nohokaistars", "spacestars", "tangen", "uno"],
-      allDecks: [
-        "budgetif",
-        "nohokaistars",
-        "spacestars",
-        "splimps",
-        "tangen",
-        "uno",
-      ],
-    };
-    /**
+      allDecks: ["budgetif", "nohokaistars", "spacestars", "tangen", "uno"],
+    }
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
      */
     function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
+      return decks.map(deck => `\n<@1043528908148052089> **${deck}**`).join('');
     }
     const toBuildString = buildDeckString(impfinityDecks.allDecks);
     const competitiveString = buildDeckString(impfinityDecks.competitiveDecks);
     const comboString = buildDeckString(impfinityDecks.comboDecks);
-    const aggroString = buildDeckString(impfinityDecks.aggroDecks);
     const midrangeString = buildDeckString(impfinityDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -129,30 +112,26 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("uno", "bif");
-    const bif = createButtons("helpall", "nhks");
-    const nhks = createButtons("budgetif", "stars");
-    const stars = createButtons("nohokaistars", "spl");
-    const spl = createButtons("spacestars", "tan");
-    const tan = createButtons("splimps", "un");
-    const un = createButtons("tangen", "allhelp");
-    const competitiveRow = createButtons("spacestars2", "nhks2");
-    const nhks2 = createButtons("helpcomp", "stars2");
-    const stars2 = createButtons("nohokaistars2", "comphelp");
-    const memerow = createButtons("uno2", "tan2");
-    const tan2 = createButtons("helpmeme", "un2");
-    const un2 = createButtons("tangen2", "memehelp");
-    const aggroRow = createButtons("splimps2", "bif2");
-    const bif2 = createButtons("helpaggro", "spl2");
-    const spl2 = createButtons("budgetif2", "aggrohelp");
-    const comboRow = createButtons("uno3", "stars3");
-    const stars3 = createButtons("helpcombo", "tan3");
-    const tan3 = createButtons("spacestars3", "un3");
-    const un3 = createButtons("tangen3", "combohelp");
-    const midrangeRow = createButtons("uno4", "nhks3");
-    const nhks3 = createButtons("helpmidrange", "stars4");
-    const stars4 = createButtons("nohokaistars3", "un4");
-    const un4 = createButtons("spacestars4", "midrangehelp");
+    const alldecksrow = createButtons("uno", "bif")
+    const bif = createButtons("helpall", "nhks")
+    const nhks = createButtons("budgetif", "stars")
+    const stars = createButtons("nohokaistars", "tan")
+    const tan = createButtons("spacestars", "un")
+    const un = createButtons("tangen", "allhelp")
+    const competitiveRow = createButtons("spacestars2", "nhks2")
+    const nhks2 = createButtons("helpcomp", "stars2")
+    const stars2 = createButtons("nohokaistars2", "comphelp")
+    const memerow = createButtons("uno2", "tan2")
+    const tan2 = createButtons("helpmeme", "un2")
+    const un2 = createButtons("tangen2", "memehelp")
+    const comboRow = createButtons("uno3", "stars3")
+    const stars3 = createButtons("helpcombo", "tan3")
+    const tan3 = createButtons("spacestars3", "un3")
+    const un3 = createButtons("tangen3", "combohelp")
+    const midrangeRow = createButtons("uno4", "nhks3")
+    const nhks3 = createButtons("helpmidrange", "stars4")
+    const stars4 = createButtons("nohokaistars3", "un4")
+    const un4 = createButtons("spacestars4", "midrangehelp")
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/magnificentbaddie/images/8/83/Impfinity.webp/revision/latest?cb=20220421015258"
@@ -206,13 +185,6 @@ Note: Impfinity has ${impfinityDecks.competitiveDecks.length} competitive decks 
       `To view the Impfinity meme decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Impfinity has ${impfinityDecks.memeDecks.length} meme decks in Tbot`
     );
-    const aggroEmbed = createHelpEmbed(
-      "Impfinity Aggro Decks",
-      `My aggro decks for Impfinity(IF) are ${aggroString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-      `To view the Impfinity aggro decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.aggroDecks.length} aggro decks in Tbot`
-    );
     const comboEmbed = createHelpEmbed(
       "Impfinity Combo Decks",
       `My combo decks for Impfinity(IF) are ${comboString}`,
@@ -256,7 +228,6 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
     const tangen = createDeckEmbed(result, "tangen");
     const spacestars = createDeckEmbed(result, "spacestars");
     const uno = createDeckEmbed(result, "uno");
-    const splimps = createDeckEmbed(result, "splimps");
     const m = await message.channel.send({
       embeds: [embed],
       components: [cmd],
@@ -265,19 +236,15 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
     async function handleSelectMenu(i) {
       if (i.customId == "select") {
         const value = i.values[0];
-        if (value == "budget") {
+        if (value == "budget" || value == "aggro") {
           await i.reply({ embeds: [budgetif], flags: MessageFlags.Ephemeral });
         } else if (value == "combo") {
           await i.reply({
             embeds: [spacestars],
             flags: MessageFlags.Ephemeral,
           });
-        } else if (value == "ladder") {
-          await i.reply({ embeds: [splimps], flags: MessageFlags.Ephemeral });
         } else if (value == "meme") {
           await i.update({ embeds: [memeEmbed], components: [memerow] });
-        } else if (value == "aggro") {
-          await i.update({ embeds: [aggroEmbed], components: [aggroRow] });
         } else if (value == "all") {
           await i.update({
             embeds: [alldecksEmbed],
@@ -323,10 +290,6 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
         spacestars3: { embed: spacestars, component: stars3 },
         stars4: { embed: spacestars, component: stars4 },
         spacestars4: { embed: spacestars, component: stars4 },
-        spl: { embed: splimps, component: spl },
-        splimps: { embed: splimps, component: spl },
-        spl2: { embed: splimps, component: spl2 },
-        splimps2: { embed: splimps, component: spl2 },
         nhks: { embed: nohokaistars, component: nhks },
         nohokaistars: { embed: nohokaistars, component: nhks },
         nhks2: { embed: nohokaistars, component: nhks2 },

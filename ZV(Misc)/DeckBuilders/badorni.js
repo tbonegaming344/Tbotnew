@@ -56,26 +56,19 @@ module.exports = {
       new StringSelectMenuOptionBuilder()
       .setLabel("Control Deck")
       .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
-      .setValue("control"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Deck")
-      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game')
-      .setValue("midrange")
+      .setValue("control")
     )
     const row = new ActionRowBuilder().addComponents(select);
     const badorniDecks = {
       memeDecks: [
       "frozentelimps",
       "plantmop",
-      "psychosolstice"
     ],
       comboDecks: [
       "frozentelimps",
-      "plantmop",
-      "psychosolstice"
+      "plantmop"
     ],
       controlDecks: ["frozentelimps"],
-      midrangeDecks: ["psychosolstice"]
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -107,21 +100,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const combo = createButtons("psychosolstice2", "ftimps");
+    const combo = createButtons("plamntmop2", "ftimps");
     const ftimps = createButtons("combo", "pmop2");
-    const pmop2 = createButtons("frozentelimps", "psy2");
-    const psy2 = createButtons("plantmop2", "helpcombo");
-    const meme = createButtons("psychosolstice", "fti2");
+    const pmop2 = createButtons("frozentelimps", "helpcombo");
+    const meme = createButtons("plantmop", "fti2");
     const fti2 = createButtons("meme", "pmop");
-    const pmop = createButtons("ftimps2", "psy");
-    const psy = createButtons("plantmop", "meme2");
+    const pmop = createButtons("ftimps2", "meme2");
     const [result] =
-      await db.query(`select frozentelimps, plantmop,
-	psychosolstice from hgdecks hg
+      await db.query(`select frozentelimps, plantmop from hgdecks hg
 	inner join ccdecks cc
-  on (hg.deckinfo = cc.deckinfo)
-	inner join sfdecks sf
-	on (hg.deckinfo = sf.deckinfo)`);
+  on (hg.deckinfo = cc.deckinfo))`);
     const user = await client.users.fetch("749149322561716294");
     const bad = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -169,7 +157,6 @@ Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbo
       }
     const fti = createDeckEmbed(result, "frozentelimps");
     const plantmop = createDeckEmbed(result, "plantmop");
-    const pysol = createDeckEmbed(result, "psychosolstice");
     const m = await message.channel.send({ embeds: [bad], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -206,8 +193,6 @@ Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbo
         plantmop: {embed: plantmop, component: pmop},
         helpcombo: {embed: combobad, component: combo},
         frozentelimps: {embed: fti, component: ftimps},
-        psychosolstice: {embed: pysol, component: psy},
-        psychosolstice2: {embed: pysol, component: psy2},
       }
       const action = buttonActions[i.customId];
       if(action){

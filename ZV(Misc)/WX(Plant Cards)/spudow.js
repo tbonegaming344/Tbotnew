@@ -39,108 +39,102 @@ module.exports = {
         .setEmoji("<:spudgun:1100168090110656582>")
         .setStyle(ButtonStyle.Danger)
     );
-    const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Spudow decks")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Budget Deck")
-        .setValue("budget")
-        .setDescription("A Deck that is cheap for new players")
-        .setEmoji("💰"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setValue("competitive")
-        .setDescription("Some of the best Decks in the game")
-        .setEmoji("<:compemote:1325461143136764060>"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Meme Decks")
-        .setDescription("Decks that are built off a weird/fun combo")
-        .setValue("meme"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Combo Deck")
-        .setDescription(
-          "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-        )
-        .setValue("combo"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Control Decks")
-        .setDescription(
-          'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-        )
-        .setValue("control"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("Midrange Decks")
-        .setDescription(
-          "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-        )
-        .setValue("midrange"),
-      new StringSelectMenuOptionBuilder()
-        .setLabel("All Spudow Decks")
-        .setValue("all")
-        .setDescription("View all the Spudow decks")
-        .setEmoji("<:spudgun:1100168090110656582>")
-    );
+   const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Spudow decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("A Deck that is cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("competitive")
+          .setDescription("Some of the best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setDescription("Decks that are built off a weird/fun combo")
+          .setValue("meme"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Deck")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          )
+          .setValue("combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          )
+          .setValue("control"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          )
+          .setValue("midrange"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Spudow Decks")
+          .setValue("all")
+          .setDescription("View all the Spudow decks")
+          .setEmoji("<:spudgun:1100168090110656582>")
+      );
 
-  const row = new ActionRowBuilder().addComponents(select);
-  const spudowDecks = {
-    budgetDecks: ["budgetsp"],
-    competitiveDecks: ["radiotherapy"],
-    memeDecks: ["nutting", "popsicle", "recycling"],
-    comboDecks: ["nutting"],
-    controlDecks: ["radiotherapy", "popsicle"],
-    midrangeDecks: ["budgetsp", "recycling"],
-    allDecks: ["budgetsp", "nutting", "popsicle", "radiotherapy", "recycling"]
-  };
-  /**
-   * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-   * @param {Array} decks - The array of deck names to build the string from
-   * @returns {string} - The string of deck names
-   */
-  function buildDeckString(decks) {
-    return decks
-      .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-      .join("");
-  }
+    const row = new ActionRowBuilder().addComponents(select);
+    const spudowDecks = {
+      budgetDecks: ["budgetsp"],
+      competitiveDecks: ["radiotherapy"],
+      memeDecks: ["nutting", "recycling"],
+      comboDecks: ["nutting"],
+      controlDecks: ["radiotherapy"],
+      midrangeDecks: ["budgetsp", "recycling"],
+      allDecks: ["budgetsp", "nutting", "radiotherapy", "recycling"]
+    };
+    /**
+     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
+     * @param {Array} decks - The array of deck names to build the string from
+     * @returns {string} - The string of deck names
+     */
+    function buildDeckString(decks) {
+      return decks
+        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
+        .join("");
+    }
 
-  const toBuildString = buildDeckString(spudowDecks.allDecks);
-  const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
-  const toBuildControlString = buildDeckString(spudowDecks.controlDecks);
-  const toBuildMidrangeString = buildDeckString(spudowDecks.midrangeDecks);
-  /**
-   * The createButtons function creates a row of buttons for the embed
-   * @param {string} leftButtonId - The ID of the left button to control the left button 
-   * @param {string} rightButtonId - The ID of the right button to control the right button
-   * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-   */
-  function createButtons(leftButtonId, rightButtonId) {
-    return new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId(leftButtonId)
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId(rightButtonId)
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-  }
-  const memerow = createButtons("recycling", "nut2");
-  const nut2 = createButtons("helpmeme", "pop2");
-  const pop2 = createButtons("nuttin2", "recy");
-  const recy = createButtons("popsicle2", "memehelp");
-  const controlrow = createButtons("radiotherapy2", "pop");
-  const pop = createButtons("helpcontrol", "radio2");
-  const radio2 = createButtons("popsicle", "controlhelp"); 
-  const midrangerow = createButtons("recycling2", "bsp");
-  const bsp = createButtons("helpmidrange", "recy2");
-  const recy2 = createButtons("budgetsp", "midrangehelp");
-  const alldecksrow = createButtons("recycling3", "bsp2");
-  const bsp2 = createButtons("helpall", "nut");
-  const nut = createButtons("budgetsp2", "pop3");
-  const pop3 = createButtons("nuttin", "radio");
-  const radio = createButtons("popsicle3", "recy3");
-  const recy3 = createButtons("radiotherapy", "helpall");
+    const toBuildString = buildDeckString(spudowDecks.allDecks);
+    const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
+    const toBuildMidrangeString = buildDeckString(spudowDecks.midrangeDecks);
+    /**
+     * The createButtons function creates a row of buttons for the embed
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} rightButtonId - The ID of the right button to control the right button
+     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
+     */
+    function createButtons(leftButtonId, rightButtonId) {
+      return new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(leftButtonId)
+          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(rightButtonId)
+          .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    }
+    const memerow = createButtons("recycling", "nut");
+    const nut = createButtons("helpmeme", "recy");
+    const recy = createButtons("nuttin", "memehelp");
+    const midrangerow = createButtons("recycling2", "bsp");
+    const bsp = createButtons("helpmidrange", "recy2");
+    const recy2 = createButtons("budgetsp", "midrangehelp");
+    const alldecksrow = createButtons("recycling3", "bsp2");
+    const bsp2 = createButtons("helpall", "nut2");
+    const nut2 = createButtons("budgetsp2", "radio");
+    const radio = createButtons("nuttin2", "recy3");
+    const recy3 = createButtons("radiotherapy", "helpall");
     const sp = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/4/49/HD_Tater_Toss.png/revision/latest?cb=20190624184934&path-prefix=protagonist"
@@ -186,13 +180,6 @@ module.exports = {
         "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
         `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
   Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`
-      );
-      const controlEmbed = createHelpEmbed(
-        "Spudow Control Decks",
-        `My control decks for Spudow are ${toBuildControlString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
-        `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
-  Note: Spudow has ${spudowDecks.controlDecks.length} decks in Tbot`
       );
       const midrangeEmbed = createHelpEmbed(
         "Spudow Midrange Decks",
@@ -242,7 +229,6 @@ module.exports = {
     const radiotherapy = createDeckEmbed(result, "radiotherapy");
     const recycling = createDeckEmbed(result, "recycling");
     const nuttin = createDeckEmbed(result, "nutting");
-    const popsicle = createDeckEmbed(result, "popsicle");
     const m = await message.channel.send({ embeds: [sp], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -257,13 +243,11 @@ module.exports = {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
-      } else if (value === "competitive") {
+      } else if (value === "competitive" || value === "control") {
         await i.reply({
           embeds: [radiotherapy],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "control") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
       } else if (value === "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
@@ -279,12 +263,10 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-        allhelp: { embed: allEmbed, component: alldecksrow },
+       allhelp: { embed: allEmbed, component: alldecksrow },
         helpall: { embed: allEmbed, component: alldecksrow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
-        controlhelp: { embed: controlEmbed, component: controlrow },
-        helpcontrol: { embed: controlEmbed, component: controlrow },
         bsp: { embed: budgetsp, component: bsp },
         budgetsp: { embed: budgetsp, component: bsp },
         bsp2: { embed: budgetsp, component: bsp2 },
@@ -295,14 +277,6 @@ module.exports = {
         nuttin2: { embed: nuttin, component: nut2 },
         radio: { embed: radiotherapy, component: radio },
         radiotherapy: { embed: radiotherapy, component: radio },
-        radio2: { embed: radiotherapy, component: radio2 },
-        radiotherapy2: { embed: radiotherapy, component: radio2 },
-        pop: { embed: popsicle, component: pop },
-        popsicle: { embed: popsicle, component: pop },
-        pop2: { embed: popsicle, component: pop2 },
-        popsicle2: { embed: popsicle, component: pop2 },
-        pop3: { embed: popsicle, component: pop3 },
-        popsicle3: { embed: popsicle, component: pop3 },
         recy: {embed: recycling, component: recy},
         recycling: {embed: recycling, component: recy},
         recy2: {embed: recycling, component: recy2},

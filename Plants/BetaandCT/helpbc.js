@@ -57,10 +57,14 @@ module.exports = {
           .setEmoji("<:compemote:1325461143136764060>")
           .setValue("competitive"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
+           new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Deck")
+          .setDescription("Decks that are built off a weird/fun combo")
+          .setValue("meme"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Combo Decks")
           .setDescription(
@@ -94,7 +98,8 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const betaCarrotinaDecks = {
       competitiveDecks: ["neurotherapy"],
-      ladderDecks: ["carroot", "dinocounter"],
+      ladderDecks: ["carroot"],
+      memeDecks: ["dinocounter"],
       comboDecks: ["carroot", "dinocounter"],
       controlDecks: ["neurotherapy"],
       midrangedecks: ["dinocounter"],
@@ -112,7 +117,6 @@ module.exports = {
         .join("");
     }
     const toBuildString = buildDeckString(betaCarrotinaDecks.allDecks);
-    const toBuildLadderString = buildDeckString(betaCarrotinaDecks.ladderDecks);
     const toBuildComboString = buildDeckString(betaCarrotinaDecks.comboDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -132,29 +136,19 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const ladderrow = createButtons("dinocounter", "car");
-    const car = createButtons("helpladder", "dcounter");
-    const dcounter = createButtons("carroot", "ladderhelp");
-    const comborow = createButtons("dinocounter2", "car2");
-    const car2 = createButtons("helpcombo", "dcounter2");
-    const dcounter2 = createButtons("carroot2", "combohelp");
-    const alldecksrow = createButtons("shamcontrol", "car3");
-    const car3 = createButtons("helpall", "dcounter3");
-    const dcounter3 = createButtons("carroot3", "scontrol");
-    const scontrol = createButtons("dinocounter3", "allhelp");
+    const comborow = createButtons("dinocounter", "car");
+    const car = createButtons("helpcombo", "dcounter");
+    const dcounter = createButtons("carroot", "combohelp");
+    const alldecksrow = createButtons("shamcontrol", "car2");
+    const car2 = createButtons("helpall", "dcounter2");
+    const dcounter2 = createButtons("carroot2", "scontrol");
+    const scontrol = createButtons("dinocounter2", "allhelp");
     const [result] = await db.query("SELECT * FROM bcdecks");
     const embed = createHelpEmbed(
       "Beta Carrotina Commands",
       `To view the Beta Carrotina decks please select an option from the select menu below
 Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist"
-    );
-    const ladderEmbed = createHelpEmbed(
-      "Beta Carrotina Ladder Decks",
-      `My ladder decks for Beta Carrotina are ${toBuildLadderString}`,
-      "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist",
-      `To view the ladder Beta Carrotina decks please use the commands listed above or click the buttons below to navigate through all ladder decks. 
-Note: Beta Carrotina has ${betaCarrotinaDecks.ladderDecks.length} total ladder decks in Tbot`
     );
     const comboEmbed = createHelpEmbed(
       "Beta Carrotina Combo Decks",
@@ -208,9 +202,7 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total all decks i
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (value == "combo") {
+     if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
@@ -219,12 +211,12 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total all decks i
           embeds: [shamcontrol],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "midrange") {
+      } else if (value == "midrange" || value == "meme") {
         await i.reply({
           embeds: [dinocounter],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value == "tempo") {
+      } else if (value == "tempo" || value == "ladder") {
         await i.reply({
           embeds: [carroot],
           flags: MessageFlags.Ephemeral,
@@ -239,22 +231,16 @@ Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total all decks i
       const buttonActions = {
         helpall: { embed: allEmbed, component: alldecksrow },
         allhelp: { embed: allEmbed, component: alldecksrow },
-        helpladder: { embed: ladderEmbed, component: ladderrow },
-        ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpcombo: { embed: comboEmbed, component: comborow },
         combohelp: { embed: comboEmbed, component: comborow },
         car: { embed: carroot, component: car },
         carroot: { embed: carroot, component: car },
         car2: { embed: carroot, component: car2 },
         carroot2: { embed: carroot, component: car2 },
-        car3: { embed: carroot, component: car3 },
-        carroot3: { embed: carroot, component: car3 },
         dcounter: { embed: dinocounter, component: dcounter },
         dinocounter: { embed: dinocounter, component: dcounter },
         dcounter2: { embed: dinocounter, component: dcounter2 },
         dinocounter2: { embed: dinocounter, component: dcounter2 },
-        dcounter3: { embed: dinocounter, component: dcounter3 },
-        dinocounter3: { embed: dinocounter, component: dcounter3 },
         scontrol: { embed: shamcontrol, component: scontrol },
         shamcontrol: { embed: shamcontrol, component: scontrol },
       };

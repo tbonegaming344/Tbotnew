@@ -81,12 +81,11 @@ module.exports = {
     const impfinityDecks = {
       budgetDecks: ["budgetif"],
       competitiveDecks: ["nohokaistars", "spacestars"],
-      ladderDecks: ["splimps"],
       memeDecks: ["tangen", "uno"],
-      aggroDecks: ["budgetif", "splimps"],
+      aggroDecks: ["budgetif"],
       comboDecks: ["spacestars", "tangen", "uno"],
       midrangeDecks: ["nohokaistars", "spacestars", "tangen", "uno"],
-      allDecks: ["budgetif", "nohokaistars", "spacestars", "splimps", "tangen", "uno"],
+      allDecks: ["budgetif", "nohokaistars", "spacestars", "tangen", "uno"],
     }
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -99,7 +98,6 @@ module.exports = {
     const toBuildString = buildDeckString(impfinityDecks.allDecks);
     const competitiveString = buildDeckString(impfinityDecks.competitiveDecks);
     const comboString = buildDeckString(impfinityDecks.comboDecks);
-    const aggroString = buildDeckString(impfinityDecks.aggroDecks);
     const midrangeString = buildDeckString(impfinityDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -122,9 +120,8 @@ module.exports = {
     const alldecksrow = createButtons("uno", "bif")
     const bif = createButtons("helpall", "nhks")
     const nhks = createButtons("budgetif", "stars")
-    const stars = createButtons("nohokaistars", "spl")
-    const spl = createButtons("spacestars", "tan")
-    const tan = createButtons("splimps", "un")
+    const stars = createButtons("nohokaistars", "tan")
+    const tan = createButtons("spacestars", "un")
     const un = createButtons("tangen", "allhelp")
     const competitiveRow = createButtons("spacestars2", "nhks2")
     const nhks2 = createButtons("helpcomp", "stars2")
@@ -132,9 +129,6 @@ module.exports = {
     const memerow = createButtons("uno2", "tan2")
     const tan2 = createButtons("helpmeme", "un2")
     const un2 = createButtons("tangen2", "memehelp")
-    const aggroRow = createButtons("splimps2", "bif2")
-    const bif2 = createButtons("helpaggro", "spl2")
-    const spl2 = createButtons("budgetif2", "aggrohelp")
     const comboRow = createButtons("uno3", "stars3")
     const stars3 = createButtons("helpcombo", "tan3")
     const tan3 = createButtons("spacestars3", "un3")
@@ -169,13 +163,6 @@ Note: Impfinity has ${impfinityDecks.competitiveDecks.length} competitive decks 
         "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
         `To view the Impfinity meme decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Impfinity has ${impfinityDecks.memeDecks.length} meme decks in Tbot`
-      );
-      const aggroEmbed = createHelpEmbed(
-        "Impfinity Aggro Decks",
-        `My aggro decks for Impfinity(IF) are ${aggroString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-        `To view the Impfinity aggro decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.aggroDecks.length} aggro decks in Tbot`
       );
       const comboEmbed = createHelpEmbed(
         "Impfinity Combo Decks",
@@ -220,7 +207,6 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
     const tangen = createDeckEmbed(result, "tangen");
     const spacestars = createDeckEmbed(result, "spacestars");
     const uno = createDeckEmbed(result, "uno");
-    const splimps = createDeckEmbed(result, "splimps");
     const m = await message.channel.send({
       embeds: [embed],
       components: [row],
@@ -229,20 +215,14 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
     async function handleSelectMenu(i){
       if(i.customId == "select") {
         const value = i.values[0];
-        if(value == "budget"){
+        if(value == "budget" ||  value == "aggro"){
           await i.reply({embeds: [budgetif], flags: MessageFlags.Ephemeral});
         }
         else if(value == "combo"){
           await i.reply({embeds: [spacestars], flags: MessageFlags.Ephemeral});
         }
-        else if(value == "ladder"){
-          await i.reply({embeds: [splimps], flags: MessageFlags.Ephemeral});
-        }
         else if(value == "meme"){
           await i.update({embeds: [memeEmbed], components: [memerow]});
-        }
-        else if(value == "aggro"){
-          await i.update({embeds: [aggroEmbed], components: [aggroRow]});
         }
         else if(value == "all"){
           await i.update({embeds: [alldecksEmbed], components: [alldecksrow]});
@@ -281,10 +261,6 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
         spacestars3: {embed: spacestars, component: stars3},
         stars4: {embed: spacestars, component: stars4},
         spacestars4: {embed: spacestars, component: stars4},
-        spl: {embed: splimps, component: spl},
-        splimps: {embed: splimps, component: spl},
-        spl2: {embed: splimps, component: spl2},
-        splimps2: {embed: splimps, component: spl2},
         nhks: {embed: nohokaistars, component: nhks},
         nohokaistars: {embed: nohokaistars, component: nhks},
         nhks2: {embed: nohokaistars, component: nhks2},

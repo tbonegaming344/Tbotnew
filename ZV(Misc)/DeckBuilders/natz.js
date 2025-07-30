@@ -43,12 +43,7 @@ function createHelpEmbed(title, description, thumbnail, footer) {
       .setPlaceholder("Please select an option below to view Natz Decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-        .setLabel("Competitive Deck")
-        .setDescription('Some of the best Decks in the game')
-        .setEmoji("<:compemote:1325461143136764060>")
-        .setValue("comp"), 
-        new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Deck")
+      .setLabel("Ladder Decks")
       .setDescription('Decks that mostly only good for ranked games')
       .setEmoji("<:ladder:1271503994857979964>")
       .setValue("ladder"),
@@ -79,8 +74,7 @@ function createHelpEmbed(title, description, thumbnail, footer) {
       )
       const row = new ActionRowBuilder().addComponents(select);
       const natzdecks = {
-        competitiveDecks: ["toyotacontrolla"],
-        ladderDecks: ["carroot"],
+        ladderDecks: ["carroot", "toyotacontrolla"],
         memeDecks: ["ladytuna"],
         comboDecks: ["carroot"],
         controlDecks: ["toyotacontrolla"],
@@ -99,6 +93,7 @@ function createHelpEmbed(title, description, thumbnail, footer) {
           .join("");
       }
       const toBuildString = buildDeckString(natzdecks.allDecks);
+      const toBuildLadderString = buildDeckString(natzdecks.ladderDecks);
       /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button 
@@ -121,6 +116,9 @@ function createHelpEmbed(title, description, thumbnail, footer) {
       const carr = createButtons("helpnatz", "lt");
       const lt = createButtons("carroot", "tc");
       const tc = createButtons("ladytuna", "help");
+      const ladderRow = createButtons("toyotacontrolla2", "carr2");
+      const carr2 = createButtons("helpladder", "tc2");
+      const tc2 = createButtons("carroot2", "ladderhelp");
       const user = await client.users.fetch("608656205589512195");
         const [result] = await db.query(`select carroot, ladytuna, toyotacontrolla from ntdecks nt inner join ncdecks nc on nt.deckinfo = nc.deckinfo 
           inner join bcdecks bc on nt.deckinfo = bc.deckinfo`);
@@ -130,6 +128,12 @@ function createHelpEmbed(title, description, thumbnail, footer) {
 Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
           user.displayAvatarURL()
         )
+        const ladderEmbed = createHelpEmbed(
+          `${user.displayName} Ladder Decks`,
+          `My Ladder Decks for Natz are ${toBuildLadderString}`,
+          "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
+          `To view the Ladder decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Ladder decks!
+Note: ${user.displayName} has ${natzdecks.ladderDecks.length} Ladder decks in Tbot`)
         const alldecksEmbed = createHelpEmbed(
           `${user.displayName} Decks`,
           `My commands for decks made by ${user.displayName} are ${toBuildString}`,
@@ -180,20 +184,29 @@ Note: ${user.displayName} has ${natzdecks.allDecks.length} total decks in Tbot`,
           else if(value == "meme" || value == "midrange"){
             await i.reply({embeds: [ladytuna], flags: MessageFlags.Ephemeral})
           }
-          else if(value == "ladder" || value == "combo" || value == "tempo"){
+          else if(value == "combo" || value == "tempo"){
             await i.reply({embeds: [carroot], flags: MessageFlags.Ephemeral})
+          }
+          else if(value == "ladder"){
+            await i.update({ embeds: [ladderEmbed], components: [ladderRow] });
           }
         }
         async function handleButtonInteraction(i){
           const buttonActions = {
             helpnatz: {embed: natz, components: alldecksrow},
-            help: {embed: natz, components: alldecksrow},    
+            help: {embed: natz, components: alldecksrow},  
+            helpladder: {embed: ladderEmbed, components: ladderRow},
+            ladderhelp: {embed: ladderEmbed, components: ladderRow},  
             carr: {embed: carroot, components: carr},
             carroot: {embed: carroot, components: carr},
+            carr2: {embed: carroot, components: carr2},
+            carroot2: {embed: carroot, components: carr2},
             lt: {embed: ladytuna, components: lt},
             ladytuna: {embed: ladytuna, components: lt},
             tc: {embed: toyotacontrolla, components: tc},
-            toyotacontrolla: {embed: toyotacontrolla, components: tc},        
+            toyotacontrolla: {embed: toyotacontrolla, components: tc},    
+            tc2: {embed: toyotacontrolla, components: tc2},
+            toyotacontrolla2: {embed: toyotacontrolla, components: tc2}    
           };
         const action = buttonActions[i.customId];
         if (action) {

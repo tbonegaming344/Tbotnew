@@ -86,8 +86,8 @@ module.exports = {
           .setValue("all")
       );
     const xeraDecks = {
-      competitiveDecks: ["limerence", "neurotherapy", "toyotacontrolla"],
-      ladderDecks: ["brady", "gomorrah", "gravepiratestache", "leafystrike"],
+      competitiveDecks: ["limerence", "neurotherapy", "turles"],
+      ladderDecks: ["brady", "gomorrah", "gravepiratestache", "leafystrike", "toyotacontrolla"],
       memeDecks: [
         "22savage",
         "frozentelimps",
@@ -99,7 +99,6 @@ module.exports = {
         "mechagold",
         "recycling",
         "reversecatster",
-        "startron",
         "uncrackamech",
         "watersports",
         "youngeggmartin",
@@ -115,7 +114,6 @@ module.exports = {
         "himpter",
         "laserrings",
         "reversecatster",
-        "startron",
         "uncrackamech",
         "watersports",
         "youngeggmartin",
@@ -137,7 +135,7 @@ module.exports = {
         "laserrings",
         "limerence",
         "recycling",
-        "startron",
+        "turles",
         "watersports",
       ],
       tempoDecks: ["brady", "leafystrike"],
@@ -158,8 +156,8 @@ module.exports = {
         "neurotherapy",
         "recycling",
         "reversecatster",
-        "startron",
         "toyotacontrolla",
+        "turles",
         "uncrackamech",
         "watersports",
         "youngeggmartin"
@@ -202,15 +200,16 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const comprow = createButtons("toyotacontrolla", "lime");
+    const comprow = createButtons("turles", "lime");
     const lime = createButtons("helpcomp", "neuro");
-    const neuro = createButtons("limerence", "tc");
-    const tc = createButtons("neurotherapy", "comphelp");
-    const ladderrow = createButtons("leafystrike", "br");
+    const neuro = createButtons("limerence", "tur");
+    const tur = createButtons("neurotherapy", "comphelp");
+    const ladderrow = createButtons("toyotacontrolla", "br");
     const br = createButtons("helpladder", "go");
     const go = createButtons("brady", "gps");
     const gps = createButtons("gomorrah", "lstrike");
-    const lstrike = createButtons("gravepiratestache", "ladderhelp");
+    const lstrike = createButtons("gravepiratestache", "tc");
+    const tc = createButtons("leafystrike", "ladderhelp");
     const memerow = createButtons("youngeggmartin", "sav");
     const sav = createButtons("helpmeme", "ftimps");
     const ftimps = createButtons("savage", "ff");
@@ -221,9 +220,8 @@ module.exports = {
     const lrings = createButtons("himps", "mgold");
     const mgold = createButtons("laserrings", "recy");
     const recy = createButtons("mechagold", "rcatster");
-    const rcatster = createButtons("recycling", "star");
-    const star = createButtons("reversecatster", "um");
-    const um = createButtons("startron", "ws");
+    const rcatster = createButtons("recycling", "um");
+    const um = createButtons("reversecatster", "ws");
     const ws = createButtons("uncrackamech", "yem");
     const yem = createButtons("watersports", "memehelp");
     const comborow = createButtons("youngeggmartin2", "sav2");
@@ -235,9 +233,8 @@ module.exports = {
     const hotk2 = createButtons("healburn2", "hi2");
     const hi2 = createButtons("healthotk2", "lrings2");
     const lrings2 = createButtons("himps2", "rcatster2");
-    const rcatster2 = createButtons("laserrings2", "star2");
-    const star2 = createButtons("reversecatster2", "um2");
-    const um2 = createButtons("startron2", "ws2");
+    const rcatster2 = createButtons("laserrings2", "um2");
+    const um2 = createButtons("reversecatster2", "ws2");
     const ws2 = createButtons("uncrackamech2", "yem2");
     const yem2 = createButtons("watersports2", "combohelp");
     const controlrow = createButtons("uncrackmech3", "ftimps3");
@@ -255,9 +252,9 @@ module.exports = {
     const hi3 = createButtons("healthotk3", "lrings3");
     const lrings3 = createButtons("himps3", "lime2");
     const lime2 = createButtons("laserrings3", "recy2");
-    const recy2 = createButtons("limerence", "star3");
-    const star3 = createButtons("recycling2", "ws3");
-    const ws3 = createButtons("startron3", "midhelp");
+    const recy2 = createButtons("limerence", "tur2");
+    const tur2 = createButtons("recycling2", "ws3");
+    const ws3 = createButtons("turles2", "midhelp");
     const temporow = createButtons("leafystrike2", "br2"); 
     const br2 = createButtons("helptempo", "lstrike2");
     const lstrike2 = createButtons("brady2", "tempohelp");
@@ -277,16 +274,16 @@ module.exports = {
     const mgold3 = createButtons("limerence3", "neuro3");
     const neuro3 = createButtons("mechagold3", "recy3");
     const recy3 = createButtons("neurotherapy3", "rcatster3");
-    const rcatster3 = createButtons("recycling3", "star4");
-    const star4 = createButtons("reversecatster3", "tc3");
-    const tc3 = createButtons("startron4", "um4");
-    const um4 = createButtons("toyotacontrolla3", "ws4");
+    const rcatster3 = createButtons("recycling3", "tc3");
+    const tc3 = createButtons("reversecatster3", "tur3");
+    const tur3 = createButtons("toyotacontrolla3", "um4");
+    const um4 = createButtons("turles3", "ws4");
     const ws4 = createButtons("uncrackamech4", "yem3");
     const yem3 = createButtons("watersports4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
       himps, lasersnap, leafystrike, limerence, mechagold, recycling,
-      reversecatster, startron, shamcontrol, toyotacontrolla, 
+      reversecatster, shamcontrol, toyotacontrolla, turles, 
       feastmech, brady, watersports, youngeggmartin
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
@@ -294,7 +291,6 @@ module.exports = {
             inner join spdecks sp on (im.deckinfo = sp.deckinfo)
             inner join pbdecks pb on (im.deckinfo = pb.deckinfo)
             inner join gkdecks gk on (im.deckinfo = gk.deckinfo)
-            inner join ctdecks ct on (im.deckinfo = ct.deckinfo)
             inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
             inner join hgdecks hg on (im.deckinfo = hg.deckinfo)
@@ -397,7 +393,6 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
     const leafystrike = createDeckEmbed(result, "leafystrike");
     const limerence = createDeckEmbed(result, "limerence");
     const reversecatster = createDeckEmbed(result, "reversecatster");
-    const startron = createDeckEmbed(result, "startron");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
     const mechagold = createDeckEmbed(result, "mechagold");
     const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
@@ -405,6 +400,7 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
     const healthotk = createDeckEmbed(result, "healthotk");
+    const turles = createDeckEmbed(result, "turles");
     const recycling = createDeckEmbed(result, "recycling");
     const uncrackamech = createDeckEmbed(result, "feastmech");
     const watersports = createDeckEmbed(result, "watersports");
@@ -458,14 +454,6 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
         himps3: { embed: himps, component: hi3 },
         hi4: { embed: himps, component: hi4 },
         himps4: { embed: himps, component: hi4 },
-        star: { embed: startron, component: star },
-        startron: { embed: startron, component: star },
-        star2: { embed: startron, component: star2 },
-        startron2: { embed: startron, component: star2 },
-        star3: { embed: startron, component: star3 },
-        startron3: { embed: startron, component: star3 },
-        star4: { embed: startron, component: star4 },
-        startron4: { embed: startron, component: star4 },
         controlhelp: { embed: controlxera, component: controlrow },
         helpcontrol: { embed: controlxera, component: controlrow },
         helpmeme: { embed: memexera, component: memerow },
@@ -607,7 +595,13 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
         yem2: { embed: youngeggmartin, component: yem2 },
         youngeggmartin2: { embed: youngeggmartin, component: yem2 },
         yem3: { embed: youngeggmartin, component: yem3 },
-        youngeggmartin3: { embed: youngeggmartin, component: yem3 }
+        youngeggmartin3: { embed: youngeggmartin, component: yem3 }, 
+        tur: { embed: turles, component: tur },
+        turles: { embed: turles, component: tur },
+        tur2: { embed: turles, component: tur2 },
+        turles2: { embed: turles, component: tur2 },
+        tur3: { embed: turles, component: tur3 },
+        turles3: { embed: turles, component: tur3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

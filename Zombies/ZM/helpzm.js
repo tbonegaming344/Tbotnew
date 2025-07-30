@@ -111,8 +111,8 @@ module.exports = {
       budgetDecks: ["budgetzm"],
       ladderDecks: ["binaryflagwar", "brady", "trickmech"],
       compDecks: ["lawnmower2"],
-      memeDecks: ["dozzamech", "uncrackamech", "zmoss"],
-      aggroDecks: ["budgetzm", "dozzamech", "trickmech"],
+      memeDecks: ["uncrackamech", "zmoss"],
+      aggroDecks: ["budgetzm", "trickmech"],
       comboDecks: ["binaryflagwar", "budgetzm", "lawnmower2", "trickmech", "uncrackamech", "zmoss"],
       controlDecks: ["uncrackamech"],
       midrangeDecks: ["binaryflagwar", "lawnmower2"],
@@ -121,7 +121,6 @@ module.exports = {
         "binaryflagwar",
         "brady",
         "budgetzm",
-        "dozzamech",
         "lawnmower2",
         "trickmech",
         "uncrackamech",
@@ -165,9 +164,8 @@ module.exports = {
     const alldecksrow = createButtons("zmoss", "bfw");
     const bfw = createButtons("helpall", "br");
     const br = createButtons("binaryflagwar", "bzm");
-    const bzm = createButtons("brady", "dm");
-    const dm = createButtons("budgetzm", "lm");
-    const lm = createButtons("dozzamech", "tm"); 
+    const bzm = createButtons("brady", "lm");
+    const lm = createButtons("budgetzm", "tm"); 
     const tm = createButtons("lawnmower", "um");
     const um = createButtons("trickmech", "zm");
     const zm = createButtons("uncrackamech", "allhelp");
@@ -175,14 +173,12 @@ module.exports = {
     const bfw2 = createButtons("ladderhelp", "br2");
     const br2 = createButtons("binaryflagwar2", "tm2");
     const tm2 = createButtons("brady2", "helpladder");
-    const memerow = createButtons("zmoss2", "dm2");
-    const dm2 = createButtons("memehelp", "um2");
-    const um2 = createButtons("dozzamech2", "zm2");
+    const memerow = createButtons("zmoss2", "um2");
+    const um2 = createButtons("memehelp", "zm2");
     const zm2 = createButtons("uncrackamech2", "helpmeme");
     const aggrorow = createButtons("trickmech2", "bzm2");
-    const bzm2 = createButtons("aggrohelp", "dm3");
-    const dm3 = createButtons("budgetzm2", "tm3");
-    const tm3 = createButtons("dozzamech3", "helpaggro");
+    const bzm2 = createButtons("aggrohelp", "tm3");
+    const tm3 = createButtons("budgetzm2", "helpaggro");
     const comborow = createButtons("zmoss3", "bfw3");
     const bfw3 = createButtons("combohelp", "bzm3");
     const bzm3 = createButtons("binaryflagwar3", "lm2");
@@ -268,7 +264,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
     const binaryflagwar = createDeckEmbed(result, "binaryflagwar");
     const brady = createDeckEmbed(result, "brady");
     const budgetzm = createDeckEmbed(result, "budgetzm");
-    const dozzamech = createDeckEmbed(result, "dozzamech");
     const uncrackamech = createDeckEmbed(result, "feastmech");
     const lawnmower = createDeckEmbed(result, "lawnmower");
     const trickmech = createDeckEmbed(result, "trickmech");
@@ -346,12 +341,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         budgetzm2: {embed: budgetzm, component: bzm2},
         bzm3: {embed: budgetzm, component: bzm3},
         budgetzm3: {embed: budgetzm, component: bzm3},
-        dm: {embed: dozzamech, component: dm},
-        dozzamech: {embed: dozzamech, component: dm},
-        dm2: {embed: dozzamech, component: dm2},
-        dozzamech2: {embed: dozzamech, component: dm2},
-        dm3: {embed: dozzamech, component: dm3},
-        dozzamech3: {embed: dozzamech, component: dm3},
         tm: {embed: trickmech, component: tm},
         trickmech: {embed: trickmech, component: tm},
         tm2: {embed: trickmech, component: tm2},

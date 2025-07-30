@@ -188,14 +188,6 @@ Note: Grass Knuckles has ${grassKnucklesDecks.memeDecks.length} meme decks in Tb
       `To view the Grass Knuckles decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
 Note: Grass Knuckles has ${grassKnucklesDecks.midrangeDecks.length} midrange decks in Tbot`
     );
-      const aggroEmbed = createHelpEmbed(
-      "Grass Knuckles Aggro Decks",
-      `My aggro decks for Grass Knuckles(GK) are ${toBuildAggroString}`,
-      "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist",
-      `To view the Grass Knuckles decks please use the commands listed above or click on the
-buttons below to navigate through all aggro decks!
-Note: Grass Knuckles has ${grassKnucklesDecks.aggroDecks.length} aggro decks in Tbot`
-    );
     const allEmbed = createHelpEmbed(
       "All Grass Knuckles Decks",
       `My decks for Grass Knuckles(GK) are ${toBuildString}`,
@@ -241,14 +233,10 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget" || value == "tempo") {
+     if (value == "budget" || value == "tempo") {
         await i.reply({ embeds: [budgetgk], flags: MessageFlags.Ephemeral });
-      } else if (value == "aggro") {
-        await i.update({embeds: [aggroEmbed], components: [aggrorow]});
-      } else if (value == "combo") {
+      } else if (value == "combo" || value == "meme") {
         await i.reply({ embeds: [healthotk], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "ladder" || value == "control") {
@@ -259,7 +247,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       } else if (value == "all") {
         await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
-      else if(value == "comp"){
+      else if(value == "comp" || value == "aggro"){
         await i.reply({
           embeds: [espressoaggro], flags: MessageFlags.Ephemeral
         });
@@ -272,34 +260,22 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-       helpmeme: { embed: memeEmbed, component: memerow },
-        memehelp: { embed: memeEmbed, component: memerow },
-        helpmidrange: { embed: midrangeEmbed, component: midrangerow },
+       helpmidrange: { embed: midrangeEmbed, component: midrangerow },
         midrangehelp: { embed: midrangeEmbed, component: midrangerow },
         helpall: { embed: allEmbed, component: alldecksrow },
         allhelp: { embed: allEmbed, component: alldecksrow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
         bgk: { embed: budgetgk, component: bgk },
         budgetgk: { embed: budgetgk, component: bgk },
         bgk2: { embed: budgetgk, component: bgk2 },
         budgetgk2: { embed: budgetgk, component: bgk2 },
-        dgloves: { embed: dinogloves, component: dgloves },
-        dinogloves: { embed: dinogloves, component: dgloves },
-        dgloves2: { embed: dinogloves, component: dgloves2 },
-        dinogloves2: { embed: dinogloves, component: dgloves2 },
-        dgloves3: { embed: dinogloves, component: dgloves3 },
-        dinogloves3: { embed: dinogloves, component: dgloves3 },
         hotk: { embed: healthotk, component: hotk },
         healthotk: { embed: healthotk, component: hotk },
         hotk2: { embed: healthotk, component: hotk2 },
         healthotk2: { embed: healthotk, component: hotk2 },
-        hotk3: { embed: healthotk, component: hotk3 },
-        healthotk3: { embed: healthotk, component: hotk3 },
         pts: { embed: pawntrickstab, component: pts },
         pawntrickstab: { embed: pawntrickstab, component: pts },
         eaggro: {embed: espressoaggro, component: eaggro},
-        espressoaggro: { embed: espressoaggro, component: eaggro }
+        espressoaggro: { embed: espressoaggro, component: eaggro },
       };
       const action = buttonActions[i.customId];
       if (action) {

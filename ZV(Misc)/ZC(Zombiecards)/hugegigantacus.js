@@ -350,8 +350,6 @@ Note: there are ${hugeGigantacusDecks.midrangeDecks.length} midrange decks for H
         huge: { embed: helphgEmbed, component: row },
         helpall: { embed: allEmbed, component: alldecksrow },
         allhelp: { embed: allEmbed, component: alldecksrow },
-        helpladder: { embed: ladderEmbed, component: ladderrow },
-        ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpmeme: { embed: memeEmbed, component: memerow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpcombo: { embed: comboEmbed, component: comborow },

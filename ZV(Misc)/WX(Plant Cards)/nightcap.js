@@ -139,9 +139,9 @@ module.exports = {
     const tur2 = createButtons("cyburn2", "midrangehelp");
     const alldecksrow = createButtons("turles3", "bnc");
     const bnc = createButtons("helpall", "cburn3");
-    const cburn3 = createButtons("budgetnc", "tc2");
-    const tc2 = createButtons("cyburn3", "tur3");
-    const tur3 = createButtons("toyotacontrolla2", "allhelp");
+    const cburn3 = createButtons("budgetnc", "tc");
+    const tc= createButtons("cyburn3", "tur3");
+    const tur3 = createButtons("toyotacontrolla", "allhelp");
     const nc = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044"
@@ -273,12 +273,12 @@ Note: Night Cap has ${nightcapDecks.midrangeDecks.length} Midrange decks in Tbot
         cyburn3: { embed: cyburn, component: cburn3 },
         tc: { embed: toyotacontrolla, component: tc },
         toyotacontrolla: { embed: toyotacontrolla, component: tc },
-        tc2: { embed: toyotacontrolla, component: tc2 },
-        toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
         tur: { embed: turles, component: tur },
         turles: { embed: turles, component: tur },
         tur2: { embed: turles, component: tur2 },
         turles2: { embed: turles, component: tur2 },
+        tur3: { embed: turles, component: tur3 },
+        turles3: { embed: turles, component: tur3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

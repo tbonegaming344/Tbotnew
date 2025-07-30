@@ -272,8 +272,6 @@ Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbo
         comphelp: { embed: competitiveEmbed, component: competitiveRow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
-        helpaggro: { embed: aggroEmbed, component: aggroRow },
-        aggrohelp: { embed: aggroEmbed, component: aggroRow },
         combohelp: { embed: comboEmbed, component: comboRow },
         helpcombo: { embed: comboEmbed, component: comboRow },
         helpmidrange: { embed: midrangeEmbed, component: midrangeRow },

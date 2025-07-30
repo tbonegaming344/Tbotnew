@@ -24,5 +24,6 @@ module.exports = {
             })
             .setColor("White")
             .setImage(`${result[4].turles}`);
+            message.channel.send({embeds: [ turles ] } );
     }
 }

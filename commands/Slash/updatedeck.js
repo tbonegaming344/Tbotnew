@@ -88,11 +88,11 @@ module.exports = {
     const fields = [
   { name: 'Deck Cost', value: `${deckcost.toString()}<:spar:1057791557387956274>`, inline: true },
 ];
+ if (decktype) {
+      fields.push({ name: 'Deck Type', value: `**__${decktype}__**`, inline: true });
+    }
     if (deckarchetype) {
       fields.push({ name: 'Deck Archetype', value: `**__${deckarchetype}__**`, inline: true });
-    }
-    if (decktype) {
-      fields.push({ name: 'Deck Type', value: `**__${decktype}__**`, inline: true });
     }
     const embed = new EmbedBuilder()
       .setTitle(`Update ${name}`)

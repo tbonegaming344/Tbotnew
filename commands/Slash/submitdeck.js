@@ -93,8 +93,8 @@ module.exports = {
       return interaction.reply({ content: '❌ Forum channel not found or invalid.', ephemeral: true });
     }
     const fields = [
-  { name: 'Deck Archetype', value: `**__${deckarchetype}__**`, inline: true },
   { name: 'Deck Type', value: `**__${decktype}__**`, inline: true },
+  { name: 'Deck Archetype', value: `**__${deckarchetype}__**`, inline: true },
   { name: 'Deck Cost', value: `${deckcost.toString()}<:spar:1057791557387956274>`, inline: true },
 ];
 if (aliases && aliases.trim() !== '') {

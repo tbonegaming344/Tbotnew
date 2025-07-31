@@ -15,10 +15,8 @@ module.exports = {
   async run(interaction) {
     const client = interaction.client;
     if (interaction.type === InteractionType.ModalSubmit) {
-      //Hangman
       if (interaction.customId.startsWith("hangman-")) {
         await interaction.deferUpdate();
-
         const game = hangmanGuesses.get(interaction.message.id);
 
         if (!game || game.guesses === 7) {
@@ -187,6 +185,8 @@ module.exports = {
               : game.text,
         });
       }
+  }
+  else if (interaction.type === InteractionType.MessageComponent) {
       if (!interaction.customId.startsWith("hangman-")) return;
 
       const type = interaction.customId.split("-").at(-1);

@@ -116,6 +116,7 @@ module.exports = {
         "Watching you",
         "plase don't dm tbot with family guy references",
         "grapes of wrath still costs more than 6",
+        "molekaling astro vera into cornucopia",
         //Buggy
         "Running smelly zombie to counter apOTK",
         "Heal Midrose is not a good deck, it can almost get cut from db",
@@ -128,6 +129,7 @@ module.exports = {
         "it's the first turn of the game what could possibly go wrong",
         "I miss the old black eyed pea",
         "tricking new players into playing plants so I have faster match making on zombies",
+        "ban sun shroom in tournaments so I can spam hg",
         //CGP23
         "complaining about losing to rng",
         "Giving bad deckbuilding advice",
@@ -146,6 +148,9 @@ module.exports = {
         "Playing multiple clique peas",
         "Exposing Broth Alts",
         "Clutching up by teleporting undying pharaoh in",
+        "We've improved Challenges! Please Update your game to the latest version, so you can challenge all your friends.",
+        //depressedmonke_
+        "Running Garlic + Lily Pad to counter Ancient Vimpire",
         //ForkLiter
         "Pay $5 a week for exclusive images from Fry's OnlyFans!",
         //Hayri
@@ -182,6 +187,8 @@ module.exports = {
         "Stop procastinating",
         "Scrapping uncommons",
         "Bean counter has too many wins to count.",
+        //LDMN 
+        "Tbot is hosting a tea party! ^_^",
         //Lolatopia
         "Enjoying the rubber chicken gag",
         "Swabbing the Plank Walker's poop deck",
@@ -235,6 +242,12 @@ module.exports = {
         "Making Pile Decks",
         "Losing to Cali Roll",
         "Quarterly bonus users are coping with the fixes",
+        //Shortbow 
+        "Anything can be a status in this channel if you just put your mind to it",
+        //Slewer
+        "Dooming an empty field for card draw",
+        //StingRay 
+        "Adding decklists for you guys is a fulltime job. Click the link when you use @Tbot donate to support me to gain a special role!", 
         //T3
         "We Need A Leap",
         "Fighting broth alts",
@@ -250,7 +263,7 @@ module.exports = {
         `Playing ${randomDeck.name}`,
         `Throwing in ${randomTourney}`,
         `@Tbot help in ${client.guilds.cache.size} servers and serving decklists to ${totalMembers} users`,
-        "Add Your Deck To Tbot Today @Tbot deckadd",
+        "Add Your Deck To Tbot Today /submitdeck",
         "@Tbot DeckBuilders to see people who have created decks in Tbot",
         `Watching ${randomYoutubers}'s Lastest Video`,
         "The Teenage Mutant Ninja Swabbies are a lean, green, ninja team with cool teens doing extreme ninja things. They emerge from the shadows, using the secret of the ooze to make their moves. Leonardo leads the team, while Donatello, Raphael, and Michelangelo are the other members. Master Swabbie teaches them every skill to be an incredible team.",

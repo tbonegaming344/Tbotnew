@@ -303,7 +303,7 @@ Note: Professor Brainstorm has ${professorBrainstormDecks.allDecks.length} total
         reversecatster2: { embed: reversecatster, component: rcatster2 },
         rcatster3: { embed: reversecatster, component: rcatster3 },
         reversecatster3: { embed: reversecatster, component: rcatster3 },
-        qssL : { embed: quartsterstache, component: qss },
+        qss: { embed: quartsterstache, component: qss },
         quartsterstache: { embed: quartsterstache, component: qss },
         qss2: { embed: quartsterstache, component: qss2 },
         quartsterstache2: { embed: quartsterstache, component: qss2 }, 

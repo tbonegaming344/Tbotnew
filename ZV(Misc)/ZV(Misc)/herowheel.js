@@ -5,8 +5,7 @@ const {
     EmbedBuilder,
   } = require('discord.js');
   module.exports = {
-    name: `wheel`,
-    aliases: [`spin`],
+    name: `herowheel`,
     category: `Miscellaneous`,
     run: async (client, message, args) => {
       if(message.guild && message.guild.id == "285818469960646657"){
@@ -14,11 +13,6 @@ const {
       }
       else{
       const row= new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-        .setLabel('Spin the Wheel')
-      .setCustomId('wheel-spin')
-      .setStyle(ButtonStyle.Secondary)
-      .setEmoji('<:200w:1260951571840237628>'),
         new ButtonBuilder()
           .setCustomId('plants')
           .setLabel('Random Plant Hero')
@@ -31,8 +25,8 @@ const {
           .setEmoji('<:200w:1260951571840237628>')
       )
         const search = new EmbedBuilder()
-        .setTitle("Wheel of Decks")
-        .setDescription("Please use the button below to spin the wheel and get cards to build a deck with")
+        .setTitle("Hero Wheel")
+        .setDescription("Please use the button below to spin the wheel and get a random hero")
         .setColor("Random")
         await message.reply({embeds: [search], components: [row]})
     }

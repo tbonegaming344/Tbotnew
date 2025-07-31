@@ -13,27 +13,23 @@ module.exports = {
   aliases: [`franinjadecks`, `franinjahelp`, `helpfraninja`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const row = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("marxbolt")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("marx")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const marx = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpf")
-        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-        .setStyle(ButtonStyle.Primary),
-      new ButtonBuilder()
-        .setCustomId("help")
-        .setEmoji("<:arrowright:1271446796207525898>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const decks = ["marxbolt"];
+     const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Please select an option below to view Franinja's Decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setDescription("Some of the best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>")
+          .setValue("comp"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setDescription("Decks that are generally only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>")
+          .setValue("ladder")
+      )
+      const row = new ActionRowBuilder().addComponents(select);
+    const decks = ["marxbolt", "pyromania"];
     let toBuildString = "";
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
@@ -74,15 +70,44 @@ ${user.displayName} has ${decks.length} total decks in Tbot`,
       )
       .setColor("#e0e0de")
       .setImage(`${result[4].marxbolt}`);
+const pyromania = new EmbedBuilder()
+            .setTitle(`${result[5].pyromania}`)
+            .setDescription(`${result[3].pyromania}`)
+            .setColor("Red")
+            .setFooter({ text: `${result[2].pyromania}` })
+            .addFields({
+                name: "Deck Type",
+                value: `${result[6].pyromania}`,
+                inline: true
+            }, {
+                name: "Archetype",
+                value: `${result[0].pyromania}`,
+                inline: true
+            }, {
+                name: "Deck Cost",
+                value: `${result[1].pyromania}`,
+                inline: true
+            })
+            .setImage(`${result[4].pyromania}`);
     const m = await message.channel.send({ embeds: [fran], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
+    /**
+     * The handleSelectMenu function handles the select menu interactions for the user
+     * @param {*} i
+     */
+    async function handleSelectMenu(i) {
+      const value = i.values[0];
+      if (value == "ladder") {
+        await i.reply({embeds: [marxbolt], flags: MessageFlags.Ephemeral});
+      } else if (value == "comp"){
+        await i.reply({embeds: [pyromania], flags: MessageFlags.Ephemeral});
+      }
+    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "marx" || i.customId == "marxbolt") {
-        await i.update({ embeds: [marxbolt], components: [marx] });
-      } else if (i.customId == "helpf" || i.customId == "help") {
-        await i.update({ embeds: [fran], components: [row] });
-      }
+      if (i.customId == "select") {
+        await handleSelectMenu(i);
+      } 
     });
   },
 };

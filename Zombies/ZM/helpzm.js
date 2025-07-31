@@ -62,7 +62,7 @@ module.exports = {
       .setDescription('Some of the Best Plant Decks in the game')
 			.setEmoji("<:compemote:1325461143136764060>"), 
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
+          .setLabel("Ladder Deck")
           .setValue("ladder")
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
@@ -95,12 +95,6 @@ module.exports = {
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setValue("tempo")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("All Zmech Decks")
           .setValue("all")
           .setDescription("View all Zmech decks in Tbot")
@@ -109,19 +103,17 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const zmechDecks = {
       budgetDecks: ["budgetzm"],
-      ladderDecks: ["binaryflagwar", "brady", "trickmech"],
-      compDecks: ["lawnmower2"],
+      ladderDecks: ["trickmech"],
+      compDecks: ["lawnmower2", "pyromanaia"],
       memeDecks: ["uncrackamech", "zmoss"],
       aggroDecks: ["budgetzm", "trickmech"],
-      comboDecks: ["binaryflagwar", "budgetzm", "lawnmower2", "trickmech", "uncrackamech", "zmoss"],
+      comboDecks: ["budgetzm", "lawnmower2", "trickmech", "uncrackamech", "zmoss"],
       controlDecks: ["uncrackamech"],
-      midrangeDecks: ["binaryflagwar", "lawnmower2"],
-      tempoDecks: ["brady"],
+      midrangeDecks: ["lawnmower2", "pyromania"],
       allDecks: [
-        "binaryflagwar",
-        "brady",
         "budgetzm",
         "lawnmower2",
+        "pyromania",
         "trickmech",
         "uncrackamech",
         "zmoss",
@@ -139,6 +131,7 @@ module.exports = {
     }
     const toBuildString = buildDeckString(zmechDecks.allDecks);
     const toBuildLadderString = buildDeckString(zmechDecks.ladderDecks);
+    const toBuildCompString = buildDeckString(zmechDecks.compDecks)
     const toBuildMemeString = buildDeckString(zmechDecks.memeDecks);
     const toBuildAggroString = buildDeckString(zmechDecks.aggroDecks);
     const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
@@ -161,34 +154,31 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("zmoss", "bfw");
-    const bfw = createButtons("helpall", "br");
-    const br = createButtons("binaryflagwar", "bzm");
-    const bzm = createButtons("brady", "lm");
-    const lm = createButtons("budgetzm", "tm"); 
-    const tm = createButtons("lawnmower", "um");
+    const alldecksrow = createButtons("zmoss", "bzm");
+    const bzm = createButtons("helpall", "lm");
+    const lm = createButtons("budgetzm", "pyro");
+    const pyro = createButtons("lawnmower", "tm") 
+    const tm = createButtons("pyromania", "um");
     const um = createButtons("trickmech", "zm");
     const zm = createButtons("uncrackamech", "allhelp");
-    const ladderrow = createButtons("trickmech2", "bfw2");
-    const bfw2 = createButtons("ladderhelp", "br2");
-    const br2 = createButtons("binaryflagwar2", "tm2");
-    const tm2 = createButtons("brady2", "helpladder");
+    const comprow = createButtons("pyromania2", "lm2");
+    const lm2 = createButtons("helpcomp", "pyro2");
+    const pyro2 = createButtons("lawnmower2", "comphelp");
     const memerow = createButtons("zmoss2", "um2");
     const um2 = createButtons("memehelp", "zm2");
     const zm2 = createButtons("uncrackamech2", "helpmeme");
     const aggrorow = createButtons("trickmech2", "bzm2");
-    const bzm2 = createButtons("aggrohelp", "tm3");
-    const tm3 = createButtons("budgetzm2", "helpaggro");
-    const comborow = createButtons("zmoss3", "bfw3");
-    const bfw3 = createButtons("combohelp", "bzm3");
-    const bzm3 = createButtons("binaryflagwar3", "lm2");
-    const lm2 = createButtons("budgetzm3", "tm4");
-    const tm4 = createButtons("lawnmower2", "um3");
-    const um3 = createButtons("trickmech4", "zm3");
+    const bzm2 = createButtons("aggrohelp", "tm2");
+    const tm2 = createButtons("budgetzm2", "helpaggro");
+    const comborow = createButtons("zmoss3", "zm3");
+    const bzm3 = createButtons("combohelp", "lm3");
+    const lm3 = createButtons("budgetzm3", "tm3");
+    const tm3 = createButtons("lawnmower3", "um3");
+    const um3 = createButtons("trickmech3", "zm3");
     const zm3 = createButtons("uncrackamech3", "helpcombo");
-    const midrangerow = createButtons("lawnmower3", "bfw4");
-    const bfw4 = createButtons("helpmidrange", "lm3");
-    const lm3 = createButtons("binaryflagwar4", "midrangehelp");
+    const midrangerow = createButtons("pyromania3", "lm4");
+    const lm4 = createButtons("helpmidrange", "pyro3");
+    const pyro3 = createButtons("lawnmower4", "midrangehelp");
     const embed = createHelpEmbed(
       "Zmech Decks",
       `To view the Zmech decks please select an option from the select menu below!
@@ -209,6 +199,13 @@ Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`
       `To view the Zmech ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
 Note: Zmech has ${zmechDecks.ladderDecks.length} ladder decks in Tbot`
     );
+    const compEmbed = createHelpEmbed(
+      "Zmech Competitive Decks",
+      `My competitive decks for Zmech(ZM) are ${toBuildCompString}`,
+      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
+      `To view the Zmech competitive decks please use the commands listed above or click on the buttons below to navigate through all competetive decks!
+Note: Zmech has ${zmechDecks.compDecks.length} competitive decks in Tbot`
+    )
     const memeEmbed = createHelpEmbed(
       "Zmech Meme Decks",
       `My meme decks for Zmech(ZM) are ${toBuildMemeString}`,
@@ -261,12 +258,11 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
       }
       return embed;
     }
-    const binaryflagwar = createDeckEmbed(result, "binaryflagwar");
-    const brady = createDeckEmbed(result, "brady");
     const budgetzm = createDeckEmbed(result, "budgetzm");
     const uncrackamech = createDeckEmbed(result, "feastmech");
     const lawnmower = createDeckEmbed(result, "lawnmower");
     const trickmech = createDeckEmbed(result, "trickmech");
+    const pyromania =  createDeckEmbed(result, "pyromania")
     const zmoss = createDeckEmbed(result, "zmoss");
     const m = await message.channel.send({
       embeds: [embed],
@@ -282,7 +278,7 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
       if (value == "all") {
         await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
       } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
+        await i.reply({embeds: [trickmech], flags: MessageFlags.Ephemeral})
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "aggro") {
@@ -291,9 +287,7 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "tempo") {
-        await i.reply({ embeds: [brady], flags: MessageFlags.Ephemeral });
-      } else if (value == "control") {
+      }else if (value == "control") {
         await i.reply({
           embeds: [uncrackamech],
           flags: MessageFlags.Ephemeral,
@@ -302,7 +296,7 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         await i.reply({ embeds: [budgetzm], flags: MessageFlags.Ephemeral });
       }
       else if (value == "comp") {
-        await i.reply({ embeds: [lawnmower], flags: MessageFlags.Ephemeral });
+        await i.update({embeds: [compEmbed], components: [comprow]})
       }
     }
     /**
@@ -313,8 +307,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
       const buttonActions = {
         allhelp: {embed: alldecksEmbed, component: alldecksrow}, 
         helpall: {embed: alldecksEmbed, component: alldecksrow},
-        ladderhelp: {embed: ladderEmbed, component: ladderrow},
-        helpladder: {embed: ladderEmbed, component: ladderrow},
         memehelp: {embed: memeEmbed, component: memerow},
         helpmeme: {embed: memeEmbed, component: memerow},
         aggrohelp: {embed: aggroEmbed, component: aggrorow},
@@ -323,18 +315,8 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         helpcombo: {embed: comboEmbed, component: comborow},
         helpmidrange: {embed: midrangeEmbed, component: midrangerow},
         midrangehelp: {embed: midrangeEmbed, component: midrangerow},
-        bfw: {embed: binaryflagwar, component: bfw},
-        binaryflagwar: {embed: binaryflagwar, component: bfw},
-        bfw2: {embed: binaryflagwar, component: bfw2},
-        binaryflagwar2: {embed: binaryflagwar, component: bfw2},
-        bfw3: {embed: binaryflagwar, component: bfw3},
-        binaryflagwar3: {embed: binaryflagwar, component: bfw3},
-        bfw4: {embed: binaryflagwar, component: bfw4},
-        binaryflagwar4: {embed: binaryflagwar, component: bfw4},
-        br: {embed: brady, component: br},
-        brady: {embed: brady, component: br},
-        br2: {embed: brady, component: br2},
-        brady2: {embed: brady, component: br2},
+        helpcomp: {embed: compEmbed, component: comprow},
+        comphelp: {embed: compEmbed, component: comprow},
         bzm: {embed: budgetzm, component: bzm},
         budgetzm: {embed: budgetzm, component: bzm},
         bzm2: {embed: budgetzm, component: bzm2},
@@ -347,8 +329,6 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         trickmech2: {embed: trickmech, component: tm2},
         tm3: {embed: trickmech, component: tm3},
         trickmech3: {embed: trickmech, component: tm3},
-        tm4: {embed: trickmech, component: tm4},
-        trickmech4: {embed: trickmech, component: tm4},
         um: {embed: uncrackamech, component: um},
         uncrackamech: {embed: uncrackamech, component: um},
         um2: {embed: uncrackamech, component: um2},
@@ -367,6 +347,14 @@ Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
         lawnmower2: {embed: lawnmower, component: lm2},
         lm3: {embed: lawnmower, component: lm3},
         lawnmower3: {embed: lawnmower, component: lm3},
+        lm4: {embed: lawnmower, component: lm4}, 
+        lawnmower4: {embed: lawnmower, component: lm4},
+        pyro: {embed: pyromania, component: pyro}, 
+        pyromania: {embed: pyromania, component: pyro}, 
+        pyro2: {embed: pyromania, component: pyro2}, 
+        pyromania2: {embed: pyromania, component: pyro2}, 
+        pyro3: {embed: pyromania, component: pyro3}, 
+        pyromania3: {embed: pyromania, component: pyro3}
       }
       const action = buttonActions[i.customId];
       if (action) {

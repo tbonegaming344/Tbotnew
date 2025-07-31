@@ -56,13 +56,13 @@ module.exports = {
             "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
+          .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
+          .setLabel("Midrange Deck")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -70,10 +70,10 @@ module.exports = {
       );
     const row = new ActionRowBuilder().addComponents(select);
     const bowlingBulbEnjoyerDecks = {
-      ladderDecks: ["bfmidgargs", "binaryflagwar", "goingnuts"],
+      ladderDecks: ["bfmidgargs", "goingnuts"],
       aggroDecks: ["goingnuts"],
-      comboDecks: ["binaryflagwar", "goingnuts"],
-      midrangeDecks: ["bfmidgargs", "binaryflagwar"],
+      comboDecks: ["goingnuts"],
+      midrangeDecks: ["bfmidgargs"],
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -87,12 +87,6 @@ module.exports = {
     }
     const toBuildLadderString = buildDeckString(
       bowlingBulbEnjoyerDecks.ladderDecks
-    );
-    const toBuildComboString = buildDeckString(
-      bowlingBulbEnjoyerDecks.comboDecks
-    );
-    const toBuildMidrangeString = buildDeckString(
-      bowlingBulbEnjoyerDecks.midrangeDecks
     );
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -113,22 +107,13 @@ module.exports = {
       );
     }
     const ladderrow = createButtons("goingnuts", "bfmg");
-    const bfmg = createButtons("ladderhelp", "bfw");
-    const bfw = createButtons("bfmidgargs", "gnuts");
-    const gnuts = createButtons("binaryflagwar", "ladderhelp");
-    const comborow = createButtons("goingnuts2", "bfw2");
-    const bfw2 = createButtons("helpcombo", "gnuts2");
-    const gnuts2 = createButtons("binaryflagwar2", "combohelp");
-    const midrangerow = createButtons("binaryflagwar3", "bfmg2");
-    const bfmg2 = createButtons("helpmid", "bfw3");
-    const bfw3 = createButtons("bfmidgargs2", "midhelp");
+    const bfmg = createButtons("ladderhelp", "gnuts");
+    const gnuts = createButtons("bfmidgargs", "ladderhelp");
     const [result] =
-      await db.query(`select bfmidgargs, binaryflagwar, going3nuts 
-		from zmdecks zm
-		inner join ctdecks ct
-		on (zm.deckinfo = ct.deckinfo)
+      await db.query(`select bfmidgargs, going3nuts 
+		from ctdecks ct
     inner join bfdecks bf
-		on (zm.deckinfo = bf.deckinfo)`);
+		on (ct.deckinfo = bf.deckinfo)`);
     const user = await client.users.fetch("1051916947253629030");
     const bowlingbulbenjoyer = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -143,20 +128,6 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} tota
       user.displayAvatarURL(),
       `To view the Ladder Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Ladder decks!
 Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.ladderDecks.length} Ladder decks in Tbot`
-    );
-    const comboEmbed = createHelpEmbed(
-      `${user.displayName} Combo Decks`,
-      `My Combo decks made by ${user.displayName} are ${toBuildComboString}`,
-      user.displayAvatarURL(),
-      `To view the Combo Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Combo decks!
-Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.comboDecks.length} Combo decks in Tbot`
-    );
-    const midrangeEmbed = createHelpEmbed(
-      `${user.displayName} Midrange Decks`,
-      `My Midrange decks made by ${user.displayName} are ${toBuildMidrangeString}`,
-      user.displayAvatarURL(),
-      `To view the Midrange Decks made by ${user.displayName} please use the commands listed above or click on the buttons below to navigate through all Midrange decks!
-Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
     /**
      * The createDeckEmbed function creates an embed for a specific deck
@@ -182,7 +153,6 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
       return embed;
     }
     const bfmidgargs = createDeckEmbed(result, "bfmidgargs");
-    const binaryflagwar = createDeckEmbed(result, "binaryflagwar");
     const goingnuts = createDeckEmbed(result, "going3nuts");
     const m = await message.channel.send({
       embeds: [bowlingbulbenjoyer],
@@ -197,11 +167,9 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
       const value = i.values[0];
       if (value == "ladder") {
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (value == "combo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "aggro") {
+        await i.reply({embeds: [bfmidgargs], flags: MessageFlags.Ephemeral})
+      } else if (value == "aggro" || value == "combo") {
         await i.reply({ embeds: [goingnuts], flags: MessageFlags.Ephemeral });
       }
     }
@@ -213,24 +181,10 @@ Note: ${user.displayName} has ${bowlingBulbEnjoyerDecks.midrangeDecks.length} Mi
       const buttonActions = {
         ladderhelp: { embed: ladderEmbed, component: ladderrow },
         helpladder: { embed: ladderEmbed, component: ladderrow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        helpcombo: { embed: comboEmbed, component: comborow },
-        midhelp: { embed: midrangeEmbed, component: midrangerow },
-        helpmid: { embed: midrangeEmbed, component: midrangerow },
-        bfw: { embed: binaryflagwar, component: bfw },
-        binaryflagwar: { embed: binaryflagwar, component: bfw },
-        bfw2: { embed: binaryflagwar, component: bfw2 },
-        binaryflagwar2: { embed: binaryflagwar, component: bfw2 },
-        bfw3: { embed: binaryflagwar, component: bfw3 },
-        binaryflagwar3: { embed: binaryflagwar, component: bfw3 },
         gnuts: { embed: goingnuts, component: gnuts },
         goingnuts: { embed: goingnuts, component: gnuts },
-        gnuts2: { embed: goingnuts, component: gnuts2 },
-        goingnuts2: { embed: goingnuts, component: gnuts2 },
         bfmg: { embed: bfmidgargs, component: bfmg },
         bfmidgargs: { embed: bfmidgargs, component: bfmg },
-        bfmg2: { embed: bfmidgargs, component: bfmg2 },
-        bfmidgargs2: { embed: bfmidgargs, component: bfmg2 },
       };
       const action = buttonActions[i.customId];
       if (action) {

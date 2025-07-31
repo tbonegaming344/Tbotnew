@@ -75,7 +75,7 @@ module.exports = {
           )
           .setValue("midrange"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Decks")
+          .setLabel("Tempo Deck")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
@@ -87,7 +87,7 @@ module.exports = {
       );
     const xeraDecks = {
       competitiveDecks: ["limerence", "neurotherapy", "turles"],
-      ladderDecks: ["brady", "gomorrah", "gravepiratestache", "leafystrike", "toyotacontrolla"],
+      ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "toyotacontrolla"],
       memeDecks: [
         "22savage",
         "frozentelimps",
@@ -138,10 +138,9 @@ module.exports = {
         "turles",
         "watersports",
       ],
-      tempoDecks: ["brady", "leafystrike"],
+      tempoDecks: [ "leafystrike"],
       allDecks: [
         "22savage",
-        "brady",
         "frozentelimps",
         "funnyflare",
         "gomorrah",
@@ -204,9 +203,8 @@ module.exports = {
     const lime = createButtons("helpcomp", "neuro");
     const neuro = createButtons("limerence", "tur");
     const tur = createButtons("neurotherapy", "comphelp");
-    const ladderrow = createButtons("toyotacontrolla", "br");
-    const br = createButtons("helpladder", "go");
-    const go = createButtons("brady", "gps");
+    const ladderrow = createButtons("toyotacontrolla", "go");
+    const go = createButtons("helpladder", "gps");
     const gps = createButtons("gomorrah", "lstrike");
     const lstrike = createButtons("gravepiratestache", "tc");
     const tc = createButtons("leafystrike", "ladderhelp");
@@ -255,22 +253,18 @@ module.exports = {
     const recy2 = createButtons("limerence", "tur2");
     const tur2 = createButtons("recycling2", "ws3");
     const ws3 = createButtons("turles2", "midhelp");
-    const temporow = createButtons("leafystrike2", "br2"); 
-    const br2 = createButtons("helptempo", "lstrike2");
-    const lstrike2 = createButtons("brady2", "tempohelp");
     const alldecksrow = createButtons("youngeggmartin3", "sav4");
-    const sav4 = createButtons("helpall", "br3");
-    const br3 = createButtons("savage4", "ftimps4");
-    const ftimps4 = createButtons("brady3", "ff4");
+    const sav4 = createButtons("helpall", "ftimps4");
+    const ftimps4 = createButtons("savage4", "ff4");
     const ff4 = createButtons("frozentelimps4", "go3");
     const go3 = createButtons("funnyflare4", "gps3");
     const gps3 = createButtons("gomorrah3", "hburn4");
     const hburn4 = createButtons("gravepiratestache3", "hotk4");
     const hotk4 = createButtons("healburn4", "hi4");
     const hi4 = createButtons("healthotk4", "lrings4");
-    const lrings4 = createButtons("himps4", "lstrike3");
-    const lstrike3 = createButtons("laserrings4", "lime3");
-    const lime3 = createButtons("leafystrike3", "mgold3");
+    const lrings4 = createButtons("himps4", "lstrike2");
+    const lstrike2 = createButtons("laserrings4", "lime3");
+    const lime3 = createButtons("leafystrike2", "mgold3");
     const mgold3 = createButtons("limerence3", "neuro3");
     const neuro3 = createButtons("mechagold3", "recy3");
     const recy3 = createButtons("neurotherapy3", "rcatster3");
@@ -284,7 +278,7 @@ module.exports = {
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
       himps, lasersnap, leafystrike, limerence, mechagold, recycling,
       reversecatster, shamcontrol, toyotacontrolla, turles, 
-      feastmech, brady, watersports, youngeggmartin
+      feastmech, watersports, youngeggmartin
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
             inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
@@ -385,7 +379,6 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
       return embed;
     }
     const savage22 = createDeckEmbed(result, "savage22");
-    const brady = createDeckEmbed(result, "brady");
     const funnyflare = createDeckEmbed(result, "funnyflare");
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const himps = createDeckEmbed(result, "himps");
@@ -496,12 +489,6 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
         toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
         tc3: { embed: toyotacontrolla, component: tc3 },
         toyotacontrolla3: { embed: toyotacontrolla, component: tc3 },
-        br: { embed: brady, component: br },
-        brady: { embed: brady, component: br },
-        br2: { embed: brady, component: br2 },
-        brady2: { embed: brady, component: br2 },
-        br3: { embed: brady, component: br3 },
-        brady3: { embed: brady, component: br3 },
         lrings: { embed: laserrings, component: lrings },
         laserrings: { embed: laserrings, component: lrings },
         lrings2: { embed: laserrings, component: lrings2 },

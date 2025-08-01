@@ -39,7 +39,7 @@ module.exports = {
         .setEmoji("<:FUCKLES:1100168498363240518>")
         .setStyle(ButtonStyle.Success)
     );
-   const select = new StringSelectMenuBuilder()
+  const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Grass Knuckles decklists")
       .addOptions(
@@ -63,7 +63,7 @@ module.exports = {
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Decks")
+          .setLabel("Aggro Deck")
           .setValue("aggro")
           .setDescription(
             "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
@@ -91,12 +91,12 @@ module.exports = {
       budgetDecks: ["budgetgk"],
       comprtitiveDecks: ["esspressoaggro"],
       ladderDecks: ["pawntrickstab"],
-      memeDecks: ["dinogloves", "healthotk"],
-      aggroDecks: ["dinogloves", "espressoaggro"],
+      memeDecks: ["healthotk"],
+      aggroDecks: ["espressoaggro"],
       comboDecks: ["healthotk"],
       controlDecks: ["pawntrickstab"],
       midrangeDecks: ["budgetgk", "healthotk"],
-      allDecks: ["budgetgk", "dinogloves", "espressoaggro", "healthotk", "pawntrickstab"],
+      allDecks: ["budgetgk", "espressoaggro", "healthotk", "pawntrickstab"],
     };
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -116,21 +116,14 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const memerow = createButtons("healthotk", "dgloves");
-    const dgloves = createButtons("helpmeme", "hotk");
-    const hotk = createButtons("dinogloves", "memehelp");
-    const aggrorow = createButtons("espressoaggro", "dgloves2"); 
-    const dgloves2 = createButtons("helpaggro", "eaggro");
-    const eaggro = createButtons("dinogloves", "aggrohelp");
-    const midrangerow = createButtons("healthotk2", "bgk");
-    const bgk = createButtons("helpmidrange", "hotk2");
-    const hotk2 = createButtons("budgetgk", "midrangehelp");
+    const midrangerow = createButtons("healthotk", "bgk");
+    const bgk = createButtons("helpmidrange", "hotk");
+    const hotk = createButtons("budgetgk", "midrangehelp");
     const alldecksrow = createButtons("pawntrickstab", "bgk2");
-    const bgk2 = createButtons("helpall", "dgloves3");
-    const dgloves3 = createButtons("budgetgk2", "eaggro2");
-    const eaggro2 = createButtons("dinogloves3", "hotk3");
-    const hotk3 = createButtons("espressoaggro2", "pts");
-    const pts = createButtons("healthotk3", "allhelp");
+    const bgk2 = createButtons("helpall", "eaggro");
+    const eaggro = createButtons("budgetgk2", "hotk2");
+    const hotk2 = createButtons("espressoaggro", "pts");
+    const pts = createButtons("healthotk2", "allhelp");
     function BuildDeckString(decks) {
       return decks
         .map((deck) => `\n<@1043528908148052089> **${deck}**`)
@@ -140,7 +133,6 @@ module.exports = {
     const toBuildMidrangeString = BuildDeckString(
       grassKnucklesDecks.midrangeDecks
     );
-    const toBuildMemeString = BuildDeckString(grassKnucklesDecks.memeDecks);
     const gk = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist"
@@ -173,13 +165,6 @@ module.exports = {
       `To view the Grass Knuckles decks please select an option from the select menu below!
 Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist"
-    );
-    const memeEmbed = createHelpEmbed(
-      "Grass Knuckles Meme Decks",
-      `My meme decks for Grass Knuckles(GK) are ${toBuildMemeString}`,
-      "https://static.wikia.nocookie.net/p__/images/4/41/HD_Grass_Knuckles.png/revision/latest?cb=20200105024802&path-prefix=protagonist",
-      `To view the Grass Knuckles please use the commands listed above or click on the buttons below to navigate through all meme decks!
-Note: Grass Knuckles has ${grassKnucklesDecks.memeDecks.length} meme decks in Tbot`
     );
     const midrangeEmbed = createHelpEmbed(
       "Grass Knuckles Midrange Decks",
@@ -221,7 +206,6 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
       return embed;
     }
     const budgetgk = createDeckEmbed(result, "budgetgk");
-    const dinogloves = createDeckEmbed(result, "dinogloves");
     const espressoaggro = createDeckEmbed(result, "espressoaggro");
     const healthotk = createDeckEmbed(result, "healthotk");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
@@ -233,7 +217,7 @@ Note: Grass Knuckles has ${grassKnucklesDecks.allDecks.length} decks in Tbot`
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-     if (value == "budget" || value == "tempo") {
+    if (value == "budget" || value == "tempo") {
         await i.reply({ embeds: [budgetgk], flags: MessageFlags.Ephemeral });
       } else if (value == "combo" || value == "meme") {
         await i.reply({ embeds: [healthotk], flags: MessageFlags.Ephemeral });

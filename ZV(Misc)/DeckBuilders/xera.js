@@ -97,6 +97,7 @@ module.exports = {
         "himpter",
         "laserrings",
         "mechagold",
+        "pankration",
         "recycling",
         "reversecatster",
         "uncrackamech",
@@ -113,6 +114,7 @@ module.exports = {
         "healthotk",
         "himpter",
         "laserrings",
+        "pankration",
         "reversecatster",
         "uncrackamech",
         "watersports",
@@ -134,6 +136,7 @@ module.exports = {
         "himpter",
         "laserrings",
         "limerence",
+        "pankration",
         "recycling",
         "turles",
         "watersports",
@@ -153,6 +156,7 @@ module.exports = {
         "limerence",
         "mechagold",
         "neurotherapy",
+        "pankration",
         "recycling",
         "reversecatster",
         "toyotacontrolla",
@@ -179,7 +183,6 @@ module.exports = {
     const toBuildMeme = buildDeckString(xeraDecks.memeDecks);
     const toBuildComboString = buildDeckString(xeraDecks.comboDecks);
     const toBuildControlString = buildDeckString(xeraDecks.controlDecks);
-    const toBuildTempoString = buildDeckString(xeraDecks.tempoDecks);
     const toBuildMidString = buildDeckString(xeraDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
@@ -216,8 +219,9 @@ module.exports = {
     const hotk = createButtons("healburn", "hi");
     const hi = createButtons("healthotk", "lrings");
     const lrings = createButtons("himps", "mgold");
-    const mgold = createButtons("laserrings", "recy");
-    const recy = createButtons("mechagold", "rcatster");
+    const mgold = createButtons("laserrings", "pank");
+    const pank = createButtons("mechagold", "recy");
+    const recy = createButtons("pankration", "rcatster");
     const rcatster = createButtons("recycling", "um");
     const um = createButtons("reversecatster", "ws");
     const ws = createButtons("uncrackamech", "yem");
@@ -230,8 +234,9 @@ module.exports = {
     const hburn2 = createButtons("gravepiratestache2", "hotk2");
     const hotk2 = createButtons("healburn2", "hi2");
     const hi2 = createButtons("healthotk2", "lrings2");
-    const lrings2 = createButtons("himps2", "rcatster2");
-    const rcatster2 = createButtons("laserrings2", "um2");
+    const lrings2 = createButtons("himps2", "pank2");
+    const pank2 = createButtons("laserrings2", "rcatster2");
+    const rcatster2 = createButtons("pankration2", "um2");
     const um2 = createButtons("reversecatster2", "ws2");
     const ws2 = createButtons("uncrackamech2", "yem2");
     const yem2 = createButtons("watersports2", "combohelp");
@@ -249,8 +254,9 @@ module.exports = {
     const hotk3 = createButtons("healburn3", "hi3");
     const hi3 = createButtons("healthotk3", "lrings3");
     const lrings3 = createButtons("himps3", "lime2");
-    const lime2 = createButtons("laserrings3", "recy2");
-    const recy2 = createButtons("limerence", "tur2");
+    const lime2 = createButtons("laserrings3", "pank3");
+    const pank3 = createButtons("limerence2", "recy2");
+    const recy2 = createButtons("pankration3", "tur2");
     const tur2 = createButtons("recycling2", "ws3");
     const ws3 = createButtons("turles2", "midhelp");
     const alldecksrow = createButtons("youngeggmartin3", "sav4");
@@ -266,8 +272,9 @@ module.exports = {
     const lstrike2 = createButtons("laserrings4", "lime3");
     const lime3 = createButtons("leafystrike2", "mgold3");
     const mgold3 = createButtons("limerence3", "neuro3");
-    const neuro3 = createButtons("mechagold3", "recy3");
-    const recy3 = createButtons("neurotherapy3", "rcatster3");
+    const neuro3 = createButtons("mechagold3", "pank4");
+    const pank4 = createButtons("neurotherapy3", "recy3");   
+    const recy3 = createButtons("pankration4", "rcatster3");
     const rcatster3 = createButtons("recycling3", "tc3");
     const tc3 = createButtons("reversecatster3", "tur3");
     const tur3 = createButtons("toyotacontrolla3", "um4");
@@ -276,7 +283,7 @@ module.exports = {
     const yem3 = createButtons("watersports4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
-      himps, lasersnap, leafystrike, limerence, mechagold, recycling,
+      himps, lasersnap, leafystrike, limerence, mechagold, pankration, recycling,
       reversecatster, shamcontrol, toyotacontrolla, turles, 
       feastmech, watersports, youngeggmartin
             FROM imdecks im
@@ -289,6 +296,7 @@ module.exports = {
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
             inner join hgdecks hg on (im.deckinfo = hg.deckinfo)
             inner join sbdecks sb on (im.deckinfo = sb.deckinfo)
+            inner join smdecks sm on (im.deckinfo = sm.deckinfo)
             inner join ntdecks nt on (im.deckinfo = nt.deckinfo)
             inner join zmdecks zm on (im.deckinfo = zm.deckinfo)
             inner join bcdecks bc on (im.deckinfo = bc.deckinfo)`);
@@ -348,13 +356,6 @@ Note: ${user.displayName} has ${xeraDecks.controlDecks.length} Control decks in 
       `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks in tbot`
     );
-    const tempoxera = createHelpEmbed(
-      `${user.displayName} Tempo Decks`,
-      `My Tempo Decks made by ${user.displayName} are ${toBuildTempoString}`,
-      user.displayAvatarURL(),
-      `To view the Tempo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot`
-    );
     /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
@@ -389,6 +390,7 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
     const mechagold = createDeckEmbed(result, "mechagold");
     const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
+    const pankration = createDeckEmbed(result, "pankration");
     const healburn = createDeckEmbed(result, "healburn");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
@@ -437,8 +439,6 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
       const buttonActions = {
         ladderhelp: { embed: ladderxera, component: ladderrow },
         helpladder: { embed: ladderxera, component: ladderrow },
-        helptempo: { embed: tempoxera, component: temporow },
-        tempohelp: { embed: tempoxera, component: temporow },
         hi: { embed: himps, component: hi },
         himps: { embed: himps, component: hi },
         hi2: { embed: himps, component: hi2 },
@@ -574,9 +574,6 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
         lstrike: { embed: leafystrike, component: lstrike },
         leafystrike: { embed: leafystrike, component: lstrike },
         lstrike2: { embed: leafystrike, component: lstrike2 },
-        leafystrike2: { embed: leafystrike, component: lstrike2 },
-        lstrike3: { embed: leafystrike, component: lstrike3 },
-        leafystrike3: { embed: leafystrike, component: lstrike3 },
         yem: { embed: youngeggmartin, component: yem },
         youngeggmartin: { embed: youngeggmartin, component: yem },
         yem2: { embed: youngeggmartin, component: yem2 },
@@ -588,7 +585,16 @@ Note: ${user.displayName} has ${xeraDecks.tempoDecks.length} Tempo decks in tbot
         tur2: { embed: turles, component: tur2 },
         turles2: { embed: turles, component: tur2 },
         tur3: { embed: turles, component: tur3 },
-        turles3: { embed: turles, component: tur3 }
+        turles3: { embed: turles, component: tur3 }, 
+        pank: { embed: pankration, component: pank },
+        pankration: { embed: pankration, component: pank },
+        pank2: { embed: pankration, component: pank2 },
+        pankration2: { embed: pankration, component: pank2 },
+        pank3: { embed: pankration, component: pank3 },
+        pankration3: { embed: pankration, component: pank3 },
+        pank4: { embed: pankration, component: pank4 }, 
+        pankration4: { embed: pankration, component: pank4 },
+
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -86,7 +86,7 @@ module.exports = {
           .setValue("all")
       );
     const xeraDecks = {
-      competitiveDecks: ["limerence", "neurotherapy", "turles"],
+      competitiveDecks: ["dinoroots", "limerence", "neurotherapy", "turles"],
       ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "toyotacontrolla"],
       memeDecks: [
         "22savage",
@@ -129,6 +129,7 @@ module.exports = {
       ],
       midrangeDecks: [
         "22savage",
+        "dinoroots",
         "funnyflare",
         "gomorrah",
         "healburn",
@@ -144,6 +145,7 @@ module.exports = {
       tempoDecks: [ "leafystrike"],
       allDecks: [
         "22savage",
+        "dinoroots",
         "frozentelimps",
         "funnyflare",
         "gomorrah",
@@ -202,8 +204,9 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const comprow = createButtons("turles", "lime");
-    const lime = createButtons("helpcomp", "neuro");
+    const comprow = createButtons("turles", "droots");
+    const droots = createButtons("helpcomp", "lime")
+    const lime = createButtons("dinoroots", "neuro");
     const neuro = createButtons("limerence", "tur");
     const tur = createButtons("neurotherapy", "comphelp");
     const ladderrow = createButtons("toyotacontrolla", "go");
@@ -247,8 +250,9 @@ module.exports = {
     const tc2 = createButtons("neurotherapy2", "um3");
     const um3 = createButtons("toyotacontrolla2", "controlhelp");
     const midrangerow = createButtons("watersports3", "sav3");
-    const sav3 = createButtons("helpmid", "ff3");
-    const ff3 = createButtons("savage3", "go2");
+    const sav3 = createButtons("helpmid", "droots2");
+    const droots2 = createButtons("savage3", "ff3");
+    const ff3 = createButtons("dinoroots", "go2");
     const go2 = createButtons("funnyflare3", "hburn3");
     const hburn3 = createButtons("gomorrah2", "hotk3");
     const hotk3 = createButtons("healburn3", "hi3");
@@ -260,8 +264,9 @@ module.exports = {
     const tur2 = createButtons("recycling2", "ws3");
     const ws3 = createButtons("turles2", "midhelp");
     const alldecksrow = createButtons("youngeggmartin3", "sav4");
-    const sav4 = createButtons("helpall", "ftimps4");
-    const ftimps4 = createButtons("savage4", "ff4");
+    const sav4 = createButtons("helpall", "droots3");
+    const droots3 = createButtons("savage4", "ftimps4");
+    const ftimps4 = createButtons("dinoroots3", "ff4");
     const ff4 = createButtons("frozentelimps4", "go3");
     const go3 = createButtons("funnyflare4", "gps3");
     const gps3 = createButtons("gomorrah3", "hburn4");
@@ -282,7 +287,7 @@ module.exports = {
     const ws4 = createButtons("uncrackamech4", "yem3");
     const yem3 = createButtons("watersports4", "allhelp");
     const [result] = await db.query(`SELECT 
-      savage22, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
+      savage22, dinoroots, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
       himps, lasersnap, leafystrike, limerence, mechagold, pankration, recycling,
       reversecatster, shamcontrol, toyotacontrolla, turles, 
       feastmech, watersports, youngeggmartin
@@ -385,6 +390,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const himps = createDeckEmbed(result, "himps");
     const laserrings = createDeckEmbed(result, "lasersnap");
     const leafystrike = createDeckEmbed(result, "leafystrike");
+    const dinoroots = createDeckEmbed(result, "dinoroots");
     const limerence = createDeckEmbed(result, "limerence");
     const reversecatster = createDeckEmbed(result, "reversecatster");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
@@ -594,6 +600,12 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         pankration3: { embed: pankration, component: pank3 },
         pank4: { embed: pankration, component: pank4 }, 
         pankration4: { embed: pankration, component: pank4 },
+        droots: { embed: dinoroots, component: droots }, 
+        dinoroots: { embed: dinoroots, component: droots },
+        droots2: { embed: dinoroots, component: droots2 },
+        dinoroots2: { embed: dinoroots, component: droots2 },
+        droots3: { embed: dinoroots, component: droots3 },
+        dinoroots3: { embed: dinoroots, component: droots3 }
 
       };
       const action = buttonActions[i.customId];

@@ -113,6 +113,13 @@ module.exports = {
     `decktypes`,
     `archetype`,
     `archetypes`,
+    `budgetdb`, 
+    `deckdb`, 
+    `plantdeck`,
+    `zombiedeck`,
+    `plants`, 
+    `zombies`,
+
   ],
   category: `Miscellaneous`,
   run: async (client, message, args) => {
@@ -249,6 +256,7 @@ module.exports = {
         "cartasbuenas",
         "chemotherapy",
         "cyburn",
+        "dinoroots",
         "espressoaggro",
         "gobeyond",
         "healmidrose",
@@ -331,6 +339,7 @@ module.exports = {
         "budgetwk",
         "cyburn",
         "dinocounter",
+        "dinoroots",
         "funnyflare",
         "gobeyond",
         "healburn",
@@ -365,6 +374,7 @@ module.exports = {
         "chemotherapy",
         "cyburn",
         "dinocounter",
+        "dinoroots",
         "espressoaggro",
         "funnyflare",
         "gobeyond",
@@ -698,8 +708,9 @@ module.exports = {
     const cb = createButtons("carroot", "chemo");
     const chemo = createButtons("cartasbuenas", "cburn");
     const cburn = createButtons("chemotherapy", "dcounter");
-    const dcounter = createButtons("cyburn", "eaggro");
-    const eaggro = createButtons("dinocounter", "fflare");
+    const dcounter = createButtons("cyburn", "droots");
+    const droots = createButtons("dinocounter", "eaggro");
+    const eaggro = createButtons("dinoroots", "fflare");
     const fflare = createButtons("espressoaggro", "gbeyond");
     const gbeyond = createButtons("funnyflare", "gnuts");
     const gnuts = createButtons("gobeyond", "gseg");
@@ -739,8 +750,9 @@ module.exports = {
     const compprow = createButtons("venice2", "cb2");
     const cb2 = createButtons("compphelp", "chemo2");
     const chemo2 = createButtons("cartasbuenas2", "cburn2");
-    const cburn2 = createButtons("chemotherapy2", "eaggro2");
-    const eaggro2 = createButtons("cyburn2", "hmr2");
+    const cburn2 = createButtons("chemotherapy2", "droots2");
+    const droots2 = createButtons("cyburn2", "eaggro2");
+    const eaggro2 = createButtons("dinoroots2", "hmr2");
     const hmr2 = createButtons("espressoaggro2", "lbait2");
     const lbait2 = createButtons("healmidrose2", "neuro2");
     const neuro2 = createButtons("logbait2", "radio2");
@@ -815,8 +827,9 @@ module.exports = {
     const bsp3 = createButtons("budgetro3", "bwk3");
     const bwk3 = createButtons("budgetro3", "cburn4");
     const cburn4 = createButtons("budgetwk3", "dcounter4");
-    const dcounter4 = createButtons("cyburn4", "fflare4");
-    const fflare4 = createButtons("dinocounter4", "gbeyond3");
+    const dcounter4 = createButtons("cyburn4", "droots3");
+    const droots3 = createButtons("dinocounter4", "fflare4");
+    const fflare4 = createButtons("dinoroots3", "gbeyond3");
     const gbeyond3 = createButtons("funnyflare4", "hburn4");
     const hburn4 = createButtons("gobeyond3", "hmr3");
     const hmr3 = createButtons("healburn4", "hotk4");
@@ -1353,6 +1366,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetsf = createPlantDeckEmbed(result, "budgetswarmsf");
     const recycling = createPlantDeckEmbed(result, "recycling");
     const funnyflare = createPlantDeckEmbed(result, "funnyflare");
+    const dinoroots = createPlantDeckEmbed(result, "dinoroots");
     const healburn = createPlantDeckEmbed(result, "healburn");
     const budgetsp = createPlantDeckEmbed(result, "budgetburstsp");
     const nuttin = createPlantDeckEmbed(result, "nutting");
@@ -2254,7 +2268,13 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         pank3: { embed: pankration, component: pank3 },
         pankration3: { embed: pankration, component: pank3 },
         pank4: { embed: pankration, component: pank4 },
-        pankration4: { embed: pankration, component: pank4 }
+        pankration4: { embed: pankration, component: pank4 }, 
+        droots: { embed: dinoroots, component: droots },
+        dinoroots: { embed: dinoroots, component: droots },
+        droots2: { embed: dinoroots, component: droots2 },
+        dinoroots2: { embed: dinoroots, component: droots2 },
+        droots3: { embed: dinoroots, component: droots3 },
+        dinoroots3: { embed: dinoroots, component: droots3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

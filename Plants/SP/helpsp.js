@@ -54,7 +54,7 @@ module.exports = {
           .setDescription("A Deck that is cheap for new players")
           .setEmoji("💰"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
+          .setLabel("Competitive Decks")
           .setValue("competitive")
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
@@ -90,12 +90,12 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const spudowDecks = {
       budgetDecks: ["budgetsp"],
-      competitiveDecks: ["radiotherapy"],
+      competitiveDecks: ["dinoroots", "radiotherapy"],
       memeDecks: ["nutting", "recycling"],
       comboDecks: ["nutting"],
       controlDecks: ["radiotherapy"],
-      midrangeDecks: ["budgetsp", "recycling"],
-      allDecks: ["budgetsp", "nutting", "radiotherapy", "recycling"]
+      midrangeDecks: ["budgetsp", "dinoroots", "recycling"],
+      allDecks: ["budgetsp", "dinoroots", "nutting", "radiotherapy", "recycling"]
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -109,6 +109,7 @@ module.exports = {
     }
 
     const toBuildString = buildDeckString(spudowDecks.allDecks);
+    const toBuildCompetitiveString = buildDeckString(spudowDecks.competitiveDecks);
     const toBuildMemeString = buildDeckString(spudowDecks.memeDecks);
     const toBuildMidrangeString = buildDeckString(spudowDecks.midrangeDecks);
     /**
@@ -129,22 +130,34 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
+    const comprow = createButtons("radiotherapy", "droots"); 
+    const droots = createButtons("helpcompetitive", "radio");
+    const radio = createButtons("dinoroots", "helpcompetitive");
     const memerow = createButtons("recycling", "nut");
     const nut = createButtons("helpmeme", "recy");
     const recy = createButtons("nuttin", "memehelp");
     const midrangerow = createButtons("recycling2", "bsp");
-    const bsp = createButtons("helpmidrange", "recy2");
-    const recy2 = createButtons("budgetsp", "midrangehelp");
+    const bsp = createButtons("helpmidrange", "droots2");
+    const droots2 = createButtons("budgetsp", "recy2");
+    const recy2 = createButtons("dinoroots2", "midrangehelp");
     const alldecksrow = createButtons("recycling3", "bsp2");
-    const bsp2 = createButtons("helpall", "nut2");
-    const nut2 = createButtons("budgetsp2", "radio");
-    const radio = createButtons("nuttin2", "recy3");
-    const recy3 = createButtons("radiotherapy", "helpall");
+    const bsp2 = createButtons("helpall", "droots3");
+    const droots3 = createButtons("budgetsp2", "nut2");
+    const nut2 = createButtons("dinoroots3", "radio2");
+    const radio2 = createButtons("nuttin2", "recy3");
+    const recy3 = createButtons("radiotherapy2", "helpall");
     const embed = createHelpEmbed(
       "Spudow Decks",
       `To view the Spudow decks please select an option using the select menu below!
 Note: Spudow has ${spudowDecks.allDecks.length} decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719"
+    );
+    const compEmbed = createHelpEmbed(
+      "Spudow Competitive Decks",
+      `My competitive decks for Spudow are ${toBuildCompetitiveString}`,
+      "https://static.wikia.nocookie.net/plantsvszombies/images/f/ff/Spudow%27s_Winning_Pose.png/revision/latest/scale-to-width-down/250?cb=20161022004719",
+      `To view the Spudow decks either use the listed commands above or navigate through all decks by using the buttons below!
+Note: Spudow has ${spudowDecks.competitiveDecks.length} decks in Tbot`
     );
     const memeEmbed = createHelpEmbed(
       "Spudow Meme Decks",
@@ -193,6 +206,7 @@ Note: Spudow has ${spudowDecks.midrangeDecks.length} decks in Tbot`
       return embed;
     }
     const budgetsp = createDeckEmbed(result, "budgetburstsp");
+    const dinoroots = createDeckEmbed(result, "dinoroots");
     const radiotherapy = createDeckEmbed(result, "radiotherapy");
     const recycling = createDeckEmbed(result, "recycling");
     const nuttin = createDeckEmbed(result, "nutting");
@@ -216,16 +230,19 @@ Note: Spudow has ${spudowDecks.midrangeDecks.length} decks in Tbot`
         await i.update({ embeds: [memeEmbed], components: [memerow] });
       } else if (value == "combo") {
         await i.reply({ embeds: [nuttin], flags: MessageFlags.Ephemeral });
-      } else if (value === "competitive" || value === "control") {
+      } else if (value === "control") {
         await i.reply({
           embeds: [radiotherapy],
           flags: MessageFlags.Ephemeral,
         });
-      } else if (value === "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
       }
-      else if(value === "midrange"){
-        await i.update({embeds: [midrangeEmbed], components: [midrangerow]})
+      else if (value === "competitive") {
+        await i.update({ embeds: [compEmbed], components: [comprow] });
+      }
+       else if (value === "all") {
+        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
+      } else if(value === "midrange"){
+        await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
       }
     }
 
@@ -237,18 +254,28 @@ Note: Spudow has ${spudowDecks.midrangeDecks.length} decks in Tbot`
       const buttonActions = {
         allhelp: { embed: allEmbed, component: alldecksrow },
         helpall: { embed: allEmbed, component: alldecksrow },
+        competitivehelp: { embed: compEmbed, component: comprow },
+        helpcompetitive: { embed: compEmbed, component: comprow },
         memehelp: { embed: memeEmbed, component: memerow },
         helpmeme: { embed: memeEmbed, component: memerow },
         bsp: { embed: budgetsp, component: bsp },
         budgetsp: { embed: budgetsp, component: bsp },
         bsp2: { embed: budgetsp, component: bsp2 },
         budgetsp2: { embed: budgetsp, component: bsp2 },
+        droots: { embed: dinoroots, component: droots },
+        dinoroots: { embed: dinoroots, component: droots },
+        droots2: { embed: dinoroots, component: droots2 },
+        dinoroots2: { embed: dinoroots, component: droots2 },
+        droots3: { embed: dinoroots, component: droots3 },
+        dinoroots3: { embed: dinoroots, component: droots3 },
         nut: { embed: nuttin, component: nut },
         nuttin: { embed: nuttin, component: nut },
         nut2: { embed: nuttin, component: nut2 },
         nuttin2: { embed: nuttin, component: nut2 },
         radio: { embed: radiotherapy, component: radio },
         radiotherapy: { embed: radiotherapy, component: radio },
+        radio2: { embed: radiotherapy, component: radio2 },
+        radiotherapy2: { embed: radiotherapy, component: radio2 },
         recy: {embed: recycling, component: recy},
         recycling: {embed: recycling, component: recy},
         recy2: {embed: recycling, component: recy2},

@@ -97,6 +97,7 @@ module.exports = {
         "himpter",
         "laserrings",
         "mechagold",
+        "muglord",
         "pankration",
         "recycling",
         "reversecatster",
@@ -114,6 +115,7 @@ module.exports = {
         "healthotk",
         "himpter",
         "laserrings",
+        "muglord",
         "pankration",
         "reversecatster",
         "uncrackamech",
@@ -137,6 +139,7 @@ module.exports = {
         "himpter",
         "laserrings",
         "limerence",
+        "muglord",
         "pankration",
         "recycling",
         "turles",
@@ -157,6 +160,7 @@ module.exports = {
         "leafystrike",
         "limerence",
         "mechagold",
+        "muglord",
         "neurotherapy",
         "pankration",
         "recycling",
@@ -222,8 +226,9 @@ module.exports = {
     const hotk = createButtons("healburn", "hi");
     const hi = createButtons("healthotk", "lrings");
     const lrings = createButtons("himps", "mgold");
-    const mgold = createButtons("laserrings", "pank");
-    const pank = createButtons("mechagold", "recy");
+    const mgold = createButtons("laserrings", "mlord");
+    const mlord = createButtons("mechagold", "pank");
+    const pank = createButtons("muglord", "recy");
     const recy = createButtons("pankration", "rcatster");
     const rcatster = createButtons("recycling", "um");
     const um = createButtons("reversecatster", "ws");
@@ -237,8 +242,9 @@ module.exports = {
     const hburn2 = createButtons("gravepiratestache2", "hotk2");
     const hotk2 = createButtons("healburn2", "hi2");
     const hi2 = createButtons("healthotk2", "lrings2");
-    const lrings2 = createButtons("himps2", "pank2");
-    const pank2 = createButtons("laserrings2", "rcatster2");
+    const lrings2 = createButtons("himps2", "mlord2");
+    const mlord2 = createButtons("laserrings2", "pank2");
+    const pank2 = createButtons("muglord2", "rcatster2");
     const rcatster2 = createButtons("pankration2", "um2");
     const um2 = createButtons("reversecatster2", "ws2");
     const ws2 = createButtons("uncrackamech2", "yem2");
@@ -258,8 +264,9 @@ module.exports = {
     const hotk3 = createButtons("healburn3", "hi3");
     const hi3 = createButtons("healthotk3", "lrings3");
     const lrings3 = createButtons("himps3", "lime2");
-    const lime2 = createButtons("laserrings3", "pank3");
-    const pank3 = createButtons("limerence2", "recy2");
+    const lime2 = createButtons("laserrings3", "mlord3");
+    const mlord3 = createButtons("limerence2", "pank3");
+    const pank3 = createButtons("muglord3", "recy2");
     const recy2 = createButtons("pankration3", "tur2");
     const tur2 = createButtons("recycling2", "ws3");
     const ws3 = createButtons("turles2", "midhelp");
@@ -276,8 +283,9 @@ module.exports = {
     const lrings4 = createButtons("himps4", "lstrike2");
     const lstrike2 = createButtons("laserrings4", "lime3");
     const lime3 = createButtons("leafystrike2", "mgold3");
-    const mgold3 = createButtons("limerence3", "neuro3");
-    const neuro3 = createButtons("mechagold3", "pank4");
+    const mgold3 = createButtons("limerence3", "mlord4");
+    const mlord4 = createButtons("mechagold3", "neuro3");
+    const neuro3 = createButtons("muglord4", "pank4");
     const pank4 = createButtons("neurotherapy3", "recy3");   
     const recy3 = createButtons("pankration4", "rcatster3");
     const rcatster3 = createButtons("recycling3", "tc3");
@@ -288,7 +296,7 @@ module.exports = {
     const yem3 = createButtons("watersports4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, dinoroots, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
-      himps, lasersnap, leafystrike, limerence, mechagold, pankration, recycling,
+      himps, lasersnap, leafystrike, limerence, mechagold, muglord, pankration, recycling,
       reversecatster, shamcontrol, toyotacontrolla, turles, 
       feastmech, watersports, youngeggmartin
             FROM imdecks im
@@ -399,6 +407,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const pankration = createDeckEmbed(result, "pankration");
     const healburn = createDeckEmbed(result, "healburn");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
+    const muglord = createDeckEmbed(result, "muglord");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
     const healthotk = createDeckEmbed(result, "healthotk");
     const turles = createDeckEmbed(result, "turles");
@@ -605,8 +614,15 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         droots2: { embed: dinoroots, component: droots2 },
         dinoroots2: { embed: dinoroots, component: droots2 },
         droots3: { embed: dinoroots, component: droots3 },
-        dinoroots3: { embed: dinoroots, component: droots3 }
-
+        dinoroots3: { embed: dinoroots, component: droots3 }, 
+        mlord: { embed: muglord, component: mlord },
+        muglord: { embed: muglord, component: mlord },
+        mlord2: { embed: muglord, component: mlord2 },
+        muglord2: { embed: muglord, component: mlord2 },
+        mlord3: { embed: muglord, component: mlord3 },
+        muglord3: { embed: muglord, component: mlord3 },
+        mlord4: { embed: muglord, component: mlord4 },
+        muglord4: { embed: muglord, component: mlord4 }
       };
       const action = buttonActions[i.customId];
       if (action) {

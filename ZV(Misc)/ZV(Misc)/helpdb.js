@@ -424,7 +424,6 @@ module.exports = {
         "limerence",
         "lockthebathroom",
         "pablosyeezys",
-        "piport",
         "portalgun",
         "pyromania",
         "nohokaistars",
@@ -459,6 +458,7 @@ module.exports = {
         "ladytuna",
         "lunchtime",
         "mechagold",
+        "muglord",
         "noplayingallowed",
         "pankration",
         "reversecatster",
@@ -506,6 +506,7 @@ module.exports = {
         "igmablobchum",
         "lawnmower2",
         "mechascope",
+        "muglord",
         "pablosyeezys",
         "pankration",
         "portalgun",
@@ -559,9 +560,9 @@ module.exports = {
         "lunchtime",
         "pablosyeezys",
         "pankration",
-        "piport",
         "portalgun",
         "pyromania",
+        "muglord",
         "nohokaistars",
         "scimania",
         "slugged",
@@ -618,11 +619,11 @@ module.exports = {
         "mechacontrol",
         "mechagold",
         "mechascope",
+        "muglord",
         "nohokaistars",
         "noplayingallowed",
         "pablosyeezys",
         "pankration",
-        "piport",
         "portalgun", 
         "pyromania",
         "reversecatster",
@@ -884,13 +885,13 @@ module.exports = {
     const mbolt = createButtons("lunchtime", "mcon");
     const mcon = createButtons("marxbolt", "mgold");
     const mgold = createButtons("mechacontrol", "mscope");
-    const mscope = createButtons("mechagold", "nhks");
-    const nhks = createButtons("mechascope", "npa");
+    const mscope = createButtons("mechagold", "mlord");
+    const mlord = createButtons("mechascope", "nhks");
+    const nhks = createButtons("muglord", "npa");
     const npa = createButtons("nohokaistars", "pyeeyz");
     const pyeeyz = createButtons("noplayingallowed", "pank");
-    const pank = createButtons("pablosyeezys", "pip");
-    const pip = createButtons("pankration", "pgun");
-    const pgun = createButtons("piport", "pyro");
+    const pank = createButtons("pablosyeezys", "pgun");
+    const pgun = createButtons("pankration", "pyro");
     const pyro = createButtons("portalgun", "rcatster")
     const rcatster = createButtons("pyromania", "syard");
     const syard = createButtons("reversecatster", "smania");
@@ -930,9 +931,8 @@ module.exports = {
     const lmower2 = createButtons("cardsbolt2", "lime2");
     const lime2 = createButtons("lawnmower2", "ltbr2");
     const ltbr2 = createButtons("limerence2", "pyeeyz2");
-    const pyeeyz2 = createButtons("lockthebathroom2", "pip2");
-    const pip2 = createButtons("pablosyeezys2", "pgun2");
-    const pgun2 = createButtons("piport2", "pyro2");
+    const pyeeyz2 = createButtons("lockthebathroom2", "pgun2");
+    const pgun2 = createButtons("pablosyeezys2", "pyro2");
     const pyro2 = createButtons("portalgun2", "nhks2")
     const nhks2 = createButtons("pyromania2", "sea2");
     const sea2 = createButtons("nohokaistars2", "slug2");
@@ -965,8 +965,9 @@ module.exports = {
     const igbc2 = createButtons("huntgargs2", "lt2");
     const lt2 = createButtons("igmablobchum2", "ltime2");
     const ltime2 = createButtons("ladytuna2", "mgold2");
-    const mgold2 = createButtons("lunchtime2", "npa2");
-    const npa2 = createButtons("mechagold2", "pank2");
+    const mgold2 = createButtons("lunchtime2", "mlord2");
+    const mlord2 = createButtons("mechagold2", "npa2");
+    const npa2 = createButtons("muglord2", "pank2");
     const pank2 = createButtons("noplayingallowed2", "rcatster2");
     const rcatster2 = createButtons("pankration2", "smate2");
     const smate2 = createButtons("reversecatster2", "sbandits2");
@@ -1011,8 +1012,9 @@ module.exports = {
     const hter3 = createButtons("gravepiratestache4", "igbc3");
     const igbc3 = createButtons("himpter3", "lmower3");
     const lmower3 = createButtons("igmablobchum3", "mscope3");
-    const mscope3 = createButtons("lawnmower3", "pyeeyz3");
-    const pyeeyz3 = createButtons("mechascope3", "pank3");
+    const mscope3 = createButtons("lawnmower3", "mlord3");
+    const mlord3 = createButtons("mechascope3", "pyeeyz3");
+    const pyeeyz3 = createButtons("muglord3", "pank3");
     const pank3 = createButtons("pablosyeezys3", "pgun3");
     const pgun3 = createButtons("pankration3", "rcatster3");
     const rcatster3 = createButtons("portalgun3", "stars3");
@@ -1062,11 +1064,11 @@ module.exports = {
     const lum3 = createButtons("ladytuna3", "ltime3");
     const ltime3 = createButtons("luminous3", "pyeeyz4");
     const pyeeyz4 = createButtons("lunchtime3", "pank4");
-    const pank4 = createButtons("mechagold3", "pip3");
-    const pip3 = createButtons("pankration4", "pgun4");
-    const pgun4 = createButtons("piport3", "pyro3");
-    const pyro3 = createButtons("portalgun4", "nhks3")
-    const nhks3 = createButtons("pyromania3", "smania3");
+    const pank4 = createButtons("mechagold3", "pgun43");
+    const pgun4 = createButtons("pankration4", "pyro3");
+    const pyro3 = createButtons("portalgun4", "mlord4");
+    const mlord4 = createButtons("pyromania3", "nhks3");
+    const nhks3 = createButtons("muglord4", "smania3");
     const smania3 = createButtons("nohokaistars3", "slug3");
     const slug3 = createButtons("scimania3", "stars4");
     const stars4 = createButtons("slugged3", "slord4");
@@ -1435,7 +1437,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const budgetnt = createZombieDeckEmbed(result, "budgetnt");
     const floss = createZombieDeckEmbed(result, "floss");
     const gomorrah = createZombieDeckEmbed(result, "gomorrah");
-    const piport = createZombieDeckEmbed(result, "piport");
     const slugged = createZombieDeckEmbed(result, "icebox");
     const ladytuna = createZombieDeckEmbed(result, "ladytuna");
     const scimania = createZombieDeckEmbed(result, "scimania");
@@ -1445,6 +1446,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const sunlord = createZombieDeckEmbed(result, "wimps");
     const bonusducks = createZombieDeckEmbed(result, "bonusducks");
     const budgetpb = createZombieDeckEmbed(result, "budgetpb");
+    const muglord = createZombieDeckEmbed(result, "muglord");
     const trickstache = createZombieDeckEmbed(result, "trickstache");
     const pyromania = createZombieDeckEmbed(result, "pyromania");
     const youngeggmartin = createZombieDeckEmbed(result, "youngeggmartin");
@@ -2174,12 +2176,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         limerence2: { embed: limerence, component: lime2 },
         lime3: { embed: limerence, component: lime3 },
         limerence3: { embed: limerence, component: lime3 },
-        pip: { embed: piport, component: pip },
-        piport: { embed: piport, component: pip },
-        pip2: { embed: piport, component: pip2 },
-        piport2: { embed: piport, component: pip2 },
-        pip3: { embed: piport, component: pip3 },
-        piport3: { embed: piport, component: pip3 },
         tan: { embed: tangen, component: tan },
         tangen: { embed: tangen, component: tan },
         tan2: { embed: tangen, component: tan2 },
@@ -2287,7 +2283,15 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         smania2: { embed: scimania, component: smania2 },
         scimania2: { embed: scimania, component: smania2 },
         smania3: { embed: scimania, component: smania3 },
-        scimania3: { embed: scimania, component: scimania3 },
+        scimania3: { embed: scimania, component: smania3 },
+        mlord: { embed: muglord, component: mlord },
+        muglord: { embed: muglord, component: mlord },  
+        mlord2: { embed: muglord, component: mlord2 },
+        muglord2: { embed: muglord, component: mlord2 },
+        mlord3: { embed: muglord, component: mlord3 },
+        muglord3: { embed: muglord, component: mlord3 },
+        mlord4: { embed: muglord, component: mlord4 },
+        muglord4: { embed: muglord, component: mlord4 }
       };
       const action = buttonActions[i.customId];
       if (action) {

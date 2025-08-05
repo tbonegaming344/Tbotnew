@@ -102,7 +102,7 @@ module.exports = {
     const rustboltDecks = {
       budgetDecks: ["budgetrb"],
       competitiveDecks: ["boltbolt", "cardsbolt"],
-      ladderDecks: ["marxbolt", "mechacontrol"],
+      ladderDecks: ["marxbolt", "mechacontrol", "scimania"],
       memeDecks: [
         "igmablobchum",
         "sunbandits",
@@ -115,7 +115,7 @@ module.exports = {
         "sunbandits",
       ],
       controlDecks: ["mechacontrol", "sunbandits"],
-      midrangeDecks: ["boltbolt", "budgetrb", "igmablobchum"],
+      midrangeDecks: ["boltbolt", "budgetrb", "igmablobchum", "scimania"],
       tempoDecks: ["cardsbolt"],
       allDecks: [
         "boltbolt",
@@ -124,6 +124,7 @@ module.exports = {
         "igmablobchum",
         "marxbolt",
         "mechacontrol",
+        "scimania",
         "sunbandits"      
       ],
     };
@@ -168,14 +169,16 @@ module.exports = {
     const cbolt = createButtons("budgetrb", "igb");
     const igb = createButtons("cardsbolt", "marx");
     const marx = createButtons("igmablobchum", "mc");
-    const mc = createButtons("marxbolt", "sb");
-    const sb = createButtons("mechacontrol", "allhelp");
+    const mc = createButtons("marxbolt", "smania");
+    const smania = createButtons("mechacontrol", "sb");
+    const sb = createButtons("scimania", "allhelp");
     const comprow = createButtons("cardsbolt2", "bol2"); 
     const bol2 = createButtons("helpcomp", "cbolt2");
     const cbolt2 = createButtons("boltbolt2", "comphelp");
-    const ladderrow = createButtons("mechacontrol2", "marx2");
+    const ladderrow = createButtons("scimania2", "marx2");
     const marx2 = createButtons("ladderhelp", "mc2");
-    const mc2 = createButtons("marxbolt2", "helpladder");
+    const mc2 = createButtons("marxbolt2", "smania2");
+    const smania2 = createButtons("mechacontrol2", "helpladder");
     const memerow = createButtons("sunbandits2", "igb2");
     const igb2 = createButtons("memehelp", "sb2");
     const sb2 = createButtons("igmablobchum2", "helpmeme");
@@ -187,10 +190,11 @@ module.exports = {
     const controlrow = createButtons("sunbandits4", "mc3");
     const mc3 = createButtons("controlhelp", "sb4");
     const sb4 = createButtons("mechacontrol3", "helpcontrol");
-    const midrangerow = createButtons("igmablobchum4", "bol4");
+    const midrangerow = createButtons("scimania3", "bol4");
     const bol4 = createButtons("midrangehelp", "brb2");
     const brb2 = createButtons("boltbolt4", "igb4");
-    const igb4 = createButtons("budgetrb2", "helpmidrange");
+    const igb4 = createButtons("budgetrb2", "smania3");
+    const smania3 = createButtons("igmablobchum4", "helpmidrange");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701?cb=20190807152027"
@@ -300,6 +304,7 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
     const igmablobchum = createDeckEmbed(result, "igmablobchum");
     const marxbolt = createDeckEmbed(result, "marxbolt");
     const mechacontrol = createDeckEmbed(result, "mechacontrol");
+    const scimania = createDeckEmbed(result, "scimania");
     const cardsbolt = createDeckEmbed(result, "poggerrazzi");
     const sunbandits = createDeckEmbed(result, "sunbandits");
     const m = await message.channel.send({
@@ -330,7 +335,7 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
       } else if (value == "midrange") {
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
-        await i.replY({ embeds: [cardsbolt], flags: MessageFlags.Ephemeral });
+        await i.reply({ embeds: [cardsbolt], flags: MessageFlags.Ephemeral });
       } else if (value == "budget") {
         await i.reply({ embeds: [budgetrb], flags: MessageFlags.Ephemeral });
       }
@@ -362,6 +367,8 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
         boltbolt2: { embed: boltbolt, component: bol2 },
         bol3: { embed: boltbolt, component: bol3 },
         boltbolt3: { embed: boltbolt, component: bol3 },
+        bol4: { embed: boltbolt, component: bol4 },
+        boltbolt4: { embed: boltbolt, component: bol4 },
         brb: { embed: budgetrb, component: brb },
         budgetrb: { embed: budgetrb, component: brb },
         brb2: { embed: budgetrb, component: brb2 },
@@ -397,7 +404,13 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
         sb3: { embed: sunbandits, component: sb3 },
         sunbandits3: { embed: sunbandits, component: sb3 },
         sb4: { embed: sunbandits, component: sb4 },
-        sunbandits4: { embed: sunbandits, component: sb4 }
+        sunbandits4: { embed: sunbandits, component: sb4 }, 
+        smania: { embed: scimania, component: smania },
+        scimania: { embed: scimania, component: smania },
+        smania2: { embed: scimania, component: smania2 },
+        scimania2: { embed: scimania, component: smania2 },
+        smania3: { embed: scimania, component: smania3 },
+        scimania3: { embed: scimania, component: smania3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

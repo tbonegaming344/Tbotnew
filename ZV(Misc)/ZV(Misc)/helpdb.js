@@ -443,6 +443,7 @@ module.exports = {
         "marxbolt",
         "mechacontrol",
         "schoolyard",
+        "scimania", 
         "trickmech"
       ],
       memeDecks: [
@@ -562,6 +563,7 @@ module.exports = {
         "portalgun",
         "pyromania",
         "nohokaistars",
+        "scimania",
         "slugged",
         "spacestars",
         "sunlord",
@@ -625,6 +627,7 @@ module.exports = {
         "pyromania",
         "reversecatster",
         "schoolyard",
+        "scimania",
         "seacret",
         "slugged",
         "spacestars",
@@ -890,8 +893,9 @@ module.exports = {
     const pgun = createButtons("piport", "pyro");
     const pyro = createButtons("portalgun", "rcatster")
     const rcatster = createButtons("pyromania", "syard");
-    const syard = createButtons("reversecatster", "sea");
-    const sea = createButtons("schoolyard", "slug");
+    const syard = createButtons("reversecatster", "smania");
+    const smania = createButtons("schoolyard", "sea");
+    const sea = createButtons("scimania", "slug");
     const slug = createButtons("seacret", "stars");
     const stars = createButtons("slugged", "smate");
     const smate = createButtons("spacestars", "sbandits");
@@ -945,8 +949,9 @@ module.exports = {
     const mbolt2 = createButtons("luminous2", "mcon2");
     const mcon2 = createButtons("marxbolt2", "mscope2");
     const mscope2 = createButtons("mechacontrol2", "syard2");
-    const syard2 = createButtons("mechascope2", "tmech2");
-    const tmech2 = createButtons("schoolyard2", "ladderzhelp");
+    const syard2 = createButtons("mechascope2", "smania2");
+    const smania2 = createButtons("schoolyard2", "tmech2");
+    const tmech2 = createButtons("scimania2", "ladderzhelp");
     const memezrow = createButtons("zmoss2", "sav2");
     const sav2 = createButtons("helpzmeme", "bhammer2");
     const bhammer2 = createButtons("savage2", "bas2");
@@ -1061,8 +1066,9 @@ module.exports = {
     const pip3 = createButtons("pankration4", "pgun4");
     const pgun4 = createButtons("piport3", "pyro3");
     const pyro3 = createButtons("portalgun4", "nhks3")
-    const nhks3 = createButtons("pyromania3", "slug3");
-    const slug3 = createButtons("nohokaistars3", "stars4");
+    const nhks3 = createButtons("pyromania3", "smania3");
+    const smania3 = createButtons("nohokaistars3", "slug3");
+    const slug3 = createButtons("scimania3", "stars4");
     const stars4 = createButtons("slugged3", "slord4");
     const slord4 = createButtons("spacestars4", "tan4");
     const tan4 = createButtons("sunlord4", "timps4");
@@ -1432,6 +1438,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const piport = createZombieDeckEmbed(result, "piport");
     const slugged = createZombieDeckEmbed(result, "icebox");
     const ladytuna = createZombieDeckEmbed(result, "ladytuna");
+    const scimania = createZombieDeckEmbed(result, "scimania");
     const schoolyard = createZombieDeckEmbed(result, "schoolyard");
     const stalemate = createZombieDeckEmbed(result, "stalemate");
     const pankration = createZombieDeckEmbed(result, "pankration");
@@ -2275,6 +2282,12 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         dinoroots2: { embed: dinoroots, component: droots2 },
         droots3: { embed: dinoroots, component: droots3 },
         dinoroots3: { embed: dinoroots, component: droots3 },
+        smania: { embed: scimania, component: smania },
+        scimania: { embed: scimania, component: smania },
+        smania2: { embed: scimania, component: smania2 },
+        scimania2: { embed: scimania, component: smania2 },
+        smania3: { embed: scimania, component: smania3 },
+        scimania3: { embed: scimania, component: scimania3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -8,6 +8,7 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
+const { all } = require("axios");
 /**
  * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
@@ -46,6 +47,11 @@ module.exports = {
         "Select an option below to view KingFish Commander's Decklists"
       )
       .addOptions(
+         new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setValue("meme")
@@ -61,13 +67,21 @@ module.exports = {
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ), 
+          new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription(
+            "All of KingFish Commander's Decks"
           )
       );
     const row = new ActionRowBuilder().addComponents(select);
     const kingFishCommanderDecks = {
+      ladderDecks: ["scimania"],
       memeDecks: ["lunchtime", "savagemayflower", "sunlord"],
       comboDecks: ["lunchtime", "sunlord"],
-      midrangeDecks: ["lunchtime", "sunlord"],
+      midrangeDecks: ["lunchtime", "scimania", "sunlord"],
+      allDecks: ["lunchtime", "savagemayflower", "scimania", "sunlord", ],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -80,6 +94,7 @@ module.exports = {
         .join("");
     }
     const toBuildMeme = buildDeckString(kingFishCommanderDecks.memeDecks);
+    const toBuildString = buildDeckString(kingFishCommanderDecks.allDecks);
     const toBuildCombo = buildDeckString(kingFishCommanderDecks.comboDecks);
     const toBuildMidrange = buildDeckString(
       kingFishCommanderDecks.midrangeDecks
@@ -107,11 +122,17 @@ module.exports = {
     const smf = createButtons("lunchtime", "sl");
     const sl = createButtons("savagemayflower", "memehelp");
     const midrangerow = createButtons("sunlord2", "lt2");
-    const lt2 = createButtons("helpmidrange", "sl2");
-    const sl2 = createButtons("lunchtime2", "midrangehelp");
+    const lt2 = createButtons("helpmidrange", "smania");
+    const smania = createButtons("lunchtime2", "sl2");
+    const sl2 = createButtons("scimania", "midrangehelp");
     const comborow = createButtons("sunlord3", "lt3");
     const lt3 = createButtons("helpcombo", "sl3");
     const sl3 = createButtons("lunchtime3", "combohelp");
+    const alldecksrow = createButtons("sunlord4", "lt4");
+    const lt4 = createButtons("helpall", "smf2");
+    const smf2 = createButtons("lunchtime4", "smania2");
+    const smania2 = createButtons("savagemayflower2", "sl4");
+    const sl4 = createButtons("scimania2", "allhelp");
     const user = await client.users.fetch("1160392548423061516");
     const kfish = createHelpEmbed(
       `${user.displayName} Decks`,
@@ -126,6 +147,13 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} total d
       user.displayAvatarURL(),
       `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${kingFishCommanderDecks.memeDecks.length} Meme decks in Tbot`
+    );
+    const allkfish = createHelpEmbed(
+      `${user.displayName} All Decks`,
+      `My decks made by ${user.displayName} are ${toBuildString}`,
+      user.displayAvatarURL(),
+      `To view All the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
+Note: ${user.displayName} has ${kingFishCommanderDecks.allDecks.length} total decks in Tbot`
     );
     const combookfish = createHelpEmbed(
       `${user.displayName} Combo Decks`,
@@ -173,6 +201,7 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
     }
     const lunchtime = createDeckEmbed(result, "midpets");
     const savagemayflower = createDeckEmbed(result, "savagemayflower");
+    const scimania = createDeckEmbed(result, "scimania");
     const sunlord = createDeckEmbed(result, "wimps");
     const m = await message.channel.send({
       embeds: [kfish],
@@ -185,7 +214,13 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "meme") {
+      if(value == "all") {
+        await i.update({ embeds: [allkfish], components: [alldecksrow] });
+      }
+      else if (value == "ladder") {
+        await i.reply({embeds: [scimania], flags: MessageFlags.Ephemeral});
+      }
+      else if (value == "meme") {
         await i.update({ embeds: [memekfish], components: [memerow] });
       } else if (value == "combo") {
         await i.update({ embeds: [combookfish], components: [comborow] });
@@ -201,6 +236,8 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
       const buttonActions = {
         helpmeme: { embed: memekfish, component: memerow },
         memehelp: { embed: memekfish, component: memerow },
+        helpall: { embed: allkfish, component: alldecksrow },
+        allhelp: { embed: allkfish, component: alldecksrow },
         helpmidrange: { embed: midrangekfish, component: midrangerow },
         midrangehelp: { embed: midrangekfish, component: midrangerow },
         helpcombo: { embed: combookfish, component: comborow },
@@ -211,14 +248,24 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
         sunlord2: { embed: sunlord, component: sl2 },
         sl3: { embed: sunlord, component: sl3 },
         sunlord3: { embed: sunlord, component: sl3 },
+        sl4: { embed: sunlord, component: sl4 },
+        sunlord4: { embed: sunlord, component: sl4 },
         smf: { embed: savagemayflower, component: smf },
         savagemayflower: { embed: savagemayflower, component: smf },
+        smf2: { embed: savagemayflower, component: smf2 },
+        savagemayflower2: { embed: savagemayflower, component: smf2 },
         lt: { embed: lunchtime, component: lt },
         lunchtime: { embed: lunchtime, component: lt },
         lt2: { embed: lunchtime, component: lt2 },
         lunchtime2: { embed: lunchtime, component: lt2 },
         lt3: { embed: lunchtime, component: lt3 },
         lunchtime3: { embed: lunchtime, component: lt3 },
+        lt4: { embed: lunchtime, component: lt4 },
+        lunchtime4: { embed: lunchtime, component: lt4 },
+        smania: { embed: scimania, component: smania },
+        scimania: { embed: scimania, component: smania },
+        smania2: { embed: scimania, component: smania2 },
+        scimania2: { embed: scimania, component: smania2 },
       };
       const action = buttonActions[i.customId];
       if (action) {

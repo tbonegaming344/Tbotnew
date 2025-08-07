@@ -79,6 +79,10 @@ module.exports = {
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
+           new StringSelectMenuOptionBuilder()
+      .setLabel("Control Decks")
+      .setValue("control")
+      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setValue("midrange")

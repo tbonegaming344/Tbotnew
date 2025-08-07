@@ -8,7 +8,6 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-const helpnt = require("../../Zombies/NT/helpnt.js");
 /**
  * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
  * @param {string} title - The title of the embed
@@ -40,7 +39,7 @@ module.exports = {
         .setStyle(ButtonStyle.Danger)
         .setEmoji("<:NeptunaH:1087845030867247174>")
     );
-    const select = new StringSelectMenuBuilder()
+     const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Please select an option below to view Neptuna Decks")
       .addOptions(
@@ -75,6 +74,10 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           )
           .setValue("combo"),
+           new StringSelectMenuOptionBuilder()
+      .setLabel("Control Decks")
+      .setValue("control")
+      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setDescription(
@@ -91,9 +94,10 @@ module.exports = {
     const neptunaDecks = {
       budgetDecks: ["budgetnt"],
       competitiveDecks: ["slugged"],
-      ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
+      ladderDecks: ["ladytuna", "gomorrah", "schoolyard", "tanktuna"],
       memeDecks: ["floss", "muglord", "sunlord"],
       aggroDecks: ["budgetnt", "schoolyard"],
+      controldecks: ["tanktuna"],
       comboDecks: ["budgetnt", "floss", "muglord", "sunlord"],
       midrangeDecks: ["gomorrah", "ladytuna", "muglord", "slugged", "sunlord"],
       allDecks: [
@@ -105,9 +109,10 @@ module.exports = {
         "schoolyard",
         "slugged",
         "sunlord",
+        "tanktuna"
       ],
     };
-    /**
+     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -125,7 +130,7 @@ module.exports = {
     const toBuildMidrangeString = buildDeckString(neptunaDecks.midrangeDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button
+     * @param {string} leftButtonId - The ID of the left button to control the left button 
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -141,7 +146,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("sunlord", "bnt");
+    const alldecksrow = createButtons("tanktuna", "bnt");
     const bnt = createButtons("helpall", "fl");
     const fl = createButtons("budgetnt", "go");
     const go = createButtons("floss", "lt");
@@ -149,10 +154,12 @@ module.exports = {
     const mlord = createButtons("ladytuna", "sy");
     const sy = createButtons("muglord", "slug");
     const slug = createButtons("schoolyard", "sl");
-    const sl = createButtons("slugged", "allhelp");
-    const ladderrow = createButtons("schoolyard2", "go2");
+    const sl = createButtons("slugged", "tank");
+    const tank = createButtons("sunlord", "helpall");
+    const ladderrow = createButtons("tanktuna2", "go2");
     const go2 = createButtons("helpladder", "sy2");
-    const sy2 = createButtons("gomorrah2", "ladderhelp");
+    const sy2 = createButtons("gomorrah2", "tank2");
+    const tank2 = createButtons("schoolyard2", "ladderhelp");
     const memerow = createButtons("sunlord2", "fl2");
     const fl2 = createButtons("helpmeme", "lt2");
     const lt2 = createButtons("floss2", "mlord2");
@@ -273,6 +280,7 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
     const gomorrah = createDeckEmbed(result, "gomorrah");
     const slugged = createDeckEmbed(result, "icebox");
     const muglord = createDeckEmbed(result, "muglord");
+    const tanktuna = createDeckEmbed(result, "tanktuna");
     const ladytuna = createDeckEmbed(result, "ladytuna");
     const schoolyard = createDeckEmbed(result, "schoolyard");
     const sunlord = createDeckEmbed(result, "wimps");
@@ -304,6 +312,9 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
       } else if (value == "budget") {
         await i.reply({ embeds: [budgetnt], flags: MessageFlags.Ephemeral });
       }
+      else if(value == "control") {
+        await i.reply({ embeds: [tanktuna], flags: MessageFlags.Ephemeral });
+      }
     }
     /**
      * the handleButtonInteraction function handles the button interactions for the decks
@@ -312,68 +323,72 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
     async function handleButtonInteraction(i) {
       const buttonActions = {
         helpnt: { embed: nthelp, component: row },
-        helpall: { embed: alldecksEmbed, component: alldecksrow },
-        allhelp: { embed: alldecksEmbed, component: alldecksrow },
-        ladderhelp: { embed: ladderEmbed, component: ladderrow },
-        helpladder: { embed: ladderEmbed, component: ladderrow },
-        memehelp: { embed: memeEmbed, component: memerow },
-        helpmeme: { embed: memeEmbed, component: memerow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        helpcombo: { embed: comboEmbed, component: comborow },
-        helpmid: { embed: midrangeEmbed, component: midrangerow },
-        midhelp: { embed: midrangeEmbed, component: midrangerow },
-        bnt: { embed: budgetnt, component: bnt },
-        budgetnt: { embed: budgetnt, component: bnt },
-        bnt2: { embed: budgetnt, component: bnt2 },
-        budgetnt2: { embed: budgetnt, component: bnt2 },
-        bnt3: { embed: budgetnt, component: bnt3 },
-        budgetnt3: { embed: budgetnt, component: bnt3 },
-        fl: { embed: floss, component: fl },
-        floss: { embed: floss, component: fl },
-        fl2: { embed: floss, component: fl2 },
-        floss2: { embed: floss, component: fl2 },
-        fl3: { embed: floss, component: fl3 },
-        floss3: { embed: floss, component: fl3 },
-        go: { embed: gomorrah, component: go },
-        gomorrah: { embed: gomorrah, component: go },
-        go2: { embed: gomorrah, component: go2 },
-        gomorrah2: { embed: gomorrah, component: go2 },
-        go3: { embed: gomorrah, component: go3 },
-        gomorrah3: { embed: gomorrah, component: go3 },
-        lt: { embed: ladytuna, component: lt },
-        ladytuna: { embed: ladytuna, component: lt },
-        lt2: { embed: ladytuna, component: lt2 },
-        ladytuna2: { embed: ladytuna, component: lt2 },
-        lt3: { embed: ladytuna, component: lt3 },
-        ladytuna3: { embed: ladytuna, component: lt3 },
-        sy: { embed: schoolyard, component: sy },
-        schoolyard: { embed: schoolyard, component: sy },
-        sy2: { embed: schoolyard, component: sy2 },
-        schoolyard2: { embed: schoolyard, component: sy2 },
-        sy3: { embed: schoolyard, component: sy3 },
-        schoolyard3: { embed: schoolyard, component: sy3 },
-        sl: { embed: sunlord, component: sl },
-        sunlord: { embed: sunlord, component: sl },
-        sl2: { embed: sunlord, component: sl2 },
-        sunlord2: { embed: sunlord, component: sl2 },
-        sl3: { embed: sunlord, component: sl3 },
-        sunlord3: { embed: sunlord, component: sl3 },
-        sl4: { embed: sunlord, component: sl4 },
-        sunlord4: { embed: sunlord, component: sl4 },
-        slug: { embed: slugged, component: slug },
-        slugged: { embed: slugged, component: slug },
-        slug2: { embed: slugged, component: slug2 },
-        slugged2: { embed: slugged, component: slug2 },
-        mlord: { embed: muglord, component: mlord },
-        muglord: { embed: muglord, component: mlord },
-        mlord2: { embed: muglord, component: mlord2 },
-        muglord2: { embed: muglord, component: mlord2 },
-        mlord3: { embed: muglord, component: mlord3 },
-        muglord3: { embed: muglord, component: mlord3 },
-        mlord4: { embed: muglord, component: mlord4 },
-        muglord4: { embed: muglord, component: mlord4 },
+        helpall: {embed: alldecksEmbed, component: alldecksrow},
+        allhelp: {embed: alldecksEmbed, component: alldecksrow},
+        ladderhelp: {embed: ladderEmbed, component: ladderrow},
+        helpladder: {embed: ladderEmbed, component: ladderrow},
+        memehelp: {embed: memeEmbed, component: memerow},
+        helpmeme: {embed: memeEmbed, component: memerow},
+        aggrohelp: {embed: aggroEmbed, component: aggrorow},
+        helpaggro: {embed: aggroEmbed, component: aggrorow},
+        combohelp: {embed: comboEmbed, component: comborow},
+        helpcombo: {embed: comboEmbed, component: comborow},
+        helpmid: {embed: midrangeEmbed, component: midrangerow},
+        midhelp: {embed: midrangeEmbed, component: midrangerow},
+        bnt: {embed: budgetnt, component: bnt},
+        budgetnt: {embed: budgetnt, component: bnt},
+        bnt2: {embed: budgetnt, component: bnt2},
+        budgetnt2: {embed: budgetnt, component: bnt2},
+        bnt3: {embed: budgetnt, component: bnt3},
+        budgetnt3: {embed: budgetnt, component: bnt3},
+        fl: {embed: floss, component: fl},
+        floss: {embed: floss, component: fl},
+        fl2: {embed: floss, component: fl2},
+        floss2: {embed: floss, component: fl2},
+        fl3: {embed: floss, component: fl3},
+        floss3: {embed: floss, component: fl3},
+        go: {embed: gomorrah, component: go},
+        gomorrah: {embed: gomorrah, component: go},
+        go2: {embed: gomorrah, component: go2},
+        gomorrah2: {embed: gomorrah, component: go2},
+        go3: {embed: gomorrah, component: go3},
+        gomorrah3: {embed: gomorrah, component: go3},
+        lt: {embed: ladytuna, component: lt},
+        ladytuna: {embed: ladytuna, component: lt},
+        lt2: {embed: ladytuna, component: lt2},
+        ladytuna2: {embed: ladytuna, component: lt2},
+        lt3: {embed: ladytuna, component: lt3},
+        ladytuna3: {embed: ladytuna, component: lt3},
+        sy: {embed: schoolyard, component: sy},
+        schoolyard: {embed: schoolyard, component: sy},
+        sy2: {embed: schoolyard, component: sy2},
+        schoolyard2: {embed: schoolyard, component: sy2},
+        sy3: {embed: schoolyard, component: sy3},
+        schoolyard3: {embed: schoolyard, component: sy3},
+        sl: {embed: sunlord, component: sl},
+        sunlord: {embed: sunlord, component: sl},
+        sl2: {embed: sunlord, component: sl2},
+        sunlord2: {embed: sunlord, component: sl2},
+        sl3: {embed: sunlord, component: sl3},
+        sunlord3: {embed: sunlord, component: sl3},
+        sl4: {embed: sunlord, component: sl4},
+        sunlord4: {embed: sunlord, component: sl4},
+        slug: {embed: slugged, component: slug},
+        slugged: {embed: slugged, component: slug},
+        slug2: {embed: slugged, component: slug2},
+        slugged2: {embed: slugged, component: slug2},
+        mlord: {embed: muglord, component: mlord},
+        muglord: {embed: muglord, component: mlord},
+        mlord2: {embed: muglord, component: mlord2},
+        muglord2: {embed: muglord, component: mlord2},
+        mlord3: {embed: muglord, component: mlord3},
+        muglord3: {embed: muglord, component: mlord3},
+        mlord4: {embed: muglord, component: mlord4},
+        muglord4: {embed: muglord, component: mlord4},
+        tank: {embed: tanktuna, component: tank},
+        tanktuna: {embed: tanktuna, component: tank},
+        tank2: {embed: tanktuna, component: tank2},
+        tanktuna2: {embed: tanktuna, component: tank2},
       };
       const action = buttonActions[i.customId];
       if (action) {

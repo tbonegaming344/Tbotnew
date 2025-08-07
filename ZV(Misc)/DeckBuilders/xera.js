@@ -87,7 +87,7 @@ module.exports = {
       );
     const xeraDecks = {
       competitiveDecks: ["dinoroots", "limerence", "neurotherapy", "turles"],
-      ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "toyotacontrolla"],
+      ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "tanktuna", "toyotacontrolla"],
       memeDecks: [
         "22savage",
         "frozentelimps",
@@ -126,6 +126,7 @@ module.exports = {
         "frozentelimps",
         "mechagold",
         "neurotherapy",
+        "tanktuna",
         "toyotacontrolla",
         "uncrackamech",
       ],
@@ -165,6 +166,7 @@ module.exports = {
         "pankration",
         "recycling",
         "reversecatster",
+        "tanktuna",
         "toyotacontrolla",
         "turles",
         "uncrackamech",
@@ -216,8 +218,9 @@ module.exports = {
     const ladderrow = createButtons("toyotacontrolla", "go");
     const go = createButtons("helpladder", "gps");
     const gps = createButtons("gomorrah", "lstrike");
-    const lstrike = createButtons("gravepiratestache", "tc");
-    const tc = createButtons("leafystrike", "ladderhelp");
+    const lstrike = createButtons("gravepiratestache", "tank");
+    const tank = createButtons("leafystrike", "tc");
+    const tc = createButtons("tanktuna", "ladderhelp");
     const memerow = createButtons("youngeggmartin", "sav");
     const sav = createButtons("helpmeme", "ftimps");
     const ftimps = createButtons("savage", "ff");
@@ -252,8 +255,9 @@ module.exports = {
     const controlrow = createButtons("uncrackmech3", "ftimps3");
     const ftimps3 = createButtons("helpcontrol", "mgold2");
     const mgold2 = createButtons("frozentelimps3", "neuro2");
-    const neuro2 = createButtons("mechagold2", "tc2");
-    const tc2 = createButtons("neurotherapy2", "um3");
+    const neuro2 = createButtons("mechagold2", "tank2");
+    const tank2 = createButtons("neurotherapy2", "tc2");
+    const tc2 = createButtons("tanktuna2", "um3");
     const um3 = createButtons("toyotacontrolla2", "controlhelp");
     const midrangerow = createButtons("watersports3", "sav3");
     const sav3 = createButtons("helpmid", "droots2");
@@ -288,8 +292,9 @@ module.exports = {
     const neuro3 = createButtons("muglord4", "pank4");
     const pank4 = createButtons("neurotherapy3", "recy3");   
     const recy3 = createButtons("pankration4", "rcatster3");
-    const rcatster3 = createButtons("recycling3", "tc3");
-    const tc3 = createButtons("reversecatster3", "tur3");
+    const rcatster3 = createButtons("recycling3", "tank3");
+    const tank3 = createButtons("reversecatster3", "tc3")
+    const tc3 = createButtons("tanktuna3", "tur3");
     const tur3 = createButtons("toyotacontrolla3", "um4");
     const um4 = createButtons("turles3", "ws4");
     const ws4 = createButtons("uncrackamech4", "yem3");
@@ -297,7 +302,7 @@ module.exports = {
     const [result] = await db.query(`SELECT 
       savage22, dinoroots, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
       himps, lasersnap, leafystrike, limerence, mechagold, muglord, pankration, recycling,
-      reversecatster, shamcontrol, toyotacontrolla, turles, 
+      reversecatster, shamcontrol, tanktuna, toyotacontrolla, turles, 
       feastmech, watersports, youngeggmartin
             FROM imdecks im
             inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
@@ -407,6 +412,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const pankration = createDeckEmbed(result, "pankration");
     const healburn = createDeckEmbed(result, "healburn");
     const frozentelimps = createDeckEmbed(result, "frozentelimps");
+    const tanktuna = createDeckEmbed(result, "tanktuna");
     const muglord = createDeckEmbed(result, "muglord");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
     const healthotk = createDeckEmbed(result, "healthotk");
@@ -622,7 +628,13 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         mlord3: { embed: muglord, component: mlord3 },
         muglord3: { embed: muglord, component: mlord3 },
         mlord4: { embed: muglord, component: mlord4 },
-        muglord4: { embed: muglord, component: mlord4 }
+        muglord4: { embed: muglord, component: mlord4 }, 
+        tank: { embed: tanktuna, component: tank },
+        tanktuna: { embed: tanktuna, component: tank },
+        tank2: { embed: tanktuna, component: tank2 },
+        tanktuna2: { embed: tanktuna, component: tank2 },
+        tank3: { embed: tanktuna, component: tank3 },
+        tanktuna3: { embed: tanktuna, component: tank3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

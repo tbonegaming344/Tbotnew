@@ -78,6 +78,10 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           )
           .setValue("combo"),
+           new StringSelectMenuOptionBuilder()
+      .setLabel("Control Decks")
+      .setValue("control")
+      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setDescription(
@@ -94,9 +98,10 @@ module.exports = {
     const neptunaDecks = {
       budgetDecks: ["budgetnt"],
       competitiveDecks: ["slugged"],
-      ladderDecks: ["ladytuna", "gomorrah", "schoolyard"],
+      ladderDecks: ["ladytuna", "gomorrah", "schoolyard", "tanktuna"],
       memeDecks: ["floss", "muglord", "sunlord"],
       aggroDecks: ["budgetnt", "schoolyard"],
+      controldecks: ["tanktuna"],
       comboDecks: ["budgetnt", "floss", "muglord", "sunlord"],
       midrangeDecks: ["gomorrah", "ladytuna", "muglord", "slugged", "sunlord"],
       allDecks: [
@@ -108,6 +113,7 @@ module.exports = {
         "schoolyard",
         "slugged",
         "sunlord",
+        "tanktuna"
       ],
     };
      /**
@@ -144,7 +150,7 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("sunlord", "bnt");
+    const alldecksrow = createButtons("tanktuna", "bnt");
     const bnt = createButtons("helpall", "fl");
     const fl = createButtons("budgetnt", "go");
     const go = createButtons("floss", "lt");
@@ -152,10 +158,12 @@ module.exports = {
     const mlord = createButtons("ladytuna", "sy");
     const sy = createButtons("muglord", "slug");
     const slug = createButtons("schoolyard", "sl");
-    const sl = createButtons("slugged", "allhelp");
-    const ladderrow = createButtons("schoolyard2", "go2");
+    const sl = createButtons("slugged", "tank");
+    const tank = createButtons("sunlord", "helpall");
+    const ladderrow = createButtons("tanktuna2", "go2");
     const go2 = createButtons("helpladder", "sy2");
-    const sy2 = createButtons("gomorrah2", "ladderhelp");
+    const sy2 = createButtons("gomorrah2", "tank2");
+    const tank2 = createButtons("schoolyard2", "ladderhelp");
     const memerow = createButtons("sunlord2", "fl2");
     const fl2 = createButtons("helpmeme", "lt2");
     const lt2 = createButtons("floss2", "mlord2");
@@ -250,6 +258,7 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
     const budgetnt = createDeckEmbed(result, "budgetnt");
     const floss = createDeckEmbed(result, "floss");
     const gomorrah = createDeckEmbed(result, "gomorrah");
+    const tanktuna = createDeckEmbed(result, "tanktuna");
     const muglord = createDeckEmbed(result, "muglord");
     const slugged = createDeckEmbed(result, "icebox");
     const ladytuna = createDeckEmbed(result, "ladytuna");
@@ -282,6 +291,9 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "budget") {
         await i.reply({ embeds: [budgetnt], flags: MessageFlags.Ephemeral });
+      }
+      else if (value == "control") {
+        await i.reply({ embeds: [tanktuna], flags: MessageFlags.Ephemeral });
       }
     }
     /**
@@ -352,6 +364,10 @@ Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
         muglord3: {embed: muglord, component: mlord3},
         mlord4: {embed: muglord, component: mlord4},
         muglord4: {embed: muglord, component: mlord4},
+        tank: {embed: tanktuna, component: tank},
+        tanktuna: {embed: tanktuna, component: tank},
+        tank2: {embed: tanktuna, component: tank2},
+        tanktuna2: {embed: tanktuna, component: tank2},
       }
       const action = buttonActions[i.customId];
       if (action) {

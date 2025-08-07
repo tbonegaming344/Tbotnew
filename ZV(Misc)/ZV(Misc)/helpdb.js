@@ -443,6 +443,7 @@ module.exports = {
         "mechacontrol",
         "schoolyard",
         "scimania", 
+        "tankktuna",
         "trickmech"
       ],
       memeDecks: [
@@ -537,6 +538,7 @@ module.exports = {
         "noplayingallowed",
         "stalemate",
         "sunbandits",
+        "tanktuna",
         "uncrackamech",
         "whalepharaoh",
       ],
@@ -636,6 +638,7 @@ module.exports = {
         "sunbandits",
         "sunlord",
         "tangen",
+        "tanktuna",
         "telimps",
         "trickstache",
         "trickmech",
@@ -902,8 +905,9 @@ module.exports = {
     const smate = createButtons("spacestars", "sbandits");
     const sbandits = createButtons("stalemate", "slord");
     const slord = createButtons("sunbandits", "tan");
-    const tan = createButtons("sunlord", "timps");
-    const timps = createButtons("tangen", "tstache");
+    const tan = createButtons("sunlord", "tank");
+    const tank = createButtons("tangen", "timps");
+    const timps = createButtons("tanktuna", "tstache");
     const tstache = createButtons("telimps", "tmech");
     const tmech = createButtons("trickstache", "umech");
     const umech = createButtons("trickmech", "un");
@@ -950,8 +954,9 @@ module.exports = {
     const mcon2 = createButtons("marxbolt2", "mscope2");
     const mscope2 = createButtons("mechacontrol2", "syard2");
     const syard2 = createButtons("mechascope2", "smania2");
-    const smania2 = createButtons("schoolyard2", "tmech2");
-    const tmech2 = createButtons("scimania2", "ladderzhelp");
+    const smania2 = createButtons("schoolyard2", "tank2");
+    const tank2 = createButtons("scimania2", "tmech2");
+    const tmech2 = createButtons("tanktuna2", "ladderzhelp");
     const memezrow = createButtons("zmoss2", "sav2");
     const sav2 = createButtons("helpzmeme", "bhammer2");
     const bhammer2 = createButtons("savage2", "bas2");
@@ -1042,8 +1047,9 @@ module.exports = {
     const mscope4 = createButtons("mechagold3", "npa3");
     const npa3 = createButtons("mechascope4", "smate3");
     const smate3 = createButtons("noplayingallowed3", "sbandits4");
-    const sbandits4 = createButtons("stalemate3", "umech4");
-    const umech4 = createButtons("sunbandits4", "wph4");
+    const sbandits4 = createButtons("stalemate3", "tank3");
+    const tank3 = createButtons("sunbandits4", "umech4");
+    const umech4 = createButtons("tanktuna3", "wph4");
     const wph4 = createButtons("uncrackamech4", "controlzhelp");
     const midrangezrow = createButtons("youngkenmartin4", "sav4");
     const sav4 = createButtons("helpzmid", "bhammer4");
@@ -1460,6 +1466,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const sunbandits = createZombieDeckEmbed(result, "sunbandits");
     const budgetsm = createZombieDeckEmbed(result, "budgetsm");
     const pablosyeezys = createZombieDeckEmbed(result, "pablosyeezys");
+    const tanktuna = createZombieDeckEmbed(result, "tanktuna");
     const whalepharaoh = createZombieDeckEmbed(result, "whalepharaoh");
     const budgetzm = createZombieDeckEmbed(result, "budgetzm");
     const mechagold = createZombieDeckEmbed(result, "mechagold");
@@ -2291,7 +2298,13 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         mlord3: { embed: muglord, component: mlord3 },
         muglord3: { embed: muglord, component: mlord3 },
         mlord4: { embed: muglord, component: mlord4 },
-        muglord4: { embed: muglord, component: mlord4 }
+        muglord4: { embed: muglord, component: mlord4 }, 
+        tank: { embed: tanktuna, component: tank },
+        tanktuna: { embed: tanktuna, component: tank },
+        tank2: { embed: tanktuna, component: tank2 },
+        tanktuna2: { embed: tanktuna, component: tank2 },
+        tank3: {embed: tanktuna, component: tank3}, 
+        tanktuna3: {embed: tanktuna, component: tank3}
       };
       const action = buttonActions[i.customId];
       if (action) {

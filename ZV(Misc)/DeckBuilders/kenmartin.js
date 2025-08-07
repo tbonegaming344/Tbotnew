@@ -120,7 +120,7 @@ on (rb.deckinfo = hg.deckinfo)`);
       "Ken Martin Decks",
       `To view the Decks Made By Ken Martin please select an option from the select menu below!
 Select combo to view all decks made by Ken Martin
-Note: Ken Martin has ${kenMartinDecks.ladderDecks.length} total decks in Tbot`,
+Note: Ken Martin has ${kenMartinDecks.comboDecks.length} total decks in Tbot`,
         "https://media.discordapp.net/attachments/1044626284346605588/1111011436223803473/ken.jpg?width=604&height=604"
     )
       const comboken = createHelpEmbed(

@@ -77,9 +77,10 @@ module.exports = {
       content: `✅ Your deck update has  been submitted successfully! Please join the tbot server below if you haven't already to be notified of updates on your submission or of updates to the bot`,
       files: [file],
       components: [tbotServer],
-      fetchReply: true
+      withResponse: true
     });
-    const permanentUrl = replyMessage.attachments.first().url;
+    const message = replyMessage.resource.message;
+    const permanentUrl = message.attachments.first().url;
     const forumChannel = interaction.client.channels.cache.get('1100160031128830104');
 
     if (!forumChannel || forumChannel.type !== ChannelType.GuildForum) {

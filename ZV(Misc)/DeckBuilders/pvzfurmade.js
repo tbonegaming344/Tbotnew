@@ -117,7 +117,7 @@ on (pb.deckinfo = sm.deckinfo)`);
     const fur = createHelpEmbed(
       `${user.displayName} Decks`,
        `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${combodecks.length} total decks in Tbot`,
+Note: ${user.displayName} has ${pvzFurMadeDecks.comboDecks.length} total decks in Tbot`,
       user.displayAvatarURL()
     )
       const combofur = createHelpEmbed(

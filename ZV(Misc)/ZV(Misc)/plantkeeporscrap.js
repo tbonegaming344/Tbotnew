@@ -97,6 +97,9 @@ module.exports = {
       await message.channel.send({
       components: [container],
       flags: MessageFlags.IsComponentsV2,
+      allowedMentions: { 
+        users: []
+      }
     });
     }
   }

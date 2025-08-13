@@ -124,22 +124,26 @@ module.exports = {
     const toBuildComboString = BuildDeckString(greenShadowDecks.comboDecks);
     const toBuildMidrangeString = BuildDeckString(greenShadowDecks.midrangeDecks);
     const memerow = createButtons("savagemayflower", "lstars");
-    const lstars = createButtons("helpmeme", "smf");
-    const smf = createButtons("leafstars", "memehelp");
+    const lstars = createButtons("helpmeme", "nhouse");
+    const nhouse = createButtons("leafstars", "smf");
+    const smf = createButtons("nuthouse", "memehelp");
     const comborow = createButtons("savagemayflower2", "lstars2");
-    const lstars2 = createButtons("helpcombo", "smf2");
-    const smf2 = createButtons("leafstars2", "combohelp");
+    const lstars2 = createButtons("helpcombo", "nhouse2");
+    const nhouse2 = createButtons("leafstars2", "smf2");
+    const smf2 = createButtons("nuthouse2", "combohelp");
     const midrangerow = createButtons("leafstars3", "bms");
     const bms = createButtons("helpmidrange", "lstars3");
-    const lstars3 = createButtons("budgetmopshadow", "midrangehelp");
+    const lstars3 = createButtons("budgetmopshadow", "nhouse3");
+    const nhouse3 = createButtons("leafstars3", "midrangehelp");
     const aggrorow = createButtons("pbeans", "cb");
     const cb = createButtons("aggrohelp", "pb");
     const pb = createButtons("cartasbuenas", "helpaggro");
     const alldecksrow = createButtons("savagemayflower3", "bms2");
     const bms2 = createButtons("helpall", "cb2");
     const cb2 = createButtons("budgetmopshadow2", "lstars4");
-    const lstars4 = createButtons("cartasbuenas2", "smf3");
-    const pb2 = createButtons("leafstars4", "smf3");
+    const lstars4 = createButtons("cartasbuenas2", "nhouse4");
+    const nhouse4 = createButtons("leafstars4", "pb2");
+    const pb2 = createButtons("nuthouse4", "smf3");
     const smf3 = createButtons("pbeans2", "allhelp");
     const gs = new EmbedBuilder()
       .setThumbnail(
@@ -235,6 +239,7 @@ module.exports = {
       const cartasbuenas= createDeckEmbed(result, "abeans")
       const budgetgs = createDeckEmbed(result, "budgetgs")
       const savagemayflower = createDeckEmbed(result, "savagemayflower")
+      const nuthouse = createDeckEmbed(result, "nuthouse")
       const leafstars = createDeckEmbed(result, "sovietonion")
       const pbeans = createDeckEmbed(result, "pbeans")
     const Filter = (i) => i.user.id === message.author.id;
@@ -303,6 +308,14 @@ module.exports = {
         savagemayflower2: {embed: savagemayflower, component: smf2},
         smf3: {embed: savagemayflower, component: smf3},
         savagemayflower3: {embed: savagemayflower, component: smf3},
+        nhouse: {embed: nuthouse, component: nhouse},
+        nuthouse: {embed: nuthouse, component: nhouse},
+        nhouse2: {embed: nuthouse, component: nhouse2},
+        nuthouse2: {embed: nuthouse, component: nhouse2},
+        nhouse3: {embed: nuthouse, component: nhouse3},
+        nuthouse3: {embed: nuthouse, component: nhouse3},
+        nhouse4: {embed: nuthouse, component: nhouse4},
+        nuthouse4: {embed: nuthouse, component: nhouse4},
       }
       const action = buttonActions[i.customId];
       if (action) {

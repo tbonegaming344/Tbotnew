@@ -285,6 +285,7 @@ module.exports = {
         "leafstars",
         "lifecouldbedream",
         "mspotk",
+        "nuthouse",
         "nuttin",
         "plantmop",
         "recycling",
@@ -317,6 +318,7 @@ module.exports = {
         "lasersnap",
         "leafstars",
         "mspotk",
+        "nuthouse",
         "nuttin",
         "plantmop",
         "reflourished",
@@ -347,6 +349,7 @@ module.exports = {
         "healthotk",
         "lasersnap",
         "leafstars",
+        "nuthouse",
         "recycling",
         "turles",
         "venice",
@@ -390,6 +393,7 @@ module.exports = {
         "logbait",
         "mspotk",
         "neurotherapy",
+        "nuthouse",
         "nuttin",
         "pawntrickstab",
         "pbeans",
@@ -730,8 +734,9 @@ module.exports = {
     const lstrike = createButtons("leafstars", "lcbd");
     const lcbd = createButtons("leafystrike", "lbait");
     const lbait = createButtons("lifecouldbedream", "neuro");
-    const neuro = createButtons("logbait", "nut");
-    const nut = createButtons("neurotherapy", "msp");
+    const neuro = createButtons("logbait", "nhouse");
+    const nhouse = createButtons("neurotherapy", "nut");
+    const nut = createButtons("nuthouse", "msp");
     const msp = createButtons("logbait", "pts");
     const pts = createButtons("mspotk", "pb");
     const pb = createButtons("pawntrickstab", "plmop");
@@ -783,8 +788,9 @@ module.exports = {
     const hotk2 = createButtons("healburn2", "lsnap2");
     const lsnap2 = createButtons("healthotk2", "lcbd2");
     const lcbd2 = createButtons("lasersnap2", "msp2");
-    const msp2 = createButtons("lifecouldbedream2", "nut2");
-    const nut2 = createButtons("mspotk2", "plmop2");
+    const msp2 = createButtons("lifecouldbedream2", "nhouse2");
+    const nhouse2 = createButtons("mspotk2", "nut2");
+    const nut2 = createButtons("nuthouse2", "plmop2");
     const plmop2 = createButtons("nuttin2", "recy2");
     const recy2 = createButtons("plantmop2", "rfl2");
     const rfl2 = createButtons("recycling2", "smf2");
@@ -813,8 +819,9 @@ module.exports = {
     const hotk3 = createButtons("healburn3", "lsnap3");
     const lsnap3 = createButtons("healthotk3", "lstars3");
     const lstars3 = createButtons("lasersnap3", "msp3");
-    const msp3 = createButtons("leafstars3", "nut3");
-    const nut3 = createButtons("mspotk3", "plmop3");
+    const msp3 = createButtons("leafstars3", "nhouse3");
+    const nhouse3 = createButtons("mspotk3", "nut3");
+    const nut3 = createButtons("nuthouse3", "plmop3");
     const plmop3 = createButtons("nuttin3", "rfl3");
     const rfl3 = createButtons("plantmop3", "smf3");
     const smf3 = createButtons("reflourished3", "vce3");
@@ -842,8 +849,9 @@ module.exports = {
     const hmr3 = createButtons("healburn4", "hotk4");
     const hotk4 = createButtons("healmidrose3", "lsnap4");
     const lsnap4 = createButtons("healthotk4", "lstars4");
-    const lstars4 = createButtons("lasersnap4", "recy3");
-    const recy3 = createButtons("leafstars4", "tur3");
+    const lstars4 = createButtons("lasersnap4", "nhouse4");
+    const nhouse4 = createButtons("leafstars4", "recy3");
+    const recy3 = createButtons("nuthoouse4", "tur3");
     const tur3 = createButtons("recyling3", "vce4");
     const vce4 = createButtons("turles3", "midrangephelp");
     const tempoprow = createButtons("lifecouldbedream3", "bay4");
@@ -1355,6 +1363,7 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const logbait = createPlantDeckEmbed(result, "logbait");
     const mspotk = createPlantDeckEmbed(result, "mspotk");
     const dinocounter = createPlantDeckEmbed(result, "dinocounter");
+    const nuthouse = createPlantDeckEmbed(result, "nuthouse");
     const plantmop = createPlantDeckEmbed(result, "plantmop");
     const reflourished = createPlantDeckEmbed(result, "reflourished");
     const venice = createPlantDeckEmbed(result, "apotk");
@@ -2304,7 +2313,15 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         tank2: { embed: tanktuna, component: tank2 },
         tanktuna2: { embed: tanktuna, component: tank2 },
         tank3: {embed: tanktuna, component: tank3}, 
-        tanktuna3: {embed: tanktuna, component: tank3}
+        tanktuna3: {embed: tanktuna, component: tank3}, 
+        nhouse: {embed: nuthouse, component: nhouse},
+        nuthouse: {embed: nuthouse, component: nhouse},
+        nhouse2: {embed: nuthouse, component: nhouse2},
+        nuthouse2: {embed: nuthouse, component: nhouse2},
+        nhouse3: {embed: nuthouse, component: nhouse3},
+        nuthouse3: {embed: nuthouse, component: nhouse3},
+        nhouse4: {embed: nuthouse, component: nhouse4},
+        nuthouse4: {embed: nuthouse, component: nhouse4},
       };
       const action = buttonActions[i.customId];
       if (action) {

@@ -78,10 +78,10 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const kingFishCommanderDecks = {
       ladderDecks: ["scimania"],
-      memeDecks: ["lunchtime", "savagemayflower", "sunlord"],
-      comboDecks: ["lunchtime", "sunlord"],
-      midrangeDecks: ["lunchtime", "scimania", "sunlord"],
-      allDecks: ["lunchtime", "savagemayflower", "scimania", "sunlord", ],
+      memeDecks: ["lunchtime", "nuthouse", "savagemayflower", "sunlord"],
+      comboDecks: ["lunchtime", "nuthouse", "sunlord"],
+      midrangeDecks: ["lunchtime", "nuthouse", "scimania", "sunlord"],
+      allDecks: ["lunchtime", "nuthouse", "savagemayflower", "scimania", "sunlord"],
     };
      /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -118,19 +118,23 @@ module.exports = {
       );
     }
     const memerow = createButtons("sunlord", "lt");
-    const lt = createButtons("helpmeme", "smf");
-    const smf = createButtons("lunchtime", "sl");
+    const lt = createButtons("helpmeme", "nhouse");
+    const nhouse = createButtons("lunchtime", "smf");
+    const smf = createButtons("nuthouse", "sl");
     const sl = createButtons("savagemayflower", "memehelp");
     const midrangerow = createButtons("sunlord2", "lt2");
-    const lt2 = createButtons("helpmidrange", "smania");
-    const smania = createButtons("lunchtime2", "sl2");
+    const lt2 = createButtons("helpmidrange", "nhouse2");
+    const nhouse2 = createButtons("lunchtime2", "smania1");
+    const smania = createButtons("nuthouse2", "sl2");
     const sl2 = createButtons("scimania", "midrangehelp");
     const comborow = createButtons("sunlord3", "lt3");
-    const lt3 = createButtons("helpcombo", "sl3");
-    const sl3 = createButtons("lunchtime3", "combohelp");
+    const lt3 = createButtons("helpcombo", "nhouse3");
+    const nhouse3 = createButtons("lunchtime3", "sl3");
+    const sl3 = createButtons("nuthouse3", "combohelp");
     const alldecksrow = createButtons("sunlord4", "lt4");
-    const lt4 = createButtons("helpall", "smf2");
-    const smf2 = createButtons("lunchtime4", "smania2");
+    const lt4 = createButtons("helpall", "nhouse4");
+    const nhouse4 = createButtons("lunchtime4", "smf2");
+    const smf2 = createButtons("nuthouse4", "smania2");
     const smania2 = createButtons("savagemayflower2", "sl4");
     const sl4 = createButtons("scimania2", "allhelp");
     const user = await client.users.fetch("1160392548423061516");
@@ -170,7 +174,7 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.comboDecks.length} Combo 
 Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
     const [result] =
-      await db.query(`select midpets, savagemayflower, wimps
+      await db.query(`select midpets, nuthouse, savagemayflower, wimps
 		from gsdecks gs 
     inner join bfdecks bf 
 		on (gs.deckinfo = bf.deckinfo)
@@ -201,6 +205,7 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
     }
     const lunchtime = createDeckEmbed(result, "midpets");
     const savagemayflower = createDeckEmbed(result, "savagemayflower");
+    const nuthouse = createDeckEmbed(result, "nuthouse");
     const scimania = createDeckEmbed(result, "scimania");
     const sunlord = createDeckEmbed(result, "wimps");
     const m = await message.channel.send({
@@ -266,6 +271,14 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Mid
         scimania: { embed: scimania, component: smania },
         smania2: { embed: scimania, component: smania2 },
         scimania2: { embed: scimania, component: smania2 },
+        nhouse: { embed: nuthouse, component: nhouse },
+        nuthouse: {embed:  nuthouse, component: nhouse },
+        nhouse2: { embed: nuthouse, component: nhouse2 },
+        nuthouse2: { embed: nuthouse, component: nhouse2 },
+        nhouse3: { embed: nuthouse, component: nhouse3 },
+        nuthouse3: { embed: nuthouse, component: nhouse3 },
+        nhouse4: { embed: nuthouse, component: nhouse4 },
+        nuthouse4: { embed: nuthouse, component: nhouse4 }
       };
       const action = buttonActions[i.customId];
       if (action) {

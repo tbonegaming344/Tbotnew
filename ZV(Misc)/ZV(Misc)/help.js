@@ -76,10 +76,25 @@ const {
               }
               embed.setDescription(toBuildString)
               embed.setFooter({text: `${category} has ${commands.length} commands and ${commands.length - 1 } decks`})
-              if(category == "Miscellaneous" || category == "Zombie Cards"|| category == "Tricks Phase" || category == "DeckBuilders" || category == "Plant Cards"){
-                embed.setFooter({text: `${category} has ${commands.length} commands`})
+              if(category == "Miscellaneous" ){
+                embed.setDescription(toBuildString + `</randomdeck:1400497035043406007> 
+to get a random deck 
+</submitdeck:1394802186659168446> 
+to submit a deck to Tbot Suggestions 
+</8ball:1400510403888549998> 
+to ask Tbot a question
+</bugreport:1400182844000702577> 
+Report a bug to Tbone
+</updatedeck:1394802186659168447> 
+Update a deck already in Tbot
+</wheel:1400489180521304194> 
+generates a deck for you by picking random cards for a random hero`) 
+                embed.setFooter({text: `${category} has ${commands.length} commands and 6 slash commands`})
               }
               await m.deferUpdate()
+            if (category == "Zombie Cards"|| category == "Tricks Phase" || category == "DeckBuilders" || category == "Plant Cards"){
+                embed.setFooter({text: `${category} has ${commands.length} commands`})
+            }
               await m.message.edit({
                   embeds: [embed],
               })

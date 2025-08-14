@@ -34,6 +34,10 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     const dozzaDecks = ["trickmech"]
+     let toBuildString = "";
+          for (const deck of decks) {
+            toBuildString += `\n<@${client.user.id}> **${deck}**`;
+          }
     const [result] = await db.query(`select trickmech
 from zmdecks zm`);
 const user = await client.users.fetch("1143937777763889324");

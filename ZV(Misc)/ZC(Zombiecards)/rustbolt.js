@@ -63,12 +63,6 @@ module.exports = {
           .setValue("meme")
           .setDescription("Decks that are built off a weird/fun combo"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
-          .setValue("aggro")
-          .setDescription(
-            "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Combo Decks")
           .setValue("combo")
           .setDescription(
@@ -102,13 +96,12 @@ module.exports = {
     const rustboltDecks = {
       budgetDecks: ["budgetrb"],
       competitiveDecks: ["boltbolt", "cardsbolt"],
-      ladderDecks: ["marxbolt", "mechacontrol", "scimania"],
+      ladderDecks: ["mechacontrol", "scimania"],
       memeDecks: [
         "igmablobchum",
         "sunbandits",
       ],
-      aggroDecks: ["marxbolt"],
-      comboDecks: [
+  comboDecks: [
         "boltbolt",
         "cardsbolt",
         "igmablobchum",
@@ -122,7 +115,6 @@ module.exports = {
         "budgetrb",
         "cardsbolt",
         "igmablobchum",
-        "marxbolt",
         "mechacontrol",
         "scimania",
         "sunbandits"      
@@ -167,17 +159,15 @@ module.exports = {
     const bol = createButtons("helpall", "brb");
     const brb = createButtons("boltbolt", "cbolt");
     const cbolt = createButtons("budgetrb", "igb");
-    const igb = createButtons("cardsbolt", "marx");
-    const marx = createButtons("igmablobchum", "mc");
-    const mc = createButtons("marxbolt", "smania");
+    const igb = createButtons("cardsbolt", "mc");
+    const mc = createButtons("igmablobchum", "smania");
     const smania = createButtons("mechacontrol", "sb");
     const sb = createButtons("scimania", "allhelp");
     const comprow = createButtons("cardsbolt2", "bol2"); 
     const bol2 = createButtons("helpcomp", "cbolt2");
     const cbolt2 = createButtons("boltbolt2", "comphelp");
-    const ladderrow = createButtons("scimania2", "marx2");
-    const marx2 = createButtons("ladderhelp", "mc2");
-    const mc2 = createButtons("marxbolt2", "smania2");
+    const ladderrow = createButtons("scimania2", "mc2");
+    const mc2 = createButtons("ladderhelp", "smania2");
     const smania2 = createButtons("mechacontrol2", "helpladder");
     const memerow = createButtons("sunbandits2", "igb2");
     const igb2 = createButtons("memehelp", "sb2");
@@ -302,7 +292,6 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
     const boltbolt = createDeckEmbed(result, "boltbolt");
     const budgetrb = createDeckEmbed(result, "budgetrb");
     const igmablobchum = createDeckEmbed(result, "igmablobchum");
-    const marxbolt = createDeckEmbed(result, "marxbolt");
     const mechacontrol = createDeckEmbed(result, "mechacontrol");
     const scimania = createDeckEmbed(result, "scimania");
     const cardsbolt = createDeckEmbed(result, "poggerrazzi");
@@ -326,8 +315,6 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
         await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
       } else if (value == "meme") {
         await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (value == "aggro") {
-        await i.reply({ embeds: [marxbolt], flags: MessageFlags.Ephemeral });
       } else if (value == "combo") {
         await i.update({ embeds: [comboEmbed], components: [comborow] });
       } else if (value == "control") {
@@ -387,10 +374,6 @@ Note: Rustbolt has ${rustboltDecks.competitiveDecks.length} total competitive de
         igmablobchum3: { embed: igmablobchum, component: igb3 },
         igb4: { embed: igmablobchum, component: igb4 },
         igmablobchum4: { embed: igmablobchum, component: igb4 },
-        marx: { embed: marxbolt, component: marx },
-        marxbolt: { embed: marxbolt, component: marx },
-        marx2: { embed: marxbolt, component: marx2 },
-        marxbolt2: { embed: marxbolt, component: marx2 },
         mc: { embed: mechacontrol, component: mc },
         mechacontrol: { embed: mechacontrol, component: mc },
         mc2: { embed: mechacontrol, component: mc2 },

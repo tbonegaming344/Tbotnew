@@ -1,6 +1,5 @@
 const {EmbedBuilder} = require('discord.js');
 const db = require("../../index.js");
-const { category } = require('./marxbolt.js');
 module.exports = {
     name: `scimania`,
     aliases: [`sciencerb`, `rbscience`], 

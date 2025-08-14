@@ -13,28 +13,32 @@ module.exports = {
   aliases: [`franinjadecks`, `franinjahelp`, `helpfraninja`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-     const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Please select an option below to view Franinja's Decks")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setDescription("Some of the best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>")
-          .setValue("comp"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setDescription("Decks that are generally only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>")
-          .setValue("ladder")
-      )
-      const row = new ActionRowBuilder().addComponents(select);
-    const decks = ["marxbolt", "pyromania"];
+   const row = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("pyromania")
+         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId("pyro")
+         .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+      const pyro= new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId("helpf")
+         .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId("help")
+         .setEmoji("<:arrowright:1271446796207525898>")
+          .setStyle(ButtonStyle.Primary)
+      );
+    const decks = ["pyromania"];
     let toBuildString = "";
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    const [result] = await db.query(`select marxbolt from rbdecks`);
+    const [result] = await db.query(`select pyromania from zmdecks`);
     const user = await client.users.fetch("488426862058405899");
     const fran = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
@@ -46,30 +50,7 @@ module.exports = {
       .setFooter({
         text: `To view Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
 ${user.displayName} has ${decks.length} total decks in Tbot`,
-      })
-    const marxbolt = new EmbedBuilder()
-      .setTitle(`${result[5].marxbolt}`)
-      .setDescription(`${result[3].marxbolt}`)
-      .setFooter({ text: `${result[2].marxbolt}` })
-      .addFields(
-        {
-          name: "Deck Type",
-          value: `${result[6].marxbolt}`,
-          inline: true,
-        },
-        {
-          name: "Archetype",
-          value: `${result[0].marxbolt}`,
-          inline: true,
-        },
-        {
-          name: "Deck Cost",
-          value: `${result[1].marxbolt}`,
-          inline: true,
-        }
-      )
-      .setColor("#e0e0de")
-      .setImage(`${result[4].marxbolt}`);
+      });
 const pyromania = new EmbedBuilder()
             .setTitle(`${result[5].pyromania}`)
             .setDescription(`${result[3].pyromania}`)
@@ -91,23 +72,14 @@ const pyromania = new EmbedBuilder()
             .setImage(`${result[4].pyromania}`);
     const m = await message.channel.send({ embeds: [fran], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "ladder") {
-        await i.reply({embeds: [marxbolt], flags: MessageFlags.Ephemeral});
-      } else if (value == "comp"){
-        await i.reply({embeds: [pyromania], flags: MessageFlags.Ephemeral});
-      }
-    }
     const collector = m.createMessageComponentCollector({ filter: iFilter });
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } 
+    if (i.customId == "pyromania" || i.customId == "pyro") {
+          await i.update({ embeds: [pyromania], components: [pyro] });
+        }
+        else if (i.customId == "helpf" || i.customId == "help") {
+          await i.update({ embeds: [fran], components: [row] });
+        }
     });
   },
 };

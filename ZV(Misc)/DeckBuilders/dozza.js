@@ -44,7 +44,7 @@ const user = await client.users.fetch("1143937777763889324");
         )
         .setFooter({
           text: `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
+Note: ${user.displayName} has ${dozzaDecks.length} total decks in Tbot`,
         })
         .setThumbnail(user.displayAvatarURL())
         .setColor("#5a5547");

@@ -41,7 +41,7 @@ module.exports = {
       .setCustomId("select")
       .setPlaceholder("Please select an option below to view ShortBow's Decks")
       .addOptions(
-         new StringSelectMenuOptionBuilder()
+        new StringSelectMenuOptionBuilder()
           .setLabel("Competitive Decks")
           .setDescription("Some of the best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>")
@@ -51,7 +51,7 @@ module.exports = {
           .setDescription("Decks that are generally only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>")
           .setValue("ladder"),
-          new StringSelectMenuOptionBuilder()
+        new StringSelectMenuOptionBuilder()
           .setLabel("Meme Deck")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
@@ -93,11 +93,30 @@ module.exports = {
     const row = new ActionRowBuilder().addComponents(select);
     const shortbowDecks = {
       compdecks: ["limerence", "neurotherapy", "venice"],
-      ladderDecks: ["bayonet", "ginseng", "gomorrah", "gravepiratestache", "pawntrickstab", "trickmech"],
+      ladderDecks: [
+        "bayonet",
+        "ginseng",
+        "gomorrah",
+        "gravepiratestache",
+        "mechacontrol",
+        "pawntrickstab",
+        "trickmech",
+      ],
       memeDecks: ["tangen"],
       aggroDecks: ["gravepiratestache", "trickmech"],
-      comboDecks: ["bayonet", "gravepiratestache", "tangen", "trickmech", "venice"],
-      controlDecks: ["ginseng", "neurotherapy", "pawntrickstab"],
+      comboDecks: [
+        "bayonet",
+        "gravepiratestache",
+        "tangen",
+        "trickmech",
+        "venice",
+      ],
+      controlDecks: [
+        "ginseng",
+        "mechacontrol",
+        "neurotherapy",
+        "pawntrickstab",
+      ],
       midrangeDecks: ["gomorrah", "limerence", "tangen", "venice"],
       tempoDecks: ["bayonet"],
       allDecks: [
@@ -106,14 +125,15 @@ module.exports = {
         "gomorrah",
         "gravepiratestache",
         "limerence",
+        "mechacontrol",
         "neurotherapy",
         "pawntrickstab",
-        "tangen", 
-        "trickmech", 
-        "venice"
-      ]
+        "tangen",
+        "trickmech",
+        "venice",
+      ],
     };
-     /**
+    /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
      * @param {Array} decks - The array of deck names to build the string from
      * @returns {string} - The string of deck names
@@ -132,7 +152,7 @@ module.exports = {
     const toBuildTempoString = buildDeckString(shortbowDecks.tempoDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
+     * @param {string} leftButtonId - The ID of the left button to control the left button
      * @param {string} rightButtonId - The ID of the right button to control the right button
      * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
      */
@@ -153,8 +173,9 @@ module.exports = {
     const gseg = createButtons("bayonet", "go");
     const go = createButtons("ginseng", "gps");
     const gps = createButtons("gomorrah", "lime");
-    const lime = createButtons("gravepiratestache", "neuro");
-    const neuro = createButtons("limerence", "pts");
+    const lime = createButtons("gravepiratestache", "mcontrol");
+    const mcontrol = createButtons("limerence", "neuro");
+    const neuro = createButtons("mechacontrol", "pts");
     const pts = createButtons("neurotherapy", "tan");
     const tan = createButtons("pawntrickstab", "tmech");
     const tmech = createButtons("tangen", "vce");
@@ -167,8 +188,9 @@ module.exports = {
     const bay2 = createButtons("helpladder", "gseg2");
     const gseg2 = createButtons("bayonet2", "go2");
     const go2 = createButtons("ginseng2", "gps2");
-    const gps2 = createButtons("gomorrah2", "pts2");
-    const pts2 = createButtons("gravepiratestache2", "tmech2");
+    const gps2 = createButtons("gomorrah2", "mcontrol2");
+    const mcontrol2 = createButtons("gravepiratestache2", "pts2");
+    const pts2 = createButtons("mechacontrol2", "tmech2");
     const tmech2 = createButtons("pawntrickstab2", "ladderhelp");
     const aggrorow = createButtons("trickmech3", "gps3");
     const gps3 = createButtons("helpaggro", "tmech3");
@@ -180,20 +202,21 @@ module.exports = {
     const tmech4 = createButtons("tangen2", "vce3");
     const vce3 = createButtons("trickmech4", "combohelp");
     const controlrow = createButtons("pawntrickstab3", "gseg3");
-    const gseg3 = createButtons("helpcontrol", "neuro3");
-    const neuro3 = createButtons("ginseng3", "pts3");
+    const gseg3 = createButtons("helpcontrol", "mcontrol3");
+    const mcontrol3 = createButtons("ginseng3", "neuro3");
+    const neuro3 = createButtons("mechacontrol3", "pts3");
     const pts3 = createButtons("neurotherapy3", "controlhelp");
     const midrangerow = createButtons("venice4", "go3");
     const go3 = createButtons("helpmidrange", "lime3");
     const lime3 = createButtons("gomorrah3", "tan3");
     const tan3 = createButtons("limerence3", "vce4");
-    const vce4 = createButtons("tangen3", "midrangehelp"); 
-    const [result] =
-      await db.query(`select bayonet, ginseng, gomorrah, 
-        gps, limerence, shamcontrol, pawntrickstab, tangen, trickmech, apotk from ntdecks nt 
+    const vce4 = createButtons("tangen3", "midrangehelp");
+    const [result] = await db.query(`select bayonet, ginseng, gomorrah, 
+        gps, limerence, mechacontrol, shamcontrol, pawntrickstab, tangen, trickmech, apotk from ntdecks nt 
         inner join hgdecks hg on nt.deckinfo = hg.deckinfo
         inner join wkdecks wk on nt.deckinfo = wk.deckinfo
         inner join gkdecks gk on nt.deckinfo = gk.deckinfo
+        inner join rbdecks rb on nt.deckinfo = rb.deckinfo
         inner join sbdecks sb on nt.deckinfo = sb.deckinfo
         inner join ifdecks fi on nt.deckinfo = fi.deckinfo
         inner join ccdecks cc on nt.deckinfo = cc.deckinfo
@@ -263,7 +286,7 @@ Note: ${user.displayName} has ${shortbowDecks.midrangeDecks.length} midrange dec
       `To view the tempo decks made by ${user.displayName} please use the commands listed above or click on the buttons below!
 Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in Tbot`
     );
-     /**
+    /**
      * The createDeckEmbed function creates an embed for a specific deck
      * @param {string} deckName - The name of the deck
      * @param {*} result - The result from the database query
@@ -291,6 +314,7 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
     const limerence = createDeckEmbed(result, "limerence");
     const pawntrickstab = createDeckEmbed(result, "pawntrickstab");
     const neurotherapy = createDeckEmbed(result, "shamcontrol");
+    const mechacontrol = createDeckEmbed(result, "mechacontrol");
     const ginseng = createDeckEmbed(result, "ginseng");
     const bayonet = createDeckEmbed(result, "bayonet");
     const trickmech = createDeckEmbed(result, "trickmech");
@@ -303,7 +327,7 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
     const iFilter = (i) => i.user.id === message.author.id;
     /**
      * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i 
+     * @param {*} i
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
@@ -321,28 +345,24 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
           embeds: [aggroEmbed],
           components: [aggrorow],
         });
-      }
-      else if (value == "combo") {
+      } else if (value == "combo") {
         await i.update({
           embeds: [comboEmbed],
           components: [comborow],
         });
-      } 
-      else if (value == "midrange") {
-        await i.update({embeds: [midrangeEmbed], components: [midrangerow]});
+      } else if (value == "midrange") {
+        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
       } else if (value == "tempo") {
         await i.update({
           embeds: [tempoEmbed],
           components: [temporow],
         });
-      }
-      else if (value == "comp") {
-       await i.update({
+      } else if (value == "comp") {
+        await i.update({
           embeds: [compEmbed],
           components: [comprow],
         });
-      } 
-      else if (value == "meme") {
+      } else if (value == "meme") {
         await i.reply({
           embeds: [tangen],
           flags: MessageFlags.Ephemeral,
@@ -400,7 +420,7 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         tan2: { embed: tangen, component: tan2 },
         tangen2: { embed: tangen, component: tan2 },
         tan3: { embed: tangen, component: tan3 },
-        tangen3: { embed: tangen, component: tan3 }, 
+        tangen3: { embed: tangen, component: tan3 },
         tmech: { embed: trickmech, component: tmech },
         trickmech: { embed: trickmech, component: tmech },
         tmech2: { embed: trickmech, component: tmech2 },
@@ -425,18 +445,24 @@ Note: ${user.displayName} has ${shortbowDecks.tempoDecks.length} tempo decks in 
         neurotherapy3: { embed: neurotherapy, component: neuro3 },
         vce: { embed: venice, component: vce },
         venice: { embed: venice, component: vce },
-        vce2:  {embed: venice, component: vce2},
+        vce2: { embed: venice, component: vce2 },
         venice2: { embed: venice, component: vce2 },
         vce3: { embed: venice, component: vce3 },
         venice3: { embed: venice, component: vce3 },
         vce4: { embed: venice, component: vce4 },
-        venice4: { embed: venice, component: vce4},
+        venice4: { embed: venice, component: vce4 },
         gseg: { embed: ginseng, component: gseg },
         ginseng: { embed: ginseng, component: gseg },
         gseg2: { embed: ginseng, component: gseg2 },
         ginseng2: { embed: ginseng, component: gseg2 },
         gseg3: { embed: ginseng, component: gseg3 },
-        ginseng3: { embed: ginseng, component: gseg3 }
+        ginseng3: { embed: ginseng, component: gseg3 },
+        mcontrol: { embed: mechacontrol, component: mcontrol },
+        mechacontrol: { embed: mechacontrol, component: mcontrol },
+        mcontrol2: { embed: mechacontrol, component: mcontrol2 },
+        mechacontrol2: { embed: mechacontrol, component: mcontrol2 },
+        mcontrol3: { embed: mechacontrol, component: mcontrol3 },
+        mechacontrol3: { embed: mechacontrol, component: mcontrol3 },
       };
       const action = buttonActions[i.customId];
       if (action) {

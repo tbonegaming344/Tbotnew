@@ -87,7 +87,7 @@ module.exports = {
       );
     const xeraDecks = {
       competitiveDecks: ["dinoroots", "limerence", "neurotherapy", "turles"],
-      ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "tanktuna", "toyotacontrolla"],
+      ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "mechacontrol", "tanktuna", "toyotacontrolla"],
       memeDecks: [
         "22savage",
         "frozentelimps",
@@ -96,6 +96,7 @@ module.exports = {
         "healthotk",
         "himpter",
         "laserrings",
+        "mechacontrol",
         "mechagold",
         "muglord",
         "pankration",
@@ -124,6 +125,7 @@ module.exports = {
       ],
       controlDecks: [
         "frozentelimps",
+        "mechacontrol",
         "mechagold",
         "neurotherapy",
         "tanktuna",
@@ -218,8 +220,9 @@ module.exports = {
     const ladderrow = createButtons("toyotacontrolla", "go");
     const go = createButtons("helpladder", "gps");
     const gps = createButtons("gomorrah", "lstrike");
-    const lstrike = createButtons("gravepiratestache", "tank");
-    const tank = createButtons("leafystrike", "tc");
+    const lstrike = createButtons("gravepiratestache", "mcontrol");
+    const mcontrol = createButtons("leafystrike", "tank");
+    const tank = createButtons("mechacontrol", "tc");
     const tc = createButtons("tanktuna", "ladderhelp");
     const memerow = createButtons("youngeggmartin", "sav");
     const sav = createButtons("helpmeme", "ftimps");
@@ -253,8 +256,9 @@ module.exports = {
     const ws2 = createButtons("uncrackamech2", "yem2");
     const yem2 = createButtons("watersports2", "combohelp");
     const controlrow = createButtons("uncrackmech3", "ftimps3");
-    const ftimps3 = createButtons("helpcontrol", "mgold2");
-    const mgold2 = createButtons("frozentelimps3", "neuro2");
+    const ftimps3 = createButtons("helpcontrol", "mcontrol2");
+    const mcontrol2 = createButtons("frozentelimps3", "mgold2");
+    const mgold2 = createButtons("mechacontrol2", "neuro2");
     const neuro2 = createButtons("mechagold2", "tank2");
     const tank2 = createButtons("neurotherapy2", "tc2");
     const tc2 = createButtons("tanktuna2", "um3");
@@ -286,8 +290,9 @@ module.exports = {
     const hi4 = createButtons("healthotk4", "lrings4");
     const lrings4 = createButtons("himps4", "lstrike2");
     const lstrike2 = createButtons("laserrings4", "lime3");
-    const lime3 = createButtons("leafystrike2", "mgold3");
-    const mgold3 = createButtons("limerence3", "mlord4");
+    const lime3 = createButtons("leafystrike2", "mcontrol3");
+    const mcontrol3 = createButtons("limerence3", "mgold3");
+    const mgold3 = createButtons("mechacontrol3", "mlord4");
     const mlord4 = createButtons("mechagold3", "neuro3");
     const neuro3 = createButtons("muglord4", "pank4");
     const pank4 = createButtons("neurotherapy3", "recy3");   
@@ -301,7 +306,7 @@ module.exports = {
     const yem3 = createButtons("watersports4", "allhelp");
     const [result] = await db.query(`SELECT 
       savage22, dinoroots, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
-      himps, lasersnap, leafystrike, limerence, mechagold, muglord, pankration, recycling,
+      himps, lasersnap, leafystrike, limerence, mechacontrol, mechagold, muglord, pankration, recycling,
       reversecatster, shamcontrol, tanktuna, toyotacontrolla, turles, 
       feastmech, watersports, youngeggmartin
             FROM imdecks im
@@ -314,6 +319,7 @@ module.exports = {
             inner join czdecks cz on (im.deckinfo = cz.deckinfo)
             inner join hgdecks hg on (im.deckinfo = hg.deckinfo)
             inner join sbdecks sb on (im.deckinfo = sb.deckinfo)
+            inner join rbdecks rb on (im.deckinfo = rb.deckinfo)
             inner join smdecks sm on (im.deckinfo = sm.deckinfo)
             inner join ntdecks nt on (im.deckinfo = nt.deckinfo)
             inner join zmdecks zm on (im.deckinfo = zm.deckinfo)
@@ -406,6 +412,7 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
     const dinoroots = createDeckEmbed(result, "dinoroots");
     const limerence = createDeckEmbed(result, "limerence");
     const reversecatster = createDeckEmbed(result, "reversecatster");
+    const mechacontrol = createDeckEmbed(result, "mechacontrol");
     const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
     const mechagold = createDeckEmbed(result, "mechagold");
     const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
@@ -635,6 +642,12 @@ Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks i
         tanktuna2: { embed: tanktuna, component: tank2 },
         tank3: { embed: tanktuna, component: tank3 },
         tanktuna3: { embed: tanktuna, component: tank3 },
+        mcontrol: { embed: mechacontrol, component: mcontrol },
+        mechacontrol: { embed: mechacontrol, component: mcontrol },
+        mcontrol2: { embed: mechacontrol, component: mcontrol2 },
+        mechacontrol2: { embed: mechacontrol, component: mcontrol2 }, 
+        mcontrol3: { embed: mechacontrol, component: mcontrol3 },
+        mechacontrol3: { embed: mechacontrol, component: mcontrol3 }
       };
       const action = buttonActions[i.customId];
       if (action) {

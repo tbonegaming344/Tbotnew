@@ -174,10 +174,12 @@ Note: ${user.displayName} has ${kingFishCommanderDecks.comboDecks.length} Combo 
 Note: ${user.displayName} has ${kingFishCommanderDecks.midrangeDecks.length} Midrange decks in Tbot`
     );
     const [result] =
-      await db.query(`select midpets, nuthouse, savagemayflower, wimps
+      await db.query(`select midpets, nuthouse, scimania, savagemayflower, wimps
 		from gsdecks gs 
     inner join bfdecks bf 
 		on (gs.deckinfo = bf.deckinfo)
+    inner join rbdecks rb
+    on (gs.deckinfo = rb.deckinfo)
     inner join ntdecks nt
     on (gs.deckinfo = nt.deckinfo)`);
      /**

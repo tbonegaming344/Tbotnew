@@ -566,7 +566,7 @@ module.exports = {
           // Captain Combustible
           "Captain Combustible": kabloomWords.concat(megaGrowWords),
           // Chompzilla
-          chompzilla: megaGrowWords.concat(solarWords),
+          "Chompzilla": megaGrowWords.concat(solarWords),
           // Grass Knuckles
           "Grass Knuckles": gurdianWords.concat(megaGrowWords),
           // Green Shadow

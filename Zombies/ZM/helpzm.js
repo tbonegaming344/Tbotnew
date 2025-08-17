@@ -192,13 +192,6 @@ Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`,
       `To view the Zmech decks please use the commands listed above or click on the buttons below to navigate through all decks!
 Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`
     );
-    const ladderEmbed = createHelpEmbed(
-      "Zmech Ladder Decks",
-      `My ladder decks for Zmech(ZM) are ${toBuildLadderString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech ladder decks please use the commands listed above or click on the buttons below to navigate through all ladder decks!
-Note: Zmech has ${zmechDecks.ladderDecks.length} ladder decks in Tbot`
-    );
     const compEmbed = createHelpEmbed(
       "Zmech Competitive Decks",
       `My competitive decks for Zmech(ZM) are ${toBuildCompString}`,

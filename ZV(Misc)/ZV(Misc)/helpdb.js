@@ -451,7 +451,6 @@ module.exports = {
       ],
       memeDecks: [
         "22savage",
-        "banhammer",
         "bastet",
         "bonusducks",
         "floss",
@@ -492,7 +491,6 @@ module.exports = {
         "trickmech",
       ],
       comboDecks: [
-        "banhammer",
         "bastet",
         "boltbolt",
         "bonusducks",
@@ -546,7 +544,6 @@ module.exports = {
       ],
       midrangeDecks: [
         "22savage",
-        "banhammer",
         "bastet",
         "bfmidgargs",
         "boltbolt",
@@ -587,7 +584,6 @@ module.exports = {
       ],
       allDecks: [
         "22savage",
-        "banhammer",
         "bfmidgargs",
         "bastet",
         "boltbolt",
@@ -857,9 +853,8 @@ module.exports = {
     const lstrike3 = createButtons("carroot4", "lcbd3");
     const lcbd3 = createButtons("leafystrike3", "helpptempo");
     const allzrow = createButtons("zmoss", "sav");
-    const sav = createButtons("allzhelp", "bhammer");
-    const bhammer = createButtons("savage", "bfmg");
-    const bfmg = createButtons("banhammer", "bas");
+    const sav = createButtons("allzhelp", "bfmg");
+    const bfmg = createButtons("savage", "bas");
     const bas = createButtons("bfmidgargs", "bbolt");
     const bbolt = createButtons("bastet", "bducks");
     const bducks = createButtons("boltbolt", "bbf");
@@ -961,9 +956,8 @@ module.exports = {
     const tank2 = createButtons("scimania2", "tmech2");
     const tmech2 = createButtons("tanktuna2", "ladderzhelp");
     const memezrow = createButtons("zmoss2", "sav2");
-    const sav2 = createButtons("helpzmeme", "bhammer2");
-    const bhammer2 = createButtons("savage2", "bas2");
-    const bas2 = createButtons("banhammer2", "bducks2");
+    const sav2 = createButtons("helpzmeme", "bas2");
+    const bas2 = createButtons("savage2", "bducks2");
     const bducks2 = createButtons("bastet2", "cleap2");
     const cleap2 = createButtons("bonusducks2", "flo2");
     const flo2 = createButtons("conjureleap2", "ftimps2");
@@ -1002,9 +996,8 @@ module.exports = {
     const sea3 = createButtons("schoolyard3", "tmech3");
     const tmech3 = createButtons("seacret3", "aggrozhelp");
     const combozrow = createButtons("zmoss3", "sav3");
-    const sav3 = createButtons("helpzcombo", "bhammer3");
-    const bhammer3 = createButtons("savage3", "bas3");
-    const bas3 = createButtons("banhammer3", "bbolt3");
+    const sav3 = createButtons("helpzcombo", "bas3");
+    const bas3 = createButtons("savage3", "bbolt3");
     const bbolt3 = createButtons("bastet3", "bducks3");
     const bducks3 = createButtons("boltbolt3", "bim3");
     const bim3 = createButtons("bonusducks3", "bnt4");
@@ -1054,9 +1047,8 @@ module.exports = {
     const umech4 = createButtons("tanktuna3", "wph4");
     const wph4 = createButtons("uncrackamech4", "controlzhelp");
     const midrangezrow = createButtons("youngkenmartin4", "sav4");
-    const sav4 = createButtons("helpzmid", "bhammer4");
-    const bhammer4 = createButtons("savage4", "bas4");
-    const bas4 = createButtons("banhammer4", "bfmg3");
+    const sav4 = createButtons("helpzmid", "bas4");
+    const bas4 = createButtons("savage4", "bfmg3");
     const bfmg3 = createButtons("bastet4", "brb3");
     const brb3 = createButtons("bfmidgargs3", "bsb3");
     const bsb3 = createButtons("budgetrb3", "bbolt4");
@@ -1419,7 +1411,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
     const himps = createZombieDeckEmbed(result, "himps");
     const lockthebathroom = createZombieDeckEmbed(result, "lockin");
     const lunchtime = createZombieDeckEmbed(result, "midpets");
-    const banhammer = createZombieDeckEmbed(result, "racism");
     const watersports = createZombieDeckEmbed(result, "watersports");
     const budgeteb = createZombieDeckEmbed(result, "budgetburn");
     const gargstar22 = createZombieDeckEmbed(result, "gargstar22");
@@ -1969,14 +1960,6 @@ Note: there are ${zombieDecks.tempoDecks.length} tempo zombie decks in the datab
         pablosyeezys3: { embed: pablosyeezys, component: pyeeyz3 },
         pyeeyz4: { embed: pablosyeezys, component: pyeeyz4 },
         pablosyeezys4: { embed: pablosyeezys, component: pyeeyz4 },
-        bhammer: { embed: banhammer, component: bhammer },
-        banhammer: { embed: banhammer, component: bhammer },
-        bhammer2: { embed: banhammer, component: bhammer2 },
-        banhammer2: { embed: banhammer, component: bhammer2 },
-        bhammer3: { embed: banhammer, component: bhammer3 },
-        banhammer3: { embed: banhammer, component: bhammer3 },
-        bhammer4: { embed: banhammer, component: bhammer4 },
-        banhammer4: { embed: banhammer, component: bhammer4 },
         syard: { embed: schoolyard, component: syard },
         schoolyard: { embed: schoolyard, component: syard },
         syard2: { embed: schoolyard, component: syard2 },

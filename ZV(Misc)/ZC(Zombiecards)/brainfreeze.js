@@ -98,15 +98,13 @@ module.exports = {
       competitiveDecks: ["lockthebathroom"],
       ladderDecks: ["bfmidgargs"],
       memeDecks: [
-        "banhammer",
         "himpter",
         "lunchtime",
         "watersports",
       ],
       aggroDecks: ["budgetbf"],
-      comboDecks: ["banhammer", "himpter", "watersports"],
+      comboDecks: [ "himpter", "watersports"],
       midrangeDecks: [
-        "bhammer",
         "bfmidgargs",
         "himpter",
         "lunchtime",
@@ -114,7 +112,6 @@ module.exports = {
       ],
       tempoDecks: ["lockthebathroom"],
       allDecks: [
-        "banhammer",
         "bfmidgargs",
         "budgetbf",
         "himpter",
@@ -157,26 +154,22 @@ module.exports = {
           .setStyle(ButtonStyle.Primary)
       );
     }
-    const alldecksrow = createButtons("watersports", "bhammer");
-    const bhammer = createButtons("helpall", "bfmg");
-    const bfmg = createButtons("banhammer", "bbf");
+    const alldecksrow = createButtons("watersports", "bfmg");
+    const bfmg = createButtons("helpall", "bbf");
     const bbf = createButtons("bfmidgargs", "hi");
     const hi = createButtons("budgetbf", "lt");
     const lt = createButtons("himps", "ltbr");
     const ltbr = createButtons("lunchtime", "ws")
     const ws = createButtons("lockthebathroom", "allhelp");
-    const memerow = createButtons("watersports2", "bhammer2");
-    const bhammer2 = createButtons("helpmeme", "hi2");
-    const hi2 = createButtons("banhammer2", "lt2");
+    const memerow = createButtons("watersports2", "hi2");
+    const hi2 = createButtons("helpmeme", "lt2");
     const lt2 = createButtons("himps2", "ws2");
     const ws2 = createButtons("lunchtime2", "memehelp");
-    const comborow = createButtons("watersports3", "bhammer3");
-    const bhammer3 = createButtons("helpcombo", "hi3");
-    const hi3 = createButtons("banhammer3", "ws3");
+    const comborow = createButtons("watersports3", "hi3");
+    const hi3 = createButtons("helpcombo", "ws3");
     const ws3 = createButtons("himps3", "combohelp");
-    const midrangerow = createButtons("watersports4", "bhammer4");
-    const bhammer4= createButtons("helpmid", "bfmg3");
-    const bfmg3 = createButtons("banhammer4", "hi4");
+    const midrangerow = createButtons("watersports4", "bfmg2");
+    const bfmg2 = createButtons("helpmid", "hi4");
     const hi4 = createButtons("bfmidgargs3", "lt3");
     const lt3 = createButtons("himps4", "ws4");
     const ws4 = createButtons("lunchtime3", "midhelp");
@@ -268,7 +261,6 @@ module.exports = {
     const himps = createDeckEmbed(result, "himps");
     const lockthebathroom = createDeckEmbed(result, "lockin");
     const lunchtime = createDeckEmbed(result, "midpets");
-    const banhammer= createDeckEmbed(result, "racism");
     const watersports = createDeckEmbed(result, "watersports");
     const m = await message.channel.send({
       embeds: [embed],
@@ -310,30 +302,16 @@ module.exports = {
         cmd: { embed: helpbf, component: row },
        helpall: {embed: allEmbed, component: alldecksrow},
         allhelp: {embed: allEmbed, component: alldecksrow},
-        helpladder: {embed: ladderEmbed, component: ladderrow},
-        ladderhelp: {embed: ladderEmbed, component: ladderrow},
         helpmeme: {embed: memeEmbed, component: memerow},
         memehelp: {embed: memeEmbed, component: memerow},
         helpcombo: {embed: comboEmbed, component: comborow},
         combohelp: {embed: comboEmbed, component: comborow},
         helpmid: {embed: midrangeEmbed, component: midrangerow},
         midhelp: {embed: midrangeEmbed, component: midrangerow},
-        helptempo: {embed: tempoEmbed, component: temporow},
-        tempohelp: {embed: tempoEmbed, component: temporow},
-        bhammer: {embed: banhammer, component: bhammer},
-        banhammer: {embed: banhammer, component: bhammer},
-        bhammer2: {embed: banhammer, component: bhammer2},
-        banhammer2: {embed: banhammer, component: bhammer2},
-        bhammer3: {embed: banhammer, component: bhammer3},
-        banhammer3: {embed: banhammer, component: bhammer3},
-        bhammer4: {embed: banhammer, component: bhammer4},
-        banhammer4: {embed: banhammer, component: bhammer4},
         bfmg: {embed: bfmidgargs, component: bfmg},
         bfmidgargs: {embed: bfmidgargs, component: bfmg},
         bfmg2: {embed: bfmidgargs, component: bfmg2},
         bfmidgargs2: {embed: bfmidgargs, component: bfmg2},
-        bfmg3: {embed: bfmidgargs, component: bfmg3},
-        bfmidgargs3: {embed: bfmidgargs, component: bfmg3},
         bbf: {embed: budgetbf, component: bbf},
         budgetbf: {embed: budgetbf, component: bbf},
         hi: {embed: himps, component: hi}, 
@@ -346,8 +324,6 @@ module.exports = {
         himps4: {embed: himps, component: hi4},
         ltbr: {embed: lockthebathroom, component: ltbr}, 
         lockthebathroom: {embed: lockthebathroom, component: ltbr},
-        ltbr2: {embed: lockthebathroom, component: ltbr2}, 
-        lockthebathroom2: {embed: lockthebathroom, component: ltbr2},
         lt: {embed: lunchtime, component: lt},
         lunchtime: {embed: lunchtime, component: lt},
         lt2: {embed: lunchtime, component: lt2},

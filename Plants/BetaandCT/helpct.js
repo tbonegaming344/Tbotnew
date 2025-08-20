@@ -176,7 +176,9 @@ Note: Citron has ${citronDecks.aggroDecks.length} aggro decks in Tbot`
         bct: { embed: budgetct, component: bct },
         budgetct: { embed: budgetct, component: bct },
         gnuts: { embed: goingnuts, component: gnuts },
-        goingnuts: { embed: goingnuts, component: gnuts }
+        goingnuts: { embed: goingnuts, component: gnuts }, 
+        aggrohelp: {embed: aggroEmbed, component: aggrorow},
+        helpaggro: {embed: aggroEmbed, component: aggrorow}
       };
       const action = buttonActions[i.customId];
       if (action) {

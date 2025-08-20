@@ -39,7 +39,7 @@ module.exports = {
         .setEmoji("<:Citron_Pog:1100168420743450654>")
         .setStyle(ButtonStyle.Primary)
     );
-   const select = new StringSelectMenuBuilder()
+    const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Select an option below to view Citron's Decklists")
       .addOptions(
@@ -54,42 +54,24 @@ module.exports = {
           .setDescription("Decks that mostly only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setValue("meme")
-          .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
           .setLabel("Aggro Decks")
           .setValue("aggro")
           .setDescription(
             "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
+          .setLabel("Combo Deck")
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Citron Decks")
-          .setValue("all")
-          .setDescription("View all of Citron's decks")
-          .setEmoji("<:Citron_Pog:1100168420743450654>")
       );
     const row = new ActionRowBuilder().addComponents(select);
     const citronDecks = {
       budgetDecks: ["budgetct"],
       ladderDecks: ["goingnuts"],
-      memeDecks: ["startron"],
       aggroDecks: ["budgetct", "goingnuts"],
-      comboDecks: ["goingnuts", "startron"],
-      midrangeDecks: ["startron"],
-      allDecks: ["budgetct", "goingnuts", "startron"],
+      comboDecks: ["goingnuts"],
     };
     /**
      * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
@@ -102,8 +84,6 @@ module.exports = {
         .join("");
     }
     const toBuildAggroString = buildDeckString(citronDecks.aggroDecks);
-    const toBuildComboString = buildDeckString(citronDecks.comboDecks);
-    const toBuildString = buildDeckString(citronDecks.allDecks);
     /**
      * The createButtons function creates a row of buttons for the embed
      * @param {string} leftButtonId - The ID of the left button to control the left button
@@ -125,13 +105,6 @@ module.exports = {
     const aggrorow = createButtons("goingnuts", "bct");
     const bct = createButtons("helpaggro", "gnuts");
     const gnuts = createButtons("budgetct", "aggrohelp");
-    const comborow = createButtons("startron", "gnuts2");
-    const gnuts2 = createButtons("helpcombo", "star");
-    const star = createButtons("goingnuts2", "combohelp");
-    const alldecksrow = createButtons("startron2", "bct2");
-    const bct2 = createButtons("helpall", "gnuts3");
-    const gnuts3 = createButtons("budgetct", "star2");
-    const star2 = createButtons("goingnuts3", "helpall");
     const [heroResult] = await db.query("select citron from plantheroes");
     const ct = new EmbedBuilder()
       .setThumbnail(`${heroResult[2].citron}`)
@@ -159,15 +132,8 @@ module.exports = {
     const embed = createHelpEmbed(
       "Citron Decks",
       `To view the Citron decks Please select an option from the select menu below!
-  Note: Citron has ${citronDecks.allDecks.length} total decks in Tbot`,
+  Note: Citron has ${citronDecks.aggroDecks.length} total decks in Tbot`,
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747"
-    );
-    const allEmbed = createHelpEmbed(
-      "Citron Decks",
-      `My decks for Citron(CT) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
-      `To view the Citron decks please use the commands listed above or click on the buttons below to navigate through all Citron decks!
-  Note: Citron has ${citronDecks.allDecks.length} total decks in Tbot`
     );
     const aggroEmbed = createHelpEmbed(
       "Citron Aggro Decks",
@@ -175,13 +141,6 @@ module.exports = {
       "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
       `To view the aggro Citron decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
   Note: Citron has ${citronDecks.aggroDecks.length} aggro decks in Tbot`
-    );
-    const comboEmbed = createHelpEmbed(
-      "Citron Combo Decks",
-      `My Combo decks for Citron(CT) are ${toBuildComboString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747",
-      `To view the combo Citron decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-  Note: Citron has ${citronDecks.comboDecks.length} combo decks in Tbot`
     );
     const [result] = await db.query("SELECT * FROM ctdecks");
     /**
@@ -209,7 +168,6 @@ module.exports = {
     }
     const budgetct = createDeckEmbed(result, "budgetct");
     const goingnuts = createDeckEmbed(result, "going3nuts");
-    const startron = createDeckEmbed(result, "startron");
     const m = await message.channel.send({ embeds: [ct], components: [cmd] });
     const iFilter = (i) => i.user.id === message.author.id;
     /**
@@ -218,21 +176,13 @@ module.exports = {
      */
     async function handleSelectMenu(i) {
       const value = i.values[0];
-      if (value == "budget") {
+       if (value == "budget") {
         await i.reply({ embeds: [budgetct], flags: MessageFlags.Ephemeral });
       } else if (value == "aggro") {
         await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (value == "ladder") {
+      } else if (value == "ladder" || value == "combo") {
         await i.reply({ embeds: [goingnuts], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
-        await i.reply({ embeds: [startron], flags: MessageFlags.Ephemeral });
-      } else if (value == "combo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "midrange") {
-        await i.reply({ embeds: [startron], flags: MessageFlags.Ephemeral });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      }
+      } 
     }
     /**
      * the handleButtonInteraction function handles the button interactions for the decks
@@ -241,26 +191,12 @@ module.exports = {
     async function handleButtonInteraction(i) {
       const buttonActions = {
         cmd: { embed: embed, component: row },
-        helpall: { embed: allEmbed, component: alldecksrow },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        helpcombo: { embed: comboEmbed, component: comborow },
         bct: { embed: budgetct, component: bct },
         budgetct: { embed: budgetct, component: bct },
-        bct2: { embed: budgetct, component: bct2 },
-        budgetct2: { embed: budgetct, component: bct2 },
         gnuts: { embed: goingnuts, component: gnuts },
-        goingnuts: { embed: goingnuts, component: gnuts },
-        gnuts2: { embed: goingnuts, component: gnuts2 },
-        goingnuts2: { embed: goingnuts, component: gnuts2 },
-        gnuts3: { embed: goingnuts, component: gnuts3 },
-        goingnuts3: { embed: goingnuts, component: gnuts3 },
-        star: { embed: startron, component: star },
-        startron: { embed: startron, component: star },
-        star2: { embed: startron, component: star2 },
-        startron2: { embed: startron, component: star2 }
+        goingnuts: { embed: goingnuts, component: gnuts }, 
+        aggrohelp: {embed: aggroEmbed, component: aggrorow},
+        helpaggro: {embed: aggroEmbed, component: aggrorow}
       };
       const action = buttonActions[i.customId];
       if (action) {

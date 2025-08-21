@@ -1,9 +1,11 @@
 const {EmbedBuilder}= require("discord.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `bananabomb`,
 	aliases: [`bbomb`, `bomb1`, `bb2`],
 	category: `Tricks Phase`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select bananabomb from kabloomcards`)
 		const bb = new EmbedBuilder()
 		.setThumbnail(`${result[4].bananabomb}`)
 		.setTitle(`${result[7].bananabomb}`)

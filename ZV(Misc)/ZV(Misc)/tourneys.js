@@ -100,6 +100,18 @@ module.exports = {
     .setEmoji("<:soupgang:1394325298257858560>")
     const section7 = new SectionBuilder().addTextDisplayComponents(tourneyText7).setButtonAccessory(soupGang);
     container.addSectionComponents(section7);
+    container.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
+    const tourneyText8 = new TextDisplayBuilder().setContent([
+      "# Xera's White Space",
+      "Xera's White Space is a server hosting of both normal and gimmick-focused tournaments, as well as the place for a passion project, that aims to revamp all strategy decks into community-chosen good decks and improve the pvzh AI. Tournaments are hosted around every 2 months."
+    ].join("\n"))
+    const xera = new ButtonBuilder()
+    .setLabel("Xera's White Space")
+    .setStyle(ButtonStyle.Link)
+    .setURL('https://discord.gg/t7pe5YjgAM')
+    .setEmoji("<:xera:1411739428095004872>")
+    const section8 = new SectionBuilder().addTextDisplayComponents(tourneyText8).setButtonAccessory(xera);
+    container.addSectionComponents(section8);
     message.channel.send({
       components: [container],
       flags: MessageFlags.IsComponentsV2

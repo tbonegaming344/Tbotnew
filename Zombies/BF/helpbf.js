@@ -284,7 +284,7 @@ module.exports = {
           .setDescription(
             `To view the Brain Freeze decks please select an option from the select menu below!\nNote: Brain Freeze has ${normalized.length} total decks in Tbot`
           )
-          .setColor("Blue")
+          .setColor("#000000")
           .setThumbnail(thumb),
       ],
       components: [new ActionRowBuilder().addComponents(select)],

@@ -234,7 +234,7 @@ module.exports = {
     );
 
     const m = await message.channel.send({
-      embeds: [embed],
+      embeds: [nc],
       components: [helpncButton],
     });
 

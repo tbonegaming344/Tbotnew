@@ -305,11 +305,13 @@ module.exports = {
           // present the select menu (replace helprb button)
           await i.update({
             embeds: [
-              createHelpEmbed(
-                "Brain Freeze Decks",
-                `Select a category to view Brain Freeze Decks — Brain Freeze has ${normalized.length} total decks.`,
-                thumb
-              ),
+              new EmbedBuilder()
+          .setTitle("Brain Freeze Decks")
+          .setDescription(
+            `To view the Brain Freeze decks please select an option from the select menu below!\nNote: Brain Freeze has ${normalized.length} total decks in Tbot`
+          )
+          .setColor("#000000")
+          .setThumbnail(thumb)
             ],
             components: [new ActionRowBuilder().addComponents(select)],
           });

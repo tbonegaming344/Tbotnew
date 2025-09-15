@@ -93,17 +93,58 @@ module.exports = {
     const tableName = heroDeckTables[heroInput];
 
     if (heroInput === "na") {
-      const query = `SELECT * FROM bcdecks bc INNER JOIN bfdecks bf ON (bc.deckinfo = bf.deckinfo) INNER JOIN ccdecks cc ON (bc.deckinfo = cc.deckinfo) INNER JOIN ctdecks ct ON (bc.deckinfo = ct.deckinfo) INNER JOIN czdecks cz ON (bc.deckinfo = cz.deckinfo) INNER JOIN ebdecks eb ON (bc.deckinfo = eb.deckinfo) INNER JOIN gkdecks gk ON (bc.deckinfo = gk.deckinfo) INNER JOIN gsdecks gs ON (bc.deckinfo = gs.deckinfo) INNER JOIN hgdecks hg ON (bc.deckinfo = hg.deckinfo) INNER JOIN ifdecks fi ON (bc.deckinfo = fi.deckinfo) INNER JOIN imdecks im ON (bc.deckinfo = im.deckinfo) INNER JOIN ncdecks nc ON (bc.deckinfo = nc.deckinfo) INNER JOIN ntdecks nt ON (bc.deckinfo = nt.deckinfo) INNER JOIN pbdecks pb ON (bc.deckinfo = pb.deckinfo) INNER JOIN rbdecks rb ON (bc.deckinfo = rb.deckinfo) INNER JOIN rodecks ro ON (bc.deckinfo = ro.deckinfo) INNER JOIN sbdecks sb ON (bc.deckinfo = sb.deckinfo) INNER JOIN sfdecks sf ON (bc.deckinfo = sf.deckinfo) INNER JOIN smdecks sm ON (bc.deckinfo = sm.deckinfo) INNER JOIN spdecks sp ON (bc.deckinfo = sp.deckinfo) INNER JOIN wkdecks wk ON (bc.deckinfo = wk.deckinfo) INNER JOIN zmdecks zm ON (bc.deckinfo = zm.deckinfo) WHERE bc.deckinfo = "image link:"`;
+      const query = `SELECT image FROM sbdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ccdecks where type NOT LIKE '%budget%'
+      union all SELECT image from sfdecks where type NOT LIKE '%budget%'
+      union all SELECT image from rodecks where type NOT LIKE '%budget%'
+      union all SELECT image from gsdecks where type NOT LIKE '%budget%'
+      union all SELECT image from wkdecks where type NOT LIKE '%budget%'
+      union all SELECT image from czdecks where type NOT LIKE '%budget%'
+      union all SELECT image from spdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ctdecks where type NOT LIKE '%budget%'
+      union all SELECT image from bcdecks where type NOT LIKE '%budget%'
+      union all SELECT image from gkdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ncdecks where type NOT LIKE '%budget%'
+      union all SELECT image from hgdecks where type NOT LIKE '%budget%'
+      union all SELECT image from zmdecks where type NOT LIKE '%budget%'
+      union all SELECT image from smdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ifdecks where type NOT LIKE '%budget%'
+      union all SELECT image from rbdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ebdecks where type NOT LIKE '%budget%'
+      union all SELECT image from bfdecks where type NOT LIKE '%budget%'
+      union all SELECT image from pbdecks where type NOT LIKE '%budget%'
+      union all SELECT image from imdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ntdecks where type NOT LIKE '%budget%'`;
       await getAndSendRandomDeck(query, "Random Deck", "Here is your random deck");
     } else if (heroInput === "Plants") {
-      const query = `SELECT * FROM bcdecks bc INNER JOIN ccdecks cc ON (bc.deckinfo = cc.deckinfo) INNER JOIN ctdecks ct ON (bc.deckinfo = ct.deckinfo) INNER JOIN czdecks cz ON (bc.deckinfo = cz.deckinfo) INNER JOIN gkdecks gk ON (bc.deckinfo = gk.deckinfo) INNER JOIN gsdecks gs ON (bc.deckinfo = gs.deckinfo) INNER JOIN ncdecks nc ON (bc.deckinfo = nc.deckinfo) INNER JOIN rodecks ro ON (bc.deckinfo = ro.deckinfo) INNER JOIN sfdecks sf ON (bc.deckinfo = sf.deckinfo) INNER JOIN spdecks sp ON (bc.deckinfo = sp.deckinfo) INNER JOIN wkdecks wk ON (bc.deckinfo = wk.deckinfo) WHERE bc.deckinfo = "image link:"`;
+      const query = `SELECT image from ccdecks where type NOT LIKE '%budget%' 
+      union all SELECT image from sfdecks where type NOT LIKE '%budget%'
+      union all SELECT image from rodecks where type NOT LIKE '%budget%'
+      union all SELECT image from gsdecks where type NOT LIKE '%budget%'
+      union all SELECT image from wkdecks where type NOT LIKE '%budget%'
+      union all SELECT image from czdecks where type NOT LIKE '%budget%'
+      union all SELECT image from spdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ctdecks where type NOT LIKE '%budget%'
+      union all SELECT image from bcdecks where type NOT LIKE '%budget%'
+      union all SELECT image from gkdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ncdecks where type NOT LIKE '%budget%'`;
       await getAndSendRandomDeck(query, "Random Plant Deck", "Here is your random plant Deck");
     } else if (heroInput === "Zombies") {
-      const query = `SELECT * FROM bfdecks bf INNER JOIN ebdecks eb ON (bf.deckinfo = eb.deckinfo) INNER JOIN hgdecks hg ON (bf.deckinfo = hg.deckinfo) INNER JOIN ifdecks fi ON (bf.deckinfo = fi.deckinfo) INNER JOIN imdecks im ON (bf.deckinfo = im.deckinfo) INNER JOIN ntdecks nt ON (bf.deckinfo = nt.deckinfo) INNER JOIN pbdecks pb ON (bf.deckinfo = pb.deckinfo) INNER JOIN rbdecks rb ON (bf.deckinfo = rb.deckinfo) INNER JOIN sbdecks sb ON (bf.deckinfo = sb.deckinfo) INNER JOIN smdecks sm ON (bf.deckinfo = sm.deckinfo) WHERE bf.deckinfo = "image link:"`;
+      const query = `SELECT image FROM sbdecks where type NOT LIKE '%budget%' 
+      union all SELECT image from hgdecks where type NOT LIKE '%budget%' 
+      union all SELECT image from zmdecks where type NOT LIKE '%budget%'
+      union all SELECT image from smdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ifdecks where type NOT LIKE '%budget%'
+      union all SELECT image from rbdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ebdecks where type NOT LIKE '%budget%'
+      union all SELECT image from bfdecks where type NOT LIKE '%budget%'
+      union all SELECT image from pbdecks where type NOT LIKE '%budget%'
+      union all SELECT image from imdecks where type NOT LIKE '%budget%'
+      union all SELECT image from ntdecks where type NOT LIKE '%budget%'`;
       await getAndSendRandomDeck(query, "Random Zombie Deck", "Here is your random Zombie Deck");
     } else if (tableName) {
       // This is now the final case for a valid hero
-      const query = `SELECT * FROM ${tableName} WHERE deckinfo = 'image link:'`;
+      const query = `SELECT image FROM ${tableName} where type NOT LIKE '%budget%'`;
       const title = `Random ${heroInput.charAt(0).toUpperCase() + heroInput.slice(1)} Deck`;
       const description = `Here is your random ${heroInput} deck`;
       await getAndSendRandomDeck(query, title, description);

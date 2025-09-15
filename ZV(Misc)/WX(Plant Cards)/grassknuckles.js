@@ -236,7 +236,7 @@ module.exports = {
     );
 
     const m = await message.channel.send({
-      embeds: [embed],
+      embeds: [gk],
       components: [helpgkButton],
     });
 

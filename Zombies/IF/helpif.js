@@ -4,20 +4,112 @@ const {
   ButtonStyle,
   EmbedBuilder,
   MessageFlags,
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-function createHelpEmbed(title, description, thumbnail, footer){
-  const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
+// --- Helpers ---
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Impifinity Decks" : `Impifinity ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Impifinity decks in Tbot are:${description}`
+        : `My ${name} decks for Impifinity are: ${description}`
+    )
     .setThumbnail(thumbnail)
-    .setColor("#000000");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
+    .setColor("#000000")
+    .setFooter({
+      text: isAll
+        ? `Impifinity has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Impifinity has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("Purple");
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
   }
   return embed;
+}
+
+/**
+ * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
+ * left = previous (or back_to_list when at start for special categories)
+ * right = next (or back_to_list when at end for special categories)
+ */
+function buildNavRow(category, currentIndex, total, specialCategories) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  // decide ids
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+
+  // ensure uniqueness (avoid duplicate custom_id)
+  if (leftId === rightId) {
+    rightId = `${rightId}_alt`;
+  }
+
+  const left = new ButtonBuilder().setEmoji("⬅️");
+  const right = new ButtonBuilder().setEmoji("➡️");
+
+  // styles depending on id type
+  left
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(leftId);
+  right
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(rightId);
+
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `helpif`,
@@ -26,9 +118,9 @@ module.exports = {
     `ifcommands`,
     `commandsif`,
     `helpimpifinity`,
-	  `helpimpfinity`,
+    `helpimpfinity`,
     `impfinitydecks`,
-	  `impfinityhelp`,
+    `impfinityhelp`,
     `ifdecks`,
     `impifinityhelp`,
     `impifinitydecks`,
@@ -36,264 +128,307 @@ module.exports = {
   ],
   category: `Impfinity(IF)`,
   run: async (client, message, args) => {
+    const [rows] = await db.query("SELECT * FROM ifdecks");
+    if (!rows || rows.length === 0) {
+      return message.channel.send("No Impfinity decks found in the database.");
+    }
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
+
+    // category matching function using normalized fields
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
+    }
+
+    // build category lists from DB dynamically (unchanged)
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories) {
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+    }
+
+    // debug counts (optional)
+    console.log(
+      "category counts:",
+      Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
+    );
+
+    // thumbnail
+    const thumb =
+      "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520";
+
+    // create category overview embeds (used when nav hits ends for special cats)
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Impfinity's decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Budget Deck")
-      .setValue("budget")
-      .setDescription('Decks that are cheap for new players')
-      .setEmoji("💰"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Decks")
-      .setValue("comp")
-      .setDescription('Some of the Best Plant Decks in the game')
-			.setEmoji("<:compemote:1325461143136764060>"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Deck")
-      .setValue("ladder")
-      .setDescription('Decks that mostly only good for ranked games')
-			.setEmoji("<:ladder:1271503994857979964>"),
-       new StringSelectMenuOptionBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Impfinity's decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Budget Deck")
+          .setValue("budget")
+          .setDescription("Decks that are cheap for new players")
+          .setEmoji("💰"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Decks")
+          .setValue("comp")
+          .setDescription("Some of the Best Plant Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
           .setLabel("Meme Decks")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Aggro Deck")
-      .setValue("aggro")
-      .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Combo Deck")
-      .setValue("combo")
-      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Decks")
-      .setValue("midrange")
-      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("All Impfinity Decks")
-      .setValue("all")
-      .setDescription('View all of Impfinity(IF) decks')
-      .setEmoji("<:Impfinity:1087754523050774659>")
-    )
-    const row = new ActionRowBuilder().addComponents(select);
-    const impfinityDecks = {
-      budgetDecks: ["budgetif"],
-      competitiveDecks: ["nohokaistars", "spacestars"],
-      memeDecks: ["tangen", "uno"],
-      aggroDecks: ["budgetif"],
-      comboDecks: ["spacestars", "tangen", "uno"],
-      midrangeDecks: ["nohokaistars", "spacestars", "tangen", "uno"],
-      allDecks: ["budgetif", "nohokaistars", "spacestars", "tangen", "uno"],
-    }
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks.map(deck => `\n<@1043528908148052089> **${deck}**`).join('');
-    }
-    const toBuildString = buildDeckString(impfinityDecks.allDecks);
-    const competitiveString = buildDeckString(impfinityDecks.competitiveDecks);
-    const comboString = buildDeckString(impfinityDecks.comboDecks);
-    const midrangeString = buildDeckString(impfinityDecks.midrangeDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Deck")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Impfinity Decks")
+          .setValue("all")
+          .setDescription("View all of Impfinity(IF) decks")
+          .setEmoji("<:Impfinity:1087754523050774659>")
       );
-    }
-    const alldecksrow = createButtons("uno", "bif")
-    const bif = createButtons("helpall", "nhks")
-    const nhks = createButtons("budgetif", "stars")
-    const stars = createButtons("nohokaistars", "tan")
-    const tan = createButtons("spacestars", "un")
-    const un = createButtons("tangen", "allhelp")
-    const competitiveRow = createButtons("spacestars2", "nhks2")
-    const nhks2 = createButtons("helpcomp", "stars2")
-    const stars2 = createButtons("nohokaistars2", "comphelp")
-    const memerow = createButtons("uno2", "tan2")
-    const tan2 = createButtons("helpmeme", "un2")
-    const un2 = createButtons("tangen2", "memehelp")
-    const comboRow = createButtons("uno3", "stars3")
-    const stars3 = createButtons("helpcombo", "tan3")
-    const tan3 = createButtons("spacestars3", "un3")
-    const un3 = createButtons("tangen3", "combohelp")
-    const midrangeRow = createButtons("uno4", "nhks3")
-    const nhks3 = createButtons("helpmidrange", "stars4")
-    const stars4 = createButtons("nohokaistars3", "un4")
-    const un4 = createButtons("spacestars4", "midrangehelp")
-    const alldecksEmbed = createHelpEmbed(
-      "Impfinity(IF) Decks",
-      `My commands for Impfinity(IF) are ${toBuildString}`, 
-      "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-      `To view the Impfinity decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.allDecks.length} total decks in Tbot`
-    )
-      const embed = createHelpEmbed(
-        "Impfinity(IF) Decks",
-        `To view the Impfinity decks please select an option from the select menu below!
-Note: Impfinity has ${impfinityDecks.allDecks.length} total decks in Tbot`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520"
-      );
-      const competitiveEmbed = createHelpEmbed(
-        "Impfinity Competitive Decks",
-        `My competitive decks for Impfinity(IF) are ${competitiveString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-        `To view the Impfinity competitive decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.competitiveDecks.length} competitive decks in Tbot`
-      );
-      const memeEmbed = createHelpEmbed(
-        "Impfinity Meme Decks",
-        `My meme decks for Impfinity(IF) are ${buildDeckString(impfinityDecks.memeDecks)}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-        `To view the Impfinity meme decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.memeDecks.length} meme decks in Tbot`
-      );
-      const comboEmbed = createHelpEmbed(
-        "Impfinity Combo Decks",
-        `My combo decks for Impfinity(IF) are ${comboString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-        `To view the Impfinity combo decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.comboDecks.length} combo decks in Tbot`
-      );
-      const midrangeEmbed = createHelpEmbed(
-        "Impfinity Midrange Decks",
-        `My midrange decks for Impfinity(IF) are ${midrangeString}`,
-        "https://static.wikia.nocookie.net/plantsvszombies/images/d/d6/A_PVZH_Z_Imp%403x.png/revision/latest/scale-to-width-down/250?cb=20161028000520",
-        `To view the Impfinity midrange decks please use the commands listed above or click on the buttons below to navigate through all decks!
-Note: Impfinity has ${impfinityDecks.midrangeDecks.length} midrange decks in Tbot`
-      );
-    const [result] = await db.query(`SELECT * FROM ifdecks`);
-     /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("Purple");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    const budgetif = createDeckEmbed(result, "budgetif");
-    const nohokaistars = createDeckEmbed(result, "nohokaistars");
-    const tangen = createDeckEmbed(result, "tangen");
-    const spacestars = createDeckEmbed(result, "spacestars");
-    const uno = createDeckEmbed(result, "uno");
     const m = await message.channel.send({
-      embeds: [embed],
-      components: [row],
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("Impfinity Decks")
+          .setDescription(
+            `To view the Impfinity decks please select an option from the select menu below!\nNote: Impfinity has ${normalized.length} total decks in Tbot`
+          )
+          .setColor("#000000")
+          .setThumbnail(thumb),
+      ],
+      components: [new ActionRowBuilder().addComponents(select)],
     });
-    const iFilter = (i) => i.user.id === message.author.id;
-    async function handleSelectMenu(i){
-      if(i.customId == "select") {
-        const value = i.values[0];
-        if(value == "budget" ||  value == "aggro"){
-          await i.reply({embeds: [budgetif], flags: MessageFlags.Ephemeral});
-        }
-        else if(value == "combo"){
-          await i.reply({embeds: [spacestars], flags: MessageFlags.Ephemeral});
-        }
-        else if(value == "meme"){
-          await i.update({embeds: [memeEmbed], components: [memerow]});
-        }
-        else if(value == "all"){
-          await i.update({embeds: [alldecksEmbed], components: [alldecksrow]});
-        }
-        else if(value == "comp"){
-          await i.update({embeds: [competitiveEmbed], components: [competitiveRow]});
-        }
-        else if(value == "midrange"){
-          await i.update({embeds: [midrangeEmbed], components: [midrangeRow]});
-        }
-      }
-    }
-    async function handleButtonInteraction(i){
-      const buttonActions = {
-        allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        helpall: {embed: alldecksEmbed, component: alldecksrow},
-        helpcomp: {embed: competitiveEmbed, component: competitiveRow},
-        comphelp: {embed: competitiveEmbed, component: competitiveRow},
-        memehelp: {embed: memeEmbed, component: memerow},
-        helpmeme: {embed: memeEmbed, component: memerow},
-        combohelp: {embed: comboEmbed, component: comboRow},
-        helpcombo: {embed: comboEmbed, component: comboRow},
-        helpmidrange: {embed: midrangeEmbed, component: midrangeRow},
-        midrangehelp: {embed: midrangeEmbed, component: midrangeRow},
-        bif: {embed: budgetif, component: bif},
-        budgetif: {embed: budgetif, component: bif},
-        stars: {embed: spacestars, component: stars},
-        spacestars: {embed: spacestars, component: stars},
-        stars2: {embed: spacestars, component: stars2},
-        spacestars2: {embed: spacestars, component: stars2},
-        stars3: {embed: spacestars, component: stars3},
-        spacestars3: {embed: spacestars, component: stars3},
-        stars4: {embed: spacestars, component: stars4},
-        spacestars4: {embed: spacestars, component: stars4},
-        nhks: {embed: nohokaistars, component: nhks},
-        nohokaistars: {embed: nohokaistars, component: nhks},
-        nhks2: {embed: nohokaistars, component: nhks2},
-        nohokaistars2: {embed: nohokaistars, component: nhks2},
-        nhks3: {embed: nohokaistars, component: nhks3},
-        nohokaistars3: {embed: nohokaistars, component: nhks3},
-        tan: {embed: tangen, component: tan},
-        tangen: {embed: tangen, component: tan},
-        tan2: {embed: tangen, component: tan2},
-        tangen2: {embed: tangen, component: tan2},
-        tan3: {embed: tangen, component: tan3},
-        tangen3: {embed: tangen, component: tan3},
-        un: {embed: uno, component: un},
-        uno: {embed: uno, component: un},
-        un2: {embed: uno, component: un2},
-        uno2: {embed: uno, component: un2},
-        un3: {embed: uno, component: un3},
-        uno3: {embed: uno, component: un3},
-        un4: {embed: uno, component: un4},
-        uno4: {embed: uno, component: un4},
-      }
-      const action = buttonActions[i.customId];
-      if(action) {
-        await i.update({ embeds: [action.embed], components: [action.component] });
-      }
-      else{
-        await i.reply({content: "Invalid button interaction", flags: MessageFlags.Ephemeral});
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+
+    const specialCategories = [
+      "comp",
+      "all",
+      "meme",
+      "aggro",
+      "midrange",
+      "combo",
+      "control",
+    ];
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if(i.customId == "select") {
-        await handleSelectMenu(i);
-      }
-      else{
-        await handleButtonInteraction(i);
+      try {
+        if (i.isStringSelectMenu()) {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          // Reply with the category embed and two buttons:
+          // left -> last deck in category, right -> first deck in category.
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+
+          // avoid duplicate custom_ids when firstIndex === lastIndex by appending suffix to one id
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+
+          const actionRow = new ActionRowBuilder().addComponents(
+            leftBtn,
+            rightBtn
+          );
+
+          // update the original message to show category overview + navigation options
+          return i.update({ embeds: [catEmbed], components: [actionRow] });
+        }
+
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          if (action === "nav") {
+            const category = parts[1];
+            // parseInt will ignore any trailing non-numeric suffix like "_alt"
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+            const embed = buildDeckEmbed(list[index].raw);
+            const nav = buildNavRow(
+              category,
+              index,
+              list.length,
+              specialCategories
+            );
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const pretty =
+              category === "comp"
+                ? "Competitive"
+                : category.charAt(0).toUpperCase() + category.slice(1);
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ||
+              createCategoryEmbed(pretty, [], 0, thumb);
+
+            // build left -> last, right -> first (avoid duplicate ids when only one item)
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback: unknown customId
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        if (!i.replied && !i.deferred) {
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
       }
     });
-  }
-  }
+
+    collector.on("end", () => {
+      m.edit({ components: [] }).catch(() => {});
+    });
+  },
+};

@@ -30,6 +30,7 @@ module.exports = {
           )
           .setValue("control"),
     )
+    const row = new ActionRowBuilder().addComponents(select);
     const voofDecks = {
       ladderDecks: ["mechacontrol"],
       memeDecks: ["stalemate"], 

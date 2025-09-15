@@ -8,162 +8,199 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
+// small helpers
 function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
+  const e = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
-    .setColor("Blue");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
-  }
+    .setColor("#FFC0CB");
+  if (footer) e.setFooter({ text: footer });
+  return e;
+}
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(
+      isAll ? "Electric Bogaloo Decks" : `Electric Bogaloo ${name} Decks`
+    )
+    .setDescription(
+      isAll
+        ? `All Electric Bogaloo decks in Tbot are:${description}`
+        : `My ${name} decks for Electric Bogaloo are: ${description}`
+    )
+    .setThumbnail(thumbnail)
+    .setColor("Blue")
+    .setFooter({
+      text: isAll
+        ? `Electric Bogaloo has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Electric Bogaloo has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("Purple");
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  )
+    embed.setImage(row.image);
   return embed;
+}
+function buildNavRow(category, currentIndex, total, specialCategories = []) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+  if (leftId === rightId) rightId = `${rightId}_alt`;
+
+  const left = new ButtonBuilder()
+    .setCustomId(leftId)
+    .setEmoji("⬅️")
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+  const right = new ButtonBuilder()
+    .setCustomId(rightId)
+    .setEmoji("➡️")
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+
+  // disable when only one deck to avoid confusion
+  if (total <= 1) {
+    left.setDisabled(true);
+    right.setDisabled(true);
+  }
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `electricboogaloo`,
   aliases: [`eb`, `boog`, `electric`, `boogaloo`, `loo`],
   category: `Zombie Cards`,
   run: async (client, message, args) => {
-    const cmd = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cmd")
-        .setLabel("Electric Boogaloo decks")
-        .setEmoji("<:electricsleeper:1100169044440645776>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder(
-        "Select an option below to view electric boogaloo's decklists"
-      )
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setValue("budget")
-          .setDescription("Decks that are cheap for new players")
-          .setEmoji("💰"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
-          .setValue("meme")
-          .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Decks")
-          .setValue("aggro")
-          .setDescription(
-            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Control Decks")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Electric Boogaloo Decks")
-          .setValue("all")
-          .setDescription("View all of Electric Boogaloo's decks")
-          .setEmoji("<:electricsleeper:1100169044440645776>")
+    const [rows] = await db.query("SELECT * FROM ebdecks");
+    if (!rows || rows.length === 0)
+      return message.channel.send(
+        "No Electric Boogaloo decks found in the database."
       );
-    const row = new ActionRowBuilder().addComponents(select);
-    const electricBoogalooDecks = {
-      budgetDecks: ["budgetburn"],
-      competitiveDecks: ["seacret"],
-      ladderDecks: ["gargstar22"],
-      memeDecks: ["huntgargs", "noplayingallowed"],
-      aggroDecks: ["budgetburn", "seacret"],
-      comboDecks: ["seacret"],
-      controlDecks: ["huntgargs", "noplayingallowed"],
-      midrangeDecks: ["gargstar22"],
-      allDecks: [
-        "budgetburn",
-        "gargstar22",
-        "huntgargs",
-        "noplayingallowed",
-        "seacret",
-      ],
-    };
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-    const toBuildAggroString = buildDeckString(
-      electricBoogalooDecks.aggroDecks
-    );
-    const toBuildControlString = buildDeckString(
-      electricBoogalooDecks.controlDecks
-    );
-    const toBuildMemeString = buildDeckString(electricBoogalooDecks.memeDecks);
-    const toBuildString = buildDeckString(electricBoogalooDecks.allDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
+
+    // normalize db rows -> deck objects
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        raw: r,
+      };
+    });
+
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
     }
 
-    const alldecksrow = createButtons("seacret", "beb");
-    const beb = createButtons("helpall", "gstar22");
-    const gstar22 = createButtons("budgeteb", "hgargs");
-    const hgargs = createButtons("gargstar22", "npa");
-    const npa = createButtons("huntgargs", "sea");
-    const sea = createButtons("noplayingallowed", "allhelp");
-    const memerow = createButtons("noplayingallowed2", "hgargs2");
-    const hgargs2 = createButtons("helpmeme", "npa2");
-    const npa2 = createButtons("huntgargs2", "memehelp");
-    const aggrorow = createButtons("seacret2", "beb2");
-    const beb2 = createButtons("helpaggro", "sea2");
-    const sea2 = createButtons("budgeteb2", "aggrohelp");
-    const controlrow = createButtons("noplayingallowed3", "hgargs3");
-    const hgargs3 = createButtons("helpcontrol", "npa3");
-    const npa3 = createButtons("huntgargs3", "controlhelp");
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories)
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+
+    const thumb = "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png";
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
     const embed = new EmbedBuilder()
       .setThumbnail("https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png")
       .setTitle(
@@ -186,160 +223,233 @@ module.exports = {
           value: "They say that disco is dead, but he's down with the dead.",
         }
       );
-    const [result] = await db.query("select * from ebdecks");
-    const helpeb = createHelpEmbed(
-      "Electric Boogaloo Decks",
-      `To view the Electric Boogaloo decks please select an option from the select menu below!
-   Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks in Tbot`,
-      "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png"
+    const helpebButton = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpeb")
+        .setLabel("Electric Boogaloo Decks")
+        .setStyle(ButtonStyle.Danger)
+        .setEmoji("<:electricsleeper:1100169044440645776>")
     );
-    const allEmbed = createHelpEmbed(
-      "Electric Boogaloo Decks",
-      `My Decks for Electric Boogaloo(EB) are ${toBuildString}`
-    )
-      .setThumbnail("https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png")
-      .setTitle("Electric Boogaloo Decks")
-      .setDescription(`My Decks for Electric Boogaloo(EB) are ${toBuildString}`)
-      .setFooter({
-        text: `To view the Electric Boogaloo decks please use the commands listed above or navigate through all of the decks using the buttons below!
-   Note: Electric Boogaloo has ${electricBoogalooDecks.allDecks.length} total decks in Tbot`,
-      })
-      .setColor("Random");
-    const memeEmbed = createHelpEmbed(
-      "Electric Boogaloo Meme Decks",
-      `My Meme Decks for Electric Boogaloo(EB) are ${toBuildMemeString}`,
-      "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
-      `To view the Meme Electric Boogaloo decks please use the commands listed above or navigate through all of the Meme decks using the buttons below!
-   Note: Electric Boogaloo has ${electricBoogalooDecks.memeDecks.length} Meme decks in Tbot`
-    );
-    const aggroEmbed = createHelpEmbed(
-      "Electric Boogaloo Aggro Decks",
-      `My Aggro Decks for Electric Boogaloo(EB) are ${toBuildAggroString}`,
-      "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
-      `To view the Aggro Electric Boogaloo decks please use the commands listed above or navigate through all of the Aggro decks using the buttons below!
-   Note: Electric Boogaloo has ${electricBoogalooDecks.aggroDecks.length} Aggro decks in Tbot`
-    );
-    const controlEmbed = createHelpEmbed(
-      "Electric Boogaloo Control Decks",
-      `My Control Decks for Electric Boogaloo(EB) are ${toBuildControlString}`,
-      "https://pbs.twimg.com/media/C2utROCXUAQh7aZ.png",
-      `To view the Control Electric Boogaloo decks please use the commands listed above or navigate through all of the Control decks using the buttons below!
-   Note: Electric Boogaloo has ${electricBoogalooDecks.controlDecks.length} Control decks in Tbot`
-    );
-     /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("Blue");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    //Deck Embeds
-    const budgetburn = createDeckEmbed(result, "budgetburn");
-    const gargstar22 = createDeckEmbed(result, "gargstar22");
-    const huntgargs = createDeckEmbed(result, "huntgargs");
-    const noplayingallowed = createDeckEmbed(result, "noplayingallowed");
-    const seacret = createDeckEmbed(result, "seacret");
     const m = await message.channel.send({
       embeds: [embed],
-      components: [cmd],
+      components: [helpebButton],
     });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i - The interaction object
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "budget") {
-        await i.reply({ embeds: [budgetburn], flags: MessageFlags.Ephemeral });
-      } else if (value == "comp" || value == "combo") {
-        await i.reply({ embeds: [seacret], flags: MessageFlags.Ephemeral });
-      } else if (value == "ladder" || value == "midrange") {
-        await i.reply({ embeds: [gargstar22], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (value == "aggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (value == "control") {
-        await i.update({ embeds: [controlEmbed], components: [controlrow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        cmd: { embed: helpeb, component: row },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpall: { embed: allEmbed, component: alldecksrow },
-        helpmeme: { embed: memeEmbed, component: memerow },
-        memehelp: { embed: memeEmbed, component: memerow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
-        helpcontrol: { embed: controlEmbed, component: controlrow },
-        controlhelp: { embed: controlEmbed, component: controlrow },
-        beb: { embed: budgetburn, component: beb },
-        budgeteb: { embed: budgetburn, component: beb },
-        beb2: { embed: budgetburn, component: beb2 },
-        budgeteb2: { embed: budgetburn, component: beb2 },
-        gstar22: { embed: gargstar22, component: gstar22 },
-        gargstar22: { embed: gargstar22, component: gstar22 },
-        hgargs: { embed: huntgargs, component: hgargs },
-        huntgargs: { embed: huntgargs, component: hgargs },
-        hgargs2: { embed: huntgargs, component: hgargs2 },
-        huntgargs2: { embed: huntgargs, component: hgargs2 },
-        hgargs3: { embed: huntgargs, component: hgargs3 },
-        huntgargs3: { embed: huntgargs, component: hgargs3 },
-        npa: { embed: noplayingallowed, component: npa },
-        noplayingallowed: { embed: noplayingallowed, component: npa },
-        npa2: { embed: noplayingallowed, component: npa2 },
-        noplayingallowed2: { embed: noplayingallowed, component: npa2 },
-        npa3: { embed: noplayingallowed, component: npa3 },
-        noplayingallowed3: { embed: noplayingallowed, component: npa3 },
-        sea: { embed: seacret, component: sea },
-        seacret: { embed: seacret, component: sea },
-        sea2: { embed: seacret, component: sea2 },
-        seacret2: { embed: seacret, component: sea2 },
-      };
-     const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Invalid button interaction.",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        handleButtonInteraction(i);
+      try {
+        if (i.customId === "helpeb" && i.isButton()) {
+          const select = new StringSelectMenuBuilder()
+            .setCustomId("select")
+            .setPlaceholder(
+              "Select an option below to view electric boogaloo's decklists"
+            )
+            .addOptions(
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Budget Deck")
+                .setValue("budget")
+                .setDescription("Decks that are cheap for new players")
+                .setEmoji("💰"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Competitive Deck")
+                .setValue("comp")
+                .setDescription("Some of the Best Decks in the game")
+                .setEmoji("<:compemote:1325461143136764060>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Ladder Deck")
+                .setValue("ladder")
+                .setDescription("Decks that mostly only good for ranked games")
+                .setEmoji("<:ladder:1271503994857979964>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Meme Decks")
+                .setValue("meme")
+                .setDescription("Decks that are built off a weird/fun combo"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Aggro Decks")
+                .setValue("aggro")
+                .setDescription(
+                  "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Combo Deck")
+                .setValue("combo")
+                .setDescription(
+                  "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Control Decks")
+                .setValue("control")
+                .setDescription(
+                  'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Midrange Deck")
+                .setValue("midrange")
+                .setDescription(
+                  "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("All Electric Boogaloo Decks")
+                .setValue("all")
+                .setDescription("View all of Electric Boogaloo's decks")
+                .setEmoji("<:electricsleeper:1100169044440645776>")
+            );
+
+          // present the select menu (replace helprb button)
+          await i.update({
+            embeds: [
+              createHelpEmbed(
+                "Electric Boogaloo Decks",
+                `Select a category — Electric Boogaloo has ${normalized.length} total decks.`,
+                thumb
+              ),
+            ],
+            components: [new ActionRowBuilder().addComponents(select)],
+          });
+          return;
+        }
+
+        // select menu chosen -> show category embed with nav buttons (left -> last, right -> first)
+        if (i.isStringSelectMenu() && i.customId === "select") {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+          if (list.length <= 1) {
+            leftBtn.setDisabled(true);
+            rightBtn.setDisabled(true);
+          }
+
+          const row = new ActionRowBuilder().addComponents(leftBtn, rightBtn);
+          return i.update({ embeds: [catEmbed], components: [row] });
+        }
+
+        // button navigation (nav_* / back_to_list_*)
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          // noop or unknown -> acknowledge
+          if (action === "noop")
+            return i.reply({
+              content: "No navigation available.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          if (action === "nav") {
+            const category = parts[1];
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+
+            const embed = buildDeckEmbed(list[index]);
+            const nav = buildNavRow(category, index, list.length, [
+              "comp",
+              "all",
+              "meme",
+              "aggro",
+              "midrange",
+              "combo",
+              "control",
+            ]);
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ??
+              createCategoryEmbed(
+                category.charAt(0).toUpperCase() + category.slice(1),
+                [],
+                0,
+                thumb
+              );
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+            if (list.length <= 1) {
+              leftBtn.setDisabled(true);
+              rightBtn.setDisabled(true);
+            }
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error("Electric Boogaloo collector error:", err);
+        if (!i.replied && !i.deferred)
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
       }
     });
+
+    collector.on("end", () => m.edit({ components: [] }).catch(() => {}));
   },
 };

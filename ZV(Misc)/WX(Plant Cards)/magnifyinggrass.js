@@ -4,6 +4,7 @@ module.exports = {
 	aliases: [`mag`, 	`magnifying`, `mg3`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		//left off here for SQL DB
 		const mg = new EmbedBuilder()
 		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/5/53/MagnifyingGrass.png/revision/latest/scale-to-width-down/250?cb=20170906160729")
 		.setTitle("Magnifying Grass | <:Solar:1062502678384607262>")

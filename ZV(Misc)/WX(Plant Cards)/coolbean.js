@@ -1,29 +1,34 @@
-const {EmbedBuilder}= require("discord.js")
+const { EmbedBuilder } = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
-	name: `coolbean`,
-	aliases: [`cool`, `cb3`, `cbean`],
-	category: `Plant Cards`,
-	run: async(client, message, args)=> {
-		const cb = new EmbedBuilder()
-		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1106221433996181645/Carbeanite_HD.webp")
-		.setTitle("Cool Bean | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Bean Plant -**")
-		.setColor("Random")
-		
-		.addFields({name: "Stats",
-							 	value: "3 <:Strength:1062501774612779039>, 3 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
-							 {
-								 name: "Ability",
-								 value: "**When played:** <:freeze:1323059404874055774>__Freeze__ all Gravestones."
-							 },
-							 {
-								 name: "Set-Rarity",
-								value: "**Galactic - Super-Rare**"
-							 },
-							 {
-								 name: "Flavor Text",
-								 value: `"Chance of meeting Gravestones? Never tell me the odds!"`
-							 })
-		message.channel.send({embeds: [cb]})
-	}
-}
+  name: `coolbean`,
+  aliases: [`cool`, `cb3`, `cbean`],
+  category: `Plant Cards`,
+  run: async (client, message, args) => {
+    const [result] = await db.query(`select coolbean from smartycards`);
+    const cb = new EmbedBuilder()
+      .setThumbnail(`${result[4].coolbean}`)
+      .setTitle(`${result[7].coolbean}`)
+      .setDescription(`${result[2].coolbean}`)
+      .setColor("Random")
+      .addFields(
+        { name: "Stats", value: `${result[6].coolbean}`, inline: true },
+        {
+          name: "Ability",
+          value: `${result[0].coolbean}`,
+          inline: true,
+        },
+        {
+          name: "Set-Rarity",
+          value: `${result[5].coolbean}`,
+          inline: true,
+        },
+        {
+          name: "Flavor Text",
+          value: `${result[3].coolbean}`,
+          inline: true,
+        }
+      );
+    message.channel.send({ embeds: [cb] });
+  },
+};

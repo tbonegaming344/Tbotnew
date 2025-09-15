@@ -1,30 +1,37 @@
 const {EmbedBuilder}= require("discord.js")
+const db = require("../../index.js");
 module.exports = {
 	name: `garlic`,
 	aliases: [`vimpdestroyer`, `vimptech`, `vimpiredestroyer`, `vimpiretech`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select garlic from guardiancards`)
 		const garlic = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/c/cc/Garlic.png/revision/latest/scale-to-width-down/250?cb=20201226145126")
-		.setTitle("Garlic | <:Guardian:1062501130501885973>")
-		.setDescription("**\\- Root Plant -**")
+		.setThumbnail(`${result[4].garlic}`)
+		.setTitle(`${result[7].garlic}`)
+		.setDescription(`${result[2].garlic}`)
 		.addFields({name: "Stats", 
-							 value: "1 <:Strength:1062501774612779039>, 5 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							 value: `${result[6].garlic}`,
+							 inline: true},
 							 {
 								 name: "Trait",
-								 value: "__Team-Up__"
+								 value: `${result[8].garlic}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "When a Zombie hurts this, move that Zombie to the left. If it's a Vimpire, destroy it."
+								 value: `${result[0].garlic}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Event**"
+								 value: `${result[5].garlic}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"Vimpires. They're the worst. I don't like to use the word 'hate' but yeah, I hate 'em."`
+								 value: `${result[3].garlic}`,
+								 inline: true
 							 })
 						.setColor("Random")
 						

@@ -8,24 +8,108 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
-function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
+// --- Helpers ---
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Beta Carrotina Decks" : `Beta Carrotina ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Beta Carrotina decks in Tbot are:${description}`
+        : `My ${name} decks for Beta Carrotina are: ${description}`
+    )
     .setThumbnail(thumbnail)
-    .setColor("#964B00");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
+    .setColor("#964B00")
+    .setFooter({
+      text: isAll
+        ? `Beta Carrotina has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Beta Carrotina has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("Orange");
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
   }
   return embed;
+}
+
+/**
+ * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
+ * left = previous (or back_to_list when at start for special categories)
+ * right = next (or back_to_list when at end for special categories)
+ */
+function buildNavRow(category, currentIndex, total, specialCategories) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  // decide ids
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+
+  // ensure uniqueness (avoid duplicate custom_id)
+  if (leftId === rightId) {
+    rightId = `${rightId}_alt`;
+  }
+
+  const left = new ButtonBuilder().setEmoji("⬅️");
+  const right = new ButtonBuilder().setEmoji("➡️");
+
+  // styles depending on id type
+  left
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(leftId);
+  right
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(rightId);
+
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `helpbc`,
@@ -48,6 +132,106 @@ module.exports = {
   ],
   category: `Beta-Carrotina/Citron`,
   run: async (client, message, args) => {
+    // fetch rows: each row is a deck
+    const [rows] = await db.query("SELECT * FROM bcdecks");
+    if (!rows || rows.length === 0) {
+      return message.channel.send(
+        "No Beta Carrotina decks found in the database."
+      );
+    }
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
+
+    // category matching function using normalized fields
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
+    }
+
+    // build category lists from DB dynamically (unchanged)
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories) {
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+    }
+
+    // debug counts (optional)
+    console.log(
+      "category counts:",
+      Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
+    );
+
+    // thumbnail
+    const thumb =
+      "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist";
+
+    // create category overview embeds (used when nav hits ends for special cats)
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
     const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .addOptions(
@@ -55,13 +239,8 @@ module.exports = {
           .setLabel("Competitive Deck")
           .setDescription("Some of the Best Plant Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>")
-          .setValue("competitive"),
+          .setValue("comp"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>")
-          .setValue("ladder"),
-           new StringSelectMenuOptionBuilder()
           .setLabel("Meme Deck")
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
@@ -95,175 +274,168 @@ module.exports = {
           .setEmoji("<:betaEmote:1368237119650402454>")
           .setValue("all")
       );
-    const row = new ActionRowBuilder().addComponents(select);
-    const betaCarrotinaDecks = {
-      competitiveDecks: ["neurotherapy"],
-      ladderDecks: ["carroot"],
-      memeDecks: ["dinocounter"],
-      comboDecks: ["carroot", "dinocounter"],
-      controlDecks: ["neurotherapy"],
-      midrangedecks: ["dinocounter"],
-      tempoDecks: ["carroot"],
-      allDecks: ["carroot", "dinocounter", "neurotherapy"],
-    };
-    /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-    const toBuildString = buildDeckString(betaCarrotinaDecks.allDecks);
-    const toBuildComboString = buildDeckString(betaCarrotinaDecks.comboDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-    }
-    const comborow = createButtons("dinocounter", "car");
-    const car = createButtons("helpcombo", "dcounter");
-    const dcounter = createButtons("carroot", "combohelp");
-    const alldecksrow = createButtons("shamcontrol", "car2");
-    const car2 = createButtons("helpall", "dcounter2");
-    const dcounter2 = createButtons("carroot2", "scontrol");
-    const scontrol = createButtons("dinocounter2", "allhelp");
-    const [result] = await db.query("SELECT * FROM bcdecks");
-    const embed = createHelpEmbed(
-      "Beta Carrotina Commands",
-      `To view the Beta Carrotina decks please select an option from the select menu below
-Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total decks in Tbot`,
-      "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist"
-    );
-    const comboEmbed = createHelpEmbed(
-      "Beta Carrotina Combo Decks",
-      `My combo decks for Beta Carrotina are ${toBuildComboString}`,
-      "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist",
-      `To view the combo Beta Carrotina decks please use the commands listed above or click the buttons below to navigate through all combo decks.
-Note: Beta Carrotina has ${betaCarrotinaDecks.comboDecks.length} total combo decks in Tbot`
-    );
-    const allEmbed = createHelpEmbed(
-      "Beta Carrotina Decks",
-      `My decks for Beta Carrotina are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/p__/images/d/d2/Betacarrot.png/revision/latest?cb=20190624185039&path-prefix=protagonist",
-      `To view the all Beta Carrotina decks please use the commands listed above or click the buttons below to navigate through all decks.
-Note: Beta Carrotina has ${betaCarrotinaDecks.allDecks.length} total all decks in Tbot`
-    );
-
-    /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("White");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    const carroot = createDeckEmbed(result, "carroot");
-    const dinocounter = createDeckEmbed(result, "dinocounter");
-    const shamcontrol = createDeckEmbed(result, "shamcontrol");
     const m = await message.channel.send({
-      embeds: [embed],
-      components: [row],
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("Beta Carrotina Decks")
+          .setDescription(
+            `To view the Beta Carrotina decks please select an option from the select menu below!\nNote: Beta Carrotina has ${normalized.length} total decks in Tbot`
+          )
+          .setColor("#964B00")
+          .setThumbnail(thumb),
+      ],
+      components: [new ActionRowBuilder().addComponents(select)],
     });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-     if (value == "combo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (value == "control" || value == "competitive") {
-        await i.reply({
-          embeds: [shamcontrol],
-          flags: MessageFlags.Ephemeral,
-        });
-      } else if (value == "midrange" || value == "meme") {
-        await i.reply({
-          embeds: [dinocounter],
-          flags: MessageFlags.Ephemeral,
-        });
-      } else if (value == "tempo" || value == "ladder") {
-        await i.reply({
-          embeds: [carroot],
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        helpall: { embed: allEmbed, component: alldecksrow },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpcombo: { embed: comboEmbed, component: comborow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        car: { embed: carroot, component: car },
-        carroot: { embed: carroot, component: car },
-        car2: { embed: carroot, component: car2 },
-        carroot2: { embed: carroot, component: car2 },
-        dcounter: { embed: dinocounter, component: dcounter },
-        dinocounter: { embed: dinocounter, component: dcounter },
-        dcounter2: { embed: dinocounter, component: dcounter2 },
-        dinocounter2: { embed: dinocounter, component: dcounter2 },
-        scontrol: { embed: shamcontrol, component: scontrol },
-        shamcontrol: { embed: shamcontrol, component: scontrol },
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Unknown button interaction",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+
+    const specialCategories = [
+      "comp",
+      "all",
+      "meme",
+      "aggro",
+      "midrange",
+      "combo",
+      "control",
+    ];
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
+      try {
+        if (i.isStringSelectMenu()) {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          // Reply with the category embed and two buttons:
+          // left -> last deck in category, right -> first deck in category.
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+
+          // avoid duplicate custom_ids when firstIndex === lastIndex by appending suffix to one id
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+
+          const actionRow = new ActionRowBuilder().addComponents(
+            leftBtn,
+            rightBtn
+          );
+
+          // update the original message to show category overview + navigation options
+          return i.update({ embeds: [catEmbed], components: [actionRow] });
+        }
+
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          if (action === "nav") {
+            const category = parts[1];
+            // parseInt will ignore any trailing non-numeric suffix like "_alt"
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+            const embed = buildDeckEmbed(list[index].raw);
+            const nav = buildNavRow(
+              category,
+              index,
+              list.length,
+              specialCategories
+            );
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const pretty =
+              category === "comp"
+                ? "Competitive"
+                : category.charAt(0).toUpperCase() + category.slice(1);
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ||
+              createCategoryEmbed(pretty, [], 0, thumb);
+
+            // build left -> last, right -> first (avoid duplicate ids when only one item)
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback: unknown customId
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        if (!i.replied && !i.deferred) {
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
       }
+    });
+
+    collector.on("end", () => {
+      m.edit({ components: [] }).catch(() => {});
     });
   },
 };

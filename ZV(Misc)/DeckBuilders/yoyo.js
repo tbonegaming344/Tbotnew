@@ -8,22 +8,36 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
-function createHelpEmbed(title, description, thumbnail, footer) {
+function buildDeckEmbed(row) {
   const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
-    .setThumbnail(thumbnail)
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
     .setColor("#ffcd59");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
   }
   return embed;
 }
@@ -62,8 +76,31 @@ module.exports = {
     const toBuildString = decks
       .map((deck) => `\n<@1043528908148052089> **${deck}**`)
       .join("");
-    const [result] = await db.query(`select reflourished
-from ccdecks cc`);
+    const [rows] = await db.query(`select *
+from ccdecks where creator like '%yoyo%'`);
+if (!rows || rows.length === 0) {
+      return message.channel.send("No Yoyo decks found in the database.");
+    }
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
 const user = await client.users.fetch("1255818880211882077");
     const yoyo = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
@@ -76,31 +113,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("#ffcd59")
-
-   /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("#ffcd59");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    const reflourished = createDeckEmbed(result, "reflourished");
+    const reflourished = buildDeckEmbed(normalized[0]);
     const m = await message.channel.send({
       embeds: [yoyo],
       components: [row],

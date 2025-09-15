@@ -1,28 +1,33 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `fumeshroom`,
 	aliases: [`fume`, `fs`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select fumeshroom from solarcards`)
 		const fs = new EmbedBuilder()
-		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107357801153568931/HD_Fume-Shroom.webp")
-		.setTitle("Fume-Shroom | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Mushroom Plant -**")
+		.setThumbnail(`${result[4].fumeshroom}`)
+		.setTitle(`${result[7].fumeshroom}`)
+		.setDescription(`${result[2].fumeshroom}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strikethrough:1062502987425140806>, 1 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].fumeshroom}`,
+							inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Strikethrough:1062502987425140806>__Strikethrough__"
+								 value: `${result[8].fumeshroom}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Uncommon**"
+								 value: `${result[5].fumeshroom}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"I'm like the wind. Near a hog farm."`
+								 value: `${result[3].fumeshroom}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [fs]})
 	}

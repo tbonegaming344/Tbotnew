@@ -1,32 +1,38 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js")
 module.exports = {
 	name: `dandylionking`,
 	aliases: [`dandy`, `lion`, `dandylion`, `lionking`, `dlk`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select dandylionking from kabloomcards`)
 		const dlk = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/19/DandyLionKingCardImage.png/revision/latest?cb=20180208071438")
-		.setTitle("Dandy Lion King | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Flower Animal Plant -**")
+		.setThumbnail(`${result[4].dandylionking}`)
+		.setTitle(`${result[7].dandylionking}`)
+		.setDescription(`${result[2].dandylionking}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "4 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 6 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].dandylionking}`, 
+							inline: true},
 							 {
 								 name: "Ability",
-								 value: "**When played:** Damage the Zombie Hero for __half__ their Health. "
+								 value: `${result[0].dandylionking}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Premium - Legendary**"
+								 value: `${result[5].dandylionking}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "He's developed a taste for Zombie Heroes."
+								 value: `${result[3].dandylionking}`,
+								 inline: true
 							 },
 							 {
 								 name: "Half",
-								 value: "Round down the damage."
+								 value: `${result[1].dandylionking}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [dlk]})
 	}

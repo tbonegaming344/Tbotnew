@@ -1,27 +1,32 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js")
 module.exports = {
 	name: `cosmoss`,
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select cosmoss from solarcards`)
 		const cos = new EmbedBuilder()
-		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107113340502806629/CosmossTrue.webp")
-		.setTitle("Cosmoss | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Moss Plant -**")
+		.setThumbnail(`${result[4].cosmoss}`)
+		.setTitle(`${result[7].cosmoss}`)
+		.setDescription(`${result[2].cosmoss}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].cosmoss}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "When an Environment is played, this gets +2<:Strength:1062501774612779039>/+2<:Health:1062515540712751184>."
+								 value: `${result[0].cosmoss}`,
+								inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Uncommon**"
+								 value: `${result[5].cosmoss}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "He's Peel deGrass Lichen's biggest fan."
+								 value: `${result[3].cosmoss}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [cos]})
 	}

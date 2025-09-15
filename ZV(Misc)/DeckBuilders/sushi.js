@@ -3,29 +3,113 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags, 
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  MessageFlags,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
-function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
+// --- Helpers ---
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Sushi Decks" : `Sushi ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Sushi decks in Tbot are:${description}`
+        : `My ${name} decks for Sushi are: ${description}`
+    )
     .setThumbnail(thumbnail)
+    .setColor("#de8d5d")
+    .setFooter({
+      text: isAll
+        ? `Sushi has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Sushi has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
     .setColor("#de8d5d");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
   }
   return embed;
+}
+
+/**
+ * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
+ * left = previous (or back_to_list when at start for special categories)
+ * right = next (or back_to_list when at end for special categories)
+ */
+function buildNavRow(category, currentIndex, total, specialCategories) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  // decide ids
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+
+  // ensure uniqueness (avoid duplicate custom_id)
+  if (leftId === rightId) {
+    rightId = `${rightId}_alt`;
+  }
+
+  const left = new ButtonBuilder().setEmoji("⬅️");
+  const right = new ButtonBuilder().setEmoji("➡️");
+
+  // styles depending on id type
+  left
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(leftId);
+  right
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(rightId);
+
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `sushi`,
@@ -40,265 +124,324 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Sushi's decklists")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Competitive Decks")
-      .setValue("comp")
-      .setDescription('Some of the Best Decks in the game')
-      .setEmoji("<:compemote:1325461143136764060>"), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Ladder Deck")
-      .setValue("ladder")
-      .setDescription('Decks that mostly only good for ranked games')
-			.setEmoji("<:ladder:1271503994857979964>"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Meme Deck")
-      .setValue("meme")
-      .setDescription('Plant Decks that are built off a weird/fun combo'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Aggro Deck")
-      .setValue("aggro")
-      .setDescription('Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7.'),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Combo Decks")
-      .setValue("combo")
-      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Decks")
-      .setValue("Midrange")
-      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Midrange Deck")
-      .setValue("midrange")
-      .setDescription('Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Tempo Deck")
-      .setValue("tempo")
-      .setDescription('Focuses on slowly building a big board, winning trades and overwhelming the opponent.'), 
-      new StringSelectMenuOptionBuilder()
-      .setLabel("All Decks")
-      .setValue("all")
-      .setDescription("View all of Sushi's decks")
-    );
-    const row = new ActionRowBuilder().addComponents(select);
-    const sushiDecks = {
-      competitiveDecks: ["healmidrose", "telimps"], 
-      ladderDecks: ["trickmech"], 
-      memeDecks: ["sunbandits"], 
-      aggroDecks: ["trickmech"], 
-      comboDecks: ["sunbandits", "telimps", "trickmech"], 
-      MidrangeDecks: ["sunbandits"], 
-      midrangeDecks: ["healmidrose", "telimps"], 
-      allDecks: ["healmidrose", "sunbandits", "telimps", "trickmech"]
-    }
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-    const toBuildCompetitive = buildDeckString(sushiDecks.competitiveDecks);
-    const toBuildCombo = buildDeckString(sushiDecks.comboDecks);
-    const toBuildMidrange = buildDeckString(sushiDecks.midrangeDecks);
-    const toBuildString = buildDeckString(sushiDecks.allDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to Midrange the left button 
-     * @param {string} rightButtonId - The ID of the right button to Midrange the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
+    const [rows] =
+      await db.query(`SELECT * FROM rodecks where creator like '%Sushi%'
+    union all select * from rbdecks where creator like '%Sushi%'
+    union all select * from hgdecks where creator like '%Sushi%'
+    union all select * from zmdecks where creator like '%Sushi%'`);
+    if (!rows || rows.length === 0) {
+      return message.channel.send(
+        "No Super Brainz decks found in the database."
       );
     }
-    const comborow = createButtons("trickmech", "sb");
-    const sb = createButtons("combohelp", "ti");
-    const ti = createButtons("sunbandits", "tmech");
-    const tmech = createButtons("telimps", "helpcombo")
-    const competitiverow =  createButtons("telimps2", "hmrose");
-    const hmrose =  createButtons("helpcomp", "ti2");
-    const ti2 =  createButtons("healmidrose2", "comphelp");
-    const midrangerow =  createButtons("telimps3", "hmrose2");
-    const hmrose2 = createButtons("helpmidrange", "ti3")
-    const ti3 =  createButtons("healmidrose2", "midrangehelp");
-    const alldecksrow = createButtons("trickmech3", "hmrose3");
-    const hmrose3 = createButtons("helpall", "sb2");
-    const sb2 = createButtons("healmidrose3", "ti4");
-    const ti4 = createButtons("sunbandits2", "tmech2");
-    const tmech2 =  createButtons("telimps4", "allhelp");
-    const [result] =
-      await db.query(`select hmr, sunbandits, telimps, trickmech
-from rodecks ro
-inner join rbdecks rb 
-on (ro.deckinfo = rb.deckinfo)
-inner join hgdecks hg
-on (ro.deckinfo = hg.deckinfo)
-inner join zmdecks zm
-on (ro.deckinfo = zm.deckinfo)`);
-    const user = await client.users.fetch("198942472565555200");
-    const sushi = createHelpEmbed(
-      `${user.displayName} Decks`,
-      `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`,
-      user.displayAvatarURL()
-    )
-      const alldecksEmbed = createHelpEmbed(
-        `${user.displayName} Decks`,
-        `My commands for decks made by ${user.displayName} are ${toBuildString}`,
-        user.displayAvatarURL(), 
-        `To view the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${sushiDecks.allDecks.length} total decks in Tbot`
-      )
-      const combosushi = createHelpEmbed(
-        `${user.displayName} Combo Decks`,
-        `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
-        user.displayAvatarURL(), 
-        `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${sushiDecks.comboDecks.length} Combo decks in Tbot`
-      )
-      const midrangesushi = createHelpEmbed(
-        `${user.displayName} Midrange Decks`,
-        `My Midrange decks made by ${user.displayName} are ${toBuildMidrange}`,
-        user.displayAvatarURL(), 
-        `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${sushiDecks.MidrangeDecks.length} Midrange decks in Tbot`
-      )
-      const competitivesushi = createHelpEmbed(
-        `${user.displayName} Competitive Decks`,
-        `My Competitive decks made by ${user.displayName} are ${toBuildCompetitive}`,
-        user.displayAvatarURL(), 
-        `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${sushiDecks.competitiveDecks.length} Competitive decks in Tbot`
-      )
-    
-       /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-        const embed = new EmbedBuilder()
-          .setTitle(`${result[5][deckName]}`)
-          .setDescription(`${result[3][deckName]}`)
-          .setFooter({ text: `${result[2][deckName]}` })
-          .addFields(
-            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-          )
-          .setColor("#de8d5d");
-        const imageUrl = result[4][deckName];
-        if (imageUrl) {
-          embed.setImage(imageUrl);
-        }
-        return embed;
-      }
-    const hmr = createDeckEmbed(result, "hmr");
-    const sband = createDeckEmbed(result, "sunbandits");
-    const timps = createDeckEmbed(result, "telimps");
-    const trickmech = createDeckEmbed(result, "trickmech");
-    const m = await message.channel.send({
-      embeds: [sushi],
-      components: [row],
-    });
-    const iFilter = (i) => i.user.id === message.author.id;
-    async function handleSelectMenu(i){
-      const value = i.values[0];
-      if(value == "comp"){
-        await i.update({embeds: [competitivesushi], components: [competitiverow]})
-      }
-      else if(value == "aggro"){
-        await i.update({embeds: [aggrosushi], components: [aggrorow]})
-      }
-      else if(value == "combo"){
-        await i.update({embeds: [combosushi], components: [comborow]})
-      }
-      else if(value == "control"){
-        await i.reply({embeds: [sband], flags: MessageFlags.Ephemeral})
-      }
-      else if(value == "midrange"){
-        await i.update({embeds: [midrangesushi], components: [midrangerow]})
-      }
-      else if(value == "all"){
-        await i.update({embeds: [alldecksEmbed], components: [alldecksrow]})
-      }
-      else if(value == "ladder"){
-        await i.reply({embeds: [trickmech], flags: MessageFlags.Ephemeral})
-      }
-      else if(value == "meme"){
-        await i.reply({embeds: [sband], flags: MessageFlags.Ephemeral})
-      }
-    }
-    async function handleButtonInteraction(i){
-      const buttonActions = {
-        helpcomp: {embed: competitivesushi, component: competitiverow}, 
-        comphelp: {embed: competitivesushi, component: competitiverow}, 
-        combohelp: {embed: combosushi, component: comborow},
-        helpcombo: {embed: combosushi, component: comborow},
-        helpmidrange: {embed: midrangesushi, component: midrangerow},
-        midrangehelp: {embed: midrangesushi, component: midrangerow},
-        sb: {embed: sband, component: sb},
-        sunbandits: {embed: sband, component: sb},
-        sb2: {embed: sband, component: sb2},
-        sunbandits2: {embed: sband, component: sb2},
-        ti: {embed: timps, component: ti},
-        telimps: {embed: timps, component: ti},
-        ti2: {embed: timps, component: ti2},
-        telimps2: {embed: timps, component: ti2},
-        ti3: {embed: timps, component: ti3},
-        telimps3: {embed: timps, component: ti3},
-        ti4: {embed: timps, component: ti4},
-        telimps4: {embed: timps, component: ti4},
-        hmrose: {embed: hmr, component: hmrose},
-        healmidrose: {embed: hmr, component: hmrose},
-        hmrose2: {embed: hmr, component: hmrose2},
-        healmidrose2: {embed: hmr, component: hmrose2},
-        hmrose3: {embed: hmr, component: hmrose3},
-        healmidrose3: {embed: hmr, component: hmrose3},
-        helpall: {embed: alldecksEmbed, component: alldecksrow},
-        allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        tmech: {embed: trickmech, component: tmech},
-        trickmech: {embed: trickmech, component: tmech},
-        tmech2: {embed: trickmech, component: tmech2},
-        trickmech2: {embed: trickmech, component: tmech2}
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
       };
-     const action = buttonActions[i.customId]
-     if (action) {
-      await i.update({
-        embeds: [action.embed],
-        components: action.components,
-      });
-    } else {
-      await i.reply({
-        content: "Invalid button action.",
-        flags: MessageFlags.Ephemeral,
-      });
+    });
+
+    // category matching function using normalized fields
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
     }
-  }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+
+    // build category lists from DB dynamically (unchanged)
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories) {
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+    }
+
+    // debug counts (optional)
+    console.log(
+      "category counts:",
+      Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
+    );
+    const user = await client.users.fetch("198942472565555200");
+    // thumbnail
+    const thumb = user.displayAvatarURL();
+
+    // create category overview embeds (used when nav hits ends for special cats)
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
+    const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Sushi's decklists")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Decks")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that mostly only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Deck")
+          .setValue("meme")
+          .setDescription("Plant Decks that are built off a weird/fun combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Aggro Deck")
+          .setValue("aggro")
+          .setDescription(
+            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setValue("combo")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Decks")
+          .setValue("Midrange")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Deck")
+          .setValue("midrange")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Deck")
+          .setValue("tempo")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          ),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("View all of Sushi's decks")
+      );
+    const m = await message.channel.send({
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("Sushi Decks")
+          .setDescription(
+            `To view the Sushi decks please select an option from the select menu below!\nNote: Sushi has ${normalized.length} total decks in Tbot`
+          )
+          .setColor("#de8d5d")
+          .setThumbnail(thumb),
+      ],
+      components: [new ActionRowBuilder().addComponents(select)],
+    });
+
+    const specialCategories = [
+      "comp",
+      "all",
+      "meme",
+      "ladder",
+      "aggro",
+      "midrange",
+      "combo",
+      "control",
+    ];
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if(i.customId == "select"){
-        await handleSelectMenu(i)
+      try {
+        if (i.isStringSelectMenu()) {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          // Reply with the category embed and two buttons:
+          // left -> last deck in category, right -> first deck in category.
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+
+          // avoid duplicate custom_ids when firstIndex === lastIndex by appending suffix to one id
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+
+          const actionRow = new ActionRowBuilder().addComponents(
+            leftBtn,
+            rightBtn
+          );
+
+          // update the original message to show category overview + navigation options
+          return i.update({ embeds: [catEmbed], components: [actionRow] });
+        }
+
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          if (action === "nav") {
+            const category = parts[1];
+            // parseInt will ignore any trailing non-numeric suffix like "_alt"
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+            const embed = buildDeckEmbed(list[index].raw);
+            const nav = buildNavRow(
+              category,
+              index,
+              list.length,
+              specialCategories
+            );
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const pretty =
+              category === "comp"
+                ? "Competitive"
+                : category.charAt(0).toUpperCase() + category.slice(1);
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ||
+              createCategoryEmbed(pretty, [], 0, thumb);
+
+            // build left -> last, right -> first (avoid duplicate ids when only one item)
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback: unknown customId
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        if (!i.replied && !i.deferred) {
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
       }
-      else {
-        await handleButtonInteraction(i)
-      }
+    });
+
+    collector.on("end", () => {
+      m.edit({ components: [] }).catch(() => {});
     });
   },
 };

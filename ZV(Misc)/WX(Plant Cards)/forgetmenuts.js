@@ -1,29 +1,34 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js");
 module.exports = {
 	name: `forgetmenuts`,
 	aliases: [`fmn`, `forgor`, `forgorme`, `forgormenuts`, `forgetme`, `forget`],
 	category: `Plant Cards`,
 	run: async(client,message,args)=> {
+		const [result] = await db.query(`select fmn from guardiancards`)
 		const fmn = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/8/8f/HD_ForgetMeNuts.png/revision/latest/scale-to-width-down/250?cb=20170814002443")
-		.setTitle("Forget-Me-Nuts | <:Guardian:1062501130501885973>")
-		.setDescription("**\\- Flower Nut Plant -**")
+		.setThumbnail(`${result[4].fmn}`)
+		.setTitle(`${result[7].fmn}`)
+		.setDescription(`${result[2].fmn}`)
 		.addFields({name: "Stats", 
-							 value: "2 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 1 <:Sun:1062501177679413409>"},
+							 value: `${result[6].fmn}`,
+							 inline: true},
 							 {
 								 name: "Ability",
-								 value: "Zombie Tricks cost 1<:Brainz:1062503146745774183> more."
+								 value: `${result[0].fmn}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Event**"
+								 value: `${result[5].fmn}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: `"I'd forget my own flower if it wasn't stuck to my head. Wait, what were we talking about?"`
+								 value: `${result[3].fmn}`,
+								 inline: true
 							 })
 			.setColor("Random")
-			
 			message.channel.send({embeds: [fmn]})
 	}
 }

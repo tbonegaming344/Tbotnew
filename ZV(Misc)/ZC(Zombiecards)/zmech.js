@@ -8,175 +8,197 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
+// small helpers
 function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
+  const e = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
     .setColor("Orange");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
-  }
+  if (footer) e.setFooter({ text: footer });
+  return e;
+}
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Zmech Decks" : `Zmech ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Zmech decks in Tbot are:${description}`
+        : `My ${name} decks for Zmech are: ${description}`
+    )
+    .setThumbnail(thumbnail)
+    .setColor("Orange")
+    .setFooter({
+      text: isAll
+        ? `Zmech has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Zmech has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("Purple");
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  )
+    embed.setImage(row.image);
   return embed;
+}
+function buildNavRow(category, currentIndex, total, specialCategories = []) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+  if (leftId === rightId) rightId = `${rightId}_alt`;
+
+  const left = new ButtonBuilder()
+    .setCustomId(leftId)
+    .setEmoji("⬅️")
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+  const right = new ButtonBuilder()
+    .setCustomId(rightId)
+    .setEmoji("➡️")
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+
+  // disable when only one deck to avoid confusion
+  if (total <= 1) {
+    left.setDisabled(true);
+    right.setDisabled(true);
+  }
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `zmech`,
   aliases: [`zm`, `mech`, `z-mech`],
   category: `Zombie Cards`,
   run: async (client, message, args) => {
-    const cmd = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpzm")
-        .setLabel("Zmech Decks")
-        .setStyle(ButtonStyle.Danger)
-        .setEmoji("<:zmech:1088189178224853063>")
-    );
-    const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Select an option below to view Zmech's Decklists")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setValue("budget")
-          .setDescription("Decks that are cheap for new players")
-          .setEmoji("💰"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setDescription("Some of the Best Plant Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
-          .setValue("meme")
-          .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Decks")
-          .setValue("aggro")
-          .setDescription(
-            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Zmech Decks")
-          .setValue("all")
-          .setDescription("View all Zmech decks in Tbot")
-          .setEmoji("<:zmech:1088189178224853063>")
-      );
-    const row = new ActionRowBuilder().addComponents(select);
-    const zmechDecks = {
-      budgetDecks: ["budgetzm"],
-      ladderDecks: ["trickmech"],
-      compDecks: ["lawnmower2", "pyromanaia"],
-      memeDecks: ["uncrackamech", "zmoss"],
-      aggroDecks: ["budgetzm", "trickmech"],
-      comboDecks: [
-        "budgetzm",
-        "lawnmower2",
-        "trickmech",
-        "uncrackamech",
-        "zmoss",
-      ],
-      controlDecks: ["uncrackamech"],
-      midrangeDecks: ["lawnmower2", "pyromania"],
-      allDecks: [
-        "budgetzm",
-        "lawnmower2",
-        "pyromania",
-        "trickmech",
-        "uncrackamech",
-        "zmoss",
-      ],
-    };
-    /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
+    // fetch DB once and build automation
+    const [rows] = await db.query("SELECT * FROM zmdecks");
+    if (!rows || rows.length === 0)
+      return message.channel.send("No Zmech decks found in the database.");
+
+    // normalize db rows -> deck objects
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        raw: r,
+      };
+    });
+
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
     }
-    const toBuildString = buildDeckString(zmechDecks.allDecks);
-    const toBuildLadderString = buildDeckString(zmechDecks.ladderDecks);
-    const toBuildCompString = buildDeckString(zmechDecks.compDecks);
-    const toBuildMemeString = buildDeckString(zmechDecks.memeDecks);
-    const toBuildAggroString = buildDeckString(zmechDecks.aggroDecks);
-    const toBuildComboString = buildDeckString(zmechDecks.comboDecks);
-    const toBuildMidrangeString = buildDeckString(zmechDecks.midrangeDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
+
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories)
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+
+    const thumb =
+      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8";
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
       );
     }
-    const alldecksrow = createButtons("zmoss", "bzm");
-    const bzm = createButtons("helpall", "lm");
-    const lm = createButtons("budgetzm", "pyro");
-    const pyro = createButtons("lawnmower", "tm");
-    const tm = createButtons("pyromania", "um");
-    const um = createButtons("trickmech", "zm");
-    const zm = createButtons("uncrackamech", "allhelp");
-    const comprow = createButtons("pyromania2", "lm2");
-    const lm2 = createButtons("helpcomp", "pyro2");
-    const pyro2 = createButtons("lawnmower2", "comphelp");
-    const memerow = createButtons("zmoss2", "um2");
-    const um2 = createButtons("memehelp", "zm2");
-    const zm2 = createButtons("uncrackamech2", "helpmeme");
-    const aggrorow = createButtons("trickmech2", "bzm2");
-    const bzm2 = createButtons("aggrohelp", "tm2");
-    const tm2 = createButtons("budgetzm2", "helpaggro");
-    const comborow = createButtons("zmoss3", "zm3");
-    const bzm3 = createButtons("combohelp", "lm3");
-    const lm3 = createButtons("budgetzm3", "tm3");
-    const tm3 = createButtons("lawnmower3", "um3");
-    const um3 = createButtons("trickmech3", "zm3");
-    const zm3 = createButtons("uncrackamech3", "helpcombo");
-    const midrangerow = createButtons("pyromania3", "lm4");
-    const lm4 = createButtons("helpmidrange", "pyro3");
-    const pyro3 = createButtons("lawnmower4", "midrangehelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8"
@@ -201,196 +223,234 @@ module.exports = {
         }
       )
       .setColor("Orange");
-    const helpzm = createHelpEmbed(
-      "Zmech Decks",
-      `To view the Zmech decks please select an option from the select menu below!
-  Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8"
+    const helpzmButton = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpzm")
+        .setLabel("Z-Mech Decks")
+        .setStyle(ButtonStyle.Danger)
+        .setEmoji("<:zmech:1088189178224853063>")
     );
-    const alldecksEmbed = createHelpEmbed(
-      "Zmech Decks",
-      `My commands for Zmech(ZM) are ${toBuildString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech decks please use the commands listed above or click on the buttons below to navigate through all decks!
-  Note: Zmech has ${zmechDecks.allDecks.length} total decks in Tbot`
-    );
-    const compEmbed = createHelpEmbed(
-      "Zmech Competitive Decks",
-      `My competitive decks for Zmech(ZM) are ${toBuildCompString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech competitive decks please use the commands listed above or click on the buttons below to navigate through all competetive decks!
-Note: Zmech has ${zmechDecks.compDecks.length} competitive decks in Tbot`
-    );
-    const memeEmbed = createHelpEmbed(
-      "Zmech Meme Decks",
-      `My meme decks for Zmech(ZM) are ${toBuildMemeString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech meme decks please use the commands listed above or click on the buttons below to navigate through all meme decks!
-  Note: Zmech has ${zmechDecks.memeDecks.length} meme decks in Tbot`
-    );
-    const aggroEmbed = createHelpEmbed(
-      "Zmech Aggro Decks",
-      `My aggro decks for Zmech(ZM) are ${toBuildAggroString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech aggro decks please use the commands listed above or click on the buttons below to navigate through all aggro decks!
-  Note: Zmech has ${zmechDecks.aggroDecks.length} aggro decks in Tbot`
-    );
-    const comboEmbed = createHelpEmbed(
-      "Zmech Combo Decks",
-      `My combo decks for Zmech(ZM) are ${toBuildComboString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech combo decks please use the commands listed above or click on the buttons below to navigate through all combo decks!
-  Note: Zmech has ${zmechDecks.comboDecks.length} combo decks in Tbot`
-    );
-    const midrangeEmbed = createHelpEmbed(
-      "Zmech Midrange Decks",
-      `My midrange decks for Zmech(ZM) are ${toBuildMidrangeString}`,
-      "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/f4c91afb-efa9-444a-b3a4-24648276b936/dem481x-57df373b-da9b-4963-8d24-93c070dad656.png/v1/fit/w_375,h_329,strp/z_mech_render_by_zalgo9997_dem481x-375w.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MzU2IiwicGF0aCI6IlwvZlwvZjRjOTFhZmItZWZhOS00NDRhLWIzYTQtMjQ2NDgyNzZiOTM2XC9kZW00ODF4LTU3ZGYzNzNiLWRhOWItNDk2My04ZDI0LTkzYzA3MGRhZDY1Ni5wbmciLCJ3aWR0aCI6Ijw9NDA2In1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmltYWdlLm9wZXJhdGlvbnMiXX0.YMH20lA_-PhF9c604rAiLp55JUd2SBDhXfkA5SceXp8",
-      `To view the Zmech midrange decks please use the commands listed above or click on the buttons below to navigate through all midrange decks!
-Note: Zmech has ${zmechDecks.midrangeDecks.length} midrange decks in Tbot`
-    );
-    const [result] = await db.query(`SELECT * FROM zmdecks`);
-    /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("Purple");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    const budgetzm = createDeckEmbed(result, "budgetzm");
-    const uncrackamech = createDeckEmbed(result, "feastmech");
-    const lawnmower = createDeckEmbed(result, "lawnmower");
-    const pyromania = createDeckEmbed(result, "pyromania");
-    const trickmech = createDeckEmbed(result, "trickmech");
-    const zmoss = createDeckEmbed(result, "zmoss");
+
     const m = await message.channel.send({
       embeds: [embed],
-      components: [cmd],
+      components: [helpzmButton],
     });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "all") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (value == "ladder") {
-        await i.reply({ embeds: [trickmech], flags: MessageFlags.Ephemeral });
-      } else if (value == "meme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (value == "aggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (value == "combo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "control") {
-        await i.reply({
-          embeds: [uncrackamech],
-          flags: MessageFlags.Ephemeral,
-        });
-      } else if (value == "budget") {
-        await i.reply({ embeds: [budgetzm], flags: MessageFlags.Ephemeral });
-      } else if (value == "comp") {
-        await i.update({ embeds: [compEmbed], components: [comprow] });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        helpzm: { embed: helpzm, component: row },
-        allhelp: { embed: alldecksEmbed, component: alldecksrow },
-        helpall: { embed: alldecksEmbed, component: alldecksrow },
-        memehelp: { embed: memeEmbed, component: memerow },
-        helpmeme: { embed: memeEmbed, component: memerow },
-        aggrohelp: { embed: aggroEmbed, component: aggrorow },
-        helpaggro: { embed: aggroEmbed, component: aggrorow },
-        combohelp: { embed: comboEmbed, component: comborow },
-        helpcombo: { embed: comboEmbed, component: comborow },
-        helpmidrange: { embed: midrangeEmbed, component: midrangerow },
-        midrangehelp: { embed: midrangeEmbed, component: midrangerow },
-        helpcomp: { embed: compEmbed, component: comprow },
-        comphelp: { embed: compEmbed, component: comprow },
-        bzm: { embed: budgetzm, component: bzm },
-        budgetzm: { embed: budgetzm, component: bzm },
-        bzm2: { embed: budgetzm, component: bzm2 },
-        budgetzm2: { embed: budgetzm, component: bzm2 },
-        bzm3: { embed: budgetzm, component: bzm3 },
-        budgetzm3: { embed: budgetzm, component: bzm3 },
-        tm: { embed: trickmech, component: tm },
-        trickmech: { embed: trickmech, component: tm },
-        tm2: { embed: trickmech, component: tm2 },
-        trickmech2: { embed: trickmech, component: tm2 },
-        tm3: { embed: trickmech, component: tm3 },
-        trickmech3: { embed: trickmech, component: tm3 },
-        um: { embed: uncrackamech, component: um },
-        uncrackamech: { embed: uncrackamech, component: um },
-        um2: { embed: uncrackamech, component: um2 },
-        uncrackamech2: { embed: uncrackamech, component: um2 },
-        um3: { embed: uncrackamech, component: um3 },
-        uncrackamech3: { embed: uncrackamech, component: um3 },
-        zm: { embed: zmoss, component: zm },
-        zmoss: { embed: zmoss, component: zm },
-        zm2: { embed: zmoss, component: zm2 },
-        zmoss2: { embed: zmoss, component: zm2 },
-        zm3: { embed: zmoss, component: zm3 },
-        zmoss3: { embed: zmoss, component: zm3 },
-        lm: { embed: lawnmower, component: lm },
-        lawnmower: { embed: lawnmower, component: lm },
-        lm2: { embed: lawnmower, component: lm2 },
-        lawnmower2: { embed: lawnmower, component: lm2 },
-        lm3: { embed: lawnmower, component: lm3 },
-        lawnmower3: { embed: lawnmower, component: lm3 },
-        lm4: { embed: lawnmower, component: lm4 },
-        lawnmower4: { embed: lawnmower, component: lm4 },
-        pyro: { embed: pyromania, component: pyro },
-        pyromania: { embed: pyromania, component: pyro },
-        pyro2: { embed: pyromania, component: pyro2 },
-        pyromania2: { embed: pyromania, component: pyro2 },
-        pyro3: { embed: pyromania, component: pyro3 },
-        pyromania3: { embed: pyromania, component: pyro3 },
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Unknown button action",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
+      try {
+        // pressed the initial helpsm button -> show the select menu (same UI helpsm uses)
+        if (i.customId === "helpsm" && i.isButton()) {
+          const select = new StringSelectMenuBuilder()
+            .setCustomId("select")
+            .setPlaceholder("Select an option below to view Zmech's Decklists")
+            .addOptions(
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Budget Deck")
+                .setValue("budget")
+                .setDescription("Decks that are cheap for new players")
+                .setEmoji("💰"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Competitive Decks")
+                .setValue("comp")
+                .setDescription("Some of the Best Plant Decks in the game")
+                .setEmoji("<:compemote:1325461143136764060>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Ladder Deck")
+                .setValue("ladder")
+                .setDescription("Decks that mostly only good for ranked games")
+                .setEmoji("<:ladder:1271503994857979964>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Meme Decks")
+                .setValue("meme")
+                .setDescription("Decks that are built off a weird/fun combo"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Aggro Decks")
+                .setValue("aggro")
+                .setDescription(
+                  "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Combo Decks")
+                .setValue("combo")
+                .setDescription(
+                  "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Control Deck")
+                .setValue("control")
+                .setDescription(
+                  'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Midrange Decks")
+                .setValue("midrange")
+                .setDescription(
+                  "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("All Zmech Decks")
+                .setValue("all")
+                .setDescription("View all Zmech decks in Tbot")
+                .setEmoji("<:zmech:1088189178224853063>")
+            );
+
+          // present the select menu (replace helprb button)
+          await i.update({
+            embeds: [
+              createHelpEmbed(
+                "Zmech Decks",
+                `Select a category to view Zmech Decks — Zmech has ${normalized.length} total decks.`,
+                thumb
+              ),
+            ],
+            components: [new ActionRowBuilder().addComponents(select)],
+          });
+          return;
+        }
+
+        // select menu chosen -> show category embed with nav buttons (left -> last, right -> first)
+        if (i.isStringSelectMenu() && i.customId === "select") {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+          if (list.length <= 1) {
+            leftBtn.setDisabled(true);
+            rightBtn.setDisabled(true);
+          }
+
+          const row = new ActionRowBuilder().addComponents(leftBtn, rightBtn);
+          return i.update({ embeds: [catEmbed], components: [row] });
+        }
+
+        // button navigation (nav_* / back_to_list_*)
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          // noop or unknown -> acknowledge
+          if (action === "noop")
+            return i.reply({
+              content: "No navigation available.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          if (action === "nav") {
+            const category = parts[1];
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+
+            const embed = buildDeckEmbed(list[index]);
+            const nav = buildNavRow(category, index, list.length, [
+              "comp",
+              "all",
+              "meme",
+              "aggro",
+              "midrange",
+              "combo",
+              "control",
+            ]);
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ??
+              createCategoryEmbed(
+                category.charAt(0).toUpperCase() + category.slice(1),
+                [],
+                0,
+                thumb
+              );
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+            if (list.length <= 1) {
+              leftBtn.setDisabled(true);
+              rightBtn.setDisabled(true);
+            }
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error("rustbolt collector error:", err);
+        if (!i.replied && !i.deferred)
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
       }
     });
+
+    collector.on("end", () => m.edit({ components: [] }).catch(() => {}));
   },
 };

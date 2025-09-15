@@ -1,32 +1,38 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js")
 module.exports = {
 	name: `cosmicflower`,
 	aliases: [`cf`, `cosmicsunflower`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select cosmicflower from solarcards`)
 		const cf = new EmbedBuilder()
-		.setThumbnail("https://media.discordapp.net/attachments/1044626284346605588/1107401936715661342/CosmicFlowerCardImage.webp")
-		.setTitle("Cosmic Flower | <:Solar:1062502678384607262>")
-		.setDescription("**\\- Flower Plant -**")
+		.setThumbnail(`${result[4].cosmicflower}`)
+		.setTitle(`${result[7].cosmicflower}`)
+		.setDescription(`${result[2].cosmicflower}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strikethrough:1062502987425140806>, 2 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].cosmicflower}`, 
+							inline: true},
 							 {
 								 name: "Trait",
-								 value: "<:Strikethrough:1062502987425140806>__Strikethrough__"
+								 value: `${result[8].cosmicflower}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "**When played:** __Conjure__ a Flower, and it gets <:Strikethrough:1062502987425140806>__Strikethrough__."
+								 value: `${result[0].cosmicflower}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Rare**"
+								 value: `${result[5].cosmicflower}`, 
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "She enjoys the simple things in life - hanging out with friends, fighting Zombies, and basking in cosmic rays."
+								 value: `${result[3].cosmicflower}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [cf]})
 	}

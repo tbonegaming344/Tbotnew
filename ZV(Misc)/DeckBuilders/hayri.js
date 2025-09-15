@@ -1,43 +1,107 @@
 const {
-    ActionRowBuilder,
-    ButtonBuilder,
-    ButtonStyle,
-    EmbedBuilder,
-  } = require("discord.js");
-  const db = require("../../index.js");
-  module.exports = {
-    name: `hayri`,
-    aliases: [`helphayri`, `hayrihelp`, `decksmadebyhayri`, `hayridecks`, `hariyana`],
-    category: `DeckBuilders`,
-    run: async (client, message, args) => {
-      const row = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("uncrackamech")
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("um")
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-      const um = new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId("helph")
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId("help")
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-      const decks = ["uncrackamech"];
-      let toBuildString = "";
-      for (const deck of decks) {
-        toBuildString += `\n<@1043528908148052089> **${deck}**`;
+  ActionRowBuilder,
+  ButtonBuilder,
+  ButtonStyle,
+  EmbedBuilder,
+} = require("discord.js");
+const db = require("../../index.js");
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
       }
-      const [result] = await db.query(`select feastmech from zmdecks`)
-      const user = await client.users.fetch("354293785980829696");
-      const hayri = new EmbedBuilder()
+    )
+    .setColor("#d67fcc");
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
+  }
+  return embed;
+}
+module.exports = {
+  name: `hayri`,
+  aliases: [
+    `helphayri`,
+    `hayrihelp`,
+    `decksmadebyhayri`,
+    `hayridecks`,
+    `hariyana`,
+  ],
+  category: `DeckBuilders`,
+  run: async (client, message, args) => {
+    const row = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("uncrackamech")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("um")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const um = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helph")
+        .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
+        .setStyle(ButtonStyle.Primary),
+      new ButtonBuilder()
+        .setCustomId("help")
+        .setEmoji("<:arrowright:1271446796207525898>")
+        .setStyle(ButtonStyle.Primary)
+    );
+    const decks = ["uncrackamech"];
+    let toBuildString = "";
+    for (const deck of decks) {
+      toBuildString += `\n<@1043528908148052089> **${deck}**`;
+    }
+    const [rows] = await db.query(
+      `select * from zmdecks where creator like '%hayri%'`
+    );
+    if (!rows || rows.length === 0) {
+      return message.channel.send("No Hayri decks found in the database.");
+    }
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
+    const user = await client.users.fetch("354293785980829696");
+    const hayri = new EmbedBuilder()
       .setTitle(`${user.displayName} Decks`)
       .setDescription(
         `My commands for decks made by ${user.displayName} are ${toBuildString}`
@@ -48,38 +112,19 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
       .setColor("#d67fcc");
-      const uncrackamech= new EmbedBuilder()
-      .setTitle(`${result[5].feastmech}`)
-      .setDescription(`${result[3].feastmech}`)
-      .setColor("#d67fcc")
-      .setImage(`${result[4].feastmech}`)
-      .setFooter({ text: `${result[2].feastmech}` })
-      .addFields({
-        name: "Deck Type",
-        value: `${result[6].feastmech}`,
-        inline: true,
-      },{
-        name: "Archetype",
-        value: `${result[0].feastmech}`,
-        inline: true
-      },{ 
-        name: "Deck Cost", 
-        value: `${result[1].feastmech}`,
-        inline: true
-      });
-      const m = await message.channel.send({
-        embeds: [hayri],
-        components: [row],
-      });
-      const iFilter = (i) => i.user.id === message.author.id;
-      const collector = m.createMessageComponentCollector({ filter: iFilter });
-      collector.on("collect", async (i) => {
-        if (i.customId == "um" || i.customId == "uncrackamech") {
-          await i.update({ embeds: [uncrackamech], components: [um] });
-        }
-        else if (i.customId == "helph" || i.customId == "help") {
-          await i.update({ embeds: [hayri], components: [row] });
-        }
-      });
-    },
-  };
+    const uncrackamech = buildDeckEmbed(normalized[0]);
+    const m = await message.channel.send({
+      embeds: [hayri],
+      components: [row],
+    });
+    const iFilter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter: iFilter });
+    collector.on("collect", async (i) => {
+      if (i.customId == "um" || i.customId == "uncrackamech") {
+        await i.update({ embeds: [uncrackamech], components: [um] });
+      } else if (i.customId == "helph" || i.customId == "help") {
+        await i.update({ embeds: [hayri], components: [row] });
+      }
+    });
+  },
+};

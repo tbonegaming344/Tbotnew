@@ -1,32 +1,38 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js")
 module.exports = {
 	name: `darkmatterdragonfruit`,
 	aliases: [`dmd`, `darkmattter`, `dragonfruit`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select darkmatterdragonfruit from kabloomcards`)
 		const dmd = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/1/12/Deep_Space_Dragonfruit_HD.png/revision/latest?cb=20170225055135")
-		.setTitle("Dark Matter Dragonfruit | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Dragon Fruit Plant -**")
+		.setThumbnail(`${result[4].darkmatterdragonfruit}`)
+		.setTitle(`${result[7].darkmatterdragonfruit}`)
+		.setDescription(`${result[2].darkmatterdragonfruit}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "6 <:Strength:1062501774612779039>, 6 <:Health:1062515540712751184>, 8 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].darkmatterdragonfruit}`, 
+							 inline: true},
 							 {
 								 name: "Traits",
-								 value: "__Amphibious__, __Splash Damage 6__"
+								 value: `${result[8].darkmatterdragonfruit}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "Zombie Tricks cost 6<:Brainz:1062503146745774183> more. "
+								 value: `${result[0].darkmatterdragonfruit}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Legendary**"
+								 value: `${result[5].darkmatterdragonfruit}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "Their ancestors were hunted to the depths of space. Now their descendants are back for cold fruity vengeance."
+								 value: `${result[3].darkmatterdragonfruit}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [dmd]})
 	}

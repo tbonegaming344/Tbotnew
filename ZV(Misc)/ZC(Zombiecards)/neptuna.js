@@ -8,177 +8,197 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
+// small helpers
 function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
+  const e = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
     .setColor("Orange");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
-  }
+  if (footer) e.setFooter({ text: footer });
+  return e;
+}
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Neptuna Decks" : `Neptuna ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Neptuna decks in Tbot are:${description}`
+        : `My ${name} decks for Neptuna are: ${description}`
+    )
+    .setThumbnail(thumbnail)
+    .setColor("Orange")
+    .setFooter({
+      text: isAll
+        ? `Neptuna has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Neptuna has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("#000000");
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  )
+    embed.setImage(row.image);
   return embed;
+}
+function buildNavRow(category, currentIndex, total, specialCategories = []) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+  if (leftId === rightId) rightId = `${rightId}_alt`;
+
+  const left = new ButtonBuilder()
+    .setCustomId(leftId)
+    .setEmoji("⬅️")
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+  const right = new ButtonBuilder()
+    .setCustomId(rightId)
+    .setEmoji("➡️")
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+
+  // disable when only one deck to avoid confusion
+  if (total <= 1) {
+    left.setDisabled(true);
+    right.setDisabled(true);
+  }
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `neptuna`,
   aliases: [`nt`, `tuna`, `np`, `neptune`],
   category: `Zombie Cards`,
   run: async (client, message, args) => {
-    const cmd = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("helpnt")
-        .setLabel("Neptuna Decks")
-        .setStyle(ButtonStyle.Danger)
-        .setEmoji("<:NeptunaH:1087845030867247174>")
-    );
-     const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Please select an option below to view Neptuna Decks")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setDescription("A Deck that is cheap for new players")
-          .setEmoji("💰")
-          .setValue("budget"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setDescription("Some of the best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>")
-          .setValue("comp"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Decks")
-          .setDescription("Decks that are generally only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>")
-          .setValue("ladder"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Decks")
-          .setDescription("Decks that are built off a weird/fun combo")
-          .setValue("meme"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Decks")
-          .setDescription(
-            "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          )
-          .setValue("aggro"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          )
-          .setValue("combo"),
-           new StringSelectMenuOptionBuilder()
-      .setLabel("Control Decks")
-      .setValue("control")
-      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          )
-          .setValue("midrange"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Neptuna Decks")
-          .setDescription("An option to view all decks")
-          .setEmoji("<:NeptunaH:1087845030867247174>")
-          .setValue("all")
-      );
-    const row = new ActionRowBuilder().addComponents(select);
-    const neptunaDecks = {
-      budgetDecks: ["budgetnt"],
-      competitiveDecks: ["slugged"],
-      ladderDecks: ["ladytuna", "gomorrah", "schoolyard", "tanktuna"],
-      memeDecks: ["floss", "muglord", "sunlord"],
-      aggroDecks: ["budgetnt", "schoolyard"],
-      controldecks: ["tanktuna"],
-      comboDecks: ["budgetnt", "floss", "muglord", "sunlord"],
-      midrangeDecks: ["gomorrah", "ladytuna", "muglord", "slugged", "sunlord"],
-      allDecks: [
-        "budgetnt",
-        "floss",
-        "gomorrah",
-        "ladytuna",
-        "muglord",
-        "schoolyard",
-        "slugged",
-        "sunlord",
-        "tanktuna"
-      ],
-    };
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
+    // fetch DB once and build automation
+    const [rows] = await db.query("SELECT * FROM ntdecks");
+    if (!rows || rows.length === 0)
+      return message.channel.send("No Neptuna decks found in the database.");
+
+    // normalize db rows -> deck objects
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        raw: r,
+      };
+    });
+
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
     }
-    const toBuildString = buildDeckString(neptunaDecks.allDecks);
-    const toBuildLadderString = buildDeckString(neptunaDecks.ladderDecks);
-    const toBuildMemeString = buildDeckString(neptunaDecks.memeDecks);
-    const toBuildAggroString = buildDeckString(neptunaDecks.aggroDecks);
-    const toBuildComboString = buildDeckString(neptunaDecks.comboDecks);
-    const toBuildMidrangeString = buildDeckString(neptunaDecks.midrangeDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
+
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories)
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+
+    const thumb =
+      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317";
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
       );
     }
-    const alldecksrow = createButtons("tanktuna", "bnt");
-    const bnt = createButtons("helpall", "fl");
-    const fl = createButtons("budgetnt", "go");
-    const go = createButtons("floss", "lt");
-    const lt = createButtons("gomorrah", "mlord");
-    const mlord = createButtons("ladytuna", "sy");
-    const sy = createButtons("muglord", "slug");
-    const slug = createButtons("schoolyard", "sl");
-    const sl = createButtons("slugged", "tank");
-    const tank = createButtons("sunlord", "helpall");
-    const ladderrow = createButtons("tanktuna2", "go2");
-    const go2 = createButtons("helpladder", "sy2");
-    const sy2 = createButtons("gomorrah2", "tank2");
-    const tank2 = createButtons("schoolyard2", "ladderhelp");
-    const memerow = createButtons("sunlord2", "fl2");
-    const fl2 = createButtons("helpmeme", "lt2");
-    const lt2 = createButtons("floss2", "mlord2");
-    const mlord2 = createButtons("ladytuna2", "sl2");
-    const sl2 = createButtons("muglord2", "memehelp");
-    const aggrorow = createButtons("schoolyard3", "bnt3");
-    const bnt2 = createButtons("helpaggro", "sy3");
-    const sy3 = createButtons("budgetnt2", "aggrohelp");
-    const comborow = createButtons("sunlord3", "bnt3");
-    const bnt3 = createButtons("helpcombo", "fl3");
-    const fl3 = createButtons("budgetnt3", "mlord3");
-    const mlord3 = createButtons("floss3", "sl3");
-    const sl3 = createButtons("muglord3", "combohelp");
-    const midrangerow = createButtons("sunlord4", "go3");
-    const go3 = createButtons("helpmid", "lt3");
-    const lt3 = createButtons("gomorrah3", "mlord4");
-    const mlord4 = createButtons("ladytuna3", "slug2");
-    const slug2 = createButtons("muglord4", "sl4");
-    const sl4 = createButtons("slugged2", "midhelp");
     const embed = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
@@ -203,213 +223,238 @@ module.exports = {
         }
       )
       .setColor("Orange");
-    const alldecksEmbed = createHelpEmbed(
-      "Neptuna Decks",
-      `My commands for Neptuna(NT) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-      `To view the Neptuna decks please use the commands listed above or click on the buttons below!
-Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`
+    const helpntButton = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpnt")
+        .setLabel("Neptuna Decks")
+        .setStyle(ButtonStyle.Danger)
+        .setEmoji("<:NeptunaH:1087845030867247174>")
     );
-    const ladderEmbed = createHelpEmbed(
-      "Neptuna Ladder Decks",
-      `My ladder decks for Neptuna(NT) are ${toBuildLadderString}`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-      `To view the Neptuna ladder decks please use the commands listed above or click on the buttons below!
-Note: Neptuna has a total of ${neptunaDecks.ladderDecks.length} ladder decks in Tbot`
-    );
-    const memeEmbed = createHelpEmbed(
-      "Neptuna Meme Decks",
-      `My meme decks for Neptuna(NT) are ${toBuildMemeString}`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-      `To view the Neptuna meme decks please use the commands listed above or click on the buttons below!
-Note: Neptuna has a total of ${neptunaDecks.memeDecks.length} meme decks in Tbot`
-    );
-    const aggroEmbed = createHelpEmbed(
-      "Neptuna Aggro Decks",
-      `My aggro decks for Neptuna(NT) are ${toBuildAggroString}`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-      `To view the Neptuna aggro decks please use the commands listed above or click on the buttons below!
-Note: Neptuna has a total of ${neptunaDecks.aggroDecks.length} aggro decks in Tbot`
-    );
-    const comboEmbed = createHelpEmbed(
-      "Neptuna Combo Decks",
-      `My combo decks for Neptuna(NT) are ${toBuildComboString}`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-      `To view the Neptuna combo decks please use the commands listed above or click on the buttons below!
-Note: Neptuna has a total of ${neptunaDecks.comboDecks.length} combo decks in Tbot`
-    );
-    const midrangeEmbed = createHelpEmbed(
-      "Neptuna Midrange Decks",
-      `My midrange decks for Neptuna(NT) are ${toBuildMidrangeString}`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317",
-      `To view the Neptuna midrange decks please use the commands listed above or click on the buttons below!
-Note: Neptuna has a total of ${neptunaDecks.midrangeDecks.length} midrange decks in Tbot`
-    );
-    const nthelp = createHelpEmbed(
-      "Neptuna Decks",
-      `To view the Neptuna decks please select an option from the select menu below!
-Note: Neptuna has ${neptunaDecks.allDecks.length} total decks in Tbot`,
-      "https://static.wikia.nocookie.net/villains/images/5/50/Neptuna_12.png/revision/latest?cb=20201126030317"
-    );
-    const [result] = await db.query(`select * from ntdecks`);
-    /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("#000000");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    const budgetnt = createDeckEmbed(result, "budgetnt");
-    const floss = createDeckEmbed(result, "floss");
-    const gomorrah = createDeckEmbed(result, "gomorrah");
-    const slugged = createDeckEmbed(result, "icebox");
-    const muglord = createDeckEmbed(result, "muglord");
-    const tanktuna = createDeckEmbed(result, "tanktuna");
-    const ladytuna = createDeckEmbed(result, "ladytuna");
-    const schoolyard = createDeckEmbed(result, "schoolyard");
-    const sunlord = createDeckEmbed(result, "wimps");
+
     const m = await message.channel.send({
       embeds: [embed],
-      components: [cmd],
+      components: [helpntButton],
     });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "all") {
-        await i.update({ embeds: [alldecksEmbed], components: [alldecksrow] });
-      } else if (value == "comp") {
-        await i.reply({ embeds: [slugged], flags: MessageFlags.Ephemeral });
-      } else if (value == "ladder") {
-        await i.update({ embeds: [ladderEmbed], components: [ladderrow] });
-      } else if (value == "meme") {
-        await i.update({ embeds: [memeEmbed], components: [memerow] });
-      } else if (value == "aggro") {
-        await i.update({ embeds: [aggroEmbed], components: [aggrorow] });
-      } else if (value == "combo") {
-        await i.update({ embeds: [comboEmbed], components: [comborow] });
-      } else if (value == "midrange") {
-        await i.update({ embeds: [midrangeEmbed], components: [midrangerow] });
-      } else if (value == "budget") {
-        await i.reply({ embeds: [budgetnt], flags: MessageFlags.Ephemeral });
-      }
-      else if(value == "control") {
-        await i.reply({ embeds: [tanktuna], flags: MessageFlags.Ephemeral });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        helpnt: { embed: nthelp, component: row },
-        helpall: {embed: alldecksEmbed, component: alldecksrow},
-        allhelp: {embed: alldecksEmbed, component: alldecksrow},
-        ladderhelp: {embed: ladderEmbed, component: ladderrow},
-        helpladder: {embed: ladderEmbed, component: ladderrow},
-        memehelp: {embed: memeEmbed, component: memerow},
-        helpmeme: {embed: memeEmbed, component: memerow},
-        aggrohelp: {embed: aggroEmbed, component: aggrorow},
-        helpaggro: {embed: aggroEmbed, component: aggrorow},
-        combohelp: {embed: comboEmbed, component: comborow},
-        helpcombo: {embed: comboEmbed, component: comborow},
-        helpmid: {embed: midrangeEmbed, component: midrangerow},
-        midhelp: {embed: midrangeEmbed, component: midrangerow},
-        bnt: {embed: budgetnt, component: bnt},
-        budgetnt: {embed: budgetnt, component: bnt},
-        bnt2: {embed: budgetnt, component: bnt2},
-        budgetnt2: {embed: budgetnt, component: bnt2},
-        bnt3: {embed: budgetnt, component: bnt3},
-        budgetnt3: {embed: budgetnt, component: bnt3},
-        fl: {embed: floss, component: fl},
-        floss: {embed: floss, component: fl},
-        fl2: {embed: floss, component: fl2},
-        floss2: {embed: floss, component: fl2},
-        fl3: {embed: floss, component: fl3},
-        floss3: {embed: floss, component: fl3},
-        go: {embed: gomorrah, component: go},
-        gomorrah: {embed: gomorrah, component: go},
-        go2: {embed: gomorrah, component: go2},
-        gomorrah2: {embed: gomorrah, component: go2},
-        go3: {embed: gomorrah, component: go3},
-        gomorrah3: {embed: gomorrah, component: go3},
-        lt: {embed: ladytuna, component: lt},
-        ladytuna: {embed: ladytuna, component: lt},
-        lt2: {embed: ladytuna, component: lt2},
-        ladytuna2: {embed: ladytuna, component: lt2},
-        lt3: {embed: ladytuna, component: lt3},
-        ladytuna3: {embed: ladytuna, component: lt3},
-        sy: {embed: schoolyard, component: sy},
-        schoolyard: {embed: schoolyard, component: sy},
-        sy2: {embed: schoolyard, component: sy2},
-        schoolyard2: {embed: schoolyard, component: sy2},
-        sy3: {embed: schoolyard, component: sy3},
-        schoolyard3: {embed: schoolyard, component: sy3},
-        sl: {embed: sunlord, component: sl},
-        sunlord: {embed: sunlord, component: sl},
-        sl2: {embed: sunlord, component: sl2},
-        sunlord2: {embed: sunlord, component: sl2},
-        sl3: {embed: sunlord, component: sl3},
-        sunlord3: {embed: sunlord, component: sl3},
-        sl4: {embed: sunlord, component: sl4},
-        sunlord4: {embed: sunlord, component: sl4},
-        slug: {embed: slugged, component: slug},
-        slugged: {embed: slugged, component: slug},
-        slug2: {embed: slugged, component: slug2},
-        slugged2: {embed: slugged, component: slug2},
-        mlord: {embed: muglord, component: mlord},
-        muglord: {embed: muglord, component: mlord},
-        mlord2: {embed: muglord, component: mlord2},
-        muglord2: {embed: muglord, component: mlord2},
-        mlord3: {embed: muglord, component: mlord3},
-        muglord3: {embed: muglord, component: mlord3},
-        mlord4: {embed: muglord, component: mlord4},
-        muglord4: {embed: muglord, component: mlord4},
-        tank: {embed: tanktuna, component: tank},
-        tanktuna: {embed: tanktuna, component: tank},
-        tank2: {embed: tanktuna, component: tank2},
-        tanktuna2: {embed: tanktuna, component: tank2},
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Unknown button action",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
+      try {
+        // pressed the initial helpnt button -> show the select menu (same UI helpnt uses)
+        if (i.customId === "helpnt" && i.isButton()) {
+          const select = new StringSelectMenuBuilder()
+            .setCustomId("select")
+            .setPlaceholder(
+              "Please select an option below to view Neptuna Decks"
+            )
+            .addOptions(
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Budget Deck")
+                .setDescription("A Deck that is cheap for new players")
+                .setEmoji("💰")
+                .setValue("budget"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Competitive Deck")
+                .setDescription("Some of the best Decks in the game")
+                .setEmoji("<:compemote:1325461143136764060>")
+                .setValue("comp"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Ladder Decks")
+                .setDescription(
+                  "Decks that are generally only good for ranked games"
+                )
+                .setEmoji("<:ladder:1271503994857979964>")
+                .setValue("ladder"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Meme Decks")
+                .setDescription("Decks that are built off a weird/fun combo")
+                .setValue("meme"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Aggro Decks")
+                .setDescription(
+                  "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+                )
+                .setValue("aggro"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Combo Decks")
+                .setDescription(
+                  "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+                )
+                .setValue("combo"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Control Deck")
+                .setValue("control")
+                .setDescription(
+                  'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Midrange Decks")
+                .setDescription(
+                  "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+                )
+                .setValue("midrange"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("All Neptuna Decks")
+                .setDescription("An option to view all decks")
+                .setEmoji("<:NeptunaH:1087845030867247174>")
+                .setValue("all")
+            );
+
+          // present the select menu (replace helprb button)
+          await i.update({
+            embeds: [
+              createHelpEmbed(
+                "Neptuna Decks",
+                `Select a category to view Neptuna Decks — Neptuna has ${normalized.length} total decks.`,
+                thumb
+              ),
+            ],
+            components: [new ActionRowBuilder().addComponents(select)],
+          });
+          return;
+        }
+
+        // select menu chosen -> show category embed with nav buttons (left -> last, right -> first)
+        if (i.isStringSelectMenu() && i.customId === "select") {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+          if (list.length <= 1) {
+            leftBtn.setDisabled(true);
+            rightBtn.setDisabled(true);
+          }
+
+          const row = new ActionRowBuilder().addComponents(leftBtn, rightBtn);
+          return i.update({ embeds: [catEmbed], components: [row] });
+        }
+
+        // button navigation (nav_* / back_to_list_*)
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          // noop or unknown -> acknowledge
+          if (action === "noop")
+            return i.reply({
+              content: "No navigation available.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          if (action === "nav") {
+            const category = parts[1];
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+
+            const embed = buildDeckEmbed(list[index]);
+            const nav = buildNavRow(category, index, list.length, [
+              "comp",
+              "all",
+              "meme",
+              "aggro",
+              "midrange",
+              "combo",
+              "control",
+            ]);
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ??
+              createCategoryEmbed(
+                category.charAt(0).toUpperCase() + category.slice(1),
+                [],
+                0,
+                thumb
+              );
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+            if (list.length <= 1) {
+              leftBtn.setDisabled(true);
+              rightBtn.setDisabled(true);
+            }
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error("neptuna collector error:", err);
+        if (!i.replied && !i.deferred)
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
       }
     });
+
+    collector.on("end", () => m.edit({ components: [] }).catch(() => {}));
   },
 };

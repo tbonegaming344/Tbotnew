@@ -6,7 +6,6 @@ const {
   MessageFlags
 } = require("discord.js");
 const db = require("../../index.js");
-const e = require("express");
 module.exports = {
   name: `non`,
   aliases: [`nondecks`, `nonhelp`, `nonsequitur`, `nonsequiturhelp`, `nonsequiturdecks`],

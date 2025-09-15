@@ -1,29 +1,34 @@
-const {EmbedBuilder}= require("discord.js")
+const { EmbedBuilder } = require("discord.js");
+const db = require("../../index.js");
 module.exports = {
-	name: `cosmicmushroom`,
-	aliases: [`cm1`],
-	category: `Plant Cards`,
-	run: async(client, message, args)=> {
-		const cm = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/e/e4/Cosmic_Mushroom_HD.png/revision/latest?cb=20170619175749")
-		.setTitle("Cosmic Mushroom | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Mushroom Plant -**")
-		.setColor("Random")
-		
-		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 2 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
-							 {
-								 name: "Ability",
-								 value: "**When played:** __Conjure__ a Mushroom, and it gets +2<:Strength:1062501774612779039>. "
-							 },
-							 {
-								 name: "Set-Rarity",
-								 value: "**Galactic - Rare**"
-							 },
-							 {
-								 name: "Flavor Text",
-								 value: "He's far out all right. Like, waaaay far out."
-							 })
-		message.channel.send({embeds: [cm]})
-	}
-}
+  name: `cosmicmushroom`,
+  aliases: [`cm1`],
+  category: `Plant Cards`,
+  run: async (client, message, args) => {
+    const [result] = await db.query(`select cosmicmushroom from kabloomcards`);
+    const cm = new EmbedBuilder()
+      .setThumbnail(`${result[4].cosmicmushroom}`)
+      .setTitle(`${result[7].cosmicmushroom}`)
+      .setDescription(`${result[2].cosmicmushroom}`)
+      .setColor("Random")
+      .addFields(
+        { name: "Stats", value: `${result[6].cosmicmushroom}`, inline: true },
+        {
+          name: "Ability",
+          value: `${result[0].cosmicmushroom}`,
+          inline: true,
+        },
+        {
+          name: "Set-Rarity",
+          value: `${result[5].cosmicmushroom}`,
+          inline: true,
+        },
+        {
+          name: "Flavor Text",
+          value: `${result[3].cosmicmushroom}`,
+          inline: true,
+        }
+      );
+    message.channel.send({ embeds: [cm] });
+  },
+};

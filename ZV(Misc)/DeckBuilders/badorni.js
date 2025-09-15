@@ -3,29 +3,113 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags, 
-  StringSelectMenuBuilder, 
-  StringSelectMenuOptionBuilder
+  MessageFlags,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
-function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
+// --- Helpers ---
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Badorni Decks" : `Badorni ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Badorni decks in Tbot are:${description}`
+        : `My ${name} decks for Badorni are: ${description}`
+    )
     .setThumbnail(thumbnail)
+    .setColor("#000000")
+    .setFooter({
+      text: isAll
+        ? `Badorni has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Badorni has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
     .setColor("#000000");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
   }
   return embed;
+}
+
+/**
+ * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
+ * left = previous (or back_to_list when at start for special categories)
+ * right = next (or back_to_list when at end for special categories)
+ */
+function buildNavRow(category, currentIndex, total, specialCategories) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  // decide ids
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+
+  // ensure uniqueness (avoid duplicate custom_id)
+  if (leftId === rightId) {
+    rightId = `${rightId}_alt`;
+  }
+
+  const left = new ButtonBuilder().setEmoji("⬅️");
+  const right = new ButtonBuilder().setEmoji("➡️");
+
+  // styles depending on id type
+  left
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(leftId);
+  right
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(rightId);
+
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `badorni`,
@@ -42,175 +126,287 @@ module.exports = {
   category: `DeckBuilders`,
   run: async (client, message, args) => {
     const select = new StringSelectMenuBuilder()
-    .setCustomId("select")
-    .setPlaceholder("Select an option below to view Badorni's Decks")
-    .addOptions(
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Meme Decks")
-      .setDescription('Plant Decks that are built off a weird/fun combo')
-      .setValue("meme"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Combo Decks")
-      .setDescription('Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks).')
-      .setValue("combo"),
-      new StringSelectMenuOptionBuilder()
-      .setLabel("Control Deck")
-      .setDescription('Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.')
-      .setValue("control")
-    )
-    const row = new ActionRowBuilder().addComponents(select);
-    const badorniDecks = {
-      memeDecks: [
-      "frozentelimps",
-      "plantmop",
-    ],
-      comboDecks: [
-      "frozentelimps",
-      "plantmop"
-    ],
-      controlDecks: ["frozentelimps"],
+      .setCustomId("select")
+      .setPlaceholder("Select an option below to view Badorni's Decks")
+      .addOptions(
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Meme Decks")
+          .setDescription("Plant Decks that are built off a weird/fun combo")
+          .setValue("meme"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Combo Decks")
+          .setDescription(
+            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          )
+          .setValue("combo"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Control Deck")
+          .setDescription(
+            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+          )
+          .setValue("control")
+      );
+    const [rows] = await db.query(
+      "SELECT * FROM ccdecks where creator like '%Badorni%' union all select * from hgdecks where creator like '%Badorni%'"
+    );
+    if (!rows || rows.length === 0) {
+      return message.channel.send("No Badorni decks found in the database.");
     }
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
+
+    // category matching function using normalized fields
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
     }
-    const toBuildMeme = buildDeckString(badorniDecks.memeDecks);
-    const toBuildCombo = buildDeckString(badorniDecks.comboDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
+
+    // build category lists from DB dynamically (unchanged)
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories) {
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+    }
+
+    // debug counts (optional)
+    console.log(
+      "category counts:",
+      Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
+    );
+
+    const user = await client.users.fetch("749149322561716294");
+    // thumbnail
+    const thumb = user.displayAvatarURL();
+
+    // create category overview embeds (used when nav hits ends for special cats)
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
       );
     }
-    const combo = createButtons("plamntmop2", "ftimps");
-    const ftimps = createButtons("combo", "pmop2");
-    const pmop2 = createButtons("frozentelimps", "helpcombo");
-    const meme = createButtons("plantmop", "fti2");
-    const fti2 = createButtons("meme", "pmop");
-    const pmop = createButtons("ftimps2", "meme2");
-    const [result] =
-      await db.query(`select frozentelimps, plantmop from hgdecks hg
-	inner join ccdecks cc
-  on (hg.deckinfo = cc.deckinfo))`);
-    const user = await client.users.fetch("749149322561716294");
-    const bad = createHelpEmbed(
-      `${user.displayName} Decks`,
-      `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-To view all decks made by Badorni select the meme or combo decks option
-Note: ${user.displayName} has ${badorniDecks.memeDecks.length} decks in Tbot`,
-        user.displayAvatarURL(),
-    )
-      const combobad = createHelpEmbed(
-        `${user.displayName} Combo Decks`,
-        `My Combo decks made by ${user.displayName} are ${toBuildCombo}`,
-        user.displayAvatarURL(),
-        `To view the Combo Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${badorniDecks.comboDecks.length} combo decks in Tbot`
-      )
-      const memebad = createHelpEmbed(
-        `${user.displayName} Meme Decks`,
-        `My Meme decks made by ${user.displayName} are ${toBuildMeme}`,
-        user.displayAvatarURL(),
-        `To view the Meme Decks Made By ${user.displayName} please click on the buttons below!
-Note: ${user.displayName} has ${badorniDecks.memeDecks.length} meme decks in Tbot`
-      )
-       /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-        const embed = new EmbedBuilder()
-          .setTitle(`${result[5][deckName]}`)
-          .setDescription(`${result[3][deckName]}`)
-          .setFooter({ text: `${result[2][deckName]}` })
-          .addFields(
-            { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-            { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-            { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-          )
-          .setColor("#000000");
-        const imageUrl = result[4][deckName];
-        if (imageUrl) {
-          embed.setImage(imageUrl);
-        }
-        return embed;
-      }
-    const fti = createDeckEmbed(result, "frozentelimps");
-    const plantmop = createDeckEmbed(result, "plantmop");
-    const m = await message.channel.send({ embeds: [bad], components: [row] });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i - The interaction object
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if(value == "combo"){
-        await i.update({embeds: [combobad], components: [combo]});
-      }
-      else if(value == "meme"){
-        await i.update({embeds: [memebad], components: [meme]});
-      }
-      else if(value == "midrange"){
-        await i.reply({embeds: [pysol], flags: MessageFlags.Ephemeral});
-      }
-      else if(value == "control"){
-        await i.reply({embeds: [ftimps], flags: MessageFlags.Ephemeral});
-      }     
-    }
-    async function handleButtonInteraction(i){
-      const buttonActions = {
-        pmop: {embed: plantmop, component: pmop},
-        psy: {embed: pysol, component: psy},
-        combo: {embed: combobad, component: combo},
-        ftimps: {embed: fti, component: ftimps},
-        ftimps2: {embed: fti, component: fti2},
-        pmop2: {embed: plantmop, component: pmop2},
-        psy2: {embed: pysol, component: psy2},
-        meme: {embed: memebad, component: meme},
-        meme2: {embed: memebad, component: meme},
-        fti2: {embed: fti, component: fti2},
-        plantmop: {embed: plantmop, component: pmop},
-        helpcombo: {embed: combobad, component: combo},
-        frozentelimps: {embed: fti, component: ftimps},
-      }
-      const action = buttonActions[i.customId];
-      if(action){
-        await i.update({embeds: [action.embed], components: [action.component]});
-      }
-      else{
-        await i.reply({content: "Unknown Button Interaction", flags: MessageFlags.Ephemeral});
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
-    collector.on("collect", async (i) => {
-      if(i.customId == "select"){
-      await handleSelectMenu(i);
 
+    const m = await message.channel.send({
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("Badorni Decks")
+          .setDescription(
+            `To view the Badorni decks please select an option from the select menu below!\nNote: Badorni has ${normalized.length} total decks in Tbot`
+          )
+          .setThumbnail(thumb),
+      ],
+      components: [new ActionRowBuilder().addComponents(select)],
+    });
+
+    const specialCategories = [
+      "comp",
+      "all",
+      "meme",
+      "aggro",
+      "midrange",
+      "combo",
+      "control",
+    ];
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
+    collector.on("collect", async (i) => {
+      try {
+        if (i.isStringSelectMenu()) {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          // Reply with the category embed and two buttons:
+          // left -> last deck in category, right -> first deck in category.
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+
+          // avoid duplicate custom_ids when firstIndex === lastIndex by appending suffix to one id
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+
+          const actionRow = new ActionRowBuilder().addComponents(
+            leftBtn,
+            rightBtn
+          );
+
+          // update the original message to show category overview + navigation options
+          return i.update({ embeds: [catEmbed], components: [actionRow] });
+        }
+
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          if (action === "nav") {
+            const category = parts[1];
+            // parseInt will ignore any trailing non-numeric suffix like "_alt"
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+            const embed = buildDeckEmbed(list[index].raw);
+            const nav = buildNavRow(
+              category,
+              index,
+              list.length,
+              specialCategories
+            );
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const pretty =
+              category === "comp"
+                ? "Competitive"
+                : category.charAt(0).toUpperCase() + category.slice(1);
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ||
+              createCategoryEmbed(pretty, [], 0, thumb);
+
+            // build left -> last, right -> first (avoid duplicate ids when only one item)
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback: unknown customId
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        if (!i.replied && !i.deferred) {
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
       }
-      else{
-        await handleButtonInteraction(i);
-      }
+    });
+
+    collector.on("end", () => {
+      m.edit({ components: [] }).catch(() => {});
     });
   },
 };

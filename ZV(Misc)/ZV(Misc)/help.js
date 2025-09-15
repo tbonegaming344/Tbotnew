@@ -63,9 +63,9 @@ const {
   
               const category = m.values[0].split("_")[1];
               const Ccommands = Array.from(client.commands.values())
-              const commands = Ccommands.filter((command) => {
-                  return command.category === category;
-              })
+                const commands = Ccommands
+                .filter((command) => command.category === category)
+                .sort((a, b) => a.name.localeCompare(b.name));
              const embed = new EmbedBuilder()
                   .setColor("Random")
                   .setTitle("Help | " + category)

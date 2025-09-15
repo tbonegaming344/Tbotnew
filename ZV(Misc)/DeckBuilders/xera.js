@@ -8,30 +8,234 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
-function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
-    .setTitle(title)
-    .setDescription(description)
+// --- Helpers ---
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Xera Decks" : `Xera ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Xera decks in Tbot are:${description}`
+        : `My ${name} decks for Xera are: ${description}`
+    )
     .setThumbnail(thumbnail)
-    .setColor("#e4c1f9");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
+    .setColor("#e4c1f9")
+    .setFooter({
+      text: isAll
+        ? `Xera has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Xera has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("#FFC0CB");
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
   }
   return embed;
+}
+
+/**
+ * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
+ * left = previous (or back_to_list when at start for special categories)
+ * right = next (or back_to_list when at end for special categories)
+ */
+function buildNavRow(category, currentIndex, total, specialCategories) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  // decide ids
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+
+  // ensure uniqueness (avoid duplicate custom_id)
+  if (leftId === rightId) {
+    rightId = `${rightId}_alt`;
+  }
+
+  const left = new ButtonBuilder().setEmoji("⬅️");
+  const right = new ButtonBuilder().setEmoji("➡️");
+
+  // styles depending on id type
+  left
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(leftId);
+  right
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    )
+    .setCustomId(rightId);
+
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `xera`,
   aliases: [`xeradecks`, `xerahelp`, `helpxera`, `dekcsmadebyxera`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
+    const [rows] =
+      await db.query(`SELECT * FROM sbdecks where creator like '%Xera%' 
+      union all select * from ccdecks where creator like '%Xera%'
+      union all select * from sfdecks where creator like '%Xera%'
+      union all select * from rodecks where creator like '%Xera%'
+      union all select * from gsdecks where creator like '%Xera%'
+      union all select * from wkdecks where creator like '%Xera%'
+      union all select * from czdecks where creator like '%Xera%'
+      union all select * from spdecks where creator like '%Xera%'
+      union all select * from ctdecks where creator like '%Xera%'
+      union all select * from bcdecks where creator like '%Xera%'
+      union all select * from gkdecks where creator like '%Xera%'
+      union all select * from ncdecks where creator like '%Xera%'
+      union all select * from hgdecks where creator like '%Xera%'
+      union all select * from zmdecks where creator like '%Xera%'
+      union all select * from smdecks where creator like '%Xera%'
+      union all select * from ifdecks where creator like '%Xera%'
+      union all select * from rbdecks where creator like '%Xera%'
+      union all select * from ebdecks where creator like '%Xera%'
+      union all select * from bfdecks where creator like '%Xera%'
+      union all select * from pbdecks where creator like '%Xera%'
+      union all select * from imdecks where creator like '%Xera%' and creator not like '%inspired by xera%'
+      union all select * from ntdecks where creator like '%Xera%'
+      order by name
+      `);
+    if (!rows || rows.length === 0) {
+      return message.channel.send("No Xera decks found in the database.");
+    }
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
+
+    // category matching function using normalized fields
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
+    }
+
+    // build category lists from DB dynamically (unchanged)
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories) {
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+    }
+
+    // debug counts (optional)
+    console.log(
+      "category counts:",
+      Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
+    );
+    const user = await client.users.fetch("742719800395956244");
+    // thumbnail
+    const thumb = user.displayAvatarURL();
+
+    // create category overview embeds (used when nav hits ends for special cats)
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
     const select = new StringSelectMenuBuilder()
       .setCustomId("select")
       .setPlaceholder("Please select an option below to view Xera's Decks")
@@ -85,590 +289,169 @@ module.exports = {
           .setDescription("An option to view all decks")
           .setValue("all")
       );
-    const xeraDecks = {
-      competitiveDecks: ["dinoroots", "limerence", "neurotherapy", "turles"],
-      ladderDecks: ["gomorrah", "gravepiratestache", "leafystrike", "mechacontrol", "tanktuna", "toyotacontrolla"],
-      memeDecks: [
-        "22savage",
-        "frozentelimps",
-        "funnyflare",
-        "healburn",
-        "healthotk",
-        "himpter",
-        "laserrings",
-        "mechacontrol",
-        "mechagold",
-        "muglord",
-        "pankration",
-        "recycling",
-        "reversecatster",
-        "uncrackamech",
-        "watersports",
-        "youngeggmartin",
+    const m = await message.channel.send({
+      embeds: [
+        new EmbedBuilder()
+          .setTitle("Xera Decks")
+          .setDescription(
+            `To view the Xera decks please select an option from the select menu below! \n Note: Xera has ${normalized.length} total decks in Tbot`
+          )
+          .setColor("#FFC0CB")
+          .setThumbnail(thumb),
       ],
-      aggroDecks: ["gravepiratestache"],
-      comboDecks: [
-        "22savage",
-        "frozentelimps",
-        "funnyflare",
-        "gravepiratestache",
-        "healburn",
-        "healthotk",
-        "himpter",
-        "laserrings",
-        "muglord",
-        "pankration",
-        "reversecatster",
-        "uncrackamech",
-        "watersports",
-        "youngeggmartin",
-      ],
-      controlDecks: [
-        "frozentelimps",
-        "mechacontrol",
-        "mechagold",
-        "neurotherapy",
-        "tanktuna",
-        "toyotacontrolla",
-        "uncrackamech",
-      ],
-      midrangeDecks: [
-        "22savage",
-        "dinoroots",
-        "funnyflare",
-        "gomorrah",
-        "healburn",
-        "healthotk",
-        "himpter",
-        "laserrings",
-        "limerence",
-        "muglord",
-        "pankration",
-        "recycling",
-        "turles",
-        "watersports",
-      ],
-      tempoDecks: [ "leafystrike"],
-      allDecks: [
-        "22savage",
-        "dinoroots",
-        "frozentelimps",
-        "funnyflare",
-        "gomorrah",
-        "gravepiratestache",
-        "healburn",
-        "healthotk",
-        "himpter",
-        "laserrings",
-        "leafystrike",
-        "limerence",
-        "mechagold",
-        "muglord",
-        "neurotherapy",
-        "pankration",
-        "recycling",
-        "reversecatster",
-        "tanktuna",
-        "toyotacontrolla",
-        "turles",
-        "uncrackamech",
-        "watersports",
-        "youngeggmartin"
-      ],
-    };
-    const row = new ActionRowBuilder().addComponents(select);
-    /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
-    }
-    const toBuildString = buildDeckString(xeraDecks.allDecks);
-    const toBuildCompString = buildDeckString(xeraDecks.competitiveDecks);
-    const toBuildLadderString = buildDeckString(xeraDecks.ladderDecks);
-    const toBuildMeme = buildDeckString(xeraDecks.memeDecks);
-    const toBuildComboString = buildDeckString(xeraDecks.comboDecks);
-    const toBuildControlString = buildDeckString(xeraDecks.controlDecks);
-    const toBuildMidString = buildDeckString(xeraDecks.midrangeDecks);
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
-      );
-    }
-    const comprow = createButtons("turles", "droots");
-    const droots = createButtons("helpcomp", "lime")
-    const lime = createButtons("dinoroots", "neuro");
-    const neuro = createButtons("limerence", "tur");
-    const tur = createButtons("neurotherapy", "comphelp");
-    const ladderrow = createButtons("toyotacontrolla", "go");
-    const go = createButtons("helpladder", "gps");
-    const gps = createButtons("gomorrah", "lstrike");
-    const lstrike = createButtons("gravepiratestache", "mcontrol");
-    const mcontrol = createButtons("leafystrike", "tank");
-    const tank = createButtons("mechacontrol", "tc");
-    const tc = createButtons("tanktuna", "ladderhelp");
-    const memerow = createButtons("youngeggmartin", "sav");
-    const sav = createButtons("helpmeme", "ftimps");
-    const ftimps = createButtons("savage", "ff");
-    const ff = createButtons("frozentelimps", "hburn");
-    const hburn = createButtons("funnyflare", "hotk");
-    const hotk = createButtons("healburn", "hi");
-    const hi = createButtons("healthotk", "lrings");
-    const lrings = createButtons("himps", "mgold");
-    const mgold = createButtons("laserrings", "mlord");
-    const mlord = createButtons("mechagold", "pank");
-    const pank = createButtons("muglord", "recy");
-    const recy = createButtons("pankration", "rcatster");
-    const rcatster = createButtons("recycling", "um");
-    const um = createButtons("reversecatster", "ws");
-    const ws = createButtons("uncrackamech", "yem");
-    const yem = createButtons("watersports", "memehelp");
-    const comborow = createButtons("youngeggmartin2", "sav2");
-    const sav2 = createButtons("helpcombo", "ftimps2");
-    const ftimps2 = createButtons("savage2", "ff2");
-    const ff2 = createButtons("frozentelimps2", "gps2");
-    const gps2 = createButtons("funnyflare2", "hburn2");
-    const hburn2 = createButtons("gravepiratestache2", "hotk2");
-    const hotk2 = createButtons("healburn2", "hi2");
-    const hi2 = createButtons("healthotk2", "lrings2");
-    const lrings2 = createButtons("himps2", "mlord2");
-    const mlord2 = createButtons("laserrings2", "pank2");
-    const pank2 = createButtons("muglord2", "rcatster2");
-    const rcatster2 = createButtons("pankration2", "um2");
-    const um2 = createButtons("reversecatster2", "ws2");
-    const ws2 = createButtons("uncrackamech2", "yem2");
-    const yem2 = createButtons("watersports2", "combohelp");
-    const controlrow = createButtons("uncrackmech3", "ftimps3");
-    const ftimps3 = createButtons("helpcontrol", "mcontrol2");
-    const mcontrol2 = createButtons("frozentelimps3", "mgold2");
-    const mgold2 = createButtons("mechacontrol2", "neuro2");
-    const neuro2 = createButtons("mechagold2", "tank2");
-    const tank2 = createButtons("neurotherapy2", "tc2");
-    const tc2 = createButtons("tanktuna2", "um3");
-    const um3 = createButtons("toyotacontrolla2", "controlhelp");
-    const midrangerow = createButtons("watersports3", "sav3");
-    const sav3 = createButtons("helpmid", "droots2");
-    const droots2 = createButtons("savage3", "ff3");
-    const ff3 = createButtons("dinoroots", "go2");
-    const go2 = createButtons("funnyflare3", "hburn3");
-    const hburn3 = createButtons("gomorrah2", "hotk3");
-    const hotk3 = createButtons("healburn3", "hi3");
-    const hi3 = createButtons("healthotk3", "lrings3");
-    const lrings3 = createButtons("himps3", "lime2");
-    const lime2 = createButtons("laserrings3", "mlord3");
-    const mlord3 = createButtons("limerence2", "pank3");
-    const pank3 = createButtons("muglord3", "recy2");
-    const recy2 = createButtons("pankration3", "tur2");
-    const tur2 = createButtons("recycling2", "ws3");
-    const ws3 = createButtons("turles2", "midhelp");
-    const alldecksrow = createButtons("youngeggmartin3", "sav4");
-    const sav4 = createButtons("helpall", "droots3");
-    const droots3 = createButtons("savage4", "ftimps4");
-    const ftimps4 = createButtons("dinoroots3", "ff4");
-    const ff4 = createButtons("frozentelimps4", "go3");
-    const go3 = createButtons("funnyflare4", "gps3");
-    const gps3 = createButtons("gomorrah3", "hburn4");
-    const hburn4 = createButtons("gravepiratestache3", "hotk4");
-    const hotk4 = createButtons("healburn4", "hi4");
-    const hi4 = createButtons("healthotk4", "lrings4");
-    const lrings4 = createButtons("himps4", "lstrike2");
-    const lstrike2 = createButtons("laserrings4", "lime3");
-    const lime3 = createButtons("leafystrike2", "mcontrol3");
-    const mcontrol3 = createButtons("limerence3", "mgold3");
-    const mgold3 = createButtons("mechacontrol3", "mlord4");
-    const mlord4 = createButtons("mechagold3", "neuro3");
-    const neuro3 = createButtons("muglord4", "pank4");
-    const pank4 = createButtons("neurotherapy3", "recy3");   
-    const recy3 = createButtons("pankration4", "rcatster3");
-    const rcatster3 = createButtons("recycling3", "tank3");
-    const tank3 = createButtons("reversecatster3", "tc3")
-    const tc3 = createButtons("tanktuna3", "tur3");
-    const tur3 = createButtons("toyotacontrolla3", "um4");
-    const um4 = createButtons("turles3", "ws4");
-    const ws4 = createButtons("uncrackamech4", "yem3");
-    const yem3 = createButtons("watersports4", "allhelp");
-    const [result] = await db.query(`SELECT 
-      savage22, dinoroots, frozentelimps, funnyflare, gomorrah, gps, healburn, healthotk,
-      himps, lasersnap, leafystrike, limerence, mechacontrol, mechagold, muglord, pankration, recycling,
-      reversecatster, shamcontrol, tanktuna, toyotacontrolla, turles, 
-      feastmech, watersports, youngeggmartin
-            FROM imdecks im
-            inner join bfdecks bf on (im.deckinfo = bf.deckinfo) 
-            inner join sfdecks sf on (im.deckinfo = sf.deckinfo)
-            inner join spdecks sp on (im.deckinfo = sp.deckinfo)
-            inner join pbdecks pb on (im.deckinfo = pb.deckinfo)
-            inner join gkdecks gk on (im.deckinfo = gk.deckinfo)
-            inner join ncdecks nc on (im.deckinfo = nc.deckinfo)
-            inner join czdecks cz on (im.deckinfo = cz.deckinfo)
-            inner join hgdecks hg on (im.deckinfo = hg.deckinfo)
-            inner join sbdecks sb on (im.deckinfo = sb.deckinfo)
-            inner join rbdecks rb on (im.deckinfo = rb.deckinfo)
-            inner join smdecks sm on (im.deckinfo = sm.deckinfo)
-            inner join ntdecks nt on (im.deckinfo = nt.deckinfo)
-            inner join zmdecks zm on (im.deckinfo = zm.deckinfo)
-            inner join bcdecks bc on (im.deckinfo = bc.deckinfo)`);
-    const user = await client.users.fetch("742719800395956244");
-    const xera = createHelpEmbed(
-      `${user.displayName} Decks`,
-      `To view the Decks Made By ${user.displayName} please select an option from the select menu below!
-Note: ${user.displayName} has ${xeraDecks.allDecks.length} total decks in Tbot`,
-      user.displayAvatarURL()
-    );
-    const allxera = createHelpEmbed(
-      `All Decks Made By ${user.displayName}`,
-      `My commands for decks made by ${user.displayName} are ${toBuildString}`,
-      user.displayAvatarURL(),
-      `To find out more about the Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.allDecks.length} total decks in Tbot`
-    );
-    const compxera = createHelpEmbed(
-      `${user.displayName} Competitive Decks`,
-      `My Competitive Decks made by ${user.displayName} are ${toBuildCompString}`,
-      user.displayAvatarURL(),
-      `To view the Competitive Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.competitiveDecks.length} Competitive decks in tbot`
-    );
-    const ladderxera = createHelpEmbed(
-      `${user.displayName} Ladder Decks`,
-      `My Ladder Decks made by ${user.displayName} are ${toBuildLadderString}`,
-      user.displayAvatarURL(),
-      `To view the Ladder Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.ladderDecks.length} Ladder decks in tbot`
-    );
-    const memexera = createHelpEmbed(
-      `${user.displayName} Meme Decks`,
-      `My Meme Decks made by ${user.displayName} are ${toBuildMeme}`,
-      user.displayAvatarURL(),
-      `To view the Meme Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.memeDecks.length} Meme decks in tbot`
-    );
-    const comboxera = createHelpEmbed(
-      `${user.displayName} Combo Decks`,
-      `My Combo Decks made by ${user.displayName} are ${toBuildComboString}`,
-      user.displayAvatarURL(),
-      `To view the Combo Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.comboDecks.length} Combo decks in tbot`
-    );
-    const controlxera = createHelpEmbed(
-      `${user.displayName} Control Decks`,
-      `My Control Decks made by ${user.displayName} are ${toBuildControlString}`,
-      user.displayAvatarURL(),
-      `To view the Control Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.controlDecks.length} Control decks in tbot`
-    );
-    const midrangexera = createHelpEmbed(
-      `${user.displayName} Midrange Decks`,
-      `My Midrange Decks made by ${user.displayName} are ${toBuildMidString}`,
-      user.displayAvatarURL(),
-      `To view the Midrange Decks Made By ${user.displayName} please use the commands listed above or click on the buttons below!
-Note: ${user.displayName} has ${xeraDecks.midrangeDecks.length} Midrange decks in tbot`
-    );
-    /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("#e4c1f9");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    const savage22 = createDeckEmbed(result, "savage22");
-    const funnyflare = createDeckEmbed(result, "funnyflare");
-    const gomorrah = createDeckEmbed(result, "gomorrah");
-    const himps = createDeckEmbed(result, "himps");
-    const laserrings = createDeckEmbed(result, "lasersnap");
-    const leafystrike = createDeckEmbed(result, "leafystrike");
-    const dinoroots = createDeckEmbed(result, "dinoroots");
-    const limerence = createDeckEmbed(result, "limerence");
-    const reversecatster = createDeckEmbed(result, "reversecatster");
-    const mechacontrol = createDeckEmbed(result, "mechacontrol");
-    const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
-    const mechagold = createDeckEmbed(result, "mechagold");
-    const youngeggmartin = createDeckEmbed(result, "youngeggmartin");
-    const pankration = createDeckEmbed(result, "pankration");
-    const healburn = createDeckEmbed(result, "healburn");
-    const frozentelimps = createDeckEmbed(result, "frozentelimps");
-    const tanktuna = createDeckEmbed(result, "tanktuna");
-    const muglord = createDeckEmbed(result, "muglord");
-    const neurotherapy = createDeckEmbed(result, "shamcontrol");
-    const healthotk = createDeckEmbed(result, "healthotk");
-    const turles = createDeckEmbed(result, "turles");
-    const recycling = createDeckEmbed(result, "recycling");
-    const uncrackamech = createDeckEmbed(result, "feastmech");
-    const watersports = createDeckEmbed(result, "watersports");
-    const gravepiratestache = createDeckEmbed(result, "gps");
-    const m = await message.channel.send({ embeds: [xera], components: [row] });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "comp") {
-        await i.update({ embeds: [compxera], component: [comprow] });
-      } else if (value == "control") {
-        await i.update({ embeds: [controlxera], components: [controlrow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allxera], components: [alldecksrow] });
-      } else if (value == "meme") {
-        await i.update({ embeds: [memexera], components: [memerow] });
-      } else if (value == "combo") {
-        await i.update({ embeds: [comboxera], components: [comborow] });
-      } else if (value == "midrange") {
-        await i.update({ embeds: [midrangexera], components: [midrangerow] });
-      } else if (value == "aggro") {
-        await i.reply({
-          embeds: [gravepiratestache],
-          flags: MessageFlags.Ephemeral,
-        });
-      } else if (value == "ladder") {
-        await i.update({ embeds: [ladderxera], components: [ladderrow] });
-      } else if (value == "tempo") {
-        await i.update({ embeds: [tempoxera], components: [temporow] });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        ladderhelp: { embed: ladderxera, component: ladderrow },
-        helpladder: { embed: ladderxera, component: ladderrow },
-        hi: { embed: himps, component: hi },
-        himps: { embed: himps, component: hi },
-        hi2: { embed: himps, component: hi2 },
-        himps2: { embed: himps, component: hi2 },
-        hi3: { embed: himps, component: hi3 },
-        himps3: { embed: himps, component: hi3 },
-        hi4: { embed: himps, component: hi4 },
-        himps4: { embed: himps, component: hi4 },
-        controlhelp: { embed: controlxera, component: controlrow },
-        helpcontrol: { embed: controlxera, component: controlrow },
-        helpmeme: { embed: memexera, component: memerow },
-        memehelp: { embed: memexera, component: memerow },
-        helpcombo: { embed: comboxera, component: comborow },
-        combohelp: { embed: comboxera, component: comborow },
-        helpmid: { embed: midrangexera, component: midrangerow },
-        midhelp: { embed: midrangexera, component: midrangerow },
-        ws: { embed: watersports, component: ws },
-        watersports: { embed: watersports, component: ws },
-        ws2: { embed: watersports, component: ws2 },
-        watersports2: { embed: watersports, component: ws2 },
-        ws3: { embed: watersports, component: ws3 },
-        watersports3: { embed: watersports, component: ws3 },
-        ws4: { embed: watersports, component: ws4 },
-        watersports4: { embed: watersports, component: ws4 },
-        gps: { embed: gravepiratestache, component: gps },
-        gravepiratestache: { embed: gravepiratestache, component: gps },
-        gps2: { embed: gravepiratestache, component: gps2 },
-        gravepiratestache2: { embed: gravepiratestache, component: gps2 },
-        gps3: { embed: gravepiratestache, component: gps3 },
-        gravepiratestache3: { embed: gravepiratestache, component: gps3 },
-        go: { embed: gomorrah, component: go },
-        gomorrah: { embed: gomorrah, component: go },
-        go2: { embed: gomorrah, component: go2 },
-        gomorrah2: { embed: gomorrah, component: go2 },
-        go3: { embed: gomorrah, component: go3 },
-        gomorrah3: { embed: gomorrah, component: go3 },
-        um: { embed: uncrackamech, component: um },
-        uncrackamech: { embed: uncrackamech, component: um },
-        um2: { embed: uncrackamech, component: um2 },
-        uncrackamech2: { embed: uncrackamech, component: um2 },
-        um3: { embed: uncrackamech, component: um3 },
-        uncrackmech3: { embed: uncrackamech, component: um3 },
-        um4: { embed: uncrackamech, component: um4 },
-        uncrackamech4: { embed: uncrackamech, component: um4 },
-        tc: { embed: toyotacontrolla, component: tc },
-        toyotacontrolla: { embed: toyotacontrolla, component: tc },
-        tc2: { embed: toyotacontrolla, component: tc2 },
-        toyotacontrolla2: { embed: toyotacontrolla, component: tc2 },
-        tc3: { embed: toyotacontrolla, component: tc3 },
-        toyotacontrolla3: { embed: toyotacontrolla, component: tc3 },
-        lrings: { embed: laserrings, component: lrings },
-        laserrings: { embed: laserrings, component: lrings },
-        lrings2: { embed: laserrings, component: lrings2 },
-        laserrings2: { embed: laserrings, component: lrings2 },
-        lrings3: { embed: laserrings, component: lrings3 },
-        laserrings3: { embed: laserrings, component: lrings3 },
-        lrings4: { embed: laserrings, component: lrings4 },
-        laserrings4: { embed: laserrings, component: lrings4 },
-        lime: { embed: limerence, component: lime },
-        limerence: { embed: limerence, component: lime },
-        lime2: { embed: limerence, component: lime2 },
-        limerence2: { embed: limerence, component: lime2 },
-        lime3: { embed: limerence, component: lime3 },
-        limerence3: { embed: limerence, component: lime3 },
-        helpcomp: { embed: compxera, component: comprow },
-        comphelp: { embed: compxera, component: comprow },
-        helpall: { embed: allxera, component: alldecksrow },
-        allhelp: { embed: allxera, component: alldecksrow },
-        sav: { embed: savage22, component: sav },
-        savage: { embed: savage22, component: sav },
-        sav2: { embed: savage22, component: sav2 },
-        savage2: { embed: savage22, component: sav2 },
-        sav3: { embed: savage22, component: sav3 },
-        savage3: { embed: savage22, component: sav3 },
-        sav4: { embed: savage22, component: sav4 },
-        savage4: { embed: savage22, component: sav4 },
-        ff: { embed: funnyflare, component: ff },
-        funnyflare: { embed: funnyflare, component: ff },
-        ff2: { embed: funnyflare, component: ff2 },
-        funnyflare2: { embed: funnyflare, component: ff2 },
-        ff3: { embed: funnyflare, component: ff3 },
-        funnyflare3: { embed: funnyflare, component: ff3 },
-        ff4: { embed: funnyflare, component: ff4 },
-        funnyflare4: { embed: funnyflare, component: ff4 },
-        ftimps: { embed: frozentelimps, component: ftimps },
-        frozentelimps: { embed: frozentelimps, component: ftimps },
-        ftimps2: { embed: frozentelimps, component: ftimps2 },
-        frozentelimps2: { embed: frozentelimps, component: ftimps2 },
-        ftimps3: { embed: frozentelimps, component: ftimps3 },
-        frozentelimps3: { embed: frozentelimps, component: ftimps3 },
-        ftimps4: { embed: frozentelimps, component: ftimps4 },
-        frozentelimps4: { embed: frozentelimps, component: ftimps4 },
-        hburn: { embed: healburn, component: hburn },
-        healburn: { embed: healburn, component: hburn },
-        hburn2: { embed: healburn, component: hburn2 },
-        healburn2: { embed: healburn, component: hburn2 },
-        hburn3: { embed: healburn, component: hburn3 },
-        healburn3: { embed: healburn, component: hburn3 },
-        hburn4: { embed: healburn, component: hburn4 },
-        healburn4: { embed: healburn, component: hburn4 },
-        rcatster: { embed: reversecatster, component: rcatster },
-        reversecatster: { embed: reversecatster, component: rcatster },
-        rcatster2: { embed: reversecatster, component: rcatster2 },
-        reversecatster2: { embed: reversecatster, component: rcatster2 },
-        rcatster3: { embed: reversecatster, component: rcatster3 },
-        reversecatster3: { embed: reversecatster, component: rcatster3 },
-        recy: { embed: recycling, component: recy },
-        recycling: { embed: recycling, component: recy },
-        recy2: { embed: recycling, component: recy2 },
-        recycling2: { embed: recycling, component: recy2 },
-        recy3: { embed: recycling, component: recy3 },
-        recycling3: { embed: recycling, component: recy3 },
-        neuro: { embed: neurotherapy, component: neuro },
-        neurotherapy: { embed: neurotherapy, component: neuro },
-        neuro2: { embed: neurotherapy, component: neuro2 },
-        neurotherapy2: { embed: neurotherapy, component: neuro2 },
-        neuro3: { embed: neurotherapy, component: neuro3 },
-        neurotherapy3: { embed: neurotherapy, component: neuro3 },
-        mgold: { embed: mechagold, component: mgold },
-        mechagold: { embed: mechagold, component: mgold },
-        mgold2: { embed: mechagold, component: mgold2 },
-        mechagold2: { embed: mechagold, component: mgold2 },
-        mgold3: { embed: mechagold, component: mgold3 },
-        mechagold3: { embed: mechagold, component: mgold3 },
-        hotk: { embed: healthotk, component: hotk },
-        healthotk: { embed: healthotk, component: hotk },
-        hotk2: { embed: healthotk, component: hotk2 },
-        healthotk2: { embed: healthotk, component: hotk2 },
-        hotk3: { embed: healthotk, component: hotk3 },
-        healthotk3: { embed: healthotk, component: hotk3 },
-        hotk4: { embed: healthotk, component: hotk4 },
-        healthotk4: { embed: healthotk, component: hotk4 },
-        lstrike: { embed: leafystrike, component: lstrike },
-        leafystrike: { embed: leafystrike, component: lstrike },
-        lstrike2: { embed: leafystrike, component: lstrike2 },
-        yem: { embed: youngeggmartin, component: yem },
-        youngeggmartin: { embed: youngeggmartin, component: yem },
-        yem2: { embed: youngeggmartin, component: yem2 },
-        youngeggmartin2: { embed: youngeggmartin, component: yem2 },
-        yem3: { embed: youngeggmartin, component: yem3 },
-        youngeggmartin3: { embed: youngeggmartin, component: yem3 }, 
-        tur: { embed: turles, component: tur },
-        turles: { embed: turles, component: tur },
-        tur2: { embed: turles, component: tur2 },
-        turles2: { embed: turles, component: tur2 },
-        tur3: { embed: turles, component: tur3 },
-        turles3: { embed: turles, component: tur3 }, 
-        pank: { embed: pankration, component: pank },
-        pankration: { embed: pankration, component: pank },
-        pank2: { embed: pankration, component: pank2 },
-        pankration2: { embed: pankration, component: pank2 },
-        pank3: { embed: pankration, component: pank3 },
-        pankration3: { embed: pankration, component: pank3 },
-        pank4: { embed: pankration, component: pank4 }, 
-        pankration4: { embed: pankration, component: pank4 },
-        droots: { embed: dinoroots, component: droots }, 
-        dinoroots: { embed: dinoroots, component: droots },
-        droots2: { embed: dinoroots, component: droots2 },
-        dinoroots2: { embed: dinoroots, component: droots2 },
-        droots3: { embed: dinoroots, component: droots3 },
-        dinoroots3: { embed: dinoroots, component: droots3 }, 
-        mlord: { embed: muglord, component: mlord },
-        muglord: { embed: muglord, component: mlord },
-        mlord2: { embed: muglord, component: mlord2 },
-        muglord2: { embed: muglord, component: mlord2 },
-        mlord3: { embed: muglord, component: mlord3 },
-        muglord3: { embed: muglord, component: mlord3 },
-        mlord4: { embed: muglord, component: mlord4 },
-        muglord4: { embed: muglord, component: mlord4 }, 
-        tank: { embed: tanktuna, component: tank },
-        tanktuna: { embed: tanktuna, component: tank },
-        tank2: { embed: tanktuna, component: tank2 },
-        tanktuna2: { embed: tanktuna, component: tank2 },
-        tank3: { embed: tanktuna, component: tank3 },
-        tanktuna3: { embed: tanktuna, component: tank3 },
-        mcontrol: { embed: mechacontrol, component: mcontrol },
-        mechacontrol: { embed: mechacontrol, component: mcontrol },
-        mcontrol2: { embed: mechacontrol, component: mcontrol2 },
-        mechacontrol2: { embed: mechacontrol, component: mcontrol2 }, 
-        mcontrol3: { embed: mechacontrol, component: mcontrol3 },
-        mechacontrol3: { embed: mechacontrol, component: mcontrol3 }
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Invalid button interaction.",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+      components: [new ActionRowBuilder().addComponents(select)],
+    });
+
+    const specialCategories = [
+      "comp",
+      "all",
+      "ladder",
+      "meme",
+      "aggro",
+      "midrange",
+      "combo",
+      "control",
+    ];
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
+      try {
+        if (i.isStringSelectMenu()) {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          // Reply with the category embed and two buttons:
+          // left -> last deck in category, right -> first deck in category.
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+
+          // avoid duplicate custom_ids when firstIndex === lastIndex by appending suffix to one id
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+
+          const actionRow = new ActionRowBuilder().addComponents(
+            leftBtn,
+            rightBtn
+          );
+
+          // update the original message to show category overview + navigation options
+          return i.update({ embeds: [catEmbed], components: [actionRow] });
+        }
+
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          if (action === "nav") {
+            const category = parts[1];
+            // parseInt will ignore any trailing non-numeric suffix like "_alt"
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+            const embed = buildDeckEmbed(list[index].raw);
+            const nav = buildNavRow(
+              category,
+              index,
+              list.length,
+              specialCategories
+            );
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const pretty =
+              category === "comp"
+                ? "Competitive"
+                : category.charAt(0).toUpperCase() + category.slice(1);
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ||
+              createCategoryEmbed(pretty, [], 0, thumb);
+
+            // build left -> last, right -> first (avoid duplicate ids when only one item)
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback: unknown customId
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error(err);
+        if (!i.replied && !i.deferred) {
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
       }
+    });
+
+    collector.on("end", () => {
+      m.edit({ components: [] }).catch(() => {});
     });
   },
 };

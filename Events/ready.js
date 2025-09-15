@@ -68,7 +68,10 @@ module.exports = {
         youtubers[Math.floor(Math.random() * youtubers.length)];
       const randomTourney =
         tourneys[Math.floor(Math.random() * tourneys.length)];
-      const randomDeck = commands[Math.floor(Math.random() * commands.length)];
+    let randomDeck = null;
+if (commands.length > 0) {
+  randomDeck = commands[Math.floor(Math.random() * commands.length)];
+}
       const randomStreamers =
         streamers[Math.floor(Math.random() * streamers.length)];
       const customStatus = [
@@ -163,7 +166,6 @@ module.exports = {
         "They ask where's set 5 but never asked how's set 5",
         "Selling my soul to get all cards",
         "Playing grape power on a 0atk plant",
-        "Just bought a Solar Flare body pillow",
         "[bad card] is good, change my mind",
         "[good card] is bad, change my mind",
         "Overdosing cornucopium",
@@ -281,7 +283,7 @@ module.exports = {
         "(Best experienced with headphones!)",
         "Nightcap starts with 2 Lightning Reeds and a Snapdragon. He also sleeps with a teddy bear! Tell everyone!",
         "Pirate Evolution: Instead",
-        "Play a deck suggested by @Tbot random!",
+        "Play a deck suggested by /randomdeck!",
         "A bot for all things PvZ Heroes!",
         "Currently throwing games on Ranked",
         "Currently speedrunning to Ultimate League with Heal Midrose 🤓",

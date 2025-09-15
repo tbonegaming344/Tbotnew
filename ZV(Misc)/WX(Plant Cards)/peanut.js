@@ -9,7 +9,6 @@ module.exports = {
 		.setTitle("Pea-Nut | <:Guardian:1062501130501885973>")
 		.setDescription("**\\- Pea Nut Plant -**")
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
 							 	value: "2 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
 							 {

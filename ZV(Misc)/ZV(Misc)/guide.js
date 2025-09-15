@@ -66,7 +66,7 @@ module.exports = {
    guideContainer.addTextDisplayComponents(guideText2);
    guideContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
    const guideText3 = new TextDisplayBuilder().setContent(
-    "If you’re confused and feel you need both rundowns of abbreviations and more visual examples, check out the glossary option in the select menu below: The deck building guide parts from the doc are divided into specific sections on the select menu below, and the examples page can give some examples of bad deckbuilding")
+    "If you're confused and feel you need both rundowns of abbreviations and more visual examples, check out the glossary option in the select menu below: The deck building guide parts from the doc are divided into specific sections on the select menu below, and the examples page can give some examples of bad deckbuilding")
    guideContainer.addTextDisplayComponents(guideText3);
     guideContainer.addActionRowComponents(selectRow);
    message.channel.send({
@@ -138,7 +138,7 @@ module.exports = {
     const finishingPowerText2 = new TextDisplayBuilder().setContent("The archetype of the deck you’re using heavily impacts what finishers it should have, but this is usually pretty intuitive. The finishers in your deck should match the pace of the rest of your deck, so that they fit in seamlessly. For example, you really don’t want to be running Zombot and Octo zombie in your aggro Flag swarm deck, as they come into play far too late into the game, when you’re likely to have lost.");
     finishingPowerContainer.addTextDisplayComponents(finishingPowerText2);
     finishingPowerContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
-    const finishingPowerText3 = new TextDisplayBuilder().setContent("It’s also common to run multiple finishers. Having multiple finishers in a deck guarantees (at least as far as possible) that you’ll have a win condition that actually works in the matchup you’re playing. A classic example would be Rustbolt’s old control decks, which would usually use both Mechasaur and Trickster at the same time. Mechasaur acted as your beefy, board building finisher that could be teleported in and gained more value the longer it stayed on the board, forcing your opponent to either answer it or lose outright.");
+    const finishingPowerText3 = new TextDisplayBuilder().setContent("It's also common to run multiple finishers. Having multiple finishers in a deck guarantees (at least as far as possible) that you’ll have a win condition that actually works in the matchup you’re playing. A classic example would be Rustbolt’s old control decks, which would usually use both Mechasaur and Trickster at the same time. Mechasaur acted as your beefy, board building finisher that could be teleported in and gained more value the longer it stayed on the board, forcing your opponent to either answer it or lose outright.");
     finishingPowerContainer.addTextDisplayComponents(finishingPowerText3);
     finishingPowerContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
     const finishingPowerText4 = new TextDisplayBuilder().setContent("Trickster was the perfect addition, as it not only benefitted from tricks being played (which is the primary way of controlling the board when playing RB) but also offered some much-needed burst damage. This led to a deck that, despite its flaws, had a clear-cut way of how it's supposed to win.");
@@ -171,7 +171,7 @@ module.exports = {
     const superpowersAndClosingThoughtsContainer = new ContainerBuilder()
     superpowersAndClosingThoughtsContainer.addTextDisplayComponents(new TextDisplayBuilder().setContent("# __5. Superpowers and Closing Thoughts__"));
     const superpowersAndClosingThoughtsText = new TextDisplayBuilder().setContent(
-        "Before we finish this guide off, we’re going to quickly talk about superpowers. While most heroes definitely benefit from their supers, they’re not too important to consider in the grand scheme of your deck building. ",
+        "Before we finish this guide off, we're going to quickly talk about superpowers. While most heroes definitely benefit from their supers, they’re not too important to consider in the grand scheme of your deck building. ",
     )
     superpowersAndClosingThoughtsContainer.addTextDisplayComponents(superpowersAndClosingThoughtsText);
     const superpowersAndClosingThoughtsText2 = new TextDisplayBuilder().setContent("Supers are a miniscule fraction of the game and outside early game answers or some incredibly overpowered supers such as Brain freeze’s full board freeze signature, you shouldn’t really let them hinder what sort of decks you build for each hero. They’re additional spice, not the main course, and should be treated as such. Do however make sure to take them into account in your games, but do not think of your hero's supers as a centerpiece in your list, since you cannot ever guarantee that you’ll get the exact one you want.");
@@ -225,7 +225,7 @@ module.exports = {
     examplesContainer.addSeparatorComponents(separator => separator.setSpacing(SeparatorSpacingSize.Large));
     const examplesText3 = new TextDisplayBuilder().setContent([
         "### Example 2:", 
-        "When building meme ideas, it’s important to realize  they sometimes aren’t worth it if they do minimal damage or literally nothing. For example, I have this old SF deck that is poorly made. It has a heal base, but the meme is to cuke your own 7 drop card to do 6 damage to face. Not only is this meme not worth it, but you waste a whole turn to kill your own board with minimal backup lategame behind it. Cuke is also a very underwhelming card that is outclassed by other cards that do way more for the same cost. If the meme does nothing, don’t use it."
+        "When building meme ideas, it's important to realize  they sometimes aren't worth it if they do minimal damage or literally nothing. For example, I have this old SF deck that is poorly made. It has a heal base, but the meme is to cuke your own 7 drop card to do 6 damage to face. Not only is this meme not worth it, but you waste a whole turn to kill your own board with minimal backup lategame behind it. Cuke is also a very underwhelming card that is outclassed by other cards that do way more for the same cost. If the meme does nothing, don’t use it."
     ].join("\n"));
     const example2Thumbnail = new ThumbnailBuilder().setURL("https://media.discordapp.net/attachments/1312037763784376370/1407866190449348728/C1B37AF1-1401-40E1-9170-4A2580A3CCF4.png?ex=68a7a910&is=68a65790&hm=f381b32730ea90c1405d31d6194992c816386c5ec17e5be665f6cbeb520d41aa&=&format=webp&quality=lossless&width=771&height=770")
     const example2Section = new SectionBuilder().addTextDisplayComponents(examplesText3).setThumbnailAccessory(example2Thumbnail);

@@ -8,140 +8,197 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-/**
- * The createHelpEmbed function creates an embed with the given title, description, thumbnail, and footer.
- * @param {string} title - The title of the embed
- * @param {string} description - The description of the embed
- * @param {string} thumbnail - The thumbnail of the embed
- * @param {string} footer - The footer of the embed
- * @returns {EmbedBuilder} - The embed object
- */
+// small helpers
 function createHelpEmbed(title, description, thumbnail, footer) {
-  const embed = new EmbedBuilder()
+  const e = new EmbedBuilder()
     .setTitle(title)
     .setDescription(description)
     .setThumbnail(thumbnail)
     .setColor("Red");
-  if (footer) {
-    embed.setFooter({ text: `${footer}` });
-  }
+  if (footer) e.setFooter({ text: footer });
+  return e;
+}
+function createCategoryEmbed(name, deckNames, total, thumbnail) {
+  const isAll = name.toLowerCase() === "all";
+  const description =
+    Array.isArray(deckNames) && deckNames.length
+      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
+      : "No decks available";
+  return new EmbedBuilder()
+    .setTitle(isAll ? "Nightcap Decks" : `Nightcap ${name} Decks`)
+    .setDescription(
+      isAll
+        ? `All Nightcap decks in Tbot are:${description}`
+        : `My ${name} decks for Nightcap are: ${description}`
+    )
+    .setThumbnail(thumbnail)
+    .setColor("Red")
+    .setFooter({
+      text: isAll
+        ? `Nightcap has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
+        : `Nightcap has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
+    });
+}
+function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("White");
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  )
+    embed.setImage(row.image);
   return embed;
+}
+function buildNavRow(category, currentIndex, total, specialCategories = []) {
+  const isSpecial = specialCategories.includes(category);
+  const prevIndex = (currentIndex - 1 + total) % total;
+  const nextIndex = (currentIndex + 1) % total;
+
+  let leftId =
+    isSpecial && currentIndex === 0
+      ? `back_to_list_${category}`
+      : `nav_${category}_${prevIndex}`;
+  let rightId =
+    isSpecial && currentIndex === total - 1
+      ? `back_to_list_${category}`
+      : `nav_${category}_${nextIndex}`;
+  if (leftId === rightId) rightId = `${rightId}_alt`;
+
+  const left = new ButtonBuilder()
+    .setCustomId(leftId)
+    .setEmoji("⬅️")
+    .setStyle(
+      leftId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+  const right = new ButtonBuilder()
+    .setCustomId(rightId)
+    .setEmoji("➡️")
+    .setStyle(
+      rightId.startsWith("back_to_list")
+        ? ButtonStyle.Secondary
+        : ButtonStyle.Primary
+    );
+
+  // disable when only one deck to avoid confusion
+  if (total <= 1) {
+    left.setDisabled(true);
+    right.setDisabled(true);
+  }
+  return new ActionRowBuilder().addComponents(left, right);
 }
 module.exports = {
   name: `nightcap`,
   aliases: [`nc`, `night`, `cap`],
   category: `Plant Cards`,
   run: async (client, message, args) => {
-    const cmd = new ActionRowBuilder().addComponents(
-      new ButtonBuilder()
-        .setCustomId("cmd")
-        .setLabel("Night Cap Decks")
-        .setEmoji("<:NCShrug:831993812788051978>")
-        .setStyle(ButtonStyle.Primary)
-    );
-    const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("select an option below to view Nightcap's decklists")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setValue("budget")
-          .setDescription("Decks that are cheap for new players")
-          .setEmoji("💰"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Decks")
-          .setValue("comp")
-          .setDescription("Some of the Best Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>"),
-           new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that are generally only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
-          .setValue("aggro")
-          .setDescription(
-            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Nightcap Decks")
-          .setDescription("All of nightcap's decks")
-          .setValue("all")
-      );
-    const row = new ActionRowBuilder().addComponents(select);
-    const nightcapDecks = {
-      budgetDecks: ["budgetnc"],
-      competitiveDecks: ["cyburn", "turles"],
-      ladderDecks: ["toyotacontrolla"],
-      aggroDecks: ["budgetnc"],
-      comboDecks: ["cyburn"],
-      controlDecks: ["toyotacontrolla"],
-      midrangeDecks: ["cyburn", "turles"],
-      allDecks: ["budgetnc", "cyburn", "toyotacontrolla", "turles"],
-    };
+    // fetch DB once and build automation
+    const [rows] = await db.query("SELECT * FROM ncdecks");
+    if (!rows || rows.length === 0)
+      return message.channel.send("No Nightcap decks found in the database.");
 
-     /**
-     * The buildDeckString function takes an array of deck names and builds a string with each deck name on a new line, prefixed with the bot mention.
-     * @param {Array} decks - The array of deck names to build the string from
-     * @returns {string} - The string of deck names
-     */
-    function buildDeckString(decks) {
-      return decks
-        .map((deck) => `\n<@1043528908148052089> **${deck}**`)
-        .join("");
+    // normalize db rows -> deck objects
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        raw: r,
+      };
+    });
+
+    function matchesCategory(row, cat) {
+      const t = row.typeNorm;
+      const a = row.archetypeNorm;
+      if (cat === "all") return true;
+      if (cat === "comp")
+        return (
+          t.includes("competitive") ||
+          t.includes("comp") ||
+          a.includes("competitive") ||
+          a.includes("comp")
+        );
+      if (cat === "budget") return t.includes("budget") || a.includes("budget");
+      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
+      if (cat === "meme") return t.includes("meme") || a.includes("meme");
+      if (cat === "combo") return t.includes("combo") || a.includes("combo");
+      if (cat === "control")
+        return a.includes("control") || t.includes("control");
+      if (cat === "midrange")
+        return (
+          a.includes("midrange") ||
+          t.includes("midrange") ||
+          a.includes("mid") ||
+          t.includes("mid")
+        );
+      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
+      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
+      return false;
     }
-    const toBuildCompString = buildDeckString(nightcapDecks.competitiveDecks);
-    const toBuildString = buildDeckString(nightcapDecks.allDecks);
-    const toBuildMidrangeString = buildDeckString(
-      nightcapDecks.midrangeDecks)
-    /**
-     * The createButtons function creates a row of buttons for the embed
-     * @param {string} leftButtonId - The ID of the left button to control the left button 
-     * @param {string} rightButtonId - The ID of the right button to control the right button
-     * @returns {ActionRowBuilder} - The ActionRowBuilder object with the buttons
-     */
-    function createButtons(leftButtonId, rightButtonId) {
-      return new ActionRowBuilder().addComponents(
-        new ButtonBuilder()
-          .setCustomId(leftButtonId)
-          .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
-          .setStyle(ButtonStyle.Primary),
-        new ButtonBuilder()
-          .setCustomId(rightButtonId)
-          .setEmoji("<:arrowright:1271446796207525898>")
-          .setStyle(ButtonStyle.Primary)
+
+    const categories = [
+      "budget",
+      "comp",
+      "ladder",
+      "meme",
+      "combo",
+      "control",
+      "midrange",
+      "tempo",
+      "aggro",
+      "all",
+    ];
+    const deckLists = {};
+    for (const cat of categories)
+      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+
+    const thumb =
+      "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044";
+    const categoryEmbeds = {};
+    for (const cat of categories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        pretty,
+        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
       );
     }
-    const compRow = createButtons("turles", "cburn");
-    const cburn = createButtons("helpcomp", "tur");
-    const tur = createButtons("cyburn", "comphelp");
-    const midrangeRow = createButtons("turles2", "cburn2");
-    const cburn2 = createButtons("helpmidrange", "tur2");
-    const tur2 = createButtons("cyburn2", "midrangehelp");
-    const alldecksrow = createButtons("turles3", "bnc");
-    const bnc = createButtons("helpall", "cburn3");
-    const cburn3 = createButtons("budgetnc", "tc");
-    const tc= createButtons("cyburn3", "tur3");
-    const tur3 = createButtons("toyotacontrolla", "allhelp");
     const nc = new EmbedBuilder()
       .setThumbnail(
         "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044"
@@ -167,139 +224,235 @@ module.exports = {
           value: "He'a fun guy.",
         }
       );
-    const embed = createHelpEmbed(
-      "Night Cap(NC) Decks",
-      `To view the Night Cap decks please select an option from the select menu below!
-  Note: Night Cap has ${nightcapDecks.allDecks.length} total decks in Tbot`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044"
+
+    const helpncButton = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+        .setCustomId("helpnc")
+        .setLabel("Nightcap Decks")
+        .setStyle(ButtonStyle.Danger)
+        .setEmoji("<:NightCapShrug:1100167771159023687>")
     );
-    const compEmbed = createHelpEmbed(
-      "Night Cap Competitive Decks",
-      `My Competitive Decks for Night Cap(NC) are ${toBuildCompString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
-      `To view the Competitive Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Competitive decks!
-  Note: Night Cap has ${nightcapDecks.competitiveDecks.length} Competitive decks in Tbot`
-    );
-     const midrangeEmbed = createHelpEmbed(
-      "Night Cap Midrange Decks",
-      `My Midrange Decks for Night Cap(NC) are ${toBuildMidrangeString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
-      `To view the Midrange Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Midrange decks!
-Note: Night Cap has ${nightcapDecks.midrangeDecks.length} Midrange decks in Tbot`
-    );
-    const allEmbed = createHelpEmbed(
-      "Night Cap Decks",
-      `My Decks for Night Cap(NC) are ${toBuildString}`,
-      "https://static.wikia.nocookie.net/plantsvszombies/images/3/32/HD_Night_Cap%27s_victory_pose.png/revision/latest?cb=20160507044044",
-      `To view the Night Cap decks please use the commands listed above or click on the buttons below to navigate through all Night Cap decks!
-  Note: Night Cap has ${nightcapDecks.allDecks.length} decks in Tbot`
-    );
-    const [result] = await db.query(`SELECT * from ncdecks`);
-     /**
-     * The createDeckEmbed function creates an embed for a specific deck
-     * @param {string} deckName - The name of the deck
-     * @param {*} result - The result from the database query
-     * @returns The embed for the deck
-     */
-    function createDeckEmbed(result, deckName) {
-      const embed = new EmbedBuilder()
-        .setTitle(`${result[5][deckName]}`)
-        .setDescription(`${result[3][deckName]}`)
-        .setFooter({ text: `${result[2][deckName]}` })
-        .addFields(
-          { name: "Deck Type", value: `${result[6][deckName]}`, inline: true },
-          { name: "Archetype", value: `${result[0][deckName]}`, inline: true },
-          { name: "Deck Cost", value: `${result[1][deckName]}`, inline: true }
-        )
-        .setColor("White");
-      const imageUrl = result[4][deckName];
-      if (imageUrl) {
-        embed.setImage(imageUrl);
-      }
-      return embed;
-    }
-    //budgetnc
-    const budgetnc = createDeckEmbed(result, "budgetnc");
-    const cyburn = createDeckEmbed(result, "cyburn");
-    const toyotacontrolla = createDeckEmbed(result, "toyotacontrolla");
-    const turles = createDeckEmbed(result, "turles");
-    const m = await message.channel.send({ embeds: [nc], components: [cmd] });
-    const iFilter = (i) => i.user.id === message.author.id;
-    /**
-     * The handleSelectMenu function handles the select menu interactions for the user
-     * @param {*} i 
-     */
-    async function handleSelectMenu(i) {
-      const value = i.values[0];
-      if (value == "budget" || value == "aggro") {
-        await i.reply({ embeds: [budgetnc], flags: MessageFlags.Ephemeral });
-      } else if (value == "comp") {
-        await i.update({ embeds: [compEmbed], components: [compRow] });
-      } else if (value == "all") {
-        await i.update({ embeds: [allEmbed], components: [alldecksrow] });
-      } else if (value == "combo") {
-        await i.reply({ embeds: [cyburn], flags: MessageFlags.Ephemeral });
-      } else if (value == "control") {
-        await i.reply({
-          embeds: [toyotacontrolla],
-          flags: MessageFlags.Ephemeral,
-        });
-      } else if (value == "midrange") {
-        await i.update({
-          embeds: [midrangeEmbed],
-          components: [midrangeRow],
-        });
-      }
-    }
-    /**
-     * the handleButtonInteraction function handles the button interactions for the decks
-     * @param {*} i - The interaction object
-     */
-    async function handleButtonInteraction(i) {
-      const buttonActions = {
-        cmd: { embed: embed, component: row },
-        comphelp: { embed: compEmbed, component: compRow },
-        allhelp: { embed: allEmbed, component: alldecksrow },
-        helpall: { embed: allEmbed, component: alldecksrow },
-        midrangehelp: { embed: midrangeEmbed, component: midrangeRow },
-        helpmidrange: { embed: midrangeEmbed, component: midrangeRow },
-        bnc: { embed: budgetnc, component: bnc },
-        budgetnc: { embed: budgetnc, component: bnc },
-        cburn: { embed: cyburn, component: cburn },
-        cyburn: { embed: cyburn, component: cburn },
-        cburn2: { embed: cyburn, component: cburn2 },
-        cyburn2: { embed: cyburn, component: cburn2 },
-        cburn3: { embed: cyburn, component: cburn3 },
-        cyburn3: { embed: cyburn, component: cburn3 },
-        tc: { embed: toyotacontrolla, component: tc },
-        toyotacontrolla: { embed: toyotacontrolla, component: tc },
-        tur: { embed: turles, component: tur },
-        turles: { embed: turles, component: tur },
-        tur2: { embed: turles, component: tur2 },
-        turles2: { embed: turles, component: tur2 },
-        tur3: { embed: turles, component: tur3 },
-        turles3: { embed: turles, component: tur3 },
-      };
-      const action = buttonActions[i.customId];
-      if (action) {
-        await i.update({
-          embeds: [action.embed],
-          components: [action.component],
-        });
-      } else {
-        await i.reply({
-          content: "Invalid button action.",
-          flags: MessageFlags.Ephemeral,
-        });
-      }
-    }
-    const collector = m.createMessageComponentCollector({ filter: iFilter });
+
+    const m = await message.channel.send({
+      embeds: [embed],
+      components: [helpncButton],
+    });
+
+    const filter = (i) => i.user.id === message.author.id;
+    const collector = m.createMessageComponentCollector({ filter });
+
     collector.on("collect", async (i) => {
-      if (i.customId == "select") {
-        await handleSelectMenu(i);
-      } else {
-        await handleButtonInteraction(i);
+      try {
+        // pressed the initial helpnc button -> show the select menu (same UI helpnc uses)
+        if (i.customId === "helpnc" && i.isButton()) {
+          const select = new StringSelectMenuBuilder()
+            .setCustomId("select")
+            .setPlaceholder(
+              "select an option below to view Nightcap's decklists"
+            )
+            .addOptions(
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Budget Deck")
+                .setValue("budget")
+                .setDescription("Decks that are cheap for new players")
+                .setEmoji("💰"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Competitive Decks")
+                .setValue("comp")
+                .setDescription("Some of the Best Decks in the game")
+                .setEmoji("<:compemote:1325461143136764060>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Ladder Deck")
+                .setValue("ladder")
+                .setDescription(
+                  "Decks that are generally only good for ranked games"
+                )
+                .setEmoji("<:ladder:1271503994857979964>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Aggro Deck")
+                .setValue("aggro")
+                .setDescription(
+                  "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Combo Deck")
+                .setValue("combo")
+                .setDescription(
+                  "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Control Deck")
+                .setValue("control")
+                .setDescription(
+                  'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Midrange Deck")
+                .setValue("midrange")
+                .setDescription(
+                  "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("All Nightcap Decks")
+                .setDescription("All of nightcap's decks")
+                .setEmoji("<:NightCapShrug:1100167771159023687>")
+                .setValue("all")
+            );
+
+          // present the select menu (replace helprb button)
+          await i.update({
+            embeds: [
+              createHelpEmbed(
+                "Night Cap Decks",
+                `Select a category below to view Night Cap Decks — Night Cap has ${normalized.length} total decks.`,
+                thumb
+              ),
+            ],
+            components: [new ActionRowBuilder().addComponents(select)],
+          });
+          return;
+        }
+
+        // select menu chosen -> show category embed with nav buttons (left -> last, right -> first)
+        if (i.isStringSelectMenu() && i.customId === "select") {
+          const value = i.values[0];
+          const list = deckLists[value] || [];
+          if (list.length === 0)
+            return i.reply({
+              content: "No decks in that category.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          // If the category has exactly one deck, reply with that deck's embed (ephemeral)
+          if (list.length === 1) {
+            const singleEmbed = buildDeckEmbed(list[0]);
+            return i.reply({
+              embeds: [singleEmbed],
+              flags: MessageFlags.Ephemeral,
+            });
+          }
+
+          const catEmbed =
+            categoryEmbeds[value] ??
+            createCategoryEmbed(
+              value.charAt(0).toUpperCase() + value.slice(1),
+              [],
+              0,
+              thumb
+            );
+          const firstIndex = 0;
+          const lastIndex = Math.max(0, list.length - 1);
+          const leftId = `nav_${value}_${lastIndex}${
+            lastIndex === firstIndex ? "_alt" : ""
+          }`;
+          const rightId = `nav_${value}_${firstIndex}`;
+
+          const leftBtn = new ButtonBuilder()
+            .setCustomId(leftId)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary);
+          const rightBtn = new ButtonBuilder()
+            .setCustomId(rightId)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary);
+          if (list.length <= 1) {
+            leftBtn.setDisabled(true);
+            rightBtn.setDisabled(true);
+          }
+
+          const row = new ActionRowBuilder().addComponents(leftBtn, rightBtn);
+          return i.update({ embeds: [catEmbed], components: [row] });
+        }
+
+        // button navigation (nav_* / back_to_list_*)
+        if (i.isButton()) {
+          const parts = i.customId.split("_");
+          const action = parts[0];
+
+          // noop or unknown -> acknowledge
+          if (action === "noop")
+            return i.reply({
+              content: "No navigation available.",
+              flags: MessageFlags.Ephemeral,
+            });
+
+          if (action === "nav") {
+            const category = parts[1];
+            const index = parseInt(parts[2], 10);
+            const list = deckLists[category] || [];
+            if (!list[index])
+              return i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+
+            const embed = buildDeckEmbed(list[index]);
+            const nav = buildNavRow(category, index, list.length, [
+              "comp",
+              "all",
+              "meme",
+              "aggro",
+              "midrange",
+              "combo",
+              "control",
+            ]);
+            return i.update({ embeds: [embed], components: [nav] });
+          }
+
+          if (action === "back" && parts[1] === "to" && parts[2] === "list") {
+            const category = parts[3];
+            const list = deckLists[category] || [];
+            const catEmbed =
+              categoryEmbeds[category] ??
+              createCategoryEmbed(
+                category.charAt(0).toUpperCase() + category.slice(1),
+                [],
+                0,
+                thumb
+              );
+            const firstIndex = 0;
+            const lastIndex = Math.max(0, list.length - 1);
+            const leftId = `nav_${category}_${lastIndex}${
+              lastIndex === firstIndex ? "_alt" : ""
+            }`;
+            const rightId = `nav_${category}_${firstIndex}`;
+
+            const leftBtn = new ButtonBuilder()
+              .setCustomId(leftId)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary);
+            const rightBtn = new ButtonBuilder()
+              .setCustomId(rightId)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary);
+            if (list.length <= 1) {
+              leftBtn.setDisabled(true);
+              rightBtn.setDisabled(true);
+            }
+
+            const actionRow = new ActionRowBuilder().addComponents(
+              leftBtn,
+              rightBtn
+            );
+            return i.update({ embeds: [catEmbed], components: [actionRow] });
+          }
+
+          // fallback
+          return i.reply({
+            content: "Unknown button.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+      } catch (err) {
+        console.error("Nightcap collector error:", err);
+        if (!i.replied && !i.deferred)
+          await i.reply({
+            content: "An error occurred.",
+            flags: MessageFlags.Ephemeral,
+          });
       }
     });
+
+    collector.on("end", () => m.edit({ components: [] }).catch(() => {}));
   },
 };

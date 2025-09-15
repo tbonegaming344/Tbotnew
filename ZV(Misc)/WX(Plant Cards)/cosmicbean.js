@@ -1,32 +1,38 @@
-const {EmbedBuilder}= require("discord.js")
+const {EmbedBuilder}= require("discord.js"); 
+const db = require("../../index.js")
 module.exports = {
 	name: `cosmicbean`,
-	aliases: [`cb2`, `cbean`],
+	aliases: [`cb2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select cosmicbean from smartycards`)
 		const cb = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/2/26/CosmicBeanCardImage.png/revision/latest/scale-to-width-down/250?cb=20170226140040")
-		.setTitle("Cosmic Bean | <:Smarty:1062502890448638022>")
-		.setDescription("**\\- Bean Plant -**")
+		.setThumbnail(`${result[4].cosmicbean}`)
+		.setTitle(`${result[7].cosmicbean}`)
+		.setDescription(`${result[2].cosmicbean}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "1 <:Strength:1062501774612779039>, 1 <:Health:1062515540712751184>, 2 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].cosmicbean}`,
+								inline: true},
 							 {
 								 name: "Trait",
-								 value: "__Team-Up__"
+								 value: `${result[8].cosmicbean}`,
+								 inline: true
 							 },
 							 {
 								 name: "Ability",
-								 value: "**When played:** __Conjure__ a Bean, and it gets __Team-Up__."
+								 value: `${result[0].cosmicbean}`,
+								 inline: true
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Galactic - Rare**"
+								 value: `${result[5].cosmicbean}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "It IS a magical fruit."
+								 value: `${result[3].cosmicbean}`,
+								 inline: true
 							 })
 		message.channel.send({embeds: [cb]})
 	}

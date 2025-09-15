@@ -1,28 +1,32 @@
 const {EmbedBuilder}= require("discord.js")
+const db = require("../../index.js")
 module.exports = {
 	name: `cromagnolia`,
 	aliases: [`cromag`,`cm2`],
 	category: `Plant Cards`,
 	run: async(client, message, args)=> {
+		const [result] = await db.query(`select cromagnolia from kabloomcards`)
 		const cm = new EmbedBuilder()
-		.setThumbnail("https://static.wikia.nocookie.net/plantsvszombies/images/9/9d/Mesozoic_Magnolia_card_face.png/revision/latest?cb=20170706062111")
-		.setTitle("Cro-Magnolia | <:Kabloom:1062502137826910268>")
-		.setDescription("**\\- Flower Plant -**")
+		.setThumbnail(`${result[4].cromagnolia}`)
+		.setTitle(`${result[7].cromagnolia}`)
+		.setDescription(`${result[2].cromagnolia}`)
 		.setColor("Random")
-		
 		.addFields({name: "Stats",
-							 	value: "2 <:Strength:1062501774612779039>, 4 <:Health:1062515540712751184>, 3 <:Sun:1062501177679413409>"},
+							 	value: `${result[6].cromagnolia}`, 
+							inline: true},
 							 {
 								 name: "Ability",
-								 value: "**__Plant Evolution__:** Plants here and next door get +2<:Strength:1062501774612779039>. "
+								 value: `${result[0].cromagnolia}`
 							 },
 							 {
 								 name: "Set-Rarity",
-								 value: "**Colossal - Rare**"
+								 value: `${result[5].cromagnolia}`,
+								 inline: true
 							 },
 							 {
 								 name: "Flavor Text",
-								 value: "In the secret groves of Hollow Earth, Magnolias evolved to shun steely stoicism, boasting blunt barbarity."
+								 value: `${result[3].cromagnolia}`, 
+								 inline: true
 							 })
 		message.channel.send({embeds: [cm]})
 	}

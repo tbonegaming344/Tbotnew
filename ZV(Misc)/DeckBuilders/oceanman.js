@@ -5,6 +5,39 @@ const {
     EmbedBuilder,
   } = require("discord.js");
   const db = require("../../index.js");
+  function buildDeckEmbed(row) {
+  const embed = new EmbedBuilder()
+    .setTitle(row.name || "Unknown")
+    .setDescription(row.description || "")
+    .setFooter({ text: row.creator || "" })
+    .addFields(
+      {
+        name: "Deck Type",
+        value: `**__${row.type}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Archetype",
+        value: `**__${row.archetype}__**` || "N/A",
+        inline: true,
+      },
+      {
+        name: "Deck Cost",
+        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
+        inline: true,
+      }
+    )
+    .setColor("Blue");
+
+  if (
+    row.image &&
+    typeof row.image === "string" &&
+    row.image.startsWith("http")
+  ) {
+    embed.setImage(row.image);
+  }
+  return embed;
+}
   module.exports = {
     name: `oceanman`,
     aliases: [
@@ -44,7 +77,30 @@ const {
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-          const [result] = await db.query(`SELECT gargstar22 FROM ebdecks`)
+          const [rows] = await db.query(`SELECT * FROM ebdecks where creator like '%oceanman%'`);
+          if (!rows || rows.length === 0) {
+      return message.channel.send("No OceanMan decks found in the database.");
+    }
+
+    // normalize rows and key properties (added normalization fields)
+    const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
           const user = await client.users.fetch("585648378290110469");
           const oceanman = new EmbedBuilder()
             .setTitle(`${user.displayName} Decks`)
@@ -57,25 +113,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
             })
             .setThumbnail(user.displayAvatarURL())
             .setColor("Blue");
-            const gargstar22 = new EmbedBuilder()
-        .setTitle(`${result[5].gargstar22}`)
-        .setDescription(`${result[3].gargstar22}`)
-        .setFooter({ text: `${result[2].gargstar22}` })
-        .addFields({
-          name: "Deck Type",
-          value: `${result[6].gargstar22}`,
-          inline: true
-        },{ 
-          name: "Archetype", 
-          value: `${result[0].gargstar22}`,
-          inline: true
-        },{ 
-          name: "Deck Cost", 
-          value: `${result[1].gargstar22}`,
-          inline: true
-        })
-        .setColor("Blue")
-        .setImage(`${result[4].gargstar22}`);
+            const gargstar22 = buildDeckEmbed(normalized[0]);
           const m = await message.channel.send({ embeds: [oceanman], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
           const collector = m.createMessageComponentCollector({ filter: iFilter });

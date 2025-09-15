@@ -118,9 +118,9 @@ module.exports = {
   aliases: [`pb`, `pbs`, `professor`, `brainstorm`, `prof`, `bs`],
   category: `Zombie Cards`,
   run: async (client, message, args) => {
-    const [rows] = await db.query("SELECT * FROM rbdecks");
+    const [rows] = await db.query("SELECT * FROM pbdecks");
     if (!rows || rows.length === 0)
-      return message.channel.send("No Rustbolt decks found in the database.");
+      return message.channel.send("No Professor Brainstorm decks found in the database.");
 
     // normalize db rows -> deck objects
     const normalized = rows.map((r) => {

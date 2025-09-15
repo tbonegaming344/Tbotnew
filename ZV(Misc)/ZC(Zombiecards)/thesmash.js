@@ -115,9 +115,9 @@ module.exports = {
   category: `Zombie Cards`,
   run: async (client, message, args) => {
     // fetch DB once and build automation
-    const [rows] = await db.query("SELECT * FROM rbdecks");
+    const [rows] = await db.query("SELECT * FROM smdecks");
     if (!rows || rows.length === 0)
-      return message.channel.send("No Rustbolt decks found in the database.");
+      return message.channel.send("No Smash decks found in the database.");
 
     // normalize db rows -> deck objects
     const normalized = rows.map((r) => {
@@ -185,7 +185,7 @@ module.exports = {
       deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
 
     const thumb =
-      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701";
+      "https://static.wikia.nocookie.net/plantsvszombies/images/5/5c/Smash_Win_Render.png/revision/latest?cb=20161008025543";
     const categoryEmbeds = {};
     for (const cat of categories) {
       const pretty =

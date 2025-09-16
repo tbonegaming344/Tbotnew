@@ -234,6 +234,11 @@ module.exports = {
           .setValue("budget")
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
+             new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setDescription("Some of the Best Plant Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>")
+          .setValue("comp"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Deck")
           .setValue("ladder")
@@ -250,7 +255,24 @@ module.exports = {
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+          ),
+            new StringSelectMenuOptionBuilder()
+          .setLabel("Midrange Deck")
+          .setDescription(
+            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           )
+          .setValue("midrange"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Tempo Deck")
+          .setDescription(
+            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+          )
+          .setValue("tempo"), 
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("View all Citron decks in Tbot")
+          .setEmoji("<:Citron_Pog:1100168420743450654>")
       );
     const m = await message.channel.send({
       embeds: [

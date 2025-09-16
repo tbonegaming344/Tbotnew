@@ -128,7 +128,8 @@ module.exports = {
   run: async (client, message, args) => {
     const [rows] =
       await db.query(`SELECT * FROM ccdecks where creator like '%MakeMeACoffee%'
-      union all select * from spdecks where creator like '%MakeMeACoffee%'`);
+      union all select * from spdecks where creator like '%MakeMeACoffee%'
+      union all select * from ctdecks where creator like '%MakeMeACoffee%'`);
     if (!rows || rows.length === 0) {
       return message.channel.send(
         "No Make Me A Coffee decks found in the database."
@@ -233,6 +234,11 @@ module.exports = {
       )
       .addOptions(
         new StringSelectMenuOptionBuilder()
+          .setLabel("Competitive Deck")
+          .setValue("comp")
+          .setDescription("Some of the Best Decks in the game")
+          .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Deck")
           .setDescription("Decks that are generally only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>")
@@ -248,17 +254,21 @@ module.exports = {
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
+          .setLabel("Midrange Decks")
           .setValue("midrange")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
+          .setLabel("Tempo Decks")
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
-          .setValue("tempo")
+          .setValue("tempo"), 
+        new StringSelectMenuOptionBuilder()
+          .setLabel("All Decks")
+          .setValue("all")
+          .setDescription("View all of Make Me A Coffee's decks")
       );
     const m = await message.channel.send({
       embeds: [
@@ -267,6 +277,7 @@ module.exports = {
           .setDescription(
             `To view the Make Me A Coffee decks please select an option from the select menu below!\nNote: Make Me A Coffee has ${normalized.length} total decks in Tbot`
           )
+          .setColor("White")
           .setThumbnail(thumb),
       ],
       components: [new ActionRowBuilder().addComponents(select)],

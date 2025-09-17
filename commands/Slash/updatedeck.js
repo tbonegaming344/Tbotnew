@@ -130,8 +130,8 @@ module.exports = {
       `);
       // Lowercase and join names (remove spaces)
       const choices = [
-        ...new Set(rows.map((r) => r.name.toLowerCase().replace(/\s+/g, ""))),
-      ];
+        ...new Set(rows.map((r) => r.name.toLowerCase().replace(/\s+/g, "")))
+      ].sort((a, b) => a.localeCompare(b));
       let filtered;
       if (!focusedValue) {
         filtered = choices.slice(0, 25);
@@ -151,7 +151,43 @@ module.exports = {
     }
   },
   async execute(interaction) {
+    const db = require("../../index.js");
+    const [rows] = await db.query(`
+        select name FROM sbdecks    
+        union all select name from ccdecks 
+        union all select name from sfdecks 
+        union all select name from rodecks 
+        union all select name from gsdecks 
+        union all select name from wkdecks 
+        union all select name from czdecks 
+        union all select name from spdecks 
+        union all select name from ctdecks 
+        union all select name from bcdecks 
+        union all select name from gkdecks 
+        union all select name from ncdecks 
+        union all select name from hgdecks 
+        union all select name from zmdecks 
+        union all select name from smdecks 
+        union all select name from ifdecks 
+        union all select name from rbdecks 
+        union all select name from ebdecks 
+        union all select name from bfdecks 
+        union all select name from pbdecks 
+        union all select name from imdecks
+        union all select name from ntdecks
+      `);
     const name = interaction.options.getString("name");
+    const validNames = rows.map((r) =>
+      r.name.toLowerCase().replace(/\s+/g, "")
+    );
+    if (!validNames.includes(name.toLowerCase().replace(/\s+/g, ""))) {
+      return interaction.reply({
+        content:
+          "❌ Invalid deck name. Please make sure the deck exists in Tbot.",
+        ephemeral: true,
+        withResponse: true,
+      });
+    }
     const description = interaction.options.getString("description");
     const decktype = interaction.options.getString("deck_type");
     const deckarchetype = interaction.options.getString("deck_archetype");

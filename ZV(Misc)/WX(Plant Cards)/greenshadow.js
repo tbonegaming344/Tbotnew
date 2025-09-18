@@ -115,7 +115,7 @@ module.exports = {
   category: `Plant Cards`,
   run: async (client, message, args) => {
     // fetch DB once and build automation
-    const [rows] = await db.query("SELECT * FROM gsdecks");
+    const [rows] = await db.query("SELECT * FROM gsdecks order by name ASC");
     if (!rows || rows.length === 0)
       return message.channel.send(
         "No Green Shadow decks found in the database."

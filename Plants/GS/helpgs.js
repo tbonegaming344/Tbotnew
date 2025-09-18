@@ -128,7 +128,7 @@ module.exports = {
   ],
   category: `Green Shadow(GS)`,
   run: async (client, message, args) => {
-    const [rows] = await db.query("SELECT * FROM gsdecks");
+    const [rows] = await db.query("SELECT * FROM gsdecks order by name ASC");
     if (!rows || rows.length === 0) {
       return message.channel.send(
         "No Green Shadow decks found in the database."

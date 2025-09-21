@@ -3,49 +3,15 @@ const {
   ButtonBuilder,
   ButtonStyle,
   EmbedBuilder,
-  MessageFlags,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("#5a5547");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 module.exports = {
   name: `dozza`,
   aliases: [`decksmadebydozza`, `helpdozza`, `dozzahelp`, `dozzadecks`],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
+    const color = "#5a5547";
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("trickmech")
@@ -108,8 +74,8 @@ module.exports = {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("#5a5547");
-    const trickmech = buildDeckEmbed(normalized[0]);
+      .setColor(color);
+    const trickmech = buildDeckEmbed(normalized[0], color);
     const m = await message.channel.send({
       embeds: [dozza],
       components: [row],

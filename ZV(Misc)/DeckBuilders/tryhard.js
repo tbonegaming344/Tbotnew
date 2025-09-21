@@ -9,108 +9,10 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 // --- Helpers ---
-function createCategoryEmbed(name, deckNames, total, thumbnail) {
-  const isAll = name.toLowerCase() === "all";
-  const description =
-    Array.isArray(deckNames) && deckNames.length
-      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
-      : "No decks available";
-  return new EmbedBuilder()
-    .setTitle(isAll ? "Tryhard Decks" : `Tryhard ${name} Decks`)
-    .setDescription(
-      isAll
-        ? `All Tryhard decks in Tbot are:${description}`
-        : `My ${name} decks for Tryhard are: ${description}`
-    )
-    .setThumbnail(thumbnail)
-    .setColor("#1483C9")
-    .setFooter({
-      text: isAll
-        ? `Tryhard has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
-        : `Tryhard has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
-    });
-}
-
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("#1483C9");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
-
-/**
- * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
- * left = previous (or back_to_list when at start for special categories)
- * right = next (or back_to_list when at end for special categories)
- */
-function buildNavRow(category, currentIndex, total, specialCategories) {
-  const isSpecial = specialCategories.includes(category);
-  const prevIndex = (currentIndex - 1 + total) % total;
-  const nextIndex = (currentIndex + 1) % total;
-
-  // decide ids
-  let leftId =
-    isSpecial && currentIndex === 0
-      ? `back_to_list_${category}`
-      : `nav_${category}_${prevIndex}`;
-  let rightId =
-    isSpecial && currentIndex === total - 1
-      ? `back_to_list_${category}`
-      : `nav_${category}_${nextIndex}`;
-
-  // ensure uniqueness (avoid duplicate custom_id)
-  if (leftId === rightId) {
-    rightId = `${rightId}_alt`;
-  }
-
-  const left = new ButtonBuilder().setEmoji("⬅️");
-  const right = new ButtonBuilder().setEmoji("➡️");
-
-  // styles depending on id type
-  left
-    .setStyle(
-      leftId.startsWith("back_to_list")
-        ? ButtonStyle.Secondary
-        : ButtonStyle.Primary
-    )
-    .setCustomId(leftId);
-  right
-    .setStyle(
-      rightId.startsWith("back_to_list")
-        ? ButtonStyle.Secondary
-        : ButtonStyle.Primary
-    )
-    .setCustomId(rightId);
-
-  return new ActionRowBuilder().addComponents(left, right);
-}
+const createCategoryEmbed = require("../../Utilities/createCategoryEmbed.js");
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
+const buildNavRow = require("../../Utilities/buildNavRow.js");
+const matchesCategory = require("../../Utilities/matchesCategory.js");
 module.exports = {
   name: `tryhard`,
   aliases: [
@@ -130,6 +32,7 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
+    const color = "#1483C9";
     const [rows] = await db.query(`SELECT * FROM rbdecks
       where creator like '%TryHard%'
       union all select * from hgdecks where creator like '%TryHard%'`);
@@ -157,36 +60,6 @@ module.exports = {
       };
     });
 
-    // category matching function using normalized fields
-    function matchesCategory(row, cat) {
-      const t = row.typeNorm;
-      const a = row.archetypeNorm;
-      if (cat === "all") return true;
-      if (cat === "comp")
-        return (
-          t.includes("competitive") ||
-          t.includes("comp") ||
-          a.includes("competitive") ||
-          a.includes("comp")
-        );
-      if (cat === "budget") return t.includes("budget") || a.includes("budget");
-      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
-      if (cat === "meme") return t.includes("meme") || a.includes("meme");
-      if (cat === "combo") return t.includes("combo") || a.includes("combo");
-      if (cat === "control")
-        return a.includes("control") || t.includes("control");
-      if (cat === "midrange")
-        return (
-          a.includes("midrange") ||
-          t.includes("midrange") ||
-          a.includes("mid") ||
-          t.includes("mid")
-        );
-      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
-      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
-      return false;
-    }
-
     // build category lists from DB dynamically (unchanged)
     const categories = [
       "budget",
@@ -211,6 +84,7 @@ module.exports = {
       Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
     );
     const user = await client.users.fetch("265754905828917259");
+    const name = user.displayName;
     // thumbnail
     const thumb = user.displayAvatarURL();
 
@@ -222,6 +96,8 @@ module.exports = {
           ? "Competitive"
           : cat.charAt(0).toUpperCase() + cat.slice(1);
       categoryEmbeds[cat] = createCategoryEmbed(
+        name,
+        color,
         pretty,
         deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
         deckLists[cat].length,
@@ -258,11 +134,11 @@ module.exports = {
     const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()
-          .setTitle("TryHard Decks")
+          .setTitle(`${name}'s Decks`)
           .setDescription(
-            `To view the TryHard decks please select an option from the select menu below!\nNote: TryHard has ${normalized.length} total decks in Tbot`
+            `To view ${name}'s decks please select an option from the select menu below!\nNote: ${name} has ${normalized.length} total decks in Tbot`
           )
-          .setColor("#1483C9")
+          .setColor(color)
           .setThumbnail(thumb),
       ],
       components: [new ActionRowBuilder().addComponents(select)],
@@ -293,7 +169,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0, color]);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,
@@ -305,6 +181,8 @@ module.exports = {
           const catEmbed =
             categoryEmbeds[value] ??
             createCategoryEmbed(
+              name,
+              color,
               value.charAt(0).toUpperCase() + value.slice(1),
               [],
               0,
@@ -352,7 +230,7 @@ module.exports = {
                 content: "Deck not found.",
                 flags: MessageFlags.Ephemeral,
               });
-            const embed = buildDeckEmbed(list[index].raw);
+            const embed = buildDeckEmbed(list[index].raw, color);
             const nav = buildNavRow(
               category,
               index,
@@ -371,7 +249,7 @@ module.exports = {
             const list = deckLists[category] || [];
             const catEmbed =
               categoryEmbeds[category] ||
-              createCategoryEmbed(pretty, [], 0, thumb);
+              createCategoryEmbed(name, color, pretty, [], 0, thumb);
 
             // build left -> last, right -> first (avoid duplicate ids when only one item)
             const firstIndex = 0;

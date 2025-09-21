@@ -5,39 +5,7 @@ const {
     EmbedBuilder,
   } = require("discord.js");
   const db = require("../../index.js");
-  function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("Blue");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+ const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
   module.exports = {
     name: `oceanman`,
     aliases: [
@@ -73,6 +41,7 @@ const {
               .setStyle(ButtonStyle.Primary)
           );
           const decks = ["gargstar22"];
+          const color = "Blue";
            let toBuildString = "";
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
@@ -112,8 +81,8 @@ const {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
             })
             .setThumbnail(user.displayAvatarURL())
-            .setColor("Blue");
-            const gargstar22 = buildDeckEmbed(normalized[0]);
+            .setColor(color);
+            const gargstar22 = buildDeckEmbed(normalized[0].raw, color);
           const m = await message.channel.send({ embeds: [oceanman], components: [row] });
           const iFilter = (i) => i.user.id === message.author.id;
           const collector = m.createMessageComponentCollector({ filter: iFilter });

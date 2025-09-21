@@ -8,39 +8,7 @@ const {
   StringSelectMenuOptionBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("#ffcd59");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 module.exports = {
   name: `yoyo`,
   aliases: [
@@ -52,6 +20,7 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
+    const color = "#ffcd59";
      const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("reflourished")
@@ -112,8 +81,8 @@ const user = await client.users.fetch("1255818880211882077");
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("#ffcd59")
-    const reflourished = buildDeckEmbed(normalized[0]);
+      .setColor(color);
+    const reflourished = buildDeckEmbed(normalized[0], color);
     const m = await message.channel.send({
       embeds: [yoyo],
       components: [row],

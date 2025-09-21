@@ -5,39 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("Orange");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 module.exports = {
   name: `firsthero`,
   aliases: [
@@ -48,6 +16,7 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
+    const color = "Orange";
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("lawnmower")
@@ -88,7 +57,7 @@ module.exports = {
         union all select * from zmdecks where creator like '%first hero%'`);
     if (!rows || rows.length === 0) {
       return message.channel.send("No First hero decks found in the database.");
-    }
+    }  
 
     // normalize rows and key properties (added normalization fields)
     const normalized = rows.map((r) => {
@@ -120,9 +89,9 @@ module.exports = {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("Orange");
-    const gobeyond = buildDeckEmbed(normalized[0]);
-    const lawnmower = buildDeckEmbed(normalized[1]);
+      .setColor(color);
+    const gobeyond = buildDeckEmbed(normalized[0], color);
+    const lawnmower = buildDeckEmbed(normalized[1], color);
     const m = await message.channel.send({
       embeds: [firsthero],
       components: [row],

@@ -8,39 +8,7 @@ const {
     StringSelectMenuOptionBuilder,
   } = require("discord.js");
   const db = require("../../index.js");
-  function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("Orange");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
  module.exports = {
     name: `masterbomber32`,
     aliases: [
@@ -55,6 +23,7 @@ const {
     ],
     category: `DeckBuilders`,
     run: async (client, message, args) => {
+      const color = "Orange";
       const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("bayonet")
@@ -113,8 +82,8 @@ const {
         .setThumbnail(user.displayAvatarURL())
         .setFooter({text: `Note: ${user.displayName} has ${decks.length} total decks in Tbot
 To view the decks, click the buttons below or use the commands listed above.`})
-        .setColor("Orange");
-        const bayonet = buildDeckEmbed(normalized[0]);
+        .setColor(color);
+        const bayonet = buildDeckEmbed(normalized[0], color);
         const m = await message.channel.send({ embeds: [masterbomber32], components: [row] });
         const iFilter = (i) => i.user.id === message.author.id;
         const collector = m.createMessageComponentCollector({ filter: iFilter });

@@ -9,110 +9,10 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 // --- Helpers ---
-function createCategoryEmbed(name, deckNames, total, thumbnail) {
-  const isAll = name.toLowerCase() === "all";
-  const description =
-    Array.isArray(deckNames) && deckNames.length
-      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
-      : "No decks available";
-  return new EmbedBuilder()
-    .setTitle(
-      isAll ? "The Question Mark Decks" : `The Question Mark ${name} Decks`
-    )
-    .setDescription(
-      isAll
-        ? `All The Question Mark decks in Tbot are:${description}`
-        : `My ${name} decks for The Question Mark are: ${description}`
-    )
-    .setThumbnail(thumbnail)
-    .setColor("#000000")
-    .setFooter({
-      text: isAll
-        ? `The Question Mark has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
-        : `The Question Mark has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
-    });
-}
-
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("#000000");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
-
-/**
- * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
- * left = previous (or back_to_list when at start for special categories)
- * right = next (or back_to_list when at end for special categories)
- */
-function buildNavRow(category, currentIndex, total, specialCategories) {
-  const isSpecial = specialCategories.includes(category);
-  const prevIndex = (currentIndex - 1 + total) % total;
-  const nextIndex = (currentIndex + 1) % total;
-
-  // decide ids
-  let leftId =
-    isSpecial && currentIndex === 0
-      ? `back_to_list_${category}`
-      : `nav_${category}_${prevIndex}`;
-  let rightId =
-    isSpecial && currentIndex === total - 1
-      ? `back_to_list_${category}`
-      : `nav_${category}_${nextIndex}`;
-
-  // ensure uniqueness (avoid duplicate custom_id)
-  if (leftId === rightId) {
-    rightId = `${rightId}_alt`;
-  }
-
-  const left = new ButtonBuilder().setEmoji("⬅️");
-  const right = new ButtonBuilder().setEmoji("➡️");
-
-  // styles depending on id type
-  left
-    .setStyle(
-      leftId.startsWith("back_to_list")
-        ? ButtonStyle.Secondary
-        : ButtonStyle.Primary
-    )
-    .setCustomId(leftId);
-  right
-    .setStyle(
-      rightId.startsWith("back_to_list")
-        ? ButtonStyle.Secondary
-        : ButtonStyle.Primary
-    )
-    .setCustomId(rightId);
-
-  return new ActionRowBuilder().addComponents(left, right);
-}
+const createCategoryEmbed = require("../../Utilities/createCategoryEmbed.js");
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
+const buildNavRow = require("../../Utilities/buildNavRow.js");
+const matchesCategory = require("../../Utilities/matchesCategory.js");
 module.exports = {
   name: `thequestionmark`,
   aliases: [
@@ -130,10 +30,12 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
-    const [rows] = await db.query("SELECT * FROM sbdecks");
+    const color = "#000000";
+    const [rows] = await db.query(`SELECT * FROM ntdecks where creator like '%The Question Mark%'
+    union all select * from spdecks where creator like '%The Question Mark%'`);
     if (!rows || rows.length === 0) {
       return message.channel.send(
-        "No Super Brainz decks found in the database."
+        "No The Question Mark decks found in the database."
       );
     }
 
@@ -156,36 +58,6 @@ module.exports = {
         raw: r,
       };
     });
-
-    // category matching function using normalized fields
-    function matchesCategory(row, cat) {
-      const t = row.typeNorm;
-      const a = row.archetypeNorm;
-      if (cat === "all") return true;
-      if (cat === "comp")
-        return (
-          t.includes("competitive") ||
-          t.includes("comp") ||
-          a.includes("competitive") ||
-          a.includes("comp")
-        );
-      if (cat === "budget") return t.includes("budget") || a.includes("budget");
-      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
-      if (cat === "meme") return t.includes("meme") || a.includes("meme");
-      if (cat === "combo") return t.includes("combo") || a.includes("combo");
-      if (cat === "control")
-        return a.includes("control") || t.includes("control");
-      if (cat === "midrange")
-        return (
-          a.includes("midrange") ||
-          t.includes("midrange") ||
-          a.includes("mid") ||
-          t.includes("mid")
-        );
-      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
-      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
-      return false;
-    }
 
     // build category lists from DB dynamically (unchanged)
     const categories = [
@@ -211,6 +83,7 @@ module.exports = {
       Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
     );
     const user = await client.users.fetch("906888157272875048");
+    const name = user.displayName;
     // thumbnail
     const thumb = user.displayAvatarURL();
 
@@ -222,6 +95,8 @@ module.exports = {
           ? "Competitive"
           : cat.charAt(0).toUpperCase() + cat.slice(1);
       categoryEmbeds[cat] = createCategoryEmbed(
+        name,
+        color,
         pretty,
         deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
         deckLists[cat].length,
@@ -261,11 +136,11 @@ module.exports = {
     const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()
-          .setTitle("The Question Mark Decks")
+          .setTitle(`${name}'s Decks`)
           .setDescription(
-            `To view the Question Mark decks please select an option from the select menu below!\nNote: Question Mark has ${normalized.length} total decks in Tbot`
+            `To view ${name}'s decks please select an option from the select menu below!\nNote: ${name} has ${normalized.length} total decks in Tbot`
           )
-          .setColor("#000000")
+          .setColor(color)
           .setThumbnail(thumb),
       ],
       components: [new ActionRowBuilder().addComponents(select)],
@@ -296,7 +171,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], color);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,
@@ -308,6 +183,8 @@ module.exports = {
           const catEmbed =
             categoryEmbeds[value] ??
             createCategoryEmbed(
+              name, 
+              color,
               value.charAt(0).toUpperCase() + value.slice(1),
               [],
               0,
@@ -355,7 +232,7 @@ module.exports = {
                 content: "Deck not found.",
                 flags: MessageFlags.Ephemeral,
               });
-            const embed = buildDeckEmbed(list[index].raw);
+            const embed = buildDeckEmbed(list[index].raw, color);
             const nav = buildNavRow(
               category,
               index,
@@ -374,7 +251,7 @@ module.exports = {
             const list = deckLists[category] || [];
             const catEmbed =
               categoryEmbeds[category] ||
-              createCategoryEmbed(pretty, [], 0, thumb);
+              createCategoryEmbed(name, color, pretty, [], 0, thumb);
 
             // build left -> last, right -> first (avoid duplicate ids when only one item)
             const firstIndex = 0;

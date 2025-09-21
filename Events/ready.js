@@ -2,29 +2,37 @@ const { Events, ActivityType } = require("discord.js");
 module.exports = {
   name: Events.ClientReady,
   async run(client) {
+    const db = require("../index.js");
+    const [rows] = await db.query(`
+        select name FROM sbdecks    
+        union all select name from ccdecks 
+        union all select name from sfdecks 
+        union all select name from rodecks 
+        union all select name from gsdecks 
+        union all select name from wkdecks 
+        union all select name from czdecks 
+        union all select name from spdecks 
+        union all select name from ctdecks 
+        union all select name from bcdecks 
+        union all select name from gkdecks 
+        union all select name from ncdecks 
+        union all select name from hgdecks 
+        union all select name from zmdecks 
+        union all select name from smdecks 
+        union all select name from ifdecks 
+        union all select name from rbdecks 
+        union all select name from ebdecks 
+        union all select name from bfdecks 
+        union all select name from pbdecks 
+        union all select name from imdecks
+        union all select name from ntdecks`);
     console.log(`Tbot is in ${client.guilds.cache.size} servers`)
     const totalMembers = client.guilds.cache
       .map((guild) => guild.memberCount)
       .reduce((a, b) => a + b, 0);
     client.user.setStatus("dnd");
     console.log(`${client.user.username} is online`);
-    const Ccommands = Array.from(client.commands.values());
-    const commands = Ccommands.filter((command) => {
-      if (!(command?.name && command?.category)) return false;
-      // Filter commands based on category and name
-      if (
-        command.category != "Miscellaneous" &&
-        command.category != "DeckBuilders" &&
-        command.category != "Zombie Cards" &&
-        command.category != "Tricks Phase" &&
-        command.category != "Plant Cards" &&
-        !command.name.includes("help")
-      ) {
-        return command;
-      }
-    
-      return false;
-    });
+    console.log(`${rows.length} decks are in the tbot system`);
     const tourneys = [
       "Floral Federation",
       "PVZHTWJIZ",
@@ -68,10 +76,7 @@ module.exports = {
         youtubers[Math.floor(Math.random() * youtubers.length)];
       const randomTourney =
         tourneys[Math.floor(Math.random() * tourneys.length)];
-    let randomDeck = null;
-if (commands.length > 0) {
-  randomDeck = commands[Math.floor(Math.random() * commands.length)];
-}
+    let randomDeck = rows[Math.floor(Math.random() * rows.length)];
       const randomStreamers =
         streamers[Math.floor(Math.random() * streamers.length)];
       const customStatus = [
@@ -271,7 +276,7 @@ if (commands.length > 0) {
         "The Teenage Mutant Ninja Swabbies are a lean, green, ninja team with cool teens doing extreme ninja things. They emerge from the shadows, using the secret of the ooze to make their moves. Leonardo leads the team, while Donatello, Raphael, and Michelangelo are the other members. Master Swabbie teaches them every skill to be an incredible team.",
         `Watching ${randomStreamers}'s Lastest stream`,
         `Waiting for ${randomStreamers}'s next Stream`,
-        `${commands.length} decks are in the tbot system`,
+        `${rows.length} decks are in the tbot system`,
         `Craft ${randomDeck.name} today!`,
         //The Cute Chick
         "You shouldn't have to know who someone is. If they are above you on the hierarchy they deserve the utmost respect.",

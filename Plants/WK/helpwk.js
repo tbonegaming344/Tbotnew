@@ -9,108 +9,10 @@ const {
 } = require("discord.js");
 const db = require("../../index.js");
 // --- Helpers ---
-function createCategoryEmbed(name, deckNames, total, thumbnail) {
-  const isAll = name.toLowerCase() === "all";
-  const description =
-    Array.isArray(deckNames) && deckNames.length
-      ? deckNames.map((d) => `\n<@1043528908148052089> **${d}**`).join("")
-      : "No decks available";
-  return new EmbedBuilder()
-    .setTitle(isAll ? "WallKnight Decks" : `WallKnight ${name} Decks`)
-    .setDescription(
-      isAll
-        ? `All WallKnight decks in Tbot are:${description}`
-        : `My ${name} decks for WallKnight are: ${description}`
-    )
-    .setThumbnail(thumbnail)
-    .setColor("#964B00")
-    .setFooter({
-      text: isAll
-        ? `WallKnight has ${total} total decks in Tbot\nPlease click on the buttons below to navigate through the decks.`
-        : `WallKnight has ${total} total ${name} decks in Tbot\nPlease click on the buttons below to navigate through the decks.`,
-    });
-}
-
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("Yellow");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
-
-/**
- * Build navigation row. Ensures customIds are unique to avoid Discord duplicate-id errors.
- * left = previous (or back_to_list when at start for special categories)
- * right = next (or back_to_list when at end for special categories)
- */
-function buildNavRow(category, currentIndex, total, specialCategories) {
-  const isSpecial = specialCategories.includes(category);
-  const prevIndex = (currentIndex - 1 + total) % total;
-  const nextIndex = (currentIndex + 1) % total;
-
-  // decide ids
-  let leftId =
-    isSpecial && currentIndex === 0
-      ? `back_to_list_${category}`
-      : `nav_${category}_${prevIndex}`;
-  let rightId =
-    isSpecial && currentIndex === total - 1
-      ? `back_to_list_${category}`
-      : `nav_${category}_${nextIndex}`;
-
-  // ensure uniqueness (avoid duplicate custom_id)
-  if (leftId === rightId) {
-    rightId = `${rightId}_alt`;
-  }
-
-  const left = new ButtonBuilder().setEmoji("⬅️");
-  const right = new ButtonBuilder().setEmoji("➡️");
-
-  // styles depending on id type
-  left
-    .setStyle(
-      leftId.startsWith("back_to_list")
-        ? ButtonStyle.Secondary
-        : ButtonStyle.Primary
-    )
-    .setCustomId(leftId);
-  right
-    .setStyle(
-      rightId.startsWith("back_to_list")
-        ? ButtonStyle.Secondary
-        : ButtonStyle.Primary
-    )
-    .setCustomId(rightId);
-
-  return new ActionRowBuilder().addComponents(left, right);
-}
+const createCategoryEmbed = require("../../Utilities/createCategoryEmbed.js");
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
+const buildNavRow = require("../../Utilities/buildNavRow.js");
+const matchesCategory = require("../../Utilities/matchesCategory.js");
 module.exports = {
   name: `helpwk`,
   aliases: [
@@ -127,6 +29,9 @@ module.exports = {
   ],
   category: `Wall Knight(WK)`,
   run: async (client, message, args) => {
+    const hero = "WallKnight";
+    const categoryColor = "#964B00"; 
+    const deckColor = "Yellow";
     const [rows] = await db.query("SELECT * FROM wkdecks");
     if (!rows || rows.length === 0) {
       return message.channel.send(
@@ -154,35 +59,6 @@ module.exports = {
       };
     });
 
-    // category matching function using normalized fields
-    function matchesCategory(row, cat) {
-      const t = row.typeNorm;
-      const a = row.archetypeNorm;
-      if (cat === "all") return true;
-      if (cat === "comp")
-        return (
-          t.includes("competitive") ||
-          t.includes("comp") ||
-          a.includes("competitive") ||
-          a.includes("comp")
-        );
-      if (cat === "budget") return t.includes("budget") || a.includes("budget");
-      if (cat === "ladder") return t.includes("ladder") || a.includes("ladder");
-      if (cat === "meme") return t.includes("meme") || a.includes("meme");
-      if (cat === "combo") return t.includes("combo") || a.includes("combo");
-      if (cat === "control")
-        return a.includes("control") || t.includes("control");
-      if (cat === "midrange")
-        return (
-          a.includes("midrange") ||
-          t.includes("midrange") ||
-          a.includes("mid") ||
-          t.includes("mid")
-        );
-      if (cat === "tempo") return t.includes("tempo") || a.includes("tempo");
-      if (cat === "aggro") return a.includes("aggro") || t.includes("aggro");
-      return false;
-    }
 
     // build category lists from DB dynamically (unchanged)
     const categories = [
@@ -270,7 +146,7 @@ module.exports = {
           .setDescription(
             `To view the WallKnight decks please select an option from the select menu below!\nNote: WallKnight has ${normalized.length} total decks in Tbot`
           )
-          .setColor("#964B00")
+          .setColor(categoryColor)
           .setThumbnail(thumb),
       ],
       components: [new ActionRowBuilder().addComponents(select)],
@@ -300,7 +176,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,
@@ -312,6 +188,8 @@ module.exports = {
           const catEmbed =
             categoryEmbeds[value] ??
             createCategoryEmbed(
+              hero,
+              categoryColor,
               value.charAt(0).toUpperCase() + value.slice(1),
               [],
               0,
@@ -359,7 +237,7 @@ module.exports = {
                 content: "Deck not found.",
                 flags: MessageFlags.Ephemeral,
               });
-            const embed = buildDeckEmbed(list[index].raw);
+            const embed = buildDeckEmbed(list[index].raw, deckColor);
             const nav = buildNavRow(
               category,
               index,
@@ -378,7 +256,7 @@ module.exports = {
             const list = deckLists[category] || [];
             const catEmbed =
               categoryEmbeds[category] ||
-              createCategoryEmbed(pretty, [], 0, thumb);
+              createCategoryEmbed(hero, categoryColor, pretty, [], 0, thumb);
 
             // build left -> last, right -> first (avoid duplicate ids when only one item)
             const firstIndex = 0;

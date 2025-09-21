@@ -6,39 +6,7 @@ const {
   MessageFlags,
 } = require("discord.js");
 const db = require("../../index.js");
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("#b90003");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 module.exports = {
   name: `oafish`,
   aliases: [`oafishdecks`, `oafishhelp`],
@@ -64,6 +32,7 @@ module.exports = {
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+    const color = "Red";
     const decks = ["mechacontrol"];
     let toBuildString = "";
     for (const deck of decks) {
@@ -105,8 +74,8 @@ from rbdecks where creator like '%oafish%'`);
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("#b90003");
-    const mechacontrol = buildDeckEmbed(normalized[0]);
+      .setColor(color);
+    const mechacontrol = buildDeckEmbed(normalized[0].raw, color);
     const m = await message.channel.send({ embeds: [oa], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({ filter: iFilter });

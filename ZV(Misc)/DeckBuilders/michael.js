@@ -18,6 +18,7 @@ const {
     ],
     category: `DeckBuilders`,
     run: async (client, message, args) => {
+      const color = "#00FFFF";
       const row = new ActionRowBuilder().addComponents(
         new ButtonBuilder()
           .setCustomId("midgargs")
@@ -56,7 +57,7 @@ Note: ${user.displayName} has ${decks.length} total decks in Tbot
 To view the decks, click the buttons below or use the commands listed above.`
         )
         .setThumbnail(user.displayAvatarURL())
-        .setColor("#00FFFF");
+        .setColor(color);
         // normalize rows and key properties (added normalization fields)
     const normalized = rows.map((r) => {
       const rawType = (r.type || "").toString();
@@ -76,7 +77,7 @@ To view the decks, click the buttons below or use the commands listed above.`
         raw: r,
       };
     });
-        const midgargs = buildDeckEmbed(normalized[0].raw, "#00FFFF");
+        const midgargs = buildDeckEmbed(normalized[0].raw, color);
         const m = await message.channel.send({ embeds: [michael], components: [row] });
         const iFilter = (i) => i.user.id === message.author.id;
         const collector = m.createMessageComponentCollector({ filter: iFilter });

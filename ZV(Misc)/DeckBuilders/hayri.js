@@ -5,39 +5,7 @@ const {
   EmbedBuilder,
 } = require("discord.js");
 const db = require("../../index.js");
-function buildDeckEmbed(row) {
-  const embed = new EmbedBuilder()
-    .setTitle(row.name || "Unknown")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: `${row.cost} <:spar:1057791557387956274>` || "N/A",
-        inline: true,
-      }
-    )
-    .setColor("#d67fcc");
-
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  ) {
-    embed.setImage(row.image);
-  }
-  return embed;
-}
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 module.exports = {
   name: `hayri`,
   aliases: [
@@ -49,6 +17,7 @@ module.exports = {
   ],
   category: `DeckBuilders`,
   run: async (client, message, args) => {
+    const color = "#d67fcc";
     const row = new ActionRowBuilder().addComponents(
       new ButtonBuilder()
         .setCustomId("uncrackamech")
@@ -111,8 +80,8 @@ module.exports = {
 Note: ${user.displayName} has ${decks.length} total decks in Tbot`,
       })
       .setThumbnail(user.displayAvatarURL())
-      .setColor("#d67fcc");
-    const uncrackamech = buildDeckEmbed(normalized[0]);
+      .setColor(color);
+    const uncrackamech = buildDeckEmbed(normalized[0], color);
     const m = await message.channel.send({
       embeds: [hayri],
       components: [row],

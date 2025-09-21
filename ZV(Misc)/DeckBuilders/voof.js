@@ -88,7 +88,10 @@ module.exports = {
         thumb
       );
     }
-    const select = new StringSelectMenuBuilder(
+    const select = new StringSelectMenuBuilder()
+      .setCustomId("select")
+      .setPlaceholder("Select a category below to view Voof's decklists")
+      .addOptions(
       new StringSelectMenuOptionBuilder()
           .setLabel("Ladder Deck")
           .setDescription("Decks that are generally only good for ranked games")
@@ -104,7 +107,7 @@ module.exports = {
             'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
           )
           .setValue("control"),
-    )
+        );
     const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()

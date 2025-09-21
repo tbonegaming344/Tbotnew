@@ -6,6 +6,7 @@ const {
   MessageFlags
 } = require("discord.js");
 const db = require("../../index.js");
+const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 module.exports = {
   name: `non`,
   aliases: [`nondecks`, `nonhelp`, `nonsequitur`, `nonsequiturhelp`, `nonsequiturdecks`],
@@ -37,69 +38,54 @@ module.exports = {
       .setEmoji("<:arrowbackremovebgpreview:1271448914733568133>")
         .setStyle(ButtonStyle.Primary),
         new ButtonBuilder()
-        .setCustomId("helpnon")
+        .setCustomId("help")
         .setEmoji("<:arrowright:1271446796207525898>")
         .setStyle(ButtonStyle.Primary)
     );
+    const color = "Grey";
     const decks = ["floss", "zmoss"];
     let toBuildString = "";
     for (const deck of decks) {
       toBuildString += `\n<@1043528908148052089> **${deck}**`;
     }
-    const [result] = await db.query(`select floss, zmoss
-		from ntdecks nt
-		inner join zmdecks zm 
-		on (nt.deckinfo = zm.deckinfo);`);
-    const user = await client.users.fetch("761810528606617602");
+    const [rows] = await db.query(`select * from zmdecks where creator like '%non%'
+      union all select * from ntdecks where creator like '%non%'`);
+    if (!rows || rows.length === 0) {
+      return message.channel.send("No Non decks found in the database.");
+    }
+     const normalized = rows.map((r) => {
+      const rawType = (r.type || "").toString();
+      const rawArch = (r.archetype || "").toString();
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      return {
+        id: r.deckID ?? null,
+        name: r.name ?? r.deckID ?? "Unnamed",
+        type: rawType,
+        archetype: rawArch,
+        cost: r.cost ?? r.deckcost ?? "",
+        typeNorm: normalize(rawType),
+        archetypeNorm: normalize(rawArch),
+        description: r.description ?? "",
+        image: r.image ?? null,
+        creator: r.creator ?? "",
+        raw: r,
+      };
+    });
+    const user = await client.users.fetch("1381608131766911078");
+    const name = user.displayName;
     const non = new EmbedBuilder()
-    .setTitle(`Non Decks`)
+    .setTitle(`${name}'s Decks`)
     .setDescription(
-      `My commands for decks made by Non are ${toBuildString}`
+      `My commands for decks made by ${name} are ${toBuildString}`
     )
     .setFooter({
-      text: `To view the Decks Made By Non please use the commands listed above or click on the buttons below!
-Note: Non has ${decks.length} total decks in Tbot`,
+      text: `To view the Decks Made By ${name} please use the commands listed above or click on the buttons below!
+Note: ${name} has ${decks.length} total decks in Tbot`,
     })
     .setThumbnail(user.displayAvatarURL())
-    .setColor("Grey");
-    const floss = new EmbedBuilder()
-    .setTitle(`${result[5].floss}`)
-    .setDescription(`${result[3].floss}`)
-    .setColor('Grey')
-    .addFields({
-        name: 'Deck Type',
-        value: `${result[6].floss}`,
-        inline: true
-    },{
-        name: 'archtype',
-        value: `${result[0].floss}`,
-        inline: true
-    },{
-        name: 'Deck Cost', 
-        value: `${result[1].floss}`,
-        inline: true
-    })
-    .setFooter({text: `${result[2].floss}`})
-    .setImage(`${result[4].floss}`)
-    const zmoss = new EmbedBuilder()
-    .setTitle(`${result[5].zmoss}`)
-        .setDescription(`${result[3].zmoss}`)
-        .setColor("Grey")
-        .setFooter({text: `${result[2].zmoss}`})
-        .addFields({
-            name: "Deck Type",
-            value:`${result[6].zmoss}`,
-            inline: true
-        },{
-            name: "Archetype",
-            value:`${result[0].zmoss}`,
-            inline: true
-        },{
-            name: "Deck Cost", 
-            value:`${result[1].zmoss}`,
-            inline: true
-        })
-        .setImage(`${result[4].zmoss}`)
+    .setColor(color);
+    const floss = buildDeckEmbed(normalized[0].raw, color);
+    const zmoss = buildDeckEmbed(normalized[1].raw, color);
     const m = await message.channel.send({ embeds: [non], components: [row] });
     const iFilter = (i) => i.user.id === message.author.id;
     const collector = m.createMessageComponentCollector({ filter: iFilter });

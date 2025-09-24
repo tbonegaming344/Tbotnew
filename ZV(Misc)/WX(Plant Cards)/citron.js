@@ -184,7 +184,7 @@ module.exports = {
       deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
 
     const thumb =
-      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701";
+     "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747";
     const categoryEmbeds = {};
     for (const cat of categories) {
       const pretty =

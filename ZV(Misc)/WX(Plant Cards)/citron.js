@@ -184,7 +184,7 @@ module.exports = {
       deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
 
     const thumb =
-      "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747";
+      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701";
     const categoryEmbeds = {};
     for (const cat of categories) {
       const pretty =
@@ -318,7 +318,7 @@ module.exports = {
 
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

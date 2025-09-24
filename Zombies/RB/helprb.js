@@ -33,7 +33,7 @@ module.exports = {
   category: `Rustbolt(RB)`,
   run: async (client, message, args) => {
     const hero = "Rustbolt";
-    const categoryColor = "Pink";
+    const categoryColor = "#FF00FF";
     const deckColor = "Orange";
     const [rows] = await db.query("SELECT * FROM rbdecks");
     if (!rows || rows.length === 0) {
@@ -281,14 +281,7 @@ module.exports = {
             const list = deckLists[category] || [];
             const catEmbed =
               categoryEmbeds[category] ||
-              createCategoryEmbed(
-                hero,
-                categoryColor,
-                pretty,
-                [],
-                0,
-                thumb
-              );
+              createCategoryEmbed(hero, categoryColor, pretty, [], 0, thumb);
 
             // build left -> last, right -> first (avoid duplicate ids when only one item)
             const firstIndex = 0;

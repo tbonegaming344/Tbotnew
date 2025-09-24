@@ -91,7 +91,7 @@ module.exports = {
           ? "Competitive"
           : cat.charAt(0).toUpperCase() + cat.slice(1);
       categoryEmbeds[cat] = createCategoryEmbed(
-        name, 
+        name,
         color,
         pretty,
         deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
@@ -173,7 +173,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

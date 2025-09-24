@@ -33,7 +33,7 @@ module.exports = {
   category: `Immorticia(IM)`,
   run: async (client, message, args) => {
     const hero = "Immorticia";
-    const categoryColor = "Pink"; 
+    const categoryColor = "#FF00FF"; 
     const deckColor = "Blue";
     const [rows] = await db.query("SELECT * FROM imdecks");
     if (!rows || rows.length === 0) {

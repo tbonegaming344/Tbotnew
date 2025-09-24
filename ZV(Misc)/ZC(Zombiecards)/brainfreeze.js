@@ -306,12 +306,12 @@ module.exports = {
           await i.update({
             embeds: [
               new EmbedBuilder()
-          .setTitle("Brain Freeze Decks")
-          .setDescription(
-            `To view the Brain Freeze decks please select an option from the select menu below!\nNote: Brain Freeze has ${normalized.length} total decks in Tbot`
-          )
-          .setColor("#000000")
-          .setThumbnail(thumb)
+                .setTitle("Brain Freeze Decks")
+                .setDescription(
+                  `To view the Brain Freeze decks please select an option from the select menu below!\nNote: Brain Freeze has ${normalized.length} total decks in Tbot`
+                )
+                .setColor("#000000")
+                .setThumbnail(thumb),
             ],
             components: [new ActionRowBuilder().addComponents(select)],
           });
@@ -330,7 +330,7 @@ module.exports = {
 
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

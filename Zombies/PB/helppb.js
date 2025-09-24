@@ -37,8 +37,8 @@ module.exports = {
   category: `Professor Brainstorm(PB)`,
   run: async (client, message, args) => {
     const hero = "Professor Brainstorm";
-    const deckColor = "Purple"; 
-    const categoryColor = "Pink"; 
+    const deckColor = "Purple";
+    const categoryColor = "#FF00FF";
     // fetch rows: each row is a deck
     const [rows] = await db.query("SELECT * FROM pbdecks");
     if (!rows || rows.length === 0) {
@@ -66,7 +66,6 @@ module.exports = {
         raw: r,
       };
     });
-
 
     // build category lists from DB dynamically (unchanged)
     const categories = [
@@ -198,7 +197,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

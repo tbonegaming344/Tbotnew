@@ -241,8 +241,8 @@ module.exports = {
 
     collector.on("collect", async (i) => {
       try {
-        // pressed the initial helpsm button -> show the select menu (same UI helpsm uses)
-        if (i.customId === "helpsm" && i.isButton()) {
+        // pressed the initial helpzm button -> show the select menu (same UI helpzm uses)
+        if (i.customId === "helpzm" && i.isButton()) {
           const select = new StringSelectMenuBuilder()
             .setCustomId("select")
             .setPlaceholder("Select an option below to view Zmech's Decklists")
@@ -323,7 +323,7 @@ module.exports = {
 
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

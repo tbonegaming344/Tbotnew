@@ -120,7 +120,9 @@ module.exports = {
   run: async (client, message, args) => {
     const [rows] = await db.query("SELECT * FROM pbdecks");
     if (!rows || rows.length === 0)
-      return message.channel.send("No Professor Brainstorm decks found in the database.");
+      return message.channel.send(
+        "No Professor Brainstorm decks found in the database."
+      );
 
     // normalize db rows -> deck objects
     const normalized = rows.map((r) => {
@@ -321,7 +323,7 @@ module.exports = {
 
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

@@ -288,7 +288,7 @@ module.exports = {
                 .setLabel("All Solar Flare Decks")
                 .setValue("all")
                 .setDescription("View all Solar Flare decks")
-                .setEmoji("<:SFSip:1018934631531282532>")
+                .setEmoji("<:SFSip:804523127912005702>")
             );
 
           // present the select menu (replace helprb button)
@@ -317,7 +317,7 @@ module.exports = {
 
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

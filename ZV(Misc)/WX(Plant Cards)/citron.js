@@ -184,7 +184,7 @@ module.exports = {
       deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
 
     const thumb =
-      "https://static.wikia.nocookie.net/villains/images/b/ba/HD_Rustbolt.png/revision/latest/scale-to-width-down/701";
+     "https://static.wikia.nocookie.net/plantsvszombies/images/c/ca/HD_Citron%27s_victory_pose.png/revision/latest?cb=20160616013747";
     const categoryEmbeds = {};
     for (const cat of categories) {
       const pretty =
@@ -242,55 +242,55 @@ module.exports = {
       try {
         // pressed the initial helprb button -> show the select menu (same UI helprb uses)
         if (i.customId === "helpct" && i.isButton()) {
-           const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Select an option below to view Citron's Decklists")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setValue("budget")
-          .setDescription("Decks that are cheap for new players")
-          .setEmoji("💰"),
-             new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setDescription("Some of the Best Plant Decks in the game")
-          .setEmoji("<:compemote:1325461143136764060>")
-          .setValue("comp"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Decks")
-          .setValue("aggro")
-          .setDescription(
-            "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-            new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Deck")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          )
-          .setValue("midrange"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          )
-          .setValue("tempo"), 
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Decks")
-          .setValue("all")
-          .setDescription("View all Citron decks in Tbot")
-          .setEmoji("<:Citron_Pog:1100168420743450654>")
-      );
+          const select = new StringSelectMenuBuilder()
+            .setCustomId("select")
+            .setPlaceholder("Select an option below to view Citron's Decklists")
+            .addOptions(
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Budget Deck")
+                .setValue("budget")
+                .setDescription("Decks that are cheap for new players")
+                .setEmoji("💰"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Competitive Deck")
+                .setDescription("Some of the Best Plant Decks in the game")
+                .setEmoji("<:compemote:1325461143136764060>")
+                .setValue("comp"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Ladder Deck")
+                .setValue("ladder")
+                .setDescription("Decks that mostly only good for ranked games")
+                .setEmoji("<:ladder:1271503994857979964>"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Aggro Decks")
+                .setValue("aggro")
+                .setDescription(
+                  "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Combo Deck")
+                .setValue("combo")
+                .setDescription(
+                  "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
+                ),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Midrange Deck")
+                .setDescription(
+                  "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
+                )
+                .setValue("midrange"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("Tempo Deck")
+                .setDescription(
+                  "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
+                )
+                .setValue("tempo"),
+              new StringSelectMenuOptionBuilder()
+                .setLabel("All Decks")
+                .setValue("all")
+                .setDescription("View all Citron decks in Tbot")
+                .setEmoji("<:Citron_Pog:1100168420743450654>")
+            );
 
           // present the select menu (replace helprb button)
           await i.update({
@@ -318,7 +318,7 @@ module.exports = {
 
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

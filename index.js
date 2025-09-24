@@ -173,6 +173,7 @@ const dbTables = [
   { table: "smdecks", prefix: "sm", category: "Smash(SM)" },
   { table: "spdecks", prefix: "sp", category: "Spudow(SP)" },
   { table: "wkdecks", prefix: "wk", category: "Wall Knight(WK)" },
+  { table: "guardiancards2", prefix: "gc", category: "Plant Cards" },
   // add more table entries here
 ];
 
@@ -226,11 +227,17 @@ function rowHash(row) {
 function buildDeckEmbedFromRow(row, tableName = null) {
   const color =
     tableName && dbTableColors[tableName] ? dbTableColors[tableName] : "Random";
-  const e = new EmbedBuilder()
-    .setTitle(row.name || row.deckID || "Deck")
-    .setDescription(row.description || "")
-    .setFooter({ text: row.creator || "" })
-    .addFields(
+  const e = new EmbedBuilder().setTitle(
+    row.name || row.title || "Deck"
+  );
+
+  if (row.description && row.description.trim().length > 0) {
+    e.setDescription(row.description);
+  }
+  if (row.footer) {
+  e.setFooter({ text: row.creator })
+  }
+  e.addFields(
       {
         name: "Deck Type",
         value: `**__${row.type}__**` || "N/A",
@@ -256,16 +263,60 @@ function buildDeckEmbedFromRow(row, tableName = null) {
     e.setImage(row.image);
   return e;
 }
+function buildCardEmbedFromRow(row, tableName = null) {
+  const color =
+    tableName && dbTableColors[tableName] ? dbTableColors[tableName] : "Random";
+  const e = new EmbedBuilder().setTitle(
+    row.title || row.card_name || row.cardid || "Card"
+  );
+
+  if (row.description && row.description.trim().length > 0) {
+    e.setDescription(`**\\- ${row.description} -**`);
+  }
+
+  e.addFields(
+    {
+      name: "Stats",
+      value: row.stats || "N/A",
+      inline: true,
+    }
+  ).setColor(color);
+
+  if (row.traits) {
+    e.addFields({ name: "Trait", value: row.traits, inline: true });
+  }
+  if (row.ability) {
+    e.addFields({ name: "Ability", value: row.ability, inline: true });
+  }
+  if(row.set_rarity){
+    e.addFields({ name: "Set-Rarity", value: `**${row.set_rarity}**`, inline: true });
+  }
+  if(row.flavor_text){
+    e.addFields({ name: "Flavor Text", value: row.flavor_text, inline: true });
+  }
+  if (
+    row.thumbnail &&
+    typeof row.thumbnail === "string" &&
+    row.thumbnail.startsWith("http")
+  ) {
+    e.setThumbnail(row.thumbnail);
+  }
+  return e;
+}
 
 async function registerOrUpdateDbCommand(tableConfig, row) {
-  const key = `${tableConfig.table}:${row.deckID ?? row.id ?? row.name}`;
-  const baseName = (row.name ?? row.deckID ?? key).toString();
+  const key = `${tableConfig.table}:${
+    row.deckID ?? row.id ?? row.cardid ?? row.card_name ?? row.title ?? row.name
+  }`;
+  const baseName = (
+    row.name ??
+    row.card_name ?? "Unnamed"
+  ).toString();
   const baseSan =
     baseName
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, "")
       .slice(0, 32) || "deck";
-  // Use baseSan as the actual command name (no prefix)
   const cmdName = baseSan;
 
   const hash = rowHash(row);
@@ -294,14 +345,22 @@ async function registerOrUpdateDbCommand(tableConfig, row) {
   }
   const aliasesArray = Array.from(aliasSet);
 
+  // Determine which embed to use based on row content
+  let embed;
+  if (row.stats) {
+    // If these fields exist, treat as card
+    embed = buildCardEmbedFromRow(row, tableConfig.table);
+  } else {
+    // Otherwise, treat as deck
+    embed = buildDeckEmbedFromRow(row, tableConfig.table);
+  }
+
   // create command module shape compatible with other commands
   const commandModule = {
     name: cmdName,
     aliases: aliasesArray,
     category: tableConfig.category,
     run: async (client, message, args) => {
-      // pass table name so embed color matches source table
-      const embed = buildDeckEmbedFromRow(row, tableConfig.table);
       await message.channel.send({ embeds: [embed] });
     },
   };
@@ -332,7 +391,7 @@ async function scanAllTablesAndSync() {
       const seenKeys = new Set();
 
       for (const r of rows || []) {
-        const key = `${t.table}:${r.deckID ?? r.id ?? r.name}`;
+        const key = `${t.table}:${r.deckID ?? r.cardid ?? r.name}`;
         seenKeys.add(key);
         await registerOrUpdateDbCommand(t, r);
       }

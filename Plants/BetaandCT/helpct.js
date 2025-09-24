@@ -94,7 +94,7 @@ module.exports = {
           ? "Competitive"
           : cat.charAt(0).toUpperCase() + cat.slice(1);
       categoryEmbeds[cat] = createCategoryEmbed(
-        hero, 
+        hero,
         categoryColor,
         pretty,
         deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
@@ -111,7 +111,7 @@ module.exports = {
           .setValue("budget")
           .setDescription("Decks that are cheap for new players")
           .setEmoji("💰"),
-             new StringSelectMenuOptionBuilder()
+        new StringSelectMenuOptionBuilder()
           .setLabel("Competitive Deck")
           .setDescription("Some of the Best Plant Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>")
@@ -133,7 +133,7 @@ module.exports = {
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
           ),
-            new StringSelectMenuOptionBuilder()
+        new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Deck")
           .setDescription(
             "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
@@ -144,7 +144,7 @@ module.exports = {
           .setDescription(
             "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
           )
-          .setValue("tempo"), 
+          .setValue("tempo"),
         new StringSelectMenuOptionBuilder()
           .setLabel("All Decks")
           .setValue("all")
@@ -188,7 +188,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0]);
+            const singleEmbed = buildDeckEmbed(list[0], deckColor);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,
@@ -200,7 +200,7 @@ module.exports = {
           const catEmbed =
             categoryEmbeds[value] ??
             createCategoryEmbed(
-              hero, 
+              hero,
               categoryColor,
               value.charAt(0).toUpperCase() + value.slice(1),
               [],

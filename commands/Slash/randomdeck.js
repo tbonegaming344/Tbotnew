@@ -45,7 +45,7 @@ module.exports = {
         if (!result || result.length === 0 || !result[0]) {
           throw new Error("No decks found in the database for this category.");
         }
-
+        const randomRow = result[Math.floor(Math.random() * result.length)];
         const deck = result
   .map(row => row.image)
   .filter(
@@ -54,10 +54,8 @@ module.exports = {
       (value.includes(".png") || value.includes(".jpg") || value.includes(".jpeg") || value.includes(".webp")) &&
       !value.includes("budget")
   );
-  const deckRow = result[Math.floor(Math.random() * result.length)];
-        const row = deckRow;
-        for (const key in deckRow) {
-          const value = deckRow[key];
+        for (const key in result[0]) {
+          const value = result[0][key];
           if (
             typeof value === 'string' &&
             (value.includes(".png") || value.includes(".jpg") || value.includes(".jpeg") || value.includes(".webp")) &&
@@ -72,26 +70,24 @@ module.exports = {
         }
 
         const embed = new EmbedBuilder()
-          .setTitle(row.title)
-          .setDescription(row.description)
-          .addFields({
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: (`${row.cost} <:spar:1057791557387956274>` || "N/A").toString(),
-        inline: true,
-      })
+          .setTitle(randomRow.name)
+          .setDescription(randomRow.description)
           .setColor("Random")
-          .setFooter({text: row.creator})
-          .setImage(deck[Math.floor(Math.random() * deck.length)]);
+          .addFields({
+            name: "Deck Type",
+            value: `**__${randomRow.type}__**`,
+            inline: true,
+          }, {
+            name: "Archetype",
+            value: `**__${randomRow.archetype}__**`,
+            inline: true,
+          }, {
+            name: "Deck Cost",
+            value: `${randomRow.cost.toString()}<:spar:1057791557387956274>`,
+            inline: true,
+          })
+          .setFooter({text: randomRow.creator})
+          .setImage(randomRow.image);
 
         await interaction.reply({
           embeds: [embed],

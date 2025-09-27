@@ -96,6 +96,8 @@ module.exports = {
           ? "Competitive"
           : cat.charAt(0).toUpperCase() + cat.slice(1);
       categoryEmbeds[cat] = createCategoryEmbed(
+        hero, 
+        categoryColor,
         pretty,
         deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
         deckLists[cat].length,

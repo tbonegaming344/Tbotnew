@@ -28,7 +28,7 @@ module.exports = {
   run: async (client, message, args) => {
     const color = "#de8d5d";
     const [rows] =
-      await db.query(`SELECT * FROM rodecks where creator like '%Sushi%'
+      await db.query(`SELECT * FROM rodecks where creator like '%Sushi%' and creator not like '%Inspired by Sushi%'
     union all select * from rbdecks where creator like '%Sushi%'
     union all select * from hgdecks where creator like '%Sushi%'
     union all select * from zmdecks where creator like '%Sushi%'`);

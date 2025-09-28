@@ -81,11 +81,16 @@ module.exports = {
         .setDescription("The archetype for the deck (optional)")
         .setRequired(false)
         .addChoices(
-          { name: "Aggro", value: "Aggro" },
-          { name: "Control", value: "Control" },
-          { name: "Combo", value: "Combo" },
-          { name: "Midrange", value: "Midrange" },
-          { name: "Tempo", value: "Tempo" }
+          { name: 'Aggro', value: 'Aggro'},
+        { name: 'Control', value: 'Control'},
+        { name: 'Combo', value: 'Combo'},
+        { name: 'Midrange', value: 'Midrange'},
+        { name: "Tempo", value: 'Tempo'}, 
+        {name: 'Aggro Combo', value: 'Aggro Combo'},
+        {name: 'Combo Midrange', value: 'Combo Midrange'},
+        {name: 'Control Combo', value: 'Control Combo'},
+        {name: 'Combo Tempo', value: 'Combo Tempo'},
+        {name: 'Midrange Tempo', value: 'Midrange Tempo'}
         )
     )
     .addStringOption((option) =>

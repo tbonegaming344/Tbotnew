@@ -47,7 +47,7 @@ module.exports = {
       union all select * from pbdecks where creator like '%shortbow%'
       union all select * from imdecks where creator like '%shortbow%'
       union all select * from ntdecks where creator like '%shortbow%'
-      order by name
+      order by name ASC
       `);
     if (!rows || rows.length === 0) {
       return message.channel.send("No Short Bow decks found in the database.");

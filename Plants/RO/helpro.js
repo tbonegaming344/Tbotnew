@@ -33,7 +33,7 @@ module.exports = {
     const hero = "Rose";
     const categoryColor = "White";
     const deckColor = "Yellow";
-    const [rows] = await db.query("SELECT * FROM rodecks");
+    const [rows] = await db.query("SELECT * FROM rodecks order by name ASC");
     if (!rows || rows.length === 0) {
       return message.channel.send("No Rose decks found in the database.");
     }
@@ -116,6 +116,11 @@ module.exports = {
           .setValue("comp")
           .setDescription("Some of the Best Decks in the game")
           .setEmoji("<:compemote:1325461143136764060>"),
+        new StringSelectMenuOptionBuilder()
+          .setLabel("Ladder Deck")
+          .setValue("ladder")
+          .setDescription("Decks that are generally only good for ranked games")
+          .setEmoji("<:ladder:1271503994857979964>"),
         new StringSelectMenuOptionBuilder()
           .setLabel("Midrange Decks")
           .setValue("midrange")

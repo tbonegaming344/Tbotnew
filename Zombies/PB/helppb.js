@@ -40,7 +40,7 @@ module.exports = {
     const deckColor = "Purple";
     const categoryColor = "#FF00FF";
     // fetch rows: each row is a deck
-    const [rows] = await db.query("SELECT * FROM pbdecks");
+    const [rows] = await db.query("SELECT * FROM pbdecks order by name ASC");
     if (!rows || rows.length === 0) {
       return message.channel.send(
         "No Professor Brainstorm decks found in the database."

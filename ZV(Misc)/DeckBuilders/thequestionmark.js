@@ -32,7 +32,9 @@ module.exports = {
   run: async (client, message, args) => {
     const color = "#000000";
     const [rows] = await db.query(`SELECT * FROM ntdecks where creator like '%The Question Mark%'
-    union all select * from spdecks where creator like '%The Question Mark%'`);
+    union all select * from spdecks where creator like '%The Question Mark%'
+    union all select * from pbdecks where creator like '%The Question Mark%'
+    order by name ASC`);
     if (!rows || rows.length === 0) {
       return message.channel.send(
         "No The Question Mark decks found in the database."

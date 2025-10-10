@@ -30,7 +30,8 @@ module.exports = {
     const [rows] =
       await db.query(`SELECT * FROM ccdecks where creator like '%MakeMeACoffee%'
       union all select * from spdecks where creator like '%MakeMeACoffee%'
-      union all select * from ctdecks where creator like '%MakeMeACoffee%'`);
+      union all select * from ctdecks where creator like '%MakeMeACoffee%'
+      union all select * from ncdecks where creator like '%MakeMeACoffee%'`);
     if (!rows || rows.length === 0) {
       return message.channel.send(
         "No Make Me A Coffee decks found in the database."

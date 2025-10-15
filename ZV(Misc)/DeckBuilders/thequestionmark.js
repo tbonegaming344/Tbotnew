@@ -34,6 +34,7 @@ module.exports = {
     const [rows] = await db.query(`SELECT * FROM ntdecks where creator like '%The Question Mark%'
     union all select * from spdecks where creator like '%The Question Mark%'
     union all select * from pbdecks where creator like '%The Question Mark%'
+    union all select * from gsdecks where creator like '%The Question Mark%'
     order by name ASC`);
     if (!rows || rows.length === 0) {
       return message.channel.send(
@@ -110,7 +111,7 @@ module.exports = {
       .setPlaceholder("Select an option below to view tqm's decks")
       .addOptions(
         new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
+          .setLabel("Ladder Decks")
           .setValue("ladder")
           .setDescription("Decks that are generally only good for ranked games")
           .setEmoji("<:ladder:1271503994857979964>"),
@@ -119,13 +120,13 @@ module.exports = {
           .setDescription("Decks that are built off a weird/fun combo")
           .setValue("meme"),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Aggro Deck")
+          .setLabel("Aggro Decks")
           .setValue("aggro")
           .setDescription(
             "attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7."
           ),
         new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Deck")
+          .setLabel("Combo Decks")
           .setValue("combo")
           .setDescription(
             "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."

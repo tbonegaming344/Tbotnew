@@ -295,8 +295,20 @@ module.exports = {
             `SELECT * FROM ${table} WHERE cards LIKE ?`,
             [`%${cardName}%`]
           );
-          
-          for (const row of rows) {
+           for (const row of rows) {
+      // Parse the cards column (newline-separated)
+      const cardsList = (row.cards || "")
+        .split('\n')
+        .map(c => c.trim().toLowerCase())
+        .filter(c => c.length > 0); // Remove empty lines
+      
+      // Check for exact match (case-insensitive)
+      const searchName = cardName.toLowerCase().trim();
+      const hasExactMatch = cardsList.some(card => card === searchName);
+      
+      if (!hasExactMatch) {
+        continue; 
+      }
             // Normalize deck data similar to helpsf.js
             const rawType = (row.type || "").toString();
             const rawArch = (row.archetype || "").toString();

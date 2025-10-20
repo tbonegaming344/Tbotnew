@@ -1,6 +1,5 @@
 const { ButtonBuilder, ButtonStyle,  ContainerBuilder,
-    SectionBuilder, SeparatorSpacingSize, TextDisplayBuilder, MessageFlags } = require("discord.js");
-const { aliases } = require("./tourneys");
+    SectionBuilder, TextDisplayBuilder, MessageFlags } = require("discord.js");
 module.exports = {
     name: `donate`, 
     aliases: [`donatetobot`, `donatetbot`],
@@ -10,6 +9,7 @@ module.exports = {
         const donateText = new TextDisplayBuilder().setContent([
             "# Want to support tbot development?",
             "If you want to donate to the bot, you can do so by clicking the donate button!",
+            "Donations help with server costs and development time.",
             "Note this is **not required**, but it is appreciated!",
         ].join('\n'));
         const donateButton = new ButtonBuilder()

@@ -514,13 +514,16 @@ Note: the decks are in alphabetical order not by hero`
         "plant_midrange",
         "plant_combo",
         "plant_control",
+        "plant_tempo",
         "zombie_comp",
+        "zombie_budget",
         "zombie_all",
         "zombie_meme",
         "zombie_aggro",
         "zombie_midrange",
         "zombie_combo",
         "zombie_control",
+        "zombie_tempo"
       ];
 
       try {

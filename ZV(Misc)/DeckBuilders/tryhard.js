@@ -169,7 +169,7 @@ module.exports = {
             });
           // If the category has exactly one deck, reply with that deck's embed (ephemeral)
           if (list.length === 1) {
-            const singleEmbed = buildDeckEmbed(list[0, color]);
+            const singleEmbed = buildDeckEmbed(list[0], color);
             return i.reply({
               embeds: [singleEmbed],
               flags: MessageFlags.Ephemeral,

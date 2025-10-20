@@ -12,7 +12,6 @@ const db = require("../../index.js");
 const createCategoryEmbed = require("../../Utilities/createCategoryEmbed.js");
 const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 const buildNavRow = require("../../Utilities/buildNavRow.js");
-const matchesCategory = require("../../Utilities/matchesCategory.js");
 module.exports = {
   name: `helpcz`,
   aliases: [
@@ -37,13 +36,12 @@ module.exports = {
     if (!rows || rows.length === 0) {
       return message.channel.send("No Chompzilla decks found in the database.");
     }
-
-    // normalize rows and key properties (added normalization fields)
-    const normalized = rows.map((r) => {
+let allDecks = [];
+  for (const r of rows) {
       const rawType = (r.type || "").toString();
       const rawArch = (r.archetype || "").toString();
-      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
-      return {
+      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); 
+      allDecks.push({
         id: r.deckID ?? null,
         name: r.name ?? r.deckID ?? "Unnamed",
         type: rawType,
@@ -55,111 +53,84 @@ module.exports = {
         image: r.image ?? null,
         creator: r.creator ?? "",
         raw: r,
-      };
-    });
-    // build category lists from DB dynamically (unchanged)
-    const categories = [
-      "budget",
-      "comp",
-      "ladder",
-      "meme",
-      "combo",
-      "control",
-      "midrange",
-      "tempo",
-      "aggro",
-      "all",
-    ];
-    const deckLists = {};
-    for (const cat of categories) {
-      deckLists[cat] = normalized.filter((r) => matchesCategory(r, cat));
+      });
     }
 
-    // debug counts (optional)
-    console.log(
-      "category counts:",
-      Object.fromEntries(categories.map((c) => [c, deckLists[c].length]))
-    );
+    // Group decks by categories dynamically based on what's available
+      const availableCategories = ["all"];
+      const deckLists = { all: allDecks };
+
+      // Add categories that actually exist in the results
+      const categoryChecks = [
+        { key: "budget", check: (deck) => deck.typeNorm.includes("budget") },
+        { key: "comp", check: (deck) => deck.typeNorm.includes("competitive") || deck.typeNorm.includes("comp") },
+        { key: "ladder", check: (deck) => deck.typeNorm.includes("ladder") },
+        { key: "meme", check: (deck) => deck.typeNorm.includes("meme") },
+        { key: "aggro", check: (deck) => deck.archetypeNorm.includes("aggro") },
+        { key: "combo", check: (deck) => deck.archetypeNorm.includes("combo") },
+        { key: "control", check: (deck) => deck.archetypeNorm.includes("control") },
+        { key: "midrange", check: (deck) => deck.archetypeNorm.includes("midrange") },
+        { key: "tempo", check: (deck) => deck.archetypeNorm.includes("tempo") }
+      ];
+
+      for (const { key, check } of categoryChecks) {
+        const filtered = allDecks.filter(check);
+        if (filtered.length > 0) {
+          availableCategories.push(key);
+          deckLists[key] = filtered;
+        }
+      }
+
+      // Create select menu options only for available categories
+      const selectOptions = [];
+
+      // Add category options that have decks
+      const categoryLabels = {
+        budget: { label: "Budget Decks", emoji: "💰", desc: "Decks that are cheap for new players" },
+        comp: { label: "Competitive Decks", emoji: "🏆", desc: "Some of the best decks in the game" },
+        ladder: { label: "Ladder Decks", emoji: "🪜", desc: "Decks that are mostly only good for ranked games" },
+        meme: { label: "Meme Decks",  emoji: "😂", desc: "Decks built for fun/weird combos" },
+        aggro: { label: "Aggro Decks", emoji: "⚡", desc: "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7." },
+        combo: { label: "Combo Decks",  emoji: "🧩", desc: "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)." },
+        control: { label: "Control Decks",  emoji: "🛡️", desc: 'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.' },
+        midrange: { label: "Midrange Decks",  emoji: "⚖️", desc: "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game" },
+        tempo: { label: "Tempo Decks",  emoji: "🏃‍♂️", desc: "Focuses on slowly building a big board, winning trades and overwhelming the opponent." }
+      };
+
+      for (const cat of availableCategories.slice(1)) { // Skip "all" since we already added it
+        const config = categoryLabels[cat];
+        if (config && deckLists[cat].length > 0) {
+          selectOptions.push(
+            new StringSelectMenuOptionBuilder()
+              .setLabel(`${config.label} (${deckLists[cat].length})`)
+              .setValue(cat)
+              .setDescription(config.desc)
+              .setEmoji(config.emoji)
+          );
+        }
+      }
+           // Always add "All" option
+      selectOptions.push(
+        new StringSelectMenuOptionBuilder()
+          .setLabel(`All Decks (${allDecks.length})`)
+          .setValue("all")
+          .setEmoji("<:LetsFrickenChomp:1100168574829596824>")
+          .setDescription(`View all chompzilla decks`)
+      );
+      const select = new StringSelectMenuBuilder()
+        .setCustomId(`chompzilla_deck_select`)
+        .setPlaceholder(`Select a category to view Chompzilla decks`)
+        .addOptions(selectOptions);
 
     // thumbnail
     const thumb =
       "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110";
-
-    // create category overview embeds (used when nav hits ends for special cats)
-    const categoryEmbeds = {};
-    for (const cat of categories) {
-      const pretty =
-        cat === "comp"
-          ? "Competitive"
-          : cat.charAt(0).toUpperCase() + cat.slice(1);
-      categoryEmbeds[cat] = createCategoryEmbed(
-        hero,
-        categoryColor,
-        pretty,
-        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
-        deckLists[cat].length,
-        thumb
-      );
-    }
-    const select = new StringSelectMenuBuilder()
-      .setCustomId("select")
-      .setPlaceholder("Select an option below to view chompzilla's decks")
-      .addOptions(
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Budget Deck")
-          .setValue("budget")
-          .setEmoji("💰")
-          .setDescription("A Deck that is cheap for new players"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Competitive Deck")
-          .setValue("comp")
-          .setEmoji("<:compemote:1325461143136764060>")
-          .setDescription("Some of the best decks in the game"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Ladder Deck")
-          .setValue("ladder")
-          .setDescription("Decks that mostly only good for ranked games")
-          .setEmoji("<:ladder:1271503994857979964>"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Meme Deck")
-          .setValue("meme")
-          .setDescription("Decks that are built off a weird/fun combo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Combo Decks")
-          .setValue("combo")
-          .setDescription(
-            "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)."
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Control Deck")
-          .setValue("control")
-          .setDescription(
-            'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.'
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Midrange Decks")
-          .setValue("midrange")
-          .setDescription(
-            "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game"
-          ),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("Tempo Deck")
-          .setDescription(
-            "Focuses on slowly building a big board, winning trades and overwhelming the opponent."
-          )
-          .setValue("tempo"),
-        new StringSelectMenuOptionBuilder()
-          .setLabel("All Decks")
-          .setValue("all")
-          .setDescription("All of the Chompzilla decks in Tbot")
-          .setEmoji("<:LetsFrickenChomp:1100168574829596824>")
-      );
     const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()
           .setTitle("Chompzilla Decks")
           .setDescription(
-            `To view the Chompzilla decks please select an option from the select menu below!\nNote: Chompzilla has ${normalized.length} total decks in Tbot`
+            `To view the Chompzilla decks please select an option from the select menu below!\nNote: Chompzilla has ${allDecks.length} total decks in Tbot`
           )
           .setColor(categoryColor)
           .setThumbnail(thumb),

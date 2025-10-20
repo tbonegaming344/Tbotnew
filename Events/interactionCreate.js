@@ -1,6 +1,8 @@
 const {
   ActionRowBuilder,
   EmbedBuilder,
+  StringSelectMenuBuilder,
+  StringSelectMenuOptionBuilder,
   InteractionType,
   ModalBuilder,
   TextInputBuilder,
@@ -10,10 +12,15 @@ const {
   MessageFlags,
 } = require("discord.js");
 const { ascii, hangmanGuesses } = require("../Utilities/hangman");
+const createCategoryEmbed = require("../Utilities/createCategoryEmbed.js");
+const buildDeckEmbed = require("../Utilities/buildDeckEmbed.js");
+const buildNavRow = require("../Utilities/buildNavRow.js");
+const buildCardEmbedFromRow = require("../Utilities/buildCardEmbedFromRow.js");
 module.exports = {
   name: "interactionCreate",
   async run(interaction) {
     const client = interaction.client;
+    const db = require("../index.js")
     if (interaction.type === InteractionType.ModalSubmit) {
       if (interaction.customId.startsWith("hangman-")) {
         await interaction.deferUpdate();
@@ -187,8 +194,381 @@ module.exports = {
       }
   }
   else if (interaction.type === InteractionType.MessageComponent) {
-      if (!interaction.customId.startsWith("hangman-")) return;
+    if (interaction.customId.startsWith("cardinfo_")) {
+       await interaction.deferReply({flags: MessageFlags.Ephemeral});
+      const tableConfig = [
+        { table: "guardiancards",  },
+  {table: "guardiantricks", },
+  { table: "kabloomcards",},
+  {table: "kabloomtricks",  },
+  { table: "megagrowcards", },
+  {table: "megagrowtricks", },
+  { table: "smartycards", },
+  {table: "smartytricks", },
+  { table: "solarcards", },
+  {table: "solartricks", },
+  { table: "beastlycards", },
+  {table: "beastlytricks",},
+  { table: "brainycards", },
+  {table: "brainytricks", },
+  { table: "crazycards",},
+  {table: "crazytricks", },
+  { table: "heartycards", },
+  {table: "heartytricks", },
+  { table: "sneakycards",},
+  {table: "sneakytricks",},
+      ]
+      const dbTableColors = {
+         guardiancards: "#964B00",
+  guardiantricks: "#964B00",
+  kabloomcards: "Red",
+  kabloomtricks: "Red",
+  megagrowcards: "Green",
+  megagrowtricks: "Green",
+  smartycards2: "White",
+  smartytricks: "White",
+  solarcards: "Yellow",
+  solartricks: "Yellow",
+  beastlycards: "Blue",
+  beastlytricks: "Blue",
+  brainycards: "Purple",
+  brainytricks: "Purple",
+  crazycards: "Purple",
+  crazytricks: "Purple",
+  heartycards: "Orange",
+  heartytricks: "Orange",
+  sneakycards: "#000000",
+  sneakytricks: "#000000",
+      };
+    const cardKey = interaction.customId.replace("cardinfo_", "");
+    console.log("Fetching info for card:", cardKey);
+    for (const t of tableConfig) {
+      const [rows] = await db
+        .query(`SELECT * FROM \`${t.table}\` WHERE card_name = ? LIMIT 1;`, [cardKey])
+        .catch(() => [[]]);
+      const cardRow = rows[0];
+      if (cardRow) {
+        console.log("Built card embed from table:", t.table);
+        const embed = buildCardEmbedFromRow(cardRow, t.table, dbTableColors);
+        return await interaction.editReply({ embeds: [embed]});
+      }
+    }
+  }
+  else if (interaction.customId.startsWith("detectdecks_")) {
+    // Handle ONLY the initial detectdecks_ button click (not select menu or nav buttons)
+    if (interaction.customId.match(/^detectdecks_[^_]+$/)) { // Only matches detectdecks_cardname format
+      const cardName = interaction.customId.replace("detectdecks_", "");
+      console.log("Detecting decks for card:", cardName);
+      
+      await interaction.deferReply({flags: MessageFlags.Ephemeral});
 
+      const dbTables = [
+        { table: "gsdecks", hero: "Green Shadow" },
+        { table: "sfdecks", hero: "Solar Flare" }, 
+        { table: "wkdecks", hero: "Wall Knight" },
+        { table: "czdecks", hero: "Chompzilla" }, 
+        { table: "spdecks", hero: "Spudow" },
+        { table: "ctdecks", hero: "Citron" },
+        { table: "gkdecks", hero: "Grass Knuckles" },
+        { table: "ncdecks", hero: "Night Cap" },
+        { table: "rodecks", hero: "Rose" },
+        { table: "ccdecks", hero: "Captain Combustible" },
+        { table: "bcdecks", hero: "Betacron" },
+        { table: "sbdecks", hero: "Super Brainz" }, 
+        { table: "smdecks", hero: "The Smash" },
+        { table: "ifdecks", hero: "Impfinity" }, 
+        { table: "rbdecks", hero: "Rustbolt" },
+        { table: "ebdecks", hero: "Electric Boogaloo" }, 
+        { table: "bfdecks", hero: "Brain Freeze" }, 
+        { table: "pbdecks", hero: "Professor Brainstorm" }, 
+        { table: "imdecks", hero: "Immorticia" }, 
+        { table: "zmdecks", hero: "Z-Mech" }, 
+        { table: "ntdecks", hero: "Neptuna" },
+        { table: "hgdecks", hero: "Huge-Gigantacus" }
+      ];
+
+      // Collect all matching decks
+      let allDecks = [];
+      for (const { table, hero } of dbTables) {
+        try {
+          const [rows] = await db.query(
+            `SELECT * FROM ${table} WHERE cards LIKE ?`,
+            [`%${cardName}%`]
+          );
+          
+          for (const row of rows) {
+            // Normalize deck data similar to helpsf.js
+            const rawType = (row.type || "").toString();
+            const rawArch = (row.archetype || "").toString();
+            const normalize = (s) => s.toLowerCase().replaceAll(/[^a-z0-9]/g, "");
+            
+            allDecks.push({
+              id: row.deckID ?? null,
+              name: row.name ?? row.deckID ?? "Unnamed",
+              type: rawType,
+              archetype: rawArch,
+              cost: row.cost ?? row.deckcost ?? "",
+              typeNorm: normalize(rawType),
+              archetypeNorm: normalize(rawArch),
+              description: row.description ?? "",
+              image: row.image ?? null,
+              creator: row.creator ?? "",
+              hero: hero,
+              table: table,
+              raw: row,
+            });
+          }
+        } catch (error) {
+          console.error(`Error querying ${table}:`, error);
+        }
+      }
+      allDecks.sort((a, b) => a.name.localeCompare(b.name));
+      if (allDecks.length === 0) {
+        return interaction.editReply({
+          content: `No decks found containing "${cardName}".`,
+        });
+      }
+
+      // Group decks by categories dynamically based on what's available
+      const availableCategories = ["all"];
+      const deckLists = { all: allDecks };
+
+      // Add categories that actually exist in the results
+      const categoryChecks = [
+        { key: "budget", check: (deck) => deck.typeNorm.includes("budget") },
+        { key: "comp", check: (deck) => deck.typeNorm.includes("competitive") || deck.typeNorm.includes("comp") },
+        { key: "ladder", check: (deck) => deck.typeNorm.includes("ladder") },
+        { key: "meme", check: (deck) => deck.typeNorm.includes("meme") },
+        { key: "aggro", check: (deck) => deck.archetypeNorm.includes("aggro") },
+        { key: "combo", check: (deck) => deck.archetypeNorm.includes("combo") },
+        { key: "control", check: (deck) => deck.archetypeNorm.includes("control") },
+        { key: "midrange", check: (deck) => deck.archetypeNorm.includes("midrange") },
+        { key: "tempo", check: (deck) => deck.archetypeNorm.includes("tempo") }
+      ];
+
+      for (const { key, check } of categoryChecks) {
+        const filtered = allDecks.filter(check);
+        if (filtered.length > 0) {
+          availableCategories.push(key);
+          deckLists[key] = filtered;
+        }
+      }
+
+      // Create select menu options only for available categories
+      const selectOptions = [];
+
+      // Add category options that have decks
+      const categoryLabels = {
+        budget: { label: "Budget Decks", emoji: "💰", desc: "Decks that are cheap for new players" },
+        comp: { label: "Competitive Decks", emoji: "🏆", desc: "Some of the best decks in the game" },
+        ladder: { label: "Ladder Decks", emoji: "🪜", desc: "Decks that are mostly only good for ranked games" },
+        meme: { label: "Meme Decks",  emoji: "😂", desc: "Decks built for fun/weird combos" },
+        aggro: { label: "Aggro Decks", emoji: "⚡", desc: "Attempts to kill the opponent as soon as possible, usually winning the game by turn 4-7." },
+        combo: { label: "Combo Decks",  emoji: "🧩", desc: "Uses a specific card synergy to do massive damage to the opponent(OTK or One Turn Kill decks)." },
+        control: { label: "Control Decks",  emoji: "🛡️", desc: 'Tries to remove/stall anything the opponent plays and win in the "lategame" with expensive cards.' },
+        midrange: { label: "Midrange Decks",  emoji: "⚖️", desc: "Slower than aggro, usually likes to set up earlygame boards into mid-cost cards to win the game" },
+        tempo: { label: "Tempo Decks",  emoji: "🏃‍♂️", desc: "Focuses on slowly building a big board, winning trades and overwhelming the opponent." }
+      };
+
+      for (const cat of availableCategories.slice(1)) { // Skip "all" since we already added it
+        const config = categoryLabels[cat];
+        if (config && deckLists[cat].length > 0) {
+          selectOptions.push(
+            new StringSelectMenuOptionBuilder()
+              .setLabel(`${config.label} (${deckLists[cat].length})`)
+              .setValue(cat)
+              .setDescription(config.desc)
+              .setEmoji(config.emoji)
+          );
+        }
+      }
+           // Always add "All" option
+      selectOptions.push(
+        new StringSelectMenuOptionBuilder()
+          .setLabel(`All Decks (${allDecks.length})`)
+          .setValue("all")
+          .setEmoji("📋")
+          .setDescription(`View all decks containing "${cardName}"`)
+      );
+      const select = new StringSelectMenuBuilder()
+        .setCustomId(`deckcat_${cardName}`)
+        .setPlaceholder(`Select a category to view decks containing "${cardName}"`)
+        .addOptions(selectOptions);
+
+      const initialEmbed = new EmbedBuilder()
+        .setTitle(`Decks containing "${cardName}"`)
+        .setColor("Blue")
+        .setDescription([
+          `Found **${allDecks.length}** deck(s) containing **"${cardName}"**`,
+          "",
+          "Select a category below to browse the decks with navigation."
+        ].join("\n"))
+        .setFooter({ text: "Use the select menu to filter by category" });
+      // After collecting all decks, but before storing in detectDecksData
+for (const [key, deckList] of Object.entries(deckLists)) {
+  deckLists[key] = deckList.toSorted((a, b) => 
+  a.hero.localeCompare(b.hero, undefined, { sensitivity: "base" }) ||
+  a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: "base" })
+);
+}
+      // Use message ID instead of interaction ID for better persistence
+      const message = await interaction.editReply({
+        embeds: [initialEmbed],
+        components: [new ActionRowBuilder().addComponents(select)]
+      });
+
+
+// Store the deck data using message ID
+if (!interaction.client.detectDecksData) {
+  interaction.client.detectDecksData = new Map();
+}
+interaction.client.detectDecksData.set(message.id, {
+  cardName,
+  deckLists, 
+  availableCategories
+});
+
+      console.log(`Stored detectdecks data for message ID: ${message.id}`);
+
+      // Set up collector for the select menu and navigation
+      const filter = (i) => (
+        i.customId.startsWith(`deckcat_${cardName}`) ||
+        i.customId.startsWith("decknav_") ||
+        i.customId.startsWith("deckback_")
+      );
+      
+      const collector = message.createMessageComponentCollector({ 
+        filter
+      });
+
+      collector.on("collect", async (i) => {
+        try {
+          const data = interaction.client.detectDecksData.get(message.id);
+          if (!data) {
+            return await i.reply({ 
+              content: "Data not found. Please try running the command again.", 
+              flags: MessageFlags.Ephemeral 
+            });
+          }
+
+          if (i.isStringSelectMenu() && i.customId.startsWith("deckcat_")) {
+            const category = i.values[0];
+            const list = data.deckLists[category] || [];
+             
+            if (list.length === 0) {
+              return await i.reply({
+                content: "No decks in that category.",
+                flags: MessageFlags.Ephemeral,
+              });
+            }
+
+            // If only one deck, show it directly
+            if (list.length === 1) {
+              const embed = buildDeckEmbed(list[0], "Random");
+              return await i.reply({ 
+                embeds: [embed],
+                flags: MessageFlags.Ephemeral,
+              });
+            }
+            // Show category overview with navigation buttons
+            const categoryEmbed = createCategoryEmbed(
+              data.cardName,
+              "Blue",
+              category.charAt(0).toUpperCase() + category.slice(1), 
+              list.map(deck => `${deck.name.replaceAll(/\s+/g, "").toLowerCase()} (${deck.hero})`),
+              list.length,
+              null
+            );
+
+            const navRow = new ActionRowBuilder().addComponents(
+              new ButtonBuilder()
+                .setCustomId(`decknav_${category}_${list.length - 1}`)
+                .setEmoji("⬅️")
+                .setStyle(ButtonStyle.Primary),
+              new ButtonBuilder()
+                .setCustomId(`decknav_${category}_0`)
+                .setEmoji("➡️")
+                .setStyle(ButtonStyle.Primary)
+            );
+
+            return await i.update({ 
+              embeds: [categoryEmbed], 
+              components: [navRow] 
+            });
+          }
+
+          if (i.isButton() && i.customId.startsWith("decknav_")) {
+            const [, category, indexStr] = i.customId.split("_");
+            const index = Number.parseInt(indexStr, 10);
+            const list = data.deckLists[category] || [];
+
+            if (!list[index]) {
+              return await i.reply({
+                content: "Deck not found.",
+                flags: MessageFlags.Ephemeral,
+              });
+            }
+
+            const embed = buildDeckEmbed(list[index], "Random");
+            
+            // Build navigation row
+            const navRow = buildNavRow(category, index, list.length, ["all"]); 
+            
+            // Convert button IDs to use decknav_ and deckback_ prefixes
+            const updatedNav = new ActionRowBuilder();
+            for (const component of navRow.components) {
+              const btn = ButtonBuilder.from(component);
+              const oldId = component.data.custom_id;
+              
+              if (oldId.startsWith("nav_")) {
+                btn.setCustomId(oldId.replace("nav_", "decknav_"));
+              } else if (oldId.startsWith("back_to_list_")) {
+                btn.setCustomId(oldId.replace("back_to_list_", "deckback_"));
+              }
+              
+              updatedNav.addComponents(btn);
+            }
+
+            return await i.update({ embeds: [embed], components: [updatedNav] });
+          }
+
+          if (i.isButton() && i.customId.startsWith("deckback_")) {
+            const category = i.customId.replace("deckback_", "");
+            const list = data.deckLists[category] || [];
+            
+            const categoryEmbed = createCategoryEmbed(
+               data.cardName,
+              "Blue",
+              category.charAt(0).toUpperCase() + category.slice(1), 
+              list.map(deck => `${deck.name.replaceAll(/\s+/g, "").toLowerCase()} (${deck.hero})`), // Use sortedList
+              list.length,
+              null
+            );
+
+            const navRow = new ActionRowBuilder().addComponents(
+              new ButtonBuilder()
+                .setCustomId(`decknav_${category}_${list.length - 1}`)
+                .setEmoji("⬅️")
+                .setStyle(ButtonStyle.Primary),
+              new ButtonBuilder()
+                .setCustomId(`decknav_${category}_0`)
+                .setEmoji("➡️")
+                .setStyle(ButtonStyle.Primary)
+            );
+
+            return await i.update({ 
+              embeds: [categoryEmbed], 
+              components: [navRow] 
+            });
+          }
+
+        } catch (error) {
+          console.error("Error in detectdecks collector:", error);
+        }
+      });
+    }
+  }
+    else if (interaction.customId.startsWith("hangman-")) {
       const type = interaction.customId.split("-").at(-1);
 
       const modal = new ModalBuilder()
@@ -227,6 +607,7 @@ module.exports = {
 		}
 	}
     }
+  }
     else if(interaction.type === InteractionType.ApplicationCommandAutocomplete){
      const command = interaction.client.slashCommands.get(interaction.commandName);
 

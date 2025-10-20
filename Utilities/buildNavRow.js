@@ -1,5 +1,12 @@
 const { ActionRowBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
-
+/**
+ * @description Builds a navigation row for a deck
+ * @param {*} category The category of the deck
+ * @param {*} currentIndex The current index of the deck
+ * @param {*} total The total number of decks
+ * @param {*} specialCategories The special categories for the deck
+ * @returns {ActionRowBuilder} The constructed action row
+ */
 function buildNavRow(category, currentIndex, total, specialCategories) {
   const isSpecial = specialCategories.includes(category);
   const prevIndex = (currentIndex - 1 + total) % total;

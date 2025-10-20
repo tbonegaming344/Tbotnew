@@ -1,5 +1,10 @@
 const { EmbedBuilder } = require("discord.js");
-
+/**
+ * @description Builds a Discord embed for a deck from a database row
+ * @param {*} row  The database row object
+ * @param {*} deckColor  The color to use for the embed
+ * @returns {EmbedBuilder} The constructed embed
+ */
 function buildDeckEmbed(row, deckColor) {
   const embed = new EmbedBuilder()
     .setTitle(row.name || "Unknown")

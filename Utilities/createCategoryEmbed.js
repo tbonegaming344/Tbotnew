@@ -1,5 +1,14 @@
 const { EmbedBuilder } = require("discord.js");
-
+/**
+ * @description Creates a category embed for a hero's decks
+ * @param {*} hero the hero name
+ * @param {*} categoryColor the color of the category
+ * @param {*} name the name of the category
+ * @param {*} deckNames the names of the decks
+ * @param {*} total the total number of decks
+ * @param {*} thumbnail the thumbnail image URL
+ * @returns {EmbedBuilder} The constructed embed
+ */
 function createCategoryEmbed(hero, categoryColor, name, deckNames, total, thumbnail) {
   const isAll = name.toLowerCase() === "all";
   const description =
@@ -11,9 +20,10 @@ function createCategoryEmbed(hero, categoryColor, name, deckNames, total, thumbn
     .setDescription(
       isAll
         ? `All ${hero} decks in Tbot are:${description}`
-        : `My ${name} decks for ${hero} are: ${description}`
+        : `My ${name} decks for ${hero} are: ${description}` ?
+        `My ${name} ${hero} decks are: ${description}` :  "None available"
     )
-    .setThumbnail(thumbnail)
+    .setThumbnail(thumbnail)   
     .setColor(categoryColor)
     .setFooter({
       text: isAll

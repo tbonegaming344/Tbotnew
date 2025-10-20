@@ -13,6 +13,13 @@ const {
       aliases: ["helpcommand", "commands", "cmds", "names"],
       category: "Miscellaneous",
       run: async (client, message, args) => {
+    const plantHeroes = ["Green Shadow(GS)", "Solar Flare(SF)", "Wall Knight(WK)", "Spudow(SP)", "Rose(RO)", "Captain Combustible(CC)", "Grass Knuckles(GK)", "Beta-Carrotina/Citron", "Chompzilla(CZ)", "Night Cap(NC)"];
+    const zombieHeroes = ["Brain Freeze(BF)", "Electric Boogaloo(EB)", "Huge-Gigantacus/SuperBrainz", "Impfinity(IF)", "Immorticia(IM)", "Neptuna(NT)", "Professor Brainstorm(PB)", "Rustbolt(RB)", "Smash(SM)", "Zmech(ZM)"];
+    const otherCategories = ["Miscellaneous", "Plant Cards", "Zombie Cards", "Tricks Phase", "DeckBuilders"];
+    plantHeroes.sort((a, b) => a.localeCompare(b));
+    zombieHeroes.sort((a, b) => a.localeCompare(b));
+    otherCategories.sort((a, b) => a.localeCompare(b));
+    const orderedCategories = [...plantHeroes, ...zombieHeroes, ...otherCategories,  ];
       const commands = Array.from(client.commands.values())
       const categories = commands.reduce((acc, command) => {
           if (!acc[command.category]) {
@@ -29,13 +36,14 @@ const {
           )
           .setImage("https://media.discordapp.net/attachments/1044626284346605588/1257720785129312306/all_characters.jpg?ex=66856f42&is=66841dc2&hm=121286e871f2f84b7db1cc561a509a729596e8105b623225d85f3d36cd9b5b43&=&format=webp&width=707&height=614")
           .setFooter({text: `Total Commands: ${commands.length} commands`})
-      const cat = Object.keys(categories).map(category => {
-          if (!category) category = `Default`;
-          return {
-              label: category,
-              value: 'help_' + category,
-          }
-      })
+      const cat = orderedCategories
+  .filter(category => categories[category])
+  .map(category => {
+    return {
+      label: category,
+      value: 'help_' + category,
+    }
+  })
   
     const menu = new ActionRowBuilder().addComponents(
          new StringSelectMenuBuilder()
@@ -71,9 +79,16 @@ const {
                   .setTitle("Help | " + category)
 
               let toBuildString = "";
-              for (const command of commands) {
-                  toBuildString += `**${command.name}** \n`;
-              }
+for (const command of commands) {
+    const newLine = `**${command.name}** \n`;
+    // Check if adding this line would exceed the limit
+    if (toBuildString.length + newLine.length > 4000) {
+        toBuildString += `\n... and ${commands.length - commands.indexOf(command)} more commands`;
+        break;
+    }
+    toBuildString += newLine;
+}
+embed.setDescription(toBuildString);
               embed.setDescription(toBuildString)
               embed.setFooter({text: `${category} has ${commands.length} commands and ${commands.length - 1 } decks`})
               if(category == "Miscellaneous" ){

@@ -6,6 +6,7 @@ Author: Tbone Gaming
         Tbonegaming18@gmail.com
 */
 const { token, user, host, password, database } = require("./config.json");
+const scanAllTablesAndSync = require("./Utilities/scanAllTablesAndSync");
 const mysql = require(`mysql2`);
 const { PermissionsBitField } = require("discord.js");
 const {
@@ -23,6 +24,7 @@ const client = new Client({
     GatewayIntentBits.Guilds,
     GatewayIntentBits.GuildMessages,
     GatewayIntentBits.GuildMessageReactions,
+    GatewayIntentBits.MessageContent,
     GatewayIntentBits.DirectMessages,
   ],
 });
@@ -34,12 +36,12 @@ const db = mysql
     database: database,
   })
   .promise();
-module.exports = db;
+  module.exports = db;
 const prefix = "?";
 client.commands = new Collection();
 client.aliases = new Collection();
 client.slashCommands = new Collection();
-const fs = require("fs");
+const fs = require("node:fs");
 const path = require("node:path");
 const foldersPath = path.join(__dirname, "commands");
 const commandFolders = fs.readdirSync(foldersPath);
@@ -62,50 +64,82 @@ for (const folder of commandFolders) {
     }
   }
 }
-fs.readdirSync("./Plants").forEach((folder) => {
-  const commands = fs
-    .readdirSync(`./Plants/${folder}`)
+const ZombieFoldersPath = path.join(__dirname, "Zombies");
+const commandFoldersZombie = fs.readdirSync(ZombieFoldersPath);
+for (const folder of commandFoldersZombie) {
+  const commandsPath = path.join(ZombieFoldersPath, folder);
+  const commandFiles = fs
+    .readdirSync(commandsPath)
     .filter((file) => file.endsWith(".js"));
-
-  commands.forEach((f) => {
-    const command = require(`./Plants/${folder}/${f}`);
+  for (const commandFile of commandFiles) {
+    const filePath = path.join(commandsPath, commandFile);
+    const command = require(filePath);
+    if (command.name) {
     client.commands.set(command.name, command);
-  });
-});
-fs.readdirSync("./Zombies").forEach((folder) => {
-  const commands = fs
-    .readdirSync(`./Zombies/${folder}`)
+    }
+    if (command.aliases) {
+        for (const alias of command.aliases) {
+          client.aliases.set(alias);
+        }
+      }
+    }
+  }
+const miscanelousFoldersPath = path.join(__dirname, "ZV(Misc)");
+const commandFoldersMisc = fs.readdirSync(miscanelousFoldersPath);
+for (const folder of commandFoldersMisc) {
+  const commandsPath = path.join(miscanelousFoldersPath, folder);
+  const commandFiles = fs
+    .readdirSync(commandsPath)
     .filter((file) => file.endsWith(".js"));
-
-  commands.forEach((f) => {
-    const command = require(`./Zombies/${folder}/${f}`);
+  for (const commandFile of commandFiles) {
+    const filePath = path.join(commandsPath, commandFile);
+    const command = require(filePath);
+    if (command.name) {
     client.commands.set(command.name, command);
-  });
-});
-fs.readdirSync("./ZV(Misc)").forEach((folder) => {
-  const commands = fs
-    .readdirSync(`./ZV(Misc)/${folder}`)
+    }
+    if (command.aliases) {
+        for (const alias of command.aliases) {
+          client.aliases.set(alias);
+        }
+      }
+    }
+  }
+  const PlantFoldersPath = path.join(__dirname, "Plants");
+const commandFoldersPlant = fs.readdirSync(PlantFoldersPath);
+for (const folder of commandFoldersPlant) {
+  const commandsPath = path.join(PlantFoldersPath, folder);
+  const commandFiles = fs
+    .readdirSync(commandsPath)
     .filter((file) => file.endsWith(".js"));
-
-  commands.forEach((f) => {
-    const command = require(`./ZV(Misc)/${folder}/${f}`);
+  for (const commandFile of commandFiles) {
+    const filePath = path.join(commandsPath, commandFile);
+    const command = require(filePath);
+    if (command.name) {
     client.commands.set(command.name, command);
-  });
-});
-
-fs.readdirSync("./Events").forEach((file) => {
-  const event = require(`./Events/${file}`);
-
+    }
+    if (command.aliases) {
+        for (const alias of command.aliases) {
+          client.aliases.set(alias);
+        }
+      }
+    }
+  }
+const eventsPath = path.join(__dirname, "Events"); 
+const eventFiles = fs
+  .readdirSync(eventsPath)
+  .filter((file) => file.endsWith(".js"));
+for (const file of eventFiles) {
+  const filePath = path.join(eventsPath, file);
+  const event = require(filePath);
   client.on(event.name, event.run);
-});
-
+}
 client.on(Events.MessageCreate, async (message) => {
   if (message.content.toLowerCase().startsWith(prefix)) {
     if (message.author.bot) return;
     const channel = client.channels.cache.get("1050107020008771604");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const invokedRaw = args.join("").toLowerCase();
-    const invoked = invokedRaw.replace(/[^a-z0-9]+/g, ""); // normalize like DB commands
+    const invoked = invokedRaw.replaceAll(/[^a-z0-9]+/g, ""); // normalize like DB commands
     const command =
       client.commands.get(invoked) ||
       client.commands.find((a) => a.aliases?.includes(invoked));
@@ -173,8 +207,26 @@ const dbTables = [
   { table: "smdecks", prefix: "sm", category: "Smash(SM)" },
   { table: "spdecks", prefix: "sp", category: "Spudow(SP)" },
   { table: "wkdecks", prefix: "wk", category: "Wall Knight(WK)" },
-  { table: "guardiancards2", prefix: "gc", category: "Plant Cards" },
-  // add more table entries here
+  { table: "guardiancards", prefix: "gc", category: "Plant Cards" },
+  {table: "guardiantricks", prefix: "gt", category: "Tricks Phase" },
+  { table: "kabloomcards", prefix: "kc", category: "Plant Cards"},
+  {table: "kabloomtricks", prefix: "kt", category: "Tricks Phase" },
+  { table: "megagrowcards", prefix: "mgc", category: "Plant Cards"},
+  {table: "megagrowtricks", prefix: "mgt", category: "Tricks Phase" },
+  { table: "smartycards", prefix: "sc", category: "Plant Cards"},
+  {table: "smartytricks", prefix: "st", category: "Tricks Phase" },
+  { table: "solarcards", prefix: "slc", category: "Plant Cards"},
+  {table: "solartricks", prefix: "slt", category: "Tricks Phase" },
+  { table: "beastlycards", prefix: "bc", category: "Zombie Cards"},
+  {table: "beastlytricks", prefix: "bt", category: "Tricks Phase" },
+  { table: "brainycards", prefix: "brc", category: "Zombie Cards"},
+  {table: "brainytricks", prefix: "brt", category: "Tricks Phase" },
+  { table: "crazycards", prefix: "crc", category: "Zombie Cards"},
+  {table: "crazytricks", prefix: "crt", category: "Tricks Phase" },
+  { table: "heartycards", prefix: "hc", category: "Zombie Cards"},
+  {table: "heartytricks", prefix: "ht", category: "Tricks Phase" },
+  { table: "sneakycards", prefix: "snc", category: "Zombie Cards"},
+  {table: "sneakytricks", prefix: "snt", category: "Tricks Phase" },
 ];
 
 // map table name => embed color (hex). Adjust colors as desired.
@@ -201,215 +253,35 @@ const dbTableColors = {
   smdecks: "Blue",
   spdecks: "#964B00",
   wkdecks: "Yellow",
+  guardiancards: "#964B00",
+  guardiantricks: "#964B00",
+  kabloomcards: "Red",
+  kabloomtricks: "Red",
+  megagrowcards: "Green",
+  megagrowtricks: "Green",
+  smartycards2: "White",
+  smartytricks: "White",
+  solarcards: "Yellow",
+  solartricks: "Yellow",
+  beastlycards: "Blue",
+  beastlytricks: "Blue",
+  brainycards: "Purple",
+  brainytricks: "Purple",
+  crazycards: "Purple",
+  crazytricks: "Purple",
+  heartycards: "Orange",
+  heartytricks: "Orange",
+  sneakycards: "#000000",
+  sneakytricks: "#000000",
 };
 
-const dbCommandMap = new Map(); // key => { commandName, hash }
+const dbCommandMap = new Map();
 
-function sanitizeCommandName(s, prefix) {
-  const base =
-    (s || "")
-      .toString()
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "")
-      .slice(0, 32) || "deck";
-  return `${prefix}${base}`;
-}
-function rowHash(row) {
-  try {
-    return require("crypto")
-      .createHash("md5")
-      .update(JSON.stringify(row))
-      .digest("hex");
-  } catch {
-    return Date.now().toString();
-  }
-}
-function buildDeckEmbedFromRow(row, tableName = null) {
-  const color =
-    tableName && dbTableColors[tableName] ? dbTableColors[tableName] : "Random";
-  const e = new EmbedBuilder().setTitle(
-    row.name || row.title || "Deck"
-  );
-
-  if (row.description && row.description.trim().length > 0) {
-    e.setDescription(row.description);
-  }
-  if (row.footer) {
-  e.setFooter({ text: row.creator })
-  }
-  e.addFields(
-      {
-        name: "Deck Type",
-        value: `**__${row.type}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Archetype",
-        value: `**__${row.archetype}__**` || "N/A",
-        inline: true,
-      },
-      {
-        name: "Deck Cost",
-        value: (`${row.cost} <:spar:1057791557387956274>` || "N/A").toString(),
-        inline: true,
-      }
-    )
-    .setColor(color);
-  if (
-    row.image &&
-    typeof row.image === "string" &&
-    row.image.startsWith("http")
-  )
-    e.setImage(row.image);
-  return e;
-}
-function buildCardEmbedFromRow(row, tableName = null) {
-  const color =
-    tableName && dbTableColors[tableName] ? dbTableColors[tableName] : "Random";
-  const e = new EmbedBuilder().setTitle(
-    row.title || row.card_name || row.cardid || "Card"
-  );
-
-  if (row.description && row.description.trim().length > 0) {
-    e.setDescription(`**\\- ${row.description} -**`);
-  }
-
-  e.addFields(
-    {
-      name: "Stats",
-      value: row.stats || "N/A",
-      inline: true,
-    }
-  ).setColor(color);
-
-  if (row.traits) {
-    e.addFields({ name: "Trait", value: row.traits, inline: true });
-  }
-  if (row.ability) {
-    e.addFields({ name: "Ability", value: row.ability, inline: true });
-  }
-  if(row.set_rarity){
-    e.addFields({ name: "Set-Rarity", value: `**${row.set_rarity}**`, inline: true });
-  }
-  if(row.flavor_text){
-    e.addFields({ name: "Flavor Text", value: row.flavor_text, inline: true });
-  }
-  if (
-    row.thumbnail &&
-    typeof row.thumbnail === "string" &&
-    row.thumbnail.startsWith("http")
-  ) {
-    e.setThumbnail(row.thumbnail);
-  }
-  return e;
-}
-
-async function registerOrUpdateDbCommand(tableConfig, row) {
-  const key = `${tableConfig.table}:${
-    row.deckID ?? row.id ?? row.cardid ?? row.card_name ?? row.title ?? row.name
-  }`;
-  const baseName = (
-    row.name ??
-    row.card_name ?? "Unnamed"
-  ).toString();
-  const baseSan =
-    baseName
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "")
-      .slice(0, 32) || "deck";
-  const cmdName = baseSan;
-
-  const hash = rowHash(row);
-
-  const existing = dbCommandMap.get(key);
-  // if unchanged, nothing to do
-  if (existing && existing.hash === hash) return;
-
-  // parse aliases from possible columns (comma-separated)
-  const aliasField = (
-    row.aliases ||
-    row.alias ||
-    row.alias_list ||
-    row.aliases_list ||
-    ""
-  ).toString();
-  const parsedAliases = aliasField
-    .split(",")
-    .map((a) => a.trim())
-    .filter(Boolean)
-    .map((a) => a.toLowerCase().replace(/[^a-z0-9]+/g, ""));
-  // include both plain and prefixed versions so users can invoke either form
-  const aliasSet = new Set();
-  for (const a of parsedAliases) {
-    aliasSet.add(a);
-  }
-  const aliasesArray = Array.from(aliasSet);
-
-  // Determine which embed to use based on row content
-  let embed;
-  if (row.stats) {
-    // If these fields exist, treat as card
-    embed = buildCardEmbedFromRow(row, tableConfig.table);
-  } else {
-    // Otherwise, treat as deck
-    embed = buildDeckEmbedFromRow(row, tableConfig.table);
-  }
-
-  // create command module shape compatible with other commands
-  const commandModule = {
-    name: cmdName,
-    aliases: aliasesArray,
-    category: tableConfig.category,
-    run: async (client, message, args) => {
-      await message.channel.send({ embeds: [embed] });
-    },
-  };
-
-  // set or overwrite command in client.commands
-  client.commands.set(cmdName, commandModule);
-  dbCommandMap.set(key, { commandName: cmdName, hash });
-  console.log(
-    `DB command registered: ${cmdName} (aliases: ${commandModule.aliases.join(
-      ", "
-    )})`
-  );
-}
-
-async function unregisterDbCommandByKey(key) {
-  const info = dbCommandMap.get(key);
-  if (!info) return;
-  client.commands.delete(info.commandName);
-  dbCommandMap.delete(key);
-}
-
-async function scanAllTablesAndSync() {
-  try {
-    for (const t of dbTables) {
-      const [rows] = await db
-        .query(`SELECT * FROM \`${t.table}\``)
-        .catch(() => [[]]);
-      const seenKeys = new Set();
-
-      for (const r of rows || []) {
-        const key = `${t.table}:${r.deckID ?? r.cardid ?? r.name}`;
-        seenKeys.add(key);
-        await registerOrUpdateDbCommand(t, r);
-      }
-
-      // remove DB commands for rows that no longer exist
-      for (const existingKey of Array.from(dbCommandMap.keys())) {
-        if (!existingKey.startsWith(`${t.table}:`)) continue;
-        if (!seenKeys.has(existingKey))
-          await unregisterDbCommandByKey(existingKey);
-      }
-    }
-  } catch (err) {
-    console.error("DB command loader error:", err);
-  }
-}
 
 // initial load
-scanAllTablesAndSync();
+scanAllTablesAndSync(db, dbTables, client, dbCommandMap, dbTableColors);
 
 // poll every 30s (adjust as needed)
-setInterval(scanAllTablesAndSync, 30_000);
+setInterval(() => {
+  scanAllTablesAndSync(db, dbTables, client, dbCommandMap, dbTableColors);
+}, 30_000);

@@ -44,7 +44,7 @@ module.exports = {
     const normalized = rows.map((r) => {
       const rawType = (r.type || "").toString();
       const rawArch = (r.archetype || "").toString();
-      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); // remove spaces/punctuation
+      const normalize = (s) => s.toLowerCase().replaceAll(/[^a-z0-9]/g, ""); // remove spaces/punctuation
       return {
         id: r.deckID ?? null,
         name: r.name ?? r.deckID ?? "Unnamed",
@@ -99,7 +99,7 @@ module.exports = {
         hero,
         categoryColor,
         pretty,
-        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].map((r) => r.name.replaceAll(/\s+/g, "").toLowerCase()),
         deckLists[cat].length,
         thumb
       );
@@ -244,7 +244,7 @@ module.exports = {
           if (action === "nav") {
             const category = parts[1];
             // parseInt will ignore any trailing non-numeric suffix like "_alt"
-            const index = parseInt(parts[2], 10);
+            const index = Number.parseInt(parts[2], 10);
             const list = deckLists[category] || [];
             if (!list[index])
               return i.reply({

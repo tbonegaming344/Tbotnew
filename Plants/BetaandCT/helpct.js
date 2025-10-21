@@ -12,7 +12,6 @@ const db = require("../../index.js");
 const createCategoryEmbed = require("../../Utilities/createCategoryEmbed.js");
 const buildDeckEmbed = require("../../Utilities/buildDeckEmbed.js");
 const buildNavRow = require("../../Utilities/buildNavRow.js");
-const { all } = require("axios");
 module.exports = {
   name: `helpct`,
   aliases: [
@@ -44,7 +43,7 @@ module.exports = {
   for (const r of rows) {
       const rawType = (r.type || "").toString();
       const rawArch = (r.archetype || "").toString();
-      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, ""); 
+      const normalize = (s) => s.toLowerCase().replaceAll(/[^a-z0-9]/g, ""); 
       allDecks.push({
         id: r.deckID ?? null,
         name: r.name ?? r.deckID ?? "Unnamed",
@@ -125,6 +124,21 @@ module.exports = {
         .setCustomId(`citron_deck_select`)
         .setPlaceholder(`Select a category to view Citron decks`)
         .addOptions(selectOptions);
+     const categoryEmbeds = {};
+    for (const cat of availableCategories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        hero,
+        categoryColor,
+        pretty,
+        deckLists[cat].map((r) => r.name.replaceAll(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
     const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()

@@ -129,7 +129,22 @@ let allDecks = [];
     // thumbnail
     const thumb =
       "https://static.wikia.nocookie.net/pvzcc/images/0/09/TRUEHD_Captain_Combustible.png/revision/latest?cb=20200729194212";
-    const m = await message.channel.send({
+    const categoryEmbeds = {};
+    for (const cat of availableCategories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        hero,
+        categoryColor,
+        pretty,
+        deckLists[cat].map((r) => r.name.replaceAll(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
+      const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()
           .setTitle("Captain Combustible Decks")

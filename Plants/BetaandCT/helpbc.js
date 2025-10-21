@@ -144,7 +144,7 @@ module.exports = {
         hero,
         categoryColor,
         pretty,
-        deckLists[cat].map((r) => r.name.replace(/\s+/g, "").toLowerCase()),
+        deckLists[cat].map((r) => r.name.replaceAll(/\s+/g, "").toLowerCase()),
         deckLists[cat].length,
         thumb
       );

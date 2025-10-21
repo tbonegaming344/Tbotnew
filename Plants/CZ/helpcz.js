@@ -125,7 +125,22 @@ let allDecks = [];
     // thumbnail
     const thumb =
       "https://static.wikia.nocookie.net/plantsvszombies/images/e/e5/C1lUqjPUcAEp4F_.png/revision/latest/scale-to-width-down/250?cb=20170109212110";
-    const m = await message.channel.send({
+    const categoryEmbeds = {};
+    for (const cat of availableCategories) {
+      const pretty =
+        cat === "comp"
+          ? "Competitive"
+          : cat.charAt(0).toUpperCase() + cat.slice(1);
+      categoryEmbeds[cat] = createCategoryEmbed(
+        hero,
+        categoryColor,
+        pretty,
+        deckLists[cat].map((r) => r.name.replaceAll(/\s+/g, "").toLowerCase()),
+        deckLists[cat].length,
+        thumb
+      );
+    }
+      const m = await message.channel.send({
       embeds: [
         new EmbedBuilder()
           .setTitle("Chompzilla Decks")

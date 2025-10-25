@@ -1,5 +1,6 @@
 const registerOrUpdateDbCommand = require("./registerOrUpdateDbCommand");
 const unregisterDbCommandByKey = require("./unregisterDbCommandByKey");
+
 /**
  * @description Scans all configured tables and synchronizes commands
  * @returns {Promise<void>} Resolves when synchronization is complete
@@ -13,7 +14,9 @@ async function scanAllTablesAndSync(db, dbTables, client, dbCommandMap, dbTableC
       const seenKeys = new Set();
 
       for (const r of rows || []) {
-        const key = `${t.table}:${r.deckID ?? r.cardid ?? r.name}`;
+        // Updated key generation to include deckbuilder_name
+        const key = `${t.table}:${r.deckID ?? r.id ?? r.cardid ?? 
+          r.card_name ?? r.title ?? r.name ?? r.deckbuilder_name}`;
         seenKeys.add(key);
         await registerOrUpdateDbCommand(t, r, client, dbCommandMap, dbTableColors);
       }
@@ -29,4 +32,5 @@ async function scanAllTablesAndSync(db, dbTables, client, dbCommandMap, dbTableC
     console.error("DB command loader error:", err);
   }
 }
+
 module.exports = scanAllTablesAndSync;

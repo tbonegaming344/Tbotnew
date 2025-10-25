@@ -73,7 +73,6 @@
   {
    "commandName": "mechacontrol",
    "aliases": [
-    "mechacontrol",
     "mptrickster",
     "mechasaurcontrol",
     "brickasaurctrl",
@@ -101,7 +100,8 @@
     "sushibandits",
     "sunb",
     "sunbandit",
-    "bandits"
+    "bandits",
+    "sunthieves"
    ]
   }
  ],
@@ -124,7 +124,8 @@
   {
    "commandName": "lawnmower2",
    "aliases": [
-    "gargmech"
+    "gargmech",
+    "lawnmowerzm"
    ]
   }
  ],
@@ -188,7 +189,6 @@
     "citronbudget",
     "budgetelusives",
     "budgetcitron",
-    "watertempo",
     "budgetct"
    ]
   }
@@ -234,7 +234,8 @@
     "abeansgs",
     "aggrobeans",
     "abean",
-    "abeans"
+    "abeans",
+    "cartas"
    ]
   }
  ],
@@ -282,7 +283,11 @@
   "gsdecks:7",
   {
    "commandName": "100winrate",
-   "aliases": []
+   "aliases": [
+    "162%winrate",
+    "100winrate",
+    "100%winrate"
+   ]
   }
  ],
  [
@@ -317,7 +322,8 @@
     "bcshamcontrol",
     "shamcontrol",
     "shamctrl",
-    "techcontrol"
+    "techcontrol",
+    "neuro"
    ]
   }
  ],
@@ -360,6 +366,18 @@
   {
    "commandName": "lunchtime",
    "aliases": [
+    "petsmid",
+    "mid-pets",
+    "pets-mid",
+    "midpets"
+   ]
+  }
+ ],
+ [
+  "bfdecks:5",
+  {
+   "commandName": "lockthebathroom",
+   "aliases": [
     "lockinbf",
     "loi",
     "lockedin",
@@ -369,16 +387,6 @@
     "ltbath",
     "ltbr",
     "lthbroom"
-   ]
-  }
- ],
- [
-  "bfdecks:5",
-  {
-   "commandName": "lockthebathroom",
-   "aliases": [
-    "petsmid",
-    "midpets"
    ]
   }
  ],
@@ -406,7 +414,7 @@
  [
   "ccdecks:2",
   {
-   "commandName": "budgetcc",
+   "commandName": "budgetcomboss",
    "aliases": [
     "ccbudget",
     "bcc",
@@ -427,8 +435,7 @@
     "imitatermuscle",
     "imitatermusclesprout",
     "bottedpowerhouse",
-    "bottedbowerhouse",
-    "lifecouldbeadream"
+    "bottedbowerhouse"
    ]
   }
  ],
@@ -478,7 +485,7 @@
  [
   "czdecks:1",
   {
-   "commandName": "budgetcz",
+   "commandName": "mopzilla",
    "aliases": [
     "czbudget",
     "bcz",
@@ -488,8 +495,7 @@
     "czbudgetmop",
     "bmz",
     "budgetchompzilla",
-    "chompzillabudget",
-    "mopzilla"
+    "chompzillabudget"
    ]
   }
  ],
@@ -500,7 +506,6 @@
    "aliases": [
     "hollowpurple",
     "snaplaser",
-    "laserrings",
     "czhollowpurple",
     "lazerrings",
     "lazerings",
@@ -561,7 +566,7 @@
   {
    "commandName": "huntgargs",
    "aliases": [
-    "huntersnet",
+    "hunter'snet",
     "hunternet"
    ]
   }
@@ -657,7 +662,7 @@
  [
   "hgdecks:3",
   {
-   "commandName": "frozenteimps",
+   "commandName": "frozentelimps",
    "aliases": [
     "teleimpsonice",
     "frozenteleimps",
@@ -903,7 +908,7 @@
    "commandName": "toyotacontrol",
    "aliases": [
     "controlcap",
-    "toyotacap",
+    "`toyotacap",
     "nccontrol",
     "controlnc",
     "toyota"
@@ -1061,11 +1066,6 @@
   {
    "commandName": "quartsterstache",
    "aliases": [
-    "mustachetricks",
-    "pbtrickstache",
-    "trs",
-    "trickstash",
-    "trickstache",
     "qss"
    ]
   }
@@ -1085,7 +1085,7 @@
  [
   "pbdecks:6",
   {
-   "commandName": "youngeggmartun",
+   "commandName": "youngeggmartin",
    "aliases": [
     "yem",
     "youngeggm",
@@ -1099,6 +1099,19 @@
   {
    "commandName": "astronomy",
    "aliases": []
+  }
+ ],
+ [
+  "pbdecks:8",
+  {
+   "commandName": "trickstache",
+   "aliases": [
+    "mustachetricks",
+    "pbtrickstache",
+    "trs",
+    "trickstash",
+    "trickstache"
+   ]
   }
  ],
  [
@@ -1135,8 +1148,10 @@
   {
    "commandName": "hiiiggro",
    "aliases": [
+    "anti-aggro",
     "antiaggro",
-    "higgro"
+    "higgro",
+    "hiiggro"
    ]
   }
  ],
@@ -1248,7 +1263,8 @@
     "bsp",
     "budgetsp",
     "budgetsd",
-    "burstroots"
+    "burstroots",
+    "budgetspudow"
    ]
   }
  ],
@@ -1261,7 +1277,8 @@
     "bartinroots",
     "sproots",
     "rootdow",
-    "rootssp"
+    "rootssp",
+    "dinoroot"
    ]
   }
  ],
@@ -1446,7 +1463,11 @@
   "guardiancards:10",
   {
    "commandName": "corndog",
-   "aliases": []
+   "aliases": [
+    "corg",
+    "dog1",
+    "cd2"
+   ]
   }
  ],
  [
@@ -1530,7 +1551,7 @@
    "aliases": [
     "jugger",
     "jn",
-    "juggernut"
+    "jugger-nut"
    ]
   }
  ],
@@ -1550,7 +1571,7 @@
    "commandName": "peanut",
    "aliases": [
     "pn",
-    "peanut"
+    "pea-nut"
    ]
   }
  ],
@@ -1897,7 +1918,7 @@
     "bowling",
     "walnutbowling",
     "bowl",
-    "wallnutbowling"
+    "wallnut-bowling"
    ]
   }
  ],
@@ -1968,13 +1989,23 @@
   }
  ],
  [
+  "guardiantricks:15",
+  {
+   "commandName": "photosynthesizer",
+   "aliases": [
+    "photo",
+    "photosynthesize"
+   ]
+  }
+ ],
+ [
   "kabloomcards:1",
   {
    "commandName": "puffshroom",
    "aliases": [
     "puff",
     "ps3",
-    "puffshroom"
+    "puff-shroom"
    ]
   }
  ],
@@ -2066,6 +2097,7 @@
     "radishhatchling",
     "hatch",
     "vrh1",
+    "veloci-radish",
     "velociradish"
    ]
   }
@@ -2896,7 +2928,7 @@
     "moss",
     "rm",
     "rmoss",
-    "repeatmoss"
+    "re-peatmoss"
    ]
   }
  ],
@@ -2990,11 +3022,14 @@
  [
   "megagrowcards:37",
   {
-   "commandName": "superphatbeets",
+   "commandName": "apotatosaurus",
    "aliases": [
-    "superphat",
-    "phatbeets",
-    "spb"
+    "apotato",
+    "asurus",
+    "apo",
+    "bowlingcard",
+    "bowlingbulbcard",
+    "bowlingbulbenjoyercard"
    ]
   }
  ],
@@ -3160,14 +3195,28 @@
   }
  ],
  [
+  "megagrowtricks:32",
+  {
+   "commandName": "vegetationmutation",
+   "aliases": [
+    "veggie",
+    "vegetation",
+    "mutation",
+    "vm",
+    "vegmut"
+   ]
+  }
+ ],
+ [
   "smartycards:1",
   {
-   "commandName": "limapleurodon",
+   "commandName": "admiralnavybean",
    "aliases": [
-    "lima",
-    "ligma",
-    "pleurodon",
-    "lp2"
+    "anb",
+    "broth",
+    "admiral",
+    "admiralnavy",
+    "admiralbean"
    ]
   }
  ],
@@ -3251,7 +3300,7 @@
     "weenie",
     "beanie",
     "wb2",
-    "verticallychallengedbeanie"
+    "verticallychallenged beanie."
    ]
   }
  ],
@@ -3268,7 +3317,7 @@
  [
   "smartycards:11",
   {
-   "commandName": "laserbean",
+   "commandName": "lasercattail",
    "aliases": [
     "laser",
     "lasercat",
@@ -3793,7 +3842,7 @@
     "lil",
     "buddy",
     "lb2",
-    "lilbuddy"
+    "lil'buddy"
    ]
   }
  ],
@@ -3868,7 +3917,7 @@
  [
   "solarcards:9",
   {
-   "commandName": "sunflower",
+   "commandName": "sunshroom",
    "aliases": [
     "ss10"
    ]
@@ -3939,7 +3988,7 @@
   {
    "commandName": "sunflowerseed",
    "aliases": [
-    "sunseedss11"
+    "sunseed. ss11"
    ]
   }
  ],
@@ -4224,7 +4273,7 @@
     "secondbesttacoofalltime",
     "2btoat",
     "sbtoat",
-    "2ndbesttaco"
+    "2nd-besttaco"
    ]
   }
  ],
@@ -4239,7 +4288,7 @@
     "xpollination",
     "xpol",
     "crosspoll",
-    "crosspollination",
+    "cross-pollination",
     "xp",
     "cp5"
    ]
@@ -4475,9 +4524,9 @@
   {
    "commandName": "piedpiper",
    "aliases": [
-    "pied",
-    "piper",
-    "rats"
+    "pied`",
+    "`piper`",
+    "`rats`"
    ]
   }
  ],
@@ -4698,7 +4747,8 @@
     "deepseagargantuar",
     "dsg",
     "seagarg",
-    "deepsea"
+    "deepsea",
+    "deepseagarg"
    ]
   }
  ],
@@ -4723,6 +4773,7 @@
     "gargthrowing",
     "gargthrower",
     "gtg",
+    "gargantuar-throwinggargantuar",
     "gargantuarthrowinggargantuar"
    ]
   }
@@ -5031,7 +5082,8 @@
   {
    "commandName": "teleportationzombie",
    "aliases": [
-    "tpz"
+    "tpz",
+    "teleportzombie"
    ]
   }
  ],
@@ -5143,7 +5195,8 @@
   {
    "commandName": "zomblob",
    "aliases": [
-    "blob"
+    "blob",
+    "zom-blob"
    ]
   }
  ],
@@ -5568,7 +5621,7 @@
     "former",
     "tf1",
     "tf",
-    "terrorformer10",
+    "terror-former10",
     "000"
    ]
   }
@@ -5600,7 +5653,7 @@
    "aliases": [
     "dn",
     "naut",
-    "disconaut"
+    "disco-naut"
    ]
   }
  ],
@@ -5645,6 +5698,7 @@
     "qdc",
     "qcm",
     "quickdraw",
+    "con-man",
     "con"
    ]
   }
@@ -5709,15 +5763,6 @@
   }
  ],
  [
-  "crazycards:18",
-  {
-   "commandName": "meteorz",
-   "aliases": [
-    "mz"
-   ]
-  }
- ],
- [
   "crazycards:19",
   {
    "commandName": "newspaperzombie",
@@ -5751,7 +5796,7 @@
    "aliases": [
     "zbf",
     "bestfriend",
-    "zombiesbestfriend"
+    "zombie'sbestfriend"
    ]
   }
  ],
@@ -5843,7 +5888,8 @@
    "aliases": [
     "gti",
     "gargthrowingimp",
-    "gargantuarthrowingimp"
+    "garg-throwing-imp",
+    "gargantuar-throwingimp"
    ]
   }
  ],
@@ -5935,7 +5981,9 @@
     "bunnygarg",
     "bunny",
     "hhg",
-    "bg2"
+    "bg2",
+    "hippityhop",
+    "hippityhopgarg"
    ]
   }
  ],
@@ -6049,7 +6097,8 @@
    "commandName": "zombotswrath",
    "aliases": [
     "wrath",
-    "zw"
+    "zw",
+    "zombot'swrath"
    ]
   }
  ],
@@ -6098,7 +6147,7 @@
     "gargfeast",
     "feast",
     "gf",
-    "gargantuarsfeast"
+    "gargantuars'feast"
    ]
   }
  ],
@@ -6318,7 +6367,7 @@
     "tcz",
     "trash",
     "trashcan",
-    "trashcanzombie"
+    "trash-canzombie"
    ]
   }
  ],
@@ -6450,7 +6499,8 @@
    "aliases": [
     "py",
     "chungusyeti",
-    "primeval"
+    "primeval",
+    "pyeti"
    ]
   }
  ],
@@ -7392,6 +7442,582 @@
     "clones1",
     "ifclones",
     "tt2"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:1",
+  {
+   "commandName": "autony",
+   "aliases": [
+    "decksmadebyautony",
+    "helpautony",
+    "autonyhelp",
+    "autonydecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:2",
+  {
+   "commandName": "badorni",
+   "aliases": [
+    "decksmadebybadorni",
+    "badornihelp",
+    "helpbadorni",
+    "baddecks",
+    "decksmadebybad",
+    "badhelp",
+    "helpbad",
+    "badornidecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:3",
+  {
+   "commandName": "bomi",
+   "aliases": [
+    "decksmadebybomi",
+    "helpbomi",
+    "bomihelp",
+    "bomidecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:4",
+  {
+   "commandName": "boris",
+   "aliases": [
+    "borishelp",
+    "borisdecks",
+    "decksmadebyboris",
+    "helpboris"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:5",
+  {
+   "commandName": "bowlingbulbenjoyer",
+   "aliases": [
+    "bowlingbulb",
+    "bowlingdecks",
+    "bolwingbulbhelp",
+    "bowlinghelp",
+    "bbe",
+    "bowlingbulbenjoyerdecks",
+    "bowlingbulbdecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:6",
+  {
+   "commandName": "cgp23",
+   "aliases": [
+    "cgp23decks",
+    "cgp23help",
+    "helpcgp23",
+    "cgpdecks",
+    "cgphelp",
+    "cgp"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:7",
+  {
+   "commandName": "creeperblade",
+   "aliases": [
+    "helpcreeperblade",
+    "creeperbladehelp",
+    "decksmadebycreeperblade",
+    "creeperbladedecks",
+    "creeperdecks",
+    "creeper",
+    "cpb"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:8",
+  {
+   "commandName": "div",
+   "aliases": [
+    "decksmadebydiv",
+    "helpdiv",
+    "divhelp",
+    "divdecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:9",
+  {
+   "commandName": "dozza",
+   "aliases": [
+    "decksmadebydozza",
+    "helpdozza",
+    "dozzahelp",
+    "dozzadecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:10",
+  {
+   "commandName": "durga",
+   "aliases": [
+    "decksmadebydurga",
+    "helpdurga",
+    "durgahelp",
+    "durgadecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:11",
+  {
+   "commandName": "firsthero",
+   "aliases": [
+    "decksmadebyfirsthero",
+    "helpfirsthero",
+    "firstherohelp",
+    "firstherodecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:12",
+  {
+   "commandName": "franinja",
+   "aliases": [
+    "franinjadecks",
+    "franinjahelp",
+    "helpfraninja"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:13",
+  {
+   "commandName": "glassinabin",
+   "aliases": [
+    "glassdecks",
+    "glasshelp",
+    "helpglass",
+    "glass"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:14",
+  {
+   "commandName": "hayri",
+   "aliases": [
+    "helphayri",
+    "hayrihelp",
+    "decksmadebyhayri",
+    "hayridecks",
+    "hariyana"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:15",
+  {
+   "commandName": "igma",
+   "aliases": [
+    "igmadecks",
+    "igmahelp",
+    "helpigma",
+    "decksmadebyigma",
+    "igmarockers",
+    "decksigma",
+    "deckigma"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:16",
+  {
+   "commandName": "izashi",
+   "aliases": [
+    "decksmadebyizashi",
+    "izashidecks",
+    "helpizashi",
+    "izashihelp"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:17",
+  {
+   "commandName": "justini",
+   "aliases": [
+    "justinidecks",
+    "helpjustini",
+    "justinihelp",
+    "decksmadebyjustini",
+    "justini12"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:18",
+  {
+   "commandName": "kenmartin",
+   "aliases": [
+    "helpkenmartin",
+    "kenmartindecks",
+    "kenmartinhelp",
+    "decksmadebykenmartin",
+    "martin"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:19",
+  {
+   "commandName": "kingfishcommander",
+   "aliases": [
+    "kingfishcommanderdecks",
+    "kingfishcommanderhelp",
+    "helpkingfishcommander",
+    "decksmadebykingfishcommander",
+    "kingfish",
+    "kfc",
+    "kingfish_commander"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:20",
+  {
+   "commandName": "lolatopia",
+   "aliases": [
+    "decksmadebylolatopia",
+    "lolatopiadecks",
+    "lolatopiahelp",
+    "helplolatopia"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:21",
+  {
+   "commandName": "makemeacoffee",
+   "aliases": [
+    "decksmadebymakemeacoffee",
+    "makemeacoffeedecks",
+    "makemeacoffeehelp",
+    "helpmakemeacoffee",
+    "coffee",
+    "makemeacoffeedeck",
+    "coffeedecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:22",
+  {
+   "commandName": "maker",
+   "aliases": [
+    "decksmadebymaker",
+    "helpmaker",
+    "makerhelp",
+    "makerdecks",
+    "maker"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:23",
+  {
+   "commandName": "masterbomber32",
+   "aliases": [
+    "decksmadebymasterbomber32",
+    "helpmasterbomber32",
+    "masterbomber32help",
+    "masterbomber32decks",
+    "masterbomber",
+    "mb32"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:24",
+  {
+   "commandName": "michael",
+   "aliases": [
+    "decksmadebymichael",
+    "helpmichael",
+    "michaelhelp",
+    "michaeldecks",
+    "michael"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:25",
+  {
+   "commandName": "mono",
+   "aliases": [
+    "decksmadebymono",
+    "monodecks",
+    "monohelp",
+    "helpmono",
+    "monosexual"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:26",
+  {
+   "commandName": "natz",
+   "aliases": [
+    "decksmadebynatz",
+    "helpnatz",
+    "natzhelp",
+    "natzdecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:27",
+  {
+   "commandName": "non",
+   "aliases": [
+    "nondecks",
+    "nonhelp",
+    "nonsequitur",
+    "nonsequiturhelp",
+    "nonsequiturdecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:28",
+  {
+   "commandName": "oafish",
+   "aliases": [
+    "oafishdecks",
+    "oafishhelp"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:29",
+  {
+   "commandName": "oceanman",
+   "aliases": [
+    "decksmadebyoceanman",
+    "helpoceanman",
+    "oceanmanhelp",
+    "oceanmandecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:30",
+  {
+   "commandName": "pillowy",
+   "aliases": [
+    "decksmadebypillowy",
+    "helppillowy",
+    "pillowyhelp",
+    "pillowydecks"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:31",
+  {
+   "commandName": "pvzfurmade",
+   "aliases": [
+    "decksmadebypvzfurmade",
+    "pvzfurmadedecks",
+    "pvzfurmadehelp",
+    "furmade",
+    "furmadedecks",
+    "helppvzfurmade",
+    "furmadehelp",
+    "helpfurmade"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:32",
+  {
+   "commandName": "salt",
+   "aliases": [
+    "helpsalt",
+    "salthelp",
+    "decksmadebysalt",
+    "saltdecklists",
+    "decklistsmadebysalt",
+    "saltdecks",
+    "snortingsaltdecks",
+    "snortingsalt",
+    "snorting",
+    "decksalt"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:33",
+  {
+   "commandName": "seasons",
+   "aliases": [
+    "decksmadebyseasons",
+    "seasonsdecks",
+    "seasonshelp",
+    "helpseasons",
+    "georgebradley",
+    "george_bradley",
+    "george_bradleythe3rd"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:34",
+  {
+   "commandName": "shortbow",
+   "aliases": [
+    "decksmadebyshortbow",
+    "shortbowdecks",
+    "shortbowhelp",
+    "helpshortbow"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:35",
+  {
+   "commandName": "slewer",
+   "aliases": [
+    "decksmadebyslewer",
+    "slewerdecks",
+    "slewerhelp",
+    "helpslewer"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:36",
+  {
+   "commandName": "stingray",
+   "aliases": [
+    "decksmadebystingray",
+    "stingraydecks",
+    "stingrayhelp",
+    "helpstingray",
+    "gigraduate",
+    "stingray201"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:37",
+  {
+   "commandName": "sushi",
+   "aliases": [
+    "decksmadebysushi",
+    "sushihelp",
+    "helpsushi",
+    "sushidecks",
+    "sushidecklists",
+    "decklistsmadebysushi",
+    "ikurasushi"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:38",
+  {
+   "commandName": "tbone",
+   "aliases": [
+    "decksmadebytbone",
+    "tbonedecks",
+    "tbonehelp",
+    "helptbone"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:39",
+  {
+   "commandName": "thequestionmark",
+   "aliases": [
+    "thequestionmarkdecks",
+    "questionmark",
+    "questionmarkhelp",
+    "thequestionmarkhelp",
+    "helpthequestionmark",
+    "questionmarkdecks",
+    "tqm",
+    "helptqm",
+    "tqmdecks",
+    "tqmhelp"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:40",
+  {
+   "commandName": "tryhard",
+   "aliases": [
+    "tryharddecks",
+    "tryhardhelp",
+    "helptryhard",
+    "decksmadebytryhard",
+    "trydecks",
+    "helptry",
+    "tryhelp",
+    "try",
+    "decksmadebytry",
+    "trycommands",
+    "commandstry",
+    "pvztryhardhelp",
+    "pvztryhard"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:41",
+  {
+   "commandName": "voof",
+   "aliases": [
+    "decksmadebyvoof",
+    "voofdecks",
+    "voofhelp",
+    "helpvoof"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:42",
+  {
+   "commandName": "xera",
+   "aliases": [
+    "xeradecks",
+    "xerahelp",
+    "helpxera",
+    "decksmadebyxera"
+   ]
+  }
+ ],
+ [
+  "deckbuilders:43",
+  {
+   "commandName": "yoyo",
+   "aliases": [
+    "yoyodecks",
+    "helpyoyo",
+    "decksmadebyyoyo",
+    "yoyodecklists"
    ]
   }
  ]

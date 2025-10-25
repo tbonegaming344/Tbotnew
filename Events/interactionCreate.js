@@ -193,6 +193,23 @@ module.exports = {
         });
       }
   }
+  else if (interaction.type === InteractionType.ApplicationCommand) {
+      const command = client.slashCommands.get(interaction.commandName);
+      console.log("Received command:", interaction.commandName, "Loaded:", !!command);
+      if (!command) return;
+
+      try {
+		await command.execute(interaction);
+	} catch (error) {
+		console.error(error);
+		if (interaction.replied || interaction.deferred) {
+			await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+		} else {
+			await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
+      console.error("Error executing command:", interaction.commandName, error);
+		}
+	}
+    }
   else if (interaction.type === InteractionType.MessageComponent) {
     if (interaction.customId.startsWith("cardinfo_")) {
        await interaction.deferReply({flags: MessageFlags.Ephemeral});
@@ -273,7 +290,7 @@ module.exports = {
         { table: "ncdecks", hero: "Night Cap" },
         { table: "rodecks", hero: "Rose" },
         { table: "ccdecks", hero: "Captain Combustible" },
-        { table: "bcdecks", hero: "Betacron" },
+        { table: "bcdecks", hero: "Beta Carrotina" },
         { table: "sbdecks", hero: "Super Brainz" }, 
         { table: "smdecks", hero: "The Smash" },
         { table: "ifdecks", hero: "Impfinity" }, 
@@ -304,12 +321,11 @@ module.exports = {
       
       // Check for exact match (case-insensitive)
       const searchName = cardName.toLowerCase().trim();
-      const hasExactMatch = cardsList.some(card => card === searchName);
+      const hasExactMatch = cardsList.includes(searchName);
       
       if (!hasExactMatch) {
         continue; 
       }
-            // Normalize deck data similar to helpsf.js
             const rawType = (row.type || "").toString();
             const rawArch = (row.archetype || "").toString();
             const normalize = (s) => s.toLowerCase().replaceAll(/[^a-z0-9]/g, "");
@@ -580,6 +596,204 @@ interaction.client.detectDecksData.set(message.id, {
       });
     }
   }
+  else if (interaction.customId.startsWith("deckbuildercat_")) {
+  // Extract deckbuilder name from customId
+  const deckbuilderKey = interaction.customId.replace("deckbuildercat_", "");
+  const tempKey = `temp_${deckbuilderKey}_${interaction.message.id}`;
+  const data = interaction.client.deckbuilderData.get(tempKey);
+  
+  if (!data) {
+    return await interaction.reply({
+      content: "Data not found. Please try running the command again.",
+      flags: MessageFlags.Ephemeral
+    });
+  }
+
+  const category = interaction.values[0];
+  const list = data.deckLists[category] || [];
+  
+  // If no decks in category, early reply
+  if (list.length === 0) {
+    return await interaction.reply({
+      content: "No decks in that category.",
+      flags: MessageFlags.Ephemeral,
+    });
+  }
+
+  // If only one deck, show it directly
+  if (list.length === 1) {
+    const embed = buildDeckEmbed(list[0], data.color || "Random");
+    return await interaction.reply({
+      embeds: [embed],
+      flags: MessageFlags.Ephemeral,
+    });
+  }
+
+  // Show category overview with navigation buttons
+  const categoryEmbed = createCategoryEmbed(
+    data.deckbuilderName,
+    data.color || "Blue",
+    category.charAt(0).toUpperCase() + category.slice(1),
+    list.map(deck => `${deck.name.replaceAll(/\s+/g, "").toLowerCase()} (${deck.hero})`),
+    list.length,
+    data.thumb
+  );
+
+  const navRow = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId(`dbnav_${category}_${list.length - 1}`) // Start from last deck
+      .setEmoji("⬅️")
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
+      .setCustomId(`dbnav_${category}_0`) // Go to first deck
+      .setEmoji("➡️")
+      .setStyle(ButtonStyle.Primary)
+  );
+
+  // REPLY with new message instead of UPDATE
+  const response = await interaction.reply({
+    embeds: [categoryEmbed],
+    components: [navRow],
+    flags: MessageFlags.Ephemeral
+  });
+
+  // Get the response message object
+  const responseMessage = await response.fetch();
+
+  // Store the data with the RESPONSE message ID (for navigation)
+  interaction.client.deckbuilderData.set(responseMessage.id, {
+    ...data,
+    currentCategory: category,
+    currentList: list
+  });
+
+  // DON'T DELETE TEMP DATA - keep it for future selections
+  // interaction.client.deckbuilderData.delete(tempKey); // REMOVE THIS LINE
+  
+  // Set up collector for navigation on the RESPONSE message
+  const filter = (i) => i.customId.startsWith("dbnav_") || i.customId.startsWith("dblist_");
+  const collector = responseMessage.createMessageComponentCollector({ filter });
+
+  collector.on("collect", async (i) => {
+    try {
+      const collectorData = interaction.client.deckbuilderData.get(i.message.id);
+      if (!collectorData) {
+        return await i.reply({
+          content: "Data not found.",
+          flags: MessageFlags.Ephemeral
+        });
+      }
+
+      if (i.isButton() && i.customId.startsWith("dbnav_")) {
+        const [, category, indexStr] = i.customId.split("_");
+        const index = Number.parseInt(indexStr, 10);
+        const list = collectorData.deckLists[category] || [];
+
+        if (!list[index]) {
+          return await i.reply({
+            content: "Deck not found.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+
+        // ALWAYS show the deck first
+        const embed = buildDeckEmbed(list[index], collectorData.color || "Random");
+
+        // Handle navigation with wrapping - at extremes, wrap to other end or go to list
+        let prevIndex, nextIndex;
+        
+        if (index === 0) {
+          // At first deck - left goes to category list, right goes to next deck
+          prevIndex = 'list'; // Special marker for going back to list
+          nextIndex = list.length > 1 ? 1 : 'list';
+        } else if (index === list.length - 1) {
+          // At last deck - left goes to previous, right goes to category list  
+          prevIndex = index - 1;
+          nextIndex = 'list'; // Special marker for going back to list
+        } else {
+          // Normal navigation
+          prevIndex = index - 1;
+          nextIndex = index + 1;
+        }
+
+        const navRow = new ActionRowBuilder();
+
+        // Left button
+        if (prevIndex === 'list') {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`dblist_${category}`) // Special ID for going back to list
+              .setEmoji("📋")
+              .setLabel("Back to List")
+              .setStyle(ButtonStyle.Secondary)
+          );
+        } else {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`dbnav_${category}_${prevIndex}`)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary)
+          );
+        }
+
+        // Right button  
+        if (nextIndex === 'list') {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`dblist_${category}`) // Special ID for going back to list
+              .setEmoji("📋")
+              .setLabel("Back to List")
+              .setStyle(ButtonStyle.Secondary)
+          );
+        } else {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`dbnav_${category}_${nextIndex}`)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary)
+          );
+        }
+
+        return await i.update({
+          embeds: [embed], // Always show the DECK, not the category list
+          components: [navRow]
+        });
+      }
+    if (i.isButton() && i.customId.startsWith("dblist_")) {
+      const category = i.customId.replace("dblist_", "");
+      const list = collectorData.deckLists[category] || [];
+      
+      const categoryEmbed = createCategoryEmbed(
+        collectorData.deckbuilderName,
+        collectorData.color || "Blue",
+        category.charAt(0).toUpperCase() + category.slice(1),
+        list.map(deck => `${deck.name.replaceAll(/\s+/g, "").toLowerCase()} (${deck.hero})`),
+        list.length,
+        collectorData.thumb
+      );
+
+      const navRow = new ActionRowBuilder().addComponents(
+        new ButtonBuilder()
+          .setCustomId(`dbnav_${category}_${list.length - 1}`)
+          .setEmoji("⬅️")
+          .setStyle(ButtonStyle.Primary),
+        new ButtonBuilder()
+          .setCustomId(`dbnav_${category}_0`)
+          .setEmoji("➡️")
+          .setStyle(ButtonStyle.Primary)
+      );
+
+      return await i.update({
+        embeds: [categoryEmbed],
+        components: [navRow]
+      });
+    }
+
+    } catch (error) {
+      console.error("Error in deckbuilder navigation collector:", error);
+    }
+  });
+}
     else if (interaction.customId.startsWith("hangman-")) {
       const type = interaction.customId.split("-").at(-1);
 
@@ -601,23 +815,6 @@ interaction.client.detectDecksData.set(message.id, {
       modal.addComponents(row);
 
       await interaction.showModal(modal);
-    }
-    else if (interaction.type === InteractionType.ApplicationCommand) {
-      const command = client.slashCommands.get(interaction.commandName);
-      console.log("Received command:", interaction.commandName, "Loaded:", !!command);
-      if (!command) return;
-
-      try {
-		await command.execute(interaction);
-	} catch (error) {
-		console.error(error);
-		if (interaction.replied || interaction.deferred) {
-			await interaction.followUp({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
-		} else {
-			await interaction.reply({ content: 'There was an error while executing this command!', flags: MessageFlags.Ephemeral });
-      console.error("Error executing command:", interaction.commandName, error);
-		}
-	}
     }
   }
     else if(interaction.type === InteractionType.ApplicationCommandAutocomplete){

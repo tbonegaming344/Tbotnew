@@ -5,6 +5,7 @@ const rowHash = require("./rowHash");
 const buildDeckEmbedFromRow = require("./buildDeckEmbedFromRow");
 const buildCardEmbedFromRow = require("./buildCardEmbedFromRow");
 const sanitizeCommandName = require("./sanitizeCommandName");
+const buildDeckBuilderFromRow = require("./buildDeckBuilderFromRow");
 /**
  * @description Registers or updates a database command
  * @param {*} tableConfig  - The configuration for the database table
@@ -13,10 +14,11 @@ const sanitizeCommandName = require("./sanitizeCommandName");
  */
 async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap, dbTableColors = {}) {
   const key = `${tableConfig.table}:${row.deckID ?? row.id ?? row.cardid ?? 
-    row.card_name ?? row.title ?? row.name}`;
+  row.card_name ?? row.title ?? row.name ?? row.deckbuilder_name}`;
   const baseName = (
     row.name ??
-    row.card_name ?? "Unnamed"
+    row.card_name ?? row.deckbuilder_name ?? 
+    "unamed"
   ).toString();
   const baseSan = sanitizeCommandName(baseName);
   const cmdName = baseSan;
@@ -39,7 +41,7 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     .split(",")
     .map((a) => a.trim())
     .filter(Boolean)
-    .map((a) => a.toLowerCase().replaceAll(/[^a-z0-9]+/g, ""));
+    .map((a) => a.toLowerCase())
   // include both plain and prefixed versions so users can invoke either form
   const aliasSet = new Set();
   for (const a of parsedAliases) {
@@ -57,7 +59,7 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     category: tableConfig.category,
     run: async (client, message, args) => {
       let components = [];
-      if(row.description.includes("Superpower") || row.set_rarity == "Token"){
+    if ((row.description && row.description.includes("Superpower")) || row.set_rarity == "Token"){
           embed = buildCardEmbedFromRow(row, tableConfig.table, dbTableColors);
           console.log("Built card embed for superpower or token"); 
           await message.channel.send({ embeds: [embed], components });
@@ -110,6 +112,114 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     .setStyle(ButtonStyle.Secondary);
     components = [new ActionRowBuilder().addComponents(detectDecks)];
       await message.channel.send({ embeds: [embed], components });
+  }
+  else if (row.deckbuilder_name){
+    if (!message.channel) {
+      console.error("message.channel is undefined!");
+      return;
+    }
+
+    try {
+      // Query all decks by this deckbuilder across all tables
+      const deckbuilderName = row.deckbuilder_name;
+      const allDecks = [];
+      
+      // Define all deck tables with their hero mappings
+      const deckTables = [
+        { table: "gsdecks", hero: "Green Shadow" },
+        { table: "sfdecks", hero: "Solar Flare" },
+        { table: "wkdecks", hero: "Wall Knight" },
+        { table: "czdecks", hero: "Chompzilla" },
+        { table: "spdecks", hero: "Spudow" },
+        { table: "ctdecks", hero: "Citron" },
+        { table: "gkdecks", hero: "Grass Knuckles" },
+        { table: "ncdecks", hero: "Night Cap" },
+        { table: "rodecks", hero: "Rose" },
+        { table: "ccdecks", hero: "Captain Combustible" },
+        { table: "bcdecks", hero: "Beta Carrotina" },
+        { table: "sbdecks", hero: "Super Brainz" },
+        { table: "smdecks", hero: "The Smash" },
+        { table: "ifdecks", hero: "Impfinity" },
+        { table: "rbdecks", hero: "Rustbolt" },
+        { table: "ebdecks", hero: "Electric Boogaloo" },
+        { table: "bfdecks", hero: "Brain Freeze" },
+        { table: "pbdecks", hero: "Professor Brainstorm" },
+        { table: "imdecks", hero: "Immorticia" },
+        { table: "zmdecks", hero: "Z-Mech" },
+        { table: "ntdecks", hero: "Neptuna" },
+        { table: "hgdecks", hero: "Huge-Gigantacus" }
+      ];
+
+      // Query each table for decks by this deckbuilder (NOT inspired by this specific deckbuilder)
+      for (const { table, hero } of deckTables) {
+        try {
+         const [decks] = await require("../index.js").query(
+  `SELECT * FROM ${table} WHERE creator LIKE ? AND creator NOT LIKE ?`,
+  [`%${deckbuilderName}%`, `%inspired by ${deckbuilderName}%`]
+);
+          
+          for (const deck of decks) {
+            allDecks.push({
+              ...deck,
+              hero,
+              table
+            });
+          }
+        } catch (error) {
+          console.error(`Error querying ${table} for ${deckbuilderName}:`, error);
+        }
+      }
+
+      console.log(`Found ${allDecks.length} decks for ${deckbuilderName}`); // Debug log
+
+      if (allDecks.length === 0) {
+        return message.channel.send(`No decks found for ${deckbuilderName}.`);
+      }
+
+      // Build embed and select menu using the utility function
+      const { embed, select, deckLists, availableCategories, deckbuilderName: returnedDeckbuilderName, color, userId } = 
+        buildDeckBuilderFromRow(row, allDecks, client);
+      
+      // Get user avatar for thumbnail
+      let thumb = null;
+      try {
+        if (userId) {
+          const user = await client.users.fetch(userId).catch(() => null);
+          if (user) {
+            thumb = user.displayAvatarURL();
+            embed.setThumbnail(thumb);
+          }
+        }
+      } catch (error) {
+        console.error("Error fetching user for deckbuilder thumbnail:", error);
+      }
+
+      const m = await message.channel.send({
+  embeds: [embed],
+  components: [new ActionRowBuilder().addComponents(select)]
+});
+
+// Store the data temporarily using a different key that includes the deckbuilder name
+if (!client.deckbuilderData) {
+  client.deckbuilderData = new Map();
+}
+
+// Use a composite key that can be reconstructed in interactionCreate
+const tempKey = `temp_${returnedDeckbuilderName.toLowerCase().replaceAll(/\s+/g, "_")}_${m.id}`;
+client.deckbuilderData.set(tempKey, {
+  deckbuilderName: returnedDeckbuilderName,
+  deckLists,
+  availableCategories,
+  color: color,
+  userId: userId, 
+  thumb: thumb,
+});
+      console.log(`Stored deckbuilder data for message ID: ${m.id}`);
+      return;
+    } catch (error) {
+      console.error("Error handling deckbuilder command:", error);
+      return message.channel.send("An error occurred while loading deckbuilder data.");
+    }
   }
       else {
         // otherwise treat as deck

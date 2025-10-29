@@ -14,9 +14,8 @@ async function scanAllTablesAndSync(db, dbTables, client, dbCommandMap, dbTableC
       const seenKeys = new Set();
 
       for (const r of rows || []) {
-        // Updated key generation to include deckbuilder_name
-        const key = `${t.table}:${r.deckID ?? r.id ?? r.cardid ?? 
-          r.card_name ?? r.title ?? r.name ?? r.deckbuilder_name}`;
+        const key = `${t.table}:${r.deckID ?? r.id ?? r.cardid ?? r.heroID ??
+          r.card_name ?? r.title ?? r.name ?? r.deckbuilder_name ?? r.herocommand}`;
         seenKeys.add(key);
         await registerOrUpdateDbCommand(t, r, client, dbCommandMap, dbTableColors);
       }

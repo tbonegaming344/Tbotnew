@@ -13,12 +13,10 @@ const buildDeckBuilderFromRow = require("./buildDeckBuilderFromRow");
  * @returns {Promise<void>} - Resolves when the command is registered or updated
  */
 async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap, dbTableColors = {}) {
-  const key = `${tableConfig.table}:${row.deckID ?? row.id ?? row.cardid ?? 
-  row.card_name ?? row.title ?? row.name ?? row.deckbuilder_name}`;
+ const key = `${tableConfig.table}:${row.deckID ?? row.id ?? row.cardid ?? row.heroID ?? row.card_name ?? row.title ?? row.name ?? row.deckbuilder_name ?? row.herocommand}`;
   const baseName = (
     row.name ??
-    row.card_name ?? row.deckbuilder_name ?? 
-    "unamed"
+    row.card_name ?? row.deckbuilder_name ?? row.herocommand ?? "unamed"
   ).toString();
   const baseSan = sanitizeCommandName(baseName);
   const cmdName = baseSan;
@@ -59,7 +57,84 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     category: tableConfig.category,
     run: async (client, message, args) => {
       let components = [];
-    if ((row.description && row.description.includes("Superpower")) || row.set_rarity == "Token"){
+    if (row.herocommand) {
+  try {
+    const buildHelpHeroEmbed = require("./buildHelpHeroEmbed");
+    const heroCommand = row.herocommand;
+    const heroName = row.heroname;
+    
+    // Determine the deck table based on hero
+    const heroTableMap = {
+      'helpbc': 'bcdecks',
+      'helpct': 'ctdecks', 
+      'helpsf': 'sfdecks',
+      'helpwk': 'wkdecks',
+      'helpgs': 'gsdecks',
+      'helpcz': 'czdecks',
+      'helpsp': 'spdecks',
+      'helpgk': 'gkdecks',
+      'helpnc': 'ncdecks',
+      'helpro': 'rodecks',
+      'helpcc': 'ccdecks',
+      'helpsb': 'sbdecks',
+      'helpsm': 'smdecks',
+      'helpif': 'ifdecks',
+      'helprb': 'rbdecks',
+      'helpeb': 'ebdecks',
+      'helpbf': 'bfdecks',
+      'helppb': 'pbdecks',
+      'helpim': 'imdecks',
+      'helpzm': 'zmdecks',
+      'helpnt': 'ntdecks',
+      'helphg': 'hgdecks'
+    };
+
+    const deckTable = heroTableMap[heroCommand];
+    if (!deckTable) {
+      console.error(`No deck table found for hero command: ${heroCommand}`);
+      return;
+    }
+
+    // Fetch all decks for this hero
+    const [decks] = await require("../index.js").query(`SELECT * FROM ${deckTable}`);
+    
+    if (!decks || decks.length === 0) {
+      return message.channel.send(`No ${heroName} decks found in the database.`);
+    }
+
+    // Build embed and select menu using the utility function
+    const { embed, select, deckLists, availableCategories, heroName: returnedHeroName, categoryColor, deckColor, thumbnailUrl } = 
+      buildHelpHeroEmbed(row, decks);
+
+    const m = await message.channel.send({
+      embeds: [embed],
+      components: [new ActionRowBuilder().addComponents(select)]
+    });
+
+    // Store data for interaction handling
+    if (!client.heroHelpData) {
+      client.heroHelpData = new Map();
+    }
+    
+    const tempKey = `temp_${heroCommand}_${m.id}`;
+    client.heroHelpData.set(tempKey, {
+      heroName: returnedHeroName,
+      heroCommand,
+      deckLists,
+      availableCategories,
+      categoryColor,
+      deckColor,
+      thumbnailUrl
+    });
+
+    console.log(`Stored hero help data for message ID: ${m.id}`);
+    return;
+  } catch (error) {
+    console.error("Error handling hero help command:", error);
+    return message.channel.send("An error occurred while loading hero help data.");
+  }
+}
+    if (row.description?.includes("Superpower") || row.set_rarity === "Token") {
           embed = buildCardEmbedFromRow(row, tableConfig.table, dbTableColors);
           console.log("Built card embed for superpower or token"); 
           await message.channel.send({ embeds: [embed], components });
@@ -232,6 +307,7 @@ client.deckbuilderData.set(tempKey, {
   // set or overwrite command in client.commands
   client.commands.set(cmdName, commandModule);
   dbCommandMap.set(key, { commandName: cmdName, aliases: aliasesArray, hash });
+
   const commandsForFile = Array.from(dbCommandMap.entries()).map(([key, value]) => [
   key,
   {

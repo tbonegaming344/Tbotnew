@@ -650,7 +650,6 @@ interaction.client.detectDecksData.set(message.id, {
       .setStyle(ButtonStyle.Primary)
   );
 
-  // REPLY with new message instead of UPDATE
   const response = await interaction.reply({
     embeds: [categoryEmbed],
     components: [navRow],
@@ -667,8 +666,6 @@ interaction.client.detectDecksData.set(message.id, {
     currentList: list
   });
 
-  // DON'T DELETE TEMP DATA - keep it for future selections
-  // interaction.client.deckbuilderData.delete(tempKey); // REMOVE THIS LINE
   
   // Set up collector for navigation on the RESPONSE message
   const filter = (i) => i.customId.startsWith("dbnav_") || i.customId.startsWith("dblist_");
@@ -791,6 +788,193 @@ interaction.client.detectDecksData.set(message.id, {
 
     } catch (error) {
       console.error("Error in deckbuilder navigation collector:", error);
+    }
+  });
+}
+else if (interaction.customId.startsWith("herocat_")) {
+  // Extract hero command from customId
+  const heroCommand = interaction.customId.replace("herocat_", "");
+  const tempKey = `temp_${heroCommand}_${interaction.message.id}`;
+  const data = interaction.client.heroHelpData.get(tempKey);
+  
+  if (!data) {
+    return await interaction.reply({
+      content: "Data not found. Please try running the command again.",
+      flags: MessageFlags.Ephemeral
+    });
+  }
+
+  const category = interaction.values[0];
+  const list = data.deckLists[category] || [];
+  
+  if (list.length === 0) {
+    return await interaction.reply({
+      content: "No decks in that category.",
+      flags: MessageFlags.Ephemeral,
+    });
+  }
+
+  // If only one deck, show it directly
+  if (list.length === 1) {
+    const embed = buildDeckEmbed(list[0], data.deckColor);
+    return await interaction.reply({
+      embeds: [embed],
+      flags: MessageFlags.Ephemeral,
+    });
+  }
+
+  // Show category overview with navigation buttons
+  const categoryEmbed = createCategoryEmbed(
+    data.heroName,
+    data.categoryColor,
+    category.charAt(0).toUpperCase() + category.slice(1),
+    list.map(deck => deck.name.replaceAll(/\s+/g, "").toLowerCase()),
+    list.length,
+    data.thumbnailUrl
+  );
+
+  const navRow = new ActionRowBuilder().addComponents(
+    new ButtonBuilder()
+      .setCustomId(`heronav_${category}_${list.length - 1}`)
+      .setEmoji("⬅️")
+      .setStyle(ButtonStyle.Primary),
+    new ButtonBuilder()
+      .setCustomId(`heronav_${category}_0`)
+      .setEmoji("➡️")
+      .setStyle(ButtonStyle.Primary)
+  );
+
+  const response = await interaction.reply({
+    embeds: [categoryEmbed],
+    components: [navRow],
+    flags: MessageFlags.Ephemeral
+  });
+
+  const responseMessage = await response.fetch();
+
+  // Store data with response message ID
+  interaction.client.heroHelpData.set(responseMessage.id, {
+    ...data,
+    currentCategory: category,
+    currentList: list
+  });
+
+  // Set up collector for navigation
+  const filter = (i) => i.customId.startsWith("heronav_") || i.customId.startsWith("herolist_");
+  const collector = responseMessage.createMessageComponentCollector({ filter });
+
+  collector.on("collect", async (i) => {
+    try {
+      const collectorData = interaction.client.heroHelpData.get(i.message.id);
+      if (!collectorData) {
+        return await i.reply({
+          content: "Data not found.",
+          flags: MessageFlags.Ephemeral
+        });
+      }
+
+      if (i.isButton() && i.customId.startsWith("heronav_")) {
+        const [, category, indexStr] = i.customId.split("_");
+        const index = Number.parseInt(indexStr, 10);
+        const list = collectorData.deckLists[category] || [];
+
+        if (!list[index]) {
+          return await i.reply({
+            content: "Deck not found.",
+            flags: MessageFlags.Ephemeral,
+          });
+        }
+
+        const embed = buildDeckEmbed(list[index], collectorData.deckColor);
+
+        // Handle navigation
+        let prevIndex, nextIndex;
+        
+        if (index === 0) {
+          prevIndex = 'list';
+          nextIndex = list.length > 1 ? 1 : 'list';
+        } else if (index === list.length - 1) {
+          prevIndex = index - 1;
+          nextIndex = 'list';
+        } else {
+          prevIndex = index - 1;
+          nextIndex = index + 1;
+        }
+
+        const navRow = new ActionRowBuilder();
+
+        if (prevIndex === 'list') {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`herolist_${category}`)
+              .setEmoji("📋")
+              .setLabel("Back to List")
+              .setStyle(ButtonStyle.Secondary)
+          );
+        } else {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`heronav_${category}_${prevIndex}`)
+              .setEmoji("⬅️")
+              .setStyle(ButtonStyle.Primary)
+          );
+        }
+
+        if (nextIndex === 'list') {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`herolist_${category}`)
+              .setEmoji("📋")
+              .setLabel("Back to List")
+              .setStyle(ButtonStyle.Secondary)
+          );
+        } else {
+          navRow.addComponents(
+            new ButtonBuilder()
+              .setCustomId(`heronav_${category}_${nextIndex}`)
+              .setEmoji("➡️")
+              .setStyle(ButtonStyle.Primary)
+          );
+        }
+
+        return await i.update({
+          embeds: [embed],
+          components: [navRow]
+        });
+      }
+
+      if (i.isButton() && i.customId.startsWith("herolist_")) {
+        const category = i.customId.replace("herolist_", "");
+        const list = collectorData.deckLists[category] || [];
+        
+        const categoryEmbed = createCategoryEmbed(
+          collectorData.heroName,
+          collectorData.categoryColor,
+          category.charAt(0).toUpperCase() + category.slice(1),
+          list.map(deck => deck.name.replaceAll(/\s+/g, "").toLowerCase()),
+          list.length,
+          collectorData.thumbnailUrl
+        );
+
+        const navRow = new ActionRowBuilder().addComponents(
+          new ButtonBuilder()
+            .setCustomId(`heronav_${category}_${list.length - 1}`)
+            .setEmoji("⬅️")
+            .setStyle(ButtonStyle.Primary),
+          new ButtonBuilder()
+            .setCustomId(`heronav_${category}_0`)
+            .setEmoji("➡️")
+            .setStyle(ButtonStyle.Primary)
+        );
+
+        return await i.update({
+          embeds: [categoryEmbed],
+          components: [navRow]
+        });
+      }
+
+    } catch (error) {
+      console.error("Error in hero help navigation collector:", error);
     }
   });
 }

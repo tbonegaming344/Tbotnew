@@ -612,11 +612,10 @@
  [
   "gkdecks:2",
   {
-   "commandName": "espressoaggro",
+   "commandName": "omose",
    "aliases": [
-    "aggrogk",
-    "gkaggro",
-    "aggroespresso"
+    "espressotree",
+    "omosessualità"
    ]
   }
  ],
@@ -8018,6 +8017,438 @@
     "helpyoyo",
     "decksmadebyyoyo",
     "yoyodecklists"
+   ]
+  }
+ ],
+ [
+  "helpcommands:1",
+  {
+   "commandName": "helpbc",
+   "aliases": [
+    "bchelp",
+    "bccommands",
+    "commandsbc",
+    "helpbeta",
+    "helpcarrotina",
+    "helpbetacarrotina",
+    "betacarrotinahelp",
+    "beta-carrotinadecks",
+    "betacarrotinadecks",
+    "bcdecks",
+    "betacarrotinacommands",
+    "betadecks",
+    "betahelp",
+    "carrotinadecks",
+    "bcdeck"
+   ]
+  }
+ ],
+ [
+  "helpcommands:2",
+  {
+   "commandName": "helpct",
+   "aliases": [
+    "ctcommands",
+    "commandsct",
+    "cthelp",
+    "helpcitron",
+    "helptron",
+    "ctdecks",
+    "citronhelp",
+    "citrondecks",
+    "citroncommands",
+    "ctdeck"
+   ]
+  }
+ ],
+ [
+  "helpcommands:3",
+  {
+   "commandName": "helpcc",
+   "aliases": [
+    "cccomands",
+    "commandscc",
+    "cchelp",
+    "helpcaptin",
+    "ccdeck",
+    "captaincombustibledecks",
+    "helpcombustible",
+    "helpcaptincombustible",
+    "ccdecks",
+    "captincombustiblehelp",
+    "captincombustibledecks",
+    "helpcaptain"
+   ]
+  }
+ ],
+ [
+  "helpcommands:4",
+  {
+   "commandName": "helpcz",
+   "aliases": [
+    "czhelp",
+    "czcommands",
+    "commandscz",
+    "helpchomp",
+    "helpzilla",
+    "zillahelp",
+    "chompzillahelp",
+    "chompzillacommands",
+    "czdecks",
+    "chompzilladecks",
+    "helpchompzilla"
+   ]
+  }
+ ],
+ [
+  "helpcommands:5",
+  {
+   "commandName": "helpgk",
+   "aliases": [
+    "gkcommands",
+    "commandsgk",
+    "gkhelp",
+    "helpgrass",
+    "helpknuckles",
+    "grassknuckleshelp",
+    "helpgrassknuckles",
+    "gkdecks",
+    "grassknucklesdecks",
+    "knucklesdecks",
+    "decksgk"
+   ]
+  }
+ ],
+ [
+  "helpcommands:6",
+  {
+   "commandName": "helpgs",
+   "aliases": [
+    "gscommands",
+    "commandsforgs",
+    "gshelp",
+    "helpgreen",
+    "helpshadow",
+    "gsdecks",
+    "decksgs",
+    "greenshadowhelp",
+    "shadowhelp",
+    "shadowdecks",
+    "greenshadowdecks"
+   ]
+  }
+ ],
+ [
+  "helpcommands:7",
+  {
+   "commandName": "helpnc",
+   "aliases": [
+    "nccommands",
+    "commandsnc",
+    "nightcapdecks",
+    "nchelp",
+    "helpnightcap",
+    "nightcaphelp",
+    "helpcap",
+    "helpnight",
+    "ncdecks",
+    "capdecks",
+    "ncdeck"
+   ]
+  }
+ ],
+ [
+  "helpcommands:8",
+  {
+   "commandName": "helpro",
+   "aliases": [
+    "rohelp",
+    "rocommands",
+    "commandsro",
+    "rosedeck",
+    "helprose",
+    "rosedb",
+    "rodecks",
+    "rosehelp",
+    "rosedecks",
+    "helprs",
+    "rshelp"
+   ]
+  }
+ ],
+ [
+  "helpcommands:9",
+  {
+   "commandName": "helpsf",
+   "aliases": [
+    "sfcommands",
+    "commandssf",
+    "sfhelp",
+    "helpsolarflare",
+    "helpflare",
+    "sfdecks",
+    "solarflaredecks",
+    "solarflarehelp",
+    "flaredecks",
+    "flarehelp"
+   ]
+  }
+ ],
+ [
+  "helpcommands:10",
+  {
+   "commandName": "helpsp",
+   "aliases": [
+    "sphelp",
+    "spcommands",
+    "commmandssp",
+    "spdecks",
+    "spudowhelp",
+    "helpspudow",
+    "spudowdecks",
+    "helpsd",
+    "sdhelp",
+    "spudowdeck"
+   ]
+  }
+ ],
+ [
+  "helpcommands:11",
+  {
+   "commandName": "helpwk",
+   "aliases": [
+    "commandswk",
+    "wkcommands",
+    "wkhelp",
+    "helpwall",
+    "helpknight",
+    "helpwallknight",
+    "wkdecks",
+    "wallknighthelp",
+    "wallknightdecks",
+    "wkdeck",
+    "wallknightdeck"
+   ]
+  }
+ ],
+ [
+  "helpcommands:12",
+  {
+   "commandName": "helpf",
+   "aliases": [
+    "bfhelp",
+    "bfcommands",
+    "commandsbf",
+    "helpfreeze",
+    "helpbrainfreeze",
+    "brainfreezehelp",
+    "bfdecks",
+    "brainfreezedecks"
+   ]
+  }
+ ],
+ [
+  "helpcommands:13",
+  {
+   "commandName": "helpeb",
+   "aliases": [
+    "ebcommands",
+    "commandseb",
+    "ebhelp",
+    "helpelectric",
+    "helpelectricboog",
+    "helpboog",
+    "helpelectricboogaloo",
+    "ebdecks",
+    "electricboogaloohelp",
+    "electricboogaloodecks",
+    "deckseb",
+    "helpboogaloo",
+    "helpboogaloodecks",
+    "boogaloocommands",
+    "boogaloodecks"
+   ]
+  }
+ ],
+ [
+  "helpcommands:14",
+  {
+   "commandName": "helphg",
+   "aliases": [
+    "hgcommands",
+    "commandshg",
+    "hghelp",
+    "helphuge",
+    "helphugegigantacus",
+    "hgdecks",
+    "deckshg",
+    "hugegigantacushelp",
+    "hugegigantacusdecks"
+   ]
+  }
+ ],
+ [
+  "helpcommands:15",
+  {
+   "commandName": "helpsb",
+   "aliases": [
+    "sbcommands",
+    "commandssb",
+    "sbhelp",
+    "helpsuperbrainz",
+    "helpsuper",
+    "sbdecks",
+    "deckssb",
+    "superbrainzhelp",
+    "superbrainzdecks"
+   ]
+  }
+ ],
+ [
+  "helpcommands:16",
+  {
+   "commandName": "helpif",
+   "aliases": [
+    "ifhelp",
+    "ifcommands",
+    "commandsif",
+    "helpimpifinity",
+    "helpimpfinity",
+    "impfinitydecks",
+    "impfinityhelp",
+    "ifdecks",
+    "impifinityhelp",
+    "impifinitydecks",
+    "helpimp"
+   ]
+  }
+ ],
+ [
+  "helpcommands:17",
+  {
+   "commandName": "helpim",
+   "aliases": [
+    "imhelp",
+    "imcommands",
+    "helpit",
+    "commandsim",
+    "helpimmort",
+    "immorticiadeck",
+    "helpimmorticia",
+    "immorticahelp",
+    "immorticiahelp",
+    "imdecks",
+    "immorticiadecks",
+    "decksim",
+    "decksimmorticia"
+   ]
+  }
+ ],
+ [
+  "helpcommands:18",
+  {
+   "commandName": "helpnt",
+   "aliases": [
+    "ntcommands",
+    "commandsnt",
+    "nthelp",
+    "helpneptuna",
+    "helptuna",
+    "helpnp",
+    "ntdecks",
+    "decksnt",
+    "neptunahelp",
+    "neptunadecks"
+   ]
+  }
+ ],
+ [
+  "helpcommands:19",
+  {
+   "commandName": "helppb",
+   "aliases": [
+    "pbhelp",
+    "pbcommands",
+    "commandspb",
+    "helpprofessor",
+    "helpbrainstorm",
+    "helppbs",
+    "helpprofessorbrainstorm",
+    "pbsdecks",
+    "bsdecks",
+    "bsdeck",
+    "pbdecks",
+    "helpbs",
+    "bshelp",
+    "professorbrainstormdecks",
+    "professorbrainstormhelp",
+    "pbshelp"
+   ]
+  }
+ ],
+ [
+  "helpcommands:20",
+  {
+   "commandName": "helprb",
+   "aliases": [
+    "rbhelp",
+    "rbcommands",
+    "commandsrb",
+    "helprust",
+    "helpbolt",
+    "helprustbolt",
+    "rustcommands",
+    "boltcommands",
+    "rustboltcommands",
+    "rbdecks",
+    "rustboltdecks",
+    "rustbolthelp"
+   ]
+  }
+ ],
+ [
+  "helpcommands:21",
+  {
+   "commandName": "helpsm",
+   "aliases": [
+    "smhelp",
+    "smcommands",
+    "commandssm",
+    "smdeck",
+    "smashdb",
+    "helpsmash",
+    "smashcommands",
+    "smashhelp",
+    "smdecks",
+    "smashdecks",
+    "deckssm",
+    "deckssmash",
+    "helpts",
+    "helpthesmash",
+    "tshelp",
+    "smashlist",
+    "smashlists"
+   ]
+  }
+ ],
+ [
+  "helpcommands:22",
+  {
+   "commandName": "helpzm",
+   "aliases": [
+    "zmhelp",
+    "zmcommands",
+    "zmdeck",
+    "commandszm",
+    "helpzmech",
+    "zmechcommands",
+    "commandszmech",
+    "helpmech",
+    "zmdecks",
+    "deckszm",
+    "zmechdecks",
+    "deckszmech",
+    "zmechhelp"
    ]
   }
  ]

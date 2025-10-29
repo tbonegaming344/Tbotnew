@@ -227,7 +227,8 @@ const dbTables = [
   {table: "heartytricks", prefix: "ht", category: "Tricks Phase" },
   { table: "sneakycards", prefix: "snc", category: "Zombie Cards"},
   {table: "sneakytricks", prefix: "snt", category: "Tricks Phase" },
-  {table: "deckbuilders", prefix: "db", category: "Deck Builders" },
+  {table: "deckbuilders", prefix: "db", category: "DeckBuilders" },
+  {table: "helpcommands", prefix: "help", category: "Miscellaneous" }
 ];
 
 // map table name => embed color (hex). Adjust colors as desired.

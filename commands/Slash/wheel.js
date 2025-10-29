@@ -626,8 +626,7 @@ module.exports = {
                   .setColor("Random");
         
                 await interaction.reply({
-                  embeds: [embed],
-                  flags: MessageFlags.Ephemeral,
+                  embeds: [embed]
                 });
       }
 }

@@ -38,7 +38,7 @@ module.exports = {
     const heroInput = interaction.options.getString('hero');
 
     // Helper function to get a deck and reply, avoiding repeated code
-    const getAndSendRandomDeck = async (query, title, description) => {
+    const getAndSendRandomDeck = async (query) => {
       try {
         const [result] = await db.query(query);
 

@@ -13,7 +13,7 @@ module.exports = {
     name: `keeporscrap`,
     aliases: [`kos`, `plantkeep`, `plantscrap`, `plantcraft`, `plantkos`, `plantrecycle`, `pkos`, 
         `zombiekeep`, `zombiescrap`, `zombiecraft`, `zombiekos`, `zombierecycle`, `zkos`, `zombiekeeporscrap`, 
-        `plantkeeporscrap`],
+        `plantkeeporscrap`, `sok`, `scraporkeep`, `scrap`, `zombiescraporkeep`],
     category: `Miscellaneous`,
     run: async (client, message, args) => {
         const container = new ContainerBuilder();
@@ -116,7 +116,6 @@ module.exports = {
         .setThumbnailAccessory(sneakyImage);
       zombieContainer.addSectionComponents(sneakySection);
       zombieContainer.setAccentColor(10494192);
-      zombieContainer.addActionRowComponents(row);
       const plantContainer = new ContainerBuilder(); 
       const tierText3 = new TextDisplayBuilder().setContent([
           "# Guardian",
@@ -182,21 +181,19 @@ module.exports = {
         .setThumbnailAccessory(solarImage);
       plantContainer.addSectionComponents(solarSection);
       plantContainer.setAccentColor(65280);
-      plantContainer.addActionRowComponents(row);
-       const filter = (interaction) => interaction.user.id === message.author.id;
-        const collector = message.channel.createMessageComponentCollector({ filter});
+        const collector = message.channel.createMessageComponentCollector({});
         collector.on('collect', async (interaction) => {
             if (interaction.customId === 'select') {
                 if (interaction.values[0] === 'plantkeeporscrap') {
-                    await interaction.update({
+                    await interaction.reply({
                         components: [plantContainer],
-                        flags: MessageFlags.IsComponentsV2
+                        flags: MessageFlags.Ephemeral | MessageFlags.IsComponentsV2,
                     });
                 }
                 else if (interaction.values[0] === 'zombiekeeporscrap') {
-                    await interaction.update({
+                    await interaction.reply({
                         components: [zombieContainer],
-                        flags: MessageFlags.IsComponentsV2
+                        flags: MessageFlags.Ephemeral | MessageFlags.IsComponentsV2,
                     });
                 }
             }

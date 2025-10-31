@@ -64,66 +64,33 @@ for (const folder of commandFolders) {
     }
   }
 }
-const ZombieFoldersPath = path.join(__dirname, "Zombies");
-const commandFoldersZombie = fs.readdirSync(ZombieFoldersPath);
-for (const folder of commandFoldersZombie) {
-  const commandsPath = path.join(ZombieFoldersPath, folder);
-  const commandFiles = fs
-    .readdirSync(commandsPath)
-    .filter((file) => file.endsWith(".js"));
-  for (const commandFile of commandFiles) {
-    const filePath = path.join(commandsPath, commandFile);
-    const command = require(filePath);
-    if (command.name) {
-    client.commands.set(command.name, command);
-    }
-    if (command.aliases) {
+const miscanelousFoldersPath = path.join(__dirname, "Misc");
+
+// Check if the directory exists first
+if (fs.existsSync(miscanelousFoldersPath)) {
+  const miscFiles = fs.readdirSync(miscanelousFoldersPath)
+    .filter((file) => file.endsWith(".js")); 
+  
+  for (const file of miscFiles) {
+    const filePath = path.join(miscanelousFoldersPath, file);
+    
+    try {
+      const command = require(filePath);
+      if (command.name) {
+        client.commands.set(command.name, command);
+      }
+      if (command.aliases) {
         for (const alias of command.aliases) {
-          client.aliases.set(alias);
+          client.aliases.set(alias, command);
         }
       }
+    } catch (error) {
+      console.error(`Error loading misc command ${file}:`, error);
     }
   }
-const miscanelousFoldersPath = path.join(__dirname, "ZV(Misc)");
-const commandFoldersMisc = fs.readdirSync(miscanelousFoldersPath);
-for (const folder of commandFoldersMisc) {
-  const commandsPath = path.join(miscanelousFoldersPath, folder);
-  const commandFiles = fs
-    .readdirSync(commandsPath)
-    .filter((file) => file.endsWith(".js"));
-  for (const commandFile of commandFiles) {
-    const filePath = path.join(commandsPath, commandFile);
-    const command = require(filePath);
-    if (command.name) {
-    client.commands.set(command.name, command);
-    }
-    if (command.aliases) {
-        for (const alias of command.aliases) {
-          client.aliases.set(alias);
-        }
-      }
-    }
-  }
-  const PlantFoldersPath = path.join(__dirname, "Plants");
-const commandFoldersPlant = fs.readdirSync(PlantFoldersPath);
-for (const folder of commandFoldersPlant) {
-  const commandsPath = path.join(PlantFoldersPath, folder);
-  const commandFiles = fs
-    .readdirSync(commandsPath)
-    .filter((file) => file.endsWith(".js"));
-  for (const commandFile of commandFiles) {
-    const filePath = path.join(commandsPath, commandFile);
-    const command = require(filePath);
-    if (command.name) {
-    client.commands.set(command.name, command);
-    }
-    if (command.aliases) {
-        for (const alias of command.aliases) {
-          client.aliases.set(alias);
-        }
-      }
-    }
-  }
+} else {
+  console.log("ZV(Misc) directory does not exist, skipping...");
+}
 const eventsPath = path.join(__dirname, "Events"); 
 const eventFiles = fs
   .readdirSync(eventsPath)
@@ -228,7 +195,8 @@ const dbTables = [
   { table: "sneakycards", prefix: "snc", category: "Zombie Cards"},
   {table: "sneakytricks", prefix: "snt", category: "Tricks Phase" },
   {table: "deckbuilders", prefix: "db", category: "DeckBuilders" },
-  {table: "helpcommands", prefix: "help", category: "Miscellaneous" }
+  {table: "helpcommands", prefix: "help", category: "Miscellaneous" }, 
+  {table: "herocommands", prefix: "help", category: "Miscellaneous" }
 ];
 
 // map table name => embed color (hex). Adjust colors as desired.

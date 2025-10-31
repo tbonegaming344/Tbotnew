@@ -44,4 +44,5 @@ function buildCardEmbedFromRow(row, tableName = null, dbTableColors = {}) {
   }
   return embed;
 }
+
 module.exports = buildCardEmbedFromRow;

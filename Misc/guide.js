@@ -12,7 +12,7 @@ const {
 } = require('discord.js');
 module.exports = {
     name: `guide`, 
-    aliases: [`deckbuildingguide`, `deckbuilding`],
+    aliases: [`deckbuildingguide`, `deckbuilding`, `guidelines`, `deckhelp`],
     category: `Miscellaneous`,
     run: async (client, message, args) => {
     const selectGuide = new StringSelectMenuBuilder()

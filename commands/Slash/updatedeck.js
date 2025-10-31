@@ -189,7 +189,7 @@ module.exports = {
       return interaction.reply({
         content:
           "❌ Invalid deck name. Please make sure the deck exists in Tbot.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
         withResponse: true,
       });
     }
@@ -225,7 +225,7 @@ module.exports = {
     if (!forumChannel || forumChannel.type !== ChannelType.GuildForum) {
       return interaction.reply({
         content: "❌ Forum channel not found or invalid.",
-        ephemeral: true,
+        flags: MessageFlags.Ephemeral,
       });
     }
     const fields = [

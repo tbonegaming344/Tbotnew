@@ -36,7 +36,8 @@ module.exports = {
     `proposedeck`,
     `proposedecks`,
     `suggest`,
-    `submission`
+    `submission`, 
+    `submissions`,
   ],
   category: `Miscellaneous`,
   run: async (client, message, args) => {

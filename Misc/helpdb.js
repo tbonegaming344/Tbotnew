@@ -7,10 +7,10 @@ const {
   StringSelectMenuOptionBuilder,
   MessageFlags,
 } = require("discord.js");
-const db = require("../../index.js");
-const  createCategoryEmbed  = require("../../Utilities/createCategoryEmbed");
-const  buildDeckEmbed  = require("../../Utilities/buildDeckEmbed");
-const buildNavRow  = require("../../Utilities/buildNavRow");
+const db = require("../index.js")
+const  createCategoryEmbed  = require("../Utilities/createCategoryEmbed");
+const  buildDeckEmbed  = require("../Utilities/buildDeckEmbed");
+const buildNavRow  = require("../Utilities/buildNavRow");
 
 
 module.exports = {
@@ -127,7 +127,7 @@ module.exports = {
           return (rows || []).map((r) => {
             const rawType = (r.type || "").toString();
             const rawArch = (r.archetype || "").toString();
-            const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+            const normalize = (s) => s.toLowerCase().replaceAll(/[^a-z0-9]/g, "");
             return {
               id: r.deckID ?? null,
               name: r.name ?? r.deckID ?? "Unnamed",
@@ -550,7 +550,7 @@ collector.on("collect", async (i) => {
         const index = Math.max(
           0,
           Math.min(
-            parseInt(parts[parts.length - 1], 10),
+            Number.parseInt(parts.at(-1), 10),
             (deckLists[category] || []).length - 1
           )
         );

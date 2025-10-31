@@ -13,11 +13,12 @@ async function scanAllTablesAndSync(db, dbTables, client, dbCommandMap, dbTableC
         .catch(() => [[]]);
       const seenKeys = new Set();
 
-      for (const r of rows || []) {
-        const key = `${t.table}:${r.deckID ?? r.id ?? r.cardid ?? r.heroID ??
-          r.card_name ?? r.title ?? r.name ?? r.deckbuilder_name ?? r.herocommand}`;
+      for (const row of rows || []) {
+        const key = `${t.table}:${row.deckID ?? row.id ?? row.cardid ?? row.heroID ?? 
+  row.card_name ?? row.title ?? row.name ?? row.deckbuilder_name 
+  ?? row.herocommand ?? row.heroname}`;
         seenKeys.add(key);
-        await registerOrUpdateDbCommand(t, r, client, dbCommandMap, dbTableColors);
+        await registerOrUpdateDbCommand(t, row, client, dbCommandMap, dbTableColors);
       }
 
       // remove DB commands for rows that no longer exist

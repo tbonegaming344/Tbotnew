@@ -8451,5 +8451,256 @@
     "zmechhelp"
    ]
   }
+ ],
+ [
+  "herocommands:1",
+  {
+   "commandName": "betacarrotina",
+   "aliases": [
+    "bc",
+    "beta",
+    "carrotina",
+    "carrot",
+    "tina",
+    "beta-carrotina"
+   ]
+  }
+ ],
+ [
+  "herocommands:2",
+  {
+   "commandName": "captaincombustible",
+   "aliases": [
+    "cc",
+    "captain",
+    "combustible",
+    "combust",
+    "stumpy"
+   ]
+  }
+ ],
+ [
+  "herocommands:3",
+  {
+   "commandName": "chompzilla",
+   "aliases": [
+    "cz",
+    "zilla"
+   ]
+  }
+ ],
+ [
+  "herocommands:4",
+  {
+   "commandName": "citron",
+   "aliases": [
+    "ct",
+    "tron"
+   ]
+  }
+ ],
+ [
+  "herocommands:5",
+  {
+   "commandName": "grassknuckles",
+   "aliases": [
+    "gk",
+    "knuckles"
+   ]
+  }
+ ],
+ [
+  "herocommands:6",
+  {
+   "commandName": "greenshadow",
+   "aliases": [
+    "gs",
+    "green",
+    "shadow",
+    "penelopea"
+   ]
+  }
+ ],
+ [
+  "herocommands:7",
+  {
+   "commandName": "nightcap",
+   "aliases": [
+    "nc",
+    "night",
+    "cap"
+   ]
+  }
+ ],
+ [
+  "herocommands:8",
+  {
+   "commandName": "rose",
+   "aliases": [
+    "ro"
+   ]
+  }
+ ],
+ [
+  "herocommands:9",
+  {
+   "commandName": "solarflare",
+   "aliases": [
+    "sf",
+    "solar",
+    "flare"
+   ]
+  }
+ ],
+ [
+  "herocommands:10",
+  {
+   "commandName": "spudow",
+   "aliases": [
+    "sp",
+    "spud",
+    "sd"
+   ]
+  }
+ ],
+ [
+  "herocommands:11",
+  {
+   "commandName": "wallknight",
+   "aliases": [
+    "wk",
+    "knight",
+    "wall-knight"
+   ]
+  }
+ ],
+ [
+  "herocommands:12",
+  {
+   "commandName": "brainfreeze",
+   "aliases": [
+    "bf"
+   ]
+  }
+ ],
+ [
+  "herocommands:13",
+  {
+   "commandName": "electricboogaloo",
+   "aliases": [
+    "eb",
+    "boog",
+    "electric",
+    "boogaloo",
+    "loo"
+   ]
+  }
+ ],
+ [
+  "herocommands:14",
+  {
+   "commandName": "hugegigantacus",
+   "aliases": [
+    "hg",
+    "huge",
+    "gigantacus",
+    "huge-gigantacus"
+   ]
+  }
+ ],
+ [
+  "herocommands:15",
+  {
+   "commandName": "immorticia",
+   "aliases": [
+    "im",
+    "ticia",
+    "i’m",
+    "i'm",
+    "it",
+    "immortica",
+    "imorticia",
+    "immort"
+   ]
+  }
+ ],
+ [
+  "herocommands:16",
+  {
+   "commandName": "impfinity",
+   "aliases": [
+    "if"
+   ]
+  }
+ ],
+ [
+  "herocommands:17",
+  {
+   "commandName": "neptuna",
+   "aliases": [
+    "nt",
+    "tuna",
+    "np",
+    "neptune"
+   ]
+  }
+ ],
+ [
+  "herocommands:18",
+  {
+   "commandName": "professorbrainstorm",
+   "aliases": [
+    "pb",
+    "pbs",
+    "professor",
+    "brainstorm",
+    "prof",
+    "bs"
+   ]
+  }
+ ],
+ [
+  "herocommands:19",
+  {
+   "commandName": "rustbolt",
+   "aliases": [
+    "rb",
+    "rust"
+   ]
+  }
+ ],
+ [
+  "herocommands:20",
+  {
+   "commandName": "superbrainz",
+   "aliases": [
+    "sb",
+    "brainz",
+    "superbrains"
+   ]
+  }
+ ],
+ [
+  "herocommands:21",
+  {
+   "commandName": "thesmash",
+   "aliases": [
+    "smash",
+    "sm",
+    "ts",
+    "the-smash"
+   ]
+  }
+ ],
+ [
+  "herocommands:22",
+  {
+   "commandName": "zmech",
+   "aliases": [
+    "zm",
+    "mech",
+    "z-mech"
+   ]
+  }
  ]
 ]

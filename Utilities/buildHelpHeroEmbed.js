@@ -1,8 +1,6 @@
-const {
-  EmbedBuilder,
-  StringSelectMenuBuilder,
-  StringSelectMenuOptionBuilder,
-} = require("discord.js");
+const { StringSelectMenuBuilder, StringSelectMenuOptionBuilder } = require("discord.js");
+const createHelpEmbed = require("./createHelpEmbed");
+const matchesCategory = require("./matchesCategory");
 
 /**
  * @description Builds a hero help embed with dynamic select menu
@@ -111,15 +109,12 @@ function buildHelpHeroEmbed(heroRow, allDecks) {
     .setPlaceholder(`Select a category to view ${heroName} decks`)
     .addOptions(selectOptions);
 
-  const embed = new EmbedBuilder()
-    .setTitle(`${heroName} Decks`)
-    .setDescription([
-      `To view the ${heroName} decks please select an option from the select menu below!`,
-      "",
-      `Note: ${heroName} has ${normalized.length} total decks in Tbot`
-    ].join("\n"))
-    .setColor(categoryColor)
-    .setThumbnail(thumbnailUrl);
+  const embed = createHelpEmbed(
+    `${heroName} Decks`,
+    `Select a category to view ${heroName} Decks — ${heroName} has ${normalized.length} total decks.`,
+    thumbnailUrl,
+    categoryColor
+  );
 
   return {
     embed,
@@ -129,8 +124,7 @@ function buildHelpHeroEmbed(heroRow, allDecks) {
     heroName,
     categoryColor,
     deckColor,
-    thumbnailUrl,
-    heroCommand
+    thumbnailUrl
   };
 }
 

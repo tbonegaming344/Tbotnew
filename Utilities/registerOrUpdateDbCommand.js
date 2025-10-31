@@ -13,10 +13,12 @@ const buildDeckBuilderFromRow = require("./buildDeckBuilderFromRow");
  * @returns {Promise<void>} - Resolves when the command is registered or updated
  */
 async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap, dbTableColors = {}) {
- const key = `${tableConfig.table}:${row.deckID ?? row.id ?? row.cardid ?? row.heroID ?? row.card_name ?? row.title ?? row.name ?? row.deckbuilder_name ?? row.herocommand}`;
+ const key = `${tableConfig.table}:${row.deckID ?? row.id ?? row.cardid ?? row.heroID ?? 
+  row.card_name ?? row.title ?? row.name ?? row.deckbuilder_name 
+  ?? row.herocommand ?? row.heroname}`;
   const baseName = (
     row.name ??
-    row.card_name ?? row.deckbuilder_name ?? row.herocommand ?? "unamed"
+    row.card_name ?? row.deckbuilder_name ?? row.herocommand ?? row.heroname  ?? "unamed"
   ).toString();
   const baseSan = sanitizeCommandName(baseName);
   const cmdName = baseSan;
@@ -57,36 +59,77 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     category: tableConfig.category,
     run: async (client, message, args) => {
       let components = [];
-    if (row.herocommand) {
+       if (row.heroname && row.hero_emoji && row.herocard_button) {
+  try {
+    const createHeroEmbedFromButton = require("./createHeroEmbedFromButton");
+    const { embed, button } = await createHeroEmbedFromButton(row);
+    
+    // Add the hero card info button to the existing button row
+    if (row.herocard_button && row.buttonemoji) {
+      const cardInfoButton = new ButtonBuilder()
+        .setCustomId(`cardinfo_${row.herocard_button}`)
+        .setLabel(row.herocard_button.toString())
+        .setEmoji(row.buttonemoji.toString())
+        .setStyle(ButtonStyle.Primary);
+      
+      // Add the card info button to the existing button row
+      button.addComponents(cardInfoButton);
+    }
+    
+    await message.channel.send({
+      embeds: [embed],
+      components: [button]
+    });
+    return;
+  } catch (error) {
+    console.error("Error handling hero command:", error);
+    console.error("Row data:", JSON.stringify(row, null, 2)); // Better debug info
+    return message.channel.send("An error occurred while loading hero data.");
+  }
+}
+      else if (row.heroname && row.hero_emoji && !row.herocommand) {
+    try {
+      const createHeroEmbedFromButton = require("./createHeroEmbedFromButton");
+      const { embed, button } = await createHeroEmbedFromButton(row);
+      
+      await message.channel.send({
+        embeds: [embed],
+        components: [button]
+      });
+      return;
+    } catch (error) {
+      console.error("Error handling hero command:", error);
+      return message.channel.send("An error occurred while loading hero data.");
+    }
+}
+    else if (row.heroname && row.herocommand) {
   try {
     const buildHelpHeroEmbed = require("./buildHelpHeroEmbed");
     const heroCommand = row.herocommand;
     const heroName = row.heroname;
-    
-    // Determine the deck table based on hero
     const heroTableMap = {
       'helpbc': 'bcdecks',
       'helpct': 'ctdecks', 
-      'helpsf': 'sfdecks',
-      'helpwk': 'wkdecks',
-      'helpgs': 'gsdecks',
-      'helpcz': 'czdecks',
-      'helpsp': 'spdecks',
-      'helpgk': 'gkdecks',
-      'helpnc': 'ncdecks',
-      'helpro': 'rodecks',
       'helpcc': 'ccdecks',
-      'helpsb': 'sbdecks',
-      'helpsm': 'smdecks',
-      'helpif': 'ifdecks',
-      'helprb': 'rbdecks',
-      'helpeb': 'ebdecks',
+      'helpcz': 'czdecks',
+      'helpgk': 'gkdecks',
+      'helpgs': 'gsdecks',
+      'helpnc': 'ncdecks',
+       'helpro': 'rodecks',
+      'helpsf': 'sfdecks',
+       'helpsp': 'spdecks',
+      'helpwk': 'wkdecks',
       'helpbf': 'bfdecks',
-      'helppb': 'pbdecks',
+      'helpeb': 'ebdecks',
+      'helphg': 'hgdecks',
+      'helpsb': 'sbdecks',
+      'helpif': 'ifdecks',
       'helpim': 'imdecks',
-      'helpzm': 'zmdecks',
       'helpnt': 'ntdecks',
-      'helphg': 'hgdecks'
+      'helppb': 'pbdecks',
+      'helprb': 'rbdecks',
+      'helpsm': 'smdecks',
+      'helpzm': 'zmdecks'
     };
 
     const deckTable = heroTableMap[heroCommand];
@@ -94,15 +137,12 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
       console.error(`No deck table found for hero command: ${heroCommand}`);
       return;
     }
-
-    // Fetch all decks for this hero
-    const [decks] = await require("../index.js").query(`SELECT * FROM ${deckTable}`);
+    const db = require("../index.js");
+const [decks] = await db.query(`SELECT * FROM ${deckTable}`);
     
     if (!decks || decks.length === 0) {
       return message.channel.send(`No ${heroName} decks found in the database.`);
     }
-
-    // Build embed and select menu using the utility function
     const { embed, select, deckLists, availableCategories, heroName: returnedHeroName, categoryColor, deckColor, thumbnailUrl } = 
       buildHelpHeroEmbed(row, decks);
 
@@ -134,10 +174,24 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
     return message.channel.send("An error occurred while loading hero help data.");
   }
 }
-    if (row.description?.includes("Superpower") || row.set_rarity === "Token") {
+    else if (row.description?.includes("Superpower") || row.set_rarity === "Token") {
+      if(row.button){
+          const actionRow = new ActionRowBuilder().addComponents(
+      new ButtonBuilder()
+      .setCustomId(`cardinfo_${row.button}`)
+      .setLabel(row.button)
+      .setEmoji(row.button_emoji)
+      .setStyle(ButtonStyle.Primary)
+    );
+    components.push(actionRow);
+    embed = buildCardEmbedFromRow(row, tableConfig.table, dbTableColors);
+    await message.channel.send({ embeds: [embed], components });
+  }
+  else{
           embed = buildCardEmbedFromRow(row, tableConfig.table, dbTableColors);
           console.log("Built card embed for superpower or token"); 
           await message.channel.send({ embeds: [embed], components });
+  }
       }
       else if(row.stats && row.button && row.button2){
          const actionRow = new ActionRowBuilder().addComponents(
@@ -228,7 +282,8 @@ async function registerOrUpdateDbCommand(tableConfig, row, client, dbCommandMap,
       // Query each table for decks by this deckbuilder (NOT inspired by this specific deckbuilder)
       for (const { table, hero } of deckTables) {
         try {
-         const [decks] = await require("../index.js").query(
+         const db = require("../index.js");
+const [decks] = await db.query(
   `SELECT * FROM ${table} WHERE creator LIKE ? AND creator NOT LIKE ?`,
   [`%${deckbuilderName}%`, `%inspired by ${deckbuilderName}%`]
 );

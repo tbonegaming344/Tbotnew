@@ -1,4 +1,4 @@
-const {SlashCommandBuilder, EmbedBuilder} = require('discord.js');
+const {SlashCommandBuilder, EmbedBuilder, MessageFlags} = require('discord.js');
 module.exports = {  
     data: new SlashCommandBuilder()
         .setName('bugreport')
@@ -35,10 +35,10 @@ module.exports = {
             });
         } catch (error) {
             console.error('Error sending bug report:', error);
-            await interaction.reply({ content: 'There was an error sending your bug report.', ephemeral: true });
+            await interaction.reply({ content: 'There was an error sending your bug report.', flags: MessageFlags.Ephemeral });
             return;
         }
 
-        await interaction.reply({ content: 'Thank you for your bug report! It has been reported to Tbone, who is the owner of Tbot', ephemeral: true });
+        await interaction.reply({ content: 'Thank you for your bug report! It has been reported to Tbone, who is the owner of Tbot', flags: MessageFlags.Ephemeral });
     }
 }

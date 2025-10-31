@@ -1,6 +1,5 @@
 const { EmbedBuilder, ButtonBuilder, ButtonStyle, ActionRowBuilder } = require('discord.js');
-const { hangmanGuesses, randomWord, ascii } = require('../../Utilities/hangman');
-
+const { hangmanGuesses, randomWord, ascii } = require('../Utilities/hangman');
 module.exports = {
     name: `hang`,
     aliases: ['hangman'],

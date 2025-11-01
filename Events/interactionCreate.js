@@ -565,25 +565,62 @@ interaction.client.detectDecksData.set(message.id, {
 
             const embed = buildDeckEmbed(list[index], "Random");
             
-            // Build navigation row
-            const navRow = buildNavRow(category, index, list.length, ["all"]); 
+            // Handle navigation with "Back to List" at extremes
+            let prevIndex, nextIndex;
             
-            // Convert button IDs to use decknav_ and deckback_ prefixes
-            const updatedNav = new ActionRowBuilder();
-            for (const component of navRow.components) {
-              const btn = ButtonBuilder.from(component);
-              const oldId = component.data.custom_id;
-              
-              if (oldId.startsWith("nav_")) {
-                btn.setCustomId(oldId.replace("nav_", "decknav_"));
-              } else if (oldId.startsWith("back_to_list_")) {
-                btn.setCustomId(oldId.replace("back_to_list_", "deckback_"));
-              }
-              
-              updatedNav.addComponents(btn);
+            if (index === 0) {
+              prevIndex = 'list';
+              nextIndex = list.length > 1 ? 1 : 'list';
+            } else if (index === list.length - 1) {
+              prevIndex = index - 1;
+              nextIndex = 'list';
+            } else {
+              prevIndex = index - 1;
+              nextIndex = index + 1;
             }
 
-            return await i.update({ embeds: [embed], components: [updatedNav] });
+            const navRow = new ActionRowBuilder();
+
+            // Left button
+            if (prevIndex === 'list') {
+              navRow.addComponents(
+                new ButtonBuilder()
+                  .setCustomId(`deckback_${category}`)
+                  .setEmoji("📋")
+                  .setLabel("Back to List")
+                  .setStyle(ButtonStyle.Secondary)
+              );
+            } else {
+              navRow.addComponents(
+                new ButtonBuilder()
+                  .setCustomId(`decknav_${category}_${prevIndex}`)
+                  .setEmoji("⬅️")
+                  .setStyle(ButtonStyle.Primary)
+              );
+            }
+
+            // Right button
+            if (nextIndex === 'list') {
+              navRow.addComponents(
+                new ButtonBuilder()
+                  .setCustomId(`deckback_${category}`)
+                  .setEmoji("📋")
+                  .setLabel("Back to List")
+                  .setStyle(ButtonStyle.Secondary)
+              );
+            } else {
+              navRow.addComponents(
+                new ButtonBuilder()
+                  .setCustomId(`decknav_${category}_${nextIndex}`)
+                  .setEmoji("➡️")
+                  .setStyle(ButtonStyle.Primary)
+              );
+            }
+
+            return await i.update({ 
+              embeds: [embed], 
+              components: [navRow] 
+            });
           }
 
           if (i.isButton() && i.customId.startsWith("deckback_")) {
@@ -929,6 +966,7 @@ else if (interaction.customId.startsWith("herocat_")) {
 
         const navRow = new ActionRowBuilder();
 
+        // Left button
         if (prevIndex === 'list') {
           navRow.addComponents(
             new ButtonBuilder()
@@ -946,6 +984,7 @@ else if (interaction.customId.startsWith("herocat_")) {
           );
         }
 
+        // Right button
         if (nextIndex === 'list') {
           navRow.addComponents(
             new ButtonBuilder()
@@ -1320,6 +1359,7 @@ else if (interaction.customId.startsWith("herodknav_")) {
 
   const navRow = new ActionRowBuilder();
 
+  // Left button
   if (prevIndex === 'list') {
     navRow.addComponents(
       new ButtonBuilder()
@@ -1337,6 +1377,7 @@ else if (interaction.customId.startsWith("herodknav_")) {
     );
   }
 
+  // Right button
   if (nextIndex === 'list') {
     navRow.addComponents(
       new ButtonBuilder()

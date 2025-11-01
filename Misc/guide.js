@@ -2,14 +2,14 @@ const {
     StringSelectMenuBuilder, 
     StringSelectMenuOptionBuilder,
     ActionRowBuilder, 
-    ContainerBuilder, 
+     ContainerBuilder, 
     ThumbnailBuilder,
     SectionBuilder,
     TextDisplayBuilder,
     MessageFlags,
     SeparatorSpacingSize, 
     MediaGalleryBuilder
-} = require('discord.js');
+}= require('discord.js');
 module.exports = {
     name: `guide`, 
     aliases: [`deckbuildingguide`, `deckbuilding`, `guidelines`, `deckhelp`],

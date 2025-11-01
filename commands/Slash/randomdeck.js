@@ -136,7 +136,7 @@ module.exports = {
       union all SELECT * from pbdecks where type NOT LIKE '%budget%'
       union all SELECT * from imdecks where type NOT LIKE '%budget%'
       union all SELECT * from ntdecks where type NOT LIKE '%budget%'`;
-      await getAndSendRandomDeck(query, "Random Deck", "Here is your random deck");
+      await getAndSendRandomDeck(query);
     } else if (heroInput === "Plants") {
       const query = `SELECT * from ccdecks where type NOT LIKE '%budget%' 
       union all SELECT * from sfdecks where type NOT LIKE '%budget%'
@@ -149,7 +149,7 @@ module.exports = {
       union all SELECT * from bcdecks where type NOT LIKE '%budget%'
       union all SELECT * from gkdecks where type NOT LIKE '%budget%'
       union all SELECT * from ncdecks where type NOT LIKE '%budget%'`;
-      await getAndSendRandomDeck(query, "Random Plant Deck", "Here is your random plant Deck");
+      await getAndSendRandomDeck(query);
     } else if (heroInput === "Zombies") {
       const query = `SELECT * FROM sbdecks where type NOT LIKE '%budget%' 
       union all SELECT * from hgdecks where type NOT LIKE '%budget%' 
@@ -162,13 +162,11 @@ module.exports = {
       union all SELECT * from pbdecks where type NOT LIKE '%budget%'
       union all SELECT * from imdecks where type NOT LIKE '%budget%'
       union all SELECT * from ntdecks where type NOT LIKE '%budget%'`;
-      await getAndSendRandomDeck(query, "Random Zombie Deck", "Here is your random Zombie Deck");
+      await getAndSendRandomDeck(query);
     } else if (tableName) {
       // This is now the final case for a valid hero
       const query = `SELECT * FROM ${tableName} where type NOT LIKE '%budget%'`;
-      const title = `Random ${heroInput.charAt(0).toUpperCase() + heroInput.slice(1)} Deck`;
-      const description = `Here is your random ${heroInput} deck`;
-      await getAndSendRandomDeck(query, title, description);
+      await getAndSendRandomDeck(query);
     } else {
       // This handles any other invalid input
       await interaction.reply({

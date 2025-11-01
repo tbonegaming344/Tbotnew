@@ -143,8 +143,6 @@ module.exports = {
         "Giving bad deckbuilding advice",
         `Watching every ${randomYoutubers} video`,
         "submitting more 4 line piles to tbot",
-        //Commander demo
-        "I like trains",
         //crepperblade 711
         "mog on a cheese cutter that turns into cheese again",
         "using doom shroom against primal yeti",

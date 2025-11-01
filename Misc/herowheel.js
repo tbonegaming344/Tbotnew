@@ -8,7 +8,7 @@ const {
     name: `herowheel`,
     category: `Miscellaneous`,
     run: async (client, message, args) => {
-      if(message.guild && message.guild.id == "285818469960646657"){
+      if(message.guild.id == "285818469960646657"){
         return message.author.send("This command is disabled in this server please use it in another server");
       }
       else{

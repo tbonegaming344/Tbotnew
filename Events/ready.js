@@ -196,7 +196,7 @@ async function createStatusExcel(statusData) {
     // Set column widths (optional)
     const maxWidth = 100;
     const colWidths = [
-      { wch: Math.min(Math.map(...data.map(row => (row[0] || '').toString().length)), maxWidth) },
+      { wch: Math.min(Math.max(...data.map(row => (row[0] || '').toString().length)), maxWidth) },
       { wch: Math.min(Math.max(...data.map(row => (row[1] || '').toString().length)), maxWidth) }
     ];
     worksheet['!cols'] = colWidths;

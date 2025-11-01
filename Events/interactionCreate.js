@@ -1020,7 +1020,7 @@ else if (interaction.customId.startsWith("herohelp_")) {
       "helpro": "Rose",
       "helpsf": "Solar Flare",
       "helpsp": "Spudow",
-      "helpwk": "Wall Knight",
+      "helpwk": "Wall-Knight",
       "helpbf": "Brain Freeze",
       "helpeb": "Electric Boogaloo",
       "helphg": "Huge-Gigantacus",
@@ -1096,7 +1096,7 @@ else if (interaction.customId.startsWith("herohelp_")) {
     const normalized = decks.map((r) => {
       const rawType = (r.type || "").toString();
       const rawArch = (r.archetype || "").toString();
-      const normalize = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, "");
+      const normalize = (s) => s.toLowerCase().replaceAll(/[^a-z0-9]/g, "");
       return {
         id: r.deckID ?? null,
         name: r.name ?? r.deckID ?? "Unnamed",
@@ -1177,7 +1177,7 @@ else if (interaction.customId.startsWith("herohelp_")) {
     );
 
     const select = new StringSelectMenuBuilder()
-      .setCustomId(`herodeck_${heroName.toLowerCase().replace(/[^a-z]/g, '')}`)
+      .setCustomId(`herodeck_${heroName.toLowerCase().replaceAll(/[^a-z]/g, '')}`)
       .setPlaceholder(`Select a category to view ${heroName} decks`)
       .addOptions(selectOptions);
 
@@ -1222,7 +1222,6 @@ else if (interaction.customId.startsWith("herohelp_")) {
 }
 
 else if (interaction.customId.startsWith("herodeck_")) {
-  const heroKey = interaction.customId.replace("herodeck_", "");
   const data = interaction.client.heroDecksData.get(interaction.message.id);
   
   if (!data) {

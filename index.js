@@ -106,7 +106,7 @@ client.on(Events.MessageCreate, async (message) => {
     const channel = client.channels.cache.get("1050107020008771604");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const invokedRaw = args.join("").toLowerCase();
-    const invoked = invokedRaw.replaceAll(/[^a-z0-9]+/g, ""); // normalize like DB commands
+    const invoked = invokedRaw.replaceAll(/[^a-z0-9]+/g, ""); 
     const command =
       client.commands.get(invoked) ||
       client.commands.find((a) => a.aliases?.includes(invoked));

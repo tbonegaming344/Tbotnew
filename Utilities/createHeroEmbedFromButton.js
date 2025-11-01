@@ -14,7 +14,7 @@ async function createHeroEmbedFromButton(row) {
     "Rose": { command: "helpro", table: "rodecks" },
     "Solar Flare": { command: "helpsf", table: "sfdecks" },
     "Spudow": { command: "helpsp", table: "spdecks" },
-    "Wall Knight": { command: "helpwk", table: "wkdecks" },
+    "Wall-Knight": { command: "helpwk", table: "wkdecks" },
     "Brain Freeze": { command: "helpbf", table: "bfdecks" },
     "Electric Boogaloo": { command: "helpeb", table: "ebdecks" },
     "Huge-Gigantacus": { command: "helphg", table: "hgdecks" },

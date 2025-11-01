@@ -55,7 +55,24 @@ This will output:
 - INSERT query with all 249 static statuses
 - SELECT query to retrieve statuses
 
-### 4. `Misc/customstatuses.js`
+### 4. `Utilities/migrateCustomStatuses.js`
+An automated database migration script that creates the table and populates it with all static custom statuses.
+
+**Usage:**
+```bash
+node Utilities/migrateCustomStatuses.js
+```
+
+This script will:
+- Create the `customstatuses` table if it doesn't exist
+- Check for existing data to avoid duplicates
+- Insert all 249 static statuses into the database
+- Verify the insertion was successful
+- Display sample statuses from the database
+
+**Note:** This is the recommended way to set up custom statuses in your database.
+
+### 5. `Misc/customstatuses.js`
 A new Discord bot command that displays all static custom statuses in an embed.
 
 **Command aliases:** `customstatuses`, `statuses`, `status`, `customstatus`, `botstatuses`
@@ -68,7 +85,19 @@ A new Discord bot command that displays all static custom statuses in an embed.
 
 ## Database Implementation
 
-### Step 1: Create the Database Table
+### Quick Setup (Recommended)
+
+Run the automated migration script:
+
+```bash
+node Utilities/migrateCustomStatuses.js
+```
+
+This will automatically create the table and populate it with all static custom statuses.
+
+### Manual Setup (Alternative)
+
+#### Step 1: Create the Database Table
 
 Run this SQL query in your MySQL database:
 
@@ -80,7 +109,7 @@ CREATE TABLE IF NOT EXISTS customstatuses (
 );
 ```
 
-### Step 2: Populate the Table
+#### Step 2: Populate the Table
 
 Generate the insert query by running:
 ```bash
@@ -89,7 +118,7 @@ node Utilities/generateStatusQueries.js > /tmp/status_queries.sql
 
 Then extract and run the INSERT statement from the output.
 
-### Step 3: Query from Database in Code
+### Step 3 (Manual Setup): Query from Database in Code
 
 Example of querying statuses from the database in your code:
 
@@ -133,19 +162,34 @@ The custom statuses functionality is fully integrated with the existing Tbot cod
 
 ## Example: Using in ready.js Event
 
-You can optionally modify the ready.js event to load statuses from the database instead of hardcoding them:
+A comprehensive example is provided in `EXAMPLE_DB_QUERY_USAGE.js` showing different approaches:
 
+1. **Load all statuses at startup** - Query all statuses once and store in memory
+2. **Combine static and dynamic** - Mix database statuses with dynamic ones containing variables
+3. **Query on-demand** - Fetch a random status from database each time it's needed
+
+**Option 1: Load all at startup (memory-efficient)**
 ```javascript
-// At the top of ready.js, after database connection
-const getStaticCustomStatuses = require("../Utilities/getStaticCustomStatuses");
-
-// Later in the code, replace the hardcoded customStatus array:
-const customStatus = getStaticCustomStatuses();
-
-// Or query from database:
+let staticCustomStatuses = [];
 const [statusRows] = await db.query("SELECT status_text FROM customstatuses ORDER BY id");
-const dbStatuses = statusRows.map(row => row.status_text);
+staticCustomStatuses = statusRows.map(row => row.status_text);
 ```
+
+**Option 2: Query random status directly from database**
+```javascript
+const [statusRows] = await db.query(
+  "SELECT status_text FROM customstatuses ORDER BY RAND() LIMIT 1"
+);
+const randomStatus = statusRows[0].status_text;
+```
+
+**Option 3: Use utility function (no database required)**
+```javascript
+const getStaticCustomStatuses = require("../Utilities/getStaticCustomStatuses");
+const statuses = getStaticCustomStatuses();
+```
+
+See `EXAMPLE_DB_QUERY_USAGE.js` for complete, working examples.
 
 ## Testing
 

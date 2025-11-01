@@ -72,21 +72,6 @@ module.exports = {
       ].join("\n")
     );
     container.addTextDisplayComponents(developerText);
-    const discordText = new TextDisplayBuilder().setContent(
-      [
-        "# Tbot Discord",
-        "Join the Tbot discord to get updated on when new commands and features are added to the bot or just to hang out with the Tbot community.",
-      ].join("\n")
-    );
-    const discordInvite = new ButtonBuilder()
-      .setLabel("Tbot Discord")
-      .setStyle(ButtonStyle.Link)
-      .setURL("https://discord.gg/2NSwt96vmS")
-      .setEmoji("<:thanosswabbie:1296923069817819137>");
-    const discordSection = new SectionBuilder()
-      .addTextDisplayComponents(discordText)
-      .setButtonAccessory(discordInvite);
-    container.addSectionComponents(discordSection);
     await message.channel.send({
       components: [container],
       flags: MessageFlags.IsComponentsV2,

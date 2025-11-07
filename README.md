@@ -123,6 +123,7 @@ While this is a personal project, I welcome feedback from the Plants vs Zombies 
 - 🐛 **Bug Reports**: Found an issue? Use `/bugreport` in Discord
 - � **Feature Ideas**: Suggest new features or improvements
 - 🎮 **Community Input**: Share your thoughts on the bot's functionality
+- 💰 **Donations**: You can donate to Tbot through [BuyMeACoffee](https://buymeacoffee.com/tbotpvzh)
 
 ### � How to Reach Me
 - Use the `/bugreport` command in Discord for quick feedback

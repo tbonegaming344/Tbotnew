@@ -12,7 +12,7 @@ function matchesCategory(row, cat) {
   const a = (row.archetypeNorm || row.archetype || "").toLowerCase();
   
   if (cat === "all") return true;
-  if (cat === "comp") {
+  if (cat === "competitive" || cat === "comp") {
     return t.includes("competitive") || t.includes("comp") || 
            a.includes("competitive") || a.includes("comp");
   }

@@ -133,26 +133,25 @@ module.exports = {
         union all select name from imdecks
         union all select name from ntdecks
       `);
-      // Lowercase and join names (remove spaces)
       const choices = [
-        ...new Set(rows.map((r) => r.name.toLowerCase().replace(/\s+/g, "")))
+        ...new Set(rows.map((r) => r.name.toLowerCase().replaceAll(/\s+/g, "")))
       ].sort((a, b) => a.localeCompare(b));
       let filtered;
-      if (!focusedValue) {
-        filtered = choices.slice(0, 25);
-      } else {
+     if (focusedValue) {
         filtered = choices
           .filter((choice) =>
-            choice.startsWith(focusedValue.toLowerCase().replace(/\s+/g, ""))
+            choice.startsWith(focusedValue.toLowerCase().replaceAll(/\s+/g, ""))
           )
           .slice(0, 25);
+      } else {
+        filtered = choices.slice(0, 25);
       }
       await interaction.respond(
         filtered.map((choice) => ({ name: choice, value: choice }))
       );
     } catch (err) {
       console.error("Autocomplete error:", err);
-      await interaction.respond([]); // Always respond, even on error
+      await interaction.respond([]);
     }
   },
   async execute(interaction) {
@@ -183,9 +182,9 @@ module.exports = {
       `);
     const name = interaction.options.getString("name");
     const validNames = rows.map((r) =>
-      r.name.toLowerCase().replace(/\s+/g, "")
+      r.name.toLowerCase().replaceAll(/\s+/g, "")
     );
-    if (!validNames.includes(name.toLowerCase().replace(/\s+/g, ""))) {
+    if (!validNames.includes(name.toLowerCase().replaceAll(/\s+/g, ""))) {
       return interaction.reply({
         content:
           "❌ Invalid deck name. Please make sure the deck exists in Tbot.",
@@ -274,5 +273,10 @@ module.exports = {
     await starterMessage.pin();
     await starterMessage.react("<:upvote:1081953853903220876>");
     await starterMessage.react("<:downvote:1081953860534403102>");
+    //send message to thread 
+    const deckPin = await thread.send({
+      content: `<@${interaction.client.user.id}> ${name}`
+    })
+    await deckPin.pin();
   },
 };

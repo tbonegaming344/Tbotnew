@@ -54,7 +54,6 @@ for (const folder of commandFolders) {
   for (const file of commandFiles) {
     const filePath = path.join(commandsPath, file);
     const command = require(filePath);
-    // Set a new item in the Collection with the key as the command name and the value as the exported module
     if ("data" in command && "execute" in command) {
       client.slashCommands.set(command.data.name, command);
     } else {
@@ -65,8 +64,6 @@ for (const folder of commandFolders) {
   }
 }
 const miscanelousFoldersPath = path.join(__dirname, "Misc");
-
-// Check if the directory exists first
 if (fs.existsSync(miscanelousFoldersPath)) {
   const miscFiles = fs.readdirSync(miscanelousFoldersPath)
     .filter((file) => file.endsWith(".js")); 
@@ -102,7 +99,7 @@ for (const file of eventFiles) {
 }
 client.on(Events.MessageCreate, async (message) => {
   if (message.content.toLowerCase().startsWith(prefix)) {
-    if (message.author.bot) return;
+    if (message.author.bot && message.author.id != "1043528908148052089") return;
     const channel = client.channels.cache.get("1050107020008771604");
     const args = message.content.slice(prefix.length).trim().split(/ +/g);
     const invokedRaw = args.join("").toLowerCase();

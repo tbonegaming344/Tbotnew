@@ -107,10 +107,14 @@ client.on(Events.MessageCreate, async (message) => {
     const command =
       client.commands.get(invoked) ||
       client.commands.find((a) => a.aliases?.includes(invoked));
-    if (!command)
+    if (!command && message.channel.id != "1050107020008771604")
       return channel.send(
         `${message} is not a command sent by ${message.author.username}.`
       );
+    if (!command) {
+      return;
+    }
+    
     // Check if the message is from a guild (not a DM)
     if (message.guild) {
       if (

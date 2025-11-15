@@ -663,6 +663,11 @@ interaction.client.detectDecksData.set(message.id, {
   // Extract deckbuilder name from customId
   const deckbuilderKey = interaction.customId.replace("deckbuildercat_", "");
   const tempKey = `temp_${deckbuilderKey}_${interaction.message.id}`;
+  
+  // Initialize the Map if it doesn't exist
+if (!interaction.client.deckbuilderData) {
+  interaction.client.deckbuilderData = new Map();
+}
   const data = interaction.client.deckbuilderData.get(tempKey);
   
   if (!data) {
@@ -858,6 +863,11 @@ else if (interaction.customId.startsWith("herocat_")) {
   // Extract hero command from customId
   const heroCommand = interaction.customId.replace("herocat_", "");
   const tempKey = `temp_${heroCommand}_${interaction.message.id}`;
+  // Initialize the Map if it doesn't exist
+  if (!interaction.client.heroHelpData) {
+    interaction.client.heroHelpData = new Map();
+  }
+  
   const data = interaction.client.heroHelpData.get(tempKey);
   
   if (!data) {
@@ -1044,7 +1054,7 @@ else if (interaction.customId.startsWith("herocat_")) {
   });
 }
 else if (interaction.customId.startsWith("herohelp_")) {
-  const heroCommand = interaction.customId.replace("herohelp_", ""); // This will be like "helpsp"
+  const heroCommand = interaction.customId.replace("herohelp_", ""); 
   
   try {
     // Map the command back to hero name for database lookup
@@ -1261,6 +1271,11 @@ else if (interaction.customId.startsWith("herohelp_")) {
 }
 
 else if (interaction.customId.startsWith("herodeck_")) {
+  // Initialize the Map if it doesn't exist
+  if (!interaction.client.heroDecksData) {
+    interaction.client.heroDecksData = new Map();
+  }
+  
   const data = interaction.client.heroDecksData.get(interaction.message.id);
   
   if (!data) {
@@ -1324,6 +1339,11 @@ else if (interaction.customId.startsWith("herodeck_")) {
 else if (interaction.customId.startsWith("herodknav_")) {
   const [, category, indexStr] = interaction.customId.split("_");
   const index = Number.parseInt(indexStr, 10);
+  
+  // Initialize the Map if it doesn't exist
+  if (!interaction.client.heroDecksData) {
+    interaction.client.heroDecksData = new Map();
+  }
   
   const data = interaction.client.heroDecksData.get(interaction.message.id);
   if (!data) {
@@ -1404,6 +1424,12 @@ else if (interaction.customId.startsWith("herodknav_")) {
 // Add back to list handler
 else if (interaction.customId.startsWith("herodklist_")) {
   const category = interaction.customId.replace("herodklist_", "");
+  
+  // Initialize the Map if it doesn't exist
+  if (!interaction.client.heroDecksData) {
+    interaction.client.heroDecksData = new Map();
+  }
+  
   const data = interaction.client.heroDecksData.get(interaction.message.id);
   
   if (!data) {

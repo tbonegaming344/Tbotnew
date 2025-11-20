@@ -14,7 +14,7 @@
  [
   "rbdecks:2",
   {
-   "commandName": "budgetrb",
+   "commandName": "flobswarm",
    "aliases": [
     "rbbudget",
     "budgetrustbolt",
@@ -23,23 +23,21 @@
     "swarmbudgetrb",
     "rbbudgetswarm",
     "budgetbolt",
-    "pennyflag"
+    "pennyflag",
+    "budgetrb"
    ]
   }
  ],
  [
   "rbdecks:3",
   {
-   "commandName": "cardsbolt",
+   "commandName": "poggerazzi",
    "aliases": [
     "poggerrazzirb",
     "pogrb",
     "rbpog",
-    "coggerazi",
-    "coggerrazi",
     "poggerazi",
     "poggers",
-    "poggerazzi",
     "poggerrazi",
     "pogger",
     "poggerrazzi"
@@ -108,14 +106,14 @@
  [
   "zmdecks:1",
   {
-   "commandName": "budgetzm",
+   "commandName": "flaggro",
    "aliases": [
     "zmbudget",
     "bzm",
     "zmb",
     "budgetzmech",
     "budgetmech",
-    "flaggro"
+    "budgetzm"
    ]
   }
  ],
@@ -339,12 +337,13 @@
  [
   "bfdecks:2",
   {
-   "commandName": "budgetbf",
+   "commandName": "budgetgraveimps",
    "aliases": [
     "bfbudget",
     "bbf",
     "bfb",
-    "budgetbrainfreeze"
+    "budgetbrainfreeze",
+    "budgetbf"
    ]
   }
  ],
@@ -600,7 +599,7 @@
  [
   "gkdecks:1",
   {
-   "commandName": "budgetgk",
+   "commandName": "tempoknuckles",
    "aliases": [
     "gkbudget",
     "bgk",
@@ -878,26 +877,26 @@
  [
   "ncdecks:1",
   {
-   "commandName": "budgetnc",
+   "commandName": "hypernavy",
    "aliases": [
     "ncbudget",
     "budgetswarmnc",
     "bnc",
-    "hypernavy"
+    "budgetnc",
+    "budgetnightcap"
    ]
   }
  ],
  [
   "ncdecks:2",
   {
-   "commandName": "cyboil",
+   "commandName": "cyburn",
    "aliases": [
     "nccyburn",
     "cyburnnc",
     "cycleburn",
     "cyclecap",
-    "cburn",
-    "cyburn"
+    "cburn"
    ]
   }
  ],
@@ -924,7 +923,7 @@
  [
   "ntdecks:1",
   {
-   "commandName": "budgetnt",
+   "commandName": "flagtuna",
    "aliases": [
     "ntbudget",
     "bnt",
@@ -936,7 +935,7 @@
     "budgetntflag",
     "budgetflagnt",
     "ntbudgetflag",
-    "flagtuna"
+    "budgetnt"
    ]
   }
  ],
@@ -1038,14 +1037,15 @@
  [
   "pbdecks:2",
   {
-   "commandName": "budgetpb",
+   "commandName": "floorremoval",
    "aliases": [
     "pbbudget",
     "budgetbrainstorm",
     "bpb",
     "pbb",
     "floorremoval",
-    "budgetbs"
+    "budgetbs",
+    "budgetpb"
    ]
   }
  ],
@@ -1116,7 +1116,7 @@
  [
   "rodecks:1",
   {
-   "commandName": "budgetro",
+   "commandName": "younghmr",
    "aliases": [
     "robudget",
     "budgethmr",
@@ -1124,7 +1124,7 @@
     "bro",
     "budgetrose",
     "rosebudget",
-    "younghmr"
+    "budgetro"
    ]
   }
  ],
@@ -1155,9 +1155,16 @@
   }
  ],
  [
+  "rodecks:4",
+  {
+   "commandName": "mayf",
+   "aliases": []
+  }
+ ],
+ [
   "sfdecks:1",
   {
-   "commandName": "budgetsf",
+   "commandName": "burstflare",
    "aliases": [
     "sfbudgetswarm",
     "bsfswarm",
@@ -1212,8 +1219,10 @@
  [
   "smdecks:1",
   {
-   "commandName": "budgetsm",
-   "aliases": []
+   "commandName": "flashswarm",
+   "aliases": [
+    "budgetsm"
+   ]
   }
  ],
  [
@@ -1249,14 +1258,15 @@
   {
    "commandName": "whalepharaoh",
    "aliases": [
-    "whaleorah"
+    "whaleorah",
+    "whaleroah"
    ]
   }
  ],
  [
   "spdecks:1",
   {
-   "commandName": "budgetsp",
+   "commandName": "burstroots",
    "aliases": [
     "spbudget",
     "bsp",
@@ -1317,7 +1327,7 @@
  [
   "wkdecks:1",
   {
-   "commandName": "budgetwk",
+   "commandName": "healmidknight",
    "aliases": [
     "wkbudget",
     "bwk",
@@ -7447,12 +7457,12 @@
  [
   "deckbuilders:1",
   {
-   "commandName": "autony",
+   "commandName": "boing",
    "aliases": [
-    "decksmadebyautony",
-    "helpautony",
-    "autonyhelp",
-    "autonydecks"
+    "decksmadebyboming",
+    "helpboming",
+    "bominghelp",
+    "bomingdecks"
    ]
   }
  ],
@@ -8021,6 +8031,18 @@
   }
  ],
  [
+  "deckbuilders:44",
+  {
+   "commandName": "crimpton",
+   "aliases": [
+    "crimptondecks",
+    "crimptonhelp",
+    "helpcrimpton",
+    "decksmadebycrimpton"
+   ]
+  }
+ ],
+ [
   "helpcommands:1",
   {
    "commandName": "helpbc",
@@ -8234,7 +8256,7 @@
  [
   "helpcommands:12",
   {
-   "commandName": "helpf",
+   "commandName": "helpbf",
    "aliases": [
     "bfhelp",
     "bfcommands",

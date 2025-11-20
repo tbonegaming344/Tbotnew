@@ -11,8 +11,6 @@ const db = require("../index.js")
 const  createCategoryEmbed  = require("../Utilities/createCategoryEmbed");
 const  buildDeckEmbed  = require("../Utilities/buildDeckEmbed");
 const buildNavRow  = require("../Utilities/buildNavRow");
-
-
 module.exports = {
   name: `helpdb`,
   aliases: [

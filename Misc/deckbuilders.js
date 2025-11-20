@@ -19,6 +19,7 @@ module.exports = {
         return command.name;
       }
     });
+    commands.sort((a, b) => a.name.localeCompare(b.name));
     let toBuildString = "";
     for (const command of commands) {
       toBuildString += `\n<@1043528908148052089> **${command.name}**`;

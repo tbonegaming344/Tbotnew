@@ -5,8 +5,6 @@ const {
       ComponentType, 
       MessageFlags
   } = require("discord.js")
-  
-  
   module.exports = {
       name: "help",
       description: "Help command",

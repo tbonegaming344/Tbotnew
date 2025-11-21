@@ -214,7 +214,7 @@ module.exports = {
     if (rows.length === 0) {
       return interaction.reply({
         content:
-        "❌ Invalid hero name. Please make sure the deck exists in the selected hero's commands by checking @Tbot heroname.",
+        `❌ Invalid hero name. Please make sure the deck exists in the selected hero's commands by checking <@${interaction.client.id}> heroname.`,
         flags: MessageFlags.Ephemeral,
         withResponse: true,
       });

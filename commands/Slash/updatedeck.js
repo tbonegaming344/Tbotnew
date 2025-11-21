@@ -44,7 +44,7 @@ module.exports = {
           { name: "Wall Knight", value: "1100171712391295006" },
           { name: "Brain Freeze", value: "1100170721994477668" },
           { name: "Electric Boogaloo", value: "1100171042380578857" },
-          { name: "Huge Giganticus/SB", value: "1100170925208502282" },
+          { name: "Huge Gigantacus/SB", value: "1100170925208502282" },
           { name: "Impfinity", value: "1100170791594762260" },
           { name: "Immorticia", value: "1100171253790285904" },
           { name: "Neptuna", value: "1100170647050649620" },
@@ -156,38 +156,65 @@ module.exports = {
   },
   async execute(interaction) {
     const db = require("../../index.js");
-    const [rows] = await db.query(`
-        select name FROM sbdecks    
-        union all select name from ccdecks 
-        union all select name from sfdecks 
-        union all select name from rodecks 
-        union all select name from gsdecks 
-        union all select name from wkdecks 
-        union all select name from czdecks 
-        union all select name from spdecks 
-        union all select name from ctdecks 
-        union all select name from bcdecks 
-        union all select name from gkdecks 
-        union all select name from ncdecks 
-        union all select name from hgdecks 
-        union all select name from zmdecks 
-        union all select name from smdecks 
-        union all select name from ifdecks 
-        union all select name from rbdecks 
-        union all select name from ebdecks 
-        union all select name from bfdecks 
-        union all select name from pbdecks 
-        union all select name from imdecks
-        union all select name from ntdecks
-      `);
+        const heroDeckMap = {
+        "1100172143603482786": "ccdecks",
+        "1100171601045106819": "czdecks",
+        "1100171558263193700": "ctdecks",
+        "1100171819148906628": "gkdecks",
+        "1100172254983241820": "gsdecks",
+        "1100171997167747172": "ncdecks",
+        "1100171855316406343": "rodecks",
+        "1100171646557491220": "sfdecks",
+        "1100171758256013412": "spdecks",
+        "1100171712391295006": "wkdecks",
+        "1100170721994477668": "bfdecks",
+        "1100171042380578857": "ebdecks",
+        "1100170925208502282": "hgdecks",
+        "1100170791594762260": "ifdecks",
+        "1100171253790285904": "imdecks",
+        "1100170647050649620": "ntdecks",
+        "1100171459785150585": "rbdecks",
+        "1100171115504078901": "pbdecks",
+        "1100171177529446492": "smdecks",
+        "1100170981013729410": "zmdecks",
+      }
+      const heroId = interaction.options.getString("hero");
+    const tableName = heroDeckMap[heroId];
     const name = interaction.options.getString("name");
-    const validNames = rows.map((r) =>
-      r.name.toLowerCase().replaceAll(/\s+/g, "")
-    );
-    if (!validNames.includes(name.toLowerCase().replaceAll(/\s+/g, ""))) {
+    
+    // Verify hero ID is valid
+    if (!tableName && heroId !== "1100171558263193700" && heroId !== "1100170925208502282") {
+      return interaction.reply({
+        content: `❌ Invalid hero selection. Hero ID: ${heroId}`,
+        flags: MessageFlags.Ephemeral,
+        withResponse: true,
+      });
+    }
+    
+    let query;
+    if (heroId === "1100171558263193700") {
+      query = `
+        SELECT name FROM ctdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?
+        UNION ALL
+        SELECT name FROM bcdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?
+      `;
+      var [rows] = await db.query(query, [name.toLowerCase().replaceAll(/\s+/g, ""), name.toLowerCase().replaceAll(/\s+/g, "")]);
+    } 
+    // check for hg/SB
+    else if (heroId === "1100170925208502282") {
+      query = `SELECT name FROM hgdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?
+        UNION ALL
+        SELECT name FROM sbdecks WHERE LOWER(REPLACE(name, ' ', '')) = ?`;
+      var [rows] = await db.query(query, [name.toLowerCase().replaceAll(/\s+/g, ""), name.toLowerCase().replaceAll(/\s+/g, "")]);
+    }
+    else {
+      var [rows] = await db.query(`SELECT name FROM ${tableName} WHERE LOWER(REPLACE(name, ' ', '')) = ?`, [name.toLowerCase().replaceAll(/\s+/g, "")]);
+    }
+    
+    if (rows.length === 0) {
       return interaction.reply({
         content:
-          "❌ Invalid deck name. Please make sure the deck exists in Tbot.",
+        "❌ Invalid hero name. Please make sure the deck exists in the selected hero's commands by checking @Tbot heroname.",
         flags: MessageFlags.Ephemeral,
         withResponse: true,
       });
@@ -278,5 +305,9 @@ module.exports = {
       content: `<@${interaction.client.user.id}> ${name}`
     })
     await deckPin.pin();
+    const deckMessage = await thread.send({
+    content: `<@${interaction.client.user.id}> ${name}`
+  })
+    await deckMessage.pin();
   },
 };

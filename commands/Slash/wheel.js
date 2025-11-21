@@ -43,28 +43,27 @@ module.exports = {
           const hero = interaction.options.getString('hero');
           
           const results = await Promise.all([
-            db.query('select card_name from guardiancards where set_rarity not like "%Token%"'), 
-            db.query('select card_name from smartycards where set_rarity not like "%Token%"'),
+            db.query('select card_name from guardiancards where set_rarity not like "%Token%" and description not like "%Superpower%"'), 
+            db.query('select card_name from smartycards where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from kabloomcards where set_rarity not like "%Token%"'),
             db.query('select card_name from megagrowcards where set_rarity not like "%Token%"'),
             db.query('select card_name from solarcards where set_rarity not like "%Token%"'),
             db.query('select card_name from sneakycards where set_rarity not like "%Token%"'),
             db.query('select card_name from beastlycards where set_rarity not like "%Token%"'),
             db.query('select card_name from crazycards where set_rarity not like "%Token%"'),
-            db.query('select card_name from brainycards where set_rarity not like "%Token%"'),
+            db.query('select card_name from brainycards where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from heartycards where set_rarity not like "%Token%"'),
             db.query('select card_name from guardiantricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from smartytricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from kabloomtricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from megagrowtricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
-            db.query('select card_name from solartricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
+            db.query('select card_name from solartricks where set_rarity not like "%Token%" and  description not like "%Superpower%"'),
             db.query('select card_name from sneakytricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from beastlytricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from crazytricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from brainytricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
             db.query('select card_name from heartytricks where set_rarity not like "%Token%" and description not like "%Superpower%"'),
           ]);
-          
           // Extract rows from mysql2 result format [rows, fields]
           const [guardianCards, smartyCards, kabloomCards, 
             megaGrowCards, solarCards, sneakyCards, beastlyCards, 
@@ -72,7 +71,6 @@ module.exports = {
             smartyTricks, kabloomTricks, megaGrowTricks, solarTricks, 
             sneakyTricks, beastlyTricks, crazyTricks, brainyTricks, 
             heartyTricks] = results.map(result => result[0]);
-            
           const gurdianWords = [
           ...guardianCards.map(row => row.card_name),
           ...guardianTricks.map(row => row.card_name)

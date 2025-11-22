@@ -407,8 +407,7 @@ const embed = new EmbedBuilder()
   .setTitle("Tbot Database")
   .setDescription(
     `Please select option from select menus below to access the database
-Note: the decks are in alphabetical order not by hero and there are ${totalDecks} decks in the databse with ${plantDecks.length} Plant Decks and ${zombieDecks.length} Zombie Decks.
-Note: the decks are in alphabetical order not by hero`
+Note: the decks are in alphabetical order by hero and there are ${totalDecks} decks in the databse with ${plantDecks.length} Plant Decks and ${zombieDecks.length} Zombie Decks.`
   )
   .setColor("Random")
   .addFields(
@@ -608,11 +607,6 @@ collector.on("collect", async (i) => {
     }
   }
 });
-
-collector.on("end", () => {
-  m.edit({ components: [] }).catch(() => {});
-});
-
     } catch (err) {
       console.error(err);
     }
